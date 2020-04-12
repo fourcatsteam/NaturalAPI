@@ -23,20 +23,20 @@ public class GenerateBAL implements GenerateBALInputPort {
         this.balAnalyzer = balAnalyzer;
     }
 
-    public void generateBAL(String filename) throws IOException {
+    public void generateBAL(String filename) {
         List<Actor> lActors = new ArrayList<>();
-        for (Scenario scenario : repo.readScenarios().values()){
+        for (Scenario scenario : repo.readScenarios().values()) {
             int index = 0;
             boolean isActorInList = false;
             for (Actor actor : lActors) {
                 if (actor.getName().equals(scenario.getActorName())) {
                     actor.addActions(scenario.getActions());
-                    lActors.set(index,actor);
+                    lActors.set(index, actor);
                     isActorInList = true;
                 }
                 index++;
             }
-            if (!isActorInList){
+            if (!isActorInList) {
                 lActors.add(new Actor(scenario.getActorName(), scenario.getActions())); //non aggiunge attori correttamente
             }
 

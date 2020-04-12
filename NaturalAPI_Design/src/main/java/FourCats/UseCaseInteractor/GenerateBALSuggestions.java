@@ -10,7 +10,9 @@ import FourCats.InterfaceAccess.TextAnalyzer;
 import FourCats.Port.GenerateBALSuggestionsInputPort;
 import FourCats.Port.GenerateBALSuggestionsOutputPort;
 
-import java.io.IOException;
+
+import java.io.FileNotFoundException;
+
 import java.util.*;
 
 public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
@@ -25,34 +27,40 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         this.out = outputPort;
     }
 
-    public void generateSuggestions(String featureFileName) throws IOException {
+    public void generateSuggestions(String featureFileName) throws FileNotFoundException {
         Map<Integer,Action> mActions;
-        BlackList blackList = new BlackList();
+        //BlackList blackList = new BlackList();
         List<Scenario> lScenarios = new ArrayList<>();
         List<Action> lGeneratedActions;
         int id = 0;
         //read feature file from repository
-        String feature = repo.read(featureFileName);
-        String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
-        for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
-            lGeneratedActions = generateAction(currentScenario);
-            mActions = new HashMap<>();
-            for (Action action : lGeneratedActions){
-                mActions.put(id,action);
-                id++;
+
+        try {
+            String feature = repo.read(featureFileName);
+            String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
+            for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
+                lGeneratedActions = generateAction(currentScenario);
+                mActions = new HashMap<>();
+                for (Action action : lGeneratedActions) {
+                    mActions.put(id, action);
+                    id++;
+                }
+
+                lScenarios.add(new Scenario(extractScenarioName(currentScenario), mActions, currentScenario, extractActorName(feature))); //add Scenario with relative suggestions
             }
-
-            lScenarios.add(new Scenario(extractScenarioName(currentScenario),mActions,currentScenario,extractActorName(feature))); //add Scenario with relative suggestions
+            for (Scenario scenario : lScenarios) {
+                repo.createScenario(scenario); //add each scenario to the repository
+            }
+            out.showSuggestionsForScenario(repo.readScenarios());
         }
-        for(Scenario scenario : lScenarios){
-            repo.createScenario(scenario); //add each scenario to the repository
+        catch (FileNotFoundException e){
+            out.showErrorFileLoad();
+            throw e;
         }
-        out.showSuggestionsForScenario(repo.readScenarios());
-
 
     }
 
-    private List<Action> generateAction(String scenario) throws IOException {
+    private List<Action> generateAction(String scenario) {
         List<Action> lGeneratedAction = new ArrayList<>();
         // analyze the content of the retrieved file
         AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(scenario);

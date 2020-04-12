@@ -13,12 +13,10 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     public String readFile(String fileName) throws FileNotFoundException {
         String filepath = "gherkin_documents/" + fileName;
         String s, fileContent = new String();
-        try{
-            BufferedReader input = new BufferedReader(new FileReader(filepath));
+        try(BufferedReader input = new BufferedReader(new FileReader(filepath))){
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
             }
-            input.close();
 
         }catch(IOException e){
             //modificare gestione eccezioni

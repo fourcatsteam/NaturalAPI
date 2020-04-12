@@ -30,10 +30,11 @@ public class App {
 
 
 
-
-        while(true) {
+        boolean shouldContinue = true;
+        while(shouldContinue) {
             cli.askForUseCase();
-            cli.readUseCase();
+            shouldContinue = cli.readUseCase();
         }
+
     }
 }
