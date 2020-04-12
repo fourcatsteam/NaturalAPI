@@ -17,6 +17,12 @@ public class WordCounter implements Comparable<WordCounter>{
         count++;
     }
 
+    public void decrementCounter(){
+        if(count > 0){
+            count--;
+        }
+    }
+
     public String getWord() {return word;}
     public Integer getCount() {return count;}
 
@@ -25,6 +31,8 @@ public class WordCounter implements Comparable<WordCounter>{
         if(count==w.count) return 0;
         return 1;
     }
+
+
 
     @Override
     public String toString() {
