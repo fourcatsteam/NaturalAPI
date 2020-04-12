@@ -14,12 +14,10 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     public String readFile(String fileName) throws FileNotFoundException {
         String filepath = "gherkin_documents/" + fileName;
         String s, fileContent = new String();
-        try{
-            BufferedReader input = new BufferedReader(new FileReader(filepath));
+        try(BufferedReader input = new BufferedReader(new FileReader(filepath))){
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
             }
-            input.close();
 
         }catch(IOException e){
             //modificare gestione eccezioni
@@ -31,9 +29,11 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     @Override
     public void writeFile(String content, String filename) throws IOException {
         try{
-            FileWriter myWriter = new FileWriter("BAL/"+filename+".json");
-            myWriter.write(content);
-            myWriter.close();
+            File file = new File("BAL/"+filename+".json");
+            file.getParentFile().mkdirs();
+            try(FileWriter writer = new FileWriter(file)) {
+                writer.write(content);
+            }
         }
         catch (IOException e){
             e.printStackTrace();

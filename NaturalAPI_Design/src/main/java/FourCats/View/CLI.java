@@ -5,6 +5,7 @@ import FourCats.InterfaceAdapters.Controller;
 import FourCats.InterfaceAdapters.DataPresenter;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -15,14 +16,13 @@ public class CLI implements Observer {
     private Controller contr;
    // private Repository repo;
     private String currentUseCase = "";
-    private String userSelectedInput = "";
     private LinkedList<String> nameTitleList;
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private DataPresenter dataPresenter;
 
     public CLI(Controller controller, DataPresenter presenter){
         this.contr = controller;
-        nameTitleList = new LinkedList<String>();
+        nameTitleList = new LinkedList<>();
         this.dataPresenter = presenter;
         this.dataPresenter.attach(this);
     }
@@ -31,9 +31,11 @@ public class CLI implements Observer {
         System.out.println("\n-------NATURAL API DESIGN-------");
         System.out.println("\n1. Generate Suggestions");
         System.out.println("2. Load BAL (TODO)");
+        System.out.println("EXIT. Quit Application");
     }
 
-    public void readUseCase(){
+    public boolean readUseCase(){
+        boolean shouldContinue = true;
         try {
             currentUseCase = br.readLine();
             switch (currentUseCase) {
@@ -46,15 +48,21 @@ public class CLI implements Observer {
                     System.out.println("Get out of here, This is a Work in progress!");
                     break;
                 }
+                case "EXIT":{
+                    shouldContinue = false;
+                }
                 default:{
-                    System.out.println("Please insert a valid option.");
+                    System.out.println("Please insert a valid option. Digit EXIT to exit.");
                     break;
                 }
+
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            shouldContinue = false;
         }
+        return shouldContinue;
     }
 
     private String chooseFile() throws IOException {
@@ -67,7 +75,16 @@ public class CLI implements Observer {
     }
 
     public void generateSuggestion() throws IOException {
-        contr.generateSuggestions(chooseFile());
+        String filename = chooseFile();
+        if (!filename.equalsIgnoreCase("EXIT")) {
+            try{
+                contr.generateSuggestions(filename);
+            }
+            catch(FileNotFoundException e){
+                return;
+            }
+        }
+        else return;
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
             System.out.println("\nDo you want to modify or delete one of them? 1. YES 2. NO. Digit EXIT to abort.");
