@@ -1,6 +1,6 @@
-package Port;
+package fourcats.port;
 
-import Entity.API;
+import fourcats.entity.API;
 import java.util.Map;
 
 public interface ModifyOutputPort {

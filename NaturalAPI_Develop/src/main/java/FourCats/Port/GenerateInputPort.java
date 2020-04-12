@@ -1,8 +1,9 @@
-package Port;
+package fourcats.port;
 
-import Entity.API;
+
+import java.io.IOException;
 
 public interface GenerateInputPort {
 
-    public void generate();
+    public void generate() throws IOException;
 }

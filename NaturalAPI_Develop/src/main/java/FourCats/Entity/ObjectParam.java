@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 public class ObjectParam {
     private String name;

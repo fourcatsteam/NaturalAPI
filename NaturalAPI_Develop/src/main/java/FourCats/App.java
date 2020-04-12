@@ -1,28 +1,18 @@
-import Frameworks.BalAnalyzerImplementation;
-import InterfaceAccess.BalAnalyzer;
-import InterfaceAdapters.DataPresenter;
-import UseCase.GenerateApi;
-import UseCase.ModifyApi;
-import UseCase.SuggestApi;
-import View.CLI;
-import Frameworks.Repository;
-import InterfaceAdapters.Controller;
+package fourcats;
+
+import fourcats.frameworks.BalAnalyzerImplementation;
+import fourcats.interfaceadapters.DataPresenter;
+import fourcats.usecase.GenerateApi;
+import fourcats.usecase.ModifyApi;
+import fourcats.usecase.SuggestApi;
+import fourcats.view.CLI;
+import fourcats.frameworks.Repository;
+import fourcats.interfaceadapters.Controller;
 
 public class App {
 
     public static void main(String[] args) {
 
-//        repositoryAccessImpl ral = new repositoryAccessImpl();
-//        jacksonAccessImpl jal = new jacksonAccessImpl(ral.openFile("bal.json"));
-//        BAL bal = jal.getBAL();
-//        PLA pla = new PLA(ral.loadPLA("javaClassPLA.txt"));
-//        API api = new API();
-//
-//        SuggestApi sa = new SuggestApi(jal,ral,api,pla,bal);
-//        sa.create();
-//        for (Map.Entry<String,String> map : sa.getApi().getListApi().entrySet()) {
-//            System.out.println(map.getValue());
-//        }
 
         Repository repo = new Repository();
         BalAnalyzerImplementation balAnalyzerImplementation = new BalAnalyzerImplementation();

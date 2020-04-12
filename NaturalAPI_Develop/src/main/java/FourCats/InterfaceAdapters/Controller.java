@@ -1,10 +1,11 @@
-package InterfaceAdapters;
+package fourcats.interfaceadapters;
 
-import Port.ApiInputPort;
-import Port.GenerateInputPort;
-import Port.ModifyInputPort;
-import UseCase.GenerateApi;
-import UseCase.ModifyApi;
+import fourcats.port.ApiInputPort;
+import fourcats.port.GenerateInputPort;
+import fourcats.port.ModifyInputPort;
+
+import java.io.IOException;
+
 
 public class Controller {
 
@@ -22,7 +23,7 @@ public class Controller {
         apiInputPort.create(filenameBal,filenamePla);
     }
 
-    public void generateApi(){
+    public void generateApi() throws IOException {
         generateInputPort.generate();
     }
 

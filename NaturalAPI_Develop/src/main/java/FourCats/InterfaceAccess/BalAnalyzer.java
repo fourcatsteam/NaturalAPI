@@ -1,8 +1,8 @@
-package InterfaceAccess;
+package fourcats.interfaceAccess;
 
-import Entity.BAL;
+import fourcats.entity.BAL;
 import com.fasterxml.jackson.databind.JsonNode;
-import Frameworks.BalAnalyzerImplementation;
+
 
 import java.io.File;
 

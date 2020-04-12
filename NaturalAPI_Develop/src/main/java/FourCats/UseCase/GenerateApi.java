@@ -1,9 +1,10 @@
-package UseCase;
+package fourcats.usecase;
 
-import Entity.API;
-import Port.GenerateInputPort;
-import InterfaceAccess.RepositoryAccess;
+import fourcats.entity.API;
+import fourcats.port.GenerateInputPort;
+import fourcats.interfaceAccess.RepositoryAccess;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class GenerateApi implements GenerateInputPort {
@@ -14,7 +15,7 @@ public class GenerateApi implements GenerateInputPort {
         repositoryAccess = ra;
     }
 
-    public void generate(){
+    public void generate() throws IOException {
         for(Map.Entry<Integer,API> mApi : repositoryAccess.getApiMap().entrySet()){
             repositoryAccess.writeApi(mApi.getValue());
         }

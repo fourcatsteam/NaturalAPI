@@ -1,9 +1,9 @@
-package InterfaceAdapters;
+package fourcats.interfaceadapters;
 
-import Entity.API;
-import Observer.Subject;
-import Port.ApiOutputPort;
-import Port.ModifyOutputPort;
+import fourcats.entity.API;
+import fourcats.observer.Subject;
+import fourcats.port.ApiOutputPort;
+import fourcats.port.ModifyOutputPort;
 
 import java.util.Map;
 

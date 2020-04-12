@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 public class PLA {
 

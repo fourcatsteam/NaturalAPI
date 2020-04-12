@@ -1,6 +1,6 @@
-package Frameworks;
+package fourcats.frameworks;
 
-import Entity.API;
+import fourcats.entity.API;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public class DataKeeper {
     private Map<Integer, API> mApi;
 
     public DataKeeper() {
-        mApi = new HashMap<Integer, API>();
+        mApi = new HashMap<>();
     }
 
     public void addApi(API api){

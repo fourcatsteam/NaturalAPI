@@ -1,8 +1,5 @@
-package Port;
+package fourcats.port;
 
-import Entity.API;
-
-import java.util.InputMismatchException;
 
 public interface ApiInputPort {
 

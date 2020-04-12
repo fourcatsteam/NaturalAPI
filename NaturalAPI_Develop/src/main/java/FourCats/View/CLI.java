@@ -1,9 +1,8 @@
-package View;
+package fourcats.view;
 
-import Frameworks.Repository;
-import InterfaceAdapters.Controller;
-import InterfaceAdapters.DataPresenter;
-import Observer.Observer;
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenter;
+import fourcats.observer.Observer;
 
 import java.io.BufferedReader;
 import java.io.IOException;

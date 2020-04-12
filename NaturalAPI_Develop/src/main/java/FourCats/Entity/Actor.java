@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ public class Actor {
 
     public Actor(){
         this.name = null;
-        this.lAction = new ArrayList<Action>();
+        this.lAction = new ArrayList<>();
     }
 
     public Actor(String userName){
         this.name = userName;
-        this.lAction = new ArrayList<Action>();
+        this.lAction = new ArrayList<>();
     }
 
     public void setName(String userName) {

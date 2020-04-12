@@ -1,6 +1,6 @@
-package Frameworks;
+package fourcats.frameworks;
 
-import Entity.API;
+import fourcats.entity.API;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,19 +27,23 @@ public class FileSystem {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            scanner.close();
         }
         return toReturn;
     }
 
-    public void writeApi(API api){
+    public void writeApi(API api) throws IOException {
         for (Map.Entry<String,String> map : api.getListApi().entrySet()){
             File file = new File(map.getKey());
+            FileWriter fileWriter = null;
             try {
-                FileWriter fileWriter = new FileWriter(file);
+                fileWriter = new FileWriter(file);
                 fileWriter.write(map.getValue());
-                fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                fileWriter.close();
             }
         }
     }

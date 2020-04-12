@@ -1,12 +1,12 @@
-package Frameworks;
+package fourcats.frameworks;
 
-import Entity.Actor;
-import Entity.BAL;
-import Entity.Action;
-import Entity.ObjectParam;
+import fourcats.entity.Actor;
+import fourcats.entity.BAL;
+import fourcats.entity.Action;
+import fourcats.entity.ObjectParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import InterfaceAccess.BalAnalyzer;
+import fourcats.interfaceAccess.BalAnalyzer;
 
 import java.io.File;
 import java.io.IOException;

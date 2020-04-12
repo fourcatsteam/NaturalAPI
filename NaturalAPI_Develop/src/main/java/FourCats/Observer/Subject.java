@@ -1,4 +1,4 @@
-package Observer;
+package fourcats.observer;
 
 import java.util.ArrayList;
 import java.util.List;

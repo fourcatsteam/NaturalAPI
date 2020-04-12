@@ -1,12 +1,11 @@
-package UseCase;
+package fourcats.usecase;
 
-import Entity.*;
-import InterfaceAccess.BalAnalyzer;
-import InterfaceAccess.RepositoryAccess;
-import Port.ModifyInputPort;
-import Port.ModifyOutputPort;
+import fourcats.entity.*;
+import fourcats.interfaceAccess.BalAnalyzer;
+import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.port.ModifyInputPort;
+import fourcats.port.ModifyOutputPort;
 
-import java.util.Map;
 
 public class ModifyApi implements ModifyInputPort {
 

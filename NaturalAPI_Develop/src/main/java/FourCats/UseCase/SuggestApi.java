@@ -1,10 +1,10 @@
-package UseCase;
+package fourcats.usecase;
 
-import Port.ApiInputPort;
-import Entity.*;
-import InterfaceAccess.BalAnalyzer;
-import InterfaceAccess.RepositoryAccess;
-import Port.ApiOutputPort;
+import fourcats.port.ApiInputPort;
+import fourcats.entity.*;
+import fourcats.interfaceAccess.BalAnalyzer;
+import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.port.ApiOutputPort;
 
 import java.util.*;
 

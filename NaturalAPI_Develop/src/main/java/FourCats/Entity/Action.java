@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +10,18 @@ public class Action {
 
     public Action() {
         this.name = null;
-        this.param = new ArrayList<ObjectParam>();
+        this.param = new ArrayList<>();
         this.type = null;
     }
     public Action(String actionName) {
         this.name = actionName;
-        this.param = new ArrayList<ObjectParam>();
+        this.param = new ArrayList<>();
         this.type = null;
     }
 
     public Action(String actionName, String actionType) {
         this.name = actionName;
-        this.param = new ArrayList<ObjectParam>();
+        this.param = new ArrayList<>();
         if(actionType.equals(""))
             this.type = null;
         else
@@ -48,7 +48,7 @@ public class Action {
 
     public void updateObjectParamName(String paramName, String newName) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setName(newName);
                 return;
             }
@@ -57,7 +57,7 @@ public class Action {
 
     public void updateObjectParamType(String paramName, String newType) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setType(newType);
                 return;
             }
@@ -66,7 +66,7 @@ public class Action {
 
     public void updateIsObjectParamRequired(String paramName, boolean isRequired) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setRequired(isRequired);
                 return;
             }

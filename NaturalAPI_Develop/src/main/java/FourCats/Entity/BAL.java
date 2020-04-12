@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class BAL{
     private List<Actor> lActors;
 
     public BAL() {
-        lActors = new ArrayList<Actor>();
+        lActors = new ArrayList<>();
     }
 
     public BAL(List<Actor> ActorsList) {

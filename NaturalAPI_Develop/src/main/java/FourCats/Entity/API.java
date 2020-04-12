@@ -1,4 +1,4 @@
-package Entity;
+package fourcats.entity;
 
 import java.util.HashMap;
 import java.util.Map;
