@@ -18,32 +18,25 @@ public class FileSystem {
     public String loadPLA(String filename) {
         String toReturn = "";
         File file = openFile("./PLA/" +filename);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(file)){
+
             while(scanner.hasNext()){
                 toReturn += scanner.nextLine();
                 toReturn += "\n";
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }finally {
-            scanner.close();
         }
         return toReturn;
     }
 
-    public void writeApi(API api) throws IOException {
+    public void writeApi(API api) {
         for (Map.Entry<String,String> map : api.getListApi().entrySet()){
             File file = new File(map.getKey());
-            FileWriter fileWriter = null;
-            try {
-                fileWriter = new FileWriter(file);
+            try (FileWriter fileWriter = new FileWriter(file)){
                 fileWriter.write(map.getValue());
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                fileWriter.close();
             }
         }
     }

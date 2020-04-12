@@ -8,7 +8,7 @@ public class API {
     private Map<String,String> listApi;
 
     public API(){
-        listApi = new HashMap<String,String>();
+        listApi = new HashMap<>();
     }
 
     public void addApi(String filename,String a){

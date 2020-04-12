@@ -6,8 +6,6 @@ import fourcats.interfaceAccess.BalAnalyzer;
 import fourcats.interfaceAccess.RepositoryAccess;
 import fourcats.port.ApiOutputPort;
 
-import java.util.*;
-
 public class SuggestApi implements ApiInputPort {
 
     BalAnalyzer balAnalyzer;
@@ -20,7 +18,7 @@ public class SuggestApi implements ApiInputPort {
         this.apiOutputPort = apiOutputPort;
     }
 
-    public void create(String filenameBal,String filenamePla) throws InputMismatchException {
+    public void create(String filenameBal,String filenamePla){
 
         balAnalyzer.setBalFile(repositoryAccess.openFile("./BAL/" + filenameBal));
         BAL bal = balAnalyzer.getBAL();

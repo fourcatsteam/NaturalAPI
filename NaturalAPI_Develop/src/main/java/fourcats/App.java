@@ -32,7 +32,7 @@ public class App {
             c.askAnother();
             c.readAnother();
         }
-        while(!c.getCurrentAnswer().equals(new String("n")));
+        while(!c.getCurrentAnswer().equals("n"));
 
         c.askGenerateApi();
         c.readGenerateApi();

@@ -6,7 +6,7 @@ public class PLA {
     String text;
 
     public PLA(String t){
-        String split[] = t.split("\n",2);
+        String[] split = t.split("\n",2);
         extension = split[0];
         text = split[1];
     }
