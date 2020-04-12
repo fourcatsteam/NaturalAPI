@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import com.sun.corba.se.spi.orb.ParserData;
+//import com.sun.corba.se.spi.orb.ParserData;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.parser.nndep.DependencyParser;

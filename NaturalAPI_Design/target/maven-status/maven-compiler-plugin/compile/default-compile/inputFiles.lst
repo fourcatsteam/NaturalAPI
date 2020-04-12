@@ -1,0 +1,15 @@
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/entity/Document.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/usecase/BdlGenerator.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/interfaceFrameworks/ParserAccessBoundary.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/usecase/DataAnalyzer.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/interfaceFrameworks/DirectoryAccessBoundary.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/entity/Documents.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/usecase/BdlMemoryAccess.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/usecase/LoadDocument.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/entity/Bdl.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/App.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/usecase/DocumentParser.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/DataStructure/WordCounter.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/interfaceAccess/ParserAccess.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/interfaceAccess/DirectoryAccess.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/FourCats/DataStructure/LemmatizerData.java
