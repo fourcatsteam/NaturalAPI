@@ -1,6 +1,7 @@
 package fourcats.datastructure;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class AnalyzedData {
     private LemmatizerData data;
@@ -8,7 +9,7 @@ public class AnalyzedData {
 
     public AnalyzedData(){
         data = new LemmatizerData();
-        parserData = new LinkedList<String>();
+        parserData = new LinkedList<>();
     }
 
     public void addParseData(String s){
@@ -19,19 +20,19 @@ public class AnalyzedData {
         data.addElement(w,t,l);
     }
 
-    public LinkedList<String> getParseList(){
+    public List<String> getParseList(){
         return parserData;
     }
 
-    public LinkedList<String> getNouns(){
+    public List<String> getNouns(){
         return data.getNouns();
     }
 
-    public LinkedList<String> getVerbs(){
+    public List<String> getVerbs(){
         return data.getVerbs();
     }
 
-    public LinkedList<WordTag> getTaggedData() { return data.getList(); }
+    public List<WordTag> getTaggedData() { return data.getList(); }
 
     public String toString(){
         String s = data.toString();
