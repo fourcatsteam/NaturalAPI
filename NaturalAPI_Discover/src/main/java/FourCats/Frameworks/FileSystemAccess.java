@@ -4,7 +4,6 @@ import FourCats.DataStructure.WordCounter;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.PersistentMemoryAccess;
-import FourCats.InterfaceAccess.RepositoryAccess;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,6 +11,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.List;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
@@ -119,25 +119,27 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         return new Document(title, fileContent);
     }*/
 
-    private void saveListToFile(LinkedList<WordCounter> list, String namefile) throws IOException {
+    private void saveListToFile(List<WordCounter> list, String namefile) throws IOException {
             String filepath = "BDL/"+namefile;
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-            StringBuilder sb = new StringBuilder();
-            for(WordCounter w : list) {
-                sb.append(w.getWord());
-                sb.append(",");
-                sb.append(w.getCount());
-                sb.append('\n');
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+                StringBuilder sb = new StringBuilder();
+                for (WordCounter w : list) {
+                    sb.append(w.getWord());
+                    sb.append(",");
+                    sb.append(w.getCount());
+                    sb.append('\n');
+                }
+                writer.write(sb.toString());
             }
-            writer.write(sb.toString());
-            writer.close();
     }
 
     //------------------------------------------------------------------------------------
 
     @Override
     public Document loadDocument(String documentTitle) {
-        String line, fileContent = "", filepath = "txt_documents/" + documentTitle;
+        String line = "";
+        String fileContent = "";
+        String filepath = "txt_documents/" + documentTitle;
         try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             while((line = reader.readLine()) != null){
                 //add a space to separate sentences
@@ -199,10 +201,10 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         }
         obj.put("FileNameList",namefiles);
         obj.put("BdlName", bdlName);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-        writer.write(obj.toJSONString());
-        writer.flush();
-        writer.close();
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+            writer.write(obj.toJSONString());
+            writer.flush();
+        }
     }
 
     //------------------------------//
@@ -220,10 +222,9 @@ public class FileSystemAccess implements PersistentMemoryAccess {
                 entity.add(s);
             }
             reader.close();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-            writer.write(value.toJSONString());
-
-            writer.close();
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+                writer.write(value.toJSONString());
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -244,9 +245,9 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             }
 
             reader.close();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-            writer.write(value.toJSONString());
-            writer.close();
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+                writer.write(value.toJSONString());
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

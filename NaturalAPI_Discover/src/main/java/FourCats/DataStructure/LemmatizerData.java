@@ -1,35 +1,16 @@
 package FourCats.DataStructure;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class LemmatizerData {
-    /*public class WordTag{
-        private String value;
-        private String tag;
-        private String lemma;
-
-        public WordTag(String w, String t, String l) {
-            value=w;
-            tag=t;
-            lemma=l;
-        }
-
-        public String getValue() {return value;}
-        public String getTag() {return tag;}
-        public String getLemma() {return lemma;}
-
-        public String toString(){
-            return "["+value+","+tag+","+lemma+"]";
-        }
-    }*/
-
     private LinkedList<WordTag> lemmatizationResult;
 
     public LemmatizerData() {
-        lemmatizationResult = new LinkedList<WordTag>();
+        lemmatizationResult = new LinkedList<>();
     }
 
-    public LinkedList<WordTag> getList() {
+    public List<WordTag> getList() {
         return lemmatizationResult;
     };
 
@@ -37,8 +18,8 @@ public class LemmatizerData {
         lemmatizationResult.add(new WordTag(word,tag,lemma));
     }
 
-    public LinkedList<String> getNouns(){
-        LinkedList<String> nouns = new LinkedList<String>();
+    public List<String> getNouns(){
+        LinkedList<String> nouns = new LinkedList<>();
         for(WordTag tag : lemmatizationResult) {
             if (tag.getTag().contains("NN")) {
                 nouns.add(tag.getLemma());
@@ -47,8 +28,8 @@ public class LemmatizerData {
         return nouns;
     }
 
-    public LinkedList<String> getVerbs(){
-        LinkedList<String> verbs = new LinkedList<String>();
+    public List<String> getVerbs(){
+        LinkedList<String> verbs = new LinkedList<>();
         for(WordTag tag : lemmatizationResult) {
             if (tag.getTag().contains("VB")) {
                 verbs.add(tag.getLemma());

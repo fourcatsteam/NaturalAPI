@@ -5,7 +5,6 @@ import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.PersistentMemoryAccess;
 import FourCats.InterfaceAccess.RepositoryAccess;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -20,16 +19,15 @@ public class Repository implements RepositoryAccess {
     @Override
     public Bdl createBdl(String name) {
         //create a new Bdl and store it in the DataKeeper
-        Bdl bdl = new Bdl(name);
-        return bdl;
+        return new Bdl(name);
+
     }
 
     @Override
     public Bdl readBdl(String targetBdl) {
         //load the Bdl and the association list from memory and store it in the DataKeeper
         try{
-            Bdl bdl = this.memoryAccess.loadBdl(targetBdl);
-            return bdl;
+            return this.memoryAccess.loadBdl(targetBdl);
         }catch(IOException e){
             e.printStackTrace();
         }

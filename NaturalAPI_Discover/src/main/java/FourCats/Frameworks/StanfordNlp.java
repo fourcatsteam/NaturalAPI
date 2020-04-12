@@ -20,7 +20,7 @@ import java.util.Properties;
 
 
 public class StanfordNlp implements TextAnalyzer {
-    private final static String DP_MODEL = "edu/stanford/nlp/models/parser/nndep/english_UD.gz";
+    private static final String DP_MODEL = "edu/stanford/nlp/models/parser/nndep/english_UD.gz";
     private StanfordCoreNLP pipeline;
     private final TokenizerFactory<CoreLabel> tokenizerFactory;
     private final DependencyParser depparser;

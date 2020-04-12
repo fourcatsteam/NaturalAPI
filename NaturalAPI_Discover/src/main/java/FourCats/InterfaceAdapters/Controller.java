@@ -3,12 +3,10 @@ package FourCats.InterfaceAdapters;
 import FourCats.Port.AddDocumentsInputPort;
 import FourCats.Port.CreateBdlInputPort;
 import FourCats.Port.RemoveDocumentsInputPort;
-import FourCats.UseCaseInteractor.AddDocuments;
-import FourCats.UseCaseInteractor.CreateBdl;
-import FourCats.UseCaseInteractor.RemoveDocuments;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Controller{
 
@@ -22,7 +20,7 @@ public class Controller{
         this.removeDocuments = r;
     }
 
-    public void createBdl(String nameBdl,LinkedList<String> titleList) throws IOException {
+    public void createBdl(String nameBdl,List<String> titleList) throws IOException {
         try {
             createBdl.create(nameBdl,titleList);
         } catch (IOException e) {
@@ -30,11 +28,11 @@ public class Controller{
         }
     }
 
-    public void addDocument(String nameBdl,LinkedList<String> docToAdd) throws IOException {
+    public void addDocument(String nameBdl, List<String> docToAdd) throws IOException {
         addDocuments.add(nameBdl,docToAdd);
     }
 
-    public void removeDocument(String nameBdl, LinkedList<String> docToRemove) throws IOException{
+    public void removeDocument(String nameBdl,List<String> docToRemove) throws IOException{
         removeDocuments.remove(nameBdl,docToRemove);
     }
 

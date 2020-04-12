@@ -9,7 +9,7 @@ import FourCats.Port.AddDocumentsOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.function.Predicate;
+import java.util.List;
 
 public class AddDocuments implements AddDocumentsInputPort {
 
@@ -25,30 +25,33 @@ public class AddDocuments implements AddDocumentsInputPort {
 
 
     @Override
-    public void add(String targetBdl, LinkedList<String> docTitles) throws IOException {
+    public void add(String targetBdl, List<String> docTitles) throws IOException {
         //retrieve BDL from the repository
         Bdl bdl = this.repository.readBdl(targetBdl);
 
         //retrieve BDL-Documents association from the repository
+
         LinkedList<String> association = this.repository.readAssociation(targetBdl);
+        try {
+            //filter already used documents
+            if (association != null) {
+                docTitles.removeAll(association);
+            }
+            //retrieve Documents from the repository
+            LinkedList<Document> documents = new LinkedList<>();
+            for (String title : docTitles) {
+                documents.add(this.repository.readDocument(title));
+            }
 
-        //filter already used documents
-        if(association!=null) {
-            docTitles.removeAll(association);
+            //add document analysis to BDL
+            for (Document document : documents) {
+                documentAnalyzer.addDocumentToBdl(bdl, document);
+            }
+
+            association.addAll(docTitles);
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
-        //retrieve Documents from the repository
-        LinkedList<Document> documents = new LinkedList<>();
-        for (String title: docTitles) {
-            documents.add(this.repository.readDocument(title));
-        }
-
-        //add document analysis to BDL
-        for (Document document: documents) {
-          documentAnalyzer.addDocumentToBdl(bdl, document);
-        }
-
-        association.addAll(docTitles);
-
         //update Bdl and association in the repository
         repository.updateBdl(bdl);
         repository.updateAssociation(targetBdl, association);

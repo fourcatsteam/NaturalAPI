@@ -1,8 +1,8 @@
 package FourCats.Port;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 public interface CreateBdlInputPort {
-    void create(String nameBdl,LinkedList<String> titleList) throws IOException;
+    void create(String nameBdl, List<String> titleList) throws IOException;
 }

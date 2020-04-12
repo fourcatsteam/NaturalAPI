@@ -1,9 +1,8 @@
 package FourCats.Port;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 public interface RemoveDocumentsInputPort {
-    void remove(String targetBdl, LinkedList<String> docTitles) throws IOException;
+    void remove(String targetBdl, List<String> docTitles) throws IOException;
 }

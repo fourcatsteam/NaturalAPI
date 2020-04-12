@@ -9,6 +9,7 @@ import FourCats.Port.CreateBdlOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class CreateBdl implements CreateBdlInputPort {
 
@@ -22,12 +23,12 @@ public class CreateBdl implements CreateBdlInputPort {
         output = p;
     }
 
-    public void create(String nameBdl,LinkedList<String> titleList) {
+    public void create(String nameBdl, List<String> titleList) {
         //create a new BDL
         Bdl bdl = repository.createBdl(nameBdl);
 
         //retrieve Documents from the repository
-        LinkedList<Document> documents = new LinkedList<Document>();
+        LinkedList<Document> documents = new LinkedList<>();
         for(String title: titleList) {
             documents.add(repository.readDocument(title));
         }

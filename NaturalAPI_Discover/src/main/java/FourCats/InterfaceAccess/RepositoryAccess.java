@@ -2,9 +2,8 @@ package FourCats.InterfaceAccess;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public interface RepositoryAccess {
     //bdl CRUD methods
@@ -17,9 +16,9 @@ public interface RepositoryAccess {
 
     //association CRUD methoods
     LinkedList<String> readAssociation(String referringBdl);
-    void addAssociation(String referringBdl, LinkedList<String> docToAdd);
-    void removeAssociation(String referringBdl, LinkedList<String> docToRemove);
-    void updateAssociation(String referringBdl, LinkedList<String> associateDocuments);
+    void addAssociation(String referringBdl, List<String> docToAdd);
+    void removeAssociation(String referringBdl, List<String> docToRemove);
+    void updateAssociation(String referringBdl, List<String> associateDocuments);
 
 
 }

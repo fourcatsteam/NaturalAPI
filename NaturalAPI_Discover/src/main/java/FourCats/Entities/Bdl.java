@@ -1,11 +1,10 @@
 package FourCats.Entities;
 
 import FourCats.DataStructure.WordCounter;
-import edu.stanford.nlp.ling.Word;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Bdl {
     private String nameBdl;
@@ -24,15 +23,15 @@ public class Bdl {
         this.predicates=new LinkedList<>();
     }
 
-    public LinkedList<WordCounter> getNouns(){
+    public List<WordCounter> getNouns(){
         return nouns;
     }
 
-    public LinkedList<WordCounter> getVerbs(){
+    public List<WordCounter> getVerbs(){
         return verbs;
     }
 
-    public LinkedList<WordCounter> getPredicates(){
+    public List<WordCounter> getPredicates(){
         return predicates;
     }
 

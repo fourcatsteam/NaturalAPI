@@ -21,7 +21,7 @@ public class CLI implements Observer {
         this.controller = controller;
         this.datapresenter = datapresenter;
         datapresenter.attach(this);
-        nameTitleList = new LinkedList<String>();
+        nameTitleList = new LinkedList<>();
     }
 
     public void askForUseCase(){
@@ -67,6 +67,8 @@ public class CLI implements Observer {
                     break;
                 case "E":
                     result = false;
+                default:
+                    break;
             }
             //notifyObservers();
         } catch (IOException e) {
@@ -78,8 +80,7 @@ public class CLI implements Observer {
 
     private String chooseBdlName() throws IOException{
         System.out.println("Inserisci il nome della Bdl");
-        String r = br.readLine();
-        return r;
+        return br.readLine();
     }
 
 
