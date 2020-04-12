@@ -1,4 +1,4 @@
-package FourCats.DataStructure;
+package fourcats.datastructure;
 
 
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ public class LemmatizerData {
     private LinkedList<WordTag> lemmatizationResult;
 
     public LemmatizerData() {
-        lemmatizationResult = new LinkedList<WordTag>();
+        lemmatizationResult = new LinkedList<>();
     }
 
     public LinkedList<WordTag> getList() {
@@ -20,7 +20,7 @@ public class LemmatizerData {
     }
 
     public LinkedList<String> getNouns(){
-        LinkedList<String> nouns = new LinkedList<String>();
+        LinkedList<String> nouns = new LinkedList<>();
         for(WordTag tag : lemmatizationResult) {
             if (tag.getTag().contains("NN")) {
                 nouns.add(tag.getLemma());
@@ -30,7 +30,7 @@ public class LemmatizerData {
     }
 
     public LinkedList<String> getVerbs(){
-        LinkedList<String> verbs = new LinkedList<String>();
+        LinkedList<String> verbs = new LinkedList<>();
         for(WordTag tag : lemmatizationResult) {
             if (tag.getTag().contains("VB")) {
                 verbs.add(tag.getLemma());

@@ -1,4 +1,4 @@
-package FourCats.DataStructure;
+package fourcats.datastructure;
 
 import java.util.LinkedList;
 

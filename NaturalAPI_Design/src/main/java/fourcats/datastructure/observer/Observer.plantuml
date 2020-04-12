@@ -2,10 +2,10 @@
 
 title __OBSERVER's Class Diagram__\n
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
       namespace Observer {
-        interface FourCats.DataStructure.Observer.Observer {
+        interface fourcats.datastructure.observer.Observer {
             {abstract} + update()
         }
       }
@@ -13,10 +13,10 @@ title __OBSERVER's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
       namespace Observer {
-        abstract class FourCats.DataStructure.Observer.Subject {
+        abstract class fourcats.datastructure.observer.Subject {
             - lObservers : List<Observer>
             + attach()
             # Subject()

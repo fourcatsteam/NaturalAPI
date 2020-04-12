@@ -1,4 +1,4 @@
-package FourCats.DataStructure;
+package fourcats.datastructure;
 
 public class WordTag {
     private String value;

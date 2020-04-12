@@ -1,4 +1,4 @@
-package FourCats.DataStructure.Observer;
+package fourcats.datastructure.observer;
 
 public interface Observer {
     void update();

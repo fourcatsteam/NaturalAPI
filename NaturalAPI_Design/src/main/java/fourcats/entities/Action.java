@@ -1,6 +1,5 @@
-package FourCats.Entities;
+package fourcats.entities;
 
-import FourCats.Entities.ObjectParam;
 
 import java.util.ArrayList;
 import java.util.List;

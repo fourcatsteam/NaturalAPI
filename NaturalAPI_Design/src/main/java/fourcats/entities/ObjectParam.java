@@ -1,4 +1,4 @@
-package FourCats.Entities;
+package fourcats.entities;
 
 
 public class ObjectParam {

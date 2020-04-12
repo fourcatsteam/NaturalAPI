@@ -2,9 +2,9 @@
 
 title __DATASTRUCTURE's Class Diagram__\n
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
-      class FourCats.DataStructure.AnalyzedData {
+      class fourcats.datastructure.AnalyzedData {
           - parserData : LinkedList<String>
           + AnalyzedData()
           + addLemmaData()
@@ -19,9 +19,9 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
-      class FourCats.DataStructure.BlackList {
+      class fourcats.datastructure.BlackList {
           + blackList : List<String>
           + BlackList()
           + BlackList()
@@ -33,9 +33,9 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
-      class FourCats.DataStructure.LemmatizerData {
+      class fourcats.datastructure.LemmatizerData {
           - lemmatizationResult : LinkedList<WordTag>
           + LemmatizerData()
           + addElement()
@@ -48,9 +48,9 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
-      class FourCats.DataStructure.WordCounter {
+      class fourcats.datastructure.WordCounter {
           - count : Integer
           - word : String
           + WordCounter()
@@ -66,9 +66,9 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace DataStructure {
-      class FourCats.DataStructure.WordTag {
+      class fourcats.datastructure.WordTag {
           - lemma : String
           - tag : String
           - value : String
@@ -82,8 +82,8 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  FourCats.DataStructure.AnalyzedData o-- FourCats.DataStructure.LemmatizerData : data
-  FourCats.DataStructure.WordCounter .up.|> java.lang.Comparable
+  fourcats.datastructure.AnalyzedData o-- fourcats.datastructure.LemmatizerData : data
+  fourcats.datastructure.WordCounter .up.|> java.lang.Comparable
 
 
 right footer

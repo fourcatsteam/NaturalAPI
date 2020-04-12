@@ -1,4 +1,4 @@
-package FourCats.DataStructure;
+package fourcats.datastructure;
 
 public class WordCounter implements Comparable<WordCounter>{
     private String word;

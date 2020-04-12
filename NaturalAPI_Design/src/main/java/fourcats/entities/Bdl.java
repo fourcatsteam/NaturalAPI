@@ -1,7 +1,6 @@
-package FourCats.Entities;
+package fourcats.entities;
 
-import FourCats.DataStructure.WordCounter;
-import edu.stanford.nlp.ling.Word;
+import fourcats.datastructure.WordCounter;
 
 import java.util.Collections;
 import java.util.Iterator;

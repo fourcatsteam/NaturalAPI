@@ -1,4 +1,4 @@
-package FourCats.Entities;
+package fourcats.entities;
 
 import java.util.ArrayList;
 import java.util.List;

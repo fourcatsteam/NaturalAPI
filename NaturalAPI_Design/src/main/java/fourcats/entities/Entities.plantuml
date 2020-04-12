@@ -2,9 +2,9 @@
 
 title __ENTITIES's Class Diagram__\n
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.Action {
+      class fourcats.entities.Action {
           - name : String
           - param : List<ObjectParam>
           - type : String
@@ -26,9 +26,9 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.Actor {
+      class fourcats.entities.Actor {
           - lAction : List<Action>
           - name : String
           + Actor()
@@ -46,9 +46,9 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.BAL {
+      class fourcats.entities.BAL {
           - lActors : List<Actor>
           + BAL()
           + BAL()
@@ -61,9 +61,9 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.Bdl {
+      class fourcats.entities.Bdl {
           - nameBdl : String
           - nouns : LinkedList<WordCounter>
           - predicates : LinkedList<WordCounter>
@@ -90,9 +90,9 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.ObjectParam {
+      class fourcats.entities.ObjectParam {
           - name : String
           - required : Boolean
           - type : String
@@ -111,9 +111,9 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
-  namespace FourCats {
+  namespace fourcats {
     namespace Entities {
-      class FourCats.Entities.Scenario {
+      class fourcats.entities.Scenario {
           - actorName : String
           - content : String
           - mAction : Map<Integer, Action>
