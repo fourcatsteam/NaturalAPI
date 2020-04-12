@@ -5,6 +5,7 @@ import FourCats.Entities.Bdl;
 import FourCats.InterfaceAccess.PersistentMemoryAccess;
 
 import java.io.*;
+import java.nio.file.FileSystem;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
@@ -13,16 +14,31 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     public String readFile(String fileName) throws FileNotFoundException {
         String filepath = "gherkin_documents/" + fileName;
         String s, fileContent = new String();
-        try(BufferedReader input = new BufferedReader(new FileReader(filepath))){
+        try{
+            BufferedReader input = new BufferedReader(new FileReader(filepath));
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
             }
+            input.close();
 
         }catch(IOException e){
             //modificare gestione eccezioni
             throw new FileNotFoundException();
         }
         return fileContent;
+    }
+
+    @Override
+    public void writeFile(String content, String filename) throws IOException {
+        try{
+            FileWriter myWriter = new FileWriter("BAL/"+filename+".json");
+            myWriter.write(content);
+            myWriter.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

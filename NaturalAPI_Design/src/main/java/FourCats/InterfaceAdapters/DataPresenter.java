@@ -26,12 +26,6 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         }
     }
 
-    @Override
-    public void showErrorFileLoad() {
-        System.out.println("Error! \n" +
-                "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
-    }
-
 
     @Override
     public void showDeclinedSuggestion(Map<Integer,Scenario> mScenarios, boolean isOk) {
@@ -42,8 +36,8 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         }
         else {
             toShow = "Oh no! Something went wrong, please check the id of the scenario and the id of the suggestion";
+            notifyObservers();
         }
-        notifyObservers();
 
     }
 

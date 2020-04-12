@@ -12,7 +12,7 @@ public class DataKeeper {
         mScenarios = new HashMap<>();
     }
 
-    public void createScenariosMap(Scenario scenario){
+    public void addScenarioToMap(Scenario scenario){
         mScenarios.put(mScenarios.size(),scenario);
     }
 
@@ -21,13 +21,12 @@ public class DataKeeper {
     }
 
 
-    public boolean removeAction(int idScenario, int idAction){
+    public void removeAction(int idScenario, int idAction){
         try {
             mScenarios.get(idScenario).getActionsMap().remove(idAction);
-            return true;
         }
-        catch (Exception e){
-            return false;
+        catch (NullPointerException e){
+            throw e;
         }
     }
 

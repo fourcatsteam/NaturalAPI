@@ -12,5 +12,5 @@ public interface BalAnalyzer {
     JsonNode getJsonNode();
     BalAnalyzer get(String s);
     BAL getBAL();
-    void createJsonFromBAL(BAL bal, String outputPath) throws IOException;
+    String createJsonFromBAL(BAL bal) throws IOException;
 }

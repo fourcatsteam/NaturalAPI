@@ -5,6 +5,7 @@ import FourCats.InterfaceAccess.PersistentMemoryAccess;
 import FourCats.InterfaceAccess.RepositoryAccess;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 public class Repository implements RepositoryAccess  {
@@ -24,13 +25,13 @@ public class Repository implements RepositoryAccess  {
 
     @Override
     public void createScenario(Scenario scenario) {
-        dataKeeper.createScenariosMap(scenario);
+        dataKeeper.addScenarioToMap(scenario);
     }
 
 
     @Override
-    public boolean deleteSuggestion(int idAction, int idScenario) {
-        return dataKeeper.removeAction(idScenario,idAction);
+    public void deleteSuggestion(int idAction, int idScenario) {
+        dataKeeper.removeAction(idScenario,idAction);
     }
 
     @Override
@@ -42,6 +43,11 @@ public class Repository implements RepositoryAccess  {
     @Override
     public void deleteScenarios() {
         dataKeeper.clearScenariosMap();
+    }
+
+    @Override
+    public void createBAL(String bal, String filename) throws IOException {
+        memoryAccess.writeFile(bal,filename);
     }
 
 

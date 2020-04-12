@@ -1,0 +1,62 @@
+{
+  "actors" : [ {
+    "name" : "Customer",
+    "actions" : [ {
+      "name" : "withdraw_cash",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "cash",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "enter_pin",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "enter_amount",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "amount",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "check_pin",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "give_cash",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "cash",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "check_validity",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "validity",
+        "type" : "string",
+        "required" : true
+      } ]
+    }, {
+      "name" : "display_message",
+      "type" : "void",
+      "objectParams" : [ {
+        "name" : "message",
+        "type" : "string",
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

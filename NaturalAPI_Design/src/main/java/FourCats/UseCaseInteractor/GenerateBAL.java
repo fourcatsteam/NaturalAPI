@@ -23,28 +23,30 @@ public class GenerateBAL implements GenerateBALInputPort {
         this.balAnalyzer = balAnalyzer;
     }
 
-    public void generateBAL(String filename) {
+    public void generateBAL(String filename) throws IOException {
         List<Actor> lActors = new ArrayList<>();
-        for (Scenario scenario : repo.readScenarios().values()) {
+        for (Scenario scenario : repo.readScenarios().values()){
             int index = 0;
             boolean isActorInList = false;
             for (Actor actor : lActors) {
                 if (actor.getName().equals(scenario.getActorName())) {
                     actor.addActions(scenario.getActions());
-                    lActors.set(index, actor);
+                    lActors.set(index,actor);
                     isActorInList = true;
                 }
                 index++;
             }
-            if (!isActorInList) {
+            if (!isActorInList){
                 lActors.add(new Actor(scenario.getActorName(), scenario.getActions())); //non aggiunge attori correttamente
             }
 
         }
         BAL bal = new BAL(lActors);
+        String jsonBal;
         try{
-            balAnalyzer.createJsonFromBAL(bal,filename+".json");
-            repo.deleteScenarios(); //after generating the bal and saved it on the fileSystem we want to delete scenarios from repo
+            jsonBal = balAnalyzer.createJsonFromBAL(bal);
+            repo.createBAL(jsonBal, filename);
+            repo.deleteScenarios(); //after the BAL creation on the fileSystem we want to delete scenarios from repo
             out.showGenerationStatus(true);
         }
         catch (IOException e) {

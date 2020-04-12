@@ -93,15 +93,17 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
     }
 
     @Override
-    public void createJsonFromBAL(BAL bal, String filename) throws IOException {
+    public String createJsonFromBAL(BAL bal) throws IOException {
         //Creating the ObjectMapper object
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         //Converting the Object to JSONString and saving it on file
+        String balJson = "";
         try {
-            mapper.writeValue(new FileWriter("BAL"+File.separator+filename), bal);
+            balJson = mapper.writeValueAsString(bal);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        return balJson;
     }
 }

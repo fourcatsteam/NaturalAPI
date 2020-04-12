@@ -15,8 +15,12 @@ public class DeclineBALSuggestion implements DeclineBALSuggestionInputPort {
         this.out = outputPort;
     }
     public void declineSuggestion(int idAction, int idScenario){
-        boolean isOk = repo.deleteSuggestion(idAction, idScenario);
-        out.showDeclinedSuggestion(repo.readScenarios(),isOk);
-
+        try{
+            repo.deleteSuggestion(idAction, idScenario);
+            out.showDeclinedSuggestion(repo.readScenarios(),true);
+        }
+        catch (NullPointerException e){
+            out.showDeclinedSuggestion(repo.readScenarios(),false); //SE VIENE CANCELLATO ULTIMO ELEMENTO DI SCENARIO SI SDOPPIA
+        }
     }
 }
