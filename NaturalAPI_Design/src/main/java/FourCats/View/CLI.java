@@ -50,6 +50,7 @@ public class CLI implements Observer {
                 }
                 case "EXIT":{
                     shouldContinue = false;
+                    break;
                 }
                 default:{
                     System.out.println("Please insert a valid option. Digit EXIT to exit.");
