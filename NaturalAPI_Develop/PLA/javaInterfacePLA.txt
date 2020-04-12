@@ -1,0 +1,5 @@
+.java
+public interface "group_action" {
+
+	public "action_type" "action_name" ("object_type" "object_name");
+}
