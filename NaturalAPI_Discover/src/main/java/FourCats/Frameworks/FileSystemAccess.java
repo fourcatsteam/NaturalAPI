@@ -192,7 +192,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     }
 
     @Override
-    public void saveAssociation(String bdlName, LinkedList<String> titleList) throws IOException {
+    public void saveAssociation(String bdlName, List<String> titleList) throws IOException {
         String filepath = "system_files/" + bdlName+".json";
         JSONObject obj = new JSONObject();
         JSONArray namefiles = new JSONArray();
@@ -210,7 +210,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     //------------------------------//
 
     @Override
-    public void addAssociation(String bdlName, LinkedList<String> titleList) throws IOException {
+    public void addAssociation(String bdlName, List<String> titleList) throws IOException {
         String filepath = "system_files/"+bdlName+".json";
         BufferedReader reader = new BufferedReader(new FileReader(filepath));
         JSONObject value;
@@ -231,7 +231,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     }
 
     @Override
-    public void removeAssociation(String bdlName, LinkedList<String> docToRemove) throws IOException {
+    public void removeAssociation(String bdlName, List<String> docToRemove) throws IOException {
         String filepath = "system_files/"+bdlName+".json";
         BufferedReader reader = new BufferedReader(new FileReader(filepath));
         JSONObject value;

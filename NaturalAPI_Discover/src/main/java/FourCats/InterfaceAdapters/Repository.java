@@ -7,6 +7,7 @@ import FourCats.InterfaceAccess.RepositoryAccess;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Repository implements RepositoryAccess {
 
@@ -60,7 +61,7 @@ public class Repository implements RepositoryAccess {
     }
 
     @Override
-    public void addAssociation(String referringBdl, LinkedList<String> associateDocuments) {
+    public void addAssociation(String referringBdl, List<String> associateDocuments) {
         try{
             this.memoryAccess.addAssociation(referringBdl, associateDocuments);
         }catch(IOException e){
@@ -69,7 +70,7 @@ public class Repository implements RepositoryAccess {
     }
 
     @Override
-    public void removeAssociation(String referringBdl, LinkedList<String> docToRemove) {
+    public void removeAssociation(String referringBdl, List<String> docToRemove) {
         try{
             this.memoryAccess.removeAssociation(referringBdl, docToRemove);
         }catch(IOException e){
@@ -78,7 +79,7 @@ public class Repository implements RepositoryAccess {
     }
 
     @Override
-    public void updateAssociation(String referringBdl, LinkedList<String> associateDocuments) {
+    public void updateAssociation(String referringBdl, List<String> associateDocuments) {
         try{
             this.memoryAccess.saveAssociation(referringBdl, associateDocuments);
         }catch(IOException e){
