@@ -24,4 +24,4 @@ _**N.B. Verificare che siano presenti o creare al bisogno le cartelle al punto 2
 4. Estrarla nella posizione voluta;
 5. Per avviare l'esecuzione del programma seguire le indicazioni contenute nel Manuale Utente in dotazione con il prodotto.
 
-È possibile consultare il sito di NaturalAPI a questo link: [NaturalAPI](https://fourcatsteam.github.io/NaturalAPI_Project/)
+È possibile consultare il sito di NaturalAPI a questo link: [NaturalAPI](https://fourcatsteam.github.io/NaturalAPI_Project/).
