@@ -1,4 +1,4 @@
-package fourcats.usecase;
+package fourcats.usecaseinteractor;
 
 import fourcats.entity.API;
 import fourcats.port.GenerateInputPort;

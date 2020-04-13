@@ -1,4 +1,4 @@
-package fourcats.usecase;
+package fourcats.usecaseinteractor;
 
 import fourcats.entity.*;
 import fourcats.interfaceAccess.BalAnalyzer;
@@ -19,7 +19,7 @@ public class ModifyApi implements ModifyInputPort {
         modifyOutputPort = m;
     }
 
-    public void modify(int id,String filenameBal,String filenamePla){
+    public void modify(int id, String filenameBal, String filenamePla){
 
         repositoryAccess.deleteApi(id);
         balAnalyzer.setBalFile(repositoryAccess.openFile("./BAL/" + filenameBal));

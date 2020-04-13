@@ -2,9 +2,9 @@ package fourcats;
 
 import fourcats.frameworks.BalAnalyzerImplementation;
 import fourcats.interfaceadapters.DataPresenter;
-import fourcats.usecase.GenerateApi;
-import fourcats.usecase.ModifyApi;
-import fourcats.usecase.SuggestApi;
+import fourcats.usecaseinteractor.GenerateApi;
+import fourcats.usecaseinteractor.ModifyApi;
+import fourcats.usecaseinteractor.SuggestApi;
 import fourcats.view.CLI;
 import fourcats.frameworks.Repository;
 import fourcats.interfaceadapters.Controller;
