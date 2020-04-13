@@ -9,6 +9,7 @@ import FourCats.Port.RemoveDocumentsInputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public class RemoveDocuments implements RemoveDocumentsInputPort {
 
@@ -23,7 +24,7 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
     }
 
     @Override
-    public void remove(String targetBdl, LinkedList<String> docTitles) throws IOException {
+    public void remove(String targetBdl, List<String> docTitles) throws IOException {
         //retrieve BDL
         Bdl bdl = this.repository.readBdl(targetBdl);
 

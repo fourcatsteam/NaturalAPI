@@ -47,25 +47,25 @@ public class BdlTest {
         bdl.addPredicate("withdraw cash");
         bdl.addPredicate("withdraw cash");
         bdl.addPredicate("withdraw cash");
-        assertEquals(3,bdl.getPredicates().getFirst().getCount().longValue());
+        assertEquals(3,bdl.getPredicates().get(0).getCount().longValue());
     }
 
     @Test
     public void testAddNounWithFrequency() {
         bdl.storeBdlNoun("dog", 5);
-        assertEquals(5,bdl.getNouns().getFirst().getCount().longValue());
+        assertEquals(5,bdl.getNouns().get(0).getCount().longValue());
     }
 
     @Test
     public void testAddVerbWithFrequency() {
         bdl.storeBdlVerb("eat", 5);
-        assertEquals(5,bdl.getVerbs().getFirst().getCount().longValue());
+        assertEquals(5,bdl.getVerbs().get(0).getCount().longValue());
     }
 
     @Test
     public void testAddPredicateWithFrequency() {
         bdl.storeBdlPredicate("withdraw cash", 5);
-        assertEquals(5,bdl.getPredicates().getFirst().getCount().longValue());
+        assertEquals(5,bdl.getPredicates().get(0).getCount().longValue());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class BdlTest {
     public void testRemoveVerb() {
         bdl.storeBdlVerb("eat",4);
         bdl.removeVerb("eat");
-        assertEquals(3,bdl.getVerbs().getFirst().getCount().longValue());
+        assertEquals(3,bdl.getVerbs().get(0).getCount().longValue());
     }
 
     @Test
