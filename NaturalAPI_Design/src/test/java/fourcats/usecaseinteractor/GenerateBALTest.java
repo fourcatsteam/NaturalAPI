@@ -3,8 +3,6 @@ package fourcats.usecaseinteractor;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.GenerateBALOutputPort;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 

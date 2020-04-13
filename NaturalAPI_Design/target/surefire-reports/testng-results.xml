@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="12" passed="11" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2020-04-13T11:46:14 CEST" name="Surefire suite" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1321">
+    <groups>
+    </groups>
+    <test started-at="2020-04-13T11:46:14 CEST" name="Surefire test" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1321">
+      <class name="fourcats.usecaseinteractor.GenerateBALTest">
+        <test-method signature="GenerateBALFromCorrectFilename()" started-at="2020-04-13T11:46:14 CEST" name="GenerateBALFromCorrectFilename" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1042" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GenerateBALFromCorrectFilename -->
+        <test-method signature="GenerateBALCorrectCreation()" started-at="2020-04-13T11:46:14 CEST" name="GenerateBALCorrectCreation" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1044" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GenerateBALCorrectCreation -->
+        <test-method signature="GenerateBALFromEmptyFilename()" started-at="2020-04-13T11:46:14 CEST" name="GenerateBALFromEmptyFilename" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1043" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GenerateBALFromEmptyFilename -->
+      </class> <!-- fourcats.usecaseinteractor.GenerateBALTest -->
+      <class name="fourcats.datastructure.LemmatizerDataTest">
+        <test-method signature="testToString()" started-at="2020-04-13T11:46:15 CEST" name="testToString" finished-at="2020-04-13T11:46:15 CEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testToString -->
+        <test-method signature="getList()" started-at="2020-04-13T11:46:15 CEST" name="getList" finished-at="2020-04-13T11:46:15 CEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getList -->
+        <test-method signature="addElement()" started-at="2020-04-13T11:46:15 CEST" name="addElement" finished-at="2020-04-13T11:46:15 CEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addElement -->
+      </class> <!-- fourcats.datastructure.LemmatizerDataTest -->
+      <class name="fourcats.datastructure.WordTagTest">
+        <test-method signature="testToString()" started-at="2020-04-13T11:46:15 CEST" name="testToString" finished-at="2020-04-13T11:46:15 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testToString -->
+      </class> <!-- fourcats.datastructure.WordTagTest -->
+      <class name="fourcats.usecaseinteractor.GenerateBALSuggestionsTest">
+        <test-method signature="GenerateBALSuggestionsFromNotExistingFeature()" started-at="2020-04-13T11:46:15 CEST" name="GenerateBALSuggestionsFromNotExistingFeature" finished-at="2020-04-13T11:46:15 CEST" duration-ms="58" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+at fourcats.usecaseinteractor.GenerateBALSuggestions.generateSuggestions(GenerateBALSuggestions.java:36)
+at fourcats.usecaseinteractor.GenerateBALSuggestionsTest.GenerateBALSuggestionsFromNotExistingFeature(GenerateBALSuggestionsTest.java:24)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+at org.junit.runner.JUnitCore.run(JUnitCore.java:160)
+at org.junit.runner.JUnitCore.run(JUnitCore.java:138)
+at org.testng.junit.JUnit4TestRunner.start(JUnit4TestRunner.java:74)
+at org.testng.junit.JUnit4TestRunner.run(JUnit4TestRunner.java:65)
+at org.testng.TestRunner$1.run(TestRunner.java:652)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1507)
+at org.testng.TestRunner.runJUnitWorkers(TestRunner.java:843)
+at org.testng.TestRunner.privateRunJUnit(TestRunner.java:681)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1109)
+at org.testng.TestNG.runSuites(TestNG.java:1039)
+at org.testng.TestNG.run(TestNG.java:1007)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:198)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GenerateBALSuggestionsFromNotExistingFeature -->
+      </class> <!-- fourcats.usecaseinteractor.GenerateBALSuggestionsTest -->
+      <class name="fourcats.AppTest">
+        <test-method signature="testApp()" started-at="2020-04-13T11:46:14 CEST" name="testApp" finished-at="2020-04-13T11:46:14 CEST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testApp -->
+      </class> <!-- fourcats.AppTest -->
+      <class name="fourcats.datastructure.WordCounterTest">
+        <test-method signature="testToString()" started-at="2020-04-13T11:46:15 CEST" name="testToString" finished-at="2020-04-13T11:46:15 CEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testToString -->
+        <test-method signature="testIncrementCounter()" started-at="2020-04-13T11:46:15 CEST" name="testIncrementCounter" finished-at="2020-04-13T11:46:15 CEST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIncrementCounter -->
+        <test-method signature="testDecrementCounter()" started-at="2020-04-13T11:46:15 CEST" name="testDecrementCounter" finished-at="2020-04-13T11:46:15 CEST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDecrementCounter -->
+      </class> <!-- fourcats.datastructure.WordCounterTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
