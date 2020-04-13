@@ -29,4 +29,5 @@ public class GenerateBALSuggestionsTest {
         }
         assertTrue(true);
     }
+
 }
