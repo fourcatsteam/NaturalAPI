@@ -1,4 +1,4 @@
-FourCats\AppTest.class
-FourCats\datastructure\WordCounterTest.class
-FourCats\datastructure\WordTagTest.class
-FourCats\datastructure\LemmatizerDataTest.class
+fourcats\datastructure\WordTagTest.class
+fourcats\datastructure\LemmatizerDataTest.class
+fourcats\AppTest.class
+fourcats\datastructure\WordCounterTest.class
