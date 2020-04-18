@@ -9,3 +9,5 @@ script:
     - cd NaturalAPI_Design
     - sonar-scanner
     - mvn test
+after_success:
+    - mvn clean test jacoco:report

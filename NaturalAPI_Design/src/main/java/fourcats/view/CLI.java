@@ -76,16 +76,12 @@ public class CLI implements Observer {
     }
 
     public void generateSuggestion() throws IOException {
-        String filename = chooseFile();
-        if (!filename.equalsIgnoreCase("EXIT")) {
-            try{
+        String filename = "";
+        while(!filename.equalsIgnoreCase("EXIT")) {
+            filename = chooseFile();
+            if (!filename.equalsIgnoreCase("EXIT"))
                 contr.generateSuggestions(filename);
-            }
-            catch(FileNotFoundException e){
-                return;
-            }
         }
-        else return;
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
             System.out.println("\nDo you want to modify or delete one of them? 1. YES 2. NO. Digit EXIT to abort.");

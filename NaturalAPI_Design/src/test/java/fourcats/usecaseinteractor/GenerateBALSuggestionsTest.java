@@ -5,7 +5,6 @@ import fourcats.interfaceaccess.TextAnalyzer;
 import fourcats.port.GenerateBALSuggestionsOutputPort;
 import org.junit.Test;
 import org.mockito.*;
-import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
@@ -20,14 +19,8 @@ public class GenerateBALSuggestionsTest {
 
     @Test
     public void GenerateBALSuggestionsFromNotExistingFeature() {
-        try{
-            correctGenerator.generateSuggestions("");
-        }
-        catch(FileNotFoundException e)
-        {
-            fail();
-        }
-        assertTrue(true);
+        correctGenerator.generateSuggestions("");
+        Mockito.verifyZeroInteractions(analyzerMock);
     }
 
 }

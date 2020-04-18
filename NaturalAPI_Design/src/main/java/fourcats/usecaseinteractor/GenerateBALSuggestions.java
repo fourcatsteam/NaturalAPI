@@ -16,6 +16,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     RepositoryAccess repo;
     TextAnalyzer textAnalyzer;
     GenerateBALSuggestionsOutputPort out;
+    private static final String AS_A = "As a:";
 
     public GenerateBALSuggestions(RepositoryAccess repositoryAccess, TextAnalyzer textAnalyzer, GenerateBALSuggestionsOutputPort outputPort)
     {
@@ -24,15 +25,22 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         this.out = outputPort;
     }
 
-    public void generateSuggestions(String featureFileName) throws FileNotFoundException {
+    public void generateSuggestions(String featureFileName) {
         Map<Integer,Action> mActions;
         //BlackList blackList = new BlackList();
         List<Scenario> lScenarios = new ArrayList<>();
         List<Action> lGeneratedActions;
         int id = 0;
+        String feature = "";
         //read feature file from repository
         try {
-            String feature = repo.read(featureFileName);
+            feature = repo.read(featureFileName);
+        }
+        catch(FileNotFoundException e){
+            out.showErrorFileLoad();
+            return;
+        }
+        if(feature!=null) {
             String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
             for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
                 lGeneratedActions = generateAction(currentScenario);
@@ -49,11 +57,6 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
             }
             out.showSuggestionsForScenario(repo.readScenarios());
         }
-        catch(FileNotFoundException e){
-            out.showErrorFileLoad();
-            throw e;
-        }
-
 
     }
 
@@ -67,7 +70,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         String formattedSuggestion="";
         Action suggestion = null;
         for (String suggestedAction : analyzedData.getParseList()){
-            formattedSuggestion = suggestedAction.replaceAll(" ", "_");
+            formattedSuggestion = suggestedAction.replace(" ", "_");
             suggestion = new Action((formattedSuggestion), "void");
             suggestion.addObjectParam(generateObject(suggestion.getName()));
             lGeneratedAction.add(suggestion);
@@ -86,8 +89,8 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 //extract scenario name by picking the text between first row and "Given:" in the feature file
         int indexFeatureStart = 1;
         int indexFeatureEnd = -1;
-        if (feature.indexOf("As a:")!=-1)
-            indexFeatureEnd = feature.indexOf("As a:")-1;
+        if (feature.indexOf(AS_A)!=-1)
+            indexFeatureEnd = feature.indexOf(AS_A)-1;
         else
             indexFeatureEnd = feature.indexOf("Given")-1;
         return feature.substring(indexFeatureStart,indexFeatureEnd);
@@ -99,8 +102,8 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         //if there isn't the keyword "As as:" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
-        if (feature.indexOf("As a:")!=-1) {
-            indexActorStart = feature.indexOf("As a:")+6;
+        if (feature.indexOf(AS_A)!=-1) {
+            indexActorStart = feature.indexOf(AS_A)+6;
             indexActorEnd = feature.indexOf("Feature")-1;
             if (indexActorStart <= indexActorEnd)
                 return feature.substring(indexActorStart,indexActorEnd);

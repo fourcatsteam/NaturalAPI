@@ -9,23 +9,23 @@ public class Action {
     private List<ObjectParam> param;
     private String type;
 
-    public Action(String ActionName) {
-        this.name = ActionName;
-        this.param = new ArrayList<ObjectParam>();
+    public Action(String actionName) {
+        this.name = actionName;
+        this.param = new ArrayList<>();
         this.type = null;
     }
 
-    public Action(String ActionName, String ActionType) {
-        this.name = ActionName;
-        this.param = new ArrayList<ObjectParam>();
-        if(ActionType.equals(""))
+    public Action(String actionName, String actionType) {
+        this.name = actionName;
+        this.param = new ArrayList<>();
+        if(actionType.equals(""))
             this.type = null;
         else
-            this.type = ActionType;
+            this.type = actionType;
     }
 
-    public void setName(String ActionName) {
-        this.name = ActionName;
+    public void setName(String actionName) {
+        this.name = actionName;
     }
 
     public String getName() {
