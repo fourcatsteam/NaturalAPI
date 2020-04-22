@@ -16,7 +16,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     RepositoryAccess repo;
     TextAnalyzer textAnalyzer;
     GenerateBALSuggestionsOutputPort out;
-    private static final String AS_A = "As a:";
+    private static final String AS_A = "As a";
 
     public GenerateBALSuggestions(RepositoryAccess repositoryAccess, TextAnalyzer textAnalyzer, GenerateBALSuggestionsOutputPort outputPort)
     {
@@ -90,23 +90,23 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         int indexFeatureStart = 1;
         int indexFeatureEnd = -1;
         if (feature.indexOf(AS_A)!=-1)
-            indexFeatureEnd = feature.indexOf(AS_A)-1;
+            indexFeatureEnd = feature.indexOf(AS_A);
         else
-            indexFeatureEnd = feature.indexOf("Given")-1;
-        return feature.substring(indexFeatureStart,indexFeatureEnd);
+            indexFeatureEnd = feature.indexOf("Given");
+        return feature.substring(indexFeatureStart,indexFeatureEnd).trim();
 
     }
 
     private String extractActorName(String feature){
-        //extract actor name by picking the text between keywords "As a:" and "Feature" in the feature file
+        //extract actor name by picking the text between keywords "As a" and "Scenario" in the feature file
         //if there isn't the keyword "As as:" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
         if (feature.indexOf(AS_A)!=-1) {
-            indexActorStart = feature.indexOf(AS_A)+6;
-            indexActorEnd = feature.indexOf("Feature")-1;
+            indexActorStart = feature.indexOf(AS_A)+5;
+            indexActorEnd = feature.indexOf("Scenario");
             if (indexActorStart <= indexActorEnd)
-                return feature.substring(indexActorStart,indexActorEnd);
+                return feature.substring(indexActorStart,indexActorEnd).trim();
         }
         return "All";
 
