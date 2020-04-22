@@ -9,4 +9,5 @@ script:
     - cd NaturalAPI_Design
    # - sonar-scanner
    # - mvn test
+    - sonar-scanner
     - mvn clean package sonar:sonar -Psonar,coverage -Dsonar.projectKey=fourcatsteam_NaturalAPI
