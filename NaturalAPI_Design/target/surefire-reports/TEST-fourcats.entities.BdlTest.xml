@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fourcats.datastructure.WordCounterTest" time="0.001" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fourcats.entities.BdlTest" time="0.009" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,7 +61,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testIncrementCounter" classname="fourcats.datastructure.WordCounterTest" time="0"/>
-  <testcase name="testToString" classname="fourcats.datastructure.WordCounterTest" time="0"/>
-  <testcase name="testDecrementCounter" classname="fourcats.datastructure.WordCounterTest" time="0"/>
+  <testcase name="testNotNullNounsReference" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testConstructorSetName" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddNoun" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddVerb" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddPredicate" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testRemoveNoun" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testRemoveVerb" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testRemovePredicate" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddPredicateWithFrequency" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testNotNullVerbsReference" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testStringConversion" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddNounWithFrequency" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testAddVerbWithFrequency" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testNotNullPredicatesReference" classname="fourcats.entities.BdlTest" time="0"/>
 </testsuite>

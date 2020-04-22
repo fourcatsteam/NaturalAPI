@@ -17,59 +17,59 @@ public class Bdl {
 <span class="nc" id="L17">        this(&quot;EmptyName&quot;);</span>
 <span class="nc" id="L18">    }</span>
 
-<span class="nc" id="L20">    public Bdl(String name){</span>
-<span class="nc" id="L21">        this.nameBdl = name;</span>
-<span class="nc" id="L22">        this.nouns=new LinkedList&lt;&gt;();</span>
-<span class="nc" id="L23">        this.verbs=new LinkedList&lt;&gt;();</span>
-<span class="nc" id="L24">        this.predicates=new LinkedList&lt;&gt;();</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L20">    public Bdl(String name){</span>
+<span class="fc" id="L21">        this.nameBdl = name;</span>
+<span class="fc" id="L22">        this.nouns=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L23">        this.verbs=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L24">        this.predicates=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L25">    }</span>
 
     public List&lt;WordCounter&gt; getNouns(){
-<span class="nc" id="L28">        return nouns;</span>
+<span class="fc" id="L28">        return nouns;</span>
     }
 
     public List&lt;WordCounter&gt; getVerbs(){
-<span class="nc" id="L32">        return verbs;</span>
+<span class="fc" id="L32">        return verbs;</span>
     }
 
     public List&lt;WordCounter&gt; getPredicates(){
-<span class="nc" id="L36">        return predicates;</span>
+<span class="fc" id="L36">        return predicates;</span>
     }
 
-<span class="nc" id="L39">    public String getName() { return nameBdl; }</span>
+<span class="fc" id="L39">    public String getName() { return nameBdl; }</span>
 
     public void addNoun(String noun) {
-<span class="nc" id="L42">        boolean present = false;</span>
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        for (WordCounter w : nouns) {</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">            if(w.getWord().equalsIgnoreCase(noun)) {</span>
-<span class="nc" id="L45">                w.incrementCounter();</span>
-<span class="nc" id="L46">                present = true;</span>
+<span class="fc" id="L42">        boolean present = false;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (WordCounter w : nouns) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            if(w.getWord().equalsIgnoreCase(noun)) {</span>
+<span class="fc" id="L45">                w.incrementCounter();</span>
+<span class="fc" id="L46">                present = true;</span>
             }
-<span class="nc" id="L48">        }</span>
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        if(!present) nouns.add(new WordCounter(noun));</span>
-<span class="nc" id="L50">    }</span>
+<span class="fc" id="L48">        }</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if(!present) nouns.add(new WordCounter(noun));</span>
+<span class="fc" id="L50">    }</span>
 
     public void addVerb(String verb) {
-<span class="nc" id="L53">        boolean present = false;</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (WordCounter w : verbs) {</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">            if(w.getWord().equalsIgnoreCase(verb)) {</span>
+<span class="fc" id="L53">        boolean present = false;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (WordCounter w : verbs) {</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if(w.getWord().equalsIgnoreCase(verb)) {</span>
 <span class="nc" id="L56">                w.incrementCounter();</span>
 <span class="nc" id="L57">                present = true;</span>
             }
-<span class="nc" id="L59">        }</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if(!present) verbs.add(new WordCounter(verb));</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L59">        }</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(!present) verbs.add(new WordCounter(verb));</span>
+<span class="fc" id="L61">    }</span>
 
     public void addPredicate(String predicate) {
-<span class="nc" id="L64">        boolean present = false;</span>
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        for (WordCounter w : predicates) {</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">            if(w.getWord().equalsIgnoreCase(predicate)) {</span>
-<span class="nc" id="L67">                w.incrementCounter();</span>
-<span class="nc" id="L68">                present = true;</span>
+<span class="fc" id="L64">        boolean present = false;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (WordCounter w : predicates) {</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">            if(w.getWord().equalsIgnoreCase(predicate)) {</span>
+<span class="fc" id="L67">                w.incrementCounter();</span>
+<span class="fc" id="L68">                present = true;</span>
             }
-<span class="nc" id="L70">        }</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(!present) predicates.add(new WordCounter(predicate));</span>
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if(!present) predicates.add(new WordCounter(predicate));</span>
+<span class="fc" id="L72">    }</span>
 
     //ORDER BDL
     private void order() {
@@ -79,70 +79,70 @@ public class Bdl {
 <span class="nc" id="L79">    }</span>
 
     public void storeBdlNoun(String s,Integer i){
-<span class="nc" id="L82">        nouns.add(new WordCounter(s,i));</span>
-<span class="nc" id="L83">    }</span>
+<span class="fc" id="L82">        nouns.add(new WordCounter(s,i));</span>
+<span class="fc" id="L83">    }</span>
     public void storeBdlVerb(String s,Integer i){
-<span class="nc" id="L85">        verbs.add(new WordCounter(s,i));</span>
-<span class="nc" id="L86">    }</span>
+<span class="fc" id="L85">        verbs.add(new WordCounter(s,i));</span>
+<span class="fc" id="L86">    }</span>
     public void storeBdlPredicate(String s,Integer i){
-<span class="nc" id="L88">        predicates.add(new WordCounter(s,i));</span>
-<span class="nc" id="L89">    }</span>
+<span class="fc" id="L88">        predicates.add(new WordCounter(s,i));</span>
+<span class="fc" id="L89">    }</span>
 
     public void removeNoun(String noun) {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        for (Iterator&lt;WordCounter&gt; iterator = nouns.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L93">            WordCounter wc = iterator.next();</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(noun)) {</span>
-<span class="nc" id="L95">                wc.decrementCounter();</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">                if(wc.getCount()==0){</span>
-<span class="nc" id="L97">                    iterator.remove();</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = nouns.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L93">            WordCounter wc = iterator.next();</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(noun)) {</span>
+<span class="fc" id="L95">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="fc" id="L97">                    iterator.remove();</span>
                 }
             }
-<span class="nc" id="L100">        }</span>
-<span class="nc" id="L101">    }</span>
+<span class="fc" id="L100">        }</span>
+<span class="fc" id="L101">    }</span>
 
     public void removeVerb(String verb) {
         //Da rivedere perchè uso iteratori
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        for (Iterator&lt;WordCounter&gt; iterator = verbs.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L106">            WordCounter wc = iterator.next();</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(verb)) {</span>
-<span class="nc" id="L108">                wc.decrementCounter();</span>
-<span class="nc bnc" id="L109" title="All 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = verbs.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L106">            WordCounter wc = iterator.next();</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(verb)) {</span>
+<span class="fc" id="L108">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
 <span class="nc" id="L110">                    iterator.remove();</span>
                 }
             }
-<span class="nc" id="L113">        }</span>
-<span class="nc" id="L114">    }</span>
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">    }</span>
 
     public void removePredicate(String predicate) {
-<span class="nc bnc" id="L117" title="All 2 branches missed.">        for (Iterator&lt;WordCounter&gt; iterator = predicates.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L118">            WordCounter wc = iterator.next();</span>
-<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(predicate)) {</span>
-<span class="nc" id="L120">                wc.decrementCounter();</span>
-<span class="nc bnc" id="L121" title="All 2 branches missed.">                if(wc.getCount()==0){</span>
-<span class="nc" id="L122">                    iterator.remove();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = predicates.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L118">            WordCounter wc = iterator.next();</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">            if (wc.getWord().equalsIgnoreCase(predicate)) {</span>
+<span class="fc" id="L120">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="fc" id="L122">                    iterator.remove();</span>
                 }
             }
-<span class="nc" id="L125">        }</span>
-<span class="nc" id="L126">    }</span>
+<span class="fc" id="L125">        }</span>
+<span class="fc" id="L126">    }</span>
 
     @Override
     public String toString() {
 
-<span class="nc" id="L131">        String ret=&quot;-- NOUNS -- \n&quot;;</span>
+<span class="fc" id="L131">        String ret=&quot;-- NOUNS -- \n&quot;;</span>
 
-<span class="nc bnc" id="L133" title="All 2 branches missed.">        for(WordCounter w: nouns){</span>
-<span class="nc" id="L134">            ret = ret + w.toString() +&quot;\n&quot;;</span>
-<span class="nc" id="L135">        }</span>
-<span class="nc" id="L136">        ret = ret + &quot;-- VERBS -- \n&quot;;</span>
-<span class="nc bnc" id="L137" title="All 2 branches missed.">        for(WordCounter w: verbs){</span>
-<span class="nc" id="L138">            ret = ret + w.toString() +&quot;\n&quot;;</span>
-<span class="nc" id="L139">        }</span>
-<span class="nc" id="L140">        ret = ret + &quot;-- PREDICATES -- \n&quot;;</span>
-<span class="nc bnc" id="L141" title="All 2 branches missed.">        for(WordCounter w: predicates){</span>
-<span class="nc" id="L142">            ret = ret + w.toString() +&quot;\n&quot;;</span>
-<span class="nc" id="L143">        }</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for(WordCounter w: nouns){</span>
+<span class="fc" id="L134">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L135">        }</span>
+<span class="fc" id="L136">        ret = ret + &quot;-- VERBS -- \n&quot;;</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        for(WordCounter w: verbs){</span>
+<span class="fc" id="L138">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L139">        }</span>
+<span class="fc" id="L140">        ret = ret + &quot;-- PREDICATES -- \n&quot;;</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        for(WordCounter w: predicates){</span>
+<span class="fc" id="L142">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L143">        }</span>
 
-<span class="nc" id="L145">        return ret;</span>
+<span class="fc" id="L145">        return ret;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
