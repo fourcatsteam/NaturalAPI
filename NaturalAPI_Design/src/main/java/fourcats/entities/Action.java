@@ -43,7 +43,7 @@ public class Action {
     }
     public void updateObjectParamName(String paramName, String newName) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setName(newName);
                 return;
             }
@@ -52,7 +52,7 @@ public class Action {
 
     public void updateObjectParamType(String paramName, String newType) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setType(newType);
                 return;
             }
@@ -61,7 +61,7 @@ public class Action {
 
     public void updateIsObjectParamRequired(String paramName, boolean isRequired) {
         for (ObjectParam p : param) {
-            if (p.getName()==paramName) {
+            if (p.getName().equals(paramName)) {
                 p.setRequired(isRequired);
                 return;
             }
