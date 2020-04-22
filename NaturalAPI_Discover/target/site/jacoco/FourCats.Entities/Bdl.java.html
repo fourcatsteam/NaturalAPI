@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bdl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Discover</a> &gt; <a href="index.source.html" class="el_package">FourCats.Entities</a> &gt; <span class="el_source">Bdl.java</span></div><h1>Bdl.java</h1><pre class="source lang-java linenums">package FourCats.Entities;
+
+import FourCats.DataStructure.WordCounter;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Bdl {
+    private String nameBdl;
+    private LinkedList&lt;WordCounter&gt; nouns;
+    private LinkedList&lt;WordCounter&gt; verbs;
+    private LinkedList&lt;WordCounter&gt; predicates;
+
+    public Bdl() {
+<span class="nc" id="L16">        this(&quot;EmptyName&quot;);</span>
+<span class="nc" id="L17">    }</span>
+
+<span class="fc" id="L19">    public Bdl(String name){</span>
+<span class="fc" id="L20">        this.nameBdl = name;</span>
+<span class="fc" id="L21">        this.nouns=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L22">        this.verbs=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L23">        this.predicates=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L24">    }</span>
+
+    public List&lt;WordCounter&gt; getNouns(){
+<span class="fc" id="L27">        return nouns;</span>
+    }
+
+    public List&lt;WordCounter&gt; getVerbs(){
+<span class="fc" id="L31">        return verbs;</span>
+    }
+
+    public List&lt;WordCounter&gt; getPredicates(){
+<span class="fc" id="L35">        return predicates;</span>
+    }
+
+<span class="fc" id="L38">    public String getName() { return nameBdl; }</span>
+
+    public void addNoun(String noun) {
+<span class="fc" id="L41">        Boolean present = false;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (WordCounter w : nouns) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if(w.getWord().equalsIgnoreCase(noun)) {</span>
+<span class="fc" id="L44">                w.incrementCounter();</span>
+<span class="fc" id="L45">                present = true;</span>
+            }
+<span class="fc" id="L47">        }</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if(!present) nouns.add(new WordCounter(noun));</span>
+<span class="fc" id="L49">    }</span>
+
+    public void addVerb(String verb) {
+<span class="fc" id="L52">        Boolean present = false;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (WordCounter w : verbs) {</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">            if(w.getWord().equalsIgnoreCase(verb)) {</span>
+<span class="nc" id="L55">                w.incrementCounter();</span>
+<span class="nc" id="L56">                present = true;</span>
+            }
+<span class="fc" id="L58">        }</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if(!present) verbs.add(new WordCounter(verb));</span>
+<span class="fc" id="L60">    }</span>
+
+    public void addPredicate(String predicate) {
+<span class="fc" id="L63">        Boolean present = false;</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (WordCounter w : predicates) {</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">            if(w.getWord().equalsIgnoreCase(predicate)) {</span>
+<span class="fc" id="L66">                w.incrementCounter();</span>
+<span class="fc" id="L67">                present = true;</span>
+            }
+<span class="fc" id="L69">        }</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if(!present) predicates.add(new WordCounter(predicate));</span>
+<span class="fc" id="L71">    }</span>
+
+    //ORDER BDL
+    private void order() {
+<span class="nc" id="L75">        Collections.sort(nouns,Collections.reverseOrder());</span>
+<span class="nc" id="L76">        Collections.sort(verbs,Collections.reverseOrder());</span>
+<span class="nc" id="L77">        Collections.sort(predicates, Collections.reverseOrder());</span>
+<span class="nc" id="L78">    }</span>
+
+    public void storeBdlNoun(String s,Integer i){
+<span class="fc" id="L81">        nouns.add(new WordCounter(s,i));</span>
+<span class="fc" id="L82">    }</span>
+    public void storeBdlVerb(String s,Integer i){
+<span class="fc" id="L84">        verbs.add(new WordCounter(s,i));</span>
+<span class="fc" id="L85">    }</span>
+    public void storeBdlPredicate(String s,Integer i){
+<span class="fc" id="L87">        predicates.add(new WordCounter(s,i));</span>
+<span class="fc" id="L88">    }</span>
+
+    public void removeNoun(String noun) {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = nouns.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L92">            WordCounter wc = iterator.next();</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(noun)) {</span>
+<span class="fc" id="L94">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="fc" id="L96">                    iterator.remove();</span>
+                }
+            }
+<span class="fc" id="L99">        }</span>
+<span class="fc" id="L100">    }</span>
+
+    public void removeVerb(String verb) {
+        //Da rivedere perchè uso iteratori
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = verbs.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L105">            WordCounter wc = iterator.next();</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">            if (wc.getWord().equalsIgnoreCase(verb)) {</span>
+<span class="fc" id="L107">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="nc" id="L109">                    iterator.remove();</span>
+                }
+            }
+<span class="fc" id="L112">        }</span>
+<span class="fc" id="L113">    }</span>
+
+    public void removePredicate(String predicate) {
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (Iterator&lt;WordCounter&gt; iterator = predicates.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L117">            WordCounter wc = iterator.next();</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (wc.getWord().equalsIgnoreCase(predicate)) {</span>
+<span class="fc" id="L119">                wc.decrementCounter();</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">                if(wc.getCount()==0){</span>
+<span class="fc" id="L121">                    iterator.remove();</span>
+                }
+            }
+<span class="fc" id="L124">        }</span>
+<span class="fc" id="L125">    }</span>
+
+    @Override
+    public String toString() {
+
+<span class="fc" id="L130">        String ret=&quot;-- NOUNS -- \n&quot;;</span>
+
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        for(WordCounter w: nouns){</span>
+<span class="fc" id="L133">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L134">        }</span>
+<span class="fc" id="L135">        ret = ret + &quot;-- VERBS -- \n&quot;;</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        for(WordCounter w: verbs){</span>
+<span class="fc" id="L137">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L138">        }</span>
+<span class="fc" id="L139">        ret = ret + &quot;-- PREDICATES -- \n&quot;;</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        for(WordCounter w: predicates){</span>
+<span class="fc" id="L141">            ret = ret + w.toString() +&quot;\n&quot;;</span>
+<span class="fc" id="L142">        }</span>
+
+<span class="fc" id="L144">        return ret;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
