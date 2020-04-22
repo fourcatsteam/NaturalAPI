@@ -41,6 +41,7 @@ public class CLI implements Observer {
             switch (currentUseCase) {
                 case "1": {
                     generateSuggestion();
+                    askForOperationOnSuggestion();
                     break;
                 }
 
@@ -75,6 +76,45 @@ public class CLI implements Observer {
         return r;
     }
 
+    private void askForOperationOnSuggestion() throws IOException {
+        String input = "";
+        while(!input.equalsIgnoreCase("EXIT")) {
+            System.out.println("\nDo you want to modify or delete a suggestion? 1. YES 2. NO. Digit EXIT to abort.");
+            input = br.readLine();
+            if (input.equals("1")) {
+                System.out.println("1. Delete 2. Modify suggestion name");
+                input = br.readLine();
+                if (input.equals("1")) {
+                    deleteSuggestion();
+                }
+                else if(input.equals("2")){
+                    modifyActionName();
+                }
+            }
+            else if (input.equals("2")){
+                System.out.println("1. Add new scenario 2. Generate BAL. Digit EXIT to abort");
+                input = br.readLine();
+                if(input.equals("1")){
+                    contr.generateSuggestions(chooseFile());
+                }
+                else if(input.equals("2")){
+                    System.out.println("Please, insert the name for the BAL");
+                    input = br.readLine();
+                    contr.generateBAL(input);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void deleteSuggestion() throws IOException {
+        System.out.println("Please insert the id of the scenario for the suggestion you want to delete");
+        String idScenario = br.readLine();
+        System.out.println("Please insert the id of the suggestion you want to delete");
+        String idSuggestion = br.readLine();
+        contr.declineSuggestion(idSuggestion, idScenario);
+    }
+
     public void generateSuggestion() throws IOException {
         String filename = "";
         while(!filename.equalsIgnoreCase("EXIT")) {
@@ -82,36 +122,16 @@ public class CLI implements Observer {
             if (!filename.equalsIgnoreCase("EXIT"))
                 contr.generateSuggestions(filename);
         }
-        String input = "";
-        while(!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("\nDo you want to modify or delete one of them? 1. YES 2. NO. Digit EXIT to abort.");
-            input = br.readLine();
-            if (input.equals("1")) {
-                System.out.println("1. Delete 2. Modify(TODO)");
-                input = br.readLine();
-                if (input.equals("1")) {
-                    System.out.println("Please insert the id of the scenario for the suggestion you want to delete");
-                    input = br.readLine();
-                    System.out.println("Please insert the id of the suggestion you want to delete");
-                    String newInput = br.readLine();
-                    contr.declineSuggestion(newInput, input);
-                }
-            }
-            if (input.equals("2")){
-                System.out.println("1. Add new scenario 2. Generate BAL. Digit EXIT to abort");
-                input = br.readLine();
-                if(input.equals("1")){
-                    contr.generateSuggestions(chooseFile());
-                }
-                if(input.equals("2")){
-                    System.out.println("Please, insert the name for the BAL");
-                    input = br.readLine();
-                    contr.generateBAL(input);
-                    return;
-                }
+    }
 
-            }
-        }
+    private void modifyActionName() throws IOException {
+        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
+        String idScenario = br.readLine();
+        System.out.println("Please insert the id of the suggestion you want to modify");
+        String idSuggestion = br.readLine();
+        System.out.println("Please insert the new name of the action");
+        String actionName = br.readLine();
+        contr.modifyActionName(idSuggestion,idScenario,actionName);
     }
 
 

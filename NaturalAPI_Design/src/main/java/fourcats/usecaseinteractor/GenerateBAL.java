@@ -37,7 +37,7 @@ public class GenerateBAL implements GenerateBALInputPort {
                 index++;
             }
             if (!isActorInList){
-                lActors.add(new Actor(scenario.getActorName(), scenario.getActions())); //non aggiunge attori correttamente
+                lActors.add(new Actor(scenario.getActorName(), scenario.getActions()));
             }
 
         }

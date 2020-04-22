@@ -6,6 +6,7 @@ import fourcats.interfaceadapters.DataPresenter;
 import fourcats.usecaseinteractor.DeclineBALSuggestion;
 import fourcats.usecaseinteractor.GenerateBAL;
 import fourcats.usecaseinteractor.GenerateBALSuggestions;
+import fourcats.usecaseinteractor.ModifyBALSuggestion;
 import fourcats.view.CLI;
 
 /**
@@ -19,15 +20,14 @@ public class App {
         DataPresenter dataPresenter = new DataPresenter();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
-
+        GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
         GenerateBALSuggestions generateBALSugg = new GenerateBALSuggestions(repo,nlp,dataPresenter);
         DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
-        GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
-        Controller controller = new Controller(generateBALSugg, declineBALSuggestion, generateBAL);
+        ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
+        Controller controller = new Controller(generateBALSugg, declineBALSuggestion, generateBAL ,modifyBALSuggestion);
 
 
         CLI cli = new CLI(controller,dataPresenter);
-
 
 
         boolean shouldContinue = true;

@@ -50,5 +50,25 @@ public class Repository implements RepositoryAccess  {
         memoryAccess.writeFile(bal,filename);
     }
 
+    @Override
+    public void updateActionName(int idAction, int idScenario, String newActionName) {
+        dataKeeper.updateActionName(idScenario, idAction, newActionName);
+    }
+
+    @Override
+    public void updateActionType(int idAction, int idScenario, String newType) {
+
+    }
+
+    @Override
+    public void updateObjectName(int idAction, int idScenario, int idObject, String newObjectName) {
+
+    }
+
+    @Override
+    public void updateObjectType(int idAction, int idScenario, int idObject, String newObject) {
+
+    }
+
 
 }

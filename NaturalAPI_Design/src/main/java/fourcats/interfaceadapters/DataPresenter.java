@@ -6,10 +6,11 @@ import fourcats.entities.Scenario;
 import fourcats.port.DeclineBALSuggestionOutputPort;
 import fourcats.port.GenerateBALOutputPort;
 import fourcats.port.GenerateBALSuggestionsOutputPort;
+import fourcats.port.ModifyBALSuggestionOutputPort;
 
 import java.util.Map;
 
-public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort, GenerateBALOutputPort {
+public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort, GenerateBALOutputPort, ModifyBALSuggestionOutputPort {
 
     private String toShow;
 
@@ -59,5 +60,19 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
             toShow = "Oh no! Something went wrong...";
         }
         notifyObservers();
+    }
+
+    @Override
+    public void showModifiedAction(Map<Integer, Scenario> mScenarios, boolean isActionModified) {
+        if (isActionModified){
+            toShow = "Suggestion name successfully updated! This is the updated list of suggestions";
+            notifyObservers();
+            showSuggestionsForScenario(mScenarios);
+        }
+        else{
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update.";
+            notifyObservers();
+        }
+
     }
 }

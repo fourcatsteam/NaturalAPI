@@ -1,5 +1,6 @@
 package fourcats.frameworks;
 
+import fourcats.entities.Action;
 import fourcats.entities.Scenario;
 
 import java.util.*;
@@ -30,9 +31,17 @@ public class DataKeeper {
         }
     }
 
-
     public void clearScenariosMap(){
         mScenarios.clear();
+    }
+
+    public void updateActionName(int idScenario, int idAction, String newActionName){
+        try{
+            mScenarios.get(idScenario).getActionsMap().get(idAction).setName(newActionName);
+        }
+        catch (NullPointerException e){
+            throw e;
+        }
     }
 
 
