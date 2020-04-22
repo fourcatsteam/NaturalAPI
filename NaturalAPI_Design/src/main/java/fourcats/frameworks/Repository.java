@@ -62,7 +62,7 @@ public class Repository implements RepositoryAccess  {
 
     @Override
     public void updateObjectName(int idAction, int idScenario, int idObject, String newObjectName) {
-
+        dataKeeper.updateObjectName(idScenario,idAction,idObject,newObjectName);
     }
 
     @Override

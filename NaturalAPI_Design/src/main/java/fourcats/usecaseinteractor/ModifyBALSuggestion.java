@@ -21,10 +21,10 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
     public void modifyActionName(int idAction, int idScenario, String newName) {
         try {
             repo.updateActionName(idAction, idScenario, newName);
-            out.showModifiedAction(repo.readScenarios(), true);
+            out.showModifiedActionName(repo.readScenarios(), true);
         }
         catch (NullPointerException e){
-            out.showModifiedAction(repo.readScenarios(), false);
+            out.showModifiedActionName(repo.readScenarios(), false);
         }
     }
 
@@ -35,6 +35,12 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
 
     @Override
     public void modifyObjectName(int idAction, int idScenario, int idObject, String newName) {
-        repo.updateObjectName(idAction, idScenario, idObject, newName); //TODO
+        try {
+            repo.updateObjectName(idAction, idScenario, idObject, newName);
+            out.showModifiedObjectName(repo.readScenarios(),true);
+        }
+        catch (Exception e){
+            out.showModifiedObjectName(repo.readScenarios(),false);
+        }
     }
 }

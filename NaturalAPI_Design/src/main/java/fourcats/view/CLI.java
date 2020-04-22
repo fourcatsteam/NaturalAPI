@@ -5,7 +5,6 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -39,24 +38,19 @@ public class CLI implements Observer {
         try {
             currentUseCase = br.readLine();
             switch (currentUseCase) {
-                case "1": {
+                case "1":
                     generateSuggestion();
                     askForOperationOnSuggestion();
                     break;
-                }
-
-                case "2": {
+                case "2":
                     System.out.println("Get out of here, This is a Work in progress!");
                     break;
-                }
-                case "EXIT":{
+                case "EXIT":
                     shouldContinue = false;
                     break;
-                }
-                default:{
+                default:
                     System.out.println("Please insert a valid option. Digit EXIT to exit.");
                     break;
-                }
 
             }
 
@@ -82,13 +76,16 @@ public class CLI implements Observer {
             System.out.println("\nDo you want to modify or delete a suggestion? 1. YES 2. NO. Digit EXIT to abort.");
             input = br.readLine();
             if (input.equals("1")) {
-                System.out.println("1. Delete 2. Modify suggestion name");
+                System.out.println("1. Delete\n2. Modify suggestion name\n3. Modify parameter name\n");
                 input = br.readLine();
                 if (input.equals("1")) {
                     deleteSuggestion();
                 }
                 else if(input.equals("2")){
                     modifyActionName();
+                }
+                else if(input.equals("3")){
+                    modifyObjectName();
                 }
             }
             else if (input.equals("2")){
@@ -132,6 +129,18 @@ public class CLI implements Observer {
         System.out.println("Please insert the new name of the action");
         String actionName = br.readLine();
         contr.modifyActionName(idSuggestion,idScenario,actionName);
+    }
+
+    private void modifyObjectName() throws IOException {
+        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
+        String idScenario = br.readLine();
+        System.out.println("Please insert the id of the suggestion you want to modify");
+        String idSuggestion = br.readLine();
+        System.out.println("Please insert the id of the parameter");
+        String idObject = br.readLine();
+        System.out.println("Please insert the new name of the parameter");
+        String objectName = br.readLine();
+        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
     }
 
 

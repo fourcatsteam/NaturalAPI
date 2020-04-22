@@ -37,4 +37,8 @@ public class Controller{
     public void modifyActionName(String idSuggestion, String idScenario, String newActionName){
         modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName);
     }
+
+    public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName){
+        modifySuggestion.modifyObjectName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newObjectName);
+    }
 }
