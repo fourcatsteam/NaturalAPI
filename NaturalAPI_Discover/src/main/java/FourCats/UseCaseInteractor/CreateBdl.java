@@ -17,9 +17,9 @@ public class CreateBdl implements CreateBdlInputPort {
     private AnalyzeDocument documentAnalyzer;
     private CreateBdlOutputPort output;
 
-    public CreateBdl(RepositoryAccess ra, TextAnalyzer nlp, CreateBdlOutputPort p){
+    public CreateBdl(RepositoryAccess ra, AnalyzeDocument an, CreateBdlOutputPort p){
         repository = ra;
-        documentAnalyzer = new AnalyzeDocument(nlp);
+        documentAnalyzer = an;
         output = p;
     }
 

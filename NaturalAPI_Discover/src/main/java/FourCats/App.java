@@ -9,6 +9,7 @@ import FourCats.InterfaceAdapters.Repository;
 import FourCats.UseCaseInteractor.AddDocuments;
 import FourCats.UseCaseInteractor.CreateBdl;
 import FourCats.UseCaseInteractor.RemoveDocuments;
+import FourCats.UseCaseUtilities.AnalyzeDocument;
 
 /**
  * Hello world!
@@ -21,7 +22,7 @@ public class App {
         StanfordNlp nlp = new StanfordNlp();
         DataPresenter datapresenter = new DataPresenter();
 
-        CreateBdl createBdl = new CreateBdl(repo,nlp,datapresenter);
+        CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
         AddDocuments addDocuments = new AddDocuments(repo,nlp,datapresenter);
         RemoveDocuments removeDocuments = new RemoveDocuments(repo,nlp,datapresenter);
 
