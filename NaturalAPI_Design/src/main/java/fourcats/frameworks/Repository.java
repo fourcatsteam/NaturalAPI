@@ -1,6 +1,7 @@
 package fourcats.frameworks;
 
 import fourcats.entities.Scenario;
+import fourcats.entities.Type;
 import fourcats.interfaceaccess.PersistentMemoryAccess;
 import fourcats.interfaceaccess.RepositoryAccess;
 
@@ -39,6 +40,10 @@ public class Repository implements RepositoryAccess  {
         return dataKeeper.getScenarioMap();
     }
 
+    @Override
+    public Map<Integer, Type> readTypes() {
+        return dataKeeper.getTypeMap();
+    }
 
     @Override
     public void deleteScenarios() {
@@ -56,7 +61,7 @@ public class Repository implements RepositoryAccess  {
     }
 
     @Override
-    public void updateActionType(int idAction, int idScenario, String newType) {
+    public void updateActionType(int idAction, int idScenario, String newActionType) {
 
     }
 
@@ -66,8 +71,13 @@ public class Repository implements RepositoryAccess  {
     }
 
     @Override
-    public void updateObjectType(int idAction, int idScenario, int idObject, String newObject) {
+    public void updateObjectType(int idAction, int idScenario, int idObject, String newObjectType) {
+        dataKeeper.updateObjectType(idScenario,idAction,idObject,newObjectType);
+    }
 
+    @Override
+    public void createCustomType(String typeName, Map<String, String> mAttributes) {
+        dataKeeper.addCustomType(typeName,mAttributes);
     }
 
 

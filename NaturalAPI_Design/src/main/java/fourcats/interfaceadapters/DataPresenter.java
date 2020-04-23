@@ -3,14 +3,13 @@ package fourcats.interfaceadapters;
 import fourcats.datastructure.observer.Subject;
 import fourcats.entities.Action;
 import fourcats.entities.Scenario;
-import fourcats.port.DeclineBALSuggestionOutputPort;
-import fourcats.port.GenerateBALOutputPort;
-import fourcats.port.GenerateBALSuggestionsOutputPort;
-import fourcats.port.ModifyBALSuggestionOutputPort;
+import fourcats.entities.Type;
+import fourcats.port.*;
 
 import java.util.Map;
 
-public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort, GenerateBALOutputPort, ModifyBALSuggestionOutputPort {
+public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort {
 
     private String toShow;
 
@@ -85,6 +84,29 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
+            notifyObservers();
+        }
+    }
+
+    @Override
+    public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
+        if (isObjectTypeModified){
+            toShow = "Parameter type of the suggestion successfully updated! This is the updated list of suggestions";
+            notifyObservers();
+            showSuggestionsForScenario(mScenarios);
+        }
+        else{
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
+            notifyObservers();
+        }
+    }
+
+    @Override
+    public void showCustomTypes(Map<Integer, Type> mType) {
+        toShow = "Custom type successfully created! This is the updated list of custom types";
+        notifyObservers();
+        for (Map.Entry<Integer,Type> mTy : mType.entrySet()) {
+            toShow = "----TYPE: " + mTy.getKey() + ") " + mTy.getValue().getName() + "----";
             notifyObservers();
         }
     }

@@ -3,10 +3,7 @@ package fourcats;
 import fourcats.frameworks.*;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
-import fourcats.usecaseinteractor.DeclineBALSuggestion;
-import fourcats.usecaseinteractor.GenerateBAL;
-import fourcats.usecaseinteractor.GenerateBALSuggestions;
-import fourcats.usecaseinteractor.ModifyBALSuggestion;
+import fourcats.usecaseinteractor.*;
 import fourcats.view.CLI;
 
 /**
@@ -24,7 +21,10 @@ public class App {
         GenerateBALSuggestions generateBALSugg = new GenerateBALSuggestions(repo,nlp,dataPresenter);
         DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
         ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
-        Controller controller = new Controller(generateBALSugg, declineBALSuggestion, generateBAL ,modifyBALSuggestion);
+        CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
+
+        Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
+                generateBAL ,modifyBALSuggestion, createCustomType);
 
 
         CLI cli = new CLI(controller,dataPresenter);

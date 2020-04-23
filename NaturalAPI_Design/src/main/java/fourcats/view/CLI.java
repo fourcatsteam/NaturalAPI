@@ -7,8 +7,9 @@ import fourcats.interfaceadapters.DataPresenter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
-
+import java.util.Map;
 
 
 public class CLI implements Observer {
@@ -76,17 +77,7 @@ public class CLI implements Observer {
             System.out.println("\nDo you want to modify or delete a suggestion? 1. YES 2. NO. Digit EXIT to abort.");
             input = br.readLine();
             if (input.equals("1")) {
-                System.out.println("1. Delete\n2. Modify suggestion name\n3. Modify parameter name\n");
-                input = br.readLine();
-                if (input.equals("1")) {
-                    deleteSuggestion();
-                }
-                else if(input.equals("2")){
-                    modifyActionName();
-                }
-                else if(input.equals("3")){
-                    modifyObjectName();
-                }
+                modifySuggestion();
             }
             else if (input.equals("2")){
                 System.out.println("1. Add new scenario 2. Generate BAL. Digit EXIT to abort");
@@ -103,6 +94,85 @@ public class CLI implements Observer {
             }
         }
     }
+
+    private void modifySuggestion() throws IOException {
+        System.out.println("1. Delete 2. Modify suggestion");
+        String input = br.readLine();
+        if (input.equals("1")) {
+            deleteSuggestion();
+        }
+        else if(input.equals("2")){
+            String idScenario = askForIdScenarioToModify();
+            String idSuggestion = askForIdSuggestionToModify();
+            String idParameter = "";
+            System.out.println("1. Modify suggestion name\n2. Modify parameter name\n3. Modify parameter type");
+            input = br.readLine();
+            if(input.equals("1")) {
+                modifyActionName(idScenario,idSuggestion);
+            }
+            else if(input.equals("2")){
+                idParameter = askForIdParameterToModify();
+                modifyObjectName(idScenario,idSuggestion,idParameter);
+            }
+            else if(input.equals("3")){
+                idParameter = askForIdParameterToModify();
+                System.out.println("1. Simple type, 2. Complex type");
+                input = br.readLine();
+                String type = "";
+                if (input.equals("1")) {
+                    type = askForSimpleType();
+                    contr.modifyObjectType(idSuggestion,idScenario,idParameter,type);
+                }
+                else if(input.equals("2")){
+                    String customType = createCustomObjectType();
+                    contr.modifyObjectType(idSuggestion,idScenario,idParameter,customType); //deve associare customType a quello esistente
+                }
+            }
+        }
+    }
+
+    private String createCustomObjectType() throws IOException {
+        Map<String, String> mAttributes = new HashMap<>();
+        System.out.println("Insert the name for the custom type");
+        String customTypeName = br.readLine();
+        boolean isDone = false;
+        while(!isDone) {
+            System.out.println("Insert the name of the attribute for the type '" + customTypeName + "'");
+            String attributeName = br.readLine();
+            System.out.println("Insert the type for the attribute '" + attributeName + "'");
+            String attributeType = askForSimpleType();
+            mAttributes.put(attributeName,attributeType);
+            System.out.println("Done! " + attributeType + " " + attributeName);
+            System.out.println("Do you want to add another attribute? 1. Yes 2. No");
+            if (br.readLine().equals("2")) {
+                isDone = true;
+            }
+        }
+        contr.createCustomType(customTypeName,mAttributes);
+        return customTypeName;
+    }
+
+
+    private String askForSimpleType() throws IOException {
+        System.out.println("1. string, 2. int, 3. float, 4. double, 5. bool");
+        String input = br.readLine();
+        switch (input) {
+            case "1":
+                return "string";
+            case "2":
+                return "int";
+            case "3":
+                return "float";
+            case "4":
+                return "double";
+            case "5":
+                return "bool";
+            default:
+                System.out.println("Error. Please insert a valid option");
+                return null;
+        }
+    }
+
 
     private void deleteSuggestion() throws IOException {
         System.out.println("Please insert the id of the scenario for the suggestion you want to delete");
@@ -121,28 +191,30 @@ public class CLI implements Observer {
         }
     }
 
-    private void modifyActionName() throws IOException {
-        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
-        String idScenario = br.readLine();
-        System.out.println("Please insert the id of the suggestion you want to modify");
-        String idSuggestion = br.readLine();
+    private void modifyActionName(String idScenario, String idSuggestion) throws IOException {
         System.out.println("Please insert the new name of the action");
         String actionName = br.readLine();
         contr.modifyActionName(idSuggestion,idScenario,actionName);
     }
 
-    private void modifyObjectName() throws IOException {
-        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
-        String idScenario = br.readLine();
-        System.out.println("Please insert the id of the suggestion you want to modify");
-        String idSuggestion = br.readLine();
-        System.out.println("Please insert the id of the parameter");
-        String idObject = br.readLine();
+    private void modifyObjectName(String idScenario, String idSuggestion, String idParameter) throws IOException {
         System.out.println("Please insert the new name of the parameter");
         String objectName = br.readLine();
-        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
+        contr.modifyObjectName(idSuggestion,idScenario,idParameter,objectName);
     }
 
+    private String askForIdScenarioToModify() throws IOException {
+        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
+        return br.readLine();
+    }
+    private String askForIdSuggestionToModify() throws IOException {
+        System.out.println("Please insert the id of the suggestion you want to modify");
+        return br.readLine();
+    }
+    private String askForIdParameterToModify() throws IOException {
+        System.out.println("Please insert the id of the parameter you want to modify");
+        return br.readLine();
+    }
 
     @Override
     public void update() {

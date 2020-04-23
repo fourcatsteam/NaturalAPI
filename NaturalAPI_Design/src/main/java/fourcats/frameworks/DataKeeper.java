@@ -1,15 +1,18 @@
 package fourcats.frameworks;
 
 import fourcats.entities.Scenario;
+import fourcats.entities.Type;
 
 import java.util.*;
 
 public class DataKeeper {
     private Map<Integer, Scenario> mScenarios;
+    private Map<Integer, Type> mType;
 
 
     public DataKeeper(){
         mScenarios = new HashMap<>();
+        mType = new HashMap<>();
     }
 
     public void addScenarioToMap(Scenario scenario){
@@ -18,6 +21,9 @@ public class DataKeeper {
 
     public Map<Integer,Scenario> getScenarioMap(){
         return mScenarios;
+    }
+    public Map<Integer,Type> getTypeMap(){
+        return mType;
     }
 
 
@@ -52,6 +58,28 @@ public class DataKeeper {
         }
     }
 
+    public void updateObjectType(int idScenario, int idAction, int idObject, String newObjectType){
+        for (Type ty : mType.values()){
+            if (ty.getName().equals(newObjectType)) {
+                try {
+                    mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(ty);
+                    return;
+                }
+                catch (Exception e){
+                    throw e;
+                }
+            }
+        }
+        try{
+            mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(newObjectType);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
 
-
+    public void addCustomType(String typeName, Map<String, String> mAttributes) {
+        if (!mType.containsKey(typeName))
+            mType.put(mType.size(),new Type(typeName,mAttributes));
+    }
 }

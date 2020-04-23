@@ -30,7 +30,14 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
 
     @Override
     public void modifyObjectType(int idAction, int idScenario, int idObject, String newType) {
-        repo.updateObjectType(idAction, idScenario, idObject, newType); //TODO
+        try{
+            repo.updateObjectType(idAction, idScenario, idObject, newType);
+            out.showModifiedObjectType(repo.readScenarios(),true);
+        }
+        catch (Exception e) {
+            out.showModifiedObjectType(repo.readScenarios(),false);
+        }
+
     }
 
     @Override
