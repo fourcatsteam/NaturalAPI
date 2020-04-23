@@ -24,14 +24,6 @@ public class AnalyzedData {
         return parserData;
     }
 
-    public List<String> getNouns(){
-        return data.getNouns();
-    }
-
-    public List<String> getVerbs(){
-        return data.getVerbs();
-    }
-
     public List<WordTag> getTaggedData() { return data.getList(); }
 
     public String toString(){

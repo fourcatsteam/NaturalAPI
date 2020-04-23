@@ -18,26 +18,6 @@ public class LemmatizerData {
         lemmatizationResult.add(new WordTag(word,tag,lemma));
     }
 
-    public List<String> getNouns(){
-        LinkedList<String> nouns = new LinkedList<>();
-        for(WordTag tag : lemmatizationResult) {
-            if (tag.getTag().contains("NN")) {
-                nouns.add(tag.getLemma());
-            }
-        }
-        return nouns;
-    }
-
-    public List<String> getVerbs(){
-        LinkedList<String> verbs = new LinkedList<>();
-        for(WordTag tag : lemmatizationResult) {
-            if (tag.getTag().contains("VB")) {
-                verbs.add(tag.getLemma());
-            }
-        }
-        return verbs;
-    }
-
     public String toString(){
         String t ="-- Lemmatize Data -- \n";
         for(WordTag tag : lemmatizationResult){
