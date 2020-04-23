@@ -17,41 +17,41 @@ public class AddDocuments implements AddDocumentsInputPort {
     private AnalyzeDocument documentAnalyzer;
     private AddDocumentsOutputPort outputPort;
 
-    public AddDocuments(RepositoryAccess repo, TextAnalyzer analyzer, AddDocumentsOutputPort port) {
+    public AddDocuments(RepositoryAccess repo, AnalyzeDocument analyzer, AddDocumentsOutputPort port) {
         this.repository = repo;
-        this.documentAnalyzer = new AnalyzeDocument(analyzer);
+        this.documentAnalyzer = analyzer;
         this.outputPort = port;
     }
 
 
     @Override
-    public void add(String targetBdl, List<String> docTitles) throws IOException {
+    public void add(String targetBdl, List<String> docTitles) {
         //retrieve BDL from the repository
         Bdl bdl = this.repository.readBdl(targetBdl);
 
         //retrieve BDL-Documents association from the repository
 
         LinkedList<String> association = this.repository.readAssociation(targetBdl);
-        try {
-            //filter already used documents
-            if (association != null) {
-                docTitles.removeAll(association);
-            }
-            //retrieve Documents from the repository
-            LinkedList<Document> documents = new LinkedList<>();
-            for (String title : docTitles) {
-                documents.add(this.repository.readDocument(title));
-            }
 
-            //add document analysis to BDL
-            for (Document document : documents) {
-                documentAnalyzer.addDocumentToBdl(bdl, document);
-            }
-
-            association.addAll(docTitles);
-        }catch (NullPointerException e){
-            e.printStackTrace();
+        //filter already used documents
+        if (association != null) {
+            docTitles.removeAll(association);
         }
+        //retrieve Documents from the repository
+        LinkedList<Document> documents = new LinkedList<>();
+        for (String title : docTitles) {
+            documents.add(this.repository.readDocument(title));
+        }
+
+        //add document analysis to BDL
+        for (Document document : documents) {
+            documentAnalyzer.addDocumentToBdl(bdl, document);
+        }
+
+        if(association != null) {
+            association.addAll(docTitles);
+        }
+
         //update Bdl and association in the repository
         repository.updateBdl(bdl);
         repository.updateAssociation(targetBdl, association);

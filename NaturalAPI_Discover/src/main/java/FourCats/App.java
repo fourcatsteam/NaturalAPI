@@ -23,7 +23,7 @@ public class App {
         DataPresenter datapresenter = new DataPresenter();
 
         CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
-        AddDocuments addDocuments = new AddDocuments(repo,nlp,datapresenter);
+        AddDocuments addDocuments = new AddDocuments(repo,new AnalyzeDocument(nlp),datapresenter);
         RemoveDocuments removeDocuments = new RemoveDocuments(repo,nlp,datapresenter);
 
         Controller controller = new Controller(createBdl,addDocuments,removeDocuments);
