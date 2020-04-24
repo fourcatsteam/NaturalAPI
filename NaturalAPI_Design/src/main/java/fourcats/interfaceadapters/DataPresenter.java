@@ -9,7 +9,7 @@ import fourcats.port.*;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort {
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowCustomTypesOutputPort {
 
     private String toShow;
 
@@ -102,12 +102,27 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     }
 
     @Override
-    public void showCustomTypes(Map<Integer, Type> mType) {
-        toShow = "Custom type successfully created! This is the updated list of custom types";
-        notifyObservers();
-        for (Map.Entry<Integer,Type> mTy : mType.entrySet()) {
-            toShow = "----TYPE: " + mTy.getKey() + ") " + mTy.getValue().getName() + "----";
+    public void showCustomTypes(Map<Integer, Type> mTypes) {
+        if (mTypes.size()!=0) {
+            for (Map.Entry<Integer, Type> mTy : mTypes.entrySet()) {
+                toShow = "----TYPE: " + mTy.getKey() + ") " + mTy.getValue().getName() + "----";
+                notifyObservers();
+            }
+        }
+        else{
+            toShow = "No custom types defined yet!";
             notifyObservers();
         }
+    }
+
+    @Override
+    public void showCustomTypeCreationStatus(boolean isCreated) {
+        if (isCreated) {
+            toShow = "Custom type successfully created! This is the updated list of custom types";
+        }
+        else {
+            toShow = "Error! Please check your input, probably the type is already defined: change the name or use the old one.";
+        }
+        notifyObservers();
     }
 }

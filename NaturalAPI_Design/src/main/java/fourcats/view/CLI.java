@@ -124,9 +124,25 @@ public class CLI implements Observer {
                     contr.modifyObjectType(idSuggestion,idScenario,idParameter,type);
                 }
                 else if(input.equals("2")){
-                    String customType = createCustomObjectType();
-                    contr.modifyObjectType(idSuggestion,idScenario,idParameter,customType); //deve associare customType a quello esistente
+                    complexTypeManager(idSuggestion,idScenario,idParameter);
                 }
+            }
+        }
+    }
+
+    private void complexTypeManager(String idSuggestion,String idScenario,String idParameter) throws IOException {
+        System.out.println("1. Create complex type, 2. Show already defined ones");
+        String input = br.readLine();
+        if (input.equals("1")) {
+            String customType = createCustomObjectType();
+            contr.modifyObjectType(idSuggestion, idScenario, idParameter, customType);
+        }
+        else if (input.equals("2")){
+            contr.showCustomTypes();
+            System.out.println("Choose the id for the corresponding type or digit EXIT to quit");
+            input = br.readLine();
+            if(!input.equals("EXIT")){
+                contr.modifyObjectTypeById(idSuggestion,idScenario,idParameter,input);
             }
         }
     }
@@ -142,8 +158,8 @@ public class CLI implements Observer {
             System.out.println("Insert the type for the attribute '" + attributeName + "'");
             String attributeType = askForSimpleType();
             mAttributes.put(attributeName,attributeType);
-            System.out.println("Done! " + attributeType + " " + attributeName);
-            System.out.println("Do you want to add another attribute? 1. Yes 2. No");
+            System.out.println("Here the attribute you defined: " + attributeType + " " + attributeName);
+            System.out.println("\nDo you want to add another attribute? 1. Yes 2. No");
             if (br.readLine().equals("2")) {
                 isDone = true;
             }
@@ -212,7 +228,7 @@ public class CLI implements Observer {
         return br.readLine();
     }
     private String askForIdParameterToModify() throws IOException {
-        System.out.println("Please insert the id of the parameter you want to modify");
+        System.out.println("Please insert the id of the parameter you want to modify: 0 first, 1 second, 2 third...");
         return br.readLine();
     }
 

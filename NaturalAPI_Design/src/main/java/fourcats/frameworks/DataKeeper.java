@@ -2,17 +2,18 @@ package fourcats.frameworks;
 
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
+import org.apache.lucene.util.SetOnce;
 
 import java.util.*;
 
 public class DataKeeper {
     private Map<Integer, Scenario> mScenarios;
-    private Map<Integer, Type> mType;
+    private Map<Integer, Type> mTypes;
 
 
     public DataKeeper(){
         mScenarios = new HashMap<>();
-        mType = new HashMap<>();
+        mTypes = new HashMap<>();
     }
 
     public void addScenarioToMap(Scenario scenario){
@@ -23,7 +24,7 @@ public class DataKeeper {
         return mScenarios;
     }
     public Map<Integer,Type> getTypeMap(){
-        return mType;
+        return mTypes;
     }
 
 
@@ -59,7 +60,7 @@ public class DataKeeper {
     }
 
     public void updateObjectType(int idScenario, int idAction, int idObject, String newObjectType){
-        for (Type ty : mType.values()){
+        for (Type ty : mTypes.values()){
             if (ty.getName().equals(newObjectType)) {
                 try {
                     mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(ty);
@@ -79,7 +80,25 @@ public class DataKeeper {
     }
 
     public void addCustomType(String typeName, Map<String, String> mAttributes) {
-        if (!mType.containsKey(typeName))
-            mType.put(mType.size(),new Type(typeName,mAttributes));
+        for (Type ty : mTypes.values()){
+            if (!ty.getName().equals(typeName)) {
+                mTypes.put(mTypes.size(),new Type(typeName,mAttributes));
+                return;
+            }
+            else{
+                throw new SetOnce.AlreadySetException();
+            }
+        }
+        mTypes.put(mTypes.size(),new Type(typeName,mAttributes));
+
+    }
+
+    public void updateObjectTypeById(int idScenario, int idAction, int idObject, int idType) {
+        try {
+            mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(mTypes.get(idType));
+            return;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

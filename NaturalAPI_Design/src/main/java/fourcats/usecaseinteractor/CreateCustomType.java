@@ -18,8 +18,13 @@ public class CreateCustomType implements CreateCustomTypeInputPort {
 
     @Override
     public void createType(String typeName,Map<String, String> mAttributes) {
-        repo.createCustomType(typeName, mAttributes);
-        out.showCustomTypes(repo.readTypes());
+        try {
+            repo.createCustomType(typeName, mAttributes);
+            out.showCustomTypeCreationStatus(true);
+        }
+        catch(Exception e){
+            out.showCustomTypeCreationStatus(false);
+        }
     }
 
 }

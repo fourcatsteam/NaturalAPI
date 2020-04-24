@@ -22,4 +22,5 @@ public interface RepositoryAccess {
     void createCustomType(String typeName, Map<String,String> mAttributes);
 
 
+    void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType);
 }

@@ -12,15 +12,17 @@ public class Controller{
     private GenerateBALInputPort generateBAL;
     private ModifyBALSuggestionInputPort modifySuggestion;
     private CreateCustomTypeInputPort createCustomType;
+    private ShowCustomTypesInputPort showCustomTypes;
 
     public Controller(GenerateBALSuggestionsInputPort generateBALSugg, DeclineBALSuggestionInputPort declineBALSugg,
                       GenerateBALInputPort generateBal, ModifyBALSuggestionInputPort modifyBALSugg,
-                      CreateCustomTypeInputPort createCustomType){
+                      CreateCustomTypeInputPort createCustomType, ShowCustomTypesInputPort showTypes){
             this.generateSuggestion = generateBALSugg;
             this.declineSuggestion = declineBALSugg;
             this.generateBAL = generateBal;
             this.modifySuggestion = modifyBALSugg;
             this.createCustomType = createCustomType;
+            this.showCustomTypes = showTypes;
     }
 
     public void generateSuggestions(String featureFileName) {
@@ -45,7 +47,15 @@ public class Controller{
     public void modifyObjectType(String idSuggestion, String idScenario, String idObject, String newType) {
         modifySuggestion.modifyObjectType(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newType);
     }
+
+    public void modifyObjectTypeById(String idSuggestion, String idScenario, String idObject, String idType) {
+        modifySuggestion.modifyObjectTypeById(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), Integer.parseInt(idType));
+    }
     public void createCustomType(String typeName, Map<String,String> mAttributes){
         createCustomType.createType(typeName,mAttributes);
+    }
+
+    public void showCustomTypes(){
+        showCustomTypes.showTypes();
     }
 }

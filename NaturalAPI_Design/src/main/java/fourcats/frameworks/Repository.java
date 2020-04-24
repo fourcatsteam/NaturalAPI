@@ -80,5 +80,10 @@ public class Repository implements RepositoryAccess  {
         dataKeeper.addCustomType(typeName,mAttributes);
     }
 
+    @Override
+    public void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType) {
+        dataKeeper.updateObjectTypeById(idScenario,idAction,idObject,idType);
+    }
+
 
 }
