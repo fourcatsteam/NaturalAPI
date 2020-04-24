@@ -6,8 +6,6 @@ import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.TextAnalyzer;
 
-import java.util.LinkedList;
-
 public class AnalyzeDocument {
     private TextAnalyzer analyzer;
 
