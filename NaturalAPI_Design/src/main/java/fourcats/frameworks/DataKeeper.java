@@ -1,9 +1,11 @@
 package fourcats.frameworks;
 
+import com.google.protobuf.NullValue;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 import org.apache.lucene.util.SetOnce;
 
+import java.rmi.NoSuchObjectException;
 import java.util.*;
 
 public class DataKeeper {
@@ -95,8 +97,12 @@ public class DataKeeper {
 
     public void updateObjectTypeById(int idScenario, int idAction, int idObject, int idType) {
         try {
-            mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(mTypes.get(idType));
-            return;
+            if(mTypes.get(idType)!=null) {
+                mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(mTypes.get(idType));
+            }
+            else {
+                throw new NoSuchElementException();
+            }
         } catch (Exception e) {
             throw e;
         }

@@ -120,17 +120,17 @@ public class CLI implements Observer {
                 input = br.readLine();
                 String type = "";
                 if (input.equals("1")) {
-                    type = askForSimpleType();
+                    type = askForSimpleTypeOption();
                     contr.modifyObjectType(idSuggestion,idScenario,idParameter,type);
                 }
                 else if(input.equals("2")){
-                    complexTypeManager(idSuggestion,idScenario,idParameter);
+                    askForComplexTypeOption(idSuggestion,idScenario,idParameter);
                 }
             }
         }
     }
 
-    private void complexTypeManager(String idSuggestion,String idScenario,String idParameter) throws IOException {
+    private void askForComplexTypeOption(String idSuggestion,String idScenario,String idParameter) throws IOException {
         System.out.println("1. Create complex type, 2. Show already defined ones");
         String input = br.readLine();
         if (input.equals("1")) {
@@ -156,7 +156,7 @@ public class CLI implements Observer {
             System.out.println("Insert the name of the attribute for the type '" + customTypeName + "'");
             String attributeName = br.readLine();
             System.out.println("Insert the type for the attribute '" + attributeName + "'");
-            String attributeType = askForSimpleType();
+            String attributeType = askForSimpleTypeOption();
             mAttributes.put(attributeName,attributeType);
             System.out.println("Here the attribute you defined: " + attributeType + " " + attributeName);
             System.out.println("\nDo you want to add another attribute? 1. Yes 2. No");
@@ -169,7 +169,7 @@ public class CLI implements Observer {
     }
 
 
-    private String askForSimpleType() throws IOException {
+    private String askForSimpleTypeOption() throws IOException {
         System.out.println("1. string, 2. int, 3. float, 4. double, 5. bool");
         String input = br.readLine();
         switch (input) {
