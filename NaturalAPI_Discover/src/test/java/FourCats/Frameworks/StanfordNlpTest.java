@@ -9,20 +9,24 @@ public class StanfordNlpTest {
 
     StanfordNlp nlp = new StanfordNlp();
 
-    /*@Test
-    public void testParseDocumentContent() {
+    @Test
+    public void testParseDocumentTokenization() {
         String content = "My dog also likes eating sausage.";
 
         AnalyzedData data = nlp.parseDocumentContent(content);
 
         assertEquals("dog",data.getTaggedData().get(1).getLemma());
         assertEquals("NN",data.getTaggedData().get(1).getTag());
+    }
 
-        //not very correct
-        assertEquals(1,data.getParseList().size());
-        assertEquals("eat sausage",data.getParseList().get(0));
+    @Test
+    public void testParseDocumentDependencies() {
+        String content = "I want to withdraw money from the ATM.";
 
-    }*/
+        AnalyzedData data = nlp.parseDocumentContent(content);
+
+        assertEquals("dobj",data.getDependenciesList().get(4).getRelation());
+    }
 
     @Test
     public void testParseNoContent() {
