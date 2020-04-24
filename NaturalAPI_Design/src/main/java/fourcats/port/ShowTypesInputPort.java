@@ -1,5 +1,5 @@
 package fourcats.port;
 
-public interface ShowCustomTypesInputPort {
+public interface ShowTypesInputPort {
     void showTypes();
 }

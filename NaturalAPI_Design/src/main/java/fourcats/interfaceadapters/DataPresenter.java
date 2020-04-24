@@ -9,7 +9,7 @@ import fourcats.port.*;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowCustomTypesOutputPort {
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort {
 
     private String toShow;
 
@@ -76,14 +76,27 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     }
 
     @Override
-    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
-        if (isObjectNameModified){
-            toShow = "Parameter name of the suggestion successfully updated! This is the updated list of suggestions";
+    public void showModifiedActionType(Map<Integer, Scenario> mScenarios, boolean isActionTypeModified) {
+        if (isActionTypeModified){
+            toShow = "Action type successfully updated! This is the updated list of suggestions";
             notifyObservers();
             showSuggestionsForScenario(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
+            notifyObservers();
+        }
+    }
+
+    @Override
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
+        if (isObjectNameModified){
+            toShow = "Object name of the suggestion successfully updated! This is the updated list of suggestions";
+            notifyObservers();
+            showSuggestionsForScenario(mScenarios);
+        }
+        else{
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
             notifyObservers();
         }
     }
@@ -91,18 +104,18 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     @Override
     public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
         if (isObjectTypeModified){
-            toShow = "Parameter type of the suggestion successfully updated! This is the updated list of suggestions";
+            toShow = "Object type of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
             showSuggestionsForScenario(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
             notifyObservers();
         }
     }
 
     @Override
-    public void showCustomTypes(Map<Integer, Type> mTypes) {
+    public void showTypes(Map<Integer, Type> mTypes) {
         if (mTypes.size()!=0) {
             for (Map.Entry<Integer, Type> mTy : mTypes.entrySet()) {
                 toShow = "----TYPE: " + mTy.getKey() + ") " + mTy.getValue().getName() + "----";

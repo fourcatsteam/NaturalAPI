@@ -62,7 +62,7 @@ public class Repository implements RepositoryAccess  {
 
     @Override
     public void updateActionType(int idAction, int idScenario, String newActionType) {
-
+        dataKeeper.updateActionType(idScenario,idAction,newActionType);
     }
 
     @Override
@@ -83,6 +83,11 @@ public class Repository implements RepositoryAccess  {
     @Override
     public void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType) {
         dataKeeper.updateObjectTypeById(idScenario,idAction,idObject,idType);
+    }
+
+    @Override
+    public void updateActionTypeById(int idAction, int idScenario, int idType) {
+        dataKeeper.updateActionTypeById(idScenario,idAction,idType);
     }
 
 

@@ -1,7 +1,6 @@
 package fourcats.interfaceadapters;
 
 import fourcats.port.*;
-import fourcats.usecaseinteractor.*;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,17 +11,17 @@ public class Controller{
     private GenerateBALInputPort generateBAL;
     private ModifyBALSuggestionInputPort modifySuggestion;
     private CreateCustomTypeInputPort createCustomType;
-    private ShowCustomTypesInputPort showCustomTypes;
+    private ShowTypesInputPort showTypes;
 
     public Controller(GenerateBALSuggestionsInputPort generateBALSugg, DeclineBALSuggestionInputPort declineBALSugg,
                       GenerateBALInputPort generateBal, ModifyBALSuggestionInputPort modifyBALSugg,
-                      CreateCustomTypeInputPort createCustomType, ShowCustomTypesInputPort showTypes){
+                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes){
             this.generateSuggestion = generateBALSugg;
             this.declineSuggestion = declineBALSugg;
             this.generateBAL = generateBal;
             this.modifySuggestion = modifyBALSugg;
             this.createCustomType = createCustomType;
-            this.showCustomTypes = showTypes;
+            this.showTypes = showTypes;
     }
 
     public void generateSuggestions(String featureFileName) {
@@ -38,6 +37,9 @@ public class Controller{
     }
     public void modifyActionName(String idSuggestion, String idScenario, String newActionName){
         modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName);
+    }
+    public void modifyActionType(String idSuggestion, String idScenario, String newType) {
+        modifySuggestion.modifyActionType(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), newType);
     }
 
     public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName){
@@ -55,7 +57,11 @@ public class Controller{
         createCustomType.createType(typeName,mAttributes);
     }
 
-    public void showCustomTypes(){
-        showCustomTypes.showTypes();
+    public void showTypes(){
+        showTypes.showTypes();
+    }
+
+    public void modifyActionTypeById(String idSuggestion, String idScenario, String idType) {
+        modifySuggestion.modifyActionTypeById(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idType));
     }
 }

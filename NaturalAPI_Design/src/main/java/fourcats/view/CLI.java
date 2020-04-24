@@ -104,48 +104,28 @@ public class CLI implements Observer {
         else if(input.equals("2")){
             String idScenario = askForIdScenarioToModify();
             String idSuggestion = askForIdSuggestionToModify();
-            String idParameter = "";
-            System.out.println("1. Modify suggestion name\n2. Modify parameter name\n3. Modify parameter type");
+            System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type");
             input = br.readLine();
-            if(input.equals("1")) {
-                modifyActionName(idScenario,idSuggestion);
-            }
-            else if(input.equals("2")){
-                idParameter = askForIdParameterToModify();
-                modifyObjectName(idScenario,idSuggestion,idParameter);
-            }
-            else if(input.equals("3")){
-                idParameter = askForIdParameterToModify();
-                System.out.println("1. Simple type, 2. Complex type");
-                input = br.readLine();
-                String type = "";
-                if (input.equals("1")) {
-                    type = askForSimpleTypeOption();
-                    contr.modifyObjectType(idSuggestion,idScenario,idParameter,type);
-                }
-                else if(input.equals("2")){
-                    askForComplexTypeOption(idSuggestion,idScenario,idParameter);
-                }
+            switch(input){
+                case "1":
+                    modifyActionName(idScenario,idSuggestion);
+                    break;
+                case "2":
+                    modifyActionType(idScenario,idSuggestion);
+                    break;
+                case "3":
+                    modifyObjectName(idScenario,idSuggestion);
+                    break;
+                case "4":
+                    modifyObjectType(idScenario,idSuggestion);
+                    break;
+                default:
+                    System.out.println("Error! Please insert a valid option");
+                    break;
             }
         }
     }
 
-    private void askForComplexTypeOption(String idSuggestion,String idScenario,String idParameter) throws IOException {
-        System.out.println("1. Create complex type, 2. Show already defined ones");
-        String input = br.readLine();
-        if (input.equals("1")) {
-            String customType = createCustomObjectType();
-            contr.modifyObjectType(idSuggestion, idScenario, idParameter, customType);
-        }
-        else if (input.equals("2")){
-            contr.showCustomTypes();
-            System.out.println("Choose the id for the corresponding type or digit EXIT to quit");
-            input = br.readLine();
-            if(!input.equals("EXIT")){
-                contr.modifyObjectTypeById(idSuggestion,idScenario,idParameter,input);
-            }
-        }
-    }
 
     private String createCustomObjectType() throws IOException {
         Map<String, String> mAttributes = new HashMap<>();
@@ -213,10 +193,46 @@ public class CLI implements Observer {
         contr.modifyActionName(idSuggestion,idScenario,actionName);
     }
 
-    private void modifyObjectName(String idScenario, String idSuggestion, String idParameter) throws IOException {
-        System.out.println("Please insert the new name of the parameter");
+    private void modifyActionType(String idScenario, String idSuggestion) throws IOException {
+        contr.showTypes();
+        System.out.println("Insert the id for the type or digit 'CREATE' to create a custom one. Digit 'V' to go back to void.\nDigit 'EXIT' to quit.");
+        String input = br.readLine();
+        if (input.equals("CREATE")){
+            String customType = createCustomObjectType();
+            contr.modifyActionType(idSuggestion, idScenario, customType);
+        }
+        else if (input.equals("EXIT")){
+            return;
+        }
+        else if (input.equals("V")){
+            contr.modifyActionType(idSuggestion, idScenario, "void");
+        }
+        else{
+            contr.modifyActionTypeById(idSuggestion,idScenario,input);
+        }
+    }
+    private void modifyObjectName(String idScenario, String idSuggestion) throws IOException {
+        String idObject = askForIdObjectToModify();
+        System.out.println("Please insert the new name for the object");
         String objectName = br.readLine();
-        contr.modifyObjectName(idSuggestion,idScenario,idParameter,objectName);
+        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
+    }
+
+    private void modifyObjectType(String idScenario, String idSuggestion) throws IOException {
+        String idObject = askForIdObjectToModify();
+        contr.showTypes();
+        System.out.println("Insert the id for the type or digit CREATE to create a custom one. Digit EXIT to quit.");
+        String input = br.readLine();
+        if (input.equals("CREATE")){
+            String customType = createCustomObjectType();
+            contr.modifyObjectType(idSuggestion, idScenario, idObject, customType);
+        }
+        else if (input.equals("EXIT")){
+            return;
+        }
+        else{
+            contr.modifyObjectTypeById(idSuggestion,idScenario,idObject,input);
+        }
     }
 
     private String askForIdScenarioToModify() throws IOException {
@@ -227,8 +243,8 @@ public class CLI implements Observer {
         System.out.println("Please insert the id of the suggestion you want to modify");
         return br.readLine();
     }
-    private String askForIdParameterToModify() throws IOException {
-        System.out.println("Please insert the id of the parameter you want to modify: 0 first, 1 second, 2 third...");
+    private String askForIdObjectToModify() throws IOException {
+        System.out.println("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
         return br.readLine();
     }
 

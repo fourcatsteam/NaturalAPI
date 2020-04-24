@@ -14,7 +14,24 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
     }
     @Override
     public void modifyActionType(int idAction, int idScenario, String newType) {
-        repo.updateActionType(idAction, idScenario, newType); //TODO
+        try {
+            repo.updateActionType(idAction, idScenario, newType);
+            out.showModifiedActionName(repo.readScenarios(), true);
+        }
+        catch (Exception e){
+            out.showModifiedActionName(repo.readScenarios(), false);
+        }
+    }
+
+    @Override
+    public void modifyActionTypeById(int idAction, int idScenario, int idType) {
+        try{
+            repo.updateActionTypeById(idAction, idScenario, idType);
+            out.showModifiedActionType(repo.readScenarios(),true);
+        }
+        catch (Exception e) {
+            out.showModifiedActionType(repo.readScenarios(),false);
+        }
     }
 
     @Override

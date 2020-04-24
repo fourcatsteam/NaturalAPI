@@ -23,4 +23,6 @@ public interface RepositoryAccess {
 
 
     void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType);
+
+    void updateActionTypeById(int idAction, int idScenario, int idType);
 }

@@ -75,6 +75,9 @@ public class Action {
     public void setType(String ActionType) {
         this.type = new Type(ActionType);
     }
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public Type getType() {
         return type;

@@ -1,14 +1,13 @@
 package fourcats.frameworks;
 
-import com.google.protobuf.NullValue;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 import org.apache.lucene.util.SetOnce;
 
-import java.rmi.NoSuchObjectException;
 import java.util.*;
 
 public class DataKeeper {
+    private List<String> lDeafultTypes = new ArrayList<>();
     private Map<Integer, Scenario> mScenarios;
     private Map<Integer, Type> mTypes;
 
@@ -16,6 +15,12 @@ public class DataKeeper {
     public DataKeeper(){
         mScenarios = new HashMap<>();
         mTypes = new HashMap<>();
+        //init mTypes with default values
+        lDeafultTypes.addAll(Arrays.asList("string","int","float","double","bool"));
+        for (String s : lDeafultTypes){
+            mTypes.put(mTypes.size(),new Type(s));
+        }
+
     }
 
     public void addScenarioToMap(Scenario scenario){
@@ -48,6 +53,26 @@ public class DataKeeper {
             mScenarios.get(idScenario).getActionsMap().get(idAction).setName(newActionName);
         }
         catch (NullPointerException e){
+            throw e;
+        }
+    }
+
+    public void updateActionType(int idScenario, int idAction, String newActionType){
+        for (Type ty : mTypes.values()){
+            if (ty.getName().equals(newActionType)) {
+                try {
+                    mScenarios.get(idScenario).getActionsMap().get(idAction).setType(newActionType);
+                    return;
+                }
+                catch (Exception e){
+                    throw e;
+                }
+            }
+        }
+        try{
+            mScenarios.get(idScenario).getActionsMap().get(idAction).setType(newActionType);
+        }
+        catch (Exception e){
             throw e;
         }
     }
@@ -99,6 +124,19 @@ public class DataKeeper {
         try {
             if(mTypes.get(idType)!=null) {
                 mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().get(idObject).setType(mTypes.get(idType));
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void updateActionTypeById(int idScenario, int idAction, int idType) {
+        try {
+            if(mTypes.get(idType)!=null) {
+                mScenarios.get(idScenario).getActionsMap().get(idAction).setType(mTypes.get(idType));
             }
             else {
                 throw new NoSuchElementException();

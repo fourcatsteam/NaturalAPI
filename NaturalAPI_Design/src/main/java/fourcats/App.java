@@ -22,10 +22,10 @@ public class App {
         DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
         ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
         CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
-        ShowCustomTypes showCustomTypes = new ShowCustomTypes(repo,dataPresenter);
+        ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
 
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-                generateBAL ,modifyBALSuggestion, createCustomType, showCustomTypes);
+                generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
 
 
         CLI cli = new CLI(controller,dataPresenter);
