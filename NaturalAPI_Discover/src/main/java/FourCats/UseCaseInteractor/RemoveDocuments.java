@@ -17,14 +17,14 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
     private AnalyzeDocument documentAnalyzer;
     private RemoveDocumenetsOutputPort outputPort;
 
-    public RemoveDocuments(RepositoryAccess repo, TextAnalyzer analyzer, RemoveDocumenetsOutputPort port) {
+    public RemoveDocuments(RepositoryAccess repo, AnalyzeDocument analyzer, RemoveDocumenetsOutputPort port) {
         this.repository = repo;
-        this.documentAnalyzer = new AnalyzeDocument(analyzer);
+        this.documentAnalyzer = analyzer;
         this.outputPort = port;
     }
 
     @Override
-    public void remove(String targetBdl, List<String> docTitles) throws IOException {
+    public void remove(String targetBdl, List<String> docTitles) {
         //retrieve BDL
         Bdl bdl = this.repository.readBdl(targetBdl);
 

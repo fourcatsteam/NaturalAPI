@@ -25,7 +25,7 @@ public class App {
 
         CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
         AddDocuments addDocuments = new AddDocuments(repo,new AnalyzeDocument(nlp),datapresenter);
-        RemoveDocuments removeDocuments = new RemoveDocuments(repo,nlp,datapresenter);
+        RemoveDocuments removeDocuments = new RemoveDocuments(repo,new AnalyzeDocument(nlp),datapresenter);
 
         Controller controller = new Controller(createBdl,addDocuments,removeDocuments);
 
