@@ -27,21 +27,12 @@ public class Repository implements RepositoryAccess {
     @Override
     public Bdl readBdl(String targetBdl) {
         //load the Bdl and the association list from memory and store it in the DataKeeper
-        try{
-            return this.memoryAccess.loadBdl(targetBdl);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return null;
+        return this.memoryAccess.loadBdl(targetBdl);
     }
 
     @Override
     public void updateBdl(Bdl bdl) {
-        try{
-            this.memoryAccess.saveBdl(bdl);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        this.memoryAccess.saveBdl(bdl);
     }
 
     @Override
@@ -52,38 +43,21 @@ public class Repository implements RepositoryAccess {
 
     @Override
     public LinkedList<String> readAssociation(String referringBdl){
-        try {
-            return this.memoryAccess.loadAssociation(referringBdl);
-        }catch (IOException e){
-            e.printStackTrace();
-            return null;
-        }
+        return this.memoryAccess.loadAssociation(referringBdl);
     }
 
     @Override
     public void addAssociation(String referringBdl, List<String> associateDocuments) {
-        try{
-            this.memoryAccess.addAssociation(referringBdl, associateDocuments);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        this.memoryAccess.addAssociation(referringBdl, associateDocuments);
     }
 
     @Override
     public void removeAssociation(String referringBdl, List<String> docToRemove) {
-        try{
-            this.memoryAccess.removeAssociation(referringBdl, docToRemove);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        this.memoryAccess.removeAssociation(referringBdl, docToRemove);
     }
 
     @Override
     public void updateAssociation(String referringBdl, List<String> associateDocuments) {
-        try{
-            this.memoryAccess.saveAssociation(referringBdl, associateDocuments);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        this.memoryAccess.saveAssociation(referringBdl, associateDocuments);
     }
 }

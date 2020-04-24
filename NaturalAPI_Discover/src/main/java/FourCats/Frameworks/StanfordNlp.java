@@ -22,7 +22,6 @@ import java.util.Properties;
 public class StanfordNlp implements TextAnalyzer {
     private static final String DP_MODEL = "edu/stanford/nlp/models/parser/nndep/english_UD.gz";
     private StanfordCoreNLP pipeline;
-    private final TokenizerFactory<CoreLabel> tokenizerFactory;
     private final DependencyParser depparser;
     private Properties props;
 
@@ -30,7 +29,6 @@ public class StanfordNlp implements TextAnalyzer {
         props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma");
         pipeline = new StanfordCoreNLP(props);
-        tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "invertible=true");
         depparser = DependencyParser.loadFromModelFile(DP_MODEL);
     }
 

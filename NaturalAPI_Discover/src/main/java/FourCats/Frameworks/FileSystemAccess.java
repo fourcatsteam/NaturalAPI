@@ -15,62 +15,6 @@ import java.util.List;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
-    /*public LinkedList<String> read(LinkedList<String> titleDoc) throws FileNotFoundException {
-        LinkedList<String> ls = new LinkedList<String>();
-        for(int i=0;i<titleDoc.size();i++){
-            ls.add(read(titleDoc.get(i)));
-        }
-        return ls;
-    }*/
-
-    /*private String read(String filename){
-        String filepath = "txt_documents/" + filename;
-        String s, fileContent = new String();
-        try{
-            BufferedReader input = new BufferedReader(new FileReader(filepath));
-            while((s=input.readLine()) != null){
-                fileContent += s + " ";
-            }
-            input.close();
-
-        }catch(IOException e){
-            //modificare gestione eccezioni
-            fileContent="file non trovato";
-        }
-        return fileContent;
-    }*/
-
-    /*public void writeBdl(String nameBdl,Bdl bdl) throws IOException {
-        saveListToFile(bdl.getNouns(),nameBdl+".nouns.bdl.csv");
-        saveListToFile(bdl.getVerbs(),nameBdl+".verbs.bdl.csv");
-        saveListToFile(bdl.getPredicates(),nameBdl+".predicates.bdl.csv");
-    }*/
-
-    /*public void writeBdlReference(String nameBdl, LinkedList<String> titleList) throws IOException{
-        String filepath = "system_files/"+nameBdl;
-        JSONObject obj = new JSONObject();
-        JSONArray namefiles = new JSONArray();
-        for(String title : titleList) {
-            namefiles.add("FileName: "+title);
-        }
-        obj.put("FileNameList",namefiles);
-        obj.put("BdlName", nameBdl);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-        writer.write(obj.toJSONString());
-        writer.flush();
-        writer.close();
-    }*/
-
-    /*public Bdl readBdl(String targetBdl) throws IOException {
-        Bdl loadedBdl = new Bdl();
-        readBdlNouns(targetBdl,loadedBdl);
-        readBdlVerbs(targetBdl,loadedBdl);
-        readBdlPredicates(targetBdl,loadedBdl);
-
-        return loadedBdl;
-    }*/
-
-
     private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
         String line = "";
         String filepath = "BDL/" + filename + ".nouns.bdl.csv";
@@ -103,21 +47,6 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             }
         }
     }
-
-    //Sostanzialmente uguale a read, ma ritorna un documento
-
-    /*public Document readDocument(String title) {
-        String line, fileContent = "", filepath = "txt_documents/" + title;
-        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-            while((line = reader.readLine()) != null){
-                //add a space to separate sentences
-                fileContent += line + " ";
-            }
-        } catch(IOException e) {
-            return null;
-        }
-        return new Document(title, fileContent);
-    }*/
 
     private void saveListToFile(List<WordCounter> list, String namefile) throws IOException {
             String filepath = "BDL/"+namefile;
@@ -152,47 +81,56 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     }
 
     @Override
-    public Bdl loadBdl(String bdlName) throws IOException {
+    public Bdl loadBdl(String bdlName) {
         Bdl loadedBdl = new Bdl(bdlName);
-        readBdlNouns(bdlName,loadedBdl);
-        readBdlVerbs(bdlName,loadedBdl);
-        readBdlPredicates(bdlName,loadedBdl);
+        try{
+            readBdlNouns(bdlName,loadedBdl);
+            readBdlVerbs(bdlName,loadedBdl);
+            readBdlPredicates(bdlName,loadedBdl);
+        } catch(IOException e){
+            return null;
+        }
 
         return loadedBdl;
     }
 
     @Override
-    public void saveBdl(Bdl bdl) throws IOException {
-        saveListToFile(bdl.getNouns(),bdl.getName()+".nouns.bdl.csv");
-        saveListToFile(bdl.getVerbs(),bdl.getName()+".verbs.bdl.csv");
-        saveListToFile(bdl.getPredicates(),bdl.getName()+".predicates.bdl.csv");
+    public boolean saveBdl(Bdl bdl) {
+        try{
+            saveListToFile(bdl.getNouns(),bdl.getName()+".nouns.bdl.csv");
+            saveListToFile(bdl.getVerbs(),bdl.getName()+".verbs.bdl.csv");
+            saveListToFile(bdl.getPredicates(),bdl.getName()+".predicates.bdl.csv");
+        } catch(IOException e){
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public LinkedList<String> loadAssociation(String bdlName) throws IOException {
+    public LinkedList<String> loadAssociation(String bdlName) {
         LinkedList<String> association = new LinkedList<>();
 
         String filepath = "system_files/"+bdlName+".json";
-        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+
         JSONObject value;
         JSONParser parser = new JSONParser();
-        try {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             value = (JSONObject) parser.parse(reader);
             JSONArray entity = (JSONArray) value.get("FileNameList");
 
             for(int i=0;i<entity.size();i++){
                 association.add( (String) entity.get(i) );
             }
-
-            reader.close();
         } catch (ParseException e) {
-            e.printStackTrace();
+            return null;
+        } catch (IOException e){
+            return null;
         }
         return association;
     }
 
     @Override
-    public void saveAssociation(String bdlName, List<String> titleList) throws IOException {
+    public boolean saveAssociation(String bdlName, List<String> titleList) {
         String filepath = "system_files/" + bdlName+".json";
         JSONObject obj = new JSONObject();
         JSONArray namefiles = new JSONArray();
@@ -204,39 +142,46 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             writer.write(obj.toJSONString());
             writer.flush();
+            return true;
+        }catch(IOException e){
+            return false;
         }
     }
 
     //------------------------------//
 
     @Override
-    public void addAssociation(String bdlName, List<String> titleList) throws IOException {
+    public boolean addAssociation(String bdlName, List<String> titleList) {
         String filepath = "system_files/"+bdlName+".json";
-        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+
         JSONObject value;
         JSONParser parser = new JSONParser();
-        try {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filepath));) {
             value = (JSONObject) parser.parse(reader);
             JSONArray entity = (JSONArray) value.get("FileNameList");
             for(String s: titleList) {
                 entity.add(s);
             }
-            reader.close();
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
                 writer.write(value.toJSONString());
+            } catch (IOException e){
+                return false;
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            return false;
+        } catch (IOException e){
+            return false;
         }
+        return true;
     }
 
     @Override
-    public void removeAssociation(String bdlName, List<String> docToRemove) throws IOException {
+    public boolean removeAssociation(String bdlName, List<String> docToRemove) {
         String filepath = "system_files/"+bdlName+".json";
-        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+
         JSONObject value;
         JSONParser parser = new JSONParser();
-        try {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             value = (JSONObject) parser.parse(reader);
             JSONArray entity = (JSONArray) value.get("FileNameList");
 
@@ -247,10 +192,15 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             reader.close();
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
                 writer.write(value.toJSONString());
+            } catch(IOException e){
+                return false;
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            return false;
+        } catch(IOException e){
+            return false;
         }
+        return true;
 
     }
 }
