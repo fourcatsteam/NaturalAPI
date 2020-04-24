@@ -15,14 +15,6 @@ public class AnalyzeDocument {
         analyzer = nlp;
     }
 
-    public AnalyzedData parseDocuments(LinkedList<Document> docs) {
-        AnalyzedData dataToPass = null;
-        for(Document doc : docs){
-            dataToPass = analyzer.parseDocumentContent(doc.getContent());
-        }
-        return dataToPass;
-    }
-
     public void removeDocumentFromBdl(Bdl bdl, Document document) {
         AnalyzedData data = analyzer.parseDocumentContent(document.getContent());
 
