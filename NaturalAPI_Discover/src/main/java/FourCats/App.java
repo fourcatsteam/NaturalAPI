@@ -3,6 +3,7 @@ package FourCats;
 import FourCats.Frameworks.CLI;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.Frameworks.StanfordNlp;
+import FourCats.GUI.GUI_Discover;
 import FourCats.InterfaceAdapters.Controller;
 import FourCats.InterfaceAdapters.DataPresenter;
 import FourCats.InterfaceAdapters.Repository;
@@ -28,12 +29,18 @@ public class App {
 
         Controller controller = new Controller(createBdl,addDocuments,removeDocuments);
 
-        CLI cli = new CLI(controller,datapresenter);
+        System.out.println("Choose CLI(1) or GUI(2)?");
+        /* Codice per scegliere CLI o GUI*/
+        /*CLI cli = new CLI(controller,datapresenter);
 
         Boolean start = true;
         while(start) {
             cli.askForUseCase();
             start = cli.readUseCase();
-        }
+        }*/
+        GUI_Discover g = new GUI_Discover(controller,datapresenter);
+        g.createAndShowGUI();
+
+
     }
 }
