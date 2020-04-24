@@ -124,6 +124,29 @@ public class Bdl {
         }
     }
 
+    public String nounsToString(){
+        String ret="-- NOUNS -- \n";
+        for(WordCounter w: nouns){
+            ret = ret + w.toString() +"\n";
+        }
+        return ret;
+    }
+
+    public String verbsToString(){
+        String ret="-- VERBS -- \n";
+        for(WordCounter w: verbs){
+            ret = ret + w.toString() +"\n";
+        }
+        return ret;
+    }
+
+    public String predicatesToString(){
+        String ret="-- PREDICATES -- \n";
+        for(WordCounter w: predicates){
+            ret = ret + w.toString() +"\n";
+        }
+        return ret;
+    }
     @Override
     public String toString() {
 

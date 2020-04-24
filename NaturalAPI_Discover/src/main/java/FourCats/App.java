@@ -10,6 +10,7 @@ import FourCats.InterfaceAdapters.Repository;
 import FourCats.UseCaseInteractor.AddDocuments;
 import FourCats.UseCaseInteractor.CreateBdl;
 import FourCats.UseCaseInteractor.RemoveDocuments;
+import FourCats.UseCaseInteractor.ViewBdl;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 
 /**
@@ -21,13 +22,15 @@ public class App {
 
         Repository repo = new Repository(new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
+        //StanfordNlp nlp = null;
         DataPresenter datapresenter = new DataPresenter();
 
         CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
         AddDocuments addDocuments = new AddDocuments(repo,new AnalyzeDocument(nlp),datapresenter);
         RemoveDocuments removeDocuments = new RemoveDocuments(repo,new AnalyzeDocument(nlp),datapresenter);
+        ViewBdl viewBdl = new ViewBdl(repo,datapresenter);
 
-        Controller controller = new Controller(createBdl,addDocuments,removeDocuments);
+        Controller controller = new Controller(createBdl,addDocuments,removeDocuments,viewBdl);
 
         System.out.println("Choose CLI(1) or GUI(2)?");
         /* Codice per scegliere CLI o GUI*/
