@@ -1,6 +1,7 @@
 package FourCats.UseCaseUtilities;
 
 import FourCats.DataStructure.AnalyzedData;
+import FourCats.DataStructure.Dependency;
 import FourCats.DataStructure.WordTag;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
@@ -26,8 +27,10 @@ public class AnalyzeDocument {
         }
 
         //find predicates from the analysis
-        for(String s: data.getParseList()){
-            bdl.removePredicate(s);
+        for(Dependency dep: data.getDependenciesList()){
+            if(dep.getRelation().equalsIgnoreCase("dobj")){
+                bdl.removePredicate(dep.getGov()+" "+dep.getDep());
+            }
         }
 
     }
@@ -46,8 +49,10 @@ public class AnalyzeDocument {
         }
 
         //find predicates from the analysis
-        for(String s: data.getParseList()){
-            bdl.addPredicate(s);
+        for(Dependency dep: data.getDependenciesList()){
+            if(dep.getRelation().equalsIgnoreCase("dobj")){
+                bdl.addPredicate(dep.getGov()+" "+dep.getDep());
+            }
         }
 
     }

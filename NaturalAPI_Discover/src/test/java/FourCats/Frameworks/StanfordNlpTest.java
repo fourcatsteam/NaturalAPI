@@ -30,7 +30,7 @@ public class StanfordNlpTest {
 
         AnalyzedData data = nlp.parseDocumentContent(content);
 
-        assertEquals(0,data.getParseList().size());
+        assertEquals(0,data.getDependenciesList().size());
         assertEquals(0,data.getTaggedData().size());
     }
 }

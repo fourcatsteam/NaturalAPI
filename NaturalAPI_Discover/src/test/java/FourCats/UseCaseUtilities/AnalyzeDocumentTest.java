@@ -1,6 +1,7 @@
 package FourCats.UseCaseUtilities;
 
 import FourCats.DataStructure.AnalyzedData;
+import FourCats.DataStructure.Dependency;
 import FourCats.DataStructure.WordTag;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
@@ -31,11 +32,11 @@ public class AnalyzeDocumentTest {
         list.add(new WordTag("dogs","NNP","dog"));
         list.add(new WordTag("went","VBP","go"));
 
-        LinkedList<String> parseList = new LinkedList<>();
-        parseList.add("withdraw cash");
+        LinkedList<Dependency> parseList = new LinkedList<>();
+        parseList.add(new Dependency("withdraw", "cash","dobj"));
 
         when(data.getTaggedData()).thenReturn(list);
-        when(data.getParseList()).thenReturn(parseList);
+        when(data.getDependenciesList()).thenReturn(parseList);
         when(doc.getContent()).thenReturn("dogs went withdraw cash. dogs");
         when(analyzerMock.parseDocumentContent(any(String.class))).thenReturn(data);
 
@@ -58,11 +59,11 @@ public class AnalyzeDocumentTest {
         list.add(new WordTag("dogs","NNP","dog"));
         list.add(new WordTag("went","VBP","go"));
 
-        LinkedList<String> parseList = new LinkedList<>();
-        parseList.add("withdraw cash");
+        LinkedList<Dependency> parseList = new LinkedList<>();
+        parseList.add(new Dependency("withdraw", "cash","dobj"));
 
         when(data.getTaggedData()).thenReturn(list);
-        when(data.getParseList()).thenReturn(parseList);
+        when(data.getDependenciesList()).thenReturn(parseList);
         when(doc.getContent()).thenReturn("dogs went withdraw cash. dogs");
         when(analyzerMock.parseDocumentContent(any(String.class))).thenReturn(data);
 

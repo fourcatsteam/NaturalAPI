@@ -7,9 +7,6 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.parser.nndep.DependencyParser;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.process.CoreLabelTokenFactory;
-import edu.stanford.nlp.process.PTBTokenizer;
-import edu.stanford.nlp.process.TokenizerFactory;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
@@ -33,7 +30,7 @@ public class StanfordNlp implements TextAnalyzer {
     }
 
     public AnalyzedData parseDocumentContent(String documentContent) {
-        //Parse della frase
+        //Parsing della frase
         AnalyzedData data = new AnalyzedData();
 
         Annotation document = new Annotation(documentContent);
@@ -45,9 +42,7 @@ public class StanfordNlp implements TextAnalyzer {
             GrammaticalStructure gramstruct = depparser.predict(sentence);
             Collection<TypedDependency> dependencies = gramstruct.typedDependencies();
             for(TypedDependency dep : dependencies) {
-                if(dep.reln().getShortName().equalsIgnoreCase("dobj")) {
-                    data.addParseData(dep.gov().lemma()+" " + dep.dep().lemma());
-                }
+                data.addDependency(dep.gov().lemma(), dep.dep().lemma(), dep.reln().getShortName());
             }
             //Lemmatizzazione della frase
             for (CoreLabel token: sentence.get(CoreAnnotations.TokensAnnotation.class)) {
