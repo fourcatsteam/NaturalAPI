@@ -22,11 +22,9 @@ public class GUI_Design {
         this.controller = c;
         this.datapresenter = dp;
 
-        genSuggestBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new SuggestionGenerated().createAndShowGUI();
-            }
+        genSuggestBtn.addActionListener(actionEvent -> new SuggestionGenerated().createAndShowGUI());
+        loadGherkinBtn.addActionListener(actionEvent -> {
+
         });
     }
 

@@ -5,6 +5,7 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.usecaseinteractor.*;
 import fourcats.view.CLI;
+import fourcats.view.FeatureWidget;
 import fourcats.view.GUI_Design;
 
 /**
