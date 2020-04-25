@@ -16,7 +16,7 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadDocumentFound() {
-        String title = "prova.txt";
+        String title = "TestFiles/prova.txt";
         String content = "Hi, i'm Simone. I'm trying to coding following Clean Architecture! See you soon. ";
 
         Document doc = fs.loadDocument(title);
@@ -36,7 +36,7 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadBdlFound() {
-        String name = "nuova";
+        String name = "TestFiles/Prova";
 
         Bdl bdl = fs.loadBdl(name);
 
@@ -55,7 +55,7 @@ public class FileSystemAccessTest {
     @Test
     public void testSaveBdl() {
         Bdl bdl = Mockito.mock(Bdl.class);
-        when(bdl.getName()).thenReturn("example");
+        when(bdl.getName()).thenReturn("Test_example");
         when(bdl.getNouns()).thenReturn(new LinkedList<>());
         when(bdl.getVerbs()).thenReturn(new LinkedList<>());
         when(bdl.getPredicates()).thenReturn(new LinkedList<>());
@@ -67,7 +67,7 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadAssociationFound() {
-        String name = "nuova";
+        String name = "TestFiles/Prova";
 
         LinkedList<String> association = fs.loadAssociation(name);
 
