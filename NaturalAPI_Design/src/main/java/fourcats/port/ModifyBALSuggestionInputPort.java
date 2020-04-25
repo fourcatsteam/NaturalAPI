@@ -7,6 +7,8 @@ public interface ModifyBALSuggestionInputPort {
     void modifyObjectType(int idAction, int idScenario, int idObject, String newType);
     void modifyObjectTypeById(int idAction, int idScenario, int idObject, int idType);
     void modifyObjectName(int idAction, int idScenario, int idObject, String newName);
+    void addObject (int idAction, int idScenario,String objectName, int idType);
+    void removeObject(int idAction, int idScenario, int idObject);
 
 
 }

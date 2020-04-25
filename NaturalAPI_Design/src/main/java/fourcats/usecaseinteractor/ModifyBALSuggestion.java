@@ -78,4 +78,26 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
             out.showModifiedObjectName(repo.readScenarios(),false);
         }
     }
+
+    @Override
+    public void addObject(int idAction, int idScenario, String objectName, int idType) {
+        try {
+            repo.createObject(idAction,idScenario,objectName,idType);
+            out.showAddedObject(repo.readScenarios(),true);
+        }
+        catch (Exception e){
+            out.showAddedObject(repo.readScenarios(),false);
+        }
+    }
+
+    @Override
+    public void removeObject(int idAction, int idScenario, int idObject) {
+        try {
+            repo.deleteObject(idAction,idScenario,idObject);
+            out.showRemovedObject(repo.readScenarios(),true);
+        }
+        catch (Exception e){
+            out.showRemovedObject(repo.readScenarios(),false);
+        }
+    }
 }

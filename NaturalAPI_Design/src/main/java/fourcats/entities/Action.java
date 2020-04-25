@@ -83,6 +83,10 @@ public class Action {
         return type;
     }
 
+    public void removeObjectParam(int idObjectParam){
+        param.remove(idObjectParam);
+    }
+
     @Override
     public String toString() {
         String ActionParams = "";

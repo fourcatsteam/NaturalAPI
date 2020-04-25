@@ -90,5 +90,15 @@ public class Repository implements RepositoryAccess  {
         dataKeeper.updateActionTypeById(idScenario,idAction,idType);
     }
 
+    @Override
+    public void createObject(int idAction, int idScenario, String objectName, int idType) {
+        dataKeeper.addObject(idScenario,idAction, objectName, idType);
+    }
+
+    @Override
+    public void deleteObject(int idAction, int idScenario, int idObject) {
+        dataKeeper.removeObject(idScenario,idAction,idObject);
+    }
+
 
 }

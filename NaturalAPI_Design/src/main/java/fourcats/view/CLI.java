@@ -30,7 +30,6 @@ public class CLI implements Observer {
     public void askForUseCase(){
         System.out.println("\n-------NATURAL API DESIGN-------");
         System.out.println("\n1. Generate Suggestions");
-        System.out.println("2. Load BAL (TODO)");
         System.out.println("EXIT. Quit Application");
     }
 
@@ -43,16 +42,12 @@ public class CLI implements Observer {
                     generateSuggestion();
                     askForOperationOnSuggestion();
                     break;
-                case "2":
-                    System.out.println("Get out of here, This is a Work in progress!");
-                    break;
                 case "EXIT":
                     shouldContinue = false;
                     break;
                 default:
                     System.out.println("Please insert a valid option. Digit EXIT to exit.");
                     break;
-
             }
 
         } catch (IOException e) {
@@ -104,7 +99,7 @@ public class CLI implements Observer {
         else if(input.equals("2")){
             String idScenario = askForIdScenarioToModify();
             String idSuggestion = askForIdSuggestionToModify();
-            System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type");
+            System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
             input = br.readLine();
             switch(input){
                 case "1":
@@ -119,6 +114,12 @@ public class CLI implements Observer {
                 case "4":
                     modifyObjectType(idScenario,idSuggestion);
                     break;
+                case "5":
+                    addObject(idScenario,idSuggestion);
+                    break;
+                case "6":
+                    removeObject(idScenario,idSuggestion);
+                    break;
                 default:
                     System.out.println("Error! Please insert a valid option");
                     break;
@@ -126,8 +127,7 @@ public class CLI implements Observer {
         }
     }
 
-
-    private String createCustomObjectType() throws IOException {
+    private String createCustomType() throws IOException {
         Map<String, String> mAttributes = new HashMap<>();
         System.out.println("Insert the name for the custom type");
         String customTypeName = br.readLine();
@@ -194,21 +194,17 @@ public class CLI implements Observer {
     }
 
     private void modifyActionType(String idScenario, String idSuggestion) throws IOException {
-        contr.showTypes();
-        System.out.println("Insert the id for the type or digit 'CREATE' to create a custom one. Digit 'V' to go back to void.\nDigit 'EXIT' to quit.");
+        System.out.println("1. Restore action to default type (void) 2. Show other types");
         String input = br.readLine();
-        if (input.equals("CREATE")){
-            String customType = createCustomObjectType();
-            contr.modifyActionType(idSuggestion, idScenario, customType);
-        }
-        else if (input.equals("EXIT")){
-            return;
-        }
-        else if (input.equals("V")){
+        if (input.equals("1")){
             contr.modifyActionType(idSuggestion, idScenario, "void");
         }
+        else if (input.equals("2")){
+            String idType = askForIdType();
+            contr.modifyActionTypeById(idSuggestion,idScenario,idType);
+        }
         else{
-            contr.modifyActionTypeById(idSuggestion,idScenario,input);
+            System.out.println("Error: invalid option");
         }
     }
     private void modifyObjectName(String idScenario, String idSuggestion) throws IOException {
@@ -220,19 +216,21 @@ public class CLI implements Observer {
 
     private void modifyObjectType(String idScenario, String idSuggestion) throws IOException {
         String idObject = askForIdObjectToModify();
-        contr.showTypes();
-        System.out.println("Insert the id for the type or digit CREATE to create a custom one. Digit EXIT to quit.");
-        String input = br.readLine();
-        if (input.equals("CREATE")){
-            String customType = createCustomObjectType();
-            contr.modifyObjectType(idSuggestion, idScenario, idObject, customType);
-        }
-        else if (input.equals("EXIT")){
-            return;
-        }
-        else{
-            contr.modifyObjectTypeById(idSuggestion,idScenario,idObject,input);
-        }
+        String idType = askForIdType();
+        contr.modifyObjectTypeById(idSuggestion,idScenario,idObject,idType);
+    }
+
+    private void addObject(String idScenario, String idSuggestion) throws IOException {
+        System.out.println("Insert new object name");
+        String objectName = br.readLine();
+        String idType = askForIdType();
+        contr.addObject(idSuggestion,idScenario,objectName,idType);
+    }
+
+    private void removeObject(String idScenario, String idSuggestion) throws IOException {
+        System.out.println("Please insert the id of the object you want to remove: 0 first, 1 second, 2 third...");
+        String idObject = br.readLine();
+        contr.removeObject(idSuggestion,idScenario,idObject);
     }
 
     private String askForIdScenarioToModify() throws IOException {
@@ -246,6 +244,18 @@ public class CLI implements Observer {
     private String askForIdObjectToModify() throws IOException {
         System.out.println("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
         return br.readLine();
+    }
+    private String askForIdType() throws IOException {
+        contr.showTypes();
+        System.out.println("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
+        String input = br.readLine();
+        while (input.equals("CREATE")){
+            createCustomType();
+            contr.showTypes();
+            System.out.println("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
+            input = br.readLine();
+        }
+        return input;
     }
 
     @Override

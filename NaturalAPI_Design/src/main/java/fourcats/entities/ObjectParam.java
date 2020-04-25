@@ -24,6 +24,12 @@ public class ObjectParam {
         this.required = true;
     }
 
+    public ObjectParam(String objectName, Type type){
+        this.name = objectName;
+        this.type = type;
+        this.required = true;
+    }
+
     public void setName(String objectName) {
         this.name = objectName;
     }

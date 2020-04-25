@@ -64,4 +64,10 @@ public class Controller{
     public void modifyActionTypeById(String idSuggestion, String idScenario, String idType) {
         modifySuggestion.modifyActionTypeById(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idType));
     }
+    public void addObject(String idSuggestion, String idScenario, String objectName, String idType){
+        modifySuggestion.addObject(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), objectName, Integer.parseInt(idType));
+    }
+    public void removeObject(String idSuggestion, String idScenario, String idObject){
+        modifySuggestion.removeObject(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),Integer.parseInt(idObject));
+    }
 }

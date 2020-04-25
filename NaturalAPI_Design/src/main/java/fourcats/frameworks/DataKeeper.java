@@ -1,5 +1,6 @@
 package fourcats.frameworks;
 
+import fourcats.entities.ObjectParam;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 import org.apache.lucene.util.SetOnce;
@@ -142,6 +143,29 @@ public class DataKeeper {
                 throw new NoSuchElementException();
             }
         } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void addObject(int idScenario, int idAction, String objectName, int idType) {
+        for (ObjectParam op : mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams()){
+            if (op.getName().equals(objectName)){
+                throw new SetOnce.AlreadySetException();
+            }
+        }
+        try{
+            mScenarios.get(idScenario).getActionsMap().get(idAction).addObjectParam(new ObjectParam(objectName, mTypes.get(idType)));
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    public void removeObject(int idScenario, int idAction, int idObject) {
+        try {
+            mScenarios.get(idScenario).getActionsMap().get(idAction).removeObjectParam(idObject);
+        }
+        catch (Exception e){
             throw e;
         }
     }

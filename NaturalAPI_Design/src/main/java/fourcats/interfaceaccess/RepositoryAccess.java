@@ -25,4 +25,8 @@ public interface RepositoryAccess {
     void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType);
 
     void updateActionTypeById(int idAction, int idScenario, int idType);
+
+    void createObject(int idAction, int idScenario, String objectName, int idType);
+
+    void deleteObject(int idAction, int idScenario, int idObject);
 }
