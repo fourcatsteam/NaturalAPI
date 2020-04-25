@@ -5,6 +5,7 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.usecaseinteractor.*;
 import fourcats.view.CLI;
+import fourcats.view.GUI_Design;
 
 /**
  * Hello world!
@@ -13,7 +14,8 @@ import fourcats.view.CLI;
 public class App {
     public static void main( String[] args ){
         Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
-        StanfordNlp nlp = new StanfordNlp();
+       // StanfordNlp nlp = new StanfordNlp();
+        StanfordNlp nlp = null;
         DataPresenter dataPresenter = new DataPresenter();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
@@ -27,15 +29,17 @@ public class App {
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
                 generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
 
+        GUI_Design g = new GUI_Design(controller,dataPresenter);
+        g.createAndShowGUI();
 
-        CLI cli = new CLI(controller,dataPresenter);
+      /*  CLI cli = new CLI(controller,dataPresenter);
 
 
         boolean shouldContinue = true;
         while(shouldContinue) {
             cli.askForUseCase();
             shouldContinue = cli.readUseCase();
-        }
+        }*/
 
     }
 }
