@@ -1,14 +1,20 @@
 package fourcats.view;
 
 
+import fourcats.interfaceadapters.Controller;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
 
 public class SuggestionGenerated {
     private JPanel panel1;
+    private Controller contr;
 
-    public SuggestionGenerated(){
+    public SuggestionGenerated(String featureName, Controller controller){
+        contr = controller;
         JPanel panelNorth = new JPanel(new GridLayout(1,1));
        // panelNorth.setPreferredSize(new Dimension(1000,100));
         JLabel textTitle = new JLabel("NaturalAPI Design");
@@ -18,9 +24,9 @@ public class SuggestionGenerated {
         //add some labels and buttons
 
         JPanel panelCenter = new JPanel();
-        panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
-        panelCenter.setPreferredSize(new Dimension(1000,500));
-        panel1.setPreferredSize(new Dimension(1000,50));
+        panelCenter.setLayout(new BoxLayout(panelCenter,1));
+
+        contr.generateSuggestions(featureName);
 
         panelCenter.add(new FeatureWidget(panelCenter));
         panelCenter.add(new FeatureWidget(panelCenter));
@@ -45,11 +51,12 @@ public class SuggestionGenerated {
     }
 
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("NaturalAPI Discover");
+        JFrame frame = new JFrame("NaturalAPI Design");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new SuggestionGenerated().panel1);
+        frame.add(panel1);
         frame.setPreferredSize(new Dimension(600,500));
         frame.pack();
         frame.setVisible(true);
     }
+
 }

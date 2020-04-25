@@ -15,8 +15,8 @@ import fourcats.view.GUI_Design;
 public class App {
     public static void main( String[] args ){
         Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
-       // StanfordNlp nlp = new StanfordNlp();
-        StanfordNlp nlp = null;
+        StanfordNlp nlp = new StanfordNlp();
+        //StanfordNlp nlp = null;
         DataPresenter dataPresenter = new DataPresenter();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 

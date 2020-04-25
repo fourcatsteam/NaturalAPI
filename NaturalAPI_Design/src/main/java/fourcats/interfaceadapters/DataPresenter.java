@@ -27,7 +27,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
 
     @Override
     public void showErrorFileLoad() {
-        System.out.println("Error! \n" +
+        toShow = ("Error! \n" +
                 "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
     }
 
