@@ -28,6 +28,9 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
         //retrieve BDL
         Bdl bdl = this.repository.readBdl(targetBdl);
 
+        //retrieve association
+        LinkedList<String> association = this.repository.readAssociation(targetBdl);
+
         //retrieve Documents
         LinkedList<Document> documents = new LinkedList<>();
         for (String title: docTitles) {
@@ -41,10 +44,14 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
         for (Document document: documents) {
             this.documentAnalyzer.removeDocumentFromBdl(bdl, document);
         }
+
+        if(association!=null) {
+            association.removeAll(docTitles);
+        }
         //update Bdl in the repository
 
         repository.updateBdl(bdl);
-        repository.removeAssociation(bdl.getName(),docTitles);
+        repository.updateAssociation(bdl.getName(),association);
         //send results to output device
         outputPort.showRemoveDocumentOutputPort("I Documenti da te selezionati sono stati rimossi con successo");
     }

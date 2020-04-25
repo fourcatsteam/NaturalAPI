@@ -12,8 +12,8 @@ public interface PersistentMemoryAccess {
     Bdl loadBdl(String bdlName);
     boolean saveBdl(Bdl bdl);
     LinkedList<String> loadAssociation(String bdlName);
-    boolean addAssociation(String bdlName, List<String> titleList);
-    boolean removeAssociation(String referringBdl, List<String> docToRemove);
+    /*boolean addAssociation(String bdlName, List<String> titleList);
+    boolean removeAssociation(String referringBdl, List<String> docToRemove);*/
     boolean saveAssociation(String bdlName, List<String> titleList);
 
 

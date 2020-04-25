@@ -31,8 +31,8 @@ public class Repository implements RepositoryAccess {
     }
 
     @Override
-    public void updateBdl(Bdl bdl) {
-        this.memoryAccess.saveBdl(bdl);
+    public boolean updateBdl(Bdl bdl) {
+        return this.memoryAccess.saveBdl(bdl);
     }
 
     @Override
@@ -47,17 +47,7 @@ public class Repository implements RepositoryAccess {
     }
 
     @Override
-    public void addAssociation(String referringBdl, List<String> associateDocuments) {
-        this.memoryAccess.addAssociation(referringBdl, associateDocuments);
-    }
-
-    @Override
-    public void removeAssociation(String referringBdl, List<String> docToRemove) {
-        this.memoryAccess.removeAssociation(referringBdl, docToRemove);
-    }
-
-    @Override
-    public void updateAssociation(String referringBdl, List<String> associateDocuments) {
-        this.memoryAccess.saveAssociation(referringBdl, associateDocuments);
+    public boolean updateAssociation(String referringBdl, List<String> associateDocuments) {
+        return this.memoryAccess.saveAssociation(referringBdl, associateDocuments);
     }
 }

@@ -84,7 +84,7 @@ public class FileSystemAccessTest {
     }
 
     @Test
-    public void testSaveAssociation() {
+    public void testSaveAssociationWithNoError() {
         String name = "example";
         LinkedList<String> list = new LinkedList<>();
         list.add("prova.txt");
@@ -94,7 +94,7 @@ public class FileSystemAccessTest {
         assertTrue(result);
     }
 
-    @Test
+    /*@Test
     public void testAddAssociationFound() {
         String name = "example";
         LinkedList<String> list = new LinkedList<>();
@@ -133,5 +133,5 @@ public class FileSystemAccessTest {
         boolean result = fs.removeAssociation(name,list);
 
         assertTrue(!result);
-    }
+    }*/
 }
