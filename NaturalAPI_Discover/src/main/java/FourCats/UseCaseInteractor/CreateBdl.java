@@ -2,7 +2,6 @@ package FourCats.UseCaseInteractor;
 
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
-import FourCats.InterfaceAccess.TextAnalyzer;
 import FourCats.InterfaceAccess.RepositoryAccess;
 import FourCats.Port.CreateBdlInputPort;
 import FourCats.Port.CreateBdlOutputPort;
@@ -30,7 +29,12 @@ public class CreateBdl implements CreateBdlInputPort {
         //retrieve Documents from the repository
         LinkedList<Document> documents = new LinkedList<>();
         for(String title: titleList) {
-            documents.add(repository.readDocument(title));
+            Document doc = repository.readDocument(title);
+            if(doc!=null) {
+                documents.add(doc);
+            } else {
+                output.showWarning("Document "+title+" not found");
+            }
         }
 
         //add Documents analysis to BDL
@@ -43,6 +47,6 @@ public class CreateBdl implements CreateBdlInputPort {
         repository.updateAssociation(nameBdl,titleList);
 
         //send results to output device
-        output.showCreateBdlOuput("Bdl generata! Puoi trovare i file csv all'interno della cartella BDL");
+        output.showCreateBdlOutput();
     }
 }

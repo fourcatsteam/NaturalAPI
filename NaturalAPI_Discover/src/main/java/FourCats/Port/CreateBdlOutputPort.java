@@ -1,7 +1,8 @@
 package FourCats.Port;
 
 public interface CreateBdlOutputPort {
-
-    void showCreateBdlOuput(String s);
+    void showCreateBdlOutput();
+    void showError(String message);
+    void showWarning(String message);
 
 }

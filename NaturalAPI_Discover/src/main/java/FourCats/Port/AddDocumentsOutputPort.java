@@ -1,5 +1,7 @@
 package FourCats.Port;
 
 public interface AddDocumentsOutputPort {
-    void showAddDocumentsOutput(String s);
+    void showAddDocumentsOutput();
+    void showError(String message);
+    void showWarning(String message);
 }

@@ -27,31 +27,40 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
         //retrieve BDL
         Bdl bdl = this.repository.readBdl(targetBdl);
 
-        //retrieve association
-        LinkedList<String> association = this.repository.readAssociation(targetBdl);
+        if(bdl==null) {
+            outputPort.showError("BDL not found");
+        } else {
+            //retrieve association
+            LinkedList<String> association = this.repository.readAssociation(targetBdl);
 
-        //retrieve Documents
-        LinkedList<Document> documents = new LinkedList<>();
-        for (String title: docTitles) {
-            Document doc = this.repository.readDocument(title);
-            if(doc != null) {   //Documento non presente
-                documents.add(doc);
+            if(association==null) {
+                outputPort.showError("BDL-Document association file missing, removing documents is not possible");
+            } else {
+                //retrieve Documents
+                LinkedList<Document> documents = new LinkedList<>();
+                for (String title: docTitles) {
+                    Document doc = this.repository.readDocument(title);
+                    if(doc != null) {
+                        documents.add(doc);
+                    } else {
+                        outputPort.showWarning("Document "+title+" not found");
+                    }
+                }
+
+                //remove Documents analysis from BDL
+                for (Document document: documents) {
+                    this.documentAnalyzer.removeDocumentFromBdl(bdl, document);
+                }
+
+                association.removeAll(docTitles);
+
+                //update Bdl in the repository
+                repository.updateBdl(bdl);
+                repository.updateAssociation(bdl.getName(),association);
+
+                //send results to output device
+                outputPort.showRemoveDocumentOutputPort();
             }
         }
-
-        //remove Documents analysis from BDL
-        for (Document document: documents) {
-            this.documentAnalyzer.removeDocumentFromBdl(bdl, document);
-        }
-
-        if(association!=null) {
-            association.removeAll(docTitles);
-        }
-        //update Bdl in the repository
-
-        repository.updateBdl(bdl);
-        repository.updateAssociation(bdl.getName(),association);
-        //send results to output device
-        outputPort.showRemoveDocumentOutputPort("I Documenti da te selezionati sono stati rimossi con successo");
     }
 }

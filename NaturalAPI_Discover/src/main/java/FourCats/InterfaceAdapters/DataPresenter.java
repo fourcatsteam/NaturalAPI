@@ -9,26 +9,44 @@ import FourCats.Port.ViewBdlOutputPort;
 
 public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDocumentsOutputPort, RemoveDocumentsOutputPort, ViewBdlOutputPort {
     private String dataToView;
+    private String message;
 
     public String getData(){
         return dataToView;
     }
 
+    public String getMessage() {return message;}
+
     @Override
-    public void showCreateBdlOuput(String s) {
-        dataToView = s;
+    public void showCreateBdlOutput() {
+        message = "BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
+        dataToView = "";
         notifyObservers();
     }
 
     @Override
-    public void showAddDocumentsOutput(String s) {
-        dataToView = s;
+    public void showError(String msg) {
+        message = "Error: "+msg;
         notifyObservers();
     }
 
     @Override
-    public void showRemoveDocumentOutputPort(String s) {
-        dataToView = s;
+    public void showWarning(String msg) {
+        message = "Warning: "+msg;
+        notifyObservers();
+    }
+
+    @Override
+    public void showAddDocumentsOutput() {
+        message = "Documenti aggiunti al BDL con successo!";
+        dataToView = "";
+        notifyObservers();
+    }
+
+    @Override
+    public void showRemoveDocumentOutputPort() {
+        message = "I Documenti da te selezionati sono stati rimossi con successo";
+        dataToView = "";
         notifyObservers();
     }
 

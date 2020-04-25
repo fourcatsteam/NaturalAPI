@@ -25,9 +25,9 @@ public class CLI implements Observer {
     }
 
     public void askForUseCase(){
-        System.out.println("1. createBdl");
-        System.out.println("2. addDocument");
-        System.out.println("3. removeDocument");
+        System.out.println("1. Create a new BDL");
+        System.out.println("2. Add documents to a BDL");
+        System.out.println("3. Remove document from a BDL");
     }
 
     public Boolean readUseCase(){
@@ -86,7 +86,7 @@ public class CLI implements Observer {
 
 
     private String chooseFile() throws IOException {
-        System.out.println("Choose a namefile, digit EXIT to exit lol");
+        System.out.println("Choose a namefile, digit EXIT to exit");
         String r = br.readLine();
         if(!r.equals("EXIT")){
             nameTitleList.add(r);
@@ -94,7 +94,7 @@ public class CLI implements Observer {
         return r;
     }
     public void showResult(){
-        System.out.println(datapresenter.getData());
+        System.out.println(datapresenter.getMessage());
     }
 
     @Override

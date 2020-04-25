@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -43,6 +42,6 @@ public class CreateBdlTest {
         verify(analyzeMock,times(3)).addDocumentToBdl(any(Bdl.class),any(Document.class));
         verify(repositoryMock).updateBdl(any(Bdl.class));
         verify(repositoryMock).updateAssociation(any(String.class),any(List.class));
-        verify(outputMock).showCreateBdlOuput(any(String.class));
+        verify(outputMock).showCreateBdlOutput();
     }
 }

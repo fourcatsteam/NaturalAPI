@@ -23,40 +23,48 @@ public class AddDocuments implements AddDocumentsInputPort {
         this.outputPort = port;
     }
 
-
     @Override
     public void add(String targetBdl, List<String> docTitles) {
         //retrieve BDL from the repository
         Bdl bdl = this.repository.readBdl(targetBdl);
 
-        //retrieve BDL-Documents association from the repository
+        if(bdl==null) {
+            outputPort.showError("BDL not found");
+        } else {
+            //retrieve BDL-Documents association from the repository
+            LinkedList<String> association = this.repository.readAssociation(targetBdl);
 
-        LinkedList<String> association = this.repository.readAssociation(targetBdl);
+            //filter already used documents
+            if (association == null) {
+                outputPort.showError("BDL-Document association file missing, adding documents is not possible");
+            } else {
+                docTitles.removeAll(association);
 
-        //filter already used documents
-        if (association != null) {
-            docTitles.removeAll(association);
+                //retrieve Documents from the repository
+                LinkedList<Document> documents = new LinkedList<>();
+                for (String title : docTitles) {
+                    Document doc = repository.readDocument(title);
+                    if(doc!=null) {
+                        documents.add(doc);
+                    } else {
+                        outputPort.showWarning("Document "+title+" not found");
+                    }
+                }
+
+                //add document analysis to BDL
+                for (Document document : documents) {
+                    documentAnalyzer.addDocumentToBdl(bdl, document);
+                }
+
+                association.addAll(docTitles);
+
+                //update Bdl and association in the repository
+                repository.updateBdl(bdl);
+                repository.updateAssociation(targetBdl, association);
+
+                //send results to output device
+                outputPort.showAddDocumentsOutput();
+            }
         }
-        //retrieve Documents from the repository
-        LinkedList<Document> documents = new LinkedList<>();
-        for (String title : docTitles) {
-            documents.add(this.repository.readDocument(title));
-        }
-
-        //add document analysis to BDL
-        for (Document document : documents) {
-            documentAnalyzer.addDocumentToBdl(bdl, document);
-        }
-
-        if(association != null) {
-            association.addAll(docTitles);
-        }
-
-        //update Bdl and association in the repository
-        repository.updateBdl(bdl);
-        repository.updateAssociation(targetBdl, association);
-
-        //send results to output device
-        outputPort.showAddDocumentsOutput("Documenti aggiunti al BDL con successo!");
     }
 }

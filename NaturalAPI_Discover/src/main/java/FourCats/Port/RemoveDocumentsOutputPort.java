@@ -1,5 +1,7 @@
 package FourCats.Port;
 
 public interface RemoveDocumentsOutputPort {
-    void showRemoveDocumentOutputPort(String s);
+    void showRemoveDocumentOutputPort();
+    void showError(String message);
+    void showWarning(String message);
 }

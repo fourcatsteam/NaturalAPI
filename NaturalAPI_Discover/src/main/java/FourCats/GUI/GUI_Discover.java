@@ -145,7 +145,7 @@ public class GUI_Discover extends JPanel implements Observer{
         }else if(datapresenter.getData().startsWith("-- PREDICATES --")){
             panelPredicates.setText(datapresenter.getData());
         }else{
-            log.append(datapresenter.getData());
+            log.append(datapresenter.getMessage());
         }
     }
 
