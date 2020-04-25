@@ -73,12 +73,28 @@ public class GUI_Discover extends JPanel implements Observer{
 
         addDocumentBtn.addActionListener(actionEvent -> {
             String result = this.choosing(2);
-            controller.addDocument(result, nameTitleList);
+            if(result!=null) {
+                controller.addDocument(result, nameTitleList);
+                nameTitleList.clear();
+                this.areFilesLoaded = false;
+            } else {
+                if(this.areFilesLoaded) {
+                    log.append("Your files are still available.");
+                }
+            }
         });
 
         removeDococumentBtn.addActionListener(actionEvent -> {
             String result = this.choosing(2);
-            controller.removeDocument(result, nameTitleList);
+            if(result!=null) {
+                controller.removeDocument(result, nameTitleList);
+                nameTitleList.clear();
+                this.areFilesLoaded = false;
+            } else {
+                if(this.areFilesLoaded) {
+                    log.append("Your files are still available.");
+                }
+            }
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
@@ -138,15 +154,11 @@ public class GUI_Discover extends JPanel implements Observer{
     }
 
     private void showResult(){
-        if(datapresenter.getData().startsWith("-- NOUNS --")){
-            panelNouns.setText(datapresenter.getData());
-        }else if(datapresenter.getData().startsWith("-- VERBS --")){
-            panelVerbs.setText(datapresenter.getData());
-        }else if(datapresenter.getData().startsWith("-- PREDICATES --")){
-            panelPredicates.setText(datapresenter.getData());
-        }else{
-            log.append(datapresenter.getMessage());
-        }
+        panelNouns.setText(datapresenter.getBdlNouns());
+        panelVerbs.setText(datapresenter.getBdlVerbs());
+        panelPredicates.setText(datapresenter.getBdlPredicates());
+
+        log.append(datapresenter.getMessage()+"\n");
     }
 
     @Override

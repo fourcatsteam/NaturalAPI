@@ -8,56 +8,64 @@ import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.Port.ViewBdlOutputPort;
 
 public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDocumentsOutputPort, RemoveDocumentsOutputPort, ViewBdlOutputPort {
-    private String dataToView;
     private String message;
-
-    public String getData(){
-        return dataToView;
-    }
+    private String bdlNouns;
+    private String bdlVerbs;
+    private String bdlPredicates;
 
     public String getMessage() {return message;}
+    public String getBdlNouns() {return bdlNouns;}
+    public String getBdlVerbs() {return bdlVerbs;}
+    public String getBdlPredicates() {return bdlPredicates;}
+
+    private void clearData() {
+        this.message = "";
+        this.bdlNouns = "";
+        this.bdlVerbs = "";
+        this.bdlPredicates = "";
+    }
 
     @Override
     public void showCreateBdlOutput() {
+        this.clearData();
         message = "BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
-        dataToView = "";
         notifyObservers();
     }
 
     @Override
     public void showError(String msg) {
+        this.clearData();
         message = "Error: "+msg;
         notifyObservers();
     }
 
     @Override
     public void showWarning(String msg) {
+        this.clearData();
         message = "Warning: "+msg;
         notifyObservers();
     }
 
     @Override
     public void showAddDocumentsOutput() {
+        this.clearData();
         message = "Documenti aggiunti al BDL con successo!";
-        dataToView = "";
         notifyObservers();
     }
 
     @Override
     public void showRemoveDocumentOutputPort() {
+        this.clearData();
         message = "I Documenti da te selezionati sono stati rimossi con successo";
-        dataToView = "";
         notifyObservers();
     }
 
     @Override
     public void showViewBdlOutput(Bdl b) {
-
-        this.dataToView = b.nounsToString();
-        notifyObservers();
-        this.dataToView = b.verbsToString();
-        notifyObservers();
-        this.dataToView = b.predicatesToString();
+        this.clearData();
+        this.bdlNouns = b.nounsToString();
+        this.bdlVerbs = b.verbsToString();
+        this.bdlPredicates = b.predicatesToString();
         notifyObservers();
     }
 }
