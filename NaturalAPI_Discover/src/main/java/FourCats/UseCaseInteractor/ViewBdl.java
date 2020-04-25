@@ -22,7 +22,7 @@ public class ViewBdl implements ViewBdlInputPort {
     }
 
     @Override
-    public void view(String nameBdl) throws IOException {
+    public void view(String nameBdl) {
         Bdl bdl = repository.readBdl(nameBdl);
         output.showViewBdlOutput(bdl);
     }

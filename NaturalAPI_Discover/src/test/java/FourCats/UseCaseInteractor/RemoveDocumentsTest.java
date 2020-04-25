@@ -3,7 +3,7 @@ package FourCats.UseCaseInteractor;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.RepositoryAccess;
-import FourCats.Port.RemoveDocumenetsOutputPort;
+import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +19,7 @@ public class RemoveDocumentsTest {
 
     RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
     AnalyzeDocument analyzerMock = Mockito.mock(AnalyzeDocument.class);
-    RemoveDocumenetsOutputPort outputMock = Mockito.mock(RemoveDocumenetsOutputPort.class);
+    RemoveDocumentsOutputPort outputMock = Mockito.mock(RemoveDocumentsOutputPort.class);
 
     @InjectMocks
     RemoveDocuments interactor = new RemoveDocuments(repositoryMock,analyzerMock,outputMock);

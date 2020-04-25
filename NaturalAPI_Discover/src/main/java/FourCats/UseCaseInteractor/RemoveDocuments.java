@@ -3,11 +3,10 @@ package FourCats.UseCaseInteractor;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.RepositoryAccess;
-import FourCats.InterfaceAccess.TextAnalyzer;
-import FourCats.Port.RemoveDocumenetsOutputPort;
+import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.Port.RemoveDocumentsInputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
-import java.io.IOException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,9 +14,9 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
 
     private RepositoryAccess repository;
     private AnalyzeDocument documentAnalyzer;
-    private RemoveDocumenetsOutputPort outputPort;
+    private RemoveDocumentsOutputPort outputPort;
 
-    public RemoveDocuments(RepositoryAccess repo, AnalyzeDocument analyzer, RemoveDocumenetsOutputPort port) {
+    public RemoveDocuments(RepositoryAccess repo, AnalyzeDocument analyzer, RemoveDocumentsOutputPort port) {
         this.repository = repo;
         this.documentAnalyzer = analyzer;
         this.outputPort = port;

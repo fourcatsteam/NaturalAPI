@@ -4,6 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface AddDocumentsInputPort {
-    void add(String targetBdl, List<String> docTitles) throws IOException;
+    void add(String targetBdl, List<String> docTitles);
 
 }

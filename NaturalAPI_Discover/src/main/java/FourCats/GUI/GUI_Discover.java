@@ -61,13 +61,9 @@ public class GUI_Discover extends JPanel implements Observer{
         createBDLbtn.addActionListener(actionEvent -> {
             String result = this.choosing(1);
             if(result!=null) {
-                try {
-                    controller.createBdl(result, nameTitleList);
-                    nameTitleList.clear();
-                    this.areFilesLoaded = false;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                controller.createBdl(result, nameTitleList);
+                nameTitleList.clear();
+                this.areFilesLoaded = false;
             }else{
                 if(this.areFilesLoaded) {
                     log.append("Your files are still available.");
@@ -77,20 +73,12 @@ public class GUI_Discover extends JPanel implements Observer{
 
         addDocumentBtn.addActionListener(actionEvent -> {
             String result = this.choosing(2);
-            try {
-                controller.addDocument(result, nameTitleList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            controller.addDocument(result, nameTitleList);
         });
 
         removeDococumentBtn.addActionListener(actionEvent -> {
             String result = this.choosing(2);
-            try {
-                controller.removeDocument(result, nameTitleList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            controller.removeDocument(result, nameTitleList);
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
@@ -101,11 +89,8 @@ public class GUI_Discover extends JPanel implements Observer{
                     null,
                     null,
                     null );
-            try {
-                controller.viewBdl(result);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            controller.viewBdl(result);
         });
     }
 

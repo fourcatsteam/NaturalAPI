@@ -4,10 +4,10 @@ import FourCats.Entities.Bdl;
 import FourCats.Observer.Subject;
 import FourCats.Port.AddDocumentsOutputPort;
 import FourCats.Port.CreateBdlOutputPort;
-import FourCats.Port.RemoveDocumenetsOutputPort;
+import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.Port.ViewBdlOutputPort;
 
-public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDocumentsOutputPort, RemoveDocumenetsOutputPort, ViewBdlOutputPort {
+public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDocumentsOutputPort, RemoveDocumentsOutputPort, ViewBdlOutputPort {
     private String dataToView;
 
     public String getData(){

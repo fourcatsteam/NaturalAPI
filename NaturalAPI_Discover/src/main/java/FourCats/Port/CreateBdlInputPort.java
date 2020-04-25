@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface CreateBdlInputPort {
-    void create(String nameBdl, List<String> titleList) throws IOException;
+    void create(String nameBdl, List<String> titleList);
 }

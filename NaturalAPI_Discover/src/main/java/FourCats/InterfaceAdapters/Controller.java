@@ -23,23 +23,19 @@ public class Controller{
         this.viewBdl = v;
     }
 
-    public void createBdl(String nameBdl,List<String> titleList) throws IOException {
-        try {
-            createBdl.create(nameBdl,titleList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void createBdl(String nameBdl,List<String> titleList) {
+        createBdl.create(nameBdl,titleList);
     }
 
-    public void addDocument(String nameBdl, List<String> docToAdd) throws IOException {
+    public void addDocument(String nameBdl, List<String> docToAdd) {
         addDocuments.add(nameBdl,docToAdd);
     }
 
-    public void removeDocument(String nameBdl,List<String> docToRemove) throws IOException{
+    public void removeDocument(String nameBdl,List<String> docToRemove) {
         removeDocuments.remove(nameBdl,docToRemove);
     }
 
-    public void viewBdl(String nameBdl) throws IOException {
+    public void viewBdl(String nameBdl) {
         viewBdl.view(nameBdl);
     }
 
