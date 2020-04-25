@@ -7,7 +7,7 @@ addons:
 script:
     # other script steps might be done before running the actual analysis
     - cd NaturalAPI_Design
-   # - sonar-scanner
+    - sonar-scanner
    # - mvn test
     - sonar-scanner
     - mvn clean package sonar:sonar -Psonar,coverage -Dsonar.projectKey=fourcatsteam_NaturalAPI

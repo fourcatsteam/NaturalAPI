@@ -1,5 +1,5 @@
-As a: Customer
 Feature: Bank withdraw
+  As a Customer
   Scenario: Withdraw cash
     Given the user is in front of an ATM
     When the user inserts the card in the ATM

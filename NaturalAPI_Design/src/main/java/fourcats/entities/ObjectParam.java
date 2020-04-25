@@ -3,7 +3,7 @@ package fourcats.entities;
 
 public class ObjectParam {
     private String name;
-    private String type;
+    private Type type;
     private Boolean required;
 
     public ObjectParam() {
@@ -20,7 +20,13 @@ public class ObjectParam {
 
     public ObjectParam(String objectName, String objectType) {
         this.name = objectName;
-        this.type = objectType;
+        this.type = new Type(objectType);
+        this.required = true;
+    }
+
+    public ObjectParam(String objectName, Type type){
+        this.name = objectName;
+        this.type = type;
         this.required = true;
     }
 
@@ -33,10 +39,13 @@ public class ObjectParam {
     }
 
     public void setType(String objectType) {
-        this.type = objectType;
+        this.type.setName(objectType);
+    }
+    public void setType(Type type){
+        this.type = type;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 

@@ -1,5 +1,6 @@
 fourcats\datastructure\WordCounter.class
 fourcats\entities\Actor.class
+fourcats\port\ModifyBALSuggestionInputPort.class
 fourcats\App.class
 fourcats\port\GenerateBALInputPort.class
 fourcats\view\CLI.class
@@ -12,6 +13,7 @@ fourcats\port\GenerateBALSuggestionsOutputPort.class
 fourcats\frameworks\StanfordNlp.class
 fourcats\datastructure\observer\Observer.class
 fourcats\interfaceadapters\DataPresenter.class
+fourcats\port\ModifyBALSuggestionOutputPort.class
 fourcats\frameworks\DataKeeper.class
 fourcats\datastructure\observer\Subject.class
 fourcats\interfaceaccess\BalAnalyzer.class
@@ -19,6 +21,7 @@ fourcats\interfaceaccess\RepositoryAccess.class
 fourcats\interfaceadapters\Controller.class
 fourcats\entities\BAL.class
 fourcats\datastructure\LemmatizerData.class
+fourcats\usecaseinteractor\ModifyBALSuggestion.class
 fourcats\frameworks\Repository.class
 fourcats\interfaceaccess\PersistentMemoryAccess.class
 fourcats\datastructure\WordTag.class

@@ -18,7 +18,7 @@ public class DeclineBALSuggestion implements DeclineBALSuggestionInputPort {
             out.showDeclinedSuggestion(repo.readScenarios(),true);
         }
         catch (NullPointerException e){
-            out.showDeclinedSuggestion(repo.readScenarios(),false); //SE VIENE CANCELLATO ULTIMO ELEMENTO DI SCENARIO SI SDOPPIA
+            out.showDeclinedSuggestion(repo.readScenarios(),false);
         }
     }
 }

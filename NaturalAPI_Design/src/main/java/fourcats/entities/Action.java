@@ -7,7 +7,7 @@ import java.util.List;
 public class Action {
     private String name;
     private List<ObjectParam> param;
-    private String type;
+    private Type type;
 
     public Action(String actionName) {
         this.name = actionName;
@@ -21,7 +21,7 @@ public class Action {
         if(actionType.equals(""))
             this.type = null;
         else
-            this.type = actionType;
+            this.type = new Type(actionType);
     }
 
     public void setName(String actionName) {
@@ -73,11 +73,18 @@ public class Action {
     }
 
     public void setType(String ActionType) {
-        this.type = ActionType;
+        this.type = new Type(ActionType);
+    }
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
+    }
+
+    public void removeObjectParam(int idObjectParam){
+        param.remove(idObjectParam);
     }
 
     @Override
