@@ -25,6 +25,7 @@ public class Gui implements Observer {
     private JPanel thirdPanel;
     private JButton generateButton;
     private JButton modifyButton;
+    private JButton createPLAButton;
 
     public Gui(Controller c,DataPresenter d){
 
@@ -75,6 +76,12 @@ public class Gui implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.generateApi();
+            }
+        });
+        createPLAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiCreatePla guiCreatePla = new GuiCreatePla();
             }
         });
     }
