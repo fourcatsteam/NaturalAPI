@@ -1,6 +1,7 @@
 package fourcats.view;
 
 import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,13 +17,12 @@ public class SuggestionWidget extends JComponent {
     private JButton removeObjectButton;
     private JPanel mainPanel;
 
-    public SuggestionWidget(JPanel panelCenter, Controller contr, String actionType, String actionName, String objectId,
-                            String objectType, String objectName, String scenarioId, String suggestionId){
+    public SuggestionWidget(JPanel panelCenter, Controller contr, DataPresenterGUI dataPresenter){
         mainPanel = new JPanel();
-        actionTypeComboBox.setSelectedItem(actionType);
-        actionNameTextField.setText(actionName);
-        objectTypeComboBox.setSelectedItem(objectType);
-        objectNameTextField.setText(objectName);
+        actionTypeComboBox.setSelectedItem(dataPresenter.getActionType());
+        actionNameTextField.setText(dataPresenter.getActionName());
+        objectTypeComboBox.setSelectedItem(dataPresenter.getObjectType());
+        objectNameTextField.setText(dataPresenter.getObjectName());
         mainPanel.add(actionTypeComboBox);
         mainPanel.add(actionNameTextField);
         mainPanel.add(objectTypeComboBox);
@@ -34,9 +34,9 @@ public class SuggestionWidget extends JComponent {
 
 
         removeSuggestionButton.addActionListener(e -> {
-            contr.declineSuggestion(suggestionId,scenarioId);
-            JOptionPane.showMessageDialog(null,"Suggestion removed! (TODO Find the way to refresh the list)");
-            //TODO
+            contr.declineSuggestion(dataPresenter.getSuggestionId(),dataPresenter.getScenarioId());
+            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
+            mainPanel.setVisible(false);
         });
     }
 }

@@ -1,6 +1,5 @@
 package fourcats.view;
 
-import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
@@ -8,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class GUI_Design extends Component implements Observer {
+public class GUI_Design extends Component {
     private Controller controller;
     private DataPresenterGUI dataPresenter;
     private JLabel titleText;
@@ -23,7 +22,6 @@ public class GUI_Design extends Component implements Observer {
     public GUI_Design(Controller c,DataPresenterGUI dp){
         this.controller = c;
         this.dataPresenter = dp;
-        this.dataPresenter.attach(this);
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
         this.fc.setMultiSelectionEnabled(true);
         this.areFilesLoaded = false;
@@ -63,14 +61,4 @@ public class GUI_Design extends Component implements Observer {
         frame.setVisible(true);
     }
 
-    private void showResults(){
-        if (!dataPresenter.getMessage().equals("")) {
-            log.append(dataPresenter.getMessage() + "\n");
-        }
-    }
-
-    @Override
-    public void update() {
-        showResults();
-    }
 }

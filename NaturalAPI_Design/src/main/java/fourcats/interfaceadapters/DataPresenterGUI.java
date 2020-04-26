@@ -21,9 +21,11 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String objectType;
     String objectName;
     String actor;
+    boolean isSuggestionToAdd = false;
 
     @Override
     public void showSuggestionsForScenario(Map<Integer, Scenario> mScenarios) {
+        isSuggestionToAdd = true;
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
             scenarioContent = "Scenario:" + mSc.getValue().getContent().replace("  ","\n");
             scenarioId = "" + mSc.getKey();
@@ -43,6 +45,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
                  }
             }
         }
+        isSuggestionToAdd = false;
     }
 
     @Override
@@ -96,16 +99,18 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return objectId;
     }
 
+    public boolean isSuggestionToAdd() {
+        return isSuggestionToAdd;
+    }
+
     @Override
     public void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk) {
         if (isOk) {
-            message = "Suggestion removed! This is the updated list of suggestions";
-            notifyObservers();
-            //showSuggestionsForScenario(mScenarios);
+            message = "Suggestion removed!";
         }
         else {
-            message = "Oh no! Something went wrong, please check the id of the scenario and the id of the suggestion";
-            notifyObservers();
+            message = "Oh no! Something went wrong...";
         }
+        notifyObservers();
     }
 }

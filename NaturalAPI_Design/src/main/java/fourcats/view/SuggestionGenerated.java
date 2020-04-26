@@ -72,8 +72,8 @@ public class SuggestionGenerated implements Observer{
                     dataPresenter.getScenarioContent()));
             currentScenarioId +=1;
         }
-        panelCenter.add(new SuggestionWidget(panelCenter,contr,dataPresenter.getActionType(),dataPresenter.getActionName(),
-                dataPresenter.getObjectId(), dataPresenter.getObjectType(),dataPresenter.getObjectName(),
-                dataPresenter.getScenarioId(),dataPresenter.getSuggestionId()));
+        if (dataPresenter.isSuggestionToAdd()) {
+            panelCenter.add(new SuggestionWidget(panelCenter, contr, dataPresenter));
+        }
     }
 }
