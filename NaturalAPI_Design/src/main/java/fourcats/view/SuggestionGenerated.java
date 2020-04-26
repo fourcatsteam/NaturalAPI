@@ -1,20 +1,28 @@
 package fourcats.view;
 
 
+import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.File;
-import java.util.ArrayList;
 
-public class SuggestionGenerated {
+public class SuggestionGenerated implements Observer{
     private JPanel panel1;
     private Controller contr;
+    private DataPresenterGUI dataPresenter;
+    private JPanel panelCenter;
+    private String featureName;
+    private int currentScenarioId;
 
-    public SuggestionGenerated(String featureName, Controller controller){
-        contr = controller;
+    public SuggestionGenerated(String featureName, Controller controller, DataPresenterGUI dataPresenter){
+        this.contr = controller;
+        this.dataPresenter = dataPresenter;
+        this.dataPresenter.attach(this);
+        this.featureName = featureName;
+        this.currentScenarioId = -1;
         JPanel panelNorth = new JPanel(new GridLayout(1,1));
        // panelNorth.setPreferredSize(new Dimension(1000,100));
         JLabel textTitle = new JLabel("NaturalAPI Design");
@@ -23,14 +31,8 @@ public class SuggestionGenerated {
 
         //add some labels and buttons
 
-        JPanel panelCenter = new JPanel();
+        panelCenter = new JPanel();
         panelCenter.setLayout(new BoxLayout(panelCenter,1));
-
-        contr.generateSuggestions(featureName);
-
-        panelCenter.add(new FeatureWidget(panelCenter));
-        panelCenter.add(new FeatureWidget(panelCenter));
-
 
         JButton generateBAlBtn = new JButton("Generate BAL");
         JButton addFeatureBtn = new JButton("Add another feature");
@@ -48,15 +50,30 @@ public class SuggestionGenerated {
         panel1.add(scrollPaneCenter,BorderLayout.CENTER);
         panel1.add(panelSouth,BorderLayout.SOUTH);
 
+
+        contr.generateSuggestions(featureName);
+
     }
 
     public void createAndShowGUI() {
         JFrame frame = new JFrame("NaturalAPI Design");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.add(panel1);
         frame.setPreferredSize(new Dimension(600,500));
         frame.pack();
         frame.setVisible(true);
     }
 
+
+    @Override
+    public void update() {
+        if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
+            panelCenter.add(new ScenarioWidget(panelCenter, featureName, dataPresenter.getActor(),
+                    dataPresenter.getScenarioContent()));
+            currentScenarioId +=1;
+        }
+        panelCenter.add(new SuggestionWidget(panelCenter,contr,dataPresenter.getActionType(),dataPresenter.getActionName(),
+                dataPresenter.getObjectId(), dataPresenter.getObjectType(),dataPresenter.getObjectName(),
+                dataPresenter.getScenarioId(),dataPresenter.getSuggestionId()));
+    }
 }

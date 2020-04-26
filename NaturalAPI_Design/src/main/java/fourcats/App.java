@@ -2,10 +2,8 @@ package fourcats;
 
 import fourcats.frameworks.*;
 import fourcats.interfaceadapters.Controller;
-import fourcats.interfaceadapters.DataPresenter;
+import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.usecaseinteractor.*;
-import fourcats.view.CLI;
-import fourcats.view.FeatureWidget;
 import fourcats.view.GUI_Design;
 
 /**
@@ -17,18 +15,21 @@ public class App {
         Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
         //StanfordNlp nlp = null;
-        DataPresenter dataPresenter = new DataPresenter();
+        //DataPresenter dataPresenter = new DataPresenter();
+        DataPresenterGUI dataPresenter = new DataPresenterGUI();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
-        GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
+        //GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
         GenerateBALSuggestions generateBALSugg = new GenerateBALSuggestions(repo,nlp,dataPresenter);
         DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
-        ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
-        CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
-        ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
+       // ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
+        //CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
+        //ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
 
-        Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-                generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
+       // Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
+               // generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
+
+        Controller controller = new Controller(generateBALSugg,declineBALSuggestion,null,null,null,null);
 
         GUI_Design g = new GUI_Design(controller,dataPresenter);
         g.createAndShowGUI();

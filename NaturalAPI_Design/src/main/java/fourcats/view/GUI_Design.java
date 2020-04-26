@@ -2,7 +2,7 @@ package fourcats.view;
 
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
-import fourcats.interfaceadapters.DataPresenter;
+import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,25 +10,33 @@ import java.io.File;
 
 public class GUI_Design extends Component implements Observer {
     private Controller controller;
-    private DataPresenter dataPresenter;
-
+    private DataPresenterGUI dataPresenter;
     private JLabel titleText;
     private JButton loadGherkinBtn;
     private JButton genSuggestBtn;
     private JTextArea log;
     private JPanel panel1;
     private JFileChooser fc;
-    private Boolean areFilesLoaded;
+    private boolean areFilesLoaded;
     private String nameFeatureFile;
 
-    public GUI_Design(Controller c,DataPresenter dp){
+    public GUI_Design(Controller c,DataPresenterGUI dp){
         this.controller = c;
         this.dataPresenter = dp;
+        this.dataPresenter.attach(this);
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
         this.fc.setMultiSelectionEnabled(true);
         this.areFilesLoaded = false;
-        this.dataPresenter.attach(this);
-        genSuggestBtn.addActionListener(actionEvent -> new SuggestionGenerated(nameFeatureFile,controller).createAndShowGUI());
+        this.log.append("Welcome to NaturalAPI Design!\n\n");
+
+        genSuggestBtn.addActionListener(actionEvent -> {
+            if(areFilesLoaded) {
+                new SuggestionGenerated(nameFeatureFile, controller, dataPresenter).createAndShowGUI();
+            }
+            else{
+                log.append("Please, load file first.\n");
+            }
+            });
 
         loadGherkinBtn.addActionListener(actionEvent -> {
             int returnVal = fc.showOpenDialog(GUI_Design.this);
@@ -56,7 +64,9 @@ public class GUI_Design extends Component implements Observer {
     }
 
     private void showResults(){
-        log.append(dataPresenter.getDataToShow()+"\n");
+        if (!dataPresenter.getMessage().equals("")) {
+            log.append(dataPresenter.getMessage() + "\n");
+        }
     }
 
     @Override
