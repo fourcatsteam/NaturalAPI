@@ -23,7 +23,7 @@ public class Controller {
         apiInputPort.create(filenameBal,filenamePla);
     }
 
-    public void generateApi() throws IOException {
+    public void generateApi() {
         generateInputPort.generate();
     }
 

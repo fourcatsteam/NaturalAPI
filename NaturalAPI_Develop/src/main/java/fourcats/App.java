@@ -1,5 +1,6 @@
 package fourcats;
 
+import fourcats.GUI.Gui;
 import fourcats.frameworks.BalAnalyzerImplementation;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.usecaseinteractor.GenerateApi;
@@ -8,6 +9,8 @@ import fourcats.usecaseinteractor.SuggestApi;
 import fourcats.view.CLI;
 import fourcats.frameworks.Repository;
 import fourcats.interfaceadapters.Controller;
+
+import javax.swing.*;
 
 public class App {
 
@@ -21,6 +24,8 @@ public class App {
         GenerateApi generateApi = new GenerateApi(repo);
         ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenter);
         Controller controller = new Controller(suggestApi,generateApi,modifyApi);
+
+        Gui gui = new Gui(controller,dataPresenter);
         CLI c = new CLI(controller,dataPresenter);
         do{
             c.askBal();
