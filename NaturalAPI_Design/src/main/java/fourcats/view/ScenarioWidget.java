@@ -4,23 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScenarioWidget extends JComponent{
-    private JPanel panel1;
+    private JPanel mainPanel;
     private JTextArea featureTextArea;
     private JLabel featureLabel;
     private JLabel actorLabel;
 
 
-    public ScenarioWidget(JPanel panelCenter, String featureName, String actor, String scenario) {
+    public ScenarioWidget(JPanel panelToUpdate, String featureName, String actor, String scenario) {
         JPanel panelNorth = new JPanel(new GridLayout(2, 1));
         panelNorth.add(featureLabel);
         panelNorth.add(actorLabel);
-        panel1 = new JPanel();
         actorLabel.setText("Actor: " + actor);
         featureLabel.setText("Feature: " + featureName);
-        panel1.add(panelNorth);
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
+        mainPanel.add(panelNorth);
+        mainPanel.add(featureTextArea);
         featureTextArea.setText(scenario);
-        panel1.add(featureTextArea);
-        panelCenter.add(panel1);
+
+        panelToUpdate.add(mainPanel);
 
     }
 

@@ -4,6 +4,7 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,12 +18,16 @@ public class SuggestionWidget extends JComponent {
     private JButton removeObjectButton;
     private JPanel mainPanel;
 
-    public SuggestionWidget(JPanel panelCenter, Controller contr, DataPresenterGUI dataPresenter){
+    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
+
         actionTypeComboBox.setSelectedItem(dataPresenter.getActionType());
+        actionTypeComboBox.add(Box.createHorizontalBox());
         actionNameTextField.setText(dataPresenter.getActionName());
         objectTypeComboBox.setSelectedItem(dataPresenter.getObjectType());
         objectNameTextField.setText(dataPresenter.getObjectName());
+
         mainPanel.add(actionTypeComboBox);
         mainPanel.add(actionNameTextField);
         mainPanel.add(objectTypeComboBox);
@@ -30,7 +35,7 @@ public class SuggestionWidget extends JComponent {
         mainPanel.add(removeObjectButton);
         mainPanel.add(addObjectButton);
         mainPanel.add(removeSuggestionButton);
-        panelCenter.add(mainPanel);
+        panelToUpdate.add(mainPanel);
 
 
         removeSuggestionButton.addActionListener(e -> {

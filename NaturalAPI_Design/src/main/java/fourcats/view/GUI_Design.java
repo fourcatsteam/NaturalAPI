@@ -14,7 +14,7 @@ public class GUI_Design extends Component {
     private JButton loadGherkinBtn;
     private JButton genSuggestBtn;
     private JTextArea log;
-    private JPanel panel1;
+    private JPanel mainPanel;
     private JFileChooser fc;
     private boolean areFilesLoaded;
     private String nameFeatureFile;
@@ -55,7 +55,7 @@ public class GUI_Design extends Component {
     public void createAndShowGUI() {
         JFrame frame = new JFrame("NaturalAPI Design");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new GUI_Design(controller,dataPresenter).panel1);
+        frame.add(new GUI_Design(controller,dataPresenter).mainPanel);
         frame.setPreferredSize(new Dimension(450,400));
         frame.pack();
         frame.setVisible(true);

@@ -10,12 +10,22 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class SuggestionGenerated implements Observer{
-    private JPanel panel1;
+    private JPanel mainPanel;
+    private JPanel panelButtons;
+    private JPanel panelScenario;
+    private JPanel panelSuggestion;
+    private JPanel panelInScrollPanel;
+    private JScrollPane scrollPanel;
+    private JButton generateBalButton;
+    private JButton addFeatureButton;
     private Controller contr;
     private DataPresenterGUI dataPresenter;
-    private JPanel panelCenter;
     private String featureName;
+    private GridBagConstraints gridConstraint;
+    private GridBagLayout gridBagLayout;
     private int currentScenarioId;
+    private int gridX = 0;
+    private int gridY = 0;
 
     public SuggestionGenerated(String featureName, Controller controller, DataPresenterGUI dataPresenter){
         this.contr = controller;
@@ -23,57 +33,66 @@ public class SuggestionGenerated implements Observer{
         this.dataPresenter.attach(this);
         this.featureName = featureName;
         this.currentScenarioId = -1;
-        JPanel panelNorth = new JPanel(new GridLayout(1,1));
-       // panelNorth.setPreferredSize(new Dimension(1000,100));
-        JLabel textTitle = new JLabel("NaturalAPI Design");
-        textTitle.setHorizontalAlignment(JLabel.CENTER);
-        panelNorth.add(textTitle);
 
-        //add some labels and buttons
+        panelInScrollPanel = new JPanel();
+        gridBagLayout = new GridBagLayout();
+        gridConstraint = new GridBagConstraints();
+        panelInScrollPanel.setLayout(gridBagLayout);
+        gridConstraint.fill = GridBagConstraints.HORIZONTAL;
 
-        panelCenter = new JPanel();
-        panelCenter.setLayout(new BoxLayout(panelCenter,1));
+        scrollPanel = new JScrollPane(panelInScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        JButton generateBAlBtn = new JButton("Generate BAL");
-        JButton addFeatureBtn = new JButton("Add another feature");
+        panelButtons = new JPanel(new GridLayout(2,1));
+        panelButtons.add(generateBalButton);
+        panelButtons.add(addFeatureButton);
 
-        JPanel panelSouth = new JPanel(new GridLayout(2,1));
-        panelSouth.add(generateBAlBtn);
-        panelSouth.add(addFeatureBtn);
-
-        JScrollPane scrollPaneCenter = new JScrollPane(panelCenter,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        //panelCenter must be scrollable when too many panels are added to panelCenter
-
-        panel1 = new JPanel(new BorderLayout(3,3));
-        panel1.setBorder(new EmptyBorder(5,5,5,5));
-        panel1.add(panelNorth,BorderLayout.NORTH);
-        panel1.add(scrollPaneCenter,BorderLayout.CENTER);
-        panel1.add(panelSouth,BorderLayout.SOUTH);
-
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+        mainPanel.add(scrollPanel,BorderLayout.CENTER);
+        mainPanel.add(panelButtons,BorderLayout.SOUTH);
 
         contr.generateSuggestions(featureName);
-
     }
 
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("NaturalAPI Design");
+        JFrame frame = new JFrame("NaturalAPI Design - Suggestions");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame.add(panel1);
-        frame.setPreferredSize(new Dimension(600,500));
+        frame.add(mainPanel);
+        frame.setPreferredSize(new Dimension(1200,800));
         frame.pack();
         frame.setVisible(true);
     }
 
+    private void initScenario(){
+        panelScenario = new JPanel();
+        panelSuggestion = new JPanel();
+        panelSuggestion.setLayout(new BoxLayout(panelSuggestion,BoxLayout.PAGE_AXIS));
+        gridConstraint.gridx = this.gridX;
+        gridConstraint.gridy = this.gridY;
+        gridBagLayout.setConstraints(panelSuggestion, gridConstraint);
+        panelInScrollPanel.add(panelSuggestion);
+
+        this.gridX++;
+        gridConstraint.gridx = this.gridX;
+        gridConstraint.gridy = this.gridY;
+        gridBagLayout.setConstraints(panelScenario, gridConstraint);
+        panelInScrollPanel.add(panelScenario);
+
+        new ScenarioWidget(panelScenario, featureName, dataPresenter.getActor(),
+                dataPresenter.getScenarioContent());
+        this.gridX=0;
+        this.gridY++;
+        currentScenarioId+=1;
+    }
 
     @Override
     public void update() {
         if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
-            panelCenter.add(new ScenarioWidget(panelCenter, featureName, dataPresenter.getActor(),
-                    dataPresenter.getScenarioContent()));
-            currentScenarioId +=1;
+            initScenario();
         }
         if (dataPresenter.isSuggestionToAdd()) {
-            panelCenter.add(new SuggestionWidget(panelCenter, contr, dataPresenter));
+            new SuggestionWidget(panelSuggestion, contr, dataPresenter);
         }
     }
 }
