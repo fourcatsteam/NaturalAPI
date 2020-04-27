@@ -24,6 +24,10 @@ public class ViewBdl implements ViewBdlInputPort {
     @Override
     public void view(String nameBdl) {
         Bdl bdl = repository.readBdl(nameBdl);
-        output.showViewBdlOutput(bdl);
+        if(bdl==null){
+            output.showError("Bdl not found");
+        } else{
+            output.showViewBdlOutput(bdl);
+        }
     }
 }

@@ -15,13 +15,15 @@ public class CLI implements Observer {
     private DataPresenter datapresenter; //Concrete Subject
     private String currentUseCase;
     private LinkedList<String> nameTitleList;
-    final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader br;
+            //= new BufferedReader(new InputStreamReader(System.in));
 
-    public CLI(Controller controller,DataPresenter datapresenter){
+    public CLI(Controller controller,DataPresenter datapresenter,BufferedReader bufferedReader){
         this.controller = controller;
         this.datapresenter = datapresenter;
         datapresenter.attach(this);
-        nameTitleList = new LinkedList<>();
+        this.nameTitleList = new LinkedList<>();
+        this.br = bufferedReader;
     }
 
     public void askForUseCase(){
@@ -72,7 +74,7 @@ public class CLI implements Observer {
             }
             //notifyObservers();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Sorry, a problem occurred while reading the input.");
         }
         return result;
 
