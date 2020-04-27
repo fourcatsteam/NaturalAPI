@@ -150,7 +150,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
             }
         }
         else{
-            toShow = "No custom types defined yet!";
+            toShow = "No types defined yet!";
             notifyObservers();
         }
     }

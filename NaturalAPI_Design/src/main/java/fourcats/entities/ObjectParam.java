@@ -4,19 +4,9 @@ package fourcats.entities;
 public class ObjectParam {
     private String name;
     private Type type;
-    private Boolean required;
+    private boolean required;
 
-    public ObjectParam() {
-        name = null;
-        type = null;
-        required = true;
-    }
 
-    public ObjectParam(String objectName) {
-        this.name = objectName;
-        this.type = null;
-        this.required = true;
-    }
 
     public ObjectParam(String objectName, String objectType) {
         this.name = objectName;

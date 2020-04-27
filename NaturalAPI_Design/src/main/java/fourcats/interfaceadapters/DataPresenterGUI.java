@@ -4,13 +4,16 @@ import fourcats.datastructure.observer.Subject;
 import fourcats.entities.Action;
 import fourcats.entities.ObjectParam;
 import fourcats.entities.Scenario;
-import fourcats.port.DeclineBALSuggestionOutputPort;
-import fourcats.port.GenerateBALSuggestionsOutputPort;
+import fourcats.entities.Type;
+import fourcats.port.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort {
-    String message = "";
+public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
+        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort {
+    String message;
     String scenarioId;
     String suggestionId;
     String scenarioContent;
@@ -21,7 +24,15 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String objectType;
     String objectName;
     String actor;
-    boolean isSuggestionToAdd = false;
+    List<String> lTypes;
+    boolean isSuggestionToAdd;
+    final String ERROR_MESSAGE = "Oh no! Something went wrong...";
+
+    public DataPresenterGUI(){
+        message = "";
+        isSuggestionToAdd = false;
+        lTypes = new ArrayList<>();
+    }
 
     @Override
     public void showSuggestionsForScenario(Map<Integer, Scenario> mScenarios) {
@@ -103,14 +114,117 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionToAdd;
     }
 
+    public List<String> getlTypes() {
+        return lTypes;
+    }
+
     @Override
     public void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk) {
         if (isOk) {
             message = "Suggestion removed!";
         }
         else {
+            message = ERROR_MESSAGE;
+        }
+        notifyObservers();
+    }
+
+    @Override
+    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified) {
+        if (isActionNameModified){
+            message = "Suggestion name successfully updated!";
+            notifyObservers();
+        }
+        else{
+            message = ERROR_MESSAGE;
+            notifyObservers();
+        }
+
+    }
+
+    @Override
+    public void showModifiedActionType(Map<Integer, Scenario> mScenarios, boolean isActionTypeModified) {
+        if (isActionTypeModified){
+            message = "Action type successfully updated!";
+            notifyObservers();
+        }
+        else{
+            message = ERROR_MESSAGE;
+        }
+    }
+
+    @Override
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
+        if (isObjectNameModified){
+            message = "Object name of the suggestion successfully updated!";
+        }
+        else{
+            message = ERROR_MESSAGE;
+        }
+        notifyObservers();
+    }
+
+    @Override
+    public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
+        if (isObjectTypeModified){
+            message = "Object type of the suggestion successfully updated!";
+        }
+        else{
+            message = ERROR_MESSAGE;
+        }
+        notifyObservers();
+    }
+
+    @Override
+    public void showAddedObject(Map<Integer, Scenario> mScenarios, boolean isObjectAdded) {
+        if (isObjectAdded){
+            message = "Object successfully added!";
+        }
+        else{
+            message = ERROR_MESSAGE+
+                    "\nCheck if the object is already defined: that could be the problem!";
+        }
+        notifyObservers();
+    }
+
+    @Override
+    public void showRemovedObject(Map<Integer, Scenario> mScenarios, boolean isObjectRemoved) {
+        if (isObjectRemoved) {
+            message = "Object successfully removed!";
+        } else {
+            message = ERROR_MESSAGE;
+            notifyObservers();
+        }
+    }
+
+    @Override
+    public void showCustomTypeCreationStatus(boolean isCreated) {
+        //TODO
+    }
+
+    @Override
+    public void showGenerationStatus(boolean isBALGenerated) {
+        if (isBALGenerated){
+            message = "Hooray! The BAL was successfully created. You will find it in the BAL folder";
+        }
+        else{
             message = "Oh no! Something went wrong...";
         }
         notifyObservers();
+    }
+
+    @Override
+    public void showTypes(Map<Integer, Type> mTypes) {
+        if (mTypes.size()!=0 && mTypes.size()!=lTypes.size()) {
+            for (Map.Entry<Integer, Type> mTy : mTypes.entrySet()) {
+                 if (!lTypes.contains(mTy.getValue().getName()))
+                    lTypes.add(mTy.getValue().getName());
+            }
+            //notifyObservers();
+        }
+        else{
+            message = "No types defined yet!";
+        }
+
     }
 }

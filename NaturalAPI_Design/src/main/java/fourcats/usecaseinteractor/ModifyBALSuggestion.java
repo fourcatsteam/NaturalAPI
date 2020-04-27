@@ -16,10 +16,10 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
     public void modifyActionType(int idAction, int idScenario, String newType) {
         try {
             repo.updateActionType(idAction, idScenario, newType);
-            out.showModifiedActionName(repo.readScenarios(), true);
+            out.showModifiedActionType(repo.readScenarios(), true);
         }
         catch (Exception e){
-            out.showModifiedActionName(repo.readScenarios(), false);
+            out.showModifiedActionType(repo.readScenarios(), false);
         }
     }
 

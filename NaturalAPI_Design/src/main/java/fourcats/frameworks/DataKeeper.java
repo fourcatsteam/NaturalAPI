@@ -62,7 +62,7 @@ public class DataKeeper {
         for (Type ty : mTypes.values()){
             if (ty.getName().equals(newActionType)) {
                 try {
-                    mScenarios.get(idScenario).getActionsMap().get(idAction).setType(newActionType);
+                    mScenarios.get(idScenario).getActionsMap().get(idAction).setType(ty);
                     return;
                 }
                 catch (Exception e){

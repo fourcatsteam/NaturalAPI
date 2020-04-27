@@ -19,17 +19,16 @@ public class App {
         DataPresenterGUI dataPresenter = new DataPresenterGUI();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
-        //GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
+        GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
         GenerateBALSuggestions generateBALSugg = new GenerateBALSuggestions(repo,nlp,dataPresenter);
         DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
-       // ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
-        //CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
-        //ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
+        ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
+        CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
+        ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
 
-       // Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-               // generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
+        Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
+                generateBAL ,modifyBALSuggestion, createCustomType, showTypes);
 
-        Controller controller = new Controller(generateBALSugg,declineBALSuggestion,null,null,null,null);
 
         GUI_Design g = new GUI_Design(controller,dataPresenter);
         g.createAndShowGUI();

@@ -32,23 +32,10 @@ public class Action {
         return name;
     }
 
-    public void addObjectParamName(String paramName) {
-        ObjectParam par = new ObjectParam();
-        par.setName(paramName);
-        this.param.add(par);
-    }
-
     public void addObjectParam(ObjectParam objectParam) {
         this.param.add(objectParam);
     }
-    public void updateObjectParamName(String paramName, String newName) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setName(newName);
-                return;
-            }
-        }
-    }
+
 
     public void updateObjectParamType(String paramName, String newType) {
         for (ObjectParam p : param) {
@@ -72,8 +59,11 @@ public class Action {
         return param;
     }
 
-    public void setType(String ActionType) {
-        this.type = new Type(ActionType);
+    public void setType(String actionType) {
+        if (this.type == null)
+            this.type = new Type(actionType);
+        else
+            this.type.setName(actionType);
     }
     public void setType(Type type) {
         this.type = type;

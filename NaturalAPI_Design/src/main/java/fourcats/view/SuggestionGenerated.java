@@ -8,6 +8,7 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
 
 public class SuggestionGenerated implements Observer{
     private JPanel mainPanel;
@@ -53,6 +54,16 @@ public class SuggestionGenerated implements Observer{
         mainPanel.add(panelButtons,BorderLayout.SOUTH);
 
         contr.generateSuggestions(featureName);
+
+        generateBalButton.addActionListener(e -> {
+            String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
+            try {
+                contr.generateBAL(balName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
+        });
     }
 
     public void createAndShowGUI() {
