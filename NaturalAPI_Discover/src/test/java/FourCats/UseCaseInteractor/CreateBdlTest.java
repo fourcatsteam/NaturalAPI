@@ -6,8 +6,11 @@ import FourCats.InterfaceAccess.RepositoryAccess;
 import FourCats.Port.CreateBdlOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,14 +18,20 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CreateBdlTest {
 
-    RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
-    AnalyzeDocument analyzeMock = Mockito.mock(AnalyzeDocument.class);
-    CreateBdlOutputPort outputMock = Mockito.mock(CreateBdlOutputPort.class);
+    @Mock
+    RepositoryAccess repositoryMock;
+
+    @Mock
+    AnalyzeDocument analyzeMock;
+
+    @Mock
+    CreateBdlOutputPort outputMock;
 
     @InjectMocks
-    CreateBdl interactor = new CreateBdl(repositoryMock,analyzeMock,outputMock);
+    CreateBdl interactor;
 
     @Test
     public void testCreateWithDocuments() {

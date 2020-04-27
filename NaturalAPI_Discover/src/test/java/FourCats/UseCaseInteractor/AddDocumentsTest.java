@@ -6,22 +6,31 @@ import FourCats.InterfaceAccess.RepositoryAccess;
 import FourCats.Port.AddDocumentsOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddDocumentsTest {
 
-    RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
-    AnalyzeDocument analyzerMock = Mockito.mock(AnalyzeDocument.class);
-    AddDocumentsOutputPort outputMock = Mockito.mock(AddDocumentsOutputPort.class);
+    @Mock
+    RepositoryAccess repositoryMock;
+
+    @Mock
+    AnalyzeDocument analyzerMock;
+
+    @Mock
+    AddDocumentsOutputPort outputMock;
 
     @InjectMocks
-    AddDocuments interactor = new AddDocuments(repositoryMock,analyzerMock,outputMock);
+    AddDocuments interactor;
 
     @Test
     public void testAddWithAssociation() {

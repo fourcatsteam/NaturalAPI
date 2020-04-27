@@ -6,8 +6,11 @@ import FourCats.InterfaceAccess.RepositoryAccess;
 import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,14 +18,20 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RemoveDocumentsTest {
 
-    RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
-    AnalyzeDocument analyzerMock = Mockito.mock(AnalyzeDocument.class);
-    RemoveDocumentsOutputPort outputMock = Mockito.mock(RemoveDocumentsOutputPort.class);
+    @Mock
+    RepositoryAccess repositoryMock;
+
+    @Mock
+    AnalyzeDocument analyzerMock;
+
+    @Mock
+    RemoveDocumentsOutputPort outputMock;
 
     @InjectMocks
-    RemoveDocuments interactor = new RemoveDocuments(repositoryMock,analyzerMock,outputMock);
+    RemoveDocuments interactor;
 
     @Test
     public void testRemoveWithDocumentFound() {
