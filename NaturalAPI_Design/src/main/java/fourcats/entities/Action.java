@@ -9,12 +9,6 @@ public class Action {
     private List<ObjectParam> param;
     private Type type;
 
-    public Action(String actionName) {
-        this.name = actionName;
-        this.param = new ArrayList<>();
-        this.type = null;
-    }
-
     public Action(String actionName, String actionType) {
         this.name = actionName;
         this.param = new ArrayList<>();
@@ -27,51 +21,28 @@ public class Action {
     public void setName(String actionName) {
         this.name = actionName;
     }
-
-    public String getName() {
-        return name;
+    public void setType(Type type) {
+        this.type = type;
     }
-
-    public void addObjectParam(ObjectParam objectParam) {
-        this.param.add(objectParam);
+    public String getName() { return name; }
+    public Type getType() {
+        return type;
     }
-
-
-    public void updateObjectParamType(String paramName, String newType) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setType(newType);
-                return;
-            }
-        }
-    }
-
-    public void updateIsObjectParamRequired(String paramName, boolean isRequired) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setRequired(isRequired);
-                return;
-            }
-        }
-    }
-
-    public List<ObjectParam> getObjectParams() {
-        return param;
-    }
-
     public void setType(String actionType) {
         if (this.type == null)
             this.type = new Type(actionType);
         else
             this.type.setName(actionType);
     }
-    public void setType(Type type) {
-        this.type = type;
+    public void addObjectParam(ObjectParam objectParam) {
+        this.param.add(objectParam);
     }
 
-    public Type getType() {
-        return type;
+    public List<ObjectParam> getObjectParams() {
+        return param;
     }
+
+
 
     public void removeObjectParam(int idObjectParam){
         param.remove(idObjectParam);

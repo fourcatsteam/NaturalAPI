@@ -40,6 +40,9 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     }
 
+    //NOTE
+    //The following functions are not used now, they will be useful for the integration of the bdl file
+
     @Override
     public Bdl loadBdl(String bdlName) throws IOException {
         Bdl loadedBdl = new Bdl(bdlName);

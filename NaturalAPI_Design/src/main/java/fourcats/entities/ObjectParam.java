@@ -6,8 +6,6 @@ public class ObjectParam {
     private Type type;
     private boolean required;
 
-
-
     public ObjectParam(String objectName, String objectType) {
         this.name = objectName;
         this.type = new Type(objectType);

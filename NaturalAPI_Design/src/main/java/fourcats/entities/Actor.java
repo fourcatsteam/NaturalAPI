@@ -7,10 +7,6 @@ public class Actor {
     private String name;
     private List<Action> lAction;
 
-    public Actor(){
-        this.name = null;
-        this.lAction = new ArrayList<>();
-    }
 
     public Actor(String actorName){
         this.name = actorName;
