@@ -27,8 +27,8 @@ public class WordCounter implements Comparable<WordCounter>{
     public Integer getCount() {return count;}
 
     public int compareTo(WordCounter w) {
-        if(count<w.count) return -1;
-        if(count.equals(w.count)) return 0;
+        if(count<w.getCount()) return -1;
+        if(count.equals(w.getCount())) return 0;
         return 1;
     }
 

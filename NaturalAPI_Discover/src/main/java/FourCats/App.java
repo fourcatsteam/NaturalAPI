@@ -25,7 +25,6 @@ public class App {
 
         Repository repo = new Repository(new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
-        //StanfordNlp nlp = null;
         DataPresenter datapresenter = new DataPresenter();
 
         CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
