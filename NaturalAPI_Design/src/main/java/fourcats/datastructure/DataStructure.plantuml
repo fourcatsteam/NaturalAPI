@@ -3,7 +3,7 @@
 title __DATASTRUCTURE's Class Diagram__\n
 
   namespace fourcats {
-    namespace DataStructure {
+    namespace datastructure {
       class fourcats.datastructure.AnalyzedData {
           - parserData : LinkedList<String>
           + AnalyzedData()
@@ -20,7 +20,7 @@ title __DATASTRUCTURE's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace DataStructure {
+    namespace datastructure {
       class fourcats.datastructure.BlackList {
           + blackList : List<String>
           + BlackList()
@@ -34,7 +34,7 @@ title __DATASTRUCTURE's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace DataStructure {
+    namespace datastructure {
       class fourcats.datastructure.LemmatizerData {
           - lemmatizationResult : LinkedList<WordTag>
           + LemmatizerData()
@@ -49,7 +49,7 @@ title __DATASTRUCTURE's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace DataStructure {
+    namespace datastructure {
       class fourcats.datastructure.WordCounter {
           - count : Integer
           - word : String
@@ -67,7 +67,7 @@ title __DATASTRUCTURE's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace DataStructure {
+    namespace datastructure {
       class fourcats.datastructure.WordTag {
           - lemma : String
           - tag : String

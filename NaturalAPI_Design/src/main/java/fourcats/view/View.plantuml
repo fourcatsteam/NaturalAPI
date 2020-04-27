@@ -3,18 +3,117 @@
 title __VIEW's Class Diagram__\n
 
   namespace fourcats {
-    namespace View {
+    namespace view {
       class fourcats.view.CLI {
           ~ br : BufferedReader
           - currentUseCase : String
           - nameTitleList : LinkedList<String>
-          - userSelectedInput : String
           + CLI()
           + askForUseCase()
           + generateSuggestion()
           + readUseCase()
           + update()
+          - addObject()
+          - askForIdObjectToModify()
+          - askForIdScenarioToModify()
+          - askForIdSuggestionToModify()
+          - askForIdType()
+          - askForOperationOnSuggestion()
+          - askForSimpleTypeOption()
           - chooseFile()
+          - createCustomType()
+          - deleteSuggestion()
+          - modifyActionName()
+          - modifyActionType()
+          - modifyObjectName()
+          - modifyObjectType()
+          - modifySuggestion()
+          - removeObject()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      class fourcats.view.GUI_Design {
+          - areFilesLoaded : boolean
+          - fc : JFileChooser
+          - genSuggestBtn : JButton
+          - loadGherkinBtn : JButton
+          - log : JTextArea
+          - mainPanel : JPanel
+          - nameFeatureFile : String
+          - titleText : JLabel
+          + GUI_Design()
+          + createAndShowGUI()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      class fourcats.view.ScenarioWidget {
+          - actorLabel : JLabel
+          - featureLabel : JLabel
+          - featureTextArea : JTextArea
+          - mainPanel : JPanel
+          + ScenarioWidget()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      class fourcats.view.SuggestionGenerated {
+          - addFeatureButton : JButton
+          - currentScenarioId : int
+          - featureName : String
+          - generateBalButton : JButton
+          - gridBagLayout : GridBagLayout
+          - gridConstraint : GridBagConstraints
+          - gridX : int
+          - gridY : int
+          - mainPanel : JPanel
+          - panelButtons : JPanel
+          - panelInScrollPanel : JPanel
+          - panelScenario : JPanel
+          - panelSuggestion : JPanel
+          - scrollPanel : JScrollPane
+          + SuggestionGenerated()
+          + createAndShowGUI()
+          + update()
+          - initScenario()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      class fourcats.view.SuggestionWidget {
+          {static} - CREATE_CUSTOM : String
+          - actionId : String
+          - actionName : String
+          - actionNameTextField : JTextField
+          - actionType : String
+          - actionTypeComboBox : JComboBox
+          - addObjectButton : JButton
+          - mainPanel : JPanel
+          - objectId : String
+          - objectName : String
+          - objectNameTextField : JTextField
+          - objectType : String
+          - objectTypeComboBox : JComboBox
+          - removeObjectButton : JButton
+          - removeSuggestionButton : JButton
+          - scenarioId : String
+          - suggestionId : String
+          + SuggestionWidget()
+          - createCustomType()
+          - getValuesFromDataPresenter()
       }
     }
   }
@@ -23,6 +122,14 @@ title __VIEW's Class Diagram__\n
   fourcats.view.CLI .up.|> fourcats.datastructure.observer.Observer
   fourcats.view.CLI o-- fourcats.interfaceadapters.Controller : contr
   fourcats.view.CLI o-- fourcats.interfaceadapters.DataPresenter : dataPresenter
+  fourcats.view.GUI_Design -up-|> java.awt.Component
+  fourcats.view.GUI_Design o-- fourcats.interfaceadapters.Controller : controller
+  fourcats.view.GUI_Design o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.ScenarioWidget -up-|> javax.swing.JComponent
+  fourcats.view.SuggestionGenerated .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.SuggestionGenerated o-- fourcats.interfaceadapters.Controller : contr
+  fourcats.view.SuggestionGenerated o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.SuggestionWidget -up-|> javax.swing.JComponent
 
 
 right footer

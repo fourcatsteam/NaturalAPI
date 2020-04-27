@@ -99,7 +99,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 
     private String extractActorName(String feature){
         //extract actor name by picking the text between keywords "As a" and "Scenario" in the feature file
-        //if there isn't the keyword "As as:" return "All"
+        //if there isn't the keyword "As as" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
         if (feature.indexOf(AS_A)!=-1) {

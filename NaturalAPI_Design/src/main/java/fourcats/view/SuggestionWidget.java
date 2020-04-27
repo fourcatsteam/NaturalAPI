@@ -27,7 +27,7 @@ public class SuggestionWidget extends JComponent {
     private String objectName;
     private String suggestionId;
     private String scenarioId;
-    private final String CREATE_CUSTOM = "CREATE CUSTOM";
+    private static final String CREATE_CUSTOM = "CREATE CUSTOM";
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         mainPanel = new JPanel();

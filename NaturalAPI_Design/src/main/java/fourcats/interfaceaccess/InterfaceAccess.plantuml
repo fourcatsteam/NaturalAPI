@@ -3,7 +3,7 @@
 title __INTERFACEACCESS's Class Diagram__\n
 
   namespace fourcats {
-    namespace InterfaceAccess {
+    namespace interfaceaccess {
       interface fourcats.interfaceaccess.BalAnalyzer {
           {abstract} + createJsonFromBAL()
           {abstract} + get()
@@ -16,30 +16,42 @@ title __INTERFACEACCESS's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace InterfaceAccess {
+    namespace interfaceaccess {
       interface fourcats.interfaceaccess.PersistentMemoryAccess {
           {abstract} + loadBdl()
           {abstract} + readFile()
+          {abstract} + writeFile()
       }
     }
   }
   
 
   namespace fourcats {
-    namespace InterfaceAccess {
+    namespace interfaceaccess {
       interface fourcats.interfaceaccess.RepositoryAccess {
+          {abstract} + createBAL()
+          {abstract} + createCustomType()
+          {abstract} + createObject()
           {abstract} + createScenario()
+          {abstract} + deleteObject()
           {abstract} + deleteScenarios()
           {abstract} + deleteSuggestion()
           {abstract} + read()
           {abstract} + readScenarios()
+          {abstract} + readTypes()
+          {abstract} + updateActionName()
+          {abstract} + updateActionType()
+          {abstract} + updateActionTypeById()
+          {abstract} + updateObjectName()
+          {abstract} + updateObjectType()
+          {abstract} + updateObjectTypeById()
       }
     }
   }
   
 
   namespace fourcats {
-    namespace InterfaceAccess {
+    namespace interfaceaccess {
       interface fourcats.interfaceaccess.TextAnalyzer {
           {abstract} + parseDocumentContent()
       }

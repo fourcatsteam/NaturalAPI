@@ -3,7 +3,17 @@
 title __USECASEINTERACTOR's Class Diagram__\n
 
   namespace fourcats {
-    namespace UseCaseInteractor {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.CreateCustomType {
+          + CreateCustomType()
+          + createType()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
       class fourcats.usecaseinteractor.DeclineBALSuggestion {
           + DeclineBALSuggestion()
           + declineSuggestion()
@@ -13,7 +23,7 @@ title __USECASEINTERACTOR's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace UseCaseInteractor {
+    namespace usecaseinteractor {
       class fourcats.usecaseinteractor.GenerateBAL {
           + GenerateBAL()
           + generateBAL()
@@ -23,8 +33,9 @@ title __USECASEINTERACTOR's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace UseCaseInteractor {
+    namespace usecaseinteractor {
       class fourcats.usecaseinteractor.GenerateBALSuggestions {
+          {static} - AS_A : String
           + GenerateBALSuggestions()
           + generateSuggestions()
           - extractActorName()
@@ -36,6 +47,36 @@ title __USECASEINTERACTOR's Class Diagram__\n
   }
   
 
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.ModifyBALSuggestion {
+          + ModifyBALSuggestion()
+          + addObject()
+          + modifyActionName()
+          + modifyActionType()
+          + modifyActionTypeById()
+          + modifyObjectName()
+          + modifyObjectType()
+          + modifyObjectTypeById()
+          + removeObject()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.ShowTypes {
+          + ShowTypes()
+          + showTypes()
+      }
+    }
+  }
+  
+
+  fourcats.usecaseinteractor.CreateCustomType .up.|> fourcats.port.CreateCustomTypeInputPort
+  fourcats.usecaseinteractor.CreateCustomType o-- fourcats.port.CreateCustomTypeOutputPort : out
+  fourcats.usecaseinteractor.CreateCustomType o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.DeclineBALSuggestion .up.|> fourcats.port.DeclineBALSuggestionInputPort
   fourcats.usecaseinteractor.DeclineBALSuggestion o-- fourcats.port.DeclineBALSuggestionOutputPort : out
   fourcats.usecaseinteractor.DeclineBALSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
@@ -47,6 +88,12 @@ title __USECASEINTERACTOR's Class Diagram__\n
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.port.GenerateBALSuggestionsOutputPort : out
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.interfaceaccess.TextAnalyzer : textAnalyzer
+  fourcats.usecaseinteractor.ModifyBALSuggestion .up.|> fourcats.port.ModifyBALSuggestionInputPort
+  fourcats.usecaseinteractor.ModifyBALSuggestion o-- fourcats.port.ModifyBALSuggestionOutputPort : out
+  fourcats.usecaseinteractor.ModifyBALSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.ShowTypes .up.|> fourcats.port.ShowTypesInputPort
+  fourcats.usecaseinteractor.ShowTypes o-- fourcats.port.ShowTypesOutputPort : out
+  fourcats.usecaseinteractor.ShowTypes o-- fourcats.interfaceaccess.RepositoryAccess : repo
 
 
 right footer

@@ -3,23 +3,22 @@
 title __ENTITIES's Class Diagram__\n
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.Action {
           - name : String
           - param : List<ObjectParam>
-          - type : String
           + Action()
           + Action()
           + addObjectParam()
-          + addObjectParamName()
           + getName()
           + getObjectParams()
           + getType()
+          + removeObjectParam()
           + setName()
+          + setType()
           + setType()
           + toString()
           + updateIsObjectParamRequired()
-          + updateObjectParamName()
           + updateObjectParamType()
       }
     }
@@ -27,7 +26,7 @@ title __ENTITIES's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.Actor {
           - lAction : List<Action>
           - name : String
@@ -47,7 +46,7 @@ title __ENTITIES's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.BAL {
           - lActors : List<Actor>
           + BAL()
@@ -62,7 +61,7 @@ title __ENTITIES's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.Bdl {
           - nameBdl : String
           - nouns : LinkedList<WordCounter>
@@ -91,12 +90,10 @@ title __ENTITIES's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.ObjectParam {
           - name : String
-          - required : Boolean
-          - type : String
-          + ObjectParam()
+          - required : boolean
           + ObjectParam()
           + ObjectParam()
           + getName()
@@ -105,6 +102,7 @@ title __ENTITIES's Class Diagram__\n
           + setName()
           + setRequired()
           + setType()
+          + setType()
           + toString()
       }
     }
@@ -112,7 +110,7 @@ title __ENTITIES's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Entities {
+    namespace entities {
       class fourcats.entities.Scenario {
           - actorName : String
           - content : String
@@ -129,6 +127,25 @@ title __ENTITIES's Class Diagram__\n
   }
   
 
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Type {
+          - mAttributes : Map<String, String>
+          - name : String
+          + Type()
+          + Type()
+          + addAttribute()
+          + getAttributes()
+          + getName()
+          + setName()
+          + toString()
+      }
+    }
+  }
+  
+
+  fourcats.entities.Action o-- fourcats.entities.Type : type
+  fourcats.entities.ObjectParam o-- fourcats.entities.Type : type
 
 
 right footer

@@ -3,7 +3,7 @@
 title __FRAMEWORKS's Class Diagram__\n
 
   namespace fourcats {
-    namespace Frameworks {
+    namespace frameworks {
       class fourcats.frameworks.BalAnalyzerImplementation {
           ~ jsonNode : JsonNode
           + BalAnalyzerImplementation()
@@ -20,24 +20,37 @@ title __FRAMEWORKS's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Frameworks {
+    namespace frameworks {
       class fourcats.frameworks.DataKeeper {
+          - lDeafultTypes : List<String>
           - mScenarios : Map<Integer, Scenario>
+          - mTypes : Map<Integer, Type>
           + DataKeeper()
+          + addCustomType()
+          + addObject()
+          + addScenarioToMap()
           + clearScenariosMap()
-          + createScenariosMap()
           + getScenarioMap()
+          + getTypeMap()
           + removeAction()
+          + removeObject()
+          + updateActionName()
+          + updateActionType()
+          + updateActionTypeById()
+          + updateObjectName()
+          + updateObjectType()
+          + updateObjectTypeById()
       }
     }
   }
   
 
   namespace fourcats {
-    namespace Frameworks {
+    namespace frameworks {
       class fourcats.frameworks.FileSystemAccess {
           + loadBdl()
           + readFile()
+          + writeFile()
           - readBdlNouns()
           - readBdlPredicates()
           - readBdlVerbs()
@@ -47,21 +60,32 @@ title __FRAMEWORKS's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace Frameworks {
+    namespace frameworks {
       class fourcats.frameworks.Repository {
           + Repository()
+          + createBAL()
+          + createCustomType()
+          + createObject()
           + createScenario()
+          + deleteObject()
           + deleteScenarios()
           + deleteSuggestion()
           + read()
           + readScenarios()
+          + readTypes()
+          + updateActionName()
+          + updateActionType()
+          + updateActionTypeById()
+          + updateObjectName()
+          + updateObjectType()
+          + updateObjectTypeById()
       }
     }
   }
   
 
   namespace fourcats {
-    namespace Frameworks {
+    namespace frameworks {
       class fourcats.frameworks.StanfordNlp {
           {static} - DP_MODEL : String
           - depparser : DependencyParser

@@ -3,8 +3,8 @@
 title __OBSERVER's Class Diagram__\n
 
   namespace fourcats {
-    namespace DataStructure {
-      namespace Observer {
+    namespace datastructure {
+      namespace observer {
         interface fourcats.datastructure.observer.Observer {
             {abstract} + update()
         }
@@ -14,8 +14,8 @@ title __OBSERVER's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace DataStructure {
-      namespace Observer {
+    namespace datastructure {
+      namespace observer {
         abstract class fourcats.datastructure.observer.Subject {
             - lObservers : List<Observer>
             + attach()

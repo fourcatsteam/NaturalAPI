@@ -26,7 +26,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String actor;
     List<String> lTypes;
     boolean isSuggestionToAdd;
-    final String ERROR_MESSAGE = "Oh no! Something went wrong...";
+    static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
     public DataPresenterGUI(){
         message = "";

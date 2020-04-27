@@ -3,37 +3,117 @@
 title __INTERFACEADAPTERS's Class Diagram__\n
 
   namespace fourcats {
-    namespace InterfaceAdapters {
+    namespace interfaceadapters {
       class fourcats.interfaceadapters.Controller {
           + Controller()
+          + addObject()
+          + createCustomType()
           + declineSuggestion()
           + generateBAL()
           + generateSuggestions()
+          + modifyActionName()
+          + modifyActionType()
+          + modifyActionTypeById()
+          + modifyObjectName()
+          + modifyObjectType()
+          + modifyObjectTypeById()
+          + removeObject()
+          + showTypes()
       }
     }
   }
   
 
   namespace fourcats {
-    namespace InterfaceAdapters {
+    namespace interfaceadapters {
       class fourcats.interfaceadapters.DataPresenter {
           - toShow : String
           + getDataToShow()
+          + showAddedObject()
+          + showCustomTypeCreationStatus()
           + showDeclinedSuggestion()
+          + showErrorFileLoad()
           + showGenerationStatus()
+          + showModifiedActionName()
+          + showModifiedActionType()
+          + showModifiedObjectName()
+          + showModifiedObjectType()
+          + showRemovedObject()
           + showSuggestionsForScenario()
+          + showTypes()
       }
     }
   }
   
 
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.DataPresenterGUI {
+          {static} ~ ERROR_MESSAGE : String
+          ~ actionId : String
+          ~ actionName : String
+          ~ actionType : String
+          ~ actor : String
+          ~ isSuggestionToAdd : boolean
+          ~ lTypes : List<String>
+          ~ message : String
+          ~ objectId : String
+          ~ objectName : String
+          ~ objectType : String
+          ~ scenarioContent : String
+          ~ scenarioId : String
+          ~ suggestionId : String
+          + DataPresenterGUI()
+          + getActionId()
+          + getActionName()
+          + getActionType()
+          + getActor()
+          + getMessage()
+          + getObjectId()
+          + getObjectName()
+          + getObjectType()
+          + getScenarioContent()
+          + getScenarioId()
+          + getSuggestionId()
+          + getlTypes()
+          + isSuggestionToAdd()
+          + showAddedObject()
+          + showCustomTypeCreationStatus()
+          + showDeclinedSuggestion()
+          + showErrorFileLoad()
+          + showGenerationStatus()
+          + showModifiedActionName()
+          + showModifiedActionType()
+          + showModifiedObjectName()
+          + showModifiedObjectType()
+          + showRemovedObject()
+          + showSuggestionsForScenario()
+          + showTypes()
+      }
+    }
+  }
+  
+
+  fourcats.interfaceadapters.Controller o-- fourcats.port.CreateCustomTypeInputPort : createCustomType
   fourcats.interfaceadapters.Controller o-- fourcats.port.DeclineBALSuggestionInputPort : declineSuggestion
-  fourcats.interfaceadapters.Controller o-- fourcats.usecaseinteractor.GenerateBAL : generateBAL
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBALInputPort : generateBAL
   fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBALSuggestionsInputPort : generateSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBALSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.DeclineBALSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBALOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBALSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.CreateCustomTypeOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.DeclineBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBALOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBALSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
 
 
 right footer
