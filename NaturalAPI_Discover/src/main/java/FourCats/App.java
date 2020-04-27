@@ -13,6 +13,9 @@ import FourCats.UseCaseInteractor.RemoveDocuments;
 import FourCats.UseCaseInteractor.ViewBdl;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  * Hello world!
  *
@@ -34,7 +37,8 @@ public class App {
 
         System.out.println("Choose CLI(1) or GUI(2)?");
         /* Codice per scegliere CLI o GUI*/
-        /*CLI cli = new CLI(controller,datapresenter);
+        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        CLI cli = new CLI(controller,datapresenter,br);
 
         Boolean start = true;
         while(start) {
