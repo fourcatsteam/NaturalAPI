@@ -13,6 +13,13 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     private String bdlVerbs;
     private String bdlPredicates;
 
+    public DataPresenter() {
+        this.message = "";
+        this.bdlNouns = "";
+        this.bdlVerbs = "";
+        this.bdlPredicates = "";
+    }
+
     public String getMessage() {return message;}
     public String getBdlNouns() {return bdlNouns;}
     public String getBdlVerbs() {return bdlVerbs;}
