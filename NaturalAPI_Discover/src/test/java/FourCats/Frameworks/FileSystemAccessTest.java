@@ -1,5 +1,6 @@
 package FourCats.Frameworks;
 
+import FourCats.DataStructure.WordCounter;
 import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import org.junit.Test;
@@ -56,7 +57,9 @@ public class FileSystemAccessTest {
     public void testSaveBdl() {
         Bdl bdl = Mockito.mock(Bdl.class);
         when(bdl.getName()).thenReturn("Test_example");
-        when(bdl.getNouns()).thenReturn(new LinkedList<>());
+        LinkedList<WordCounter> names = new LinkedList<>();
+        names.add(new WordCounter("ciao"));
+        when(bdl.getNouns()).thenReturn(names);
         when(bdl.getVerbs()).thenReturn(new LinkedList<>());
         when(bdl.getPredicates()).thenReturn(new LinkedList<>());
 
