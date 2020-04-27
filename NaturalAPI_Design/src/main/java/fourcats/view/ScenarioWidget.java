@@ -14,11 +14,11 @@ public class ScenarioWidget extends JComponent{
         JPanel panelNorth = new JPanel(new GridLayout(2, 1));
         panelNorth.add(featureLabel);
         panelNorth.add(actorLabel);
-        actorLabel.setText("Actor: " + actor);
-        featureLabel.setText("Feature: " + featureName);
+        actorLabel.setText("---Actor: " + actor);
+        featureLabel.setText("---Feature: " + featureName);
 
-        mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
+        mainPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         mainPanel.add(panelNorth);
         mainPanel.add(featureTextArea);
         featureTextArea.setText(scenario);

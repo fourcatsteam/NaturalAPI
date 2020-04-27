@@ -8,12 +8,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class SuggestionWidget extends JComponent {
-    private JComboBox actionTypeComboBox;
+    private JComboBox<String> actionTypeComboBox;
     private JTextField actionNameTextField;
-    private JComboBox objectTypeComboBox;
+    private JComboBox<String> objectTypeComboBox;
     private JTextField objectNameTextField;
     private JButton addObjectButton;
     private JButton removeSuggestionButton;
@@ -30,7 +31,6 @@ public class SuggestionWidget extends JComponent {
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
-        mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
 
         getValuesFromDataPresenter(dataPresenter);
@@ -47,14 +47,13 @@ public class SuggestionWidget extends JComponent {
         mainPanel.add(objectNameTextField);
         mainPanel.add(removeObjectButton);
         mainPanel.add(addObjectButton);
+        mainPanel.add(Box.createRigidArea(new Dimension(5, 0)));
         mainPanel.add(removeSuggestionButton);
-
         panelToUpdate.add(mainPanel);
-
 
         removeSuggestionButton.addActionListener(e -> {
             if (JOptionPane.showConfirmDialog(null,"Are you sure you want to remove this suggestion?",
-                    "Suggestion remove confirmation", JOptionPane.WARNING_MESSAGE) == 0) {
+                    "Suggestion remove confirmation",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
                 //0=yes
                 contr.declineSuggestion(suggestionId,scenarioId);
                 mainPanel.setVisible(false);
@@ -70,7 +69,7 @@ public class SuggestionWidget extends JComponent {
 
         actionTypeComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED){
-                if(actionTypeComboBox.getSelectedItem().equals(CREATE_CUSTOM)){
+                if(Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
                     createCustomType(contr);
                 }
                 else{

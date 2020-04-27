@@ -35,7 +35,6 @@ public class SuggestionGenerated implements Observer{
         this.featureName = featureName;
         this.currentScenarioId = -1;
 
-        panelInScrollPanel = new JPanel();
         gridBagLayout = new GridBagLayout();
         gridConstraint = new GridBagConstraints();
         panelInScrollPanel.setLayout(gridBagLayout);
@@ -44,11 +43,11 @@ public class SuggestionGenerated implements Observer{
         scrollPanel = new JScrollPane(panelInScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        panelButtons = new JPanel(new GridLayout(2,1));
+        panelButtons.setLayout(new GridLayout(2,1));
         panelButtons.add(generateBalButton);
         panelButtons.add(addFeatureButton);
 
-        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
         mainPanel.add(scrollPanel,BorderLayout.CENTER);
         mainPanel.add(panelButtons,BorderLayout.SOUTH);
@@ -106,4 +105,5 @@ public class SuggestionGenerated implements Observer{
             new SuggestionWidget(panelSuggestion, contr, dataPresenter);
         }
     }
+
 }
