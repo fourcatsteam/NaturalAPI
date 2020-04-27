@@ -5,23 +5,34 @@ import FourCats.Port.CreateBdlInputPort;
 import FourCats.Port.RemoveDocumentsInputPort;
 import FourCats.Port.ViewBdlInputPort;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ControllerTest {
 
-    CreateBdlInputPort cbMock = Mockito.mock(CreateBdlInputPort.class);
-    AddDocumentsInputPort adMock = Mockito.mock(AddDocumentsInputPort.class);
-    RemoveDocumentsInputPort rdMock = Mockito.mock(RemoveDocumentsInputPort.class);
-    ViewBdlInputPort vbMock = Mockito.mock(ViewBdlInputPort.class);
+    @Mock
+    CreateBdlInputPort cbMock;
+
+    @Mock
+    AddDocumentsInputPort adMock;
+
+    @Mock
+    RemoveDocumentsInputPort rdMock;
+
+    @Mock
+    ViewBdlInputPort vbMock;
 
     @InjectMocks
-    Controller controller = new Controller(cbMock,adMock,rdMock,vbMock);
+    Controller controller;
 
     @Test
     public void testCreateBdl() {

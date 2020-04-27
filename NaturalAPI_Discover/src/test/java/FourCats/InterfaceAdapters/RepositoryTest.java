@@ -4,8 +4,11 @@ import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.PersistentMemoryAccess;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,12 +16,14 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RepositoryTest {
 
-    PersistentMemoryAccess memoryMock = Mockito.mock(PersistentMemoryAccess.class);
+    @Mock
+    PersistentMemoryAccess memoryMock;
 
     @InjectMocks
-    Repository repo = new Repository(memoryMock);
+    Repository repo;
 
     @Test
     public void createBdl() {
