@@ -38,7 +38,7 @@ public class Actor {
     }
 
     public List<Action> getActionsByName(String actionName) {
-        List<Action> lSameNameActions = new ArrayList<Action>();
+        List<Action> lSameNameActions = new ArrayList<>();
         for (Action op : lAction) {
             if (op.getName().equals(actionName))
                 lSameNameActions.add(op);
