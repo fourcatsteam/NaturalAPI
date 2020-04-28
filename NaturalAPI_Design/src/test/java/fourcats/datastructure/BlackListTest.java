@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class BlackListTest {
 
-    BlackList blackList;
+    BlackList blackList = new BlackList();
 
     @Spy
     List<String> list = new ArrayList<>();
