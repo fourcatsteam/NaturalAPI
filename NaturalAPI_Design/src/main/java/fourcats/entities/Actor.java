@@ -55,5 +55,4 @@ public class Actor {
         }
         return ActionStr;
     }
-
 }

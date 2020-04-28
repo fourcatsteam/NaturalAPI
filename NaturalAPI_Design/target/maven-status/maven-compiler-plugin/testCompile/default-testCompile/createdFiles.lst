@@ -1,8 +1,0 @@
-fourcats\datastructure\WordTagTest.class
-fourcats\datastructure\LemmatizerDataTest.class
-fourcats\datastructure\WordCounterTest.class
-fourcats\entities\BdlTest.class
-fourcats\AppTest.class
-fourcats\usecaseinteractor\DeclineBALSuggestionTest.class
-fourcats\usecaseinteractor\GenerateBALSuggestionsTest.class
-fourcats\usecaseinteractor\GenerateBALTest.class
