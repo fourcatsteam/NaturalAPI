@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GUI_Design.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.view</a> &gt; <span class="el_source">GUI_Design.java</span></div><h1>GUI_Design.java</h1><pre class="source lang-java linenums">package fourcats.view;
+
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGUI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+
+public class GUI_Design extends Component {
+    private Controller controller;
+    private DataPresenterGUI dataPresenter;
+    private JLabel titleText;
+    private JButton loadGherkinBtn;
+    private JButton genSuggestBtn;
+    private JTextArea log;
+    private JPanel mainPanel;
+    private JFileChooser fc;
+    private boolean areFilesLoaded;
+    private String nameFeatureFile;
+
+<span class="nc" id="L22">    public GUI_Design(Controller c,DataPresenterGUI dp){</span>
+<span class="nc" id="L23">        this.controller = c;</span>
+<span class="nc" id="L24">        this.dataPresenter = dp;</span>
+<span class="nc" id="L25">        this.fc = new JFileChooser(&quot;..\\NaturalAPI_Design\\gherkin_documents&quot;);</span>
+<span class="nc" id="L26">        this.fc.setMultiSelectionEnabled(true);</span>
+<span class="nc" id="L27">        this.areFilesLoaded = false;</span>
+<span class="nc" id="L28">        this.log.append(&quot;Welcome to NaturalAPI Design!\n\n&quot;);</span>
+
+<span class="nc" id="L30">        genSuggestBtn.addActionListener(actionEvent -&gt; {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            if(areFilesLoaded) {</span>
+<span class="nc" id="L32">                new SuggestionGenerated(nameFeatureFile, controller, dataPresenter).createAndShowGUI();</span>
+            }
+            else{
+<span class="nc" id="L35">                log.append(&quot;Please, load file first.\n&quot;);</span>
+            }
+<span class="nc" id="L37">            });</span>
+
+<span class="nc" id="L39">        loadGherkinBtn.addActionListener(actionEvent -&gt; {</span>
+<span class="nc" id="L40">            int returnVal = fc.showOpenDialog(GUI_Design.this);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (returnVal == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L42">                File[] files = fc.getSelectedFiles();</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                for(File f: files){</span>
+<span class="nc" id="L44">                    log.append(&quot;Opening: &quot; + f.getName() + &quot;.&quot; + &quot;\n&quot;);</span>
+<span class="nc" id="L45">                    nameFeatureFile = f.getName();</span>
+                }
+<span class="nc" id="L47">                this.areFilesLoaded = true;</span>
+<span class="nc" id="L48">            } else {</span>
+<span class="nc" id="L49">                log.append(&quot;Open command cancelled by user.&quot; + &quot;\n&quot;);</span>
+            }
+<span class="nc" id="L51">            log.setCaretPosition(log.getDocument().getLength());</span>
+<span class="nc" id="L52">        });</span>
+<span class="nc" id="L53">    }</span>
+
+    public void createAndShowGUI() {
+<span class="nc" id="L56">        JFrame frame = new JFrame(&quot;NaturalAPI Design&quot;);</span>
+<span class="nc" id="L57">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L58">        frame.add(new GUI_Design(controller,dataPresenter).mainPanel);</span>
+<span class="nc" id="L59">        frame.setPreferredSize(new Dimension(450,400));</span>
+<span class="nc" id="L60">        frame.pack();</span>
+<span class="nc" id="L61">        frame.setVisible(true);</span>
+<span class="nc" id="L62">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
