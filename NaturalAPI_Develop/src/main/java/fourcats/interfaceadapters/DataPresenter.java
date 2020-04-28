@@ -5,11 +5,16 @@ import fourcats.observer.Subject;
 import fourcats.port.ApiOutputPort;
 import fourcats.port.ModifyOutputPort;
 
+import javax.xml.crypto.Data;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort {
 
     private String toShow;
+
+    public DataPresenter(){
+        this.toShow = "";
+    }
 
     public String getStringToShow(){
         return toShow;
@@ -23,7 +28,7 @@ public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutpu
             //toShow = "-----------API ID : " + mapApi.getKey() + "-----------\n"; //only for CLI
             //notifyObservers();
             for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
-                toShow = api.getValue();
+                toShow = toShow + api.getValue();
                 notifyObservers();
             }
         }
