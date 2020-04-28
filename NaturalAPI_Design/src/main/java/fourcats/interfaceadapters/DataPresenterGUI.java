@@ -20,18 +20,23 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String actionId;
     String actionType;
     String actionName;
-    String objectId;
-    String objectType;
-    String objectName;
     String actor;
     List<String> lTypes;
+    List<String> lObjectId;
+    List<String> lObjectTypes;
+    List<String> lObjectNames;
     boolean isSuggestionToAdd;
+    boolean isOkOperation;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
     public DataPresenterGUI(){
         message = "";
         isSuggestionToAdd = false;
+        isOkOperation = false;
         lTypes = new ArrayList<>();
+        lObjectId = new ArrayList<>();
+        lObjectTypes= new ArrayList<>();
+        lObjectNames = new ArrayList<>();
     }
 
     @Override
@@ -48,12 +53,15 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
                  actionType = "" + mAc.getValue().getType();
                  suggestionId = "" + mAc.getKey();
                  for (ObjectParam op : mAc.getValue().getObjectParams()){
-                     objectId = "" + idCurrentObject;
-                     objectType = "" + op.getType();
-                     objectName = op.getName();
-                     notifyObservers();
+                     lObjectId.add("" + idCurrentObject);
+                     lObjectTypes.add("" + op.getType());
+                     lObjectNames.add(op.getName());
                      idCurrentObject++;
                  }
+                notifyObservers();
+                 lObjectId.clear();
+                 lObjectTypes.clear();
+                 lObjectNames.clear();
             }
         }
         isSuggestionToAdd = false;
@@ -82,14 +90,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return message;
     }
 
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public String getObjectType() {
-        return objectType;
-    }
-
     public String getScenarioContent() {
         return scenarioContent;
     }
@@ -106,16 +106,28 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return suggestionId;
     }
 
-    public String getObjectId() {
-        return objectId;
-    }
-
     public boolean isSuggestionToAdd() {
         return isSuggestionToAdd;
     }
 
     public List<String> getlTypes() {
         return lTypes;
+    }
+
+    public List<String> getlObjectId() {
+        return lObjectId;
+    }
+
+    public List<String> getlObjectTypes() {
+        return lObjectTypes;
+    }
+
+    public List<String> getlObjectNames() {
+        return lObjectNames;
+    }
+
+    public boolean isOkOperation() {
+        return isOkOperation;
     }
 
     @Override
@@ -179,10 +191,12 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showAddedObject(Map<Integer, Scenario> mScenarios, boolean isObjectAdded) {
         if (isObjectAdded){
             message = "Object successfully added!";
+            isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE+
                     "\nCheck if the object is already defined: that could be the problem!";
+            isOkOperation = false;
         }
         notifyObservers();
     }
@@ -192,14 +206,20 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         if (isObjectRemoved) {
             message = "Object successfully removed!";
         } else {
-            message = ERROR_MESSAGE;
-            notifyObservers();
+            message = ERROR_MESSAGE+"while removing the object";
         }
+        notifyObservers();
     }
 
     @Override
     public void showCustomTypeCreationStatus(boolean isCreated) {
-        //TODO
+        if (isCreated){
+            message = "Custom type successfully created!";
+        }
+        else{
+            message = ERROR_MESSAGE;
+        }
+        notifyObservers();
     }
 
     @Override

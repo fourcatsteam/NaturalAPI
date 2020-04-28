@@ -13,17 +13,16 @@ import java.io.IOException;
 public class SuggestionGenerated implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
-    private JPanel panelScenario;
     private JPanel panelSuggestion;
     private JPanel panelInScrollPanel;
     private JScrollPane scrollPanel;
     private JButton generateBalButton;
     private JButton addFeatureButton;
-    private Controller contr;
-    private DataPresenterGUI dataPresenter;
-    private String featureName;
-    private GridBagConstraints gridConstraint;
-    private GridBagLayout gridBagLayout;
+    private final Controller contr;
+    private final DataPresenterGUI dataPresenter;
+    private final String featureName;
+    private final GridBagConstraints gridConstraint;
+    private final GridBagLayout gridBagLayout;
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
@@ -75,23 +74,38 @@ public class SuggestionGenerated implements Observer{
     }
 
     private void initScenario(){
-        panelScenario = new JPanel();
+        JPanel panelScenario = new JPanel();
         panelSuggestion = new JPanel();
+
+        //add a vertical spacer if it's not the first scenario
+        if (currentScenarioId!=-1) {
+            gridConstraint.gridx = gridX;
+            gridConstraint.gridy = gridY;
+            Component box = Box.createRigidArea(new Dimension(0, 50));
+            gridBagLayout.setConstraints(box, gridConstraint);
+            panelInScrollPanel.add(box);
+        }
+
+        //add panel suggestion
+        this.gridX = 0;
+        this.gridY++;
         panelSuggestion.setLayout(new BoxLayout(panelSuggestion,BoxLayout.PAGE_AXIS));
         gridConstraint.gridx = this.gridX;
         gridConstraint.gridy = this.gridY;
         gridBagLayout.setConstraints(panelSuggestion, gridConstraint);
         panelInScrollPanel.add(panelSuggestion);
 
+        //add panel scenario with a new scenarioWidget
         this.gridX++;
         gridConstraint.gridx = this.gridX;
         gridConstraint.gridy = this.gridY;
         gridBagLayout.setConstraints(panelScenario, gridConstraint);
         panelInScrollPanel.add(panelScenario);
-
         new ScenarioWidget(panelScenario, featureName, dataPresenter.getActor(),
                 dataPresenter.getScenarioContent());
-        this.gridX=0;
+
+
+        //prepare next scenario by adding a "row" to the grid (gridY++)
         this.gridY++;
         currentScenarioId+=1;
     }
