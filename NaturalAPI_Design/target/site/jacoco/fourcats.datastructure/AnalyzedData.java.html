@@ -4,43 +4,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AnalyzedData {
-    private LemmatizerData data;
-    private LinkedList&lt;String&gt; parserData;
+    private LinkedList&lt;WordTag&gt; tokens;
+    private LinkedList&lt;Dependency&gt; dependencies;
 
-<span class="nc" id="L10">    public AnalyzedData(){</span>
-<span class="nc" id="L11">        data = new LemmatizerData();</span>
-<span class="nc" id="L12">        parserData = new LinkedList&lt;&gt;();</span>
-<span class="nc" id="L13">    }</span>
+<span class="fc" id="L10">    public AnalyzedData(){</span>
+<span class="fc" id="L11">        tokens = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L12">        dependencies = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L13">    }</span>
 
-    public void addParseData(String s){
-<span class="nc" id="L16">        parserData.add(s);</span>
-<span class="nc" id="L17">    }</span>
+    public void addDependency(String g, String d, String r){
+<span class="fc" id="L16">        dependencies.add(new Dependency(g,d,r));</span>
+<span class="fc" id="L17">    }</span>
 
     public void addLemmaData(String w,String t,String l){
-<span class="nc" id="L20">        data.addElement(w,t,l);</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L20">        tokens.add(new WordTag(w,t,l));</span>
+<span class="fc" id="L21">    }</span>
 
-    public List&lt;String&gt; getParseList(){
-<span class="nc" id="L24">        return parserData;</span>
+    public List&lt;Dependency&gt; getDependenciesList(){
+<span class="fc" id="L24">        return dependencies;</span>
     }
 
-    public List&lt;String&gt; getNouns(){
-<span class="nc" id="L28">        return data.getNouns();</span>
-    }
-
-    public List&lt;String&gt; getVerbs(){
-<span class="nc" id="L32">        return data.getVerbs();</span>
-    }
-
-<span class="nc" id="L35">    public List&lt;WordTag&gt; getTaggedData() { return data.getList(); }</span>
+<span class="fc" id="L27">    public List&lt;WordTag&gt; getTaggedData() { return tokens; }</span>
 
     public String toString(){
-<span class="nc" id="L38">        String s = data.toString();</span>
-<span class="nc" id="L39">        s = s + &quot;-- Parser Data -- \n&quot;;</span>
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        for(String dat: parserData){</span>
-<span class="nc" id="L41">            s = s + dat;</span>
-<span class="nc" id="L42">        }</span>
-<span class="nc" id="L43">        return s;</span>
+<span class="fc" id="L30">        String s =&quot;-- Token and lemma Data -- \n&quot;;</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for(WordTag wtag : tokens){</span>
+<span class="fc" id="L32">            s = s + wtag.toString()+ &quot;\n&quot;;</span>
+<span class="fc" id="L33">        }</span>
+<span class="fc" id="L34">        s = s + &quot;-- Dependencies Data -- \n&quot;;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for(Dependency dat: dependencies){</span>
+<span class="fc" id="L36">            s = s + dat.getGov() + &quot; &quot; + dat.getDep() + &quot; &quot; + dat.getRelation() + &quot;\n&quot;;</span>
+<span class="fc" id="L37">        }</span>
+<span class="fc" id="L38">        return s;</span>
 
     }
 

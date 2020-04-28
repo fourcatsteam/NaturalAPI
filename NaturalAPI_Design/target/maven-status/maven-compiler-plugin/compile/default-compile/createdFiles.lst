@@ -17,7 +17,6 @@ fourcats/entities/BAL.class
 fourcats/port/GenerateBALInputPort.class
 fourcats/port/ShowTypesInputPort.class
 fourcats/usecaseinteractor/GenerateBALSuggestions.class
-fourcats/datastructure/LemmatizerData.class
 fourcats/view/SuggestionWidget.class
 fourcats/frameworks/BalAnalyzerImplementation.class
 fourcats/interfaceadapters/DataPresenter.class
@@ -45,6 +44,7 @@ fourcats/view/SuggestionGenerated.class
 fourcats/usecaseinteractor/DeclineBALSuggestion.class
 fourcats/datastructure/BlackList.class
 fourcats/datastructure/observer/Subject.class
+fourcats/datastructure/Dependency.class
 fourcats/interfaceaccess/RepositoryAccess.class
 fourcats/view/ObjectParamWidget$2.class
 fourcats/entities/Action.class

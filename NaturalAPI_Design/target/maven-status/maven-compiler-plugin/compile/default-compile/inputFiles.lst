@@ -45,7 +45,7 @@
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/CLI.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/GenerateBALSuggestionsOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/ShowTypesOutputPort.java
-/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/datastructure/LemmatizerData.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/datastructure/Dependency.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/GUI_Design.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/CustomTypeCreation.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/interfaceaccess/RepositoryAccess.java

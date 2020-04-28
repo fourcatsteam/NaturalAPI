@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fourcats.entities.BdlTest" time="0.246" tests="14" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fourcats.entities.BALTest" time="1.217" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="13"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -51,18 +51,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="57.0"/>
   </properties>
-  <testcase name="testNotNullNounsReference" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testConstructorSetName" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testAddNoun" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testAddVerb" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testAddPredicate" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testRemoveNoun" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testRemoveVerb" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testRemovePredicate" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testAddPredicateWithFrequency" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testNotNullVerbsReference" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testStringConversion" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testAddNounWithFrequency" classname="fourcats.entities.BdlTest" time="0"/>
-  <testcase name="testAddVerbWithFrequency" classname="fourcats.entities.BdlTest" time="0.001"/>
-  <testcase name="testNotNullPredicatesReference" classname="fourcats.entities.BdlTest" time="0"/>
+  <testcase name="testToString" classname="fourcats.entities.BALTest" time="1.188"/>
+  <testcase name="tesAddDuplicateUserToBAL" classname="fourcats.entities.BALTest" time="0.024"/>
+  <testcase name="getActors" classname="fourcats.entities.BALTest" time="0.003"/>
 </testsuite>
