@@ -17,4 +17,6 @@ public interface RepositoryAccess {
     Map<Integer,API> getApiMap();
     int getSize();
 
+    public void updateApi(String oldApi,String newApi);
+
 }

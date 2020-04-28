@@ -3,11 +3,12 @@ package fourcats.usecaseinteractor;
 import fourcats.entity.*;
 import fourcats.interfaceAccess.BalAnalyzer;
 import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 import fourcats.port.ModifyOutputPort;
 
 
-public class ModifyApi implements ModifyInputPort {
+public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
 
     BalAnalyzer balAnalyzer;
     RepositoryAccess repositoryAccess;
@@ -17,6 +18,10 @@ public class ModifyApi implements ModifyInputPort {
         balAnalyzer = b;
         repositoryAccess = r;
         modifyOutputPort = m;
+    }
+
+    public void modifyGui(String oldApi,String newApi){
+        repositoryAccess.updateApi(oldApi,newApi);
     }
 
     public void modify(int id, String filenameBal, String filenamePla){

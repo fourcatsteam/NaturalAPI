@@ -37,4 +37,14 @@ public class DataKeeper {
     public int getSize(){
         return  mApi.size();
     }
+
+    public void updateApi(String oldApi,String newApi) {
+        for(Map.Entry<Integer,API> api : mApi.entrySet()){
+            for(Map.Entry<String,String> listApi : api.getValue().getListApi().entrySet()){
+                if(listApi.getValue().equals(oldApi)){
+                    listApi.setValue(newApi);
+                }
+            }
+        }
+    }
 }

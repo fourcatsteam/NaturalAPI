@@ -51,4 +51,8 @@ public class Repository implements RepositoryAccess {
     public int getSize(){
         return dataKeeper.getSize();
     }
+
+    public void updateApi(String oldApi,String newApi){
+        dataKeeper.updateApi(oldApi,newApi);
+    }
 }

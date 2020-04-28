@@ -25,9 +25,9 @@ public class SuggestApi implements ApiInputPort {
         PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));
 
         API api = new API();
-        for(Actor actors : bal.getActors()){
+        for(Actor actor : bal.getActors()){
 
-            for(Action action : actors.getActions()){
+            for(Action action : actor.getActions()){
 
                 String newApi = pla.getText();
                 newApi = insertGroup(newApi, action.getName());
@@ -38,7 +38,8 @@ public class SuggestApi implements ApiInputPort {
                     newApi = insertObjectType(newApi, objectParam.getType());
                     newApi = insertObjectName(newApi, objectParam.getName());
                 }
-                api.addApi("./API/" + action.getName().substring(0,1).toUpperCase() +
+                repositoryAccess.openFile("./API/" + actor.getName() + "/").mkdir();
+                api.addApi("./API/" + actor.getName() + "/" + action.getName().substring(0,1).toUpperCase() +
                         action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension(), newApi);
             }
         }

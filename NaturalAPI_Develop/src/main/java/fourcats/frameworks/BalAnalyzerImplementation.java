@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class BalAnalyzerImplementation implements BalAnalyzer {
 
-    JsonNode jsonNode;
+    private JsonNode jsonNode;
 
     public BalAnalyzerImplementation(){
 
@@ -23,14 +23,6 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
         this.jsonNode = b.getJsonNode();
     }
 
-    public BalAnalyzerImplementation(File file){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            jsonNode = objectMapper.readValue(file,JsonNode.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void setBalFile(File file){
         ObjectMapper objectMapper = new ObjectMapper();

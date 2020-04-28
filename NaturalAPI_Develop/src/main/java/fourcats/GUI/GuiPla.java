@@ -2,24 +2,38 @@ package fourcats.GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class GuiCreatePla {
+public class GuiPla {
     private JTextArea textArea1;
     private JButton createButton;
     private JButton cancelButton;
     private JPanel mainPanel;
+
+    public void addLineTextArea1(String s) {
+        textArea1.append(s);
+    }
+
+    public void setTextField1FromString(String s) {
+        textField1.setText(s);
+    }
+
+    public void setTextField2FromString(String s) {
+        textField2.setText(s);
+    }
+
     private JTextField textField1;
     private JTextField textField2;
 
-    public GuiCreatePla(){
+    public GuiPla(){
         JFrame frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
         try {
             frame.setIconImage(ImageIO.read(new File("./logo1.png")));
@@ -32,9 +46,21 @@ public class GuiCreatePla {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    FileWriter fw = new FileWriter(new File("./PLA/" + textField1.getText() + ".txt"));
-                    fw.write(textField2.getText() + "\n" + textArea1.getText());
-                    fw.close();
+                    File file = new File("./PLA/" + textField1.getText());
+                    if(file.exists()) {
+                        int answer = JOptionPane.YES_NO_OPTION;
+                        JOptionPane.showConfirmDialog(frame,"There is already a PLA with this name. Do you want to overwrite it?");
+                        if(answer == JOptionPane.YES_OPTION){
+                            FileWriter fw = new FileWriter(file);
+                            fw.write(textField2.getText() + "\n" + textArea1.getText());
+                            fw.close();
+                        }
+                    }
+                    else{
+                        FileWriter fw = new FileWriter(file);
+                        fw.write(textField2.getText() + "\n" + textArea1.getText());
+                        fw.close();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

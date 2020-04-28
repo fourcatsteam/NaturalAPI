@@ -6,10 +6,9 @@ import fourcats.observer.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 
 public class Gui implements Observer {
 
@@ -25,7 +24,11 @@ public class Gui implements Observer {
     private JPanel thirdPanel;
     private JButton generateButton;
     private JButton modifyButton;
+    private JButton modifyPLAButton;
     private JButton createPLAButton;
+    private JComboBox comboBox1;
+
+    boolean next = false;
 
     public Gui(Controller c,DataPresenter d){
 
@@ -46,12 +49,13 @@ public class Gui implements Observer {
             e.printStackTrace();
         }
         frame.setVisible(true);
+        comboBox1.setVisible(false);
 
         addBalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
-                        "NaturalAPI\\NaturalAPI_Develop\\");
+                        "NaturalAPI\\NaturalAPI_Develop\\BAL\\");
                 fileChooser.showOpenDialog(mainPanel);
                 bal[0] = fileChooser.getSelectedFile().getName();
             }
@@ -61,7 +65,7 @@ public class Gui implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
-                        "NaturalAPI\\NaturalAPI_Develop\\");
+                        "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
                 fileChooser.showOpenDialog(mainPanel);
                 pla[0] = fileChooser.getSelectedFile().getName();
             }
@@ -70,6 +74,7 @@ public class Gui implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.createApiSuggestion(bal[0],pla[0]);
+                comboBox1.setVisible(true);
             }
         });
         generateButton.addActionListener(new ActionListener() {
@@ -81,13 +86,48 @@ public class Gui implements Observer {
         createPLAButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GuiCreatePla guiCreatePla = new GuiCreatePla();
+                GuiPla guiPla = new GuiPla();
+            }
+        });
+        modifyPLAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
+                        "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
+                fileChooser.showOpenDialog(mainPanel);
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())));
+                    GuiPla guiPla = new GuiPla();
+                    guiPla.setTextField1FromString(fileChooser.getSelectedFile().getName());
+                    guiPla.setTextField2FromString(br.readLine());
+                    String line;
+                    while((line = br.readLine()) != null){
+                        guiPla.addLineTextArea1(line);
+                        guiPla.addLineTextArea1("\n");
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        modifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.modifyApiGui(comboBox1.getSelectedItem().toString(),textArea.getText());
+                comboBox1.addItem(textArea.getText());
+                comboBox1.removeItem(comboBox1.getSelectedItem());
+            }
+        });
+        comboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText(comboBox1.getSelectedItem().toString());
             }
         });
     }
 
     public void showOutput(){
-        textArea.append(dataPresenter.getStringToShow());
+        comboBox1.addItem(dataPresenter.getStringToShow());
     }
 
     @Override
