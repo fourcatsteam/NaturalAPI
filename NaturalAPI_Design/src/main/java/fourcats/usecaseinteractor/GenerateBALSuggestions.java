@@ -11,6 +11,7 @@ import fourcats.port.GenerateBALSuggestionsOutputPort;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.*;
 
 public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     RepositoryAccess repo;
@@ -69,7 +70,14 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         //ex. withdraw cash --> withdraw_cash
         String formattedSuggestion="";
         Action suggestion = null;
-        for (String suggestedAction : analyzedData.getParseList()){
+
+        List<String> predicates = analyzedData.getDependenciesList()
+                .stream()
+                .filter(d->(d.getRelation().equals("dobj")))
+                .map(d-> d.getGov()+" "+d.getDep())
+                .collect(Collectors.toList());
+
+        for (String suggestedAction : predicates){
             formattedSuggestion = suggestedAction.replace(" ", "_");
             suggestion = new Action((formattedSuggestion), "void");
             suggestion.addObjectParam(generateObject(suggestion.getName()));

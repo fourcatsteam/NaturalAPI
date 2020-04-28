@@ -4,41 +4,36 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AnalyzedData {
-    private LemmatizerData data;
-    private LinkedList<String> parserData;
+    private LinkedList<WordTag> tokens;
+    private LinkedList<Dependency> dependencies;
 
     public AnalyzedData(){
-        data = new LemmatizerData();
-        parserData = new LinkedList<>();
+        tokens = new LinkedList<>();
+        dependencies = new LinkedList<>();
     }
 
-    public void addParseData(String s){
-        parserData.add(s);
+    public void addDependency(String g, String d, String r){
+        dependencies.add(new Dependency(g,d,r));
     }
 
     public void addLemmaData(String w,String t,String l){
-        data.addElement(w,t,l);
+        tokens.add(new WordTag(w,t,l));
     }
 
-    public List<String> getParseList(){
-        return parserData;
+    public List<Dependency> getDependenciesList(){
+        return dependencies;
     }
 
-    public List<String> getNouns(){
-        return data.getNouns();
-    }
-
-    public List<String> getVerbs(){
-        return data.getVerbs();
-    }
-
-    public List<WordTag> getTaggedData() { return data.getList(); }
+    public List<WordTag> getTaggedData() { return tokens; }
 
     public String toString(){
-        String s = data.toString();
-        s = s + "-- Parser Data -- \n";
-        for(String dat: parserData){
-            s = s + dat;
+        String s ="-- Token and lemma Data -- \n";
+        for(WordTag wtag : tokens){
+            s = s + wtag.toString()+ "\n";
+        }
+        s = s + "-- Dependencies Data -- \n";
+        for(Dependency dat: dependencies){
+            s = s + dat.getGov() + " " + dat.getDep() + " " + dat.getRelation() + "\n";
         }
         return s;
 
