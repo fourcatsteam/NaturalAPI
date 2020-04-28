@@ -1,3 +1,5 @@
+package fourcats.Entity;
+
 import fourcats.entity.Action;
 import fourcats.entity.Actor;
 import org.junit.Before;
