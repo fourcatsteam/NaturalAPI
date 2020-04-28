@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataPresenter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.interfaceadapters</a> &gt; <span class="el_source">DataPresenter.java</span></div><h1>DataPresenter.java</h1><pre class="source lang-java linenums">package fourcats.interfaceadapters;
+
+import fourcats.datastructure.observer.Subject;
+import fourcats.entities.Action;
+import fourcats.entities.Scenario;
+import fourcats.entities.Type;
+import fourcats.port.*;
+
+import java.util.Map;
+
+<span class="nc" id="L11">public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,</span>
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort {
+
+    private String toShow;
+
+    @Override
+    public void showSuggestionsForScenario(Map&lt;Integer,Scenario&gt; mScenarios) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        for (Map.Entry&lt;Integer,Scenario&gt; mSc : mScenarios.entrySet()) {</span>
+<span class="nc" id="L19">            toShow = &quot;----SCENARIO: &quot; + mSc.getKey() + &quot;) &quot; + mSc.getValue().getName() + &quot;----&quot;;</span>
+<span class="nc" id="L20">            notifyObservers();</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            for (Map.Entry&lt;Integer,Action&gt; mAc : mSc.getValue().getActionsMap().entrySet()) {</span>
+<span class="nc" id="L22">                toShow = mAc.getKey() + &quot;) &quot; + mAc.getValue().toString();</span>
+<span class="nc" id="L23">                notifyObservers();</span>
+<span class="nc" id="L24">            }</span>
+<span class="nc" id="L25">        }</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public void showErrorFileLoad() {
+<span class="nc" id="L30">        toShow = (&quot;Error! \n&quot; +</span>
+                &quot;Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.&quot;);
+<span class="nc" id="L32">    }</span>
+
+
+    @Override
+    public void showDeclinedSuggestion(Map&lt;Integer,Scenario&gt; mScenarios, boolean isOk) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (isOk) {</span>
+<span class="nc" id="L38">            toShow = &quot;Suggestion removed! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L39">            notifyObservers();</span>
+<span class="nc" id="L40">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else {
+<span class="nc" id="L43">            toShow = &quot;Oh no! Something went wrong, please check the id of the scenario and the id of the suggestion&quot;;</span>
+<span class="nc" id="L44">            notifyObservers();</span>
+        }
+
+<span class="nc" id="L47">    }</span>
+
+    public String getDataToShow(){
+<span class="nc" id="L50">        return toShow;</span>
+    }
+
+    @Override
+    public void showGenerationStatus(boolean isBALGenerated) {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (isBALGenerated){</span>
+<span class="nc" id="L56">            toShow = &quot;Hooray! The BAL was successfully created. You will find it in the BAL folder&quot;;</span>
+        }
+        else{
+<span class="nc" id="L59">            toShow = &quot;Oh no! Something went wrong...&quot;;</span>
+        }
+<span class="nc" id="L61">        notifyObservers();</span>
+<span class="nc" id="L62">    }</span>
+
+    @Override
+    public void showModifiedActionName(Map&lt;Integer, Scenario&gt; mScenarios, boolean isActionNameModified) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (isActionNameModified){</span>
+<span class="nc" id="L67">            toShow = &quot;Suggestion name successfully updated! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L68">            notifyObservers();</span>
+<span class="nc" id="L69">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L72">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update.&quot;;</span>
+<span class="nc" id="L73">            notifyObservers();</span>
+        }
+
+<span class="nc" id="L76">    }</span>
+
+    @Override
+    public void showModifiedActionType(Map&lt;Integer, Scenario&gt; mScenarios, boolean isActionTypeModified) {
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (isActionTypeModified){</span>
+<span class="nc" id="L81">            toShow = &quot;Action type successfully updated! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L82">            notifyObservers();</span>
+<span class="nc" id="L83">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L86">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.&quot;;</span>
+<span class="nc" id="L87">            notifyObservers();</span>
+        }
+<span class="nc" id="L89">    }</span>
+
+    @Override
+    public void showModifiedObjectName(Map&lt;Integer, Scenario&gt; mScenarios, boolean isObjectNameModified) {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (isObjectNameModified){</span>
+<span class="nc" id="L94">            toShow = &quot;Object name of the suggestion successfully updated! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L95">            notifyObservers();</span>
+<span class="nc" id="L96">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L99">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.&quot;;</span>
+<span class="nc" id="L100">            notifyObservers();</span>
+        }
+<span class="nc" id="L102">    }</span>
+
+    @Override
+    public void showModifiedObjectType(Map&lt;Integer, Scenario&gt; mScenarios, boolean isObjectTypeModified) {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (isObjectTypeModified){</span>
+<span class="nc" id="L107">            toShow = &quot;Object type of the suggestion successfully updated! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L108">            notifyObservers();</span>
+<span class="nc" id="L109">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L112">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.&quot;;</span>
+<span class="nc" id="L113">            notifyObservers();</span>
+        }
+<span class="nc" id="L115">    }</span>
+
+    @Override
+    public void showAddedObject(Map&lt;Integer, Scenario&gt; mScenarios, boolean isObjectAdded) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (isObjectAdded){</span>
+<span class="nc" id="L120">            toShow = &quot;Object successfully added! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L121">            notifyObservers();</span>
+<span class="nc" id="L122">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L125">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update.&quot; +</span>
+                    &quot;\nCheck also if the object is already defined: that could be the problem!&quot;;
+<span class="nc" id="L127">            notifyObservers();</span>
+        }
+<span class="nc" id="L129">    }</span>
+
+    @Override
+    public void showRemovedObject(Map&lt;Integer, Scenario&gt; mScenarios, boolean isObjectRemoved) {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (isObjectRemoved){</span>
+<span class="nc" id="L134">            toShow = &quot;Object successfully removed! This is the updated list of suggestions&quot;;</span>
+<span class="nc" id="L135">            notifyObservers();</span>
+<span class="nc" id="L136">            showSuggestionsForScenario(mScenarios);</span>
+        }
+        else{
+<span class="nc" id="L139">            toShow = &quot;Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the object you want to remove.&quot;;</span>
+<span class="nc" id="L140">            notifyObservers();</span>
+        }
+<span class="nc" id="L142">    }</span>
+
+    @Override
+    public void showTypes(Map&lt;Integer, Type&gt; mTypes) {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (mTypes.size()!=0) {</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            for (Map.Entry&lt;Integer, Type&gt; mTy : mTypes.entrySet()) {</span>
+<span class="nc" id="L148">                toShow = &quot;----TYPE: &quot; + mTy.getKey() + &quot;) &quot; + mTy.getValue().getName() + &quot;----&quot;;</span>
+<span class="nc" id="L149">                notifyObservers();</span>
+<span class="nc" id="L150">            }</span>
+        }
+        else{
+<span class="nc" id="L153">            toShow = &quot;No types defined yet!&quot;;</span>
+<span class="nc" id="L154">            notifyObservers();</span>
+        }
+<span class="nc" id="L156">    }</span>
+
+    @Override
+    public void showCustomTypeCreationStatus(boolean isCreated) {
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (isCreated) {</span>
+<span class="nc" id="L161">            toShow = &quot;Custom type successfully created! This is the updated list of custom types&quot;;</span>
+        }
+        else {
+<span class="nc" id="L164">            toShow = &quot;Error! Please check your input, probably the type is already defined: change the name or use the old one.&quot;;</span>
+        }
+<span class="nc" id="L166">        notifyObservers();</span>
+<span class="nc" id="L167">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

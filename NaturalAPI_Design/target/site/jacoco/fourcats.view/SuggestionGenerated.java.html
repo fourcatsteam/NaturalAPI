@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuggestionGenerated.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.view</a> &gt; <span class="el_source">SuggestionGenerated.java</span></div><h1>SuggestionGenerated.java</h1><pre class="source lang-java linenums">package fourcats.view;
+
+
+import fourcats.datastructure.observer.Observer;
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGUI;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.IOException;
+
+public class SuggestionGenerated implements Observer{
+    private JPanel mainPanel;
+    private JPanel panelButtons;
+    private JPanel panelSuggestion;
+    private JPanel panelInScrollPanel;
+    private JScrollPane scrollPanel;
+    private JButton generateBalButton;
+    private JButton addFeatureButton;
+    private final Controller contr;
+    private final DataPresenterGUI dataPresenter;
+    private final String featureName;
+    private final GridBagConstraints gridConstraint;
+    private final GridBagLayout gridBagLayout;
+    private int currentScenarioId;
+<span class="nc" id="L27">    private int gridX = 0;</span>
+<span class="nc" id="L28">    private int gridY = 0;</span>
+
+<span class="nc" id="L30">    public SuggestionGenerated(String featureName, Controller controller, DataPresenterGUI dataPresenter){</span>
+<span class="nc" id="L31">        this.contr = controller;</span>
+<span class="nc" id="L32">        this.dataPresenter = dataPresenter;</span>
+<span class="nc" id="L33">        this.dataPresenter.attach(this);</span>
+<span class="nc" id="L34">        this.featureName = featureName;</span>
+<span class="nc" id="L35">        this.currentScenarioId = -1;</span>
+
+<span class="nc" id="L37">        gridBagLayout = new GridBagLayout();</span>
+<span class="nc" id="L38">        gridConstraint = new GridBagConstraints();</span>
+<span class="nc" id="L39">        panelInScrollPanel.setLayout(gridBagLayout);</span>
+<span class="nc" id="L40">        gridConstraint.fill = GridBagConstraints.HORIZONTAL;</span>
+
+<span class="nc" id="L42">        scrollPanel = new JScrollPane(panelInScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,</span>
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+<span class="nc" id="L45">        panelButtons.setLayout(new GridLayout(2,1));</span>
+<span class="nc" id="L46">        panelButtons.add(generateBalButton);</span>
+<span class="nc" id="L47">        panelButtons.add(addFeatureButton);</span>
+
+<span class="nc" id="L49">        mainPanel.setLayout(new BorderLayout());</span>
+<span class="nc" id="L50">        mainPanel.setBorder(new EmptyBorder(5,5,5,5));</span>
+<span class="nc" id="L51">        mainPanel.add(scrollPanel,BorderLayout.CENTER);</span>
+<span class="nc" id="L52">        mainPanel.add(panelButtons,BorderLayout.SOUTH);</span>
+
+<span class="nc" id="L54">        contr.generateSuggestions(featureName);</span>
+
+<span class="nc" id="L56">        generateBalButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L57">            String balName = JOptionPane.showInputDialog(&quot;Enter the name for the BAL&quot;);</span>
+            try {
+<span class="nc" id="L59">                contr.generateBAL(balName);</span>
+<span class="nc" id="L60">            } catch (IOException ioException) {</span>
+<span class="nc" id="L61">                ioException.printStackTrace();</span>
+<span class="nc" id="L62">            }</span>
+<span class="nc" id="L63">            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());</span>
+<span class="nc" id="L64">        });</span>
+<span class="nc" id="L65">    }</span>
+
+    public void createAndShowGUI() {
+<span class="nc" id="L68">        JFrame frame = new JFrame(&quot;NaturalAPI Design - Suggestions&quot;);</span>
+<span class="nc" id="L69">        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);</span>
+<span class="nc" id="L70">        frame.add(mainPanel);</span>
+<span class="nc" id="L71">        frame.setPreferredSize(new Dimension(1200,800));</span>
+<span class="nc" id="L72">        frame.pack();</span>
+<span class="nc" id="L73">        frame.setVisible(true);</span>
+<span class="nc" id="L74">    }</span>
+
+    private void initScenario(){
+<span class="nc" id="L77">        JPanel panelScenario = new JPanel();</span>
+<span class="nc" id="L78">        panelSuggestion = new JPanel();</span>
+
+        //add a vertical spacer if it's not the first scenario
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (currentScenarioId!=-1) {</span>
+<span class="nc" id="L82">            gridConstraint.gridx = gridX;</span>
+<span class="nc" id="L83">            gridConstraint.gridy = gridY;</span>
+<span class="nc" id="L84">            Component box = Box.createRigidArea(new Dimension(0, 50));</span>
+<span class="nc" id="L85">            gridBagLayout.setConstraints(box, gridConstraint);</span>
+<span class="nc" id="L86">            panelInScrollPanel.add(box);</span>
+        }
+
+        //add panel suggestion
+<span class="nc" id="L90">        this.gridX = 0;</span>
+<span class="nc" id="L91">        this.gridY++;</span>
+<span class="nc" id="L92">        panelSuggestion.setLayout(new BoxLayout(panelSuggestion,BoxLayout.PAGE_AXIS));</span>
+<span class="nc" id="L93">        gridConstraint.gridx = this.gridX;</span>
+<span class="nc" id="L94">        gridConstraint.gridy = this.gridY;</span>
+<span class="nc" id="L95">        gridBagLayout.setConstraints(panelSuggestion, gridConstraint);</span>
+<span class="nc" id="L96">        panelInScrollPanel.add(panelSuggestion);</span>
+
+        //add panel scenario with a new scenarioWidget
+<span class="nc" id="L99">        this.gridX++;</span>
+<span class="nc" id="L100">        gridConstraint.gridx = this.gridX;</span>
+<span class="nc" id="L101">        gridConstraint.gridy = this.gridY;</span>
+<span class="nc" id="L102">        gridBagLayout.setConstraints(panelScenario, gridConstraint);</span>
+<span class="nc" id="L103">        panelInScrollPanel.add(panelScenario);</span>
+<span class="nc" id="L104">        new ScenarioWidget(panelScenario, featureName, dataPresenter.getActor(),</span>
+<span class="nc" id="L105">                dataPresenter.getScenarioContent());</span>
+
+
+        //prepare next scenario by adding a &quot;row&quot; to the grid (gridY++)
+<span class="nc" id="L109">        this.gridY++;</span>
+<span class="nc" id="L110">        currentScenarioId+=1;</span>
+<span class="nc" id="L111">    }</span>
+
+    @Override
+    public void update() {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {</span>
+<span class="nc" id="L116">            initScenario();</span>
+        }
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (dataPresenter.isSuggestionToAdd()) {</span>
+<span class="nc" id="L119">            new SuggestionWidget(panelSuggestion, contr, dataPresenter);</span>
+        }
+<span class="nc" id="L121">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

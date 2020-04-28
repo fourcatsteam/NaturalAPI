@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Repository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.frameworks</a> &gt; <span class="el_source">Repository.java</span></div><h1>Repository.java</h1><pre class="source lang-java linenums">package fourcats.frameworks;
+
+import fourcats.entities.Scenario;
+import fourcats.entities.Type;
+import fourcats.interfaceaccess.PersistentMemoryAccess;
+import fourcats.interfaceaccess.RepositoryAccess;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Map;
+
+public class Repository implements RepositoryAccess  {
+    DataKeeper dataKeeper;
+    PersistentMemoryAccess memoryAccess;
+
+<span class="nc" id="L16">    public Repository(DataKeeper dataKeeper, PersistentMemoryAccess memoryAccess){</span>
+<span class="nc" id="L17">        this.dataKeeper = dataKeeper;</span>
+<span class="nc" id="L18">        this.memoryAccess = memoryAccess;</span>
+<span class="nc" id="L19">    }</span>
+
+
+    @Override
+    public String read(String fileName) throws FileNotFoundException {
+<span class="nc" id="L24">        return memoryAccess.readFile(fileName);</span>
+    }
+
+    @Override
+    public void createScenario(Scenario scenario) {
+<span class="nc" id="L29">        dataKeeper.addScenarioToMap(scenario);</span>
+<span class="nc" id="L30">    }</span>
+
+
+    @Override
+    public void deleteSuggestion(int idAction, int idScenario) {
+<span class="nc" id="L35">        dataKeeper.removeAction(idScenario,idAction);</span>
+<span class="nc" id="L36">    }</span>
+
+    @Override
+    public Map&lt;Integer, Scenario&gt; readScenarios() {
+<span class="nc" id="L40">        return dataKeeper.getScenarioMap();</span>
+    }
+
+    @Override
+    public Map&lt;Integer, Type&gt; readTypes() {
+<span class="nc" id="L45">        return dataKeeper.getTypeMap();</span>
+    }
+
+    @Override
+    public void deleteScenarios() {
+<span class="nc" id="L50">        dataKeeper.clearScenariosMap();</span>
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public void createBAL(String bal, String filename) throws IOException {
+<span class="nc" id="L55">        memoryAccess.writeFile(bal,filename);</span>
+<span class="nc" id="L56">    }</span>
+
+    @Override
+    public void updateActionName(int idAction, int idScenario, String newActionName) {
+<span class="nc" id="L60">        dataKeeper.updateActionName(idScenario, idAction, newActionName);</span>
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    public void updateActionType(int idAction, int idScenario, String newActionType) {
+<span class="nc" id="L65">        dataKeeper.updateActionType(idScenario,idAction,newActionType);</span>
+<span class="nc" id="L66">    }</span>
+
+    @Override
+    public void updateObjectName(int idAction, int idScenario, int idObject, String newObjectName) {
+<span class="nc" id="L70">        dataKeeper.updateObjectName(idScenario,idAction,idObject,newObjectName);</span>
+<span class="nc" id="L71">    }</span>
+
+    @Override
+    public void updateObjectType(int idAction, int idScenario, int idObject, String newObjectType) {
+<span class="nc" id="L75">        dataKeeper.updateObjectType(idScenario,idAction,idObject,newObjectType);</span>
+<span class="nc" id="L76">    }</span>
+
+    @Override
+    public void createCustomType(String typeName, Map&lt;String, String&gt; mAttributes) {
+<span class="nc" id="L80">        dataKeeper.addCustomType(typeName,mAttributes);</span>
+<span class="nc" id="L81">    }</span>
+
+    @Override
+    public void updateObjectTypeById(int idAction, int idScenario, int idObject, int idType) {
+<span class="nc" id="L85">        dataKeeper.updateObjectTypeById(idScenario,idAction,idObject,idType);</span>
+<span class="nc" id="L86">    }</span>
+
+    @Override
+    public void updateActionTypeById(int idAction, int idScenario, int idType) {
+<span class="nc" id="L90">        dataKeeper.updateActionTypeById(idScenario,idAction,idType);</span>
+<span class="nc" id="L91">    }</span>
+
+    @Override
+    public void createObject(int idAction, int idScenario, String objectName, int idType) {
+<span class="nc" id="L95">        dataKeeper.addObject(idScenario,idAction, objectName, idType);</span>
+<span class="nc" id="L96">    }</span>
+
+    @Override
+    public void deleteObject(int idAction, int idScenario, int idObject) {
+<span class="nc" id="L100">        dataKeeper.removeObject(idScenario,idAction,idObject);</span>
+<span class="nc" id="L101">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

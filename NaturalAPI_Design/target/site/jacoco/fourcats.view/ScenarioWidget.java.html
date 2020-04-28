@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScenarioWidget.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.view</a> &gt; <span class="el_source">ScenarioWidget.java</span></div><h1>ScenarioWidget.java</h1><pre class="source lang-java linenums">package fourcats.view;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class ScenarioWidget extends JComponent{
+    private JPanel mainPanel;
+    private JTextArea featureTextArea;
+    private JLabel featureLabel;
+    private JLabel actorLabel;
+
+
+<span class="nc" id="L13">    public ScenarioWidget(JPanel panelToUpdate, String featureName, String actor, String scenario) {</span>
+<span class="nc" id="L14">        JPanel panelNorth = new JPanel(new GridLayout(2, 1));</span>
+<span class="nc" id="L15">        panelNorth.add(featureLabel);</span>
+<span class="nc" id="L16">        panelNorth.add(actorLabel);</span>
+<span class="nc" id="L17">        actorLabel.setText(&quot;---Actor: &quot; + actor);</span>
+<span class="nc" id="L18">        featureLabel.setText(&quot;---Feature: &quot; + featureName);</span>
+
+<span class="nc" id="L20">        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));</span>
+<span class="nc" id="L21">        mainPanel.add(Box.createRigidArea(new Dimension(20, 0)));</span>
+<span class="nc" id="L22">        mainPanel.add(panelNorth);</span>
+<span class="nc" id="L23">        mainPanel.add(featureTextArea);</span>
+<span class="nc" id="L24">        featureTextArea.setText(scenario);</span>
+
+<span class="nc" id="L26">        panelToUpdate.add(mainPanel);</span>
+
+<span class="nc" id="L28">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

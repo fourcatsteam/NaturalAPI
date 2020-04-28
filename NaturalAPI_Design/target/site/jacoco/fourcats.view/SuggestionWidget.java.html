@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuggestionWidget.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Design</a> &gt; <a href="index.source.html" class="el_package">fourcats.view</a> &gt; <span class="el_source">SuggestionWidget.java</span></div><h1>SuggestionWidget.java</h1><pre class="source lang-java linenums">package fourcats.view;
+
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGUI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Objects;
+
+
+public class SuggestionWidget {
+    private JComboBox&lt;String&gt; actionTypeComboBox;
+    private JTextField actionNameTextField;
+    private JButton addObjectButton;
+    private JButton removeSuggestionButton;
+    private JPanel mainPanel;
+    private String suggestionId;
+    private String scenarioId;
+    private static final String CREATE_CUSTOM = &quot;CREATE CUSTOM&quot;;
+
+<span class="nc" id="L22">    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){</span>
+<span class="nc" id="L23">        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));</span>
+<span class="nc" id="L24">        Box objectsBox = Box.createVerticalBox();</span>
+
+<span class="nc" id="L26">        this.scenarioId = dataPresenter.getScenarioId();</span>
+<span class="nc" id="L27">        this.suggestionId = dataPresenter.getSuggestionId();</span>
+
+<span class="nc" id="L29">        actionTypeComboBox.setSelectedItem(dataPresenter.getActionType());</span>
+<span class="nc" id="L30">        actionTypeComboBox.add(Box.createHorizontalBox());</span>
+<span class="nc" id="L31">        actionNameTextField.setText(dataPresenter.getActionName());</span>
+
+<span class="nc" id="L33">        mainPanel.add(actionTypeComboBox);</span>
+<span class="nc" id="L34">        mainPanel.add(actionNameTextField);</span>
+<span class="nc" id="L35">        mainPanel.add(objectsBox);</span>
+
+<span class="nc" id="L37">        addObjects(contr,dataPresenter,objectsBox);</span>
+
+<span class="nc" id="L39">        mainPanel.add(addObjectButton);</span>
+<span class="nc" id="L40">        mainPanel.add(Box.createRigidArea(new Dimension(5, 0)));</span>
+<span class="nc" id="L41">        mainPanel.add(removeSuggestionButton);</span>
+<span class="nc" id="L42">        panelToUpdate.add(mainPanel);</span>
+
+<span class="nc" id="L44">        addObjectButton.addActionListener(e-&gt;{</span>
+<span class="nc" id="L45">            String objectName = JOptionPane.showInputDialog(null,&quot;Insert the name for the object&quot;,</span>
+                    &quot;Object creation&quot;,JOptionPane.QUESTION_MESSAGE);
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (!objectName.equals(&quot;&quot;)){</span>
+<span class="nc" id="L48">                contr.addObject(suggestionId,scenarioId,objectName,&quot;0&quot;);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                if (dataPresenter.isOkOperation()){</span>
+<span class="nc" id="L50">                    new ObjectParamWidget(objectsBox,contr,dataPresenter,Integer.toString(dataPresenter.getlObjectId().size()),</span>
+                            &quot;string&quot;,objectName,suggestionId,scenarioId);
+                }
+            }
+<span class="nc" id="L54">            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());</span>
+<span class="nc" id="L55">        });</span>
+
+<span class="nc" id="L57">        removeSuggestionButton.addActionListener(e -&gt; {</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (JOptionPane.showConfirmDialog(null,&quot;Are you sure you want to remove this suggestion?&quot;,</span>
+                    &quot;Suggestion remove confirmation&quot;,JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                //0=yes
+<span class="nc" id="L61">                contr.declineSuggestion(suggestionId,scenarioId);</span>
+<span class="nc" id="L62">                panelToUpdate.remove(mainPanel);</span>
+            }
+<span class="nc" id="L64">        });</span>
+
+<span class="nc" id="L66">        actionTypeComboBox.addItemListener(e -&gt; {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if (e.getStateChange() == ItemEvent.SELECTED){</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                if(Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){</span>
+<span class="nc" id="L69">                    new CustomTypeCreation(contr);</span>
+                }
+                else{
+<span class="nc" id="L72">                    contr.modifyActionType(suggestionId,scenarioId,actionTypeComboBox.getSelectedItem().toString());</span>
+                }
+            }
+<span class="nc" id="L75">        });</span>
+
+<span class="nc" id="L77">        actionTypeComboBox.addFocusListener(new FocusAdapter() {</span>
+            @Override
+            public void focusGained(FocusEvent e) {
+<span class="nc" id="L80">                super.focusGained(e);</span>
+<span class="nc" id="L81">                contr.showTypes();</span>
+<span class="nc" id="L82">                actionTypeComboBox.removeAllItems();</span>
+<span class="nc" id="L83">                actionTypeComboBox.addItem(&quot;void&quot;);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                for (String type : dataPresenter.getlTypes()) {</span>
+<span class="nc" id="L85">                    actionTypeComboBox.addItem(type);</span>
+<span class="nc" id="L86">                }</span>
+<span class="nc" id="L87">                actionTypeComboBox.addItem(CREATE_CUSTOM);</span>
+<span class="nc" id="L88">            }</span>
+        });
+
+<span class="nc" id="L91">        actionNameTextField.addFocusListener(new FocusAdapter() {</span>
+            @Override
+            public void focusLost(FocusEvent e) {
+<span class="nc" id="L94">                super.focusLost(e);</span>
+<span class="nc" id="L95">                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());</span>
+<span class="nc" id="L96">            }</span>
+        });
+
+<span class="nc" id="L99">    }</span>
+
+    private void addObjects(Controller controller, DataPresenterGUI dataPresenter, Box boxToUpdate){
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        for (String objId : dataPresenter.getlObjectId()){</span>
+<span class="nc" id="L103">            int id = Integer.parseInt(objId);</span>
+<span class="nc" id="L104">            new ObjectParamWidget(boxToUpdate,controller,dataPresenter,objId,dataPresenter.getlObjectTypes().get(id),</span>
+<span class="nc" id="L105">                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId());</span>
+<span class="nc" id="L106">        }</span>
+
+<span class="nc" id="L108">    }</span>
+
+}
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
