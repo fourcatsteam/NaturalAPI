@@ -36,7 +36,7 @@ public class DataPresenterTest {
         map.put(1,api);
 
         dataPresenter.showOutput(map);
-        assertEquals("-----------API ID : 1-----------\na",dataPresenter.getStringToShow());
+        assertEquals("a",dataPresenter.getStringToShow());
     }
 
 }
