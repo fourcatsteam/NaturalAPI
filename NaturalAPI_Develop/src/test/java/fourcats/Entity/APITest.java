@@ -29,5 +29,6 @@ public class APITest {
     public void testAddApi(){
         api.addApi("nomefile","api");
         assertEquals(1,api.getListApi().size());
+        assertEquals("api",api.getListApi().get("nomefile"));
     }
 }
