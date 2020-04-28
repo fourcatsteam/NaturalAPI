@@ -12,7 +12,7 @@ public class BAL{
     public void addUserToBAL(Actor userToAdd) {
         Boolean present = false;
         for(Actor a : lActors) {
-            if(a.equals(userToAdd)) {
+            if(a.getName()==userToAdd.getName()) {
                 present = true;
                 break;
             }
