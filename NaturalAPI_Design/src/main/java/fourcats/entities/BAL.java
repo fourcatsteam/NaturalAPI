@@ -10,7 +10,16 @@ public class BAL{
     }
 
     public void addUserToBAL(Actor userToAdd) {
-        lActors.add(userToAdd);
+        Boolean present = false;
+        for(Actor a : lActors) {
+            if(a.getName()==userToAdd.getName()) {
+                present = true;
+                break;
+            }
+        }
+        if(!present) {
+            lActors.add(userToAdd);
+        }
     }
 
     public List<Actor> getActors() {
