@@ -138,27 +138,22 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else {
             message = ERROR_MESSAGE;
         }
-        notifyObservers();
     }
 
     @Override
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified) {
         if (isActionNameModified){
             message = "Suggestion name successfully updated!";
-            notifyObservers();
         }
         else{
             message = ERROR_MESSAGE;
-            notifyObservers();
         }
-
     }
 
     @Override
     public void showModifiedActionType(Map<Integer, Scenario> mScenarios, boolean isActionTypeModified) {
         if (isActionTypeModified){
             message = "Action type successfully updated!";
-            notifyObservers();
         }
         else{
             message = ERROR_MESSAGE;
@@ -170,21 +165,21 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         if (isObjectNameModified){
             message = "Object name of the suggestion successfully updated!";
         }
-        else{
+        else {
             message = ERROR_MESSAGE;
         }
-        notifyObservers();
     }
 
     @Override
     public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
         if (isObjectTypeModified){
             message = "Object type of the suggestion successfully updated!";
+            isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE;
+            isOkOperation = false;
         }
-        notifyObservers();
     }
 
     @Override
@@ -198,17 +193,17 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
                     "\nCheck if the object is already defined: that could be the problem!";
             isOkOperation = false;
         }
-        notifyObservers();
     }
 
     @Override
     public void showRemovedObject(Map<Integer, Scenario> mScenarios, boolean isObjectRemoved) {
         if (isObjectRemoved) {
             message = "Object successfully removed!";
+            isOkOperation = true;
         } else {
             message = ERROR_MESSAGE+"while removing the object";
+            isOkOperation = false;
         }
-        notifyObservers();
     }
 
     @Override
@@ -219,7 +214,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else{
             message = ERROR_MESSAGE;
         }
-        notifyObservers();
     }
 
     @Override
@@ -230,7 +224,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else{
             message = "Oh no! Something went wrong...";
         }
-        notifyObservers();
     }
 
     @Override
@@ -240,7 +233,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
                  if (!lTypes.contains(mTy.getValue().getName()))
                     lTypes.add(mTy.getValue().getName());
             }
-            //notifyObservers();
         }
         else{
             message = "No types defined yet!";

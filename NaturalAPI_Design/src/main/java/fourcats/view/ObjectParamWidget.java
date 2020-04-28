@@ -4,19 +4,19 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ItemEvent;
+import java.awt.event.*;
 
 public class ObjectParamWidget{
-    private JComboBox objectTypeComboBox;
+    private JComboBox<String> objectTypeComboBox;
     private JTextField objectNameTextField;
     private JPanel mainPanel;
     private JButton removeObjectButton;
+    private String objectId;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
 
-    public ObjectParamWidget(Box boxToUpdate, Controller contr, DataPresenterGUI dataPresenter, String objectId,
+    public ObjectParamWidget(SuggestionWidget suggWidget, Controller contr, DataPresenterGUI dataPresenter, String initialObjectId,
                              String objectType, String objectName, String suggestionId, String scenarioId){
+        this.objectId = initialObjectId;
         mainPanel = new JPanel();
         mainPanel.add(objectTypeComboBox);
         mainPanel.add(objectNameTextField);
@@ -25,15 +25,24 @@ public class ObjectParamWidget{
         objectTypeComboBox.setSelectedItem(objectType);
         objectNameTextField.setText(objectName);
 
-        boxToUpdate.add(mainPanel);
-        boxToUpdate.revalidate();
-        boxToUpdate.repaint();
+        suggWidget.addObjectParamWidget(mainPanel);
 
         removeObjectButton.addActionListener(e->{
             contr.removeObject(suggestionId,scenarioId,
                     objectId);
+            if (dataPresenter.isOkOperation()){
+                suggWidget.removeObjectParamWidget(this,mainPanel);
+            }
             JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
-            boxToUpdate.remove(mainPanel);
+        });
+
+
+        objectTypeComboBox.addItemListener(e->{
+            if (e.getStateChange() == ItemEvent.SELECTED && objectTypeComboBox.getSelectedItem()!=null){
+                if(objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)){
+                    new CustomTypeCreation(contr);
+                }
+            }
         });
 
         objectTypeComboBox.addFocusListener(new FocusAdapter() {
@@ -47,15 +56,16 @@ public class ObjectParamWidget{
                 }
                 objectTypeComboBox.addItem(CREATE_CUSTOM);
             }
-        });
-        objectTypeComboBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED){
-                if(objectTypeComboBox.getSelectedItem().equals(CREATE_CUSTOM)){
-                    new CustomTypeCreation(contr);
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (objectTypeComboBox.getSelectedItem()!=null) {
+                    contr.modifyObjectType(suggestionId, scenarioId,
+                            objectId, objectTypeComboBox.getSelectedItem().toString());
                 }
-                else{
-                    contr.modifyObjectType(suggestionId,scenarioId,
-                            objectId,objectTypeComboBox.getSelectedItem().toString());
+                if (!dataPresenter.isOkOperation()){
+                    JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -68,6 +78,13 @@ public class ObjectParamWidget{
                         objectId,objectNameTextField.getText());
             }
         });
+    }
+
+    public int getObjectId(){
+        return Integer.parseInt(this.objectId);
+    }
+    public void setObjectId(int updatedObjectId){
+        this.objectId = Integer.toString(updatedObjectId);
     }
 }
 

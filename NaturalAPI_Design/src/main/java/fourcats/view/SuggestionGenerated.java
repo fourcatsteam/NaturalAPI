@@ -55,12 +55,14 @@ public class SuggestionGenerated implements Observer{
 
         generateBalButton.addActionListener(e -> {
             String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
-            try {
-                contr.generateBAL(balName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+            if (balName != null && !balName.equals("")){
+                try {
+                    contr.generateBAL(balName);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
             }
-            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
         });
     }
 
