@@ -1,5 +1,7 @@
 package fourcats;
 
+import fourcats.frameworks.DataKeeper;
+import fourcats.frameworks.FileSystem;
 import fourcats.gui.Gui;
 import fourcats.frameworks.BalAnalyzerImplementation;
 import fourcats.interfaceadapters.DataPresenter;
@@ -15,7 +17,7 @@ public class App {
     public static void main(String[] args) {
 
 
-        Repository repo = new Repository();
+        Repository repo = new Repository(new DataKeeper(),new FileSystem());
         BalAnalyzerImplementation balAnalyzerImplementation = new BalAnalyzerImplementation();
         DataPresenter dataPresenter = new DataPresenter();
         SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);

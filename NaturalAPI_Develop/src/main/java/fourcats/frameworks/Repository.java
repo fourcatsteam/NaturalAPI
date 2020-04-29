@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class Repository implements RepositoryAccess {
 
-    DataKeeper dataKeeper;
-    FileSystem fileSystem;
+    private DataKeeper dataKeeper;
+    private FileSystem fileSystem;
 
-    public Repository(){
-        dataKeeper = new DataKeeper();
-        fileSystem = new FileSystem();
+    public Repository(DataKeeper datakeeper,FileSystem fileSystem){
+        this.dataKeeper = datakeeper;
+        this.fileSystem = fileSystem;
     }
 
     public File openFile(String filename) {
