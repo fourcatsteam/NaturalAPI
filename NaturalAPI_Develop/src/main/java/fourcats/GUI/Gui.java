@@ -41,7 +41,7 @@ public class Gui implements Observer {
         JFrame frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700,900);
+        frame.setSize(700,500);
         try {
             frame.setIconImage(ImageIO.read(new File("./logo1.png")));
         }
@@ -95,8 +95,7 @@ public class Gui implements Observer {
                 JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
                         "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
                 fileChooser.showOpenDialog(mainPanel);
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())));
+                try (BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())))){
                     GuiPla guiPla = new GuiPla();
                     guiPla.setTextField1FromString(fileChooser.getSelectedFile().getName());
                     guiPla.setTextField2FromString(br.readLine());

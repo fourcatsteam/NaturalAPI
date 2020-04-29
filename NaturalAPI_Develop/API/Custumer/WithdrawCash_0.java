@@ -1,6 +1,6 @@
 public class WithdrawCash {
 
-	public double withdrawCash (double cash){
+	public int withdrawCash (double cash){
 
 	}
 }

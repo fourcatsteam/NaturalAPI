@@ -28,7 +28,7 @@ public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutpu
             //toShow = "-----------API ID : " + mapApi.getKey() + "-----------\n"; //only for CLI
             //notifyObservers();
             for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
-                toShow = toShow + api.getValue();
+                toShow = api.getValue();
                 notifyObservers();
             }
         }

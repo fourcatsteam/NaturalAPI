@@ -45,25 +45,27 @@ public class GuiPla {
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    File file = new File("./PLA/" + textField1.getText());
-                    if(file.exists()) {
-                        int answer = JOptionPane.YES_NO_OPTION;
-                        JOptionPane.showConfirmDialog(frame,"There is already a PLA with this name. Do you want to overwrite it?");
-                        if(answer == JOptionPane.YES_OPTION){
-                            FileWriter fw = new FileWriter(file);
+
+                File file = new File("./PLA/" + textField1.getText());
+                if(file.exists()) {
+                    int answer = JOptionPane.YES_NO_OPTION;
+                    JOptionPane.showConfirmDialog(frame,"There is already a PLA with this name. Do you want to overwrite it?");
+                    if(answer == JOptionPane.YES_OPTION){
+                        try (FileWriter fw = new FileWriter(file)){
                             fw.write(textField2.getText() + "\n" + textArea1.getText());
-                            fw.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
                         }
                     }
-                    else{
-                        FileWriter fw = new FileWriter(file);
-                        fw.write(textField2.getText() + "\n" + textArea1.getText());
-                        fw.close();
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
                 }
+                else{
+                    try(FileWriter fw = new FileWriter(file)){
+                        fw.write(textField2.getText() + "\n" + textArea1.getText());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
             }
         });
         cancelButton.addActionListener(new ActionListener() {
