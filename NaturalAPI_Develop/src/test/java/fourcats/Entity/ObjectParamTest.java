@@ -65,7 +65,7 @@ public class ObjectParamTest {
 
     @Test
     public void ObjectParamConvertedToStringCorrectly() {
-        assertEquals("Name",objectParam.toString());
+        assertEquals("name: Name, type: Type, required: true",objectParam.toString());
     }
 
 }
