@@ -25,7 +25,7 @@ public class FileSystem {
                 sb.append("\n");
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
         return sb.toString();
     }
