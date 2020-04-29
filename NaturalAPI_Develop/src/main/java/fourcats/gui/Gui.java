@@ -1,4 +1,4 @@
-package fourcats.GUI;
+package fourcats.gui;
 
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
@@ -15,6 +15,7 @@ public class Gui implements Observer {
     private Controller controller;
     private DataPresenter dataPresenter;
 
+    private JFrame frame;
     private JButton addBalButton;
     private JButton addPlaButton;
     private JButton suggestionButton;
@@ -26,9 +27,7 @@ public class Gui implements Observer {
     private JButton modifyButton;
     private JButton modifyPLAButton;
     private JButton createPLAButton;
-    private JComboBox comboBox1;
-
-    boolean next = false;
+    private JComboBox<String> comboBox1;
 
     public Gui(Controller c,DataPresenter d){
 
@@ -38,7 +37,7 @@ public class Gui implements Observer {
         final String[] bal = new String[1];
         final String[] pla = new String[1];
 
-        JFrame frame = new JFrame("NaturalApi Develop");
+        frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,500);
@@ -48,7 +47,6 @@ public class Gui implements Observer {
         catch (Exception e){
             e.printStackTrace();
         }
-        frame.setVisible(true);
         comboBox1.setVisible(false);
 
         addBalButton.addActionListener(new ActionListener() {
@@ -123,6 +121,10 @@ public class Gui implements Observer {
                 textArea.setText(comboBox1.getSelectedItem().toString());
             }
         });
+    }
+
+    public void showGui(){
+        frame.setVisible(true);
     }
 
     public void showOutput(){
