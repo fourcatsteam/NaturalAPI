@@ -30,8 +30,7 @@ public class App {
 
         Gui gui = new Gui(controller,dataPresenter);
         gui.showGui();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        CLI c = new CLI(controller,dataPresenter,br);
+        CLI c = new CLI(controller,dataPresenter);
 
         do{
             c.askBal();

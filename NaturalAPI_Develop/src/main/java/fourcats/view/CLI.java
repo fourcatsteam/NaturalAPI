@@ -18,11 +18,11 @@ public class CLI implements Observer {
     private String currentAnswer;
     private BufferedReader br;
 
-    public CLI(Controller c,DataPresenter dp,BufferedReader reader){
+    public CLI(Controller c,DataPresenter dp){
         dataPresenter = dp;
         dataPresenter.attach(this);
         controller = c;
-        br = reader;
+        br = new BufferedReader(new InputStreamReader(System.in));
         currentBal="";
         currentPla="";
         currentAnswer="";
