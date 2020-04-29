@@ -37,7 +37,6 @@ public class BAL{
         for (Actor f : lActors) {
             sb.append(f.toString());
         }
-        String balStr = sb.toString();
-        return balStr;
+        return sb.toString();
     }
 }

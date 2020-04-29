@@ -52,8 +52,7 @@ public class Actor {
         for (Action s : lAction) {
             sb.append(s.toString());
         }
-        String actionStr = sb.toString();
-        return actionStr;
+        return sb.toString();
     }
 
 }
