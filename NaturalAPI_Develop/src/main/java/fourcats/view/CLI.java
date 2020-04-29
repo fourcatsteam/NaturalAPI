@@ -16,12 +16,16 @@ public class CLI implements Observer {
     private String currentBal;
     private String currentPla;
     private String currentAnswer;
-    final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader br; //= new BufferedReader(new InputStreamReader(System.in));
 
-    public CLI(Controller c,DataPresenter dp){
+    public CLI(Controller c,DataPresenter dp,BufferedReader reader){
         dataPresenter = dp;
         dataPresenter.attach(this);
         controller = c;
+        br = reader;
+        currentBal="";
+        currentPla="";
+        currentAnswer="";
     }
 
     public void askBal(){

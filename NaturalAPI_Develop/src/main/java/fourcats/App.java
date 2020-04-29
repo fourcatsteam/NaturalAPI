@@ -12,6 +12,9 @@ import fourcats.view.CLI;
 import fourcats.frameworks.Repository;
 import fourcats.interfaceadapters.Controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class App {
 
     public static void main(String[] args) {
@@ -27,7 +30,9 @@ public class App {
 
         Gui gui = new Gui(controller,dataPresenter);
         gui.showGui();
-        CLI c = new CLI(controller,dataPresenter);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        CLI c = new CLI(controller,dataPresenter,br);
+
         do{
             c.askBal();
             c.readBal();
