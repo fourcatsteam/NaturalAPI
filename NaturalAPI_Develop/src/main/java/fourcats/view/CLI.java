@@ -16,7 +16,6 @@ public class CLI implements Observer {
     private String currentBal;
     private String currentPla;
     private String currentAnswer;
-    private String currentModify;
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public CLI(Controller c,DataPresenter dp){
@@ -32,11 +31,8 @@ public class CLI implements Observer {
     public void readBal(){
         try {
             currentBal = br.readLine();
-            switch (currentBal){
-                case "E":
-                    System.exit(0);
-                default:
-                    break;
+            if (currentBal.equals("E")){
+                System.exit(0);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,11 +46,8 @@ public class CLI implements Observer {
     public void readPla(){
         try {
             currentPla = br.readLine();
-            switch (currentPla){
-                case "E":
-                    System.exit(0);
-                default:
-                    break;
+            if (currentPla.equals("E")){
+                   System.exit(0);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,18 +61,16 @@ public class CLI implements Observer {
     public void readSuggestApi(){
         try {
             currentAnswer = br.readLine();
-            switch (currentAnswer){
-                case "y":
-                    controller.createApiSuggestion(currentBal,currentPla);
-                    break;
-                default:
-                    askBal();
-                    readBal();
-                    askPla();
-                    readPla();
-                    askSuggestApi();
-                    readSuggestApi();
-                    break;
+            if (currentAnswer.equals("y")) {
+                controller.createApiSuggestion(currentBal, currentPla);
+            }
+            else {
+                askBal();
+                readBal();
+                askPla();
+                readPla();
+                askSuggestApi();
+                readSuggestApi();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,7 +120,7 @@ public class CLI implements Observer {
 
     public void readModifyApi(){
         try{
-            currentModify = br.readLine();
+            String currentModify = br.readLine();
             switch (currentModify) {
                 case "y":
                     System.out.println("Type the ID of the chosen API");

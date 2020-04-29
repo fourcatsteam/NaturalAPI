@@ -9,30 +9,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class GuiPla {
+
+    private JFrame frame;
     private JTextArea textArea1;
     private JButton createButton;
     private JButton cancelButton;
     private JPanel mainPanel;
 
-    public void addLineTextArea1(String s) {
-        textArea1.append(s);
-    }
-
-    public void setTextField1FromString(String s) {
-        textField1.setText(s);
-    }
-
-    public void setTextField2FromString(String s) {
-        textField2.setText(s);
-    }
-
     private JTextField textField1;
-    private JTextField textField2;
 
+    private JTextField textField2;
     public GuiPla(){
-        JFrame frame = new JFrame("NaturalApi Develop");
+        frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
         try {
             frame.setIconImage(ImageIO.read(new File("./logo1.png")));
@@ -40,7 +30,6 @@ public class GuiPla {
         catch (Exception e){
             e.printStackTrace();
         }
-        frame.setVisible(true);
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,5 +62,21 @@ public class GuiPla {
                 frame.dispose(); //close the frame
             }
         });
+    }
+
+    public void showGuiPla(){
+        frame.setVisible(true);
+    }
+
+    public void addLineTextArea1(String s) {
+        textArea1.append(s);
+    }
+
+    public void setTextField1FromString(String s) {
+        textField1.setText(s);
+    }
+
+    public void setTextField2FromString(String s) {
+        textField2.setText(s);
     }
 }

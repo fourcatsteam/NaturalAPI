@@ -4,8 +4,6 @@ import fourcats.entity.API;
 import fourcats.observer.Subject;
 import fourcats.port.ApiOutputPort;
 import fourcats.port.ModifyOutputPort;
-
-import javax.xml.crypto.Data;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort {

@@ -2,7 +2,7 @@ package fourcats.usecaseinteractor;
 
 import fourcats.entity.API;
 import fourcats.port.GenerateInputPort;
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.RepositoryAccess;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package fourcats.usecaseinteractor;
 
-import fourcats.interfaceAccess.BalAnalyzer;
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ModifyOutputPort;
 import org.junit.Test;
 import org.mockito.*;

@@ -2,8 +2,8 @@ package fourcats.usecaseinteractor;
 
 import fourcats.port.ApiInputPort;
 import fourcats.entity.*;
-import fourcats.interfaceAccess.BalAnalyzer;
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ApiOutputPort;
 
 public class SuggestApi implements ApiInputPort {

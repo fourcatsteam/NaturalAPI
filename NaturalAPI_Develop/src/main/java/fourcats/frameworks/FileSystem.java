@@ -16,18 +16,18 @@ public class FileSystem {
     }
 
     public String loadPLA(String filename) {
-        String toReturn = "";
+        StringBuilder sb = new StringBuilder();
         File file = openFile("./PLA/" +filename);
         try (Scanner scanner = new Scanner(file)){
 
             while(scanner.hasNext()){
-                toReturn += scanner.nextLine();
-                toReturn += "\n";
+                sb.append(scanner.nextLine());
+                sb.append("\n");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return toReturn;
+        return sb.toString();
     }
 
     public void writeApi(API api) {

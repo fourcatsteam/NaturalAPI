@@ -10,8 +10,8 @@ public class BAL{
         lActors = new ArrayList<>();
     }
 
-    public BAL(List<Actor> ActorsList) {
-        this.lActors = ActorsList;
+    public BAL(List<Actor> actorsList) {
+        this.lActors = actorsList;
     }
 
     public void addUserToBAL(Actor userToAdd) {
@@ -22,7 +22,7 @@ public class BAL{
                 break;
             }
         }
-        if(!present) {
+        if(Boolean.FALSE.equals(present)) {
             lActors.add(userToAdd);
         }
     }
@@ -33,10 +33,11 @@ public class BAL{
 
     @Override
     public String toString() {
-        String BALStr = "";
+        StringBuilder sb = new StringBuilder();
         for (Actor f : lActors) {
-            BALStr +=f.toString();
+            sb.append(f.toString());
         }
-        return BALStr;
+        String balStr = sb.toString();
+        return balStr;
     }
 }

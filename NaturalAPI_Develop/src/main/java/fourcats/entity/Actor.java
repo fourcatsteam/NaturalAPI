@@ -48,10 +48,11 @@ public class Actor {
 
     @Override
     public String toString() {
-        String actionStr = "";
+        StringBuilder sb = new StringBuilder();
         for (Action s : lAction) {
-            actionStr += s.toString();
+            sb.append(s.toString());
         }
+        String actionStr = sb.toString();
         return actionStr;
     }
 

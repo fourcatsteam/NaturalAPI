@@ -5,9 +5,6 @@ import fourcats.port.GenerateInputPort;
 import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 
-import java.io.IOException;
-
-
 public class Controller {
 
     private ApiInputPort apiInputPort;

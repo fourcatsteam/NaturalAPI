@@ -52,8 +52,7 @@ public class Gui implements Observer {
         addBalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
-                        "NaturalAPI\\NaturalAPI_Develop\\BAL\\");
+                JFileChooser fileChooser = new JFileChooser();
                 fileChooser.showOpenDialog(mainPanel);
                 bal[0] = fileChooser.getSelectedFile().getName();
             }
@@ -62,8 +61,7 @@ public class Gui implements Observer {
         addPlaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
-                        "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
+                JFileChooser fileChooser = new JFileChooser();
                 fileChooser.showOpenDialog(mainPanel);
                 pla[0] = fileChooser.getSelectedFile().getName();
             }
@@ -85,6 +83,7 @@ public class Gui implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GuiPla guiPla = new GuiPla();
+                guiPla.showGuiPla();
             }
         });
         modifyPLAButton.addActionListener(new ActionListener() {
@@ -95,6 +94,7 @@ public class Gui implements Observer {
                 fileChooser.showOpenDialog(mainPanel);
                 try (BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())))){
                     GuiPla guiPla = new GuiPla();
+                    guiPla.showGuiPla();
                     guiPla.setTextField1FromString(fileChooser.getSelectedFile().getName());
                     guiPla.setTextField2FromString(br.readLine());
                     String line;

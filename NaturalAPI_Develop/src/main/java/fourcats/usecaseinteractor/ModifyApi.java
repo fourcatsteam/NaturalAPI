@@ -1,8 +1,8 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.entity.*;
-import fourcats.interfaceAccess.BalAnalyzer;
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 import fourcats.port.ModifyOutputPort;

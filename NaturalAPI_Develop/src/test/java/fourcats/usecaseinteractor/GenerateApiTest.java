@@ -1,6 +1,6 @@
 package fourcats.usecaseinteractor;
 
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.RepositoryAccess;
 import org.junit.Test;
 import org.mockito.*;
 

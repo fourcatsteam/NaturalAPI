@@ -6,7 +6,7 @@ import fourcats.entity.Action;
 import fourcats.entity.ObjectParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fourcats.interfaceAccess.BalAnalyzer;
+import fourcats.interfaceaccess.BalAnalyzer;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,13 +58,14 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
 
                 //camelCase operations
                 String[] split = operation.split("_");
-                operation = "";
+                StringBuilder sb = new StringBuilder();
                 for(int i=0; i<split.length; i++) {
                     if(i>0) {
                         split[i] = split[i].substring(0,1).toUpperCase() + split[i].substring(1);
                     }
-                    operation += split[i];
+                    sb.append(split[i]);
                 }
+                operation = sb.toString();
 
                 JsonNode par = op.get("parameters");
 

@@ -1,4 +1,4 @@
-package fourcats.interfaceAccess;
+package fourcats.interfaceaccess;
 
 import fourcats.entity.API;
 

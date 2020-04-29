@@ -1,7 +1,7 @@
 package fourcats.frameworks;
 
 import fourcats.entity.API;
-import fourcats.interfaceAccess.RepositoryAccess;
+import fourcats.interfaceaccess.RepositoryAccess;
 
 import java.io.File;
 import java.util.Map;
