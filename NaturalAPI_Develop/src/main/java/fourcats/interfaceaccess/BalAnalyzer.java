@@ -9,7 +9,5 @@ import java.io.File;
 public interface BalAnalyzer {
 
     void setBalFile(File file);
-    JsonNode getJsonNode();
-    BalAnalyzer get(String s);
     BAL getBAL();
 }

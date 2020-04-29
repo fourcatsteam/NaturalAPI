@@ -15,14 +15,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
 
     private JsonNode jsonNode;
 
-    public BalAnalyzerImplementation(){
-
-    }
-
-    public BalAnalyzerImplementation(BalAnalyzer b){
-        this.jsonNode = b.getJsonNode();
-    }
-
+    public BalAnalyzerImplementation(){}
 
     public void setBalFile(File file){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -31,14 +24,6 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public BalAnalyzer get(String s){
-        return new BalAnalyzerImplementation(this.get(s));
-    }
-
-    public JsonNode getJsonNode() {
-        return jsonNode;
     }
 
     public BAL getBAL(){

@@ -48,7 +48,7 @@ public class Gui implements Observer {
             e.printStackTrace();
         }
         comboBox1.setVisible(false);
-
+        
         addBalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
