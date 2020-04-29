@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class CLI implements Observer {
 
@@ -16,13 +17,13 @@ public class CLI implements Observer {
     private String currentBal;
     private String currentPla;
     private String currentAnswer;
-    private BufferedReader br;
+    private Scanner br;
 
     public CLI(Controller c,DataPresenter dp){
         dataPresenter = dp;
         dataPresenter.attach(this);
         controller = c;
-        br = new BufferedReader(new InputStreamReader(System.in));
+        br = new Scanner(System.in);
         currentBal="";
         currentPla="";
         currentAnswer="";
@@ -33,14 +34,11 @@ public class CLI implements Observer {
     }
 
     public void readBal(){
-        try {
-            currentBal = br.readLine();
+            currentBal = br.nextLine();
             if (currentBal.equals("E")){
                 System.exit(0);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void askPla(){
@@ -48,14 +46,10 @@ public class CLI implements Observer {
     }
 
     public void readPla(){
-        try {
-            currentPla = br.readLine();
+            currentPla = br.nextLine();
             if (currentPla.equals("E")){
                    System.exit(0);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void askSuggestApi(){
@@ -63,8 +57,8 @@ public class CLI implements Observer {
     }
 
     public void readSuggestApi(){
-        try {
-            currentAnswer = br.readLine();
+
+            currentAnswer = br.nextLine();
             if (currentAnswer.equals("y")) {
                 controller.createApiSuggestion(currentBal, currentPla);
             }
@@ -76,9 +70,6 @@ public class CLI implements Observer {
                 askSuggestApi();
                 readSuggestApi();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void askAnother(){
@@ -86,12 +77,7 @@ public class CLI implements Observer {
     }
 
     public void readAnother(){
-        try{
-            currentAnswer = br.readLine();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
+            currentAnswer = br.nextLine();
     }
 
     public void askGenerateApi(){
@@ -99,8 +85,7 @@ public class CLI implements Observer {
     }
 
     public void readGenerateApi(){
-        try{
-            currentAnswer = br.readLine();
+            currentAnswer = br.nextLine();
             switch (currentAnswer) {
                 case "y":
                     controller.generateApi();
@@ -111,10 +96,6 @@ public class CLI implements Observer {
                 default:
                     throw new InputMismatchException("Error: insert y or n");
             }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void askModifyApi(){
@@ -123,12 +104,11 @@ public class CLI implements Observer {
     }
 
     public void readModifyApi(){
-        try{
-            String currentModify = br.readLine();
+            String currentModify = br.nextLine();
             switch (currentModify) {
                 case "y":
                     System.out.println("Type the ID of the chosen API");
-                    currentModify = br.readLine();
+                    currentModify = br.nextLine();
                     askBal();
                     readBal();
                     askPla();
@@ -143,10 +123,6 @@ public class CLI implements Observer {
                 default:
                     throw new InputMismatchException("Error: insert y or n");
             }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void showOutput(){
