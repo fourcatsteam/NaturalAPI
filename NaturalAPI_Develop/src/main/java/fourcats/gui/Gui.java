@@ -6,8 +6,6 @@ import fourcats.observer.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 
 public class Gui implements Observer {

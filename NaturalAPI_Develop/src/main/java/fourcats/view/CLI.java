@@ -16,7 +16,7 @@ public class CLI implements Observer {
     private String currentBal;
     private String currentPla;
     private String currentAnswer;
-    private BufferedReader br; //= new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader br;
 
     public CLI(Controller c,DataPresenter dp,BufferedReader reader){
         dataPresenter = dp;

@@ -15,8 +15,6 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
 
     private JsonNode jsonNode;
 
-    public BalAnalyzerImplementation(){}
-
     public void setBalFile(File file){
         ObjectMapper objectMapper = new ObjectMapper();
         try {

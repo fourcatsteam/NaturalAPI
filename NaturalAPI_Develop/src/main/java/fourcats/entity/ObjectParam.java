@@ -48,7 +48,7 @@ public class ObjectParam {
     }
 
     @Override public String toString() {
-        return name; //"name: " + name + ", type: " + type + ", required: " + required + "\n";
+        return "name: " + name + ", type: " + type + ", required: " + required + "\n";
     }
 
 }
