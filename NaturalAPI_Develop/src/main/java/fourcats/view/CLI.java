@@ -4,9 +4,10 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.observer.Observer;
 
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class CLI implements Observer {
 
@@ -15,13 +16,13 @@ public class CLI implements Observer {
     private String currentBal;
     private String currentPla;
     private String currentAnswer;
-    private Scanner br;
+    private BufferedReader br;
 
     public CLI(Controller c,DataPresenter dp){
         dataPresenter = dp;
         dataPresenter.attach(this);
         controller = c;
-        br = new Scanner(System.in);
+        br = new BufferedReader(new InputStreamReader(System.in));
         currentBal="";
         currentPla="";
         currentAnswer="";
@@ -32,11 +33,14 @@ public class CLI implements Observer {
     }
 
     public void readBal(){
-            currentBal = br.nextLine();
+        try {
+            currentBal = br.readLine();
             if (currentBal.equals("E")){
                 System.exit(0);
             }
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void askPla(){
@@ -44,10 +48,14 @@ public class CLI implements Observer {
     }
 
     public void readPla(){
-            currentPla = br.nextLine();
+        try {
+            currentPla = br.readLine();
             if (currentPla.equals("E")){
                    System.exit(0);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void askSuggestApi(){
@@ -55,8 +63,8 @@ public class CLI implements Observer {
     }
 
     public void readSuggestApi(){
-
-            currentAnswer = br.nextLine();
+        try {
+            currentAnswer = br.readLine();
             if (currentAnswer.equals("y")) {
                 controller.createApiSuggestion(currentBal, currentPla);
             }
@@ -68,6 +76,9 @@ public class CLI implements Observer {
                 askSuggestApi();
                 readSuggestApi();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void askAnother(){
@@ -75,7 +86,12 @@ public class CLI implements Observer {
     }
 
     public void readAnother(){
-            currentAnswer = br.nextLine();
+        try{
+            currentAnswer = br.readLine();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void askGenerateApi(){
@@ -83,7 +99,8 @@ public class CLI implements Observer {
     }
 
     public void readGenerateApi(){
-            currentAnswer = br.nextLine();
+        try{
+            currentAnswer = br.readLine();
             switch (currentAnswer) {
                 case "y":
                     controller.generateApi();
@@ -94,6 +111,10 @@ public class CLI implements Observer {
                 default:
                     throw new InputMismatchException("Error: insert y or n");
             }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void askModifyApi(){
@@ -102,11 +123,12 @@ public class CLI implements Observer {
     }
 
     public void readModifyApi(){
-            String currentModify = br.nextLine();
+        try{
+            String currentModify = br.readLine();
             switch (currentModify) {
                 case "y":
                     System.out.println("Type the ID of the chosen API");
-                    currentModify = br.nextLine();
+                    currentModify = br.readLine();
                     askBal();
                     readBal();
                     askPla();
@@ -121,6 +143,10 @@ public class CLI implements Observer {
                 default:
                     throw new InputMismatchException("Error: insert y or n");
             }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void showOutput(){
