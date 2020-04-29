@@ -10,9 +10,9 @@ public class BAL{
     }
 
     public void addUserToBAL(Actor userToAdd) {
-        Boolean present = false;
+        boolean present = false;
         for(Actor a : lActors) {
-            if(a.getName()==userToAdd.getName()) {
+            if(a.getName().equals(userToAdd.getName())) {
                 present = true;
                 break;
             }

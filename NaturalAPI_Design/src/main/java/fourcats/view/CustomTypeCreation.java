@@ -4,11 +4,14 @@ import fourcats.interfaceadapters.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CustomTypeCreation {
-    public CustomTypeCreation(Controller controller){
+    public CustomTypeCreation(Controller controller, ArrayList<String> lAvailableTypes){
         Map<String,String> mAttributes = new HashMap<>();
 
         JPanel fields = new JPanel(new GridLayout(5, 1));
@@ -39,17 +42,34 @@ public class CustomTypeCreation {
             }
         });
 
+        attributeTypeComboBox.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                attributeTypeComboBox.removeAllItems();
+                for (String type : lAvailableTypes) {
+                    attributeTypeComboBox.addItem(type);
+                }
+            }
+        });
+
         int result = JOptionPane.showConfirmDialog(null, fields, "Create custom type", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             if (!attributeNameField.getText().equals("")){
                 mAttributes.put(attributeNameField.getText(),attributeTypeComboBox.getSelectedItem().toString());
             }
-            if (mAttributes.size()!=0){
-                controller.createCustomType(typeNameField.getText(),mAttributes);
+            if (!typeNameField.getText().equals("")){
+                if (mAttributes.size()!=0){
+                    controller.createCustomType(typeNameField.getText(),mAttributes);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Abort: custom types should have at least one attribute", "Error custom type", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            else{
-                JOptionPane.showMessageDialog(null,"Abort: custom types should have at least one attribute", "Error custom type", JOptionPane.ERROR_MESSAGE);
+            else {
+                JOptionPane.showMessageDialog(null, "Abort: no name given for the custom type", "Error custom type", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }
 }

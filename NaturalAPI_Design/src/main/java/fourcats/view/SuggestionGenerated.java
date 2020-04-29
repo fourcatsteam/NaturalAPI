@@ -61,7 +61,6 @@ public class SuggestionGenerated implements Observer{
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
             }
         });
     }
@@ -119,6 +118,12 @@ public class SuggestionGenerated implements Observer{
         }
         if (dataPresenter.isSuggestionToAdd()) {
             new SuggestionWidget(panelSuggestion, contr, dataPresenter);
+        }
+        if (!dataPresenter.getMessage().equals("")) {
+            if (dataPresenter.isOkOperation())
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
+            else
+                JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
         }
     }
 

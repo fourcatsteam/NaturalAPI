@@ -55,7 +55,6 @@ public class SuggestionWidget {
                     lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),
                             "string",objectName,suggestionId,scenarioId));
                 }
-                JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
             }
             else{
                 JOptionPane.showMessageDialog(null,"Abort: no name entered", "Invalid name",JOptionPane.WARNING_MESSAGE);
@@ -76,10 +75,7 @@ public class SuggestionWidget {
         actionTypeComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED){
                 if(Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
-                    new CustomTypeCreation(contr);
-                }
-                else{
-                    contr.modifyActionType(suggestionId,scenarioId,actionTypeComboBox.getSelectedItem().toString());
+                    new CustomTypeCreation(contr,dataPresenter.getlTypes());
                 }
             }
         });
@@ -88,13 +84,20 @@ public class SuggestionWidget {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                contr.showTypes();
                 actionTypeComboBox.removeAllItems();
+                contr.showTypes();
                 actionTypeComboBox.addItem("void");
                 for (String type : dataPresenter.getlTypes()) {
                     actionTypeComboBox.addItem(type);
                 }
                 actionTypeComboBox.addItem(CREATE_CUSTOM);
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (actionTypeComboBox.getSelectedItem()!=null && !actionTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
+                    contr.modifyActionType(suggestionId,scenarioId,actionTypeComboBox.getSelectedItem().toString());
+                }
             }
         });
 

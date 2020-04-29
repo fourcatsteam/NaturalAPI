@@ -6,7 +6,7 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ObjectParamWidget{
+public class ObjectParamWidget {
     private JComboBox<String> objectTypeComboBox;
     private JTextField objectNameTextField;
     private JPanel mainPanel;
@@ -33,14 +33,13 @@ public class ObjectParamWidget{
             if (dataPresenter.isOkOperation()){
                 suggWidget.removeObjectParamWidget(this,mainPanel);
             }
-            JOptionPane.showMessageDialog(null,dataPresenter.getMessage());
-        });
 
+        });
 
         objectTypeComboBox.addItemListener(e->{
             if (e.getStateChange() == ItemEvent.SELECTED && objectTypeComboBox.getSelectedItem()!=null){
                 if(objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)){
-                    new CustomTypeCreation(contr);
+                    new CustomTypeCreation(contr,dataPresenter.getlTypes());
                 }
             }
         });
@@ -49,8 +48,8 @@ public class ObjectParamWidget{
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                contr.showTypes();
                 objectTypeComboBox.removeAllItems();
+                contr.showTypes();
                 for (String type : dataPresenter.getlTypes()){
                     objectTypeComboBox.addItem(type);
                 }
@@ -60,12 +59,9 @@ public class ObjectParamWidget{
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (objectTypeComboBox.getSelectedItem()!=null) {
+                if (objectTypeComboBox.getSelectedItem()!=null && !objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
                     contr.modifyObjectType(suggestionId, scenarioId,
                             objectId, objectTypeComboBox.getSelectedItem().toString());
-                }
-                if (!dataPresenter.isOkOperation()){
-                    JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -86,6 +82,7 @@ public class ObjectParamWidget{
     public void setObjectId(int updatedObjectId){
         this.objectId = Integer.toString(updatedObjectId);
     }
+
 }
 
 

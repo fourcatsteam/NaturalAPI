@@ -8,7 +8,6 @@ import fourcats.entities.Type;
 import fourcats.port.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
@@ -21,10 +20,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String actionType;
     String actionName;
     String actor;
-    List<String> lTypes;
-    List<String> lObjectId;
-    List<String> lObjectTypes;
-    List<String> lObjectNames;
+    ArrayList<String> lTypes;
+    ArrayList<String> lObjectId;
+    ArrayList<String> lObjectTypes;
+    ArrayList<String> lObjectNames;
     boolean isSuggestionToAdd;
     boolean isOkOperation;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
@@ -110,19 +109,19 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionToAdd;
     }
 
-    public List<String> getlTypes() {
+    public ArrayList<String> getlTypes() {
         return lTypes;
     }
 
-    public List<String> getlObjectId() {
+    public ArrayList<String> getlObjectId() {
         return lObjectId;
     }
 
-    public List<String> getlObjectTypes() {
+    public ArrayList<String> getlObjectTypes() {
         return lObjectTypes;
     }
 
-    public List<String> getlObjectNames() {
+    public ArrayList<String> getlObjectNames() {
         return lObjectNames;
     }
 
@@ -134,19 +133,25 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk) {
         if (isOk) {
             message = "Suggestion removed!";
+            isOkOperation = true;
         }
         else {
             message = ERROR_MESSAGE;
+            isOkOperation = false;
         }
+        notifyObservers();
     }
 
     @Override
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified) {
         if (isActionNameModified){
             message = "Suggestion name successfully updated!";
+            isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE;
+            isOkOperation = false;
+            notifyObservers();
         }
     }
 
@@ -154,20 +159,27 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showModifiedActionType(Map<Integer, Scenario> mScenarios, boolean isActionTypeModified) {
         if (isActionTypeModified){
             message = "Action type successfully updated!";
+            isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE;
+            isOkOperation = false;
+            notifyObservers();
         }
+
     }
 
     @Override
     public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
         if (isObjectNameModified){
             message = "Object name of the suggestion successfully updated!";
+            isOkOperation = true;
         }
         else {
             message = ERROR_MESSAGE;
+            isOkOperation = false;
         }
+        notifyObservers();
     }
 
     @Override
@@ -179,7 +191,9 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else{
             message = ERROR_MESSAGE;
             isOkOperation = false;
+            notifyObservers();
         }
+
     }
 
     @Override
@@ -192,6 +206,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             message = ERROR_MESSAGE+
                     "\nCheck if the object is already defined: that could be the problem!";
             isOkOperation = false;
+            notifyObservers();
         }
     }
 
@@ -203,27 +218,35 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         } else {
             message = ERROR_MESSAGE+"while removing the object";
             isOkOperation = false;
+            notifyObservers();
         }
+
     }
 
     @Override
     public void showCustomTypeCreationStatus(boolean isCreated) {
         if (isCreated){
             message = "Custom type successfully created!";
+            isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE;
+            isOkOperation = false;
         }
+        notifyObservers();
     }
 
     @Override
     public void showGenerationStatus(boolean isBALGenerated) {
         if (isBALGenerated){
             message = "Hooray! The BAL was successfully created. You will find it in the BAL folder";
+            isOkOperation = true;
         }
         else{
             message = "Oh no! Something went wrong...";
+            isOkOperation = false;
         }
+        notifyObservers();
     }
 
     @Override
@@ -237,6 +260,5 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else{
             message = "No types defined yet!";
         }
-
     }
 }
