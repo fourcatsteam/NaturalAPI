@@ -1,11 +1,23 @@
 package fourcats.usecaseinteractor;
 
+import fourcats.entity.API;
+import fourcats.entity.Action;
+import fourcats.entity.Actor;
+import fourcats.entity.BAL;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ApiOutputPort;
 import org.junit.Test;
 import org.mockito.*;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.Mockito.*;
 
 public class SuggestApiTest {
 
@@ -28,6 +40,36 @@ public class SuggestApiTest {
             assertTrue(true);
         }
 
+    }
+
+    @Test
+    public void correctlyCreatingSuggestApi(){
+        assertNotNull(suggestAPI);
+    }
+
+    @Test
+    public void correctlysuggestionApiCreated(){
+        String filebal = "bal.json";
+        String filepla = "pla";
+
+        List<Actor> l = new LinkedList<>();
+        Actor act = new Actor("Actor1");
+        Action action = new Action(("gioca"));
+        action.addObjectName("palla");
+        act.addAction(action);
+        l.add(act);
+        BAL bal = new BAL(l);
+
+
+        when(analyzerMock.getBAL()).thenReturn(bal);
+        when(repositoryMock.loadPLA(filepla)).thenReturn("ciao\nciao2");
+        when(repositoryMock.openFile(any(String.class))).thenReturn(new File("./API/"));
+
+        suggestAPI.create(filebal,filepla);
+
+        verify(repositoryMock,times(2)).openFile(any(String.class));
+        verify(repositoryMock).addApi(any(API.class));
+        verify(outputMock).showOutput(anyMap());
     }
 
 }
