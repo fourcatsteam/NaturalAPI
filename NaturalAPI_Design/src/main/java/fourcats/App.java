@@ -17,8 +17,8 @@ public class App {
         Repository repo = new Repository(new DataKeeper(), new FileSystemAccess("gherkin_documents/", "BAL/", "BDL/"));
         StanfordNlp nlp = new StanfordNlp();
         //StanfordNlp nlp = null;
-        DataPresenter dataPresenter = new DataPresenter();
-        //DataPresenterGUI dataPresenter = new DataPresenterGUI();
+        //DataPresenter dataPresenter = new DataPresenter();
+        DataPresenterGUI dataPresenter = new DataPresenterGUI();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
         GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
@@ -28,22 +28,23 @@ public class App {
         CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
         ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
         AddBALSuggestion addBALSuggestion = new AddBALSuggestion(repo,dataPresenter);
+        LoadBdl loadBdl = new LoadBdl(repo,dataPresenter);
 
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion);
+                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl);
 
 
-        //GUI_Design g = new GUI_Design(controller,dataPresenter);
-        //g.createAndShowGUI();
+        GUI_Design g = new GUI_Design(controller,dataPresenter);
+        g.createAndShowGUI();
 
-        CLI cli = new CLI(controller,dataPresenter);
+        /*CLI cli = new CLI(controller,dataPresenter);
 
 
         boolean shouldContinue = true;
         while(shouldContinue) {
             cli.askForUseCase();
             shouldContinue = cli.readUseCase();
-        }
+        }*/
 
     }
 }
