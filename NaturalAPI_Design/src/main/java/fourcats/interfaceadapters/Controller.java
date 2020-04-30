@@ -12,16 +12,18 @@ public class Controller{
     private ModifyBALSuggestionInputPort modifySuggestion;
     private CreateCustomTypeInputPort createCustomType;
     private ShowTypesInputPort showTypes;
+    private AddBALSuggestionInputPort addSuggestion;
 
     public Controller(GenerateBALSuggestionsInputPort generateBALSugg, DeclineBALSuggestionInputPort declineBALSugg,
                       GenerateBALInputPort generateBal, ModifyBALSuggestionInputPort modifyBALSugg,
-                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes){
+                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes, AddBALSuggestionInputPort addSuggestion){
             this.generateSuggestion = generateBALSugg;
             this.declineSuggestion = declineBALSugg;
             this.generateBAL = generateBal;
             this.modifySuggestion = modifyBALSugg;
             this.createCustomType = createCustomType;
             this.showTypes = showTypes;
+            this.addSuggestion = addSuggestion;
     }
 
     public void generateSuggestions(String featureFileName) {
@@ -69,5 +71,11 @@ public class Controller{
     }
     public void removeObject(String idSuggestion, String idScenario, String idObject){
         modifySuggestion.removeObject(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),Integer.parseInt(idObject));
+    }
+    public void addSuggestion(String idScenario, String suggestionName, String suggestionType){
+        addSuggestion.addSuggestion(Integer.parseInt(idScenario),suggestionName,suggestionType);
+    }
+    public void addSuggestionByIdType(String idScenario, String suggestionName, String idType){
+        addSuggestion.addSuggestionByIdType(Integer.parseInt(idScenario),suggestionName,Integer.parseInt(idType));
     }
 }

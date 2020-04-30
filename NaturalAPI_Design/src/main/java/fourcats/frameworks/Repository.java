@@ -100,5 +100,15 @@ public class Repository implements RepositoryAccess  {
         dataKeeper.removeObject(idScenario,idAction,idObject);
     }
 
+    @Override
+    public void createSuggestion(int idScenario, String suggestionName, String suggestionType) {
+        dataKeeper.addSuggestion(idScenario,suggestionName,suggestionType);
+    }
+
+    @Override
+    public void crateSuggestionByIdType(int idScenario, String suggestionName, int idType) {
+        dataKeeper.addSuggestionByIdType(idScenario,suggestionName,idType);
+    }
+
 
 }

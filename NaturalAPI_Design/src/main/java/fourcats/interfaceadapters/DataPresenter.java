@@ -9,7 +9,7 @@ import fourcats.port.*;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort {
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort,  AddBALSuggestionOutputPort {
 
     private String toShow;
 
@@ -164,5 +164,18 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
             toShow = "Error! Please check your input, probably the type is already defined: change the name or use the old one.";
         }
         notifyObservers();
+    }
+
+    @Override
+    public void showAddedSuggestion(Map<Integer, Scenario> mScenarios, boolean isSuggestionAdded) {
+        if (isSuggestionAdded) {
+            toShow = "Suggestion successfully added! This is the updated list of suggestions";
+            notifyObservers();
+            showSuggestionsForScenario(mScenarios);
+        }
+        else {
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario or the id of the type for the suggestion you want to update.";
+            notifyObservers();
+        }
     }
 }

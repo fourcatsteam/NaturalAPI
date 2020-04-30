@@ -24,4 +24,7 @@ public interface RepositoryAccess {
     void updateActionTypeById(int idAction, int idScenario, int idType);
     void createObject(int idAction, int idScenario, String objectName, int idType);
     void deleteObject(int idAction, int idScenario, int idObject);
+
+    void createSuggestion(int idScenario, String suggestionName, String suggestionType);
+    void crateSuggestionByIdType(int idScenario, String suggestionName, int idType);
 }

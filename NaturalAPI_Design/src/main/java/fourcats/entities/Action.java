@@ -9,6 +9,12 @@ public class Action {
     private List<ObjectParam> param;
     private Type type;
 
+    public Action(String actionName, Type actionType) {
+        this.name = actionName;
+        this.param = new ArrayList<>();
+        this.type = actionType;
+    }
+
     public Action(String actionName, String actionType) {
         this.name = actionName;
         this.param = new ArrayList<>();

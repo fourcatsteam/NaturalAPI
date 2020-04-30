@@ -69,62 +69,70 @@ public class CLI implements Observer {
     private void askForOperationOnSuggestion() throws IOException {
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("\nDo you want to modify or delete a suggestion? 1. YES 2. NO. Digit EXIT to abort.");
+            System.out.println("\nWhat do you want to do?\n1. Modify suggestion\n2. Delete suggestion\n3. Add suggestion" +
+                    "\n4. Add new scenario\n5. Generate BAL\nDigit EXIT to abort.");
             input = br.readLine();
-            if (input.equals("1")) {
-                modifySuggestion();
-            }
-            else if (input.equals("2")){
-                System.out.println("1. Add new scenario 2. Generate BAL. Digit EXIT to abort");
-                input = br.readLine();
-                if(input.equals("1")){
+            switch(input){
+                case "1":
+                    modifySuggestion();
+                    break;
+                case "2":
+                    deleteSuggestion();
+                    break;
+                case "3":
+                    addSuggestion();
+                    break;
+                case "4":
                     contr.generateSuggestions(chooseFile());
-                }
-                else if(input.equals("2")){
+                    break;
+                case "5":
                     System.out.println("Please, insert the name for the BAL");
-                    input = br.readLine();
-                    contr.generateBAL(input);
-                    return;
-                }
+                    String balName = br.readLine();
+                    contr.generateBAL(balName);
+                    break;
+                default:
+                    System.out.println("Please insert a valid option. Digit EXIT to exit.");
+                    break;
             }
         }
     }
 
     private void modifySuggestion() throws IOException {
-        System.out.println("1. Delete 2. Modify suggestion");
+        String idScenario = askForIdScenarioToModify();
+        String idSuggestion = askForIdSuggestionToModify();
+        System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
         String input = br.readLine();
-        if (input.equals("1")) {
-            deleteSuggestion();
+        switch(input){
+            case "1":
+                modifyActionName(idScenario,idSuggestion);
+                break;
+            case "2":
+                modifyActionType(idScenario,idSuggestion);
+                break;
+            case "3":
+                modifyObjectName(idScenario,idSuggestion);
+                break;
+            case "4":
+                modifyObjectType(idScenario,idSuggestion);
+                break;
+            case "5":
+                addObject(idScenario,idSuggestion);
+                break;
+            case "6":
+                removeObject(idScenario,idSuggestion);
+                break;
+            default:
+                System.out.println("Error! Please insert a valid option");
+                break;
         }
-        else if(input.equals("2")){
-            String idScenario = askForIdScenarioToModify();
-            String idSuggestion = askForIdSuggestionToModify();
-            System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
-            input = br.readLine();
-            switch(input){
-                case "1":
-                    modifyActionName(idScenario,idSuggestion);
-                    break;
-                case "2":
-                    modifyActionType(idScenario,idSuggestion);
-                    break;
-                case "3":
-                    modifyObjectName(idScenario,idSuggestion);
-                    break;
-                case "4":
-                    modifyObjectType(idScenario,idSuggestion);
-                    break;
-                case "5":
-                    addObject(idScenario,idSuggestion);
-                    break;
-                case "6":
-                    removeObject(idScenario,idSuggestion);
-                    break;
-                default:
-                    System.out.println("Error! Please insert a valid option");
-                    break;
-            }
-        }
+    }
+
+    private void addSuggestion() throws IOException {
+        String idScenario = askForIdScenarioToModify();
+        System.out.println("Insert the name for the new Action");
+        String actionName = br.readLine();
+        String idType = askForIdType();
+        contr.addSuggestionByIdType(idScenario,actionName,idType);
     }
 
     private String createCustomType() throws IOException {
@@ -234,7 +242,7 @@ public class CLI implements Observer {
     }
 
     private String askForIdScenarioToModify() throws IOException {
-        System.out.println("Please insert the id of the scenario for the suggestion you want to modify");
+        System.out.println("Please insert the id of the scenario you want to modify");
         return br.readLine();
     }
     private String askForIdSuggestionToModify() throws IOException {
