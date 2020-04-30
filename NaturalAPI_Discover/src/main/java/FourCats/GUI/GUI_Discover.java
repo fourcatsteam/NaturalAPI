@@ -158,6 +158,11 @@ public class GUI_Discover extends JPanel implements Observer{
         panelVerbs.setText(datapresenter.getBdlVerbs());
         panelPredicates.setText(datapresenter.getBdlPredicates());
 
+        //slide the text areas to top
+        panelNouns.setCaretPosition(0);
+        panelVerbs.setCaretPosition(0);
+        panelPredicates.setCaretPosition(0);
+
         log.append(datapresenter.getMessage()+"\n");
     }
 

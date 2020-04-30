@@ -33,6 +33,7 @@ public class AnalyzeDocument {
             }
         }
 
+        bdl.order();
     }
 
     public void addDocumentToBdl(Bdl bdl, Document document) {
@@ -54,6 +55,6 @@ public class AnalyzeDocument {
                 bdl.addPredicate(dep.getGov()+" "+dep.getDep());
             }
         }
-
+        bdl.order();
     }
 }
