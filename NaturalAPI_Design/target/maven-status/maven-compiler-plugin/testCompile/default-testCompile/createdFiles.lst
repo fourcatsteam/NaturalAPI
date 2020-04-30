@@ -1,0 +1,14 @@
+fourcats/usecaseinteractor/GenerateBALTest.class
+fourcats/usecaseinteractor/DeclineBALSuggestionTest.class
+fourcats/frameworks/FileSystemAccessTest.class
+fourcats/datastructure/WordCounterTest.class
+fourcats/datastructure/WordTagTest.class
+fourcats/entities/ObjectParamTest.class
+fourcats/entities/BdlTest.class
+fourcats/AppTest.class
+fourcats/entities/BALTest.class
+fourcats/entities/ScenarioTest.class
+fourcats/frameworks/StanfordNlpTest.class
+fourcats/datastructure/AnalyzedDataTest.class
+fourcats/usecaseinteractor/GenerateBALSuggestionsTest.class
+fourcats/datastructure/BlackListTest.class

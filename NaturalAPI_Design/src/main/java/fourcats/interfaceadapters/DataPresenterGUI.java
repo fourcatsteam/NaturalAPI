@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort {
+        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort, LoadBDLOutputPort {
     String message;
     String scenarioId;
     String suggestionId;
@@ -286,5 +286,11 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             }
         }
         isSuggestionToAdd = false;
+    }
+
+    @Override
+    public void showBDLOutput(String s) {
+        this.message = s;
+        notifyObservers();
     }
 }

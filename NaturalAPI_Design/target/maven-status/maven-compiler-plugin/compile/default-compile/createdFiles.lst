@@ -26,10 +26,12 @@ fourcats/usecaseinteractor/GenerateBAL.class
 fourcats/usecaseinteractor/CreateCustomType.class
 fourcats/interfaceaccess/PersistentMemoryAccess.class
 fourcats/view/ScenarioWidget.class
+fourcats/view/CustomTypeCreation$1.class
 fourcats/port/GenerateBALOutputPort.class
 fourcats/view/SuggestionWidget$1.class
 fourcats/App.class
 fourcats/port/GenerateBALSuggestionsInputPort.class
+fourcats/usecaseinteractor/AddBALSuggestion.class
 fourcats/entities/Actor.class
 fourcats/view/CLI.class
 fourcats/view/ObjectParamWidget.class
@@ -46,7 +48,9 @@ fourcats/datastructure/BlackList.class
 fourcats/datastructure/observer/Subject.class
 fourcats/datastructure/Dependency.class
 fourcats/interfaceaccess/RepositoryAccess.class
+fourcats/port/AddBALSuggestionInputPort.class
 fourcats/view/ObjectParamWidget$2.class
+fourcats/port/AddBALSuggestionOutputPort.class
 fourcats/entities/Action.class
 fourcats/entities/Bdl.class
 fourcats/port/ShowTypesOutputPort.class

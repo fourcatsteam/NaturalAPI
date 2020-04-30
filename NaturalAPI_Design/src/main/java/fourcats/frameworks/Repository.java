@@ -1,5 +1,6 @@
 package fourcats.frameworks;
 
+import fourcats.entities.Bdl;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 import fourcats.interfaceaccess.PersistentMemoryAccess;
@@ -108,6 +109,11 @@ public class Repository implements RepositoryAccess  {
     @Override
     public void crateSuggestionByIdType(int idScenario, String suggestionName, int idType) {
         dataKeeper.addSuggestionByIdType(idScenario,suggestionName,idType);
+    }
+
+    @Override
+    public Bdl readBdl(String[] name) throws IOException {
+        return memoryAccess.getBdl(name);
     }
 
 

@@ -1,4 +1,5 @@
 package fourcats.interfaceaccess;
+import fourcats.entities.Bdl;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 
@@ -27,4 +28,7 @@ public interface RepositoryAccess {
 
     void createSuggestion(int idScenario, String suggestionName, String suggestionType);
     void crateSuggestionByIdType(int idScenario, String suggestionName, int idType);
+
+    Bdl readBdl(String[] name) throws IOException;
+
 }

@@ -12,7 +12,7 @@ import fourcats.view.GUI_Design;
  */
 public class App {
     public static void main( String[] args ){
-        Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
+        Repository repo = new Repository(new DataKeeper(), new FileSystemAccess("gherkin_documents/", "BAL/", "BDL/"));
         StanfordNlp nlp = new StanfordNlp();
         //DataPresenter dataPresenter = new DataPresenter();
         DataPresenterGUI dataPresenter = new DataPresenterGUI();
@@ -25,9 +25,10 @@ public class App {
         CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
         ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
         AddBALSuggestion addBALSuggestion = new AddBALSuggestion(repo,dataPresenter);
+        LoadBdl loadBdl = new LoadBdl(repo,dataPresenter);
 
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion);
+                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl);
 
 
         GUI_Design gui = new GUI_Design(controller,dataPresenter);
