@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort {
+        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort, LoadBDLOutputPort {
     String message;
     String scenarioId;
     String suggestionId;
@@ -264,6 +264,11 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     @Override
     public void showAddedSuggestion(Map<Integer, Scenario> mScenarios, boolean isSuggestionAdded) {
+
+    }
+
+    @Override
+    public void showBDLOutput(String s) {
 
     }
 }

@@ -13,10 +13,11 @@ public class Controller{
     private CreateCustomTypeInputPort createCustomType;
     private ShowTypesInputPort showTypes;
     private AddBALSuggestionInputPort addSuggestion;
+    private LoadBDLInputPort loadBdl;
 
     public Controller(GenerateBALSuggestionsInputPort generateBALSugg, DeclineBALSuggestionInputPort declineBALSugg,
                       GenerateBALInputPort generateBal, ModifyBALSuggestionInputPort modifyBALSugg,
-                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes, AddBALSuggestionInputPort addSuggestion){
+                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes, AddBALSuggestionInputPort addSuggestion,LoadBDLInputPort loadBdl){
             this.generateSuggestion = generateBALSugg;
             this.declineSuggestion = declineBALSugg;
             this.generateBAL = generateBal;
@@ -24,6 +25,7 @@ public class Controller{
             this.createCustomType = createCustomType;
             this.showTypes = showTypes;
             this.addSuggestion = addSuggestion;
+            this.loadBdl = loadBdl;
     }
 
     public void generateSuggestions(String featureFileName) {
@@ -78,4 +80,10 @@ public class Controller{
     public void addSuggestionByIdType(String idScenario, String suggestionName, String idType){
         addSuggestion.addSuggestionByIdType(Integer.parseInt(idScenario),suggestionName,Integer.parseInt(idType));
     }
+
+    public void loadBdl(String namebdl){
+        loadBdl.loadingBdl(namebdl);
+    }
+
+
 }
