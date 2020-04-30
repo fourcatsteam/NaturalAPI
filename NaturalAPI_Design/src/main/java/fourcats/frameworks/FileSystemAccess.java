@@ -23,19 +23,28 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         bdlPathToFolder = bdlPath;
     }
 
-
     @Override
     public String readFile(String fileName) throws FileNotFoundException {
-        String filepath = documentsPathToFolder + fileName;
+        String filepathRelative = documentsPathToFolder + fileName;
+        String filepathAbsolute = fileName;
         String s, fileContent = "";
-        try(BufferedReader input = new BufferedReader(new FileReader(filepath))){
+        //first try with relative path, than, if exception is throw, try with absolute one
+        try(BufferedReader input = new BufferedReader(new FileReader(filepathRelative))){
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
             }
 
         }catch(IOException e){
+            //try with absolute path
+            try(BufferedReader input = new BufferedReader(new FileReader(filepathAbsolute))){
+                while((s=input.readLine()) != null){
+                    fileContent += s + " ";
+                }
+            }
+            catch (IOException exception){
+                throw new FileNotFoundException();
+            }
             //modificare gestione eccezioni
-            throw new FileNotFoundException();
         }
         return fileContent;
     }

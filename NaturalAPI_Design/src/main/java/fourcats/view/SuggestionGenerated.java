@@ -27,7 +27,7 @@ public class SuggestionGenerated implements Observer{
     private int gridX = 0;
     private int gridY = 0;
 
-    public SuggestionGenerated(String featureName, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter){
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
@@ -62,7 +62,7 @@ public class SuggestionGenerated implements Observer{
                 }
             }
         });
-        contr.generateSuggestions(featureName);
+        contr.generateSuggestions(featurePath);
     }
 
     public void createAndShowGUI() {

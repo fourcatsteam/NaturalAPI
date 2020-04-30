@@ -6,8 +6,6 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +21,8 @@ public class GUI_Design extends Component implements Observer  {
     private JFileChooser fc;
     private boolean areFilesLoaded;
     private String nameFeatureFile;
+    private String pathFeatureFile;
+
 
     public GUI_Design(Controller c,DataPresenterGUI dp){
         this.controller = c;
@@ -35,7 +35,7 @@ public class GUI_Design extends Component implements Observer  {
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(areFilesLoaded) {
-                new SuggestionGenerated(nameFeatureFile, controller, dataPresenter).createAndShowGUI();
+                new SuggestionGenerated(nameFeatureFile, pathFeatureFile, controller, dataPresenter).createAndShowGUI();
             }
             else{
                 log.append("Please, load file first.\n");
@@ -48,39 +48,38 @@ public class GUI_Design extends Component implements Observer  {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
                     log.append("Opening: " + f.getName() + "." + "\n");
+                    pathFeatureFile = f.getAbsolutePath();
                     nameFeatureFile = f.getName();
+
                 }
                 this.areFilesLoaded = true;
             } else {
-                log.append("Open command cancelled by user." + "\n");
+                log.append("\nOpen command cancelled by user." + "\n");
             }
             log.setCaretPosition(log.getDocument().getLength());
         });
 
 
 
-        loadBDLButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                String bdlnameFile[] = new String[3];
-                int i=0;
-                int returnVal = fc.showOpenDialog(GUI_Design.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File[] files = fc.getSelectedFiles();
-                    for(File f: files){
-                        log.append("Opening: " + f.getName() + "." + "\n");
-                        bdlnameFile[i] = f.getName();
-                        i++;
-                    }
-                } else {
-                    log.append("Open command cancelled by user." + "\n");
+        loadBDLButton.addActionListener(actionEvent -> {
+            String bdlnameFile[] = new String[3];
+            int i=0;
+            int returnVal = fc.showOpenDialog(GUI_Design.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File[] files = fc.getSelectedFiles();
+                for(File f: files){
+                    log.append("Opening: " + f.getName() + "." + "\n");
+                    bdlnameFile[i] = f.getName();
+                    i++;
                 }
-                log.setCaretPosition(log.getDocument().getLength());
-                try {
-                    controller.loadBdl(bdlnameFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            } else {
+                log.append("Open command cancelled by user." + "\n");
+            }
+            log.setCaretPosition(log.getDocument().getLength());
+            try {
+                controller.loadBdl(bdlnameFile);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -96,10 +95,10 @@ public class GUI_Design extends Component implements Observer  {
 
     @Override
     public void update() {
-        showOuput();
+        showOutput();
     }
 
-    private void showOuput(){
+    private void showOutput(){
         log.append(dataPresenter.getMessage());
     }
 }
