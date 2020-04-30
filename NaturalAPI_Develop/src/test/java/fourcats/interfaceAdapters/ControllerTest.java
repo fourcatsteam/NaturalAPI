@@ -3,6 +3,7 @@ package fourcats.interfaceAdapters;
 import fourcats.interfaceadapters.Controller;
 import fourcats.port.ApiInputPort;
 import fourcats.port.GenerateInputPort;
+import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,9 @@ public class ControllerTest {
 
     @Mock
     ModifyInputPort modMock;
+
+    @Mock
+    ModifyGuiInputPort modGuiInputMock;
 
     @InjectMocks
     Controller controller;
@@ -58,6 +62,12 @@ public class ControllerTest {
         controller.modifyApi(1,fileNameBal,fileNamePla);
 
         verify(modMock).modify(1,fileNameBal,fileNamePla);
+    }
+
+    @Test
+    public void testinModifyApiGui(){
+        controller.modifyApiGui("","");
+        verify(modGuiInputMock).modifyGui(any(String.class),any(String.class));
     }
 
 

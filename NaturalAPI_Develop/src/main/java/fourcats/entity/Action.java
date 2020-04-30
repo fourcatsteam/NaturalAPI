@@ -50,7 +50,7 @@ public class Action {
         for (ObjectParam p : param) {
             if (p.getName().equals(paramName)) {
                 p.setName(newName);
-                return;
+                break;
             }
         }
     }
@@ -59,7 +59,7 @@ public class Action {
         for (ObjectParam p : param) {
             if (p.getName().equals(paramName)) {
                 p.setType(newType);
-                return;
+                break;
             }
         }
     }
@@ -68,7 +68,7 @@ public class Action {
         for (ObjectParam p : param) {
             if (p.getName().equals(paramName)) {
                 p.setRequired(isRequired);
-                return;
+                break;
             }
         }
     }

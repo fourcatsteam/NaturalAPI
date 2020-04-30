@@ -2,6 +2,7 @@ package fourcats.view;
 
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
+import fourcats.observer.Observer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +40,12 @@ public class CLITest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testingConstructor(){
+        cli = new CLI(controllerMock,dataPresenterMock);
+        verify(dataPresenterMock).attach(any(Observer.class));
     }
 
     @Test
@@ -184,6 +191,8 @@ public class CLITest {
         spycli.update();
         verify(spycli).showOutput();
     }
+
+
 
 
 }

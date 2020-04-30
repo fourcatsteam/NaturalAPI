@@ -1,6 +1,7 @@
 package fourcats.frameworks;
 
 import fourcats.entity.API;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -44,10 +45,14 @@ public class FileSystemTest {
     }
 
     @Test
-    public void writingAPITestCorrectly() throws IOException {
-        //Da implementare
-        file.writeApi(new API());
+    public void writingAPITestCorrectly(){
+
+        API apis = new API();
+        apis.addApi("apifilename","realapi");
+        file.writeApi(apis);
         assertTrue(true);
+
+
     }
 
 }
