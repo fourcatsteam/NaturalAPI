@@ -42,7 +42,8 @@ public class DataPresenterTest {
 
     @Test
     public void testShowCreateBdlOutput() {
-        dataPresenter.showCreateBdlOutput();
+        Bdl bdlMock = Mockito.mock(Bdl.class);
+        dataPresenter.showCreateBdlOutput(bdlMock);
 
         String expected="BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
         assertEquals(expected,dataPresenter.getMessage());
@@ -66,7 +67,8 @@ public class DataPresenterTest {
 
     @Test
     public void testShowAddDocumentsOutput() {
-        dataPresenter.showAddDocumentsOutput();
+        Bdl bdlMock = Mockito.mock(Bdl.class);
+        dataPresenter.showAddDocumentsOutput(bdlMock);
 
         String expected="Documenti aggiunti al BDL con successo!";
         assertEquals(expected,dataPresenter.getMessage());
@@ -74,7 +76,8 @@ public class DataPresenterTest {
 
     @Test
     public void testShowRemoveDocumentOutputPort() {
-        dataPresenter.showRemoveDocumentOutputPort();
+        Bdl bdlMock = Mockito.mock(Bdl.class);
+        dataPresenter.showRemoveDocumentOutputPort(bdlMock);
 
         String expected="I Documenti da te selezionati sono stati rimossi con successo";
         assertEquals(expected,dataPresenter.getMessage());

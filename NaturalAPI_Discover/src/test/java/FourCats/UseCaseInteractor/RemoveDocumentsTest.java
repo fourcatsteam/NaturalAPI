@@ -47,7 +47,7 @@ public class RemoveDocumentsTest {
         verify(analyzerMock,times(1)).removeDocumentFromBdl(any(Bdl.class),any(Document.class));
         verify(repositoryMock).updateBdl(any(Bdl.class));
         verify(repositoryMock).updateAssociation(any(String.class),any(List.class));
-        verify(outputMock).showRemoveDocumentOutputPort();
+        verify(outputMock).showRemoveDocumentOutputPort(any(Bdl.class));
 
     }
 }

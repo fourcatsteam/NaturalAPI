@@ -47,6 +47,6 @@ public class CreateBdl implements CreateBdlInputPort {
         repository.updateAssociation(nameBdl,titleList);
 
         //send results to output device
-        output.showCreateBdlOutput();
+        output.showCreateBdlOutput(bdl);
     }
 }

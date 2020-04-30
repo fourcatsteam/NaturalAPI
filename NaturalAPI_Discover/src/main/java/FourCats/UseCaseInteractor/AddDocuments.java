@@ -63,7 +63,7 @@ public class AddDocuments implements AddDocumentsInputPort {
                 repository.updateAssociation(targetBdl, association);
 
                 //send results to output device
-                outputPort.showAddDocumentsOutput();
+                outputPort.showAddDocumentsOutput(bdl);
             }
         }
     }

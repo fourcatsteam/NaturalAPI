@@ -33,8 +33,11 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     }
 
     @Override
-    public void showCreateBdlOutput() {
+    public void showCreateBdlOutput(Bdl bdl) {
         this.clearData();
+        this.bdlNouns = bdl.nounsToString();
+        this.bdlVerbs = bdl.verbsToString();
+        this.bdlPredicates = bdl.predicatesToString();
         message = "BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
         notifyObservers();
     }
@@ -54,15 +57,21 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     }
 
     @Override
-    public void showAddDocumentsOutput() {
+    public void showAddDocumentsOutput(Bdl bdl) {
         this.clearData();
+        this.bdlNouns = bdl.nounsToString();
+        this.bdlVerbs = bdl.verbsToString();
+        this.bdlPredicates = bdl.predicatesToString();
         message = "Documenti aggiunti al BDL con successo!";
         notifyObservers();
     }
 
     @Override
-    public void showRemoveDocumentOutputPort() {
+    public void showRemoveDocumentOutputPort(Bdl bdl) {
         this.clearData();
+        this.bdlNouns = bdl.nounsToString();
+        this.bdlVerbs = bdl.verbsToString();
+        this.bdlPredicates = bdl.predicatesToString();
         message = "I Documenti da te selezionati sono stati rimossi con successo";
         notifyObservers();
     }

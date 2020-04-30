@@ -59,7 +59,7 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
                 repository.updateAssociation(bdl.getName(),association);
 
                 //send results to output device
-                outputPort.showRemoveDocumentOutputPort();
+                outputPort.showRemoveDocumentOutputPort(bdl);
             }
         }
     }

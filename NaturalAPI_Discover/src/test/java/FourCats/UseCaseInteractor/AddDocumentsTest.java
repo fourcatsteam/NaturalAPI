@@ -51,7 +51,7 @@ public class AddDocumentsTest {
         verify(analyzerMock, times(3)).addDocumentToBdl(any(Bdl.class),any(Document.class));
         verify(repositoryMock).updateBdl(any(Bdl.class));
         verify(repositoryMock).updateAssociation(any(String.class),any(List.class));
-        verify(outputMock).showAddDocumentsOutput();
+        verify(outputMock).showAddDocumentsOutput(any(Bdl.class));
 
     }
 }

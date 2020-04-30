@@ -71,7 +71,7 @@ public class Bdl {
     }
 
     //ORDER BDL
-    private void order() {
+    public void order() {
         Collections.sort(nouns,Collections.reverseOrder());
         Collections.sort(verbs,Collections.reverseOrder());
         Collections.sort(predicates, Collections.reverseOrder());

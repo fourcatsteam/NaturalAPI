@@ -51,6 +51,6 @@ public class CreateBdlTest {
         verify(analyzeMock,times(3)).addDocumentToBdl(any(Bdl.class),any(Document.class));
         verify(repositoryMock).updateBdl(any(Bdl.class));
         verify(repositoryMock).updateAssociation(any(String.class),any(List.class));
-        verify(outputMock).showCreateBdlOutput();
+        verify(outputMock).showCreateBdlOutput(any(Bdl.class));
     }
 }
