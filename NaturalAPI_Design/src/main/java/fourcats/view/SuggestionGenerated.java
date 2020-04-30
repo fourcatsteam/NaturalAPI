@@ -13,7 +13,7 @@ import java.io.IOException;
 public class SuggestionGenerated implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
-    private JPanel panelSuggestion;
+    private JPanel panelSuggestions;
     private JPanel panelInScrollPanel;
     private JScrollPane scrollPanel;
     private JButton generateBalButton;
@@ -51,7 +51,6 @@ public class SuggestionGenerated implements Observer{
         mainPanel.add(scrollPanel,BorderLayout.CENTER);
         mainPanel.add(panelButtons,BorderLayout.SOUTH);
 
-        contr.generateSuggestions(featureName);
 
         generateBalButton.addActionListener(e -> {
             String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
@@ -63,6 +62,7 @@ public class SuggestionGenerated implements Observer{
                 }
             }
         });
+        contr.generateSuggestions(featureName);
     }
 
     public void createAndShowGUI() {
@@ -76,9 +76,9 @@ public class SuggestionGenerated implements Observer{
 
     private void initScenario(){
         JPanel panelScenario = new JPanel();
-        panelSuggestion = new JPanel();
+        panelSuggestions = new JPanel();
 
-        //add a vertical spacer if it's not the first scenario
+        //add a vertical spacer in panelInScrollPanel if it's not the first scenario
         if (currentScenarioId!=-1) {
             gridConstraint.gridx = gridX;
             gridConstraint.gridy = gridY;
@@ -86,17 +86,25 @@ public class SuggestionGenerated implements Observer{
             gridBagLayout.setConstraints(box, gridConstraint);
             panelInScrollPanel.add(box);
         }
+        currentScenarioId++;
 
-        //add panel suggestion
+        //include panel suggestion in a box with a button which let to manually add a suggestion
+        Box suggestionsAndAddButtonBox = Box.createVerticalBox();
+        JButton addSuggestionButton = new AddSuggestionButtonWidget(contr,Integer.toString(currentScenarioId)).getButtonWidget();
+        suggestionsAndAddButtonBox.add(panelSuggestions);
+        suggestionsAndAddButtonBox.add(addSuggestionButton);
+
+        //add the box to the panelInScroll panel after settings constraints x(column) and y(row) values
         this.gridX = 0;
         this.gridY++;
-        panelSuggestion.setLayout(new BoxLayout(panelSuggestion,BoxLayout.PAGE_AXIS));
         gridConstraint.gridx = this.gridX;
         gridConstraint.gridy = this.gridY;
-        gridBagLayout.setConstraints(panelSuggestion, gridConstraint);
-        panelInScrollPanel.add(panelSuggestion);
+        panelSuggestions.setLayout(new BoxLayout(panelSuggestions,BoxLayout.PAGE_AXIS));
+        gridBagLayout.setConstraints(suggestionsAndAddButtonBox, gridConstraint);
+        panelInScrollPanel.add(suggestionsAndAddButtonBox);
 
-        //add panel scenario with a new scenarioWidget
+
+        //add panel scenario in panelInScrollPanel with a new scenarioWidget
         this.gridX++;
         gridConstraint.gridx = this.gridX;
         gridConstraint.gridy = this.gridY;
@@ -105,19 +113,23 @@ public class SuggestionGenerated implements Observer{
         new ScenarioWidget(panelScenario, featureName, dataPresenter.getActor(),
                 dataPresenter.getScenarioContent());
 
-
-        //prepare next scenario by adding a "row" to the grid (gridY++)
+        //get ready for next scenario by adding a "row" to the grid (gridY++)
         this.gridY++;
-        currentScenarioId+=1;
     }
 
     @Override
     public void update() {
+        if (dataPresenter.isSuggestionsRefreshNeeded()){
+            panelInScrollPanel.removeAll();
+            panelInScrollPanel.revalidate();
+            panelInScrollPanel.repaint();
+            currentScenarioId = -1;
+        }
         if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
             initScenario();
         }
         if (dataPresenter.isSuggestionToAdd()) {
-            new SuggestionWidget(panelSuggestion, contr, dataPresenter);
+            new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
         if (!dataPresenter.getMessage().equals("")) {
             if (dataPresenter.isOkOperation())

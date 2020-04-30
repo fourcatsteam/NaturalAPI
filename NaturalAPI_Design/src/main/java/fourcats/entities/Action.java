@@ -56,17 +56,17 @@ public class Action {
 
     @Override
     public String toString() {
-        String ActionParams = "";
+        String actionParams = "";
         boolean firstParam = true;
         for (ObjectParam par : param) {
             if (firstParam) {
-                ActionParams+=par.getType()+ " " + par.getName();
+                actionParams+=par.getType()+ " " + par.getName();
                 firstParam = false;
             }
             else {
-                ActionParams+=", " + par.getType()+ " " + par.getName();
+                actionParams+=", " + par.getType()+ " " + par.getName();
             }
         }
-        return this.type + " " + this.name + "(" + ActionParams + ")";
+        return this.type + " " + this.name + "(" + actionParams + ")";
     }
 }

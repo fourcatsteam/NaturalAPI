@@ -8,6 +8,7 @@ import fourcats.entities.Type;
 import fourcats.port.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
@@ -16,7 +17,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     String scenarioId;
     String suggestionId;
     String scenarioContent;
-    String actionId;
     String actionType;
     String actionName;
     String actor;
@@ -26,6 +26,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     ArrayList<String> lObjectNames;
     boolean isSuggestionToAdd;
     boolean isOkOperation;
+    boolean isSuggestionsRefreshNeeded;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
     public DataPresenterGUI(){
@@ -40,30 +41,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     @Override
     public void showSuggestionsForScenario(Map<Integer, Scenario> mScenarios) {
-        isSuggestionToAdd = true;
-        for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
-            scenarioContent = "Scenario:" + mSc.getValue().getContent().replace("  ","\n");
-            scenarioId = "" + mSc.getKey();
-            actor = mSc.getValue().getActorName();
-            for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                 int idCurrentObject=0;
-                 actionId = "" + mAc.getKey();
-                 actionName = mAc.getValue().getName();
-                 actionType = "" + mAc.getValue().getType();
-                 suggestionId = "" + mAc.getKey();
-                 for (ObjectParam op : mAc.getValue().getObjectParams()){
-                     lObjectId.add("" + idCurrentObject);
-                     lObjectTypes.add("" + op.getType());
-                     lObjectNames.add(op.getName());
-                     idCurrentObject++;
-                 }
-                notifyObservers();
-                 lObjectId.clear();
-                 lObjectTypes.clear();
-                 lObjectNames.clear();
-            }
-        }
-        isSuggestionToAdd = false;
+        showSuggestions(mScenarios);
     }
 
     @Override
@@ -71,10 +49,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         message = ("Error! \n" +
                 "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
         notifyObservers();
-    }
-
-    public String getActionId() {
-        return actionId;
     }
 
     public String getActionName() {
@@ -109,24 +83,28 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionToAdd;
     }
 
-    public ArrayList<String> getlTypes() {
+    public List<String> getlTypes() {
         return lTypes;
     }
 
-    public ArrayList<String> getlObjectId() {
+    public List<String> getlObjectId() {
         return lObjectId;
     }
 
-    public ArrayList<String> getlObjectTypes() {
+    public List<String> getlObjectTypes() {
         return lObjectTypes;
     }
 
-    public ArrayList<String> getlObjectNames() {
+    public List<String> getlObjectNames() {
         return lObjectNames;
     }
 
     public boolean isOkOperation() {
         return isOkOperation;
+    }
+
+    public boolean isSuggestionsRefreshNeeded() {
+        return isSuggestionsRefreshNeeded;
     }
 
     @Override
@@ -138,8 +116,9 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else {
             message = ERROR_MESSAGE;
             isOkOperation = false;
+            notifyObservers();
         }
-        notifyObservers();
+        message = "";
     }
 
     @Override
@@ -153,6 +132,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
             notifyObservers();
         }
+        message = "";
     }
 
     @Override
@@ -166,6 +146,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
             notifyObservers();
         }
+        message = "";
 
     }
 
@@ -180,6 +161,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
         }
         notifyObservers();
+        message = "";
     }
 
     @Override
@@ -193,6 +175,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
             notifyObservers();
         }
+        message = "";
 
     }
 
@@ -208,6 +191,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
             notifyObservers();
         }
+        message = "";
     }
 
     @Override
@@ -220,6 +204,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
             notifyObservers();
         }
+        message = "";
 
     }
 
@@ -234,6 +219,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
         }
         notifyObservers();
+        message="";
     }
 
     @Override
@@ -247,6 +233,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = false;
         }
         notifyObservers();
+        message = "";
     }
 
     @Override
@@ -257,13 +244,47 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
                     lTypes.add(mTy.getValue().getName());
             }
         }
-        else{
-            message = "No types defined yet!";
-        }
     }
 
     @Override
     public void showAddedSuggestion(Map<Integer, Scenario> mScenarios, boolean isSuggestionAdded) {
+        if (isSuggestionAdded){
+            isSuggestionsRefreshNeeded = true;
+            notifyObservers();
+            isSuggestionsRefreshNeeded = false;
+            showSuggestions(mScenarios);
+        }
+        else{
+            message = ERROR_MESSAGE;
+            isOkOperation = false;
+            notifyObservers();
+        }
+        message = "";
+    }
 
+    private void showSuggestions(Map<Integer,Scenario> mScenarios){
+        isSuggestionToAdd = true;
+        for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
+            scenarioContent = "Scenario:" + mSc.getValue().getContent().replace("  ","\n");
+            scenarioId = "" + mSc.getKey();
+            actor = mSc.getValue().getActorName();
+            for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+                int idCurrentObject=0;
+                suggestionId = "" + mAc.getKey();
+                actionName = mAc.getValue().getName();
+                actionType = "" + mAc.getValue().getType();
+                for (ObjectParam op : mAc.getValue().getObjectParams()){
+                    lObjectId.add("" + idCurrentObject);
+                    lObjectTypes.add("" + op.getType());
+                    lObjectNames.add(op.getName());
+                    idCurrentObject++;
+                }
+                notifyObservers();
+                lObjectId.clear();
+                lObjectTypes.clear();
+                lObjectNames.clear();
+            }
+        }
+        isSuggestionToAdd = false;
     }
 }

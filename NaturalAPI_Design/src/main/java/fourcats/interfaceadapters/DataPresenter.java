@@ -15,14 +15,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
 
     @Override
     public void showSuggestionsForScenario(Map<Integer,Scenario> mScenarios) {
-        for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
-            toShow = "----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getName() + "----";
-            notifyObservers();
-            for (Map.Entry<Integer,Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                toShow = mAc.getKey() + ") " + mAc.getValue().toString();
-                notifyObservers();
-            }
-        }
+        showSuggestions(mScenarios);
     }
 
     @Override
@@ -37,7 +30,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isOk) {
             toShow = "Suggestion removed! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else {
             toShow = "Oh no! Something went wrong, please check the id of the scenario and the id of the suggestion";
@@ -66,7 +59,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isActionNameModified){
             toShow = "Suggestion name successfully updated! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update.";
@@ -80,7 +73,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isActionTypeModified){
             toShow = "Action type successfully updated! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
@@ -93,7 +86,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isObjectNameModified){
             toShow = "Object name of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
@@ -106,7 +99,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isObjectTypeModified){
             toShow = "Object type of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
@@ -119,7 +112,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isObjectAdded){
             toShow = "Object successfully added! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update." +
@@ -133,7 +126,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isObjectRemoved){
             toShow = "Object successfully removed! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the object you want to remove.";
@@ -171,11 +164,22 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         if (isSuggestionAdded) {
             toShow = "Suggestion successfully added! This is the updated list of suggestions";
             notifyObservers();
-            showSuggestionsForScenario(mScenarios);
+            showSuggestions(mScenarios);
         }
         else {
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario or the id of the type for the suggestion you want to update.";
             notifyObservers();
+        }
+    }
+
+    private void showSuggestions(Map<Integer,Scenario> mScenarios) {
+        for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
+            toShow = "----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getName() + "----";
+            notifyObservers();
+            for (Map.Entry<Integer,Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+                toShow = mAc.getKey() + ") " + mAc.getValue().toString();
+                notifyObservers();
+            }
         }
     }
 }

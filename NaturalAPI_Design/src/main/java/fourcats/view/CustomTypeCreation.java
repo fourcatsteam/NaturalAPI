@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomTypeCreation {
-    public CustomTypeCreation(Controller controller, ArrayList<String> lAvailableTypes){
-        Map<String,String> mAttributes = new HashMap<>();
 
+public class CustomTypeCreation {
+    public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
+        Map<String,String> mAttributes = new HashMap<>();
         JPanel fields = new JPanel(new GridLayout(5, 1));
         JLabel typeNameLabel = new JLabel();
         JLabel attributeNameLabel = new JLabel();

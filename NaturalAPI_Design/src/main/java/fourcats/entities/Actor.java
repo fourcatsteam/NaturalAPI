@@ -39,7 +39,7 @@ public class Actor {
     }
 
     public List<Action> getActionsByName(String operationName) {
-        List<Action> lSameNameActions = new ArrayList<Action>();
+        List<Action> lSameNameActions = new ArrayList<>();
         for (Action op : lAction) {
             if (op.getName().equals(operationName))
                 lSameNameActions.add(op);
@@ -49,10 +49,10 @@ public class Actor {
 
     @Override
     public String toString() {
-        String ActionStr = "";
+        String actionStr = "";
         for (Action s : lAction) {
-            ActionStr += s.toString();
+            actionStr += s.toString();
         }
-        return ActionStr;
+        return actionStr;
     }
 }
