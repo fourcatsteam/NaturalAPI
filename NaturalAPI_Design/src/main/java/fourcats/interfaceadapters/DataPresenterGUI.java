@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort {
+        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort {
     String message;
     String scenarioId;
     String suggestionId;
@@ -243,7 +243,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             isOkOperation = true;
         }
         else{
-            message = "Oh no! Something went wrong...";
+            message = ERROR_MESSAGE;
             isOkOperation = false;
         }
         notifyObservers();
@@ -260,5 +260,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         else{
             message = "No types defined yet!";
         }
+    }
+
+    @Override
+    public void showAddedSuggestion(Map<Integer, Scenario> mScenarios, boolean isSuggestionAdded) {
+
     }
 }
