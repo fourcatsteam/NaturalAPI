@@ -23,7 +23,7 @@ public class GuiPla {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
         try {
-            frame.setIconImage(ImageIO.read(new File("./logo1.png")));
+            frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }
         catch (Exception e){
             e.printStackTrace();

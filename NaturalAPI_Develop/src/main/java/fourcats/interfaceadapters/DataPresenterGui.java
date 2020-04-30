@@ -6,27 +6,33 @@ import fourcats.port.ApiOutputPort;
 import fourcats.port.ModifyOutputPort;
 import java.util.Map;
 
-public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort {
+public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort {
 
     private String toShow;
+    private String comboToShow;
 
-    public DataPresenter(){
+    public DataPresenterGui(){
         toShow = "";
+        comboToShow = "";
     }
 
     public String getStringToShow(){
         return toShow;
     }
 
+    public String getComboToShow(){
+        return comboToShow;
+    }
+
     @Override
     public void showOutput(Map<Integer,API> mApi) {
-        toShow = "";
+
         for (Map.Entry<Integer,API> mapApi : mApi.entrySet()) {
 
-            toShow = "-----------API ID : " + mapApi.getKey() + "-----------\n";
-            notifyObservers();
             for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
                 toShow = api.getValue();
+                String split[] = api.getKey().split("/");
+                comboToShow = split[split.length-1];
                 notifyObservers();
             }
         }

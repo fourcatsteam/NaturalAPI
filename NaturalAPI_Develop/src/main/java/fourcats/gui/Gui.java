@@ -1,17 +1,23 @@
 package fourcats.gui;
 
 import fourcats.interfaceadapters.Controller;
-import fourcats.interfaceadapters.DataPresenter;
+import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.observer.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gui implements Observer {
 
     private Controller controller;
-    private DataPresenter dataPresenter;
+    private DataPresenterGui dataPresenterGui;
 
     private JFrame frame;
     private JButton addBalButton;
@@ -26,26 +32,34 @@ public class Gui implements Observer {
     private JButton modifyPLAButton;
     private JButton createPLAButton;
     private JComboBox<String> comboBox1;
+    Map<String,String> toView;
 
-    public Gui(Controller c,DataPresenter d){
+    public Gui(Controller c,DataPresenterGui d){
 
         controller = c;
-        dataPresenter = d;
-        dataPresenter.attach(this);
+        dataPresenterGui = d;
+        dataPresenterGui.attach(this);
         final String[] bal = new String[1];
         final String[] pla = new String[1];
+        toView = new HashMap<String,String>();
 
         frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,500);
         try {
-            frame.setIconImage(ImageIO.read(new File("./logo1.png")));
+            frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        textArea.setFont(textArea.getFont().deriveFont(18f));
+        textArea.setMargin(new Insets(5,5,5,5));
         comboBox1.setVisible(false);
+        comboBox1.setFont(textArea.getFont().deriveFont(18f));
+        DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
+        dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+        comboBox1.setRenderer(dlcr);
         
         addBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
@@ -91,12 +105,111 @@ public class Gui implements Observer {
         });
 
         modifyButton.addActionListener(e -> {
-            controller.modifyApiGui(comboBox1.getSelectedItem().toString(),textArea.getText());
-            comboBox1.addItem(textArea.getText());
-            comboBox1.removeItem(comboBox1.getSelectedItem());
+            controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
+            toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
         });
 
-        comboBox1.addActionListener(e -> textArea.setText(comboBox1.getSelectedItem().toString()));
+        comboBox1.addActionListener(e -> {
+            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()));
+        });
+        createPLAButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                createPLAButton.setBackground(new Color( 224,91,73));
+                createPLAButton.setBorderPainted(false);
+            }
+        });
+        createPLAButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                createPLAButton.setBackground(new Color(58,84,105));
+                createPLAButton.setBorderPainted(true);
+            }
+        });
+        modifyPLAButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                modifyPLAButton.setBackground(new Color( 224,91,73));
+                modifyPLAButton.setBorderPainted(false);
+            }
+        });
+        modifyPLAButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                modifyPLAButton.setBackground(new Color(58,84,105));
+                modifyPLAButton.setBorderPainted(true);
+            }
+        });
+        addBalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addBalButton.setBackground(new Color( 224,91,73));
+                addBalButton.setBorderPainted(false);
+            }
+        });
+        addBalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addBalButton.setBackground(new Color(58,84,105));
+                addBalButton.setBorderPainted(true);
+            }
+        });
+        addPlaButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addPlaButton.setBackground(new Color( 224,91,73));
+                addPlaButton.setBorderPainted(false);
+            }
+        });
+        addPlaButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addPlaButton.setBackground(new Color(58,84,105));
+                addPlaButton.setBorderPainted(true);
+            }
+        });
+        suggestionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                suggestionButton.setBackground(new Color( 224,91,73));
+                suggestionButton.setBorderPainted(false);
+            }
+        });
+        suggestionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                suggestionButton.setBackground(new Color(58,84,105));
+                suggestionButton.setBorderPainted(true);
+            }
+        });
+        generateButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                generateButton.setBackground(new Color( 224,91,73));
+                generateButton.setBorderPainted(false);
+            }
+        });
+        generateButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                generateButton.setBackground(new Color(58,84,105));
+                generateButton.setBorderPainted(true);
+            }
+        });
+        modifyButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                modifyButton.setBackground(new Color( 224,91,73));
+                modifyButton.setBorderPainted(false);
+            }
+        });
+        modifyButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                modifyButton.setBackground(new Color(58,84,105));
+                modifyButton.setBorderPainted(true);
+            }
+        });
     }
 
     public void showGui(){
@@ -104,11 +217,16 @@ public class Gui implements Observer {
     }
 
     public void showOutput(){
-        comboBox1.addItem(dataPresenter.getStringToShow());
+        toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
+        comboBox1.addItem(dataPresenterGui.getComboToShow());
     }
 
     @Override
     public void update() {
         showOutput();
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
