@@ -29,6 +29,6 @@ public interface RepositoryAccess {
     void createSuggestion(int idScenario, String suggestionName, String suggestionType);
     void crateSuggestionByIdType(int idScenario, String suggestionName, int idType);
 
-    Bdl readBdl(String[] name);
+    Bdl readBdl(String[] name) throws IOException;
 
 }

@@ -1,5 +1,6 @@
 package fourcats.view;
 
+import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
@@ -8,8 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
-public class GUI_Design extends Component {
+public class GUI_Design extends Component implements Observer  {
     private Controller controller;
     private DataPresenterGUI dataPresenter;
     private JLabel titleText;
@@ -29,6 +31,7 @@ public class GUI_Design extends Component {
         this.fc.setMultiSelectionEnabled(true);
         this.areFilesLoaded = false;
         this.log.append("Welcome to NaturalAPI Design!\n\n");
+        this.dataPresenter.attach(this);
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(areFilesLoaded) {
@@ -59,7 +62,7 @@ public class GUI_Design extends Component {
         loadBDLButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String bdlnameFile[] = new String[2];
+                String bdlnameFile[] = new String[3];
                 int i=0;
                 int returnVal = fc.showOpenDialog(GUI_Design.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -73,7 +76,11 @@ public class GUI_Design extends Component {
                     log.append("Open command cancelled by user." + "\n");
                 }
                 log.setCaretPosition(log.getDocument().getLength());
-                controller.loadBdl(bdlnameFile);
+                try {
+                    controller.loadBdl(bdlnameFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -87,4 +94,12 @@ public class GUI_Design extends Component {
         frame.setVisible(true);
     }
 
+    @Override
+    public void update() {
+        showOuput();
+    }
+
+    private void showOuput(){
+        log.append(dataPresenter.getMessage());
+    }
 }

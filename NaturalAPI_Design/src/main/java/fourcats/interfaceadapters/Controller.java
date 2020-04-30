@@ -81,7 +81,7 @@ public class Controller{
         addSuggestion.addSuggestionByIdType(Integer.parseInt(idScenario),suggestionName,Integer.parseInt(idType));
     }
 
-    public void loadBdl(String[] namebdl){
+    public void loadBdl(String[] namebdl) throws IOException {
         loadBdl.loadingBdl(namebdl);
     }
 

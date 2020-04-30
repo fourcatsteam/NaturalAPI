@@ -1,8 +1,11 @@
 package fourcats.usecaseinteractor;
 
+import fourcats.entities.Bdl;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.LoadBDLInputPort;
 import fourcats.port.LoadBDLOutputPort;
+
+import java.io.IOException;
 
 public class LoadBdl implements LoadBDLInputPort {
     RepositoryAccess repo;
@@ -14,7 +17,10 @@ public class LoadBdl implements LoadBDLInputPort {
     }
 
     @Override
-    public void loadingBdl(String[] nameBdl) {
-
+    public void loadingBdl(String[] nameBdl) throws IOException {
+        Bdl bdl = repo.readBdl(nameBdl);
+        if(bdl!=null){
+            out.showBDLOutput("Tutto a posto, BDL caricata");
+        }
     }
 }

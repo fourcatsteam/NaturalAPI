@@ -56,8 +56,18 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     }
 
     @Override
-    public Bdl getBdl(String[] name) {
-        return null;
+    public Bdl getBdl(String[] name) throws IOException {
+        String bdlNames[] = new String[3];
+        int i = 0;
+        for(String s:name){
+           String[] splitting = s.split("\\."); //Il punto è un carattere special
+           bdlNames[i] = splitting[0];
+           i++;
+        }
+        if(!(bdlNames[0].equals(bdlNames[1]) && bdlNames[0].equals(bdlNames[2]))){ //Hai selezionato dei file che si riferiscono a BDL diverse
+            return null;
+        }
+        return loadBdl(bdlNames[0]);
     }
 
     //NOTE

@@ -112,7 +112,7 @@ public class Repository implements RepositoryAccess  {
     }
 
     @Override
-    public Bdl readBdl(String[] name) {
+    public Bdl readBdl(String[] name) throws IOException {
         return memoryAccess.getBdl(name);
     }
 

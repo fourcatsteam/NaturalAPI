@@ -269,6 +269,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     @Override
     public void showBDLOutput(String s) {
-
+        this.message = s;
+        notifyObservers();
     }
 }
