@@ -13,11 +13,12 @@ import fourcats.view.CLI;
 import fourcats.frameworks.Repository;
 import fourcats.interfaceadapters.Controller;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Repository repo = new Repository(new DataKeeper(),new FileSystem());
         BalAnalyzerImplementation balAnalyzerImplementation = new BalAnalyzerImplementation();
@@ -25,6 +26,7 @@ public class App {
         System.out.println("Press 1 for CLI, 2 for GUI");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
+        sc.close();
         if(choice == 1){
             DataPresenter dataPresenter = new DataPresenter();
             SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);
