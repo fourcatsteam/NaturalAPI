@@ -8,11 +8,26 @@ import java.io.*;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
+    // documentsPathToFolder = "gherkin_documents/"
+    private String documentsPathToFolder;
+
+    // balPathToFolder = "BAL/"
+    private String balPathToFolder;
+
+    // bdlPathToFolder = "BDL/"
+    private String bdlPathToFolder;
+
+    public FileSystemAccess(String documentsPath, String balPath, String bdlPath) {
+        documentsPathToFolder = documentsPath;
+        balPathToFolder = balPath;
+        bdlPathToFolder = bdlPath;
+    }
+
 
     @Override
     public String readFile(String fileName) throws FileNotFoundException {
-        String filepath = "gherkin_documents/" + fileName;
-        String s, fileContent = new String();
+        String filepath = documentsPathToFolder + fileName;
+        String s, fileContent = "";
         try(BufferedReader input = new BufferedReader(new FileReader(filepath))){
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
@@ -28,7 +43,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     @Override
     public void writeFile(String content, String filename) throws IOException {
         try{
-            File file = new File("BAL/"+filename+".json");
+            File file = new File(balPathToFolder + filename + ".json");
             file.getParentFile().mkdirs();
             try(FileWriter writer = new FileWriter(file)) {
                 writer.write(content);
@@ -55,7 +70,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".nouns.bdl.csv";
+        String filepath = bdlPathToFolder + filename + ".nouns.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -66,7 +81,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlVerbs(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".verbs.bdl.csv";
+        String filepath = bdlPathToFolder + filename + ".verbs.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -77,7 +92,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlPredicates(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".predicates.bdl.csv";
+        String filepath = bdlPathToFolder + filename + ".predicates.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
