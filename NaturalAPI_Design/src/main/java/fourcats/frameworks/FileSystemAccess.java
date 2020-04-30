@@ -55,6 +55,11 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     }
 
+    @Override
+    public Bdl getBdl(String[] name) {
+        return null;
+    }
+
     //NOTE
     //The following functions are not used now, they will be useful for the integration of the bdl file
 

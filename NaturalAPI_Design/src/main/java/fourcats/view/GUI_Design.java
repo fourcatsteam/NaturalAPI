@@ -5,6 +5,8 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 public class GUI_Design extends Component {
@@ -15,6 +17,7 @@ public class GUI_Design extends Component {
     private JButton genSuggestBtn;
     private JTextArea log;
     private JPanel mainPanel;
+    private JButton loadBDLButton;
     private JFileChooser fc;
     private boolean areFilesLoaded;
     private String nameFeatureFile;
@@ -49,6 +52,29 @@ public class GUI_Design extends Component {
                 log.append("Open command cancelled by user." + "\n");
             }
             log.setCaretPosition(log.getDocument().getLength());
+        });
+
+
+
+        loadBDLButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String bdlnameFile[] = new String[2];
+                int i=0;
+                int returnVal = fc.showOpenDialog(GUI_Design.this);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File[] files = fc.getSelectedFiles();
+                    for(File f: files){
+                        log.append("Opening: " + f.getName() + "." + "\n");
+                        bdlnameFile[i] = f.getName();
+                        i++;
+                    }
+                } else {
+                    log.append("Open command cancelled by user." + "\n");
+                }
+                log.setCaretPosition(log.getDocument().getLength());
+                controller.loadBdl(bdlnameFile);
+            }
         });
     }
 

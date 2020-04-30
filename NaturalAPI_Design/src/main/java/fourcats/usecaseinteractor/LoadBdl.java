@@ -14,7 +14,7 @@ public class LoadBdl implements LoadBDLInputPort {
     }
 
     @Override
-    public void loadingBdl(String nameBdl) {
+    public void loadingBdl(String[] nameBdl) {
 
     }
 }
