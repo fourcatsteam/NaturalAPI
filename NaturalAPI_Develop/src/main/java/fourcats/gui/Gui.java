@@ -6,7 +6,6 @@ import fourcats.observer.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -41,7 +40,7 @@ public class Gui implements Observer {
         dataPresenterGui.attach(this);
         final String[] bal = new String[1];
         final String[] pla = new String[1];
-        toView = new HashMap<String,String>();
+        toView = new HashMap<>();
 
         frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
@@ -58,7 +57,7 @@ public class Gui implements Observer {
         comboBox1.setVisible(false);
         comboBox1.setFont(textArea.getFont().deriveFont(18f));
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
-        dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+        dlcr.setHorizontalAlignment(SwingConstants.CENTER);
         comboBox1.setRenderer(dlcr);
         
         addBalButton.addActionListener(e -> {
@@ -226,7 +225,4 @@ public class Gui implements Observer {
         showOutput();
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }

@@ -31,7 +31,7 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
             for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
                 toShow = api.getValue();
-                String split[] = api.getKey().split("/");
+                String[] split = api.getKey().split("/");
                 comboToShow = split[split.length-1];
                 notifyObservers();
             }
