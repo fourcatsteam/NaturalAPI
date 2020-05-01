@@ -21,7 +21,9 @@ public class Type {
         if (mAttributes==null) {
             this.mAttributes = new HashMap<>();
         }
-        this.mAttributes.put(attributeName, attributeType);
+        if(!attributeName.isEmpty()) {
+            this.mAttributes.put(attributeName, attributeType);
+        }
     }
     public String getName(){
         return this.name;
