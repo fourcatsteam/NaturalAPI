@@ -4,6 +4,9 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.*;
 
 public class ObjectParamWidget {
@@ -24,7 +27,7 @@ public class ObjectParamWidget {
 
         objectTypeComboBox.setSelectedItem(objectType);
         objectNameTextField.setText(objectName);
-
+        objectNameTextField.setPreferredSize(new Dimension(100,20));
         suggWidget.addObjectParamWidget(mainPanel);
 
         removeObjectButton.addActionListener(e->{
@@ -66,12 +69,29 @@ public class ObjectParamWidget {
             }
         });
 
-        objectNameTextField.addFocusListener(new FocusAdapter() {
+      /*  objectNameTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 contr.modifyObjectName(suggestionId,scenarioId,
                         objectId,objectNameTextField.getText());
+            }
+        });*/
+
+        objectNameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                setColor();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                setColor();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                setColor();
+            }
+
+            public void setColor() {
+                contr.modifyObjectName(suggestionId,scenarioId,objectId,objectNameTextField.getText());
+                setObjectNameColor(dataPresenter.isPresentInBdl());
             }
         });
     }
@@ -81,6 +101,14 @@ public class ObjectParamWidget {
     }
     public void setObjectId(int updatedObjectId){
         this.objectId = Integer.toString(updatedObjectId);
+    }
+
+    private void setObjectNameColor(boolean isPresentInBdl){
+        if(isPresentInBdl) { //Se presente nella BDL posso metterlo di colore verde
+            objectNameTextField.setForeground(Color.GREEN);
+        }else{
+            objectNameTextField.setForeground(Color.RED);
+        }
     }
 
 }

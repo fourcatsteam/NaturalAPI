@@ -55,7 +55,7 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     }
 
     @Override
-    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified) {
+    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
         if (isActionNameModified){
             toShow = "Suggestion name successfully updated! This is the updated list of suggestions";
             notifyObservers();
@@ -81,8 +81,9 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
         }
     }
 
+
     @Override
-    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified, String objectNameModified) {
         if (isObjectNameModified){
             toShow = "Object name of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
