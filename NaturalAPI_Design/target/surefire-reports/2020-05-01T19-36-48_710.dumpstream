@@ -1,0 +1,15 @@
+# Created at 2020-05-01T19:38:10.491
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2020-05-01T19:38:10.492
+WARNING: Illegal reflective access by org.mockito.internal.util.reflection.AccessibilityChanger (file:/Users/EdoardoTinto/.m2/repository/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.jar) to field java.util.LinkedList.size
+
+# Created at 2020-05-01T19:38:10.493
+WARNING: Please consider reporting this to the maintainers of org.mockito.internal.util.reflection.AccessibilityChanger
+
+# Created at 2020-05-01T19:38:10.494
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2020-05-01T19:38:10.494
+WARNING: All illegal access operations will be denied in a future release
+
