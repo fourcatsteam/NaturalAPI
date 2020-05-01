@@ -7,11 +7,24 @@ import FourCats.Entities.Bdl;
 import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.TextAnalyzer;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class AnalyzeDocument {
     private TextAnalyzer analyzer;
+    private Set<String> verbsBlacklist;
 
     public AnalyzeDocument(TextAnalyzer nlp){
         analyzer = nlp;
+        verbsBlacklist = this.setUpBlacklist();
+    }
+
+    private Set<String> setUpBlacklist() {
+        Set<String> blacklist = new HashSet<>();
+        blacklist.add("be");
+        blacklist.add("have");
+        blacklist.add("do");
+        return blacklist;
     }
 
     public void removeDocumentFromBdl(Bdl bdl, Document document) {
@@ -22,7 +35,9 @@ public class AnalyzeDocument {
                 bdl.removeNoun(wordTag.getLemma());
             }
             if (wordTag.getTag().contains("VB")) {
-                bdl.removeVerb(wordTag.getLemma());
+                if(!verbsBlacklist.contains(wordTag.getLemma())){
+                    bdl.removeVerb(wordTag.getLemma());
+                }
             }
         }
 
@@ -45,7 +60,9 @@ public class AnalyzeDocument {
                 bdl.addNoun(wordTag.getLemma());
             }
             if (wordTag.getTag().contains("VB")) {
-                bdl.addVerb(wordTag.getLemma());
+                if(!verbsBlacklist.contains(wordTag.getLemma())){
+                    bdl.addVerb(wordTag.getLemma());
+                }
             }
         }
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import FourCats.Observer.Observer;
 
@@ -105,8 +106,18 @@ public class GUI_Discover extends JPanel implements Observer{
                     null,
                     null,
                     null );
+            String[] choices = {"Show all","More probable words","First 15 words"};
+            String choice = (String) JOptionPane.showInputDialog(this,
+                    "Select a type of visualization",
+                    "Select type",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    choices,
+                    choices[0]
+                    );
+            Integer visualizationType = Arrays.asList(choices).indexOf(choice);
 
-            controller.viewBdl(result);
+            controller.viewBdl(result, visualizationType);
         });
     }
 

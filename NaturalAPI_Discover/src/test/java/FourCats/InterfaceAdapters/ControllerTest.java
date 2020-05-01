@@ -64,8 +64,8 @@ public class ControllerTest {
     @Test
     public void testViewBdl() {
         String name = "name";
-        controller.viewBdl(name);
+        controller.viewBdl(name,0);
 
-        verify(vbMock).view(any(String.class));
+        verify(vbMock).view(any(String.class),anyInt());
     }
 }

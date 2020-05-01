@@ -30,7 +30,7 @@ public class ViewBdlTest {
     @Test
     public void testViewExistingBdl() {
         when(repoMock.readBdl(any(String.class))).thenReturn(new Bdl());
-        interactor.view("name");
+        interactor.view("name",0);
 
         verify(outputMock).showViewBdlOutput(any(Bdl.class));
         verify(outputMock,never()).showError(any(String.class));
@@ -39,7 +39,7 @@ public class ViewBdlTest {
     @Test
     public void testViewNotExistingBdl() {
         when(repoMock.readBdl(any(String.class))).thenReturn(null);
-        interactor.view("name");
+        interactor.view("name",0);
 
         verify(outputMock).showError(any(String.class));
         verify(outputMock,never()).showViewBdlOutput(any(Bdl.class));

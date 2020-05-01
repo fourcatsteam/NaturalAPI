@@ -1,10 +1,9 @@
 package FourCats.Entities;
 
 import FourCats.DataStructure.WordCounter;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
+import java.util.function.Consumer;
 
 public class Bdl {
     private String nameBdl;
@@ -21,6 +20,22 @@ public class Bdl {
         this.nouns=new LinkedList<>();
         this.verbs=new LinkedList<>();
         this.predicates=new LinkedList<>();
+    }
+
+    public Bdl(String name, List<WordCounter> n, List<WordCounter> v, List<WordCounter> p) {
+        this.nameBdl = name;
+        this.nouns = new LinkedList<>();
+        if(n!=null) {
+            n.stream().forEach(wordCounter -> nouns.add(wordCounter));
+        }
+        this.verbs = new LinkedList<>();
+        if(v!=null) {
+            v.stream().forEach(wordCounter -> verbs.add(wordCounter));
+        }
+        this.predicates = new LinkedList<>();
+        if(p!=null) {
+            p.stream().forEach(wordCounter -> predicates.add(wordCounter));
+        }
     }
 
     public List<WordCounter> getNouns(){
@@ -157,7 +172,7 @@ public class Bdl {
         }
         ret = ret + "-- VERBS -- \n";
         for(WordCounter w: verbs){
-            ret = ret + w.toString() +"\n";
+            ret = ret + w.toString() + "\n";
         }
         ret = ret + "-- PREDICATES -- \n";
         for(WordCounter w: predicates){
@@ -165,5 +180,24 @@ public class Bdl {
         }
 
         return ret;
+    }
+
+    private Integer getTotalListsOccurrencies(List<WordCounter> list) {
+        Optional<Integer> sum = list.stream()
+                .map(wordCounter -> wordCounter.getCount())
+                .reduce((a, b) -> a + b);
+        return sum.get();
+    }
+
+    public Integer getTotalNounsOccurrences() {
+        return getTotalListsOccurrencies(nouns);
+    }
+
+    public Integer getTotalVerbsOccurrences() {
+        return getTotalListsOccurrencies(verbs);
+    }
+
+    public Integer getTotalPredicatesOccurrences() {
+        return getTotalListsOccurrencies(predicates);
     }
 }

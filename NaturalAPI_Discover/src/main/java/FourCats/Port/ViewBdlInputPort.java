@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ViewBdlInputPort {
-    void view(String nameBdl);
+    void view(String nameBdl, Integer viewType);
 }

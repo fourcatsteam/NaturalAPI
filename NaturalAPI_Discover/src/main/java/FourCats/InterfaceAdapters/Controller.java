@@ -35,8 +35,8 @@ public class Controller{
         removeDocuments.remove(nameBdl,docToRemove);
     }
 
-    public void viewBdl(String nameBdl) {
-        viewBdl.view(nameBdl);
+    public void viewBdl(String nameBdl, Integer viewType) {
+        viewBdl.view(nameBdl, viewType);
     }
 
 

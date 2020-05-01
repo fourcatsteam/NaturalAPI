@@ -79,6 +79,7 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     @Override
     public void showViewBdlOutput(Bdl b) {
         this.clearData();
+        this.message = "BDL visualized as requested";
         this.bdlNouns = b.nounsToString();
         this.bdlVerbs = b.verbsToString();
         this.bdlPredicates = b.predicatesToString();
