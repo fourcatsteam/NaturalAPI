@@ -4,8 +4,12 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -101,14 +105,31 @@ public class SuggestionWidget {
             }
         });
 
-        actionNameTextField.addFocusListener(new FocusAdapter() {
+      /*  actionNameTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
+               // contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
+                //setActionNameColor(dataPresenter.isPresentInBdl());
+            }
+        });*/
+
+        actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                setColor();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                setColor();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                setColor();
+            }
+
+            public void setColor() {
                 contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
+                setActionNameColor(dataPresenter.isPresentInBdl());
             }
         });
-
     }
 
     private void addObjects(Controller controller, DataPresenterGUI dataPresenter, Box boxToUpdate){
@@ -139,6 +160,16 @@ public class SuggestionWidget {
         objectsBox.revalidate();
         objectsBox.repaint();
     }
+
+    public void setActionNameColor(boolean isPresentInBdl){
+        if(isPresentInBdl) { //Se presente nella BDL posso metterlo di colore verde
+            actionNameTextField.setForeground(Color.GREEN);
+        }else{
+            actionNameTextField.setForeground(Color.RED);
+        }
+    }
+
+
 }
 
 

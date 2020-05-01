@@ -20,7 +20,7 @@ public class LoadBdl implements LoadBDLInputPort {
     public void loadingBdl(String[] nameBdl) throws IOException {
         Bdl bdl = repo.readBdl(nameBdl);
         if(bdl!=null){
-            out.showBDLOutput("Tutto a posto, BDL caricata");
+            out.showBDLOutput("BDL Loaded successfully",bdl);
         }
     }
 }

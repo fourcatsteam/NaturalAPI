@@ -150,6 +150,7 @@ public class SuggestionGenerated extends Component implements Observer{
             else
                 JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 }
