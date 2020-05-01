@@ -21,8 +21,8 @@ public class Repository implements RepositoryAccess  {
 
 
     @Override
-    public String read(String fileName) throws FileNotFoundException {
-        return memoryAccess.readFile(fileName);
+    public String read(String filePath) throws FileNotFoundException {
+        return memoryAccess.readFile(filePath);
     }
 
     @Override

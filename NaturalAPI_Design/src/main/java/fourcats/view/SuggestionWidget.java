@@ -4,8 +4,12 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,12 +25,14 @@ public class SuggestionWidget {
     private final Box objectsBox;
     private final ArrayList <ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
+    private boolean isBdlLoaded;
 
-
-    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
+    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter,boolean isBdlLoaded){
         lObjectParamWidget = new ArrayList<>();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
         objectsBox = Box.createVerticalBox();
+
+        this.isBdlLoaded = isBdlLoaded;
 
         this.scenarioId = dataPresenter.getScenarioId();
         this.suggestionId = dataPresenter.getSuggestionId();
@@ -53,7 +59,7 @@ public class SuggestionWidget {
                 contr.addObject(suggestionId,scenarioId,objectName,"0");
                 if (dataPresenter.isOkOperation()){
                     lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),
-                            "string",objectName,suggestionId,scenarioId));
+                            "string",objectName,suggestionId,scenarioId,isBdlLoaded));
                 }
             }
             else{
@@ -101,14 +107,37 @@ public class SuggestionWidget {
             }
         });
 
-        actionNameTextField.addFocusListener(new FocusAdapter() {
+      /*  actionNameTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
+               // contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
+                //setActionNameColor(dataPresenter.isPresentInBdl());
+            }
+        });*/
+
+        actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
+           public void changedUpdate(DocumentEvent e) {
+                setNewName();
+                if(isBdlLoaded) setColor();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                setNewName();
+                if(isBdlLoaded) setColor();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                setNewName();
+                if(isBdlLoaded) setColor();
+            }
+
+            public void setColor() {
+                setActionNameColor(dataPresenter.isPresentInBdl());
+            }
+
+            public void setNewName() {
+                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText(),isBdlLoaded);
             }
         });
-
     }
 
     private void addObjects(Controller controller, DataPresenterGUI dataPresenter, Box boxToUpdate){
@@ -116,7 +145,7 @@ public class SuggestionWidget {
         for (String objId : dataPresenter.getlObjectId()){
             int id = lObjectParamWidget.size();
             lObjectParamWidget.add(new ObjectParamWidget(this,controller,dataPresenter,objId,dataPresenter.getlObjectTypes().get(id),
-                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId()));
+                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId(),isBdlLoaded));
         }
     }
 
@@ -139,6 +168,16 @@ public class SuggestionWidget {
         objectsBox.revalidate();
         objectsBox.repaint();
     }
+
+    public void setActionNameColor(boolean isPresentInBdl){
+        if(isPresentInBdl) { //Se presente nella BDL posso metterlo di colore verde
+            actionNameTextField.setForeground(Color.GREEN);
+        }else{
+            actionNameTextField.setForeground(Color.RED);
+        }
+    }
+
+
 }
 
 

@@ -8,51 +8,29 @@ import java.io.*;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
-    // documentsPathToFolder = "gherkin_documents/"
-    private String documentsPathToFolder;
 
-    // balPathToFolder = "BAL/"
-    private String balPathToFolder;
+     String bdlPathToFolder = "BDL/";
+    //private String bdlPathToFolder;
 
-    // bdlPathToFolder = "BDL/"
-    private String bdlPathToFolder;
-
-    public FileSystemAccess(String documentsPath, String balPath, String bdlPath) {
-        documentsPathToFolder = documentsPath;
-        balPathToFolder = balPath;
-        bdlPathToFolder = bdlPath;
-    }
 
     @Override
-    public String readFile(String fileName) throws FileNotFoundException {
-        String filepathRelative = documentsPathToFolder + fileName;
-        String filepathAbsolute = fileName;
-        String s, fileContent = "";
-        //first try with relative path, than, if exception is throw, try with absolute one
-        try(BufferedReader input = new BufferedReader(new FileReader(filepathRelative))){
+    public String readFile(String filePath) throws FileNotFoundException {
+        String s;
+        String fileContent = "";
+        try(BufferedReader input = new BufferedReader(new FileReader(filePath))){
             while((s=input.readLine()) != null){
                 fileContent += s + " ";
             }
-
         }catch(IOException e){
-            //try with absolute path
-            try(BufferedReader input = new BufferedReader(new FileReader(filepathAbsolute))){
-                while((s=input.readLine()) != null){
-                    fileContent += s + " ";
-                }
-            }
-            catch (IOException exception){
-                throw new FileNotFoundException();
-            }
-            //modificare gestione eccezioni
+            throw new FileNotFoundException();
         }
         return fileContent;
     }
 
     @Override
-    public void writeFile(String content, String filename) throws IOException {
+    public void writeFile(String content, String filePath) throws IOException {
         try{
-            File file = new File(balPathToFolder + filename + ".json");
+            File file = new File(filePath + ".json");
             file.getParentFile().mkdirs();
             try(FileWriter writer = new FileWriter(file)) {
                 writer.write(content);

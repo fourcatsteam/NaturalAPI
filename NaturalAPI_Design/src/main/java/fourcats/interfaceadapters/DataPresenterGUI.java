@@ -1,10 +1,9 @@
 package fourcats.interfaceadapters;
 
+import fourcats.SuggestionBDLAlgorithm.StrategyAlgorithm;
+import fourcats.SuggestionBDLAlgorithm.SuggestionBDLAlgorithm;
 import fourcats.datastructure.observer.Subject;
-import fourcats.entities.Action;
-import fourcats.entities.ObjectParam;
-import fourcats.entities.Scenario;
-import fourcats.entities.Type;
+import fourcats.entities.*;
 import fourcats.port.*;
 
 import java.util.ArrayList;
@@ -29,6 +28,12 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     boolean isSuggestionsRefreshNeeded;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
+    private StrategyAlgorithm algorithm;
+
+    private Bdl bdlLoaded;
+
+    private boolean isPresentInBdl;
+
     public DataPresenterGUI(){
         message = "";
         isSuggestionToAdd = false;
@@ -37,6 +42,9 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         lObjectId = new ArrayList<>();
         lObjectTypes= new ArrayList<>();
         lObjectNames = new ArrayList<>();
+        algorithm = new SuggestionBDLAlgorithm();
+        bdlLoaded = null;
+        isPresentInBdl = false;
     }
 
     @Override
@@ -107,6 +115,8 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionsRefreshNeeded;
     }
 
+    public boolean isPresentInBdl(){ return isPresentInBdl; }
+
     @Override
     public void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk) {
         if (isOk) {
@@ -122,16 +132,16 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified) {
+    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified,boolean isBdlLoaded) {
         if (isActionNameModified){
-            message = "Suggestion name successfully updated!";
             isOkOperation = true;
+            if(isBdlLoaded) this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
         }
         else{
             message = ERROR_MESSAGE;
             isOkOperation = false;
-            notifyObservers();
         }
+        notifyObservers();
         message = "";
     }
 
@@ -151,10 +161,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified) {
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified,boolean isBdlLoaded) {
         if (isObjectNameModified){
-            message = "Object name of the suggestion successfully updated!";
             isOkOperation = true;
+            if(isBdlLoaded) this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
         }
         else {
             message = ERROR_MESSAGE;
@@ -289,8 +299,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showBDLOutput(String s) {
+    public void showBDLOutput(String s,Bdl b) {
         this.message = s;
+        this.bdlLoaded = b;
         notifyObservers();
+        this.message = "";
     }
 }

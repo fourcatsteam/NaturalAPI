@@ -1,5 +1,5 @@
 package fourcats.port;
 
 public interface GenerateBALSuggestionsInputPort {
-    void generateSuggestions(String featureFileName);
+    void generateSuggestions(String featureFilePath);
 }

@@ -26,14 +26,15 @@ public class SuggestionGenerated implements Observer{
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
+    private boolean isBdlLoaded;
 
-    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter,boolean bdlLoaded){
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
         this.featureName = featureName;
         this.currentScenarioId = -1;
-
+        this.isBdlLoaded = bdlLoaded;
         gridBagLayout = new GridBagLayout();
         gridConstraint = new GridBagConstraints();
         panelInScrollPanel.setLayout(gridBagLayout);
@@ -133,7 +134,7 @@ public class SuggestionGenerated implements Observer{
         }
         //suggestions can be updated for different reasons in the model but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
-            new SuggestionWidget(panelSuggestions, contr, dataPresenter);
+            new SuggestionWidget(panelSuggestions, contr, dataPresenter,isBdlLoaded);
         }
 
         if (!dataPresenter.getMessage().equals("")) {
@@ -143,6 +144,7 @@ public class SuggestionGenerated implements Observer{
             else
                 JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 }

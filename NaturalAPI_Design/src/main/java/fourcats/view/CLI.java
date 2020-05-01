@@ -58,7 +58,7 @@ public class CLI implements Observer {
     }
 
     private String chooseFile() throws IOException {
-        System.out.println("Choose a gherkin feature namefile, digit EXIT to exit.");
+        System.out.println("Enter the path of the gherkin feature namefile, digit EXIT to exit.");
         String r = br.readLine();
         if(!r.equals("EXIT")){
             nameTitleList.add(r);
@@ -86,12 +86,12 @@ public class CLI implements Observer {
                     contr.generateSuggestions(chooseFile());
                     break;
                 case "5":
-                    System.out.println("Please, insert the name for the BAL");
-                    String balName = br.readLine();
-                    contr.generateBAL(balName);
+                    System.out.println("Please, enter the path including the name for the BAL");
+                    String balPath = br.readLine();
+                    contr.generateBAL(balPath);
                     break;
                 default:
-                    System.out.println("Please insert a valid option. Digit EXIT to exit.");
+                    System.out.println("Please choose a valid option. Digit EXIT to exit.");
                     break;
             }
         }
@@ -198,7 +198,7 @@ public class CLI implements Observer {
     private void modifyActionName(String idScenario, String idSuggestion) throws IOException {
         System.out.println("Please insert the new name of the action");
         String actionName = br.readLine();
-        contr.modifyActionName(idSuggestion,idScenario,actionName);
+        contr.modifyActionName(idSuggestion,idScenario,actionName,false); //false è il campo della BDL
     }
 
     private void modifyActionType(String idScenario, String idSuggestion) throws IOException {
@@ -219,7 +219,7 @@ public class CLI implements Observer {
         String idObject = askForIdObjectToModify();
         System.out.println("Please insert the new name for the object");
         String objectName = br.readLine();
-        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
+        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName,false);  //false è il campo della BDL
     }
 
     private void modifyObjectType(String idScenario, String idSuggestion) throws IOException {

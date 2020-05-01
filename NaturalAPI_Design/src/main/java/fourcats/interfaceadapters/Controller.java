@@ -28,26 +28,26 @@ public class Controller{
             this.loadBdl = loadBdl;
     }
 
-    public void generateSuggestions(String featureFileName) {
-        generateSuggestion.generateSuggestions(featureFileName);
+    public void generateSuggestions(String featureFilePath) {
+        generateSuggestion.generateSuggestions(featureFilePath);
     }
 
     public void declineSuggestion(String idSuggestion, String idScenario) {
         declineSuggestion.declineSuggestion(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario));
     }
 
-    public void generateBAL(String filename) throws IOException {
-        generateBAL.generateBAL(filename);
+    public void generateBAL(String filePath) throws IOException {
+        generateBAL.generateBAL(filePath);
     }
-    public void modifyActionName(String idSuggestion, String idScenario, String newActionName){
-        modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName);
+    public void modifyActionName(String idSuggestion, String idScenario, String newActionName,boolean isBdlLoaded){
+        modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName,isBdlLoaded);
     }
     public void modifyActionType(String idSuggestion, String idScenario, String newType) {
         modifySuggestion.modifyActionType(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), newType);
     }
 
-    public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName){
-        modifySuggestion.modifyObjectName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newObjectName);
+    public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName,boolean isBdlLoaded){
+        modifySuggestion.modifyObjectName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newObjectName,isBdlLoaded);
     }
 
     public void modifyObjectType(String idSuggestion, String idScenario, String idObject, String newType) {
