@@ -29,6 +29,7 @@ public class DataKeeper {
         mScenarios.put(mScenarios.size(),scenario);
     }
 
+
     public Map<Integer,Scenario> getScenarioMap(){
         return mScenarios;
     }
@@ -110,11 +111,7 @@ public class DataKeeper {
 
     public void addCustomType(String typeName, Map<String, String> mAttributes) {
         for (Type ty : mTypes.values()){
-            if (!ty.getName().equals(typeName)) {
-                mTypes.put(mTypes.size(),new Type(typeName,mAttributes));
-                return;
-            }
-            else{
+            if (ty.getName().equals(typeName)) {
                 throw new SetOnce.AlreadySetException();
             }
         }
