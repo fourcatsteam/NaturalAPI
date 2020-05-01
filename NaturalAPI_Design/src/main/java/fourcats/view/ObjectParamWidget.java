@@ -102,8 +102,6 @@ public class ObjectParamWidget {
             }
         });
 
-
-
     }
 
     public int getObjectId(){
@@ -114,8 +112,8 @@ public class ObjectParamWidget {
     }
 
     private void setObjectNameColor(boolean isPresentInBdl){
-        if(isPresentInBdl) { //Se presente nella BDL posso metterlo di colore verde
-            objectNameTextField.setForeground(Color.GREEN);
+        if(isPresentInBdl) { //if present in the BDL then set text color to green
+            objectNameTextField.setForeground(new Color(9,148,65));
         }else{
             objectNameTextField.setForeground(Color.RED);
         }

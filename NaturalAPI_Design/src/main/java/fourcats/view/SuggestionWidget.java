@@ -169,8 +169,8 @@ public class SuggestionWidget {
     }
 
     public void setActionNameColor(boolean isPresentInBdl){
-        if(isPresentInBdl) { //Se presente nella BDL posso metterlo di colore verde
-            actionNameTextField.setForeground(Color.GREEN);
+        if(isPresentInBdl) { //if present in the BDL then set text color to green
+            actionNameTextField.setForeground(new Color(9,148,65));
         }else{
             actionNameTextField.setForeground(Color.RED);
         }

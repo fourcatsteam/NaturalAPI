@@ -8,9 +8,10 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
-public class SuggestionGenerated implements Observer{
+public class SuggestionGenerated extends Component implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
@@ -52,12 +53,17 @@ public class SuggestionGenerated implements Observer{
 
 
         generateBalButton.addActionListener(e -> {
-            String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
-            if (balName != null && !balName.equals("")){
-                try {
-                    contr.generateBAL(balName);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+            JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
+            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                String path = file.getAbsolutePath();
+                if (!path.equals("")) {
+                    try {
+                        contr.generateBAL(path);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
             }
         });
@@ -138,9 +144,9 @@ public class SuggestionGenerated implements Observer{
         if (!dataPresenter.getMessage().equals("")) {
             //check if the operation was successful than show information message or error message
             if (dataPresenter.isOkOperation())
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage()+"\n");
             else
-                JOptionPane.showMessageDialog(null,dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,dataPresenter.getMessage()+"\n","Error!",JOptionPane.ERROR_MESSAGE);
         }
 
     }
