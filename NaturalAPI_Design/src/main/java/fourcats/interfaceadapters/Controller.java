@@ -39,15 +39,15 @@ public class Controller{
     public void generateBAL(String filePath) throws IOException {
         generateBAL.generateBAL(filePath);
     }
-    public void modifyActionName(String idSuggestion, String idScenario, String newActionName,boolean isBdlLoaded){
-        modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName,isBdlLoaded);
+    public void modifyActionName(String idSuggestion, String idScenario, String newActionName){
+        modifySuggestion.modifyActionName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario),newActionName);
     }
     public void modifyActionType(String idSuggestion, String idScenario, String newType) {
         modifySuggestion.modifyActionType(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), newType);
     }
 
-    public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName,boolean isBdlLoaded){
-        modifySuggestion.modifyObjectName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newObjectName,isBdlLoaded);
+    public void modifyObjectName(String idSuggestion, String idScenario, String idObject, String newObjectName){
+        modifySuggestion.modifyObjectName(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario), Integer.parseInt(idObject), newObjectName);
     }
 
     public void modifyObjectType(String idSuggestion, String idScenario, String idObject, String newType) {

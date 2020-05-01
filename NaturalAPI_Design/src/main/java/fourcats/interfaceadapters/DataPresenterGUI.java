@@ -132,10 +132,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified,boolean isBdlLoaded) {
+    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
         if (isActionNameModified){
             isOkOperation = true;
-            if(isBdlLoaded) this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
+            if(bdlLoaded!=null) this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
         }
         else{
             message = ERROR_MESSAGE;
@@ -161,10 +161,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified,boolean isBdlLoaded) {
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified) {
         if (isObjectNameModified){
             isOkOperation = true;
-            if(isBdlLoaded) this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
+            if(bdlLoaded!=null) this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
         }
         else {
             message = ERROR_MESSAGE;
@@ -296,6 +296,14 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             }
         }
         isSuggestionToAdd = false;
+    }
+
+    public boolean isBdlLoaded(){
+        if(bdlLoaded!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
