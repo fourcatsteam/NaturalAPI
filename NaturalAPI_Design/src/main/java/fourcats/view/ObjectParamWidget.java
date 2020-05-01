@@ -18,7 +18,7 @@ public class ObjectParamWidget {
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
 
     public ObjectParamWidget(SuggestionWidget suggWidget, Controller contr, DataPresenterGUI dataPresenter, String initialObjectId,
-                             String objectType, String objectName, String suggestionId, String scenarioId){
+                             String objectType, String objectName, String suggestionId, String scenarioId,boolean isBdlLoaded){
         this.objectId = initialObjectId;
         mainPanel = new JPanel();
         mainPanel.add(objectTypeComboBox);
@@ -79,21 +79,31 @@ public class ObjectParamWidget {
         });*/
 
         objectNameTextField.getDocument().addDocumentListener(new DocumentListener() {
+
             public void changedUpdate(DocumentEvent e) {
-                setColor();
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
             public void removeUpdate(DocumentEvent e) {
-                setColor();
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
             public void insertUpdate(DocumentEvent e) {
-                setColor();
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
 
             public void setColor() {
-                contr.modifyObjectName(suggestionId,scenarioId,objectId,objectNameTextField.getText());
                 setObjectNameColor(dataPresenter.isPresentInBdl());
             }
+
+            public void setNewName() {
+                contr.modifyObjectName(suggestionId,scenarioId,objectId,objectNameTextField.getText(),isBdlLoaded);
+            }
         });
+
+
+
     }
 
     public int getObjectId(){

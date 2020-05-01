@@ -22,6 +22,7 @@ public class GUI_Design extends Component implements Observer  {
     private boolean areFilesLoaded;
     private String nameFeatureFile;
     private String pathFeatureFile;
+    private boolean isBdlLoaded;
 
 
     public GUI_Design(Controller c,DataPresenterGUI dp){
@@ -30,12 +31,13 @@ public class GUI_Design extends Component implements Observer  {
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
         this.fc.setMultiSelectionEnabled(true);
         this.areFilesLoaded = false;
+        this.isBdlLoaded = false;
         this.log.append("Welcome to NaturalAPI Design!\n\n");
         this.dataPresenter.attach(this);
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(areFilesLoaded) {
-                new SuggestionGenerated(nameFeatureFile, pathFeatureFile, controller, dataPresenter).createAndShowGUI();
+                new SuggestionGenerated(nameFeatureFile, pathFeatureFile, controller, dataPresenter,isBdlLoaded).createAndShowGUI();
             }
             else{
                 log.append("Please, load file first.\n");
@@ -72,6 +74,7 @@ public class GUI_Design extends Component implements Observer  {
                     bdlnameFile[i] = f.getName();
                     i++;
                 }
+                this.isBdlLoaded = true;
             } else {
                 log.append("Open command cancelled by user." + "\n");
             }

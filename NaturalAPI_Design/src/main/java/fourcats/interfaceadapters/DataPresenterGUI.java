@@ -132,10 +132,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
+    public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified,boolean isBdlLoaded) {
         if (isActionNameModified){
             isOkOperation = true;
-            this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
+            if(isBdlLoaded) this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
         }
         else{
             message = ERROR_MESSAGE;
@@ -161,11 +161,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     @Override
-    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified) {
+    public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified,boolean isBdlLoaded) {
         if (isObjectNameModified){
             isOkOperation = true;
-            this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
-
+            if(isBdlLoaded) this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
         }
         else {
             message = ERROR_MESSAGE;

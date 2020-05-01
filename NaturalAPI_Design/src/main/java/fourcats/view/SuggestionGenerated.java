@@ -5,14 +5,12 @@ import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JFileChooser;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.IOException;
 
-public class SuggestionGenerated extends Component implements Observer {
+public class SuggestionGenerated implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
@@ -28,14 +26,15 @@ public class SuggestionGenerated extends Component implements Observer {
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
+    private boolean isBdlLoaded;
 
-    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter,boolean bdlLoaded){
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
         this.featureName = featureName;
         this.currentScenarioId = -1;
-
+        this.isBdlLoaded = bdlLoaded;
         gridBagLayout = new GridBagLayout();
         gridConstraint = new GridBagConstraints();
         panelInScrollPanel.setLayout(gridBagLayout);
@@ -55,17 +54,12 @@ public class SuggestionGenerated extends Component implements Observer {
 
 
         generateBalButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
-            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                String path = file.getAbsolutePath();
-                if (!path.equals("")) {
-                    try {
-                        contr.generateBAL(path);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+            String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
+            if (balName != null && !balName.equals("")){
+                try {
+                    contr.generateBAL(balName);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
             }
         });
@@ -140,7 +134,7 @@ public class SuggestionGenerated extends Component implements Observer {
         }
         //suggestions can be updated for different reasons in the model but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
-            new SuggestionWidget(panelSuggestions, contr, dataPresenter);
+            new SuggestionWidget(panelSuggestions, contr, dataPresenter,isBdlLoaded);
         }
 
         if (!dataPresenter.getMessage().equals("")) {

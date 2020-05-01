@@ -25,12 +25,14 @@ public class SuggestionWidget {
     private final Box objectsBox;
     private final ArrayList <ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
+    private boolean isBdlLoaded;
 
-
-    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
+    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter,boolean isBdlLoaded){
         lObjectParamWidget = new ArrayList<>();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
         objectsBox = Box.createVerticalBox();
+
+        this.isBdlLoaded = isBdlLoaded;
 
         this.scenarioId = dataPresenter.getScenarioId();
         this.suggestionId = dataPresenter.getSuggestionId();
@@ -57,7 +59,7 @@ public class SuggestionWidget {
                 contr.addObject(suggestionId,scenarioId,objectName,"0");
                 if (dataPresenter.isOkOperation()){
                     lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),
-                            "string",objectName,suggestionId,scenarioId));
+                            "string",objectName,suggestionId,scenarioId,isBdlLoaded));
                 }
             }
             else{
@@ -115,19 +117,25 @@ public class SuggestionWidget {
         });*/
 
         actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-                setColor();
+           public void changedUpdate(DocumentEvent e) {
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
             public void removeUpdate(DocumentEvent e) {
-                setColor();
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
             public void insertUpdate(DocumentEvent e) {
-                setColor();
+                setNewName();
+                if(isBdlLoaded) setColor();
             }
 
             public void setColor() {
-                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
                 setActionNameColor(dataPresenter.isPresentInBdl());
+            }
+
+            public void setNewName() {
+                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText(),isBdlLoaded);
             }
         });
     }
@@ -137,7 +145,7 @@ public class SuggestionWidget {
         for (String objId : dataPresenter.getlObjectId()){
             int id = lObjectParamWidget.size();
             lObjectParamWidget.add(new ObjectParamWidget(this,controller,dataPresenter,objId,dataPresenter.getlObjectTypes().get(id),
-                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId()));
+                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId(),isBdlLoaded));
         }
     }
 
