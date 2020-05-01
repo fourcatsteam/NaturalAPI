@@ -62,12 +62,11 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     }
 
     private List<Action> generateAction(String scenario)  {
-        List<Action> lGeneratedAction = new ArrayList<>();
-        // analyze the content of the retrieved file
-        AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(scenario);
-        //add each suggestion to the suggestions list with a default parameter (the name in the action)
-        //format the suggestion by adding "_" between words
-        //ex. withdraw cash --> withdraw_cash
+        List<Action> lGeneratedActions = new ArrayList<>();
+        String scenarioContent = extractScenarioContent(scenario);
+        // analyze the content of the scenario
+        AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(scenarioContent);
+
         String formattedSuggestion="";
         Action suggestion = null;
 
@@ -77,24 +76,27 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
                 .map(d-> d.getGov()+" "+d.getDep())
                 .collect(Collectors.toList());
 
+        //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
         for (String suggestedAction : predicates){
+            //format the suggestion by adding "_" between words (ex. withdraw cash --> withdraw_cash)
             formattedSuggestion = suggestedAction.replace(" ", "_");
             suggestion = new Action((formattedSuggestion), "void");
             suggestion.addObjectParam(generateObject(suggestion.getName()));
-            lGeneratedAction.add(suggestion);
+            lGeneratedActions.add(suggestion);
         }
-        return lGeneratedAction;
+        return lGeneratedActions;
 
     }
 
-    //generate default objectParameter (the first parameter in the Action)
+
     private ObjectParam generateObject(String actionName){
+        //generate default objectParameter (the first parameter in the Action)
         String[] splittedActionName = actionName.split("_");
         return new ObjectParam(splittedActionName[1],"string"); //object type default at string
     }
 
     private String extractScenarioName(String feature){
-//extract scenario name by picking the text between first row and "Given:" in the feature file
+        //extract scenario name by picking the text between first row and "Given:" in the feature file
         int indexFeatureStart = 1;
         int indexFeatureEnd = -1;
         if (feature.indexOf(AS_A)!=-1)
@@ -118,6 +120,15 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         }
         return "All";
 
+    }
+
+    private String extractScenarioContent(String scenario){
+        //extract all text from "Given" in the scenario
+        int indexGiven = 0;
+        if (scenario.indexOf("Given")!=-1){
+            indexGiven = scenario.indexOf("Given");
+        }
+        return scenario.substring(indexGiven);
     }
 
 
