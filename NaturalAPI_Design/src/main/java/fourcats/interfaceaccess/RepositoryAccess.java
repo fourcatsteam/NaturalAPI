@@ -15,7 +15,7 @@ public interface RepositoryAccess {
     Map<Integer, Scenario> readScenarios();
     Map<Integer, Type> readTypes();
     void deleteScenarios();
-    void createBAL(String bal,String filename) throws IOException;
+    void createBAL(String bal,String filePath) throws IOException;
     void updateActionName(int idAction, int idScenario, String newActionName);
     void updateActionType(int idAction, int idScenario, String newActionType);
     void updateObjectName(int idAction, int idScenario, int idObject, String newObjectName);

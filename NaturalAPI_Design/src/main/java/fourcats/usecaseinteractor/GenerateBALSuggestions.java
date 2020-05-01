@@ -26,7 +26,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         this.out = outputPort;
     }
 
-    public void generateSuggestions(String featureFileName) {
+    public void generateSuggestions(String featureFilePath) {
         Map<Integer,Action> mActions;
         //BlackList blackList = new BlackList();
         List<Scenario> lScenarios = new ArrayList<>();
@@ -35,7 +35,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         String feature = "";
         //read feature file from repository
         try {
-            feature = repo.read(featureFileName);
+            feature = repo.read(featureFilePath);
         }
         catch(FileNotFoundException e){
             out.showErrorFileLoad();

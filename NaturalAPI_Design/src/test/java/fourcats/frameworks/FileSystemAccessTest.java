@@ -19,7 +19,7 @@ public class FileSystemAccessTest {
     private FileSystemAccess fileSystemAccess;
 
     @Before public void CreateFileSystemAccess() {
-        fileSystemAccess = new FileSystemAccess("src/test/java/fourcats/test_documents/", "src/test/java/fourcats/test_documents/", "src/test/java/fourcats/test_documents/");
+        fileSystemAccess = new FileSystemAccess();
     }
 
     @Test

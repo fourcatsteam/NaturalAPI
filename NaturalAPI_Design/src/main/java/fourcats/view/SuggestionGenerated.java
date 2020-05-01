@@ -4,13 +4,15 @@ package fourcats.view;
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
+import javafx.stage.FileChooser;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
-public class SuggestionGenerated implements Observer{
+public class SuggestionGenerated extends Component implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
@@ -53,12 +55,17 @@ public class SuggestionGenerated implements Observer{
 
 
         generateBalButton.addActionListener(e -> {
-            String balName = JOptionPane.showInputDialog("Enter the name for the BAL");
-            if (balName != null && !balName.equals("")){
-                try {
-                    contr.generateBAL(balName);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+            JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
+            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                String path = file.getAbsolutePath();
+                if (!path.equals("")) {
+                    try {
+                        contr.generateBAL(path);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
             }
         });

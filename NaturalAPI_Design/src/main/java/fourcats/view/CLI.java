@@ -58,7 +58,7 @@ public class CLI implements Observer {
     }
 
     private String chooseFile() throws IOException {
-        System.out.println("Choose a gherkin feature namefile, digit EXIT to exit.");
+        System.out.println("Enter the path of the gherkin feature namefile, digit EXIT to exit.");
         String r = br.readLine();
         if(!r.equals("EXIT")){
             nameTitleList.add(r);
@@ -86,12 +86,12 @@ public class CLI implements Observer {
                     contr.generateSuggestions(chooseFile());
                     break;
                 case "5":
-                    System.out.println("Please, insert the name for the BAL");
-                    String balName = br.readLine();
-                    contr.generateBAL(balName);
+                    System.out.println("Please, enter the path including the name for the BAL");
+                    String balPath = br.readLine();
+                    contr.generateBAL(balPath);
                     break;
                 default:
-                    System.out.println("Please insert a valid option. Digit EXIT to exit.");
+                    System.out.println("Please choose a valid option. Digit EXIT to exit.");
                     break;
             }
         }

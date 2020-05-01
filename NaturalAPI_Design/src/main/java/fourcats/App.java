@@ -12,7 +12,7 @@ import fourcats.view.GUI_Design;
  */
 public class App {
     public static void main( String[] args ){
-        Repository repo = new Repository(new DataKeeper(), new FileSystemAccess("gherkin_documents/", "BAL/", "BDL/"));
+        Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
         //DataPresenter dataPresenter = new DataPresenter();
         DataPresenterGUI dataPresenter = new DataPresenterGUI();
