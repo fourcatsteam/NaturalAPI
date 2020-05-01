@@ -119,19 +119,25 @@ public class SuggestionGenerated implements Observer{
 
     @Override
     public void update() {
+        //if the suggestions widget needs a complete refresh to be updated with the model, then this needs to be execute
+        //to fully recreate all suggestion widgets and scenario widgets in panelInScrollPanel
         if (dataPresenter.isSuggestionsRefreshNeeded()){
             panelInScrollPanel.removeAll();
             panelInScrollPanel.revalidate();
             panelInScrollPanel.repaint();
             currentScenarioId = -1;
         }
+        //init a new scenario if the id of the current scenario is different from the one being read from the dataPresenter
         if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
             initScenario();
         }
+        //suggestions can be updated for different reasons in the model but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
             new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
+
         if (!dataPresenter.getMessage().equals("")) {
+            //check if the operation was successful than show information message or error message
             if (dataPresenter.isOkOperation())
                 JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
             else
