@@ -9,12 +9,13 @@ import org.apache.lucene.util.SetOnce;
 import java.util.*;
 
 public class DataKeeper {
-    private List<String> lDeafultTypes = new ArrayList<>();
+    private List<String> lDeafultTypes;
     private Map<Integer, Scenario> mScenarios;
     private Map<Integer, Type> mTypes;
 
 
     public DataKeeper(){
+        lDeafultTypes = new ArrayList<>();
         mScenarios = new HashMap<>();
         mTypes = new HashMap<>();
         //init mTypes with default values
