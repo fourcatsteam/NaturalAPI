@@ -15,11 +15,13 @@
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/ModifyBALSuggestionOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/entities/ObjectParam.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/usecaseinteractor/GenerateBALSuggestions.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/AddSuggestionButtonWidget.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/entities/BAL.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/SuggestionGenerated.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/entities/Action.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/datastructure/AnalyzedData.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/interfaceaccess/PersistentMemoryAccess.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/SuggestionBDLAlgorithm/StrategyAlgorithm.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/frameworks/BalAnalyzerImplementation.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/usecaseinteractor/GenerateBAL.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/ModifyBALSuggestionInputPort.java
@@ -36,6 +38,7 @@
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/usecaseinteractor/ShowTypes.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/frameworks/Repository.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/DeclineBALSuggestionOutputPort.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/LoadBDLInputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/GenerateBALOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/AddBALSuggestionOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/usecaseinteractor/CreateCustomType.java
@@ -49,7 +52,10 @@
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/GenerateBALSuggestionsOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/ShowTypesOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/datastructure/Dependency.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/usecaseinteractor/LoadBdl.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/GUI_Design.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/view/CustomTypeCreation.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/interfaceaccess/RepositoryAccess.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/SuggestionBDLAlgorithm/SuggestionBDLAlgorithm.java
+/Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/LoadBDLOutputPort.java
 /Users/EdoardoTinto/Desktop/NaturalAPI/NaturalAPI_Design/src/main/java/fourcats/port/GenerateBALInputPort.java

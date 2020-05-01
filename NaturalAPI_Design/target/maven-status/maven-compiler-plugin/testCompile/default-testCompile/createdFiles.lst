@@ -1,6 +1,9 @@
 fourcats/usecaseinteractor/GenerateBALTest.class
 fourcats/usecaseinteractor/DeclineBALSuggestionTest.class
+fourcats/entities/TypeTest.class
+fourcats/frameworks/BalAnalyzerImplementationTest.class
 fourcats/frameworks/FileSystemAccessTest.class
+fourcats/frameworks/DataKeeperTest.class
 fourcats/datastructure/WordCounterTest.class
 fourcats/datastructure/WordTagTest.class
 fourcats/entities/ObjectParamTest.class
