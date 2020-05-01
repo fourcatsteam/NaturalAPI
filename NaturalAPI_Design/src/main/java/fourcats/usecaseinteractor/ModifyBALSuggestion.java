@@ -35,14 +35,14 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
     }
 
     @Override
-    public void modifyActionName(int idAction, int idScenario, String newName,boolean isBdlLoaded) {
+    public void modifyActionName(int idAction, int idScenario, String newName) {
         try {
             repo.updateActionName(idAction, idScenario, newName);
-            out.showModifiedActionName(repo.readScenarios(), true,newName,isBdlLoaded);
+            out.showModifiedActionName(repo.readScenarios(), true,newName);
         }
         catch (NullPointerException e){
             //Modifica non effettuata
-            out.showModifiedActionName(repo.readScenarios(), false,"",isBdlLoaded);
+            out.showModifiedActionName(repo.readScenarios(), false,"");
         }
     }
 
@@ -70,13 +70,13 @@ public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
     }
 
     @Override
-    public void modifyObjectName(int idAction, int idScenario, int idObject, String newName,boolean isBdlLoaded) {
+    public void modifyObjectName(int idAction, int idScenario, int idObject, String newName) {
         try {
             repo.updateObjectName(idAction, idScenario, idObject, newName);
-            out.showModifiedObjectName(repo.readScenarios(),true,newName,isBdlLoaded);
+            out.showModifiedObjectName(repo.readScenarios(),true,newName);
         }
         catch (Exception e){
-            out.showModifiedObjectName(repo.readScenarios(),false,"",isBdlLoaded);
+            out.showModifiedObjectName(repo.readScenarios(),false,"");
         }
     }
 

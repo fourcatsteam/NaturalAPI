@@ -198,7 +198,7 @@ public class CLI implements Observer {
     private void modifyActionName(String idScenario, String idSuggestion) throws IOException {
         System.out.println("Please insert the new name of the action");
         String actionName = br.readLine();
-        contr.modifyActionName(idSuggestion,idScenario,actionName,false); //false è il campo della BDL
+        contr.modifyActionName(idSuggestion,idScenario,actionName);
     }
 
     private void modifyActionType(String idScenario, String idSuggestion) throws IOException {
@@ -219,7 +219,7 @@ public class CLI implements Observer {
         String idObject = askForIdObjectToModify();
         System.out.println("Please insert the new name for the object");
         String objectName = br.readLine();
-        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName,false);  //false è il campo della BDL
+        contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
     }
 
     private void modifyObjectType(String idScenario, String idSuggestion) throws IOException {
