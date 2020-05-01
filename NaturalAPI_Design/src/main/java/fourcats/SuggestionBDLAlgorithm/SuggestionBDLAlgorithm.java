@@ -8,9 +8,11 @@ public class SuggestionBDLAlgorithm implements StrategyAlgorithm{
     @Override
     public boolean findActionInBdl(String nameAction, Bdl bdl) {
         //Ricerca sui predicati
-        for(WordCounter wc : bdl.getPredicates()){
-            if(wc.getWord().equalsIgnoreCase(nameAction.replaceAll("_"," "))){
-                return true;
+        if (bdl!=null){
+            for(WordCounter wc : bdl.getPredicates()){
+                if(wc.getWord().equalsIgnoreCase(nameAction.replaceAll("_"," "))){
+                    return true;
+                }
             }
         }
         return false;
@@ -19,9 +21,11 @@ public class SuggestionBDLAlgorithm implements StrategyAlgorithm{
     @Override
     public boolean findObjectInBdl(String nameObject, Bdl bdl) {
         //Ricerca sui nomi
-        for(WordCounter wc : bdl.getNouns()){
-            if(wc.getWord().equalsIgnoreCase(nameObject)){
-                return true;
+        if (bdl!=null) {
+            for (WordCounter wc : bdl.getNouns()) {
+                if (wc.getWord().equalsIgnoreCase(nameObject)) {
+                    return true;
+                }
             }
         }
         return false;
