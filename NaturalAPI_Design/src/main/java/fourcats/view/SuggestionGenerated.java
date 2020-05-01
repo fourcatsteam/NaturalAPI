@@ -4,15 +4,15 @@ package fourcats.view;
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
-import javafx.stage.FileChooser;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
-public class SuggestionGenerated extends Component implements Observer{
+public class SuggestionGenerated extends Component implements Observer {
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
