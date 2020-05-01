@@ -44,9 +44,11 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5af26" class="javax.swing.JTextPane" binding="panelNouns">
+              <component id="af10" class="javax.swing.JTable" binding="tableNouns">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <enabled value="true"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
@@ -57,7 +59,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="d6910" class="javax.swing.JTextPane" binding="panelVerbs">
+              <component id="3c5e7" class="javax.swing.JTable" binding="tableVerbs">
                 <constraints/>
                 <properties/>
               </component>
@@ -70,7 +72,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="97d41" class="javax.swing.JTextPane" binding="panelPredicates">
+              <component id="cb274" class="javax.swing.JTable" binding="tablePredicates">
                 <constraints/>
                 <properties/>
               </component>

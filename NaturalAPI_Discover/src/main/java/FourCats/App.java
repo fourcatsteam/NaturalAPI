@@ -6,6 +6,7 @@ import FourCats.Frameworks.StanfordNlp;
 import FourCats.GUI.GUI_Discover;
 import FourCats.InterfaceAdapters.Controller;
 import FourCats.InterfaceAdapters.DataPresenter;
+import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.InterfaceAdapters.Repository;
 import FourCats.UseCaseInteractor.AddDocuments;
 import FourCats.UseCaseInteractor.CreateBdl;
@@ -25,7 +26,7 @@ public class App {
 
         Repository repo = new Repository(new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
-        DataPresenter datapresenter = new DataPresenter();
+        DataPresenter_GUI datapresenter = new DataPresenter_GUI();
 
         CreateBdl createBdl = new CreateBdl(repo,new AnalyzeDocument(nlp),datapresenter);
         AddDocuments addDocuments = new AddDocuments(repo,new AnalyzeDocument(nlp),datapresenter);

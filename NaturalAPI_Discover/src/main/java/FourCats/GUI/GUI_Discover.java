@@ -4,13 +4,20 @@ import FourCats.InterfaceAdapters.Controller;
 import FourCats.InterfaceAdapters.DataPresenter;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
+
+import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.Observer.Observer;
 
 public class GUI_Discover extends JPanel implements Observer{
@@ -29,13 +36,16 @@ public class GUI_Discover extends JPanel implements Observer{
     private JTextPane panelPredicates;
     private JTextPane panelNouns;
     private JScrollPane logScroll;
+    private JTable tableNouns;
+    private JTable tableVerbs;
+    private JTable tablePredicates;
     private Boolean areFilesLoaded;
 
     private Controller controller;
-    private DataPresenter datapresenter;
+    private DataPresenter_GUI datapresenter;
     private LinkedList<String> nameTitleList;
 
-    public GUI_Discover(Controller c, DataPresenter d) {
+    public GUI_Discover(Controller c, DataPresenter_GUI d) {
         this.areFilesLoaded = false;
         this.controller = c;
         this.datapresenter= d;
@@ -119,6 +129,30 @@ public class GUI_Discover extends JPanel implements Observer{
 
             controller.viewBdl(result, visualizationType);
         });
+
+        KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
+        tableNouns.registerKeyboardAction(actionEvent -> doCopy(tableNouns),"Copy",stroke,JComponent.WHEN_FOCUSED);
+        tableVerbs.registerKeyboardAction(actionEvent -> doCopy(tableVerbs),"Copy",stroke,JComponent.WHEN_FOCUSED);
+        tablePredicates.registerKeyboardAction(actionEvent -> doCopy(tablePredicates),"Copy",stroke,JComponent.WHEN_FOCUSED);
+    }
+
+    private void doCopy(JTable t) {
+        int col = t.getSelectedColumn();
+        int row = t.getSelectedRow();
+        if (col != -1 && row != -1) {
+            Object value = t.getValueAt(row, col);
+            String data;
+            if (value == null) {
+                data = "";
+            } else {
+                data = value.toString();
+            }
+
+            final StringSelection selection = new StringSelection(data);
+
+            final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(selection, selection);
+        }
     }
 
     private String choosing(int useCase){
@@ -165,14 +199,28 @@ public class GUI_Discover extends JPanel implements Observer{
     }
 
     private void showResult(){
-        panelNouns.setText(datapresenter.getBdlNouns());
-        panelVerbs.setText(datapresenter.getBdlVerbs());
-        panelPredicates.setText(datapresenter.getBdlPredicates());
+        DefaultTableModel nounModel = new DefaultTableModel(new Object[]{"Noun","Frequency"},0);
+        datapresenter.getBdlNouns().stream()
+                .forEach(tableRow -> {
+                    nounModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
+                });
+        tableNouns.setModel(nounModel);
 
-        //slide the text areas to top
-        panelNouns.setCaretPosition(0);
-        panelVerbs.setCaretPosition(0);
-        panelPredicates.setCaretPosition(0);
+        DefaultTableModel verbsModel = new DefaultTableModel(new Object[]{"Verb","Frequency"},0);
+        datapresenter.getBdlVerbs().stream()
+                .forEach(tableRow -> {
+                    verbsModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
+                });
+        tableVerbs.setModel(verbsModel);
+
+        DefaultTableModel predModel = new DefaultTableModel(new Object[]{"Predicate","Frequency"},0);
+        datapresenter.getBdlPredicates().stream()
+                .forEach(tableRow -> {
+                    predModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
+                });
+
+        tablePredicates.setModel(predModel);
+        tablePredicates.getColumn("Frequency").setPreferredWidth(10);
 
         log.append(datapresenter.getMessage()+"\n");
     }
@@ -181,6 +229,5 @@ public class GUI_Discover extends JPanel implements Observer{
     public void update() {
         showResult();
     }
-
 
 }
