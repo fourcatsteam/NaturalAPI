@@ -96,7 +96,6 @@ public class DataKeeperTest {
 
     @Test
     public void DataKeeperAddCustomTypeWthEmptyMap() {
-        when(scenario.getActionsMap()).thenReturn(map);
         dataKeeper.addCustomType("NewType", new HashMap<String, String>());
         assertEquals(dataKeeper.getTypeMap().size(), 6);
     }
