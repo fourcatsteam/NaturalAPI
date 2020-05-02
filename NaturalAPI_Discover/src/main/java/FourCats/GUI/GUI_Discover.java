@@ -12,6 +12,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -130,10 +131,27 @@ public class GUI_Discover extends JPanel implements Observer{
             controller.viewBdl(result, visualizationType);
         });
 
+        //Editing behaviour Ctrl+C keyboard copy
         KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
         tableNouns.registerKeyboardAction(actionEvent -> doCopy(tableNouns),"Copy",stroke,JComponent.WHEN_FOCUSED);
         tableVerbs.registerKeyboardAction(actionEvent -> doCopy(tableVerbs),"Copy",stroke,JComponent.WHEN_FOCUSED);
         tablePredicates.registerKeyboardAction(actionEvent -> doCopy(tablePredicates),"Copy",stroke,JComponent.WHEN_FOCUSED);
+
+        //Setting lose focus when clicking outside a table
+        Toolkit.getDefaultToolkit().addAWTEventListener(awtEvent -> {
+            if(awtEvent.getID() == MouseEvent.MOUSE_CLICKED) {
+                MouseEvent mevent = (MouseEvent) awtEvent;
+                if(!mevent.getSource().equals(tableNouns)) {
+                    tableNouns.clearSelection();
+                }
+                if(!mevent.getSource().equals(tableVerbs)) {
+                    tableVerbs.clearSelection();
+                }
+                if(!mevent.getSource().equals(tablePredicates)) {
+                    tablePredicates.clearSelection();
+                }
+            }
+        }, AWTEvent.MOUSE_EVENT_MASK);
     }
 
     private void doCopy(JTable t) {
