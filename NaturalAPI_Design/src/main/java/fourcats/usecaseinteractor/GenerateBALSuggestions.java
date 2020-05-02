@@ -26,40 +26,43 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         this.out = outputPort;
     }
 
-    public void generateSuggestions(String featureFilePath) {
+    public void generateSuggestions(List<String> lFeatureFilePaths, boolean isForNewBal) {
+        if (isForNewBal){
+            repo.deleteScenarios(); //make sure that there are no old suggestions by deleting scenarios from repo
+        }
         Map<Integer,Action> mActions;
         //BlackList blackList = new BlackList();
         List<Scenario> lScenarios = new ArrayList<>();
         List<Action> lGeneratedActions;
         int id = 0;
         String feature = "";
-        //read feature file from repository
-        try {
-            feature = repo.read(featureFilePath);
-        }
-        catch(FileNotFoundException e){
-            out.showErrorFileLoad();
-            return;
-        }
-        if(feature!=null) {
-            String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
-            for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
-                lGeneratedActions = generateAction(currentScenario);
-                mActions = new HashMap<>();
-                for (Action action : lGeneratedActions) {
-                    mActions.put(id, action);
-                    id++;
+        //read each feature file from repository
+        for (String featurePath: lFeatureFilePaths) {
+            try {
+                feature = repo.read(featurePath);
+            } catch (FileNotFoundException e) {
+                out.showErrorFileLoad();
+                return;
+            }
+            if (feature != null) {
+                String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
+                for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
+                    lGeneratedActions = generateAction(currentScenario);
+                    mActions = new HashMap<>();
+                    for (Action action : lGeneratedActions) {
+                        mActions.put(id, action);
+                        id++;
+                    }
+                    lScenarios.add(new Scenario(extractScenarioName(currentScenario), mActions, currentScenario, extractActorName(feature),featurePath)); //add Scenario with relative suggestions
                 }
-
-                lScenarios.add(new Scenario(extractScenarioName(currentScenario), mActions, currentScenario, extractActorName(feature))); //add Scenario with relative suggestions
             }
-            for (Scenario scenario : lScenarios) {
-                repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
-            }
-            out.showSuggestionsForScenario(repo.readScenarios());
         }
-
+        for (Scenario scenario : lScenarios) {
+            repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
+        }
+        out.showSuggestionsForScenario(repo.readScenarios());
     }
+
 
     private List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
@@ -123,7 +126,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     }
 
     private String extractScenarioContent(String scenario){
-        //extract all text from "Given" in the scenario
+        //extract all text after the keyword "Given" in the scenario
         int indexGiven = 0;
         if (scenario.indexOf("Given")!=-1){
             indexGiven = scenario.indexOf("Given");

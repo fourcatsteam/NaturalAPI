@@ -1,4 +1,4 @@
-package fourcats.view;
+package fourcats.view.gui;
 
 import javax.swing.*;
 import java.awt.*;

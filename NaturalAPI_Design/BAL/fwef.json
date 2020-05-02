@@ -1,0 +1,163 @@
+{
+  "actors" : [ {
+    "name" : "Customer",
+    "actions" : [ {
+      "name" : "enter_pin",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "enter_amount",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "amount",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "check_pin",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "give_cash",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "cash",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "enter_pin",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "enter_amount",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "amount",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "check_validity",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "validity",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "display_message",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "message",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "name" : "All",
+    "actions" : [ {
+      "name" : "start_game",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "game",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "join_game",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "game",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "guess_word",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "objectParams" : [ {
+        "name" : "word",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

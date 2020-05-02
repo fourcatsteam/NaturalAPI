@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Type {
     private String name;
-    private Map<String, String> mAttributes;
+    private Map<String, String> mAttributes; //<attributeName,attributeType>
 
     public Type(String name){
         this.name = name;

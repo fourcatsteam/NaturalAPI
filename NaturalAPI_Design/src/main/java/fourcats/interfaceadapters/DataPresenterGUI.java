@@ -13,6 +13,7 @@ import java.util.Map;
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
         ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort, LoadBDLOutputPort {
     String message;
+    String featurePath;
     String scenarioId;
     String suggestionId;
     String scenarioContent;
@@ -36,11 +37,12 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     public DataPresenterGUI(){
         message = "";
+        scenarioId = "" + (-1);
         isSuggestionToAdd = false;
         isOkOperation = false;
         lTypes = new ArrayList<>();
         lObjectId = new ArrayList<>();
-        lObjectTypes= new ArrayList<>();
+        lObjectTypes = new ArrayList<>();
         lObjectNames = new ArrayList<>();
         algorithm = new SuggestionBDLAlgorithm();
         bdlLoaded = null;
@@ -117,6 +119,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     public boolean isPresentInBdl(){ return isPresentInBdl; }
 
+    public String getFeaturePath() {
+        return featurePath;
+    }
+
     @Override
     public void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk) {
         if (isOk) {
@@ -186,7 +192,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             notifyObservers();
         }
         message = "";
-
     }
 
     @Override
@@ -215,7 +220,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             notifyObservers();
         }
         message = "";
-
     }
 
     @Override
@@ -235,7 +239,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     @Override
     public void showGenerationStatus(boolean isBALGenerated) {
         if (isBALGenerated){
-            message = "Hooray! The BAL was successfully created. You will find it in the BAL folder";
+            message = "Hooray! The BAL was successfully created. You will find it in the folder you have selected";
             isOkOperation = true;
         }
         else{
@@ -259,9 +263,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     @Override
     public void showAddedSuggestion(Map<Integer, Scenario> mScenarios, boolean isSuggestionAdded) {
         if (isSuggestionAdded){
-            isSuggestionsRefreshNeeded = true;
-            notifyObservers();
-            isSuggestionsRefreshNeeded = false;
             showSuggestions(mScenarios);
         }
         else{
@@ -273,8 +274,12 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     private void showSuggestions(Map<Integer,Scenario> mScenarios){
-        isSuggestionToAdd = true;
+        isSuggestionsRefreshNeeded = true; //this will allows the GUI tu reset all the suggestions widgets
+        notifyObservers();
+        isSuggestionsRefreshNeeded = false;
+        isSuggestionToAdd = true; //tell the GUI that it's time to create new suggestions widgets
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
+            featurePath = mSc.getValue().getFeatureName();
             scenarioContent = "Scenario:" + mSc.getValue().getContent().replace("  ","\n");
             scenarioId = "" + mSc.getKey();
             actor = mSc.getValue().getActorName();
@@ -299,11 +304,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     public boolean isBdlLoaded(){
-        if(bdlLoaded!=null){
+        if(bdlLoaded!=null) {
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     @Override

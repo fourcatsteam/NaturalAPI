@@ -9,21 +9,23 @@ import org.apache.lucene.util.SetOnce;
 import java.util.*;
 
 public class DataKeeper {
-    private List<String> lDeafultTypes;
+    private final List<String> lDefaultTypes;
     private Map<Integer, Scenario> mScenarios;
     private Map<Integer, Type> mTypes;
 
 
     public DataKeeper(){
-        lDeafultTypes = new ArrayList<>();
+        lDefaultTypes = new ArrayList<>();
+        lDefaultTypes.addAll(Arrays.asList("string","int","float","double","bool"));
         mScenarios = new HashMap<>();
-        mTypes = new HashMap<>();
-        //init mTypes with default values
-        lDeafultTypes.addAll(Arrays.asList("string","int","float","double","bool"));
-        for (String s : lDeafultTypes){
+        initTypesMap();
+
+    }
+    private void initTypesMap(){
+        mTypes = new HashMap<>();//init mTypes with default values
+        for (String s : lDefaultTypes){
             mTypes.put(mTypes.size(),new Type(s));
         }
-
     }
 
     public void addScenarioToMap(Scenario scenario){
@@ -50,6 +52,7 @@ public class DataKeeper {
 
     public void clearScenariosMap(){
         mScenarios.clear();
+        initTypesMap();
     }
 
     public void updateActionName(int idScenario, int idAction, String newActionName){

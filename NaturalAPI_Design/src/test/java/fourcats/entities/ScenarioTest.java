@@ -19,7 +19,7 @@ public class ScenarioTest {
     Scenario scenario;
 
     @Before public void CreateScenario() {
-        scenario = new Scenario("Name", map, "Content", "Actor");
+        scenario = new Scenario("Name", map, "Content", "Actor","FeatureName");
     }
 
     @Test
@@ -37,11 +37,12 @@ public class ScenarioTest {
         assertEquals(scenario.getActionsMap(), map);
     }
 
+
     @Test
     public void ScenarioGetActionsCorrectly() {
         map = new HashMap<Integer, Action>();
         map.put(1, action);
-        scenario = new Scenario("Name", map, "Content", "Actor");
+        scenario = new Scenario("Name", map, "Content", "Actor","FeatureName");
         assertTrue(scenario.getActions().contains(action));
     }
 
@@ -53,6 +54,11 @@ public class ScenarioTest {
     @Test
     public void ScenarioGetActorNameCorrectly() {
         assertEquals(scenario.getActorName(), "Actor");
+    }
+
+    @Test
+    public void ScenarioGetFeatureNameCorrectly() {
+        assertEquals(scenario.getFeatureName(), "FeatureName");
     }
 
 }

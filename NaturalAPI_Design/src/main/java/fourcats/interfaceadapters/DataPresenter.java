@@ -2,6 +2,7 @@ package fourcats.interfaceadapters;
 
 import fourcats.datastructure.observer.Subject;
 import fourcats.entities.Action;
+import fourcats.entities.Bdl;
 import fourcats.entities.Scenario;
 import fourcats.entities.Type;
 import fourcats.port.*;
@@ -9,7 +10,8 @@ import fourcats.port.*;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort,  AddBALSuggestionOutputPort {
+        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort,
+        AddBALSuggestionOutputPort, LoadBDLOutputPort {
 
     private String toShow;
 
@@ -21,7 +23,8 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     @Override
     public void showErrorFileLoad() {
         toShow = ("Error! \n" +
-                "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
+                "Please make sure that the path you specified for the .feature file is correct.");
+        notifyObservers();
     }
 
 
@@ -184,5 +187,10 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
                 notifyObservers();
             }
         }
+    }
+
+    @Override
+    public void showBDLOutput(String s, Bdl b) {
+
     }
 }

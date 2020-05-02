@@ -9,12 +9,14 @@ public class Scenario {
     private String content;
     private Map<Integer,Action> mAction; //suggestions for the scenario
     private String actorName;
+    private String featureName;
 
-    public Scenario(String scenarioName, Map<Integer,Action> mAction, String content, String actorName) {
+    public Scenario(String scenarioName, Map<Integer,Action> mAction, String content, String actorName, String featureName) {
         this.name = scenarioName;
         this.mAction = mAction;
         this.content = content;
         this.actorName = actorName;
+        this.featureName = featureName; //this may be the entire path
     }
 
     public String getName() {
@@ -39,4 +41,7 @@ public class Scenario {
 
     public String getActorName(){ return actorName; }
 
+    public String getFeatureName() {
+        return featureName;
+    }
 }

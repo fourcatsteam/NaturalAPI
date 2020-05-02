@@ -3,6 +3,7 @@ package fourcats.interfaceadapters;
 import fourcats.port.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class Controller{
@@ -28,8 +29,8 @@ public class Controller{
             this.loadBdl = loadBdl;
     }
 
-    public void generateSuggestions(String featureFilePath) {
-        generateSuggestion.generateSuggestions(featureFilePath);
+    public void generateSuggestions(List<String> lFeatureFilePaths, boolean isForNewBal) {
+        generateSuggestion.generateSuggestions(lFeatureFilePaths, isForNewBal);
     }
 
     public void declineSuggestion(String idSuggestion, String idScenario) {

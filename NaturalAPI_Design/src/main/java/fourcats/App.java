@@ -4,7 +4,7 @@ import fourcats.frameworks.*;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.usecaseinteractor.*;
-import fourcats.view.GUI_Design;
+import fourcats.view.gui.GUI_Design;
 
 /**
  * Hello world!
@@ -41,7 +41,7 @@ public class App {
         while(shouldContinue) {
             cli.askForUseCase();
             shouldContinue = cli.readUseCase();
-        } */
+        }*/
 
     }
 }

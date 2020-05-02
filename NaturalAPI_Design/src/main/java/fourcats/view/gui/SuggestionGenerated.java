@@ -1,4 +1,4 @@
-package fourcats.view;
+package fourcats.view.gui;
 
 
 import fourcats.datastructure.observer.Observer;
@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SuggestionGenerated extends Component implements Observer{
     private JPanel mainPanel;
@@ -21,19 +24,21 @@ public class SuggestionGenerated extends Component implements Observer{
     private JButton addFeatureButton;
     private final Controller contr;
     private final DataPresenterGUI dataPresenter;
-    private final String featureName;
     private final GridBagConstraints gridConstraint;
     private final GridBagLayout gridBagLayout;
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
+    private List<String >lFeatureNames;
+    private List<String> lFeaturePaths;
 
-    public SuggestionGenerated(String featureName, String featurePath, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(List<String> lFeatureNames, List<String> lFeaturePaths, Controller controller, DataPresenterGUI dataPresenter){
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
-        this.featureName = featureName;
         this.currentScenarioId = -1;
+        this.lFeatureNames = lFeatureNames;
+        this.lFeaturePaths = lFeaturePaths;
         gridBagLayout = new GridBagLayout();
         gridConstraint = new GridBagConstraints();
         panelInScrollPanel.setLayout(gridBagLayout);
@@ -51,10 +56,11 @@ public class SuggestionGenerated extends Component implements Observer{
         mainPanel.add(scrollPanel,BorderLayout.CENTER);
         mainPanel.add(panelButtons,BorderLayout.SOUTH);
 
+        contr.generateSuggestions(lFeaturePaths,true);
 
         generateBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
-            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
+            int returnVal = fileChooser.showSaveDialog(SuggestionGenerated.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 String path = file.getAbsolutePath();
@@ -67,7 +73,23 @@ public class SuggestionGenerated extends Component implements Observer{
                 }
             }
         });
-        contr.generateSuggestions(featurePath);
+
+        addFeatureButton.addActionListener(e->{
+            List<String> paths = new ArrayList<>(); //contains paths of new files
+            JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
+            fileChooser.setMultiSelectionEnabled(true);
+            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File[] files = fileChooser.getSelectedFiles();
+                for(File f: files){
+                    paths.add(f.getAbsolutePath());
+                    lFeatureNames.add(f.getName());
+                }
+            }
+            lFeaturePaths.addAll(paths); //update the list of feature paths
+            contr.generateSuggestions(paths,false); //generate suggestions only on new files
+
+        });
     }
 
     public void createAndShowGUI() {
@@ -115,7 +137,7 @@ public class SuggestionGenerated extends Component implements Observer{
         gridConstraint.gridy = this.gridY;
         gridBagLayout.setConstraints(panelScenario, gridConstraint);
         panelInScrollPanel.add(panelScenario);
-        new ScenarioWidget(panelScenario, featureName, dataPresenter.getActor(),
+        new ScenarioWidget(panelScenario, getFeatureName(), dataPresenter.getActor(),
                 dataPresenter.getScenarioContent());
 
         //get ready for next scenario by adding a "row" to the grid (gridY++)
@@ -136,19 +158,22 @@ public class SuggestionGenerated extends Component implements Observer{
         if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
             initScenario();
         }
-        //suggestions can be updated for different reasons in the model but that doesn't mean we always need to create a new Suggestion widget
+        //the model can request an update for different reasons but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
             new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
 
         if (!dataPresenter.getMessage().equals("")) {
-            //check if the operation was successful than show information message or error message
+            //check if the operation was successful then show information message or error message
             if (dataPresenter.isOkOperation())
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage()+"\n");
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
             else
-                JOptionPane.showMessageDialog(null,dataPresenter.getMessage()+"\n","Error!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
+    private String getFeatureName(){
+        //the "name" of the feature from the model is coming as a path so this method it's useful to get only the name of the feature file
+        return lFeatureNames.get(lFeaturePaths.indexOf(dataPresenter.getFeaturePath()));
+    }
 }

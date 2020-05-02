@@ -46,7 +46,6 @@ public class GenerateBAL implements GenerateBALInputPort {
         try{
             jsonBal = balAnalyzer.createJsonFromBAL(bal);
             repo.createBAL(jsonBal, filePath);
-            repo.deleteScenarios(); //after the BAL creation on the fileSystem we want to delete scenarios from repo
             out.showGenerationStatus(true);
         }
         catch (IOException e) {

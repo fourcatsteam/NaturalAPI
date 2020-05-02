@@ -1,4 +1,4 @@
-package fourcats.view;
+package fourcats.view.gui;
 
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUI_Design extends Component implements Observer  {
     private Controller controller;
@@ -20,8 +22,8 @@ public class GUI_Design extends Component implements Observer  {
     private JButton loadBDLButton;
     private JFileChooser fc;
     private boolean areFilesLoaded;
-    private String nameFeatureFile;
-    private String pathFeatureFile;
+    private List<String> gherkinFilesPath;
+    private List<String> gherkinFilesName;
 
 
     public GUI_Design(Controller c,DataPresenterGUI dp){
@@ -32,10 +34,13 @@ public class GUI_Design extends Component implements Observer  {
         this.areFilesLoaded = false;
         this.log.append("Welcome to NaturalAPI Design!\n\n");
         this.dataPresenter.attach(this);
+        this.gherkinFilesPath = new ArrayList<>();
+        this.gherkinFilesName = new ArrayList<>();
+
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(areFilesLoaded) {
-                new SuggestionGenerated(nameFeatureFile, pathFeatureFile, controller, dataPresenter).createAndShowGUI();
+                new SuggestionGenerated(gherkinFilesName, gherkinFilesPath, controller, dataPresenter).createAndShowGUI();
             }
             else{
                 log.append("Please, load file first.\n");
@@ -48,9 +53,8 @@ public class GUI_Design extends Component implements Observer  {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
                     log.append("Opening: " + f.getName() + "." + "\n");
-                    pathFeatureFile = f.getAbsolutePath();
-                    nameFeatureFile = f.getName();
-
+                    gherkinFilesPath.add(f.getAbsolutePath());
+                    gherkinFilesName.add(f.getName());
                 }
                 this.areFilesLoaded = true;
             } else {
@@ -62,14 +66,14 @@ public class GUI_Design extends Component implements Observer  {
 
 
         loadBDLButton.addActionListener(actionEvent -> {
-            String bdlnameFile[] = new String[3];
+            String[] bdlNameFile = new String[3];
             int i=0;
             int returnVal = fc.showOpenDialog(GUI_Design.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
                     log.append("Opening: " + f.getName() + "." + "\n");
-                    bdlnameFile[i] = f.getName();
+                    bdlNameFile[i] = f.getName();
                     i++;
                 }
             } else {
@@ -77,7 +81,7 @@ public class GUI_Design extends Component implements Observer  {
             }
             log.setCaretPosition(log.getDocument().getLength());
             try {
-                controller.loadBdl(bdlnameFile);
+                controller.loadBdl(bdlNameFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,6 +103,6 @@ public class GUI_Design extends Component implements Observer  {
     }
 
     private void showOutput(){
-        log.append(dataPresenter.getMessage());
+        log.append("\n"+dataPresenter.getMessage()+"\n");
     }
 }

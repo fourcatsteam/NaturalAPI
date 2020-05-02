@@ -6,7 +6,8 @@ import fourcats.port.GenerateBALSuggestionsOutputPort;
 import org.junit.Test;
 import org.mockito.*;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+
 
 public class GenerateBALSuggestionsTest {
 
@@ -19,7 +20,7 @@ public class GenerateBALSuggestionsTest {
 
     @Test
     public void GenerateBALSuggestionsFromNotExistingFeature() {
-        correctGenerator.generateSuggestions("");
+        correctGenerator.generateSuggestions(new ArrayList<>(),true);
         Mockito.verifyZeroInteractions(analyzerMock);
     }
 

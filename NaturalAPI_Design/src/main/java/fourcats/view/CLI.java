@@ -7,22 +7,18 @@ import fourcats.interfaceadapters.DataPresenter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 
 public class CLI implements Observer {
     private Controller contr;
    // private Repository repo;
     private String currentUseCase = "";
-    private LinkedList<String> nameTitleList;
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private DataPresenter dataPresenter;
 
     public CLI(Controller controller, DataPresenter presenter){
         this.contr = controller;
-        nameTitleList = new LinkedList<>();
         this.dataPresenter = presenter;
         this.dataPresenter.attach(this);
     }
@@ -57,20 +53,24 @@ public class CLI implements Observer {
         return shouldContinue;
     }
 
-    private String chooseFile() throws IOException {
-        System.out.println("Enter the path of the gherkin feature namefile, digit EXIT to exit.");
-        String r = br.readLine();
-        if(!r.equals("EXIT")){
-            nameTitleList.add(r);
+    private List<String> chooseFile() throws IOException {
+        List<String> lFiles = new ArrayList<>();
+        String input="";
+        while(!input.equals("EXIT")){
+            System.out.println("Enter the path of the gherkin feature file, digit EXIT when you're done.");
+            input = br.readLine();
+            if (!input.equals("EXIT")){
+                lFiles.add(input);
+            }
         }
-        return r;
+        return lFiles;
     }
 
     private void askForOperationOnSuggestion() throws IOException {
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
             System.out.println("\nWhat do you want to do?\n1. Modify suggestion\n2. Delete suggestion\n3. Add suggestion" +
-                    "\n4. Add new scenario\n5. Generate BAL\nDigit EXIT to abort.");
+                    "\n4. Add new feature\n5. Generate BAL\nDigit EXIT to abort.");
             input = br.readLine();
             switch(input){
                 case "1":
@@ -83,7 +83,7 @@ public class CLI implements Observer {
                     addSuggestion();
                     break;
                 case "4":
-                    contr.generateSuggestions(chooseFile());
+                    contr.generateSuggestions(chooseFile(),false);
                     break;
                 case "5":
                     System.out.println("Please, enter the path including the name for the BAL");
@@ -187,12 +187,8 @@ public class CLI implements Observer {
     }
 
     public void generateSuggestion() throws IOException {
-        String filename = "";
-        while(!filename.equalsIgnoreCase("EXIT")) {
-            filename = chooseFile();
-            if (!filename.equalsIgnoreCase("EXIT"))
-                contr.generateSuggestions(filename);
-        }
+        List<String> lFilesPath = chooseFile();
+        contr.generateSuggestions(lFilesPath,true);
     }
 
     private void modifyActionName(String idScenario, String idSuggestion) throws IOException {
