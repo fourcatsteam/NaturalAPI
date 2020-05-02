@@ -41,7 +41,7 @@ public class DataPresenter_GUI extends Subject implements CreateBdlOutputPort, A
     public void showCreateBdlOutput(Bdl bdl) {
         this.clearData();
         convertBdl(bdl);
-        message = "BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
+        message = "BDL \""+bdl.getName()+"\" generated successfully. You can find the CSV files in the chosen directory";
         notifyObservers();
     }
 
@@ -63,7 +63,7 @@ public class DataPresenter_GUI extends Subject implements CreateBdlOutputPort, A
     public void showAddDocumentsOutput(Bdl bdl) {
         this.clearData();
         convertBdl(bdl);
-        message = "Documenti aggiunti al BDL con successo!";
+        message = "Selected documents have been added successfully";
         notifyObservers();
     }
 
@@ -71,14 +71,14 @@ public class DataPresenter_GUI extends Subject implements CreateBdlOutputPort, A
     public void showRemoveDocumentOutputPort(Bdl bdl) {
         this.clearData();
         convertBdl(bdl);
-        message = "I Documenti da te selezionati sono stati rimossi con successo";
+        message = "Selected documents have been removed successfully";
         notifyObservers();
     }
 
     @Override
     public void showViewBdlOutput(Bdl bdl) {
         this.clearData();
-        this.message = "BDL visualized as requested";
+        this.message = "BDL \""+bdl.getName()+"\" visualized correctly";
         convertBdl(bdl);
         notifyObservers();
     }

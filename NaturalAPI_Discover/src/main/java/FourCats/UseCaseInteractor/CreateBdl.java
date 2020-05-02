@@ -33,7 +33,7 @@ public class CreateBdl implements CreateBdlInputPort {
             if(doc!=null) {
                 documents.add(doc);
             } else {
-                output.showWarning("Document "+title+" not found");
+                output.showWarning("Document "+title+" not found. The creation will continue with the other documents.");
             }
         }
 

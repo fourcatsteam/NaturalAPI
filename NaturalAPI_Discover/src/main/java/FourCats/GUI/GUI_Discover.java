@@ -117,18 +117,25 @@ public class GUI_Discover extends JPanel implements Observer{
                     null,
                     null,
                     null );
-            String[] choices = {"Show all","More probable words","First 15 words"};
-            String choice = (String) JOptionPane.showInputDialog(this,
-                    "Select a type of visualization",
-                    "Select type",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    choices,
-                    choices[0]
-                    );
-            Integer visualizationType = Arrays.asList(choices).indexOf(choice);
+            if(result != null) {
 
-            controller.viewBdl(result, visualizationType);
+                String[] choices = {"Show all","More probable words","First 15 words"};
+                String choice = (String) JOptionPane.showInputDialog(this,
+                        "Select a type of visualization",
+                        "Select type",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        choices,
+                        choices[0]
+                );
+
+                if (choice != null) {
+                    Integer visualizationType = Arrays.asList(choices).indexOf(choice);
+                    controller.viewBdl(result, visualizationType);
+                }
+            } else {
+                log.append("Operation canceled");
+            }
         });
 
         //Editing behaviour Ctrl+C keyboard copy
@@ -213,6 +220,7 @@ public class GUI_Discover extends JPanel implements Observer{
         frame.setPreferredSize(new Dimension(600,500));
         //Display the window.
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

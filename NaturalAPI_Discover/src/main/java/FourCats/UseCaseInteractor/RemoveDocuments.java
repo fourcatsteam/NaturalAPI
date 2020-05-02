@@ -28,7 +28,7 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
         Bdl bdl = this.repository.readBdl(targetBdl);
 
         if(bdl==null) {
-            outputPort.showError("BDL not found");
+            outputPort.showError("BDL \""+targetBdl+"\" not found");
         } else {
             //retrieve association
             LinkedList<String> association = this.repository.readAssociation(targetBdl);
@@ -43,7 +43,7 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
                     if(doc != null) {
                         documents.add(doc);
                     } else {
-                        outputPort.showWarning("Document "+title+" not found");
+                        outputPort.showWarning("Document "+title+" not found. The removal will continue with the other documents");
                     }
                 }
 
