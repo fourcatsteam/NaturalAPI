@@ -24,13 +24,12 @@ public class Gui implements Observer {
     private JButton suggestionButton;
     private JTextArea textArea;
     private JPanel mainPanel;
-    private JPanel secondPanel;
-    private JPanel thirdPanel;
     private JButton generateButton;
     private JButton modifyButton;
     private JButton modifyPLAButton;
     private JButton createPLAButton;
     private JComboBox<String> comboBox1;
+    private JLabel messageLabel;
     Map<String,String> toView;
 
     public Gui(Controller c,DataPresenterGui d){
@@ -52,10 +51,7 @@ public class Gui implements Observer {
         catch (Exception e){
             e.printStackTrace();
         }
-        textArea.setFont(textArea.getFont().deriveFont(18f));
-        textArea.setMargin(new Insets(5,5,5,5));
         comboBox1.setVisible(false);
-        comboBox1.setFont(textArea.getFont().deriveFont(18f));
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
         dlcr.setHorizontalAlignment(SwingConstants.CENTER);
         comboBox1.setRenderer(dlcr);
@@ -64,20 +60,55 @@ public class Gui implements Observer {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
             bal[0] = fileChooser.getSelectedFile().getName();
+            if(bal[0].contains(".json")){
+                messageLabel.setText("Bal loaded!");
+                mainPanel.setBackground(Color.GREEN);
+            }
+            else{
+                mainPanel.setBackground(Color.RED);
+                messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+            }
         });
 
         addPlaButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
             pla[0] = fileChooser.getSelectedFile().getName();
+            if(pla[0].contains(".txt")){
+                messageLabel.setText("Pla loaded!");
+                mainPanel.setBackground(Color.GREEN);
+            }
+            else{
+                mainPanel.setBackground(Color.RED);
+                messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+            }
         });
 
         suggestionButton.addActionListener(e -> {
-            c.createApiSuggestion(bal[0],pla[0]);
-            comboBox1.setVisible(true);
+            try{
+                c.createApiSuggestion(bal[0],pla[0]);
+                comboBox1.setVisible(true);
+                mainPanel.setBackground(Color.GREEN);
+                messageLabel.setText("Suggestions created!");
+            }
+            catch (Exception ex){
+                messageLabel.setText("Ops! Something went wrong! " +
+                        "Check that your BAL and PLA files are correctly formatted");
+                mainPanel.setBackground(Color.RED);
+            }
         });
 
-        generateButton.addActionListener(e -> c.generateApi());
+        generateButton.addActionListener(e -> {
+            try{
+                c.generateApi();
+                messageLabel.setText("APIs generated!");
+                mainPanel.setBackground(Color.GREEN);
+            }
+            catch(Exception ex){
+                messageLabel.setText("Ops! Something went wrong!");
+                mainPanel.setBackground(Color.RED);
+            }
+        });
 
         createPLAButton.addActionListener(e -> {
             GuiPla guiPla = new GuiPla();

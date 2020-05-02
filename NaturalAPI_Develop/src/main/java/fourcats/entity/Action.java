@@ -6,17 +6,12 @@ import java.util.List;
 public class Action {
     private String name;
     private List<ObjectParam> param;
-    private String type;
+    private Type type;
 
-    public Action() {
-        this.name = null;
-        this.param = new ArrayList<>();
-        this.type = null;
-    }
-    public Action(String actionName) {
+    public Action(String actionName, Type actionType) {
         this.name = actionName;
         this.param = new ArrayList<>();
-        this.type = null;
+        this.type = actionType;
     }
 
     public Action(String actionName, String actionType) {
@@ -25,82 +20,52 @@ public class Action {
         if(actionType.equals(""))
             this.type = null;
         else
-            this.type = actionType;
+            this.type = new Type(actionType);
     }
 
     public void setName(String actionName) {
         this.name = actionName;
     }
-
-    public String getName() {
-        return name;
+    public void setType(Type type) {
+        this.type = type;
     }
-
-    public void addObjectName(String objectName) {
-        ObjectParam par = new ObjectParam();
-        par.setName(objectName);
-        this.param.add(par);
+    public String getName() { return name; }
+    public Type getType() {
+        return type;
     }
-
+    public void setType(String actionType) {
+        if (this.type == null)
+            this.type = new Type(actionType);
+        else
+            this.type.setName(actionType);
+    }
     public void addObjectParam(ObjectParam objectParam) {
         this.param.add(objectParam);
     }
 
-    public void updateObjectParamName(String paramName, String newName) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setName(newName);
-                break;
-            }
-        }
-    }
-
-    public void updateObjectParamType(String paramName, String newType) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setType(newType);
-                break;
-            }
-        }
-    }
-
-    public void updateIsObjectParamRequired(String paramName, boolean isRequired) {
-        for (ObjectParam p : param) {
-            if (p.getName().equals(paramName)) {
-                p.setRequired(isRequired);
-                break;
-            }
-        }
-    }
-
-    public List<ObjectParam> getObjectParam() {
+    public List<ObjectParam> getObjectParams() {
         return param;
     }
 
-    public void setType(String actionType) {
-        this.type = actionType;
-    }
 
-    public String getType() {
-        return type;
+
+    public void removeObjectParam(int idObjectParam){
+        param.remove(idObjectParam);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        String actionParams = "";
         boolean firstParam = true;
         for (ObjectParam par : param) {
             if (firstParam) {
-                sb.append(par.getType() + " " + par.getName());
+                actionParams+=par.getType()+ " " + par.getName();
                 firstParam = false;
             }
             else {
-                sb.append(", " + par.getType() + " " + par.getName());
+                actionParams+=", " + par.getType()+ " " + par.getName();
             }
         }
-        String actionParams = sb.toString();
         return this.type + " " + this.name + "(" + actionParams + ")";
     }
-
-
 }

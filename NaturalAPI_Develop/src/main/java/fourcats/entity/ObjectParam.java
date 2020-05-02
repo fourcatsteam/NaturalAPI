@@ -2,24 +2,18 @@ package fourcats.entity;
 
 public class ObjectParam {
     private String name;
-    private String type;
-    private Boolean required;
-
-    public ObjectParam() {
-        name = null;
-        type = null;
-        required = true;
-    }
-
-    public ObjectParam(String objectName) {
-        this.name = objectName;
-        this.type = null;
-        this.required = true;
-    }
+    private Type type;
+    private boolean required;
 
     public ObjectParam(String objectName, String objectType) {
         this.name = objectName;
-        this.type = objectType;
+        this.type = new Type(objectType);
+        this.required = true;
+    }
+
+    public ObjectParam(String objectName, Type type){
+        this.name = objectName;
+        this.type = type;
         this.required = true;
     }
 
@@ -32,15 +26,18 @@ public class ObjectParam {
     }
 
     public void setType(String objectType) {
-        this.type = objectType;
+        this.type.setName(objectType);
+    }
+    public void setType(Type type){
+        this.type = type;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setRequired(boolean isObjectRequired) {
-        this.required = isObjectRequired;
+    public void setRequired(boolean isParamRequired) {
+        this.required = isParamRequired;
     }
 
     public boolean isRequired() {
@@ -48,7 +45,6 @@ public class ObjectParam {
     }
 
     @Override public String toString() {
-        return "name: " + name + ", type: " + type + ", required: " + required;
+        return name; //"name: " + name + ", type: " + type + ", required: " + required + "\n";
     }
-
 }

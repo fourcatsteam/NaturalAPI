@@ -1,15 +1,14 @@
 package fourcats.frameworks;
 
-import fourcats.entity.Actor;
-import fourcats.entity.BAL;
-import fourcats.entity.Action;
-import fourcats.entity.ObjectParam;
+import fourcats.entity.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fourcats.interfaceaccess.BalAnalyzer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BalAnalyzerImplementation implements BalAnalyzer {
 
@@ -32,15 +31,16 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
         for(JsonNode actor : actors) {
             String actorName = actor.get("name").asText();
             Actor entityActor = new Actor(actorName);
-            JsonNode operations = actor.get("operations");
+            JsonNode actions = actor.get("actions");
 
-            for (JsonNode op : operations) {
+            for (JsonNode ac : actions) {
 
-                String type = op.get("type").asText();
-                String operation = op.get("name").asText();
+                String actionName = ac.get("name").asText();
+                JsonNode acType = ac.get("type");
+                String actionType = acType.get("name").asText();
 
                 //camelCase operations
-                String[] split = operation.split("_");
+                String[] split = actionName.split("_");
                 StringBuilder sb = new StringBuilder();
                 for(int i=0; i<split.length; i++) {
                     if(i>0) {
@@ -48,17 +48,39 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                     }
                     sb.append(split[i]);
                 }
-                operation = sb.toString();
 
-                JsonNode par = op.get("parameters");
+                JsonNode attributesAction = acType.get("attributes");
 
-                Action entityAction = new Action(operation,type);
-                for (JsonNode parameter : par) {
-                    String typePar = parameter.get("type").asText();
-                    String name = parameter.get("name").asText();
-                    ObjectParam entityObjectParam = new ObjectParam(name,typePar);
+                Map<String,String> mAttributes = new HashMap<>();
+                java.util.Iterator it = attributesAction.fieldNames();
+                while(it.hasNext()){
+                    String attributeName = it.next().toString();
+                    String attributeType = attributesAction.get(attributeName).asText();
+                    mAttributes.put(attributeName,attributeType);
+                }
+                Type entityType = new Type(actionType,mAttributes);
+
+                actionName = sb.toString();
+                Action entityAction = new Action(actionName,entityType);
+
+                JsonNode parameters = ac.get("objectParams");
+                for (JsonNode par : parameters) {
+                    JsonNode typePar = par.get("type");
+                    JsonNode attributes = typePar.get("attributes");
+
+                    mAttributes = new HashMap<>();
+                    it = attributes.fieldNames();
+                    while(it.hasNext()){
+                        String attributeName = it.next().toString();
+                        String attributeType = attributes.get(attributeName).asText();
+                        mAttributes.put(attributeName,attributeType);
+                    }
+
+                    Type entityTypeOb = new Type(typePar.get("name").asText(),mAttributes);
+                    ObjectParam entityObjectParam = new ObjectParam(par.get("name").asText(),entityTypeOb);
                     entityAction.addObjectParam(entityObjectParam);
                 }
+
                 entityActor.addAction(entityAction);
             }
             bal.addUserToBAL(entityActor);

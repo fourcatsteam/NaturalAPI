@@ -38,11 +38,11 @@ public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
 
                 String newApi = pla.getText();
                 newApi = insertGroup(newApi, action.getName());
-                newApi = insertActionType(newApi, action.getType());
+                newApi = insertActionType(newApi, action.getType().getName());
                 newApi = insertActionName(newApi, action.getName());
-                for(ObjectParam objectParam : action.getObjectParam()) {
+                for(ObjectParam objectParam : action.getObjectParams()) {
 
-                    newApi = insertObjectType(newApi, objectParam.getType());
+                    newApi = insertObjectType(newApi, objectParam.getType().getName());
                     newApi = insertObjectName(newApi, objectParam.getName());
                 }
                 api.addApi("./API/" + action.getName().substring(0,1).toUpperCase() +

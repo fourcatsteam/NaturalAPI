@@ -18,18 +18,6 @@ public class ActionTest {
     }
 
     @Test
-    public void createActionWithoutParameter(){
-        Action action = new Action();
-        assertNotNull(action);
-    }
-
-    @Test
-    public void createActionWithName(){
-        Action act = new Action("NomeAction");
-        assertNotNull(act);
-    }
-
-    @Test
     public void createActionWithNameAndType(){
         Action act = new Action("NomeAction","TipoAction");
         assertNotNull(act);
@@ -43,33 +31,9 @@ public class ActionTest {
 
     @Test
     public void addObjectParamCorrectly(){
-        ObjectParam o = new ObjectParam("nome");
+        ObjectParam o = new ObjectParam("nome","Tipo");
         act.addObjectParam(o);
-        assertEquals(1,act.getObjectParam().size());
-    }
-
-    @Test
-    public void modifyNameOfObjectParamCorrectly(){
-        ObjectParam o = new ObjectParam("nome");
-        act.addObjectParam(o);
-        act.updateObjectParamName("nome","newName");
-        assertEquals("newName",act.getObjectParam().get(0).getName());
-    }
-
-    @Test
-    public void modifyTypeOfObjectParamCorrectly(){
-        ObjectParam o = new ObjectParam("nome","type");
-        act.addObjectParam(o);
-        act.updateObjectParamType("nome","newType");
-        assertEquals("newType",act.getObjectParam().get(0).getType());
-    }
-
-    @Test
-    public void modifyRequiredOfObjectParamCorrectly(){
-        ObjectParam o = new ObjectParam("nome","type");
-        act.addObjectParam(o);
-        act.updateIsObjectParamRequired("nome",false);
-        assertEquals(false,act.getObjectParam().get(0).isRequired());
+        assertEquals(1,act.getObjectParams().size());
     }
 
     @Test
@@ -99,13 +63,13 @@ public class ActionTest {
 
     @Test
     public void testAddObjectName(){
-        act.addObjectName("objectName");
-        assertEquals(1,act.getObjectParam().size());
+        act.addObjectParam(new ObjectParam("nome","tipo"));
+        assertEquals(1,act.getObjectParams().size());
     }
 
     @Test
-    public void testGettingTypeCorrectly(){
-         assertEquals("type",act.getType());
+    public void testGettingTypeNameCorrectly(){
+         assertEquals("type",act.getType().getName());
     }
 
 

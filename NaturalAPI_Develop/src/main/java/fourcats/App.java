@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Repository repo = new Repository(new DataKeeper(),new FileSystem());
         BalAnalyzerImplementation balAnalyzerImplementation = new BalAnalyzerImplementation();
@@ -26,7 +26,6 @@ public class App {
         System.out.println("Press 1 for CLI, 2 for GUI");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
-        sc.close();
         if(choice == 1){
             DataPresenter dataPresenter = new DataPresenter();
             SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);

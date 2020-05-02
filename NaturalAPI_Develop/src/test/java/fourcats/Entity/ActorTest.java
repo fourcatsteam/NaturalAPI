@@ -33,22 +33,22 @@ public class ActorTest {
 
     @Test
     public void testAddingOneActionCorrectly(){
-        act.addAction(new Action("Action"));
+        act.addAction(new Action("Action","Type"));
         assertEquals(1,act.getActions().size());
     }
 
     @Test
     public void testAddingMoreActionCorrectly(){
         List<Action> a = new LinkedList<>();
-        a.add(new Action("Action1"));
-        a.add(new Action("Action2"));
+        a.add(new Action("Action1","Type1"));
+        a.add(new Action("Action2","Type2"));
         act.addActions(a);
         assertEquals(2,act.getActions().size());
     }
 
     @Test
     public void testRequestActionByName(){
-        act.addAction(new Action("Action"));
+        act.addAction(new Action("Action","Type"));
         assertEquals(1,act.getActionsByName("Action").size());
     }
 

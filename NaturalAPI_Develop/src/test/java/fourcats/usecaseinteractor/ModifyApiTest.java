@@ -1,9 +1,6 @@
 package fourcats.usecaseinteractor;
 
-import fourcats.entity.API;
-import fourcats.entity.Action;
-import fourcats.entity.Actor;
-import fourcats.entity.BAL;
+import fourcats.entity.*;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ModifyOutputPort;
@@ -71,8 +68,8 @@ public class ModifyApiTest {
         int i = 1;
         List<Actor> l = new LinkedList<>();
         Actor act = new Actor("Actor1");
-        Action action = new Action(("gioca"));
-        action.addObjectName("palla");
+        Action action = new Action("gioca","tipo");
+        action.addObjectParam(new ObjectParam("palla","tipoObj"));
         act.addAction(action);
         l.add(act);
         BAL bal = new BAL(l);
@@ -91,8 +88,4 @@ public class ModifyApiTest {
 
 
     }
-
-
-
-
 }

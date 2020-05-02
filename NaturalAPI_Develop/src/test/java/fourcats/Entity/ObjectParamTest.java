@@ -1,6 +1,7 @@
 package fourcats.Entity;
 
 import fourcats.entity.ObjectParam;
+import fourcats.entity.Type;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,19 +15,6 @@ public class ObjectParamTest {
     public void CreateValidObjectParam() {
         objectParam = new ObjectParam("Name", "Type");
     }
-
-    @Test
-    public void EmptyObjectParamConstructorCreation(){
-        ObjectParam correct = new ObjectParam();
-        assertNotNull(correct);
-    }
-
-    @Test
-    public void OneParamObjectParamConstructorCreation(){
-        ObjectParam correct = new ObjectParam("objectName");
-        assertNotNull(correct);
-    }
-
 
     @Test
     public void EmptyObjectParamCorrectCreation() {
@@ -48,13 +36,13 @@ public class ObjectParamTest {
 
     @Test
     public void ObjectParamGetTypeCorrectly() {
-        assertEquals("Type", objectParam.getType());
+        assertEquals("Type", objectParam.getType().getName());
     }
 
     @Test
     public void ObjectParamSetTypeCorrectly() {
-        objectParam.setType("newType");
-        assertEquals("newType", objectParam.getType());
+        objectParam.setType(new Type("newType"));
+        assertEquals("newType", objectParam.getType().getName());
     }
 
     @Test
@@ -65,7 +53,7 @@ public class ObjectParamTest {
 
     @Test
     public void ObjectParamConvertedToStringCorrectly() {
-        assertEquals("name: Name, type: Type, required: true",objectParam.toString());
+        assertEquals("Name",objectParam.toString());
     }
 
 }

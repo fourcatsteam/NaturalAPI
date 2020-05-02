@@ -6,6 +6,9 @@ import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ApiOutputPort;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SuggestApi implements ApiInputPort {
 
     BalAnalyzer balAnalyzer;
@@ -31,11 +34,23 @@ public class SuggestApi implements ApiInputPort {
 
                 String newApi = pla.getText();
                 newApi = insertGroup(newApi, action.getName());
-                newApi = insertActionType(newApi, action.getType());
+                newApi = insertActionType(newApi, action.getType().getName());
                 newApi = insertActionName(newApi, action.getName());
-                for(ObjectParam objectParam : action.getObjectParam()) {
 
-                    newApi = insertObjectType(newApi, objectParam.getType());
+
+                int size = action.getObjectParams().size();
+                Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
+                Matcher m = p.matcher(newApi);
+                if(m.find()){
+                    while(size != 1){
+                        newApi = m.replaceFirst(m.group() + ", " + m.group());
+                        size--;
+                    }
+                }
+
+                for(ObjectParam objectParam : action.getObjectParams()) {
+
+                    newApi = insertObjectType(newApi, objectParam.getType().getName());
                     newApi = insertObjectName(newApi, objectParam.getName());
                 }
                 repositoryAccess.openFile("./API/" + actor.getName() + "/").mkdir();
@@ -50,23 +65,23 @@ public class SuggestApi implements ApiInputPort {
     private String insertGroup(String text,String toReplace){
         //CamelCase
         toReplace = toReplace.substring(0,1).toUpperCase() + toReplace.substring(1);
-        return text.replaceAll("\"group_action\"", toReplace);
+        return text.replaceFirst("\"group_action\"", toReplace);
     }
 
     private String insertActionType (String text,String toReplace){
-        return text.replaceAll("\"action_type\"", toReplace);
+        return text.replaceFirst("\"action_type\"", toReplace);
     }
 
     private String insertActionName (String text,String toReplace){
-        return text.replaceAll("\"action_name\"", toReplace);
+        return text.replaceFirst("\"action_name\"", toReplace);
     }
 
     private String insertObjectType (String text,String toReplace){
-        return text.replaceAll("\"object_type\"", toReplace);
+        return text.replaceFirst("\"object_type\"", toReplace);
     }
 
     private String insertObjectName (String text,String toReplace){
-        return text.replaceAll("\"object_name\"", toReplace);
+        return text.replaceFirst("\"object_name\"", toReplace);
     }
 
 }
