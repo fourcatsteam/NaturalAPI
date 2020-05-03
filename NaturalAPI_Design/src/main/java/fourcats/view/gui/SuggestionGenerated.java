@@ -175,11 +175,13 @@ public class SuggestionGenerated extends Component implements Observer{
         }
 
         if (!dataPresenter.getMessage().equals("")) {
-            //check if the operation was successful then show information message or error message
-            if (dataPresenter.isOkOperation())
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
-            else
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+            if(!dataPresenter.isBdlLoaded()) {
+                //check if the operation was successful then show information message or error message
+                if (dataPresenter.isOkOperation())
+                    JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
+                else
+                    JOptionPane.showMessageDialog(null, dataPresenter.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
