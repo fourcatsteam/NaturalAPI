@@ -16,7 +16,7 @@ public class PLATest {
     PLA pla;
 
     @Before
-    public void before(){ pla = new PLA(".java\npublic class Classe{ }");}
+    public void before(){ pla = new PLA(".java\npublic class Classe{ }\ncustom class\npublic class\n{\n}");}
 
     @Test
     public void testConstructor(){
