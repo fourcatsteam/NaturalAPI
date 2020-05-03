@@ -107,7 +107,7 @@ public class SuggestionGenerated extends Component implements Observer{
         JFrame frame = new JFrame("NaturalAPI Design - Suggestions");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
-        frame.setPreferredSize(new Dimension(1200,800));
+        frame.setPreferredSize(new Dimension(1400,800));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

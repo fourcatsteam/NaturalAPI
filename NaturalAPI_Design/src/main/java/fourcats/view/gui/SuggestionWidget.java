@@ -30,8 +30,7 @@ public class SuggestionWidget {
         lObjectParamWidget = new ArrayList<>();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
         objectsBox = Box.createVerticalBox();
-
-
+        
         this.scenarioId = dataPresenter.getScenarioId();
         this.suggestionId = dataPresenter.getSuggestionId();
 
