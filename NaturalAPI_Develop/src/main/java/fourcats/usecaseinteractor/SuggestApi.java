@@ -50,10 +50,37 @@ public class SuggestApi implements ApiInputPort {
 
                 for(ObjectParam objectParam : action.getObjectParams()) {
 
+                    String customApi = pla.getCustomClass();
                     newApi = insertObjectType(newApi, objectParam.getType().getName());
                     newApi = insertObjectName(newApi, objectParam.getName());
+
+                    if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+
+                        int numAttributes = objectParam.getType().getAttributes().size();
+
+                        customApi = customApi.substring(0,customApi.lastIndexOf("}"));
+
+                        java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
+                        java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
+                        while(numAttributes > 0) {
+
+                            customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
+                            customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+                            if(numAttributes > 1) {
+                                customApi = customApi.concat(pla.getCustomBody());
+                            }
+                            numAttributes--;
+                        }
+                        customApi = customApi.concat("}");
+
+                        customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
+                        repositoryAccess.openFile("./API/" + actor.getName() + "/" +"/CustomClasses/").mkdir();
+                        api.addApi("./API/" + actor.getName() + "/" +"/CustomClasses/"
+                                + objectParam.getType().getName() + pla.getExtension(),customApi);
+                    }
                 }
                 repositoryAccess.openFile("./API/" + actor.getName() + "/").mkdir();
+                repositoryAccess.openFile("./API/" + actor.getName() + "/" +"/CustomClasses/").mkdir();
                 api.addApi("./API/" + actor.getName() + "/" + action.getName().substring(0,1).toUpperCase() +
                         action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension(), newApi);
             }

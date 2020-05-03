@@ -143,6 +143,7 @@
               <editable value="true"/>
               <font size="18"/>
               <foreground color="-16777216"/>
+              <margin top="15" left="15" bottom="15" right="15"/>
               <text value=""/>
               <toolTipText value=""/>
             </properties>

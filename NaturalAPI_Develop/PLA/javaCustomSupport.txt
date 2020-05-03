@@ -1,18 +1,12 @@
 .java
-public class "group_action" {
-
-	public "action_type" "action_name" ("object_type" "object_name"){
-
-	}
-}
-
-custom class
 public class "custom_class" {
 	
 	private "attribute_type" "attribute_name";
 
+	public "custom_class"() {}
+
 	public void set"attribute_name"("attribute_type" "attribute_name") {
-		this."attribute_name" = "attribute_name";
+		this."attibute_name" = "attribute_name";
 	}
 
 	public "attribute_type" get"attribute_name"() {
