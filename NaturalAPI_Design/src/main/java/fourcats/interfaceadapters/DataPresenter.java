@@ -21,9 +21,15 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     }
 
     @Override
-    public void showErrorFileLoad() {
-        toShow = ("Error! \n" +
-                "Please make sure that the path you specified for the .feature file is correct.");
+    public void showErrorFileLoad(boolean isFileDuplicated) {
+        if (isFileDuplicated){
+            toShow = ("Warning!\n" +
+                    "One of the files you selected was already on the system. No action has been taken on it.");
+        }
+        else {
+            toShow = ("Error! \n" +
+                    "Please make sure that the path you specified for the .feature file is correct.");
+        }
         notifyObservers();
     }
 

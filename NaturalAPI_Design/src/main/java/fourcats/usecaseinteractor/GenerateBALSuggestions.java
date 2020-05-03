@@ -8,6 +8,7 @@ import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
 import fourcats.port.GenerateBALSuggestionsInputPort;
 import fourcats.port.GenerateBALSuggestionsOutputPort;
+import org.apache.lucene.util.SetOnce;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -41,7 +42,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
             try {
                 feature = repo.read(featurePath);
             } catch (FileNotFoundException e) {
-                out.showErrorFileLoad();
+                out.showErrorFileLoad(false);
                 return;
             }
             if (feature != null) {
@@ -57,9 +58,19 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
                 }
             }
         }
+        boolean isScenarioDuplicated = false;
         for (Scenario scenario : lScenarios) {
-            repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
+            try {
+                repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
+            }
+            catch (SetOnce.AlreadySetException e){
+                isScenarioDuplicated = true;
+            }
         }
+        if(isScenarioDuplicated){
+            out.showErrorFileLoad(true);
+        }
+
         out.showSuggestionsForScenario(repo.readScenarios());
     }
 

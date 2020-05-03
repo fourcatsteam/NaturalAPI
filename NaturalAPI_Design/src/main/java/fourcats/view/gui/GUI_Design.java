@@ -52,9 +52,16 @@ public class GUI_Design extends Component implements Observer  {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
-                    log.append("Opening: " + f.getName() + "." + "\n");
-                    gherkinFilesPath.add(f.getAbsolutePath());
-                    gherkinFilesName.add(f.getName());
+                    //check if the file has already been uploaded
+                    if(!gherkinFilesPath.contains(f.getAbsolutePath())) {
+                        log.append("Opening: " + f.getName() + "." + "\n");
+                        gherkinFilesPath.add(f.getAbsolutePath());
+                        gherkinFilesName.add(f.getName());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(GUI_Design.this, "The file '"+f.getName()+"' has already been uploaded!",
+                                "Notice",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 this.areFilesLoaded = true;
             } else {
@@ -62,7 +69,6 @@ public class GUI_Design extends Component implements Observer  {
             }
             log.setCaretPosition(log.getDocument().getLength());
         });
-
 
 
         loadBDLButton.addActionListener(actionEvent -> {
@@ -103,6 +109,8 @@ public class GUI_Design extends Component implements Observer  {
     }
 
     private void showOutput(){
-        log.append("\n"+dataPresenter.getMessage()+"\n");
+        if (!dataPresenter.getMessage().equals("")) {
+            log.append("\n" + dataPresenter.getMessage() + "\n");
+        }
     }
 }

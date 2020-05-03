@@ -12,7 +12,8 @@ import java.util.Map;
 
 public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
         ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort, LoadBDLOutputPort {
-    String message;
+
+    String message; //NOTE remember to always set to empty string ("") after notifyObservers
     String featurePath;
     String scenarioId;
     String suggestionId;
@@ -47,18 +48,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         algorithm = new SuggestionBDLAlgorithm();
         bdlLoaded = null;
         isPresentInBdl = false;
-    }
-
-    @Override
-    public void showSuggestionsForScenario(Map<Integer, Scenario> mScenarios) {
-        showSuggestions(mScenarios);
-    }
-
-    @Override
-    public void showErrorFileLoad() {
-        message = ("Error! \n" +
-                "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
-        notifyObservers();
     }
 
     public String getActionName() {
@@ -121,6 +110,27 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     public String getFeaturePath() {
         return featurePath;
+    }
+
+    @Override
+    public void showSuggestionsForScenario(Map<Integer, Scenario> mScenarios) {
+        showSuggestions(mScenarios);
+    }
+
+    @Override
+    public void showErrorFileLoad(boolean isFileDuplicated) {
+        if (isFileDuplicated){
+            isOkOperation = true;
+            message = ("Warning!\n" +
+                    "One of the files you selected was already on the system. No action has been taken on it.");
+        }
+        else {
+            isOkOperation = false;
+            message = ("Error! \n" +
+                    "Please make sure that the .feature file is inside the gherkin_documents folder and that the file name is correct.");
+        }
+        notifyObservers();
+        message = "";
     }
 
     @Override
@@ -301,6 +311,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             }
         }
         isSuggestionToAdd = false;
+        //the following instruction is needed for a new suggestions generation after closing the SuggestionGenerated window
+        //otherwise the GUI in a new initialization will read an old scenarioId value from the dataPresenter
+        //and will fail to understand how to correctly initialize the widgets in initScenario()
+        scenarioId = "" + (-1);
     }
 
     public boolean isBdlLoaded(){

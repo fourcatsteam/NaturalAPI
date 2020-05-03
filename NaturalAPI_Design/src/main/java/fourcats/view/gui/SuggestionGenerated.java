@@ -29,16 +29,18 @@ public class SuggestionGenerated extends Component implements Observer{
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
-    private List<String >lFeatureNames;
+    private List<String> lFeatureNames;
     private List<String> lFeaturePaths;
 
-    public SuggestionGenerated(List<String> lFeatureNames, List<String> lFeaturePaths, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(List<String> featureNames, List<String> featurePaths, Controller controller, DataPresenterGUI dataPresenter){
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
         this.currentScenarioId = -1;
-        this.lFeatureNames = lFeatureNames;
-        this.lFeaturePaths = lFeaturePaths;
+        this.lFeatureNames = new ArrayList<>();
+        this.lFeaturePaths = new ArrayList<>();
+        this.lFeatureNames.addAll(featureNames);
+        this.lFeaturePaths.addAll(featurePaths);
         gridBagLayout = new GridBagLayout();
         gridConstraint = new GridBagConstraints();
         panelInScrollPanel.setLayout(gridBagLayout);
@@ -56,7 +58,6 @@ public class SuggestionGenerated extends Component implements Observer{
         mainPanel.add(scrollPanel,BorderLayout.CENTER);
         mainPanel.add(panelButtons,BorderLayout.SOUTH);
 
-        contr.generateSuggestions(lFeaturePaths,true);
 
         generateBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
@@ -75,26 +76,36 @@ public class SuggestionGenerated extends Component implements Observer{
         });
 
         addFeatureButton.addActionListener(e->{
-            List<String> paths = new ArrayList<>(); //contains paths of new files
+            List<String> newPaths = new ArrayList<>(); //contains paths of new files
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
             fileChooser.setMultiSelectionEnabled(true);
             int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fileChooser.getSelectedFiles();
                 for(File f: files){
-                    paths.add(f.getAbsolutePath());
-                    lFeatureNames.add(f.getName());
+                    if(!lFeaturePaths.contains(f.getAbsolutePath())) {
+                        newPaths.add(f.getAbsolutePath());
+                        this.lFeatureNames.add(f.getName());
+                        this.lFeaturePaths.add(f.getAbsolutePath());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(SuggestionGenerated.this,
+                                "The file '"+f.getName()+"' has already been uploaded!",
+                                "Notice",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
-            lFeaturePaths.addAll(paths); //update the list of feature paths
-            contr.generateSuggestions(paths,false); //generate suggestions only on new files
+            if (newPaths.size()!=0) {
+                contr.generateSuggestions(newPaths, false); //generate suggestions only for the new files
+            }
 
         });
+        contr.generateSuggestions(featurePaths,true);
     }
 
     public void createAndShowGUI() {
         JFrame frame = new JFrame("NaturalAPI Design - Suggestions");
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(1200,800));
         frame.pack();
@@ -158,7 +169,7 @@ public class SuggestionGenerated extends Component implements Observer{
         if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
             initScenario();
         }
-        //the model can request an update for different reasons but that doesn't mean we always need to create a new Suggestion widget
+        //the update method can be call for different reasons but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
             new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
@@ -173,7 +184,12 @@ public class SuggestionGenerated extends Component implements Observer{
     }
 
     private String getFeatureName(){
-        //the "name" of the feature from the model is coming as a path so this method it's useful to get only the name of the feature file
-        return lFeatureNames.get(lFeaturePaths.indexOf(dataPresenter.getFeaturePath()));
+        //the "name" of the feature from the dataPresenter is coming as a path so this method it's useful to get the name of the feature file
+        for (String fPath : lFeaturePaths){
+            if (fPath.equals(dataPresenter.getFeaturePath())){
+                return lFeatureNames.get(lFeaturePaths.indexOf(dataPresenter.getFeaturePath()));
+            }
+        }
+        return "";
     }
 }

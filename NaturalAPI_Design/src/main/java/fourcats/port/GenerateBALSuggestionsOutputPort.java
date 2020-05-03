@@ -8,7 +8,7 @@ public interface GenerateBALSuggestionsOutputPort {
 
     void showSuggestionsForScenario(Map<Integer,Scenario> mScenarios);
 
-    void showErrorFileLoad();
+    void showErrorFileLoad(boolean isFileDuplicated);
 }
 
 

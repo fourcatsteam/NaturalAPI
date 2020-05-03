@@ -29,6 +29,12 @@ public class DataKeeper {
     }
 
     public void addScenarioToMap(Scenario scenario){
+        //first check if the scenario is already in the map by checking the scenario content
+        for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()){
+            if (mSc.getValue().getContent().equals(scenario.getContent())){
+                throw new SetOnce.AlreadySetException();
+            }
+        }
         mScenarios.put(mScenarios.size(),scenario);
     }
 
