@@ -147,7 +147,7 @@ public class RepositoryTest {
     }
 
     @Test
-    public void testReadBdl() {
+    public void testReadBdl() throws IOException {
         String[] myStr = new String[1];
         repository.readBdl(myStr);
         verify(memoryAccess,times(1)).getBdl(myStr);
