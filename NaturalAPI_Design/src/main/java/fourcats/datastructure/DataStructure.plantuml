@@ -5,14 +5,13 @@ title __DATASTRUCTURE's Class Diagram__\n
   namespace fourcats {
     namespace datastructure {
       class fourcats.datastructure.AnalyzedData {
-          - parserData : LinkedList<String>
+          - dependencies : LinkedList<Dependency>
+          - tokens : LinkedList<WordTag>
           + AnalyzedData()
+          + addDependency()
           + addLemmaData()
-          + addParseData()
-          + getNouns()
-          + getParseList()
+          + getDependenciesList()
           + getTaggedData()
-          + getVerbs()
           + toString()
       }
     }
@@ -22,7 +21,7 @@ title __DATASTRUCTURE's Class Diagram__\n
   namespace fourcats {
     namespace datastructure {
       class fourcats.datastructure.BlackList {
-          + blackList : List<String>
+          - blackList : List<String>
           + BlackList()
           + BlackList()
           + addTerm()
@@ -35,14 +34,14 @@ title __DATASTRUCTURE's Class Diagram__\n
 
   namespace fourcats {
     namespace datastructure {
-      class fourcats.datastructure.LemmatizerData {
-          - lemmatizationResult : LinkedList<WordTag>
-          + LemmatizerData()
-          + addElement()
-          + getList()
-          + getNouns()
-          + getVerbs()
-          + toString()
+      class fourcats.datastructure.Dependency {
+          - dep : String
+          - gov : String
+          - relation : String
+          + Dependency()
+          + getDep()
+          + getGov()
+          + getRelation()
       }
     }
   }
@@ -82,7 +81,6 @@ title __DATASTRUCTURE's Class Diagram__\n
   }
   
 
-  fourcats.datastructure.AnalyzedData o-- fourcats.datastructure.LemmatizerData : data
   fourcats.datastructure.WordCounter .up.|> java.lang.Comparable
 
 

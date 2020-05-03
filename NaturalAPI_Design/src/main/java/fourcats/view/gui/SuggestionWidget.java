@@ -42,7 +42,7 @@ public class SuggestionWidget {
         mainPanel.add(actionNameTextField);
         mainPanel.add(objectsBox);
 
-        addObjects(contr,dataPresenter,objectsBox);
+        addObjects(contr,dataPresenter);
 
         mainPanel.add(addObjectButton);
         mainPanel.add(Box.createRigidArea(new Dimension(5, 0)));
@@ -104,15 +104,6 @@ public class SuggestionWidget {
             }
         });
 
-      /*  actionNameTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-               // contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
-                //setActionNameColor(dataPresenter.isPresentInBdl());
-            }
-        });*/
-
         actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
            public void changedUpdate(DocumentEvent e) {
                 setNewName();
@@ -137,7 +128,7 @@ public class SuggestionWidget {
         });
     }
 
-    private void addObjects(Controller controller, DataPresenterGUI dataPresenter, Box boxToUpdate){
+    private void addObjects(Controller controller, DataPresenterGUI dataPresenter){
         //init suggested objects
         for (String objId : dataPresenter.getlObjectId()){
             int id = lObjectParamWidget.size();

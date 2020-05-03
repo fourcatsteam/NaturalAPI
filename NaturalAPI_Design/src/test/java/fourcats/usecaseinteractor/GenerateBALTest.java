@@ -26,25 +26,13 @@ public class GenerateBALTest {
 
     @Test
     public void GenerateBALFromEmptyFilename() {
-        try{
-            correctGenerator.generateBAL("");
-        }
-        catch(IOException e)
-        {
-            fail();
-        }
+        correctGenerator.generateBAL("");
         assertTrue(true);
     }
 
     @Test
     public void GenerateBALFromCorrectFilename() {
-        try{
-            correctGenerator.generateBAL("GenerateBALCorrectFile.txt");
-        }
-        catch(IOException e)
-        {
-            fail();
-        }
+        correctGenerator.generateBAL("GenerateBALCorrectFile.txt");
         assertTrue(true);
     }
 

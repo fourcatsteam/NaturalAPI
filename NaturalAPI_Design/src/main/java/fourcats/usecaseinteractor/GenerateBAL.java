@@ -23,7 +23,7 @@ public class GenerateBAL implements GenerateBALInputPort {
         this.balAnalyzer = balAnalyzer;
     }
 
-    public void generateBAL(String filePath) throws IOException {
+    public void generateBAL(String filePath) {
         List<Actor> lActors = new ArrayList<>();
         for (Scenario scenario : repo.readScenarios().values()){
             int index = 0;

@@ -6,10 +6,6 @@ title __INTERFACEACCESS's Class Diagram__\n
     namespace interfaceaccess {
       interface fourcats.interfaceaccess.BalAnalyzer {
           {abstract} + createJsonFromBAL()
-          {abstract} + get()
-          {abstract} + getBAL()
-          {abstract} + getJsonNode()
-          {abstract} + setBalFile()
       }
     }
   }
@@ -18,6 +14,7 @@ title __INTERFACEACCESS's Class Diagram__\n
   namespace fourcats {
     namespace interfaceaccess {
       interface fourcats.interfaceaccess.PersistentMemoryAccess {
+          {abstract} + getBdl()
           {abstract} + loadBdl()
           {abstract} + readFile()
           {abstract} + writeFile()
@@ -29,14 +26,17 @@ title __INTERFACEACCESS's Class Diagram__\n
   namespace fourcats {
     namespace interfaceaccess {
       interface fourcats.interfaceaccess.RepositoryAccess {
+          {abstract} + crateSuggestionByIdType()
           {abstract} + createBAL()
           {abstract} + createCustomType()
           {abstract} + createObject()
           {abstract} + createScenario()
+          {abstract} + createSuggestion()
           {abstract} + deleteObject()
           {abstract} + deleteScenarios()
           {abstract} + deleteSuggestion()
           {abstract} + read()
+          {abstract} + readBdl()
           {abstract} + readScenarios()
           {abstract} + readTypes()
           {abstract} + updateActionName()

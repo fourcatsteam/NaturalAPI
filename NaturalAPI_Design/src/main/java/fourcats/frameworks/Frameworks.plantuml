@@ -5,15 +5,7 @@ title __FRAMEWORKS's Class Diagram__\n
   namespace fourcats {
     namespace frameworks {
       class fourcats.frameworks.BalAnalyzerImplementation {
-          ~ jsonNode : JsonNode
-          + BalAnalyzerImplementation()
-          + BalAnalyzerImplementation()
-          + BalAnalyzerImplementation()
           + createJsonFromBAL()
-          + get()
-          + getBAL()
-          + getJsonNode()
-          + setBalFile()
       }
     }
   }
@@ -22,13 +14,15 @@ title __FRAMEWORKS's Class Diagram__\n
   namespace fourcats {
     namespace frameworks {
       class fourcats.frameworks.DataKeeper {
-          - lDeafultTypes : List<String>
+          - lDefaultTypes : List<String>
           - mScenarios : Map<Integer, Scenario>
           - mTypes : Map<Integer, Type>
           + DataKeeper()
           + addCustomType()
           + addObject()
           + addScenarioToMap()
+          + addSuggestion()
+          + addSuggestionByIdType()
           + clearScenariosMap()
           + getScenarioMap()
           + getTypeMap()
@@ -40,6 +34,8 @@ title __FRAMEWORKS's Class Diagram__\n
           + updateObjectName()
           + updateObjectType()
           + updateObjectTypeById()
+          - getMaxKeyInActionMap()
+          - initTypesMap()
       }
     }
   }
@@ -48,6 +44,8 @@ title __FRAMEWORKS's Class Diagram__\n
   namespace fourcats {
     namespace frameworks {
       class fourcats.frameworks.FileSystemAccess {
+          ~ bdlPathToFolder : String
+          + getBdl()
           + loadBdl()
           + readFile()
           + writeFile()
@@ -63,14 +61,17 @@ title __FRAMEWORKS's Class Diagram__\n
     namespace frameworks {
       class fourcats.frameworks.Repository {
           + Repository()
+          + crateSuggestionByIdType()
           + createBAL()
           + createCustomType()
           + createObject()
           + createScenario()
+          + createSuggestion()
           + deleteObject()
           + deleteScenarios()
           + deleteSuggestion()
           + read()
+          + readBdl()
           + readScenarios()
           + readTypes()
           + updateActionName()
@@ -91,7 +92,6 @@ title __FRAMEWORKS's Class Diagram__\n
           - depparser : DependencyParser
           - pipeline : StanfordCoreNLP
           - props : Properties
-          - tokenizerFactory : TokenizerFactory<CoreLabel>
           + StanfordNlp()
           + parseDocumentContent()
       }

@@ -5,6 +5,7 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class GUI_Design extends Component implements Observer  {
         this.dataPresenter.attach(this);
         this.gherkinFilesPath = new ArrayList<>();
         this.gherkinFilesName = new ArrayList<>();
+        this.mainPanel.setBorder(new EmptyBorder(5,5,5,5));
 
 
         genSuggestBtn.addActionListener(actionEvent -> {
@@ -100,6 +102,7 @@ public class GUI_Design extends Component implements Observer  {
         frame.add(new GUI_Design(controller,dataPresenter).mainPanel);
         frame.setPreferredSize(new Dimension(450,400));
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

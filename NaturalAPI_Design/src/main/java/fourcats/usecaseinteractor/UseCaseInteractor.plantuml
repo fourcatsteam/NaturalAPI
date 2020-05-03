@@ -4,6 +4,17 @@ title __USECASEINTERACTOR's Class Diagram__\n
 
   namespace fourcats {
     namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.AddBALSuggestion {
+          + AddBALSuggestion()
+          + addSuggestion()
+          + addSuggestionByIdType()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
       class fourcats.usecaseinteractor.CreateCustomType {
           + CreateCustomType()
           + createType()
@@ -39,9 +50,20 @@ title __USECASEINTERACTOR's Class Diagram__\n
           + GenerateBALSuggestions()
           + generateSuggestions()
           - extractActorName()
+          - extractScenarioContent()
           - extractScenarioName()
           - generateAction()
           - generateObject()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.LoadBdl {
+          + LoadBdl()
+          + loadingBdl()
       }
     }
   }
@@ -74,6 +96,9 @@ title __USECASEINTERACTOR's Class Diagram__\n
   }
   
 
+  fourcats.usecaseinteractor.AddBALSuggestion .up.|> fourcats.port.AddBALSuggestionInputPort
+  fourcats.usecaseinteractor.AddBALSuggestion o-- fourcats.port.AddBALSuggestionOutputPort : out
+  fourcats.usecaseinteractor.AddBALSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.CreateCustomType .up.|> fourcats.port.CreateCustomTypeInputPort
   fourcats.usecaseinteractor.CreateCustomType o-- fourcats.port.CreateCustomTypeOutputPort : out
   fourcats.usecaseinteractor.CreateCustomType o-- fourcats.interfaceaccess.RepositoryAccess : repo
@@ -88,6 +113,9 @@ title __USECASEINTERACTOR's Class Diagram__\n
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.port.GenerateBALSuggestionsOutputPort : out
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.GenerateBALSuggestions o-- fourcats.interfaceaccess.TextAnalyzer : textAnalyzer
+  fourcats.usecaseinteractor.LoadBdl .up.|> fourcats.port.LoadBDLInputPort
+  fourcats.usecaseinteractor.LoadBdl o-- fourcats.port.LoadBDLOutputPort : out
+  fourcats.usecaseinteractor.LoadBdl o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.ModifyBALSuggestion .up.|> fourcats.port.ModifyBALSuggestionInputPort
   fourcats.usecaseinteractor.ModifyBALSuggestion o-- fourcats.port.ModifyBALSuggestionOutputPort : out
   fourcats.usecaseinteractor.ModifyBALSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo

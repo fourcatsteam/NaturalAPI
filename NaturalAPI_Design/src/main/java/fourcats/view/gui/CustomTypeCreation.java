@@ -3,73 +3,97 @@ package fourcats.view.gui;
 import fourcats.interfaceadapters.Controller;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class CustomTypeCreation {
-    public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
-        Map<String,String> mAttributes = new HashMap<>();
-        JPanel fields = new JPanel(new GridLayout(5, 1));
-        JLabel typeNameLabel = new JLabel();
-        JLabel attributeNameLabel = new JLabel();
-        JTextField typeNameField = new JTextField();
-        JTextField attributeNameField = new JTextField();
-        JButton addAttributeButton = new JButton();
-        addAttributeButton.setText("+");
-        typeNameLabel.setText("Type name:");
-        attributeNameLabel.setText("Attribute name:");
-        JComboBox<String> attributeTypeComboBox = new JComboBox<>(new String[]{"string","int","float","double","bool"});
 
-        fields.add(typeNameLabel);
-        fields.add(typeNameField);
-        fields.add(attributeNameLabel);
-        JPanel attributePanel = new JPanel(new GridLayout(1,2));
-        attributePanel.add(attributeTypeComboBox);
-        attributePanel.add(attributeNameField);
-        fields.add(attributePanel);
-        fields.add(addAttributeButton);
+public class CustomTypeCreation extends Component{
+    private JPanel mainPanel;
+
+    public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
+        mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+
+        JFrame frame = new JFrame("Create custom type");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(mainPanel);
+        frame.setPreferredSize(new Dimension(400,350));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        Map<String,String> mAttributes = new HashMap<>();
+        List<AttributeWidget> lAttributeWidgets = new ArrayList<>(); //contains attributeWidgets instance
+        JTextField customTypeNameField = new JTextField();
+        customTypeNameField.setPreferredSize(new Dimension(Integer.MAX_VALUE,25));
+        customTypeNameField.setMaximumSize(new Dimension(Integer.MAX_VALUE,40)); //set max height for the field
+        JButton addAttributeButton = new JButton("+");
+        JLabel customTypeNameLabel = new JLabel("Custom type name:");
+        JButton okButton = new JButton("OK");
+        JButton cancelButton = new JButton("Cancel");
+
+
+        Box okCancelBtnBox = Box.createHorizontalBox();
+        okCancelBtnBox.add(okButton);
+        okCancelBtnBox.add(Box.createHorizontalStrut(10)); //space horizontally the two buttons
+        okCancelBtnBox.add(cancelButton);
+
+        Box attributeBox = Box.createVerticalBox();
+        AttributeWidget attributeWidget = new AttributeWidget(lAvailableTypes);
+        lAttributeWidgets.add(attributeWidget); //add to attribute widgets list
+        attributeBox.add(attributeWidget.getAttributeWidgetPanel()); //add to panel to show widget
+
+        Box labelBox = Box.createHorizontalBox();
+        labelBox.add(customTypeNameLabel);
+        labelBox.add(Box.createHorizontalGlue()); //push the label to the left of the box
+        mainPanel.add(labelBox);
+        mainPanel.add(customTypeNameField);
+        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(attributeBox);
+        mainPanel.add(Box.createVerticalStrut(10)); //space addAttributeButton from the fields
+        mainPanel.add(addAttributeButton);
+        mainPanel.add(Box.createVerticalGlue()); //this allow push the ok_cancel buttons at the bottom of the panel
+        mainPanel.add(okCancelBtnBox);
+        mainPanel.add(Box.createVerticalStrut(10)); //space ok_cancel buttons from bottom
 
         addAttributeButton.addActionListener(e->{
-            if (!attributeNameField.getText().equals("")) {
-                mAttributes.put(attributeNameField.getText(), attributeTypeComboBox.getSelectedItem().toString());
-                attributeTypeComboBox.setSelectedIndex(0);
-                attributeNameField.setText("");
-            }
+            AttributeWidget attrWidget = new AttributeWidget(lAvailableTypes);
+            lAttributeWidgets.add(attrWidget); //add to attrWidget list
+            attributeBox.add(attrWidget.getAttributeWidgetPanel());
+            attributeBox.revalidate();
+            attributeBox.repaint();
         });
 
-        attributeTypeComboBox.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                attributeTypeComboBox.removeAllItems();
-                for (String type : lAvailableTypes) {
-                    attributeTypeComboBox.addItem(type);
+        okButton.addActionListener(e->{
+            //check for customType name
+            if (!customTypeNameField.getText().equals("")){
+                for (AttributeWidget attrW : lAttributeWidgets){
+                    if (!attrW.getAttributeName().equals("")){
+                        mAttributes.put(attrW.getAttributeName(),attrW.getAttributeType());
+                    }
                 }
-            }
-        });
-
-        int result = JOptionPane.showConfirmDialog(null, fields, "Create custom type", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        if (result == JOptionPane.OK_OPTION) {
-            if (!attributeNameField.getText().equals("")){
-                mAttributes.put(attributeNameField.getText(),attributeTypeComboBox.getSelectedItem().toString());
-            }
-            if (!typeNameField.getText().equals("")){
                 if (mAttributes.size()!=0){
-                    controller.createCustomType(typeNameField.getText(),mAttributes);
+                    controller.createCustomType(customTypeNameField.getText(),mAttributes);
+                    frame.dispose();
+                    return;
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"Abort: custom types should have at least one attribute", "Error custom type", JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(null,"Custom types should have at least one attribute", "No attributes", JOptionPane.WARNING_MESSAGE);
             }
             else {
-                JOptionPane.showMessageDialog(null, "Abort: no name given for the custom type", "Error custom type", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please enter the name for the custom type", "No name given", JOptionPane.WARNING_MESSAGE);
             }
 
-        }
+        });
+
+        cancelButton.addActionListener(e->{
+            frame.dispose();
+        });
+
     }
 }

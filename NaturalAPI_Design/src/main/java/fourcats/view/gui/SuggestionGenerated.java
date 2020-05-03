@@ -29,8 +29,8 @@ public class SuggestionGenerated extends Component implements Observer{
     private int currentScenarioId;
     private int gridX = 0;
     private int gridY = 0;
-    private List<String> lFeatureNames;
-    private List<String> lFeaturePaths;
+    private final List<String> lFeatureNames;
+    private final List<String> lFeaturePaths;
 
     public SuggestionGenerated(List<String> featureNames, List<String> featurePaths, Controller controller, DataPresenterGUI dataPresenter){
         this.contr = controller;
@@ -109,6 +109,7 @@ public class SuggestionGenerated extends Component implements Observer{
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(1200,800));
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
