@@ -6,28 +6,30 @@ import fourcats.entities.Bdl;
 public class SuggestionBDLAlgorithm implements StrategyAlgorithm{
 
     @Override
-    public boolean findActionInBdl(String nameAction, Bdl bdl) {
+    public int findActionInBdl(String nameAction, Bdl bdl) {
         //Ricerca sui predicati
-        if (bdl!=null){
+
+       if (bdl!=null){
             for(WordCounter wc : bdl.getPredicates()){
                 if(wc.getWord().equalsIgnoreCase(nameAction.replaceAll("_"," "))){
-                    return true;
+                    return wc.getCount();
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     @Override
-    public boolean findObjectInBdl(String nameObject, Bdl bdl) {
+    public int findObjectInBdl(String nameObject, Bdl bdl) {
         //Ricerca sui nomi
         if (bdl!=null) {
             for (WordCounter wc : bdl.getNouns()) {
                 if (wc.getWord().equalsIgnoreCase(nameObject)) {
-                    return true;
+                    //return true;
+                    return wc.getCount();
                 }
             }
         }
-        return false;
+        return 0;
     }
 }

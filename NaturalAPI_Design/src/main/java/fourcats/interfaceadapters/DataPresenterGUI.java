@@ -34,7 +34,9 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
 
     private Bdl bdlLoaded;
 
-    private boolean isPresentInBdl;
+    //private boolean isPresentInBdl;
+    private int isPresentInBdl;
+
 
     public DataPresenterGUI(){
         message = "";
@@ -47,7 +49,8 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         lObjectNames = new ArrayList<>();
         algorithm = new SuggestionBDLAlgorithm();
         bdlLoaded = null;
-        isPresentInBdl = false;
+        //isPresentInBdl = false;
+        isPresentInBdl = 0;
     }
 
     public String getActionName() {
@@ -106,7 +109,9 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionsRefreshNeeded;
     }
 
-    public boolean isPresentInBdl(){ return isPresentInBdl; }
+    //public boolean isPresentInBdl(){ return isPresentInBdl; }
+    public int isPresentInBdl(){ return isPresentInBdl; }
+
 
     public String getFeaturePath() {
         return featurePath;
@@ -315,6 +320,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         //otherwise the GUI in a new initialization will read an old scenarioId value from the dataPresenter
         //and will fail to understand how to correctly initialize the widgets in initScenario()
         scenarioId = "" + (-1);
+    }
+
+    public int getWordObjectFrequency(String s){
+        return this.algorithm.findObjectInBdl(s,bdlLoaded);
     }
 
     public boolean isBdlLoaded(){

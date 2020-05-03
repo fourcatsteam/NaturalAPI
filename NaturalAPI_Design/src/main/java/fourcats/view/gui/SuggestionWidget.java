@@ -18,6 +18,7 @@ public class SuggestionWidget {
     private JButton addObjectButton;
     private JButton removeSuggestionButton;
     private JPanel mainPanel;
+    private JLabel frequencyLabel;
     private final String suggestionId;
     private final String scenarioId;
     private final Box objectsBox;
@@ -40,6 +41,11 @@ public class SuggestionWidget {
 
         mainPanel.add(actionTypeComboBox);
         mainPanel.add(actionNameTextField);
+        if(dataPresenter.isBdlLoaded()){
+            mainPanel.add(frequencyLabel);
+            frequencyLabel.setText("Word Frequency: "+dataPresenter.isPresentInBdl());
+        }
+
         mainPanel.add(objectsBox);
 
         addObjects(contr,dataPresenter);
@@ -157,14 +163,15 @@ public class SuggestionWidget {
         objectsBox.repaint();
     }
 
-    public void setActionNameColor(boolean isPresentInBdl){
-        if(isPresentInBdl) { //if present in the BDL then set text color to green
+    public void setActionNameColor(int isPresentInBdl){
+        if(isPresentInBdl!=0) { //if present in the BDL then set text color to green
             actionNameTextField.setForeground(new Color(9,148,65));
+            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
         }else{
             actionNameTextField.setForeground(Color.RED);
+            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
         }
     }
-
 
 }
 

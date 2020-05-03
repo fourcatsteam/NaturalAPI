@@ -1,13 +1,21 @@
 package fourcats.frameworks;
 
 import fourcats.datastructure.AnalyzedData;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class StanfordNlpTest {
 
-    StanfordNlp nlp = new StanfordNlp();
+
+    StanfordNlp nlp;
+
+    @Before
+    public void setup(){
+        nlp = new StanfordNlp();
+    }
+
 
     @Test
     public void testParseDocumentTokenization() {
