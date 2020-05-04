@@ -1,23 +1,35 @@
 package fourcats.gui;
 
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGui;
+import fourcats.observer.Observer;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
-public class GuiPla {
+public class GuiPla implements Observer {
 
     private JFrame frame;
     private JTextArea textArea1;
     private JButton createButton;
     private JButton cancelButton;
     private JPanel mainPanel;
-
     private JTextField textField1;
-
     private JTextField textField2;
-    public GuiPla(){
+
+    String message;
+
+    private Controller controller;
+    private DataPresenterGui dataPresenterGui;
+
+    public GuiPla(Controller c,DataPresenterGui d){
+
+        controller = c;
+        dataPresenterGui = d;
+        dataPresenterGui.attach(this);
+        message = "";
+
         frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -30,26 +42,8 @@ public class GuiPla {
         }
         createButton.addActionListener(e -> {
 
-            File file = new File("./PLA/" + textField1.getText());
-            if(file.exists()) {
-                int answer = JOptionPane.YES_NO_OPTION;
-                JOptionPane.showConfirmDialog(frame,"There is already a PLA with this name. Do you want to overwrite it?");
-                if(answer == JOptionPane.YES_OPTION){
-                    try (FileWriter fw = new FileWriter(file)){
-                        fw.write(textField2.getText() + "\n" + textArea1.getText());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-            else{
-                try(FileWriter fw = new FileWriter(file)){
-                    fw.write(textField2.getText() + "\n" + textArea1.getText());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
+            controller.createPla(textField1.getText(),textField2.getText(),textArea1.getText());
+            JOptionPane.showMessageDialog(frame,message);
         });
 
         cancelButton.addActionListener(e -> {
@@ -71,5 +65,14 @@ public class GuiPla {
 
     public void setTextField2FromString(String s) {
         textField2.setText(s);
+    }
+
+    public void showOutput(){
+        message = dataPresenterGui.getMessagePla();
+    }
+
+    @Override
+    public void update() {
+        showOutput();
     }
 }

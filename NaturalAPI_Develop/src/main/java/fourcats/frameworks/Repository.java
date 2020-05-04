@@ -55,4 +55,8 @@ public class Repository implements RepositoryAccess {
     public void updateApi(String oldApi,String newApi){
         dataKeeper.updateApi(oldApi,newApi);
     }
+
+    public void writePla(String file,String pla){
+        fileSystem.writePla(file,pla);
+    }
 }

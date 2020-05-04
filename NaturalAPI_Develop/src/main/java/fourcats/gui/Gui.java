@@ -111,7 +111,7 @@ public class Gui implements Observer {
         });
 
         createPLAButton.addActionListener(e -> {
-            GuiPla guiPla = new GuiPla();
+            GuiPla guiPla = new GuiPla(controller,dataPresenterGui);
             guiPla.showGuiPla();
         });
 
@@ -120,7 +120,7 @@ public class Gui implements Observer {
                     "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
             fileChooser.showOpenDialog(mainPanel);
             try (BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())))){
-                GuiPla guiPla = new GuiPla();
+                GuiPla guiPla = new GuiPla(controller,dataPresenterGui);
                 guiPla.showGuiPla();
                 guiPla.setTextField1FromString(fileChooser.getSelectedFile().getName());
                 guiPla.setTextField2FromString(br.readLine());
