@@ -186,7 +186,11 @@ public class Bdl {
         Optional<Integer> sum = list.stream()
                 .map(wordCounter -> wordCounter.getCount())
                 .reduce((a, b) -> a + b);
-        return sum.get();
+        if(sum.isPresent()){
+            return sum.get();
+        }
+        return 0;
+
     }
 
     public Integer getTotalNounsOccurrences() {
