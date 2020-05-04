@@ -21,7 +21,7 @@ public class ModifyPla implements ModifyPlaInputPort {
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
             String line;
             String text = "";
-            br.readLine();
+            line = br.readLine(); //SERVE PER SALTARE LA PRIMA RIGA
             while((line = br.readLine()) != null){
                 text = text.concat(line);
                 text = text.concat("\n");
