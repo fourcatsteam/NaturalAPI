@@ -32,6 +32,10 @@ public class Gui implements Observer {
     private JLabel messageLabel;
     Map<String,String> toView;
 
+    private String modifyTitlePla;
+    private String modifyExtensionPla;
+    private String modifyTextPla;
+
     public Gui(Controller c,DataPresenterGui d){
 
         controller = c;
@@ -119,19 +123,14 @@ public class Gui implements Observer {
             JFileChooser fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
                     "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
             fileChooser.showOpenDialog(mainPanel);
-            try (BufferedReader br = new BufferedReader(new FileReader((fileChooser.getSelectedFile())))){
-                GuiPla guiPla = new GuiPla(controller,dataPresenterGui);
-                guiPla.showGuiPla();
-                guiPla.setTextField1FromString(fileChooser.getSelectedFile().getName());
-                guiPla.setTextField2FromString(br.readLine());
-                String line;
-                while((line = br.readLine()) != null){
-                    guiPla.addLineTextArea1(line);
-                    guiPla.addLineTextArea1("\n");
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+
+            controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath());
+
+            GuiPla guiPla= new GuiPla(controller,dataPresenterGui);
+            guiPla.showGuiPla();
+            guiPla.setTextField1FromString(modifyTitlePla);
+            guiPla.setTextField2FromString(modifyExtensionPla);
+            guiPla.addLineTextArea1(modifyTextPla);
         });
 
         modifyButton.addActionListener(e -> {
@@ -249,6 +248,9 @@ public class Gui implements Observer {
     public void showOutput(){
         toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
         comboBox1.addItem(dataPresenterGui.getComboToShow());
+        modifyTitlePla = dataPresenterGui.getModifyTitlePla();
+        modifyExtensionPla = dataPresenterGui.getModifyExtensionPla();
+        modifyTextPla = dataPresenterGui.getModifyTextPla();
     }
 
     @Override

@@ -9,15 +9,17 @@ public class Controller {
     private ModifyInputPort modifyInputPort;
     private ModifyGuiInputPort modifyGuiInputPort;
     private CreatePlaInputPort createPlaInputPort;
+    private ModifyPlaInputPort modifyPlaInputPort;
 
     public Controller(ApiInputPort apiInputPort,GenerateInputPort generateInputPort,
                       ModifyInputPort modifyInputPort, ModifyGuiInputPort modifyGuiInputPort,
-                      CreatePlaInputPort createPlaInputPort){
+                      CreatePlaInputPort createPlaInputPort, ModifyPlaInputPort modifyPlaInputPort){
         this.apiInputPort = apiInputPort;
         this.generateInputPort = generateInputPort;
         this.modifyInputPort = modifyInputPort;
         this.modifyGuiInputPort = modifyGuiInputPort;
         this.createPlaInputPort = createPlaInputPort;
+        this.modifyPlaInputPort = modifyPlaInputPort;
     }
 
     public void createApiSuggestion(String filenameBal,String filenamePla) {
@@ -38,5 +40,9 @@ public class Controller {
 
     public void createPla(String title,String extension,String pla){
         createPlaInputPort.create(title,extension,pla);
+    }
+
+    public void modifyPla(String filename){
+        modifyPlaInputPort.modify(filename);
     }
 }

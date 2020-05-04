@@ -6,10 +6,7 @@ import fourcats.gui.Gui;
 import fourcats.frameworks.BalAnalyzerImplementation;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.interfaceadapters.DataPresenterGui;
-import fourcats.usecaseinteractor.CreatePla;
-import fourcats.usecaseinteractor.GenerateApi;
-import fourcats.usecaseinteractor.ModifyApi;
-import fourcats.usecaseinteractor.SuggestApi;
+import fourcats.usecaseinteractor.*;
 import fourcats.view.CLI;
 import fourcats.frameworks.Repository;
 import fourcats.interfaceadapters.Controller;
@@ -32,7 +29,8 @@ public class App {
             SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);
             GenerateApi generateApi = new GenerateApi(repo);
             ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenter);
-            Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,new CreatePla(repo,new DataPresenterGui()));
+            Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,new CreatePla(repo,new DataPresenterGui()),
+                    new ModifyPla(repo,new DataPresenterGui()));
             CLI c = new CLI(controller,dataPresenter);
 
             do{
@@ -56,7 +54,8 @@ public class App {
             GenerateApi generateApi = new GenerateApi(repo);
             ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenterGui);
             CreatePla createPla = new CreatePla(repo,dataPresenterGui);
-            Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,createPla);
+            ModifyPla modifyPla = new ModifyPla(repo,dataPresenterGui);
+            Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,createPla,modifyPla);
             Gui gui = new Gui(controller,dataPresenterGui);
             gui.showGui();
         }

@@ -2,22 +2,26 @@ package fourcats.interfaceadapters;
 
 import fourcats.entity.API;
 import fourcats.observer.Subject;
-import fourcats.port.ApiOutputPort;
-import fourcats.port.CreatePlaInputPort;
-import fourcats.port.CreatePlaOutputPort;
-import fourcats.port.ModifyOutputPort;
+import fourcats.port.*;
+
 import java.util.Map;
 
-public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort, CreatePlaOutputPort {
+public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort, CreatePlaOutputPort, ModifyPlaOutputPort {
 
     private String toShow;
     private String comboToShow;
     private String messagePla;
+    private String modifyTitlePla;
+    private String modifyExtensionPla;
+    private String modifyTextPla;
 
     public DataPresenterGui(){
         toShow = "";
         comboToShow = "";
         messagePla = "";
+        modifyTitlePla = "";
+        modifyExtensionPla = "";
+        modifyTextPla = "";
     }
 
     public String getStringToShow(){
@@ -30,6 +34,18 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     public String getMessagePla() {
         return messagePla;
+    }
+
+    public String getModifyTitlePla() {
+        return modifyTitlePla;
+    }
+
+    public String getModifyExtensionPla() {
+        return modifyExtensionPla;
+    }
+
+    public String getModifyTextPla() {
+        return modifyTextPla;
     }
 
     @Override
@@ -48,6 +64,13 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     public void showOutput(String message){
         messagePla = message;
+        notifyObservers();
+    }
+
+    public void showModifyPla(String title,String extension,String text){
+        modifyTitlePla = title;
+        modifyExtensionPla = extension;
+        modifyTextPla = text;
         notifyObservers();
     }
 }
