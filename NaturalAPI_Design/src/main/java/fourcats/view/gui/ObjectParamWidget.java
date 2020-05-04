@@ -104,7 +104,7 @@ public class ObjectParamWidget {
             }
 
             public void setColor() {
-                setObjectNameColor(dataPresenter.isPresentInBdl());
+                setObjectNameColor(dataPresenter.getFrequencyInBdl());
             }
 
             public void setNewName() {

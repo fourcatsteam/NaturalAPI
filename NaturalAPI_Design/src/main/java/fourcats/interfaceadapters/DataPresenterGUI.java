@@ -31,11 +31,8 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
     private StrategyAlgorithm algorithm;
-
     private Bdl bdlLoaded;
-
-    //private boolean isPresentInBdl;
-    private int isPresentInBdl;
+    private int frequencyInBdl;
 
 
     public DataPresenterGUI(){
@@ -49,8 +46,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         lObjectNames = new ArrayList<>();
         algorithm = new SuggestionBDLAlgorithm();
         bdlLoaded = null;
-        //isPresentInBdl = false;
-        isPresentInBdl = 0;
+        frequencyInBdl = 0;
     }
 
     public String getActionName() {
@@ -109,8 +105,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         return isSuggestionsRefreshNeeded;
     }
 
-    //public boolean isPresentInBdl(){ return isPresentInBdl; }
-    public int isPresentInBdl(){ return isPresentInBdl; }
+    public int getFrequencyInBdl(){ return frequencyInBdl; }
 
 
     public String getFeaturePath() {
@@ -156,7 +151,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
         if (isActionNameModified){
             isOkOperation = true;
-            if(bdlLoaded!=null) this.isPresentInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
+            if(bdlLoaded!=null) this.frequencyInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
         }
         else{
             message = ERROR_MESSAGE;
@@ -185,7 +180,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified) {
         if (isObjectNameModified){
             isOkOperation = true;
-            if(bdlLoaded!=null) this.isPresentInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
+            if(bdlLoaded!=null) this.frequencyInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
         }
         else {
             message = ERROR_MESSAGE;

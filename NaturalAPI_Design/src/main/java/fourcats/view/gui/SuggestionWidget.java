@@ -42,7 +42,7 @@ public class SuggestionWidget {
         mainPanel.add(actionNameTextField);
         if(dataPresenter.isBdlLoaded()){
             mainPanel.add(frequencyLabel);
-            frequencyLabel.setText("Word Frequency: "+dataPresenter.isPresentInBdl());
+            frequencyLabel.setText("Word Frequency: "+dataPresenter.getFrequencyInBdl());
         }
 
         mainPanel.add(objectsBox);
@@ -124,7 +124,7 @@ public class SuggestionWidget {
             }
 
             public void setColor() {
-                setActionNameColor(dataPresenter.isPresentInBdl());
+                setActionNameColor(dataPresenter.getFrequencyInBdl());
             }
 
             public void setNewName() {

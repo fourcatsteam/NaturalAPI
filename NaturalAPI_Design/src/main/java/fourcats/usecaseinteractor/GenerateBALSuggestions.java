@@ -143,7 +143,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     }
 
     private String extractScenarioContent(String scenario){
-        //extract all text after the keyword "Given" in the scenario
+        //extract all text from the keyword "Given" in the scenario
         int indexGiven = 0;
         if (scenario.indexOf("Given")!=-1){
             indexGiven = scenario.indexOf("Given");
