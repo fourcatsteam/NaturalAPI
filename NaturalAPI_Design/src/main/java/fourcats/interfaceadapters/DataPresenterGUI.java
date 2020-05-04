@@ -284,6 +284,10 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     private void showSuggestions(Map<Integer,Scenario> mScenarios){
+        //the following instruction (*) is needed for a new suggestions generation after closing the SuggestionGenerated window
+        //otherwise the GUI in a new initialization will read an old scenarioId value from the dataPresenter
+        //and will fail to understand how to correctly initialize the widgets in initScenario()
+        scenarioId = "" + (-1); //(*)
         isSuggestionsRefreshNeeded = true; //this will allows the GUI tu reset all the suggestions widgets
         notifyObservers();
         isSuggestionsRefreshNeeded = false;
@@ -311,10 +315,6 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
             }
         }
         isSuggestionToAdd = false;
-        //the following instruction is needed for a new suggestions generation after closing the SuggestionGenerated window
-        //otherwise the GUI in a new initialization will read an old scenarioId value from the dataPresenter
-        //and will fail to understand how to correctly initialize the widgets in initScenario()
-        scenarioId = "" + (-1);
     }
 
     public int getWordObjectFrequency(String s){

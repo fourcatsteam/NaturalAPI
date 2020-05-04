@@ -21,8 +21,9 @@ public class GUI_Design extends Component implements Observer  {
     private JTextArea log;
     private JPanel mainPanel;
     private JButton loadBDLButton;
-    private JButton clearFeatureBtn;
-    private JButton clearBdlBtn;
+    private JButton removeFeatureBtn;
+    private JButton removeBdlBtn;
+    private JPanel removeFilesBtnPanel;
     private JFileChooser fc;
     private String[] bdlNameFile;
     private List<String> featureFilesPath;
@@ -101,24 +102,24 @@ public class GUI_Design extends Component implements Observer  {
             log.setCaretPosition(log.getDocument().getLength());
         });
 
-        clearFeatureBtn.addActionListener(e->{
+        removeFeatureBtn.addActionListener(e->{
             if (featureFilesPath.size()!=0){
                 featureFilesPath.clear();
                 featureFilesName.clear();
                 log.append("\n"+ "Done! Feature files removed.");
             }
             else{
-                log.append("\n"+"Nothing to clear: no feature files uploaded!");
+                log.append("\n"+"Nothing to remove: no feature files uploaded!");
             }
         });
 
-        clearBdlBtn.addActionListener(e->{
+        removeBdlBtn.addActionListener(e->{
             if (bdlNameFile!=null){
                 bdlNameFile = null;
                 log.append("\n"+ "Done! BDL removed.");
             }
             else{
-                log.append("\n"+"Nothing to clear: no BDL uploaded!");
+                log.append("\n"+"Nothing to remove: no BDL uploaded!");
             }
 
         });
@@ -128,7 +129,7 @@ public class GUI_Design extends Component implements Observer  {
         JFrame frame = new JFrame("NaturalAPI Design");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new GUI_Design(controller,dataPresenter).mainPanel);
-        frame.setPreferredSize(new Dimension(450,400));
+        frame.setPreferredSize(new Dimension(500,450));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
