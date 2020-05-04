@@ -1,20 +1,17 @@
 package FourCats.GUI;
 
+import FourCats.Frameworks.FileSystemAccess;
 import FourCats.InterfaceAdapters.Controller;
-import FourCats.InterfaceAdapters.DataPresenter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -24,7 +21,8 @@ import FourCats.Observer.Observer;
 public class GUI_Discover extends JPanel implements Observer{
     private JButton loadFileBtn;
     private JPanel panel1;
-    private JFileChooser fc;
+    private JFileChooser txtChooser;
+    private JFileChooser dirChooser;
     private JTextArea log;
     private JButton createBDLbtn;
     private JButton addDocumentBtn;
@@ -33,9 +31,6 @@ public class GUI_Discover extends JPanel implements Observer{
     private JScrollPane scrollNouns;
     private JScrollPane scrollVerbs;
     private JScrollPane scrollPredicates;
-    private JTextPane panelVerbs;
-    private JTextPane panelPredicates;
-    private JTextPane panelNouns;
     private JScrollPane logScroll;
     private JTable tableNouns;
     private JTable tableVerbs;
@@ -44,21 +39,26 @@ public class GUI_Discover extends JPanel implements Observer{
 
     private Controller controller;
     private DataPresenter_GUI datapresenter;
+    private FileSystemAccess fileSystemAccess;
     private LinkedList<String> nameTitleList;
 
-    public GUI_Discover(Controller c, DataPresenter_GUI d) {
+    public GUI_Discover(Controller c, DataPresenter_GUI d, FileSystemAccess fs) {
         this.areFilesLoaded = false;
         this.controller = c;
         this.datapresenter= d;
+        this.fileSystemAccess = fs;
         datapresenter.attach(this);
         nameTitleList = new LinkedList<>();
-        fc = new JFileChooser("..\\NaturalAPI_Discover\\txt_documents");
-        fc.setMultiSelectionEnabled(true);
+        txtChooser = new JFileChooser("..\\NaturalAPI_Discover\\txt_documents");
+        txtChooser.setMultiSelectionEnabled(true);
+        dirChooser = new JFileChooser("\\NaturalAPI_Discover\\BDL");
+        dirChooser.setMultiSelectionEnabled(false);
+        dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         loadFileBtn.addActionListener(actionEvent -> {
-            int returnVal = fc.showOpenDialog(GUI_Discover.this);
+            int returnVal = txtChooser.showOpenDialog(GUI_Discover.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File[] files = fc.getSelectedFiles();
+                File[] files = txtChooser.getSelectedFiles();
                 for(File f: files){
                     log.append("Opening: " + f.getName() + "." + "\n");
                     nameTitleList.add(f.getName());
@@ -110,31 +110,38 @@ public class GUI_Discover extends JPanel implements Observer{
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
-            String result = (String)JOptionPane.showInputDialog(this,
-                    "Choose the name of the bdl that you want to view",
-                    "Choose name",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    null );
-            if(result != null) {
-
-                String[] choices = {"Show all","More probable words","First 15 words"};
-                String choice = (String) JOptionPane.showInputDialog(this,
-                        "Select a type of visualization",
-                        "Select type",
+            int returnVal = dirChooser.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File directory = dirChooser.getSelectedFile();
+                String path = directory.getPath().replaceAll("\\\\","/");
+                String result = (String)JOptionPane.showInputDialog(this,
+                        "Choose the name of the bdl that you want to view",
+                        "Choose name",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
-                        choices,
-                        choices[0]
-                );
+                        null,
+                        null );
+                if(result != null) {
 
-                if (choice != null) {
-                    Integer visualizationType = Arrays.asList(choices).indexOf(choice);
-                    controller.viewBdl(result, visualizationType);
+                    String[] choices = {"Show all","More probable words","First 15 words"};
+                    String choice = (String) JOptionPane.showInputDialog(this,
+                            "Select a type of visualization",
+                            "Select type",
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            choices,
+                            choices[0]
+                    );
+
+                    if (choice != null) {
+                        Integer visualizationType = Arrays.asList(choices).indexOf(choice);
+                        controller.viewBdl(path+"/"+result, visualizationType);
+                    }
+                } else {
+                    log.append("Operation canceled");
                 }
-            } else {
-                log.append("Operation canceled");
+            }else {
+                log.append("Selection canceled");
             }
         });
 
@@ -216,8 +223,9 @@ public class GUI_Discover extends JPanel implements Observer{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Add content to the window.
-        frame.add(new GUI_Discover(controller,datapresenter).panel1);
+        frame.add(new GUI_Discover(controller,datapresenter,fileSystemAccess).panel1);
         frame.setPreferredSize(new Dimension(600,500));
+
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);

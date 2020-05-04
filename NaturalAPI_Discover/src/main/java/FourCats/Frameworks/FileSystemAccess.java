@@ -17,7 +17,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".nouns.bdl.csv";
+        String filepath = filename + ".nouns.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -28,7 +28,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlVerbs(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".verbs.bdl.csv";
+        String filepath = filename + ".verbs.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -39,7 +39,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlPredicates(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".predicates.bdl.csv";
+        String filepath = filename + ".predicates.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");

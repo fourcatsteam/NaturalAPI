@@ -24,7 +24,8 @@ import java.io.InputStreamReader;
 public class App {
     public static void main( String[] args ) {
 
-        Repository repo = new Repository(new FileSystemAccess());
+        FileSystemAccess fs = new FileSystemAccess();
+        Repository repo = new Repository(fs);
         StanfordNlp nlp = new StanfordNlp();
         DataPresenter_GUI datapresenter = new DataPresenter_GUI();
 
@@ -45,9 +46,8 @@ public class App {
             cli.askForUseCase();
             start = cli.readUseCase();
         }*/
-        GUI_Discover g = new GUI_Discover(controller,datapresenter);
+        GUI_Discover g = new GUI_Discover(controller,datapresenter,fs);
         g.createAndShowGUI();
-
 
     }
 }
