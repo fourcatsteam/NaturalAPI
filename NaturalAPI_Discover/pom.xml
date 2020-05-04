@@ -11,6 +11,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>5.2.5.RELEASE</spring.version>
+    <sonar.coverage.exclusions>src/test/*,src/main/java/FourCats/Observer/*,src/main/java/FourCats/GUI/*,src/**/App.java </sonar.coverage.exclusions>
   </properties>
 
   <dependencies>
