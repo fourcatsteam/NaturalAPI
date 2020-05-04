@@ -2,9 +2,6 @@ package fourcats.entities;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,13 +38,30 @@ public class ActorTest {
     @Test
     public void testAddListAction(){
 
-        List<Action> ListAction = Arrays.asList( new Action("act","int"), new Action("act","int"));
+        List<Action> ListAction = Arrays.asList( new Action("act","int"),
+                                                 new Action("act","int"));
 
         actor.addActions(ListAction);
 
         List<Action> myActionList = actor.getActions();
         assertEquals(2, myActionList.size());
+        assertTrue(myActionList.equals(ListAction));
+    }
 
+
+    @Test
+    public void testGetActionByName(){
+        List<Action> InputListAction = Arrays.asList( new Action("actA","int"),
+                                                 new Action("actA","int"),
+                                                 new Action("actB","int"));
+
+        actor.addActions(InputListAction);
+
+        List<Action> OutputListAction = actor.getActionsByName("actA");
+        List<Action> ExpectedListAction = Arrays.asList( new Action("actA","int"),
+                                                         new Action("actA","int"));
+
+        assertEquals(2, OutputListAction.size());
     }
 
 
