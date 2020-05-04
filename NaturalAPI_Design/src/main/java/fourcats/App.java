@@ -6,6 +6,8 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.usecaseinteractor.*;
 import fourcats.view.gui.GUI_Design;
 
+import java.util.Locale;
+
 /**
  * Hello world!
  *
@@ -31,6 +33,7 @@ public class App {
                 generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl);
 
 
+        Locale.setDefault(Locale.ENGLISH); //set language of GUI components to english
         GUI_Design gui = new GUI_Design(controller,dataPresenter);
         gui.createAndShowGUI();
 
