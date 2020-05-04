@@ -48,6 +48,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
             if (feature != null) {
                 String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
                 for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
+                    currentScenario = currentScenario.trim();
                     lGeneratedActions = generateAction(currentScenario);
                     mActions = new HashMap<>();
                     for (Action action : lGeneratedActions) {
@@ -78,30 +79,34 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     private List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
         String scenarioContent = extractScenarioContent(scenario);
-        // analyze the content of the scenario
-        AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(scenarioContent);
 
-        String formattedSuggestion="";
-        Action suggestion = null;
+        // extract steps from the scenario and analyze them
+        List<String> lSteps = extractScenarioSteps(scenarioContent);
+        for (String step : lSteps) {
+            AnalyzedData analyzedData = null;
+            analyzedData = textAnalyzer.parseDocumentContent(step);
+            String formattedSuggestion = "";
+            Action suggestion = null;
 
-        List<String> predicates = analyzedData.getDependenciesList()
-                .stream()
-                .filter(d->(d.getRelation().equals("dobj")))
-                .map(d-> d.getGov()+" "+d.getDep())
-                .collect(Collectors.toList());
+            List<String> predicates = analyzedData.getDependenciesList()
+                    .stream()
+                    .filter(d->(d.getRelation().equals("dobj")))
+                    .map(d-> d.getGov()+" "+d.getDep())
+                    .collect(Collectors.toList());
 
-        //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
-        for (String suggestedAction : predicates){
-            //format the suggestion by adding "_" between words (ex. withdraw cash --> withdraw_cash)
-            formattedSuggestion = suggestedAction.replace(" ", "_");
-            suggestion = new Action((formattedSuggestion), "void");
-            suggestion.addObjectParam(generateObject(suggestion.getName()));
-            lGeneratedActions.add(suggestion);
+            //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
+            for (String suggestedAction : predicates){
+                //format the suggestion by adding "_" between words (ex. withdraw cash --> withdraw_cash)
+                formattedSuggestion = suggestedAction.replace(" ", "_");
+                suggestion = new Action(formattedSuggestion, "void",extractScenarioName(scenario),step);
+                suggestion.addObjectParam(generateObject(suggestion.getName()));
+                lGeneratedActions.add(suggestion);
+            }
         }
+
         return lGeneratedActions;
 
     }
-
 
     private ObjectParam generateObject(String actionName){
         //generate default objectParameter (the first parameter in the Action)
@@ -111,7 +116,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 
     private String extractScenarioName(String feature){
         //extract scenario name by picking the text between first row and "Given:" in the feature file
-        int indexFeatureStart = 1;
+        int indexFeatureStart = 0;
         int indexFeatureEnd = -1;
         if (feature.indexOf(AS_A)!=-1)
             indexFeatureEnd = feature.indexOf(AS_A);
@@ -126,9 +131,10 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         //if there isn't the keyword "As as" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
-        if (feature.indexOf(AS_A)!=-1) {
+        if (feature.contains(AS_A)) {
             indexActorStart = feature.indexOf(AS_A)+5;
-            indexActorEnd = feature.indexOf("Scenario");
+            indexActorEnd = feature.indexOf("  ",indexActorStart);
+            //indexActorEnd = feature.indexOf("Scenario");
             if (indexActorStart <= indexActorEnd)
                 return feature.substring(indexActorStart,indexActorEnd).trim();
         }
@@ -143,6 +149,16 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
             indexGiven = scenario.indexOf("Given");
         }
         return scenario.substring(indexGiven);
+    }
+
+    private List<String> extractScenarioSteps(String scenarioContent){
+        List<String> lSteps = new ArrayList<>();
+        //split whenever one of the keyword is found
+        String[] steps = scenarioContent.split("When|Then|And");
+        for (String step : steps){
+            lSteps.add(step.trim());
+        }
+        return lSteps;
     }
 
 
