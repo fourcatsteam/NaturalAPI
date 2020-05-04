@@ -1,0 +1,7 @@
+.java
+public class{
+	
+}
+custom classpublic class{
+
+}
