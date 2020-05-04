@@ -43,15 +43,10 @@ public class FileSystem {
 
     public void writePla(String file,String pla) {
         File f = new File(file);
-        if(f.exists()){
-
-        }
-        else{
-            try(FileWriter fw = new FileWriter(f)){
-                fw.write(pla);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+        try(FileWriter fw = new FileWriter(f)){
+            fw.write(pla);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

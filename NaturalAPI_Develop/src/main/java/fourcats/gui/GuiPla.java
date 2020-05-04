@@ -17,6 +17,7 @@ public class GuiPla implements Observer {
     private JPanel mainPanel;
     private JTextField textField1;
     private JTextField textField2;
+    private JTextArea textArea2;
 
     String message;
 
@@ -40,9 +41,11 @@ public class GuiPla implements Observer {
         catch (Exception e){
             e.printStackTrace();
         }
+
         createButton.addActionListener(e -> {
 
-            controller.createPla(textField1.getText(),textField2.getText(),textArea1.getText());
+            controller.createPla(textField1.getText(),textField2.getText(),textArea1.getText() +
+                    "\ncustom class\n" + textArea2.getText());
             JOptionPane.showMessageDialog(frame,message);
         });
 
@@ -53,18 +56,6 @@ public class GuiPla implements Observer {
 
     public void showGuiPla(){
         frame.setVisible(true);
-    }
-
-    public void addLineTextArea1(String s) {
-        textArea1.append(s);
-    }
-
-    public void setTextField1FromString(String s) {
-        textField1.setText(s);
-    }
-
-    public void setTextField2FromString(String s) {
-        textField2.setText(s);
     }
 
     public void showOutput(){

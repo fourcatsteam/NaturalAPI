@@ -5,7 +5,6 @@ public class "group_action" {
 
 	}
 }
-
 custom class
 public class "custom_class" {
 	

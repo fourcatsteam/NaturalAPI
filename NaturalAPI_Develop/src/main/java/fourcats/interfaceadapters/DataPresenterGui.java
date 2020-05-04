@@ -11,17 +11,16 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
     private String toShow;
     private String comboToShow;
     private String messagePla;
-    private String modifyTitlePla;
-    private String modifyExtensionPla;
-    private String modifyTextPla;
 
+    private String modifyApiPla;
+
+    private String modifyCustomPla;
     public DataPresenterGui(){
         toShow = "";
         comboToShow = "";
         messagePla = "";
-        modifyTitlePla = "";
-        modifyExtensionPla = "";
-        modifyTextPla = "";
+        modifyApiPla = "";
+        modifyCustomPla = "";
     }
 
     public String getStringToShow(){
@@ -36,16 +35,12 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
         return messagePla;
     }
 
-    public String getModifyTitlePla() {
-        return modifyTitlePla;
+    public String getModifyApiPla() {
+        return modifyApiPla;
     }
 
-    public String getModifyExtensionPla() {
-        return modifyExtensionPla;
-    }
-
-    public String getModifyTextPla() {
-        return modifyTextPla;
+    public String getModifyCustomPla() {
+        return modifyCustomPla;
     }
 
     @Override
@@ -67,10 +62,14 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
         notifyObservers();
     }
 
-    public void showModifyPla(String title,String extension,String text){
-        modifyTitlePla = title;
-        modifyExtensionPla = extension;
-        modifyTextPla = text;
+    public void showLoadPla(String api,String custom){
+        modifyApiPla = api;
+        modifyCustomPla = custom;
+        notifyObservers();
+    }
+
+    public void showModifyPla(String message){
+        messagePla = message;
         notifyObservers();
     }
 }

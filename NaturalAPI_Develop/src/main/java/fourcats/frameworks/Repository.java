@@ -59,4 +59,12 @@ public class Repository implements RepositoryAccess {
     public void writePla(String file,String pla){
         fileSystem.writePla(file,pla);
     }
+
+    public void addCoupleBalPla(String bal,String pla){
+        dataKeeper.addCoupleBalPla(bal,pla);
+    }
+
+    public boolean isCoupleBalPlaPresent(String bal,String pla){
+        return dataKeeper.isCoupleBalPlaPresent(bal,pla);
+    }
 }

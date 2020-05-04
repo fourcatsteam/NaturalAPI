@@ -16,7 +16,9 @@ public interface RepositoryAccess {
     API getApi(int id);
     Map<Integer,API> getApiMap();
     int getSize();
-    public void updateApi(String oldApi,String newApi);
-    public void writePla(String file,String pla);
+    void updateApi(String oldApi,String newApi);
+    void writePla(String file,String pla);
+    void addCoupleBalPla(String bal,String pla);
+    boolean isCoupleBalPlaPresent(String bal,String pla);
 
 }

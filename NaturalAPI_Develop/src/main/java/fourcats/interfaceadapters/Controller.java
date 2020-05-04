@@ -42,7 +42,11 @@ public class Controller {
         createPlaInputPort.create(title,extension,pla);
     }
 
-    public void modifyPla(String filename){
-        modifyPlaInputPort.modify(filename);
+    public void loadPlaToModify(String filename) {
+        modifyPlaInputPort.loadPlaToModify(filename);
+    }
+
+    public void modifyPla(String filename,String text){
+        modifyPlaInputPort.modify(filename,text);
     }
 }
