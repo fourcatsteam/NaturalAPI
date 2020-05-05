@@ -284,7 +284,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     }
 
     private void showSuggestions(Map<Integer,Scenario> mScenarios){
-        //the following instruction (*) is needed for a new suggestions generation after closing the SuggestionGenerated window
+        //the following instruction (*) is needed for new suggestions generation after closing the SuggestionGenerated window
         //otherwise the GUI in a new initialization will read an old scenarioId value from the dataPresenter
         //and will fail to understand how to correctly initialize the widgets in initScenario()
         scenarioId = "" + (-1); //(*)
@@ -301,6 +301,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
                 int idCurrentObject=0;
                 suggestionId = "" + mAc.getKey();
                 actionName = mAc.getValue().getName();
+                if(isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionName);
                 actionType = "" + mAc.getValue().getType();
                 for (ObjectParam op : mAc.getValue().getObjectParams()){
                     lObjectId.add("" + idCurrentObject);

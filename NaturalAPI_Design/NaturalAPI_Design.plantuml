@@ -9,22 +9,6 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   
 
   namespace fourcats {
-    namespace SuggestionBDLAlgorithm {
-      interface fourcats.suggestionbdlalgorithm.StrategyAlgorithm {
-      }
-    }
-  }
-  
-
-  namespace fourcats {
-    namespace SuggestionBDLAlgorithm {
-      class fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm {
-      }
-    }
-  }
-  
-
-  namespace fourcats {
     namespace datastructure {
       class fourcats.datastructure.AnalyzedData {
       }
@@ -350,6 +334,22 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace port {
+      interface fourcats.port.RemoveBdlInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.RemoveBdlOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
       interface fourcats.port.ShowTypesInputPort {
       }
     }
@@ -359,6 +359,22 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   namespace fourcats {
     namespace port {
       interface fourcats.port.ShowTypesOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace suggestionbdlalgorithm {
+      interface fourcats.suggestionbdlalgorithm.StrategyAlgorithm {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace suggestionbdlalgorithm {
+      class fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm {
       }
     }
   }
@@ -422,6 +438,14 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.RemoveBdl {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
       class fourcats.usecaseinteractor.ShowTypes {
       }
     }
@@ -440,6 +464,16 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
     namespace view {
       namespace gui {
         class fourcats.view.gui.AddSuggestionButtonWidget {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.AttributeWidget {
         }
       }
     }
@@ -506,11 +540,11 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   }
   
 
-  fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm .up.|> fourcats.suggestionbdlalgorithm.StrategyAlgorithm
   fourcats.datastructure.WordCounter .up.|> java.lang.Comparable
   fourcats.entities.Action o-- fourcats.entities.Type : type
   fourcats.entities.ObjectParam o-- fourcats.entities.Type : type
   fourcats.frameworks.BalAnalyzerImplementation .up.|> fourcats.interfaceaccess.BalAnalyzer
+  fourcats.frameworks.DataKeeper o-- fourcats.entities.Bdl : bdl
   fourcats.frameworks.FileSystemAccess .up.|> fourcats.interfaceaccess.PersistentMemoryAccess
   fourcats.frameworks.Repository .up.|> fourcats.interfaceaccess.RepositoryAccess
   fourcats.frameworks.Repository o-- fourcats.frameworks.DataKeeper : dataKeeper
@@ -523,6 +557,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalSuggestionsInputPort : generateSuggestion
   fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBdlInputPort : loadBdl
   fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBalSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.RemoveBdlInputPort : removeBdl
   fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
@@ -531,6 +566,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBdlOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBalSuggestionOutputPort
@@ -540,10 +576,12 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
   fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.StrategyAlgorithm : algorithm
-  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.entities.Bdl : bdlLoaded
+  fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm .up.|> fourcats.suggestionbdlalgorithm.StrategyAlgorithm
+  fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm o-- fourcats.entities.Bdl : bdl
   fourcats.usecaseinteractor.AddBalSuggestion .up.|> fourcats.port.AddBalSuggestionInputPort
   fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.port.AddBalSuggestionOutputPort : out
   fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
@@ -567,12 +605,16 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.usecaseinteractor.ModifyBalSuggestion .up.|> fourcats.port.ModifyBalSuggestionInputPort
   fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.port.ModifyBalSuggestionOutputPort : out
   fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.RemoveBdl .up.|> fourcats.port.RemoveBdlInputPort
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.port.RemoveBdlOutputPort : out
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.ShowTypes .up.|> fourcats.port.ShowTypesInputPort
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.port.ShowTypesOutputPort : out
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.view.CLI .up.|> fourcats.datastructure.observer.Observer
   fourcats.view.CLI o-- fourcats.interfaceadapters.Controller : contr
   fourcats.view.CLI o-- fourcats.interfaceadapters.DataPresenter : dataPresenter
+  fourcats.view.gui.CustomTypeCreation -up-|> java.awt.Component
   fourcats.view.gui.GUI_Design .up.|> fourcats.datastructure.observer.Observer
   fourcats.view.gui.GUI_Design -up-|> java.awt.Component
   fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.Controller : controller

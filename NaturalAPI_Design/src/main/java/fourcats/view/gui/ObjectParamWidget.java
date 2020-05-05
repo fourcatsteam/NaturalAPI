@@ -17,6 +17,7 @@ public class ObjectParamWidget {
     private JLabel frequencyLabel;
     private String objectId;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
+    private static final String WORD_FREQUENCY = "Word Frequency: ";
 
 
     public ObjectParamWidget(SuggestionWidget suggWidget, Controller contr, DataPresenterGUI dataPresenter, String initialObjectId,
@@ -28,7 +29,8 @@ public class ObjectParamWidget {
 
         if(dataPresenter.isBdlLoaded()) {
             mainPanel.add(frequencyLabel);
-            frequencyLabel.setText("Word Frequency: " + dataPresenter.getWordObjectFrequency(objectName));
+            frequencyLabel.setText(WORD_FREQUENCY + dataPresenter.getWordObjectFrequency(objectName));
+            setObjectNameColor(dataPresenter.getWordObjectFrequency(objectName));
         }
         mainPanel.add(removeObjectButton);
         objectTypeComboBox.setSelectedItem(objectType);
@@ -77,15 +79,6 @@ public class ObjectParamWidget {
             }
         });
 
-      /*  objectNameTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                contr.modifyObjectName(suggestionId,scenarioId,
-                        objectId,objectNameTextField.getText());
-            }
-        });*/
-
         objectNameTextField.getDocument().addDocumentListener(new DocumentListener() {
 
             public void changedUpdate(DocumentEvent e) {
@@ -122,13 +115,13 @@ public class ObjectParamWidget {
 
 
     private void setObjectNameColor(int isPresentInBdl){
-        if(isPresentInBdl!=0) { //if present in the BDL then set text color to green
+        objectNameTextField.setFont(new Font("",Font.BOLD,12));
+        if(isPresentInBdl!=0) { //if present in BDL then set text color to green
             objectNameTextField.setForeground(new Color(9,148,65));
-            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
         }else{
-            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
             objectNameTextField.setForeground(Color.RED);
         }
+        frequencyLabel.setText(WORD_FREQUENCY+isPresentInBdl);
     }
 
 }

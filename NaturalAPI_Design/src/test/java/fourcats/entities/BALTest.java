@@ -31,16 +31,6 @@ public class BALTest {
     }
 
     @Test
-    public void tesAddDuplicateUserToBAL() {
-        when(actorMock.getName()).thenReturn("act1");
-
-        bal.addUserToBAL(actorMock);
-        bal.addUserToBAL(actorMock);
-
-        verify(listMock,times(1)).add(any(Actor.class));
-    }
-
-    @Test
     public void getActors() {
         List<Actor> l = bal.getActors();
 

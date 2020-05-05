@@ -19,6 +19,7 @@ title __OBSERVER's Class Diagram__\n
         abstract class fourcats.datastructure.observer.Subject {
             - lObservers : List<Observer>
             + attach()
+            + detach()
             # Subject()
             # notifyObservers()
         }

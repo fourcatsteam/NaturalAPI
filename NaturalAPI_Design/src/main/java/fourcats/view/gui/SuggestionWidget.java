@@ -24,6 +24,7 @@ public class SuggestionWidget {
     private final Box objectsBox;
     private final ArrayList <ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
+    private static final String WORD_FREQUENCY = "Word Frequency: ";
 
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
@@ -42,7 +43,8 @@ public class SuggestionWidget {
         mainPanel.add(actionNameTextField);
         if(dataPresenter.isBdlLoaded()){
             mainPanel.add(frequencyLabel);
-            frequencyLabel.setText("Word Frequency: "+dataPresenter.getFrequencyInBdl());
+            frequencyLabel.setText(WORD_FREQUENCY + dataPresenter.getFrequencyInBdl());
+            setActionNameColor(dataPresenter.getFrequencyInBdl());
         }
 
         mainPanel.add(objectsBox);
@@ -163,13 +165,13 @@ public class SuggestionWidget {
     }
 
     public void setActionNameColor(int isPresentInBdl){
-        if(isPresentInBdl!=0) { //if present in the BDL then set text color to green
+        actionNameTextField.setFont(new Font("",Font.BOLD,12));
+        if(isPresentInBdl!=0) { //if present in BDL then set text color to green
             actionNameTextField.setForeground(new Color(9,148,65));
-            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
         }else{
             actionNameTextField.setForeground(Color.RED);
-            frequencyLabel.setText("Word Frequency: "+isPresentInBdl);
         }
+        frequencyLabel.setText(WORD_FREQUENCY + isPresentInBdl);
     }
 
 }

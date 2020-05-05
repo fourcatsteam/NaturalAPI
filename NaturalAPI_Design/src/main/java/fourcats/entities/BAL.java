@@ -9,19 +9,6 @@ public class BAL{
         this.lActors = ActorsList;
     }
 
-    public void addUserToBAL(Actor userToAdd) {
-        boolean present = false;
-        for(Actor a : lActors) {
-            if(a.getName().equals(userToAdd.getName())) {
-                present = true;
-                break;
-            }
-        }
-        if(!present) {
-            lActors.add(userToAdd);
-        }
-    }
-
     public List<Actor> getActors() {
         return lActors;
     }

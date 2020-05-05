@@ -115,7 +115,7 @@ public class SuggestionGenerated extends Component implements Observer{
             }
         });
         frame.add(mainPanel);
-        frame.setPreferredSize(new Dimension(1400,800));
+        frame.setPreferredSize(new Dimension(1400,1000));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

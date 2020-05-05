@@ -5,7 +5,7 @@ title __USECASEINTERACTOR's Class Diagram__\n
   namespace fourcats {
     namespace usecaseinteractor {
       class fourcats.usecaseinteractor.AddBalSuggestion {
-          + AddBALSuggestion()
+          + AddBalSuggestion()
           + addSuggestion()
           + addSuggestionByIdType()
       }
@@ -26,7 +26,7 @@ title __USECASEINTERACTOR's Class Diagram__\n
   namespace fourcats {
     namespace usecaseinteractor {
       class fourcats.usecaseinteractor.DeclineBalSuggestion {
-          + DeclineBALSuggestion()
+          + DeclineBalSuggestion()
           + declineSuggestion()
       }
     }
@@ -36,7 +36,7 @@ title __USECASEINTERACTOR's Class Diagram__\n
   namespace fourcats {
     namespace usecaseinteractor {
       class fourcats.usecaseinteractor.GenerateBal {
-          + GenerateBAL()
+          + GenerateBal()
           + generateBAL()
       }
     }
@@ -47,13 +47,14 @@ title __USECASEINTERACTOR's Class Diagram__\n
     namespace usecaseinteractor {
       class fourcats.usecaseinteractor.GenerateBalSuggestions {
           {static} - AS_A : String
-          + GenerateBALSuggestions()
+          + GenerateBalSuggestions()
           + generateSuggestions()
-          - extractActorName()
-          - extractScenarioContent()
-          - extractScenarioName()
-          - generateAction()
-          - generateObject()
+          # extractActorName()
+          # extractScenarioContent()
+          # extractScenarioName()
+          # extractScenarioSteps()
+          # generateAction()
+          # generateObject()
       }
     }
   }
@@ -72,7 +73,7 @@ title __USECASEINTERACTOR's Class Diagram__\n
   namespace fourcats {
     namespace usecaseinteractor {
       class fourcats.usecaseinteractor.ModifyBalSuggestion {
-          + ModifyBALSuggestion()
+          + ModifyBalSuggestion()
           + addObject()
           + modifyActionName()
           + modifyActionType()
@@ -81,6 +82,16 @@ title __USECASEINTERACTOR's Class Diagram__\n
           + modifyObjectType()
           + modifyObjectTypeById()
           + removeObject()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.RemoveBdl {
+          + RemoveBdl()
+          + removeLoadedBdl()
       }
     }
   }
@@ -119,6 +130,9 @@ title __USECASEINTERACTOR's Class Diagram__\n
   fourcats.usecaseinteractor.ModifyBalSuggestion .up.|> fourcats.port.ModifyBalSuggestionInputPort
   fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.port.ModifyBalSuggestionOutputPort : out
   fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.RemoveBdl .up.|> fourcats.port.RemoveBdlInputPort
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.port.RemoveBdlOutputPort : out
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.interfaceaccess.RepositoryAccess : repo
   fourcats.usecaseinteractor.ShowTypes .up.|> fourcats.port.ShowTypesInputPort
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.port.ShowTypesOutputPort : out
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.interfaceaccess.RepositoryAccess : repo

@@ -18,15 +18,18 @@ title __FRAMEWORKS's Class Diagram__\n
           - mScenarios : Map<Integer, Scenario>
           - mTypes : Map<Integer, Type>
           + DataKeeper()
+          + addBdl()
           + addCustomType()
           + addObject()
           + addScenarioToMap()
           + addSuggestion()
           + addSuggestionByIdType()
           + clearScenariosMap()
+          + getBdl()
           + getScenarioMap()
           + getTypeMap()
           + removeAction()
+          + removeBdl()
           + removeObject()
           + updateActionName()
           + updateActionType()
@@ -67,10 +70,12 @@ title __FRAMEWORKS's Class Diagram__\n
           + createObject()
           + createScenario()
           + createSuggestion()
+          + deleteBdl()
           + deleteObject()
           + deleteScenarios()
           + deleteSuggestion()
           + read()
+          + readAndCreateBdl()
           + readBdl()
           + readScenarios()
           + readTypes()
@@ -100,6 +105,7 @@ title __FRAMEWORKS's Class Diagram__\n
   
 
   fourcats.frameworks.BalAnalyzerImplementation .up.|> fourcats.interfaceaccess.BalAnalyzer
+  fourcats.frameworks.DataKeeper o-- fourcats.entities.Bdl : bdl
   fourcats.frameworks.FileSystemAccess .up.|> fourcats.interfaceaccess.PersistentMemoryAccess
   fourcats.frameworks.Repository .up.|> fourcats.interfaceaccess.RepositoryAccess
   fourcats.frameworks.Repository o-- fourcats.frameworks.DataKeeper : dataKeeper

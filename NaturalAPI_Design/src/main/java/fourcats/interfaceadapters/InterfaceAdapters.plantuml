@@ -20,6 +20,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
           + modifyObjectName()
           + modifyObjectType()
           + modifyObjectTypeById()
+          + removeBdl()
           + removeObject()
           + showTypes()
       }
@@ -43,6 +44,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
           + showModifiedActionType()
           + showModifiedObjectName()
           + showModifiedObjectType()
+          + showRemoveBdlStatus()
           + showRemovedObject()
           + showSuggestionsForScenario()
           + showTypes()
@@ -56,38 +58,40 @@ title __INTERFACEADAPTERS's Class Diagram__\n
     namespace interfaceadapters {
       class fourcats.interfaceadapters.DataPresenterGUI {
           {static} ~ ERROR_MESSAGE : String
-          ~ actionName : String
-          ~ actionType : String
-          ~ actor : String
-          ~ featurePath : String
-          ~ isOkOperation : boolean
-          ~ isSuggestionToAdd : boolean
-          ~ isSuggestionsRefreshNeeded : boolean
-          ~ lObjectId : ArrayList<String>
-          ~ lObjectNames : ArrayList<String>
-          ~ lObjectTypes : ArrayList<String>
-          ~ lTypes : ArrayList<String>
-          ~ message : String
-          ~ scenarioContent : String
-          ~ scenarioId : String
-          ~ suggestionId : String
-          - isPresentInBdl : boolean
+          - actionName : String
+          - actionType : String
+          - actor : String
+          - featurePath : String
+          - frequencyInBdl : int
+          - isBdlLoaded : boolean
+          - isOkOperation : boolean
+          - isSuggestionToAdd : boolean
+          - isSuggestionsRefreshNeeded : boolean
+          - lObjectId : ArrayList<String>
+          - lObjectNames : ArrayList<String>
+          - lObjectTypes : ArrayList<String>
+          - lTypes : ArrayList<String>
+          - message : String
+          - scenarioContent : String
+          - scenarioId : String
+          - suggestionId : String
           + DataPresenterGUI()
           + getActionName()
           + getActionType()
           + getActor()
           + getFeaturePath()
+          + getFrequencyInBdl()
           + getMessage()
           + getScenarioContent()
           + getScenarioId()
           + getSuggestionId()
+          + getWordObjectFrequency()
           + getlObjectId()
           + getlObjectNames()
           + getlObjectTypes()
           + getlTypes()
           + isBdlLoaded()
           + isOkOperation()
-          + isPresentInBdl()
           + isSuggestionToAdd()
           + isSuggestionsRefreshNeeded()
           + showAddedObject()
@@ -101,6 +105,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
           + showModifiedActionType()
           + showModifiedObjectName()
           + showModifiedObjectType()
+          + showRemoveBdlStatus()
           + showRemovedObject()
           + showSuggestionsForScenario()
           + showTypes()
@@ -117,6 +122,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
   fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalSuggestionsInputPort : generateSuggestion
   fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBdlInputPort : loadBdl
   fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBalSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.RemoveBdlInputPort : removeBdl
   fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
@@ -125,6 +131,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBdlOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBalSuggestionOutputPort
@@ -134,10 +141,10 @@ title __INTERFACEADAPTERS's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
   fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.StrategyAlgorithm : algorithm
-  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.entities.Bdl : bdlLoaded
 
 
 right footer
