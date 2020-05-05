@@ -76,7 +76,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
     }
 
 
-    private List<Action> generateAction(String scenario)  {
+    protected List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
         String scenarioContent = extractScenarioContent(scenario);
 
@@ -108,13 +108,13 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 
     }
 
-    private ObjectParam generateObject(String actionName){
+    protected ObjectParam generateObject(String actionName){
         //generate default objectParameter (the first parameter in the Action)
         String[] splittedActionName = actionName.split("_");
         return new ObjectParam(splittedActionName[1],"string"); //object type default at string
     }
 
-    private String extractScenarioName(String feature){
+    protected String extractScenarioName(String feature){
         //extract scenario name by picking the text between first row and "Given:" in the feature file
         int indexFeatureStart = 0;
         int indexFeatureEnd = -1;
@@ -126,7 +126,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 
     }
 
-    private String extractActorName(String feature){
+    protected String extractActorName(String feature){
         //extract actor name by picking the text between keywords "As a" and "Scenario" in the feature file
         //if there isn't the keyword "As as" return "All"
         int indexActorStart = -1;
@@ -142,7 +142,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
 
     }
 
-    private String extractScenarioContent(String scenario){
+    protected String extractScenarioContent(String scenario){
         //extract all text from the keyword "Given" in the scenario
         int indexGiven = 0;
         if (scenario.indexOf("Given")!=-1){
@@ -151,7 +151,7 @@ public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
         return scenario.substring(indexGiven);
     }
 
-    private List<String> extractScenarioSteps(String scenarioContent){
+    protected List<String> extractScenarioSteps(String scenarioContent){
         List<String> lSteps = new ArrayList<>();
         //split whenever one of the keyword is found
         String[] steps = scenarioContent.split("When|Then|And");
