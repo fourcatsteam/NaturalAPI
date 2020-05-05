@@ -127,14 +127,13 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
     protected String extractActorName(String feature){
-        //extract actor name by picking the text between keywords "As a" and "Scenario" in the feature file
-        //if there isn't the keyword "As as" return "All"
+        //extract actor name by picking the text between "As a" and the first "\n" found after it in the feature
+        //if there isn't the keyword "As a" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
         if (feature.contains(AS_A)) {
             indexActorStart = feature.indexOf(AS_A)+5;
-            indexActorEnd = feature.indexOf("  ",indexActorStart);
-            //indexActorEnd = feature.indexOf("Scenario");
+            indexActorEnd = feature.indexOf("\n",indexActorStart);
             if (indexActorStart <= indexActorEnd)
                 return feature.substring(indexActorStart,indexActorEnd).trim();
         }
@@ -154,9 +153,13 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     protected List<String> extractScenarioSteps(String scenarioContent){
         List<String> lSteps = new ArrayList<>();
         //split whenever one of the keyword is found
-        String[] steps = scenarioContent.split("When|Then|And");
+        String[] steps = scenarioContent.split("Given|When|Then|And");
+        String trimmedStep = "";
         for (String step : steps){
-            lSteps.add(step.trim());
+            trimmedStep = step.trim();
+            if (!trimmedStep.equals("")) {
+                lSteps.add(trimmedStep);
+            }
         }
         return lSteps;
     }

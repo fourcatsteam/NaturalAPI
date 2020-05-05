@@ -128,7 +128,7 @@ public class GUI_Design extends Component implements Observer  {
         JFrame frame = new JFrame("NaturalAPI Design");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new GUI_Design(controller,dataPresenter).mainPanel);
-        frame.setPreferredSize(new Dimension(500,450));
+        frame.setPreferredSize(new Dimension(650,550));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

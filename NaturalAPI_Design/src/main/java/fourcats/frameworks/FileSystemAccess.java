@@ -9,8 +9,7 @@ import java.io.*;
 public class FileSystemAccess implements PersistentMemoryAccess {
 
 
-     String bdlPathToFolder = "BDL/";
-    //private String bdlPathToFolder;
+     String bdlPathToFolder = "BDL/"; //this should be done in a different way...
 
 
     @Override
@@ -19,7 +18,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         String fileContent = "";
         try(BufferedReader input = new BufferedReader(new FileReader(filePath))){
             while((s=input.readLine()) != null){
-                fileContent += s + " ";
+                fileContent += s + "\n";
             }
         }catch(IOException e){
             throw new FileNotFoundException();
@@ -57,8 +56,6 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         return loadBdl(bdlNames[0]);
     }
 
-    //NOTE
-    //The following functions are not used now, they will be useful for the integration of the bdl file
 
     @Override
     public Bdl loadBdl(String bdlName) throws IOException {

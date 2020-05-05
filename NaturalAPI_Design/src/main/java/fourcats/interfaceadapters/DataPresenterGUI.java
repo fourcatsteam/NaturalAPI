@@ -294,7 +294,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
         isSuggestionToAdd = true; //tell the GUI that it's time to create new suggestions widgets
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
             featurePath = mSc.getValue().getFeatureName();
-            scenarioContent = "Scenario:" + mSc.getValue().getContent().replace("  ","\n");
+            scenarioContent = "Scenario:" + mSc.getValue().getContent();
             scenarioId = "" + mSc.getKey();
             actor = mSc.getValue().getActorName();
             for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
