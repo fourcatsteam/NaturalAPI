@@ -1,0 +1,187 @@
+@startuml
+
+title __GUI's Class Diagram__\n
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.AddSuggestionButtonWidget {
+            - addSuggestionButton : JButton
+            + AddSuggestionButtonWidget()
+            ~ getButtonWidget()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.AttributeWidget {
+            - attrName : String
+            - attrType : String
+            - attributeNameField : JTextField
+            - attributeTypeComboBox : JComboBox<String>
+            - mainPanel : JPanel
+            - removeAttributeButton : JButton
+            + AttributeWidget()
+            + getAttributeName()
+            + getAttributeType()
+            + getAttributeWidgetPanel()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.CustomTypeCreation {
+            - mainPanel : JPanel
+            + CustomTypeCreation()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.GUI_Design {
+            - bdlNameFile : String[]
+            - fc : JFileChooser
+            - featureFilesName : List<String>
+            - featureFilesPath : List<String>
+            - genSuggestBtn : JButton
+            - loadBDLButton : JButton
+            - loadFeatureBtn : JButton
+            - log : JTextArea
+            - mainPanel : JPanel
+            - removeBdlBtn : JButton
+            - removeFeatureBtn : JButton
+            - removeFilesBtnPanel : JPanel
+            - titleText : JLabel
+            + GUI_Design()
+            + createAndShowGUI()
+            + update()
+            - showOutput()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.ObjectParamWidget {
+            {static} - CREATE_CUSTOM : String
+            - frequencyLabel : JLabel
+            - mainPanel : JPanel
+            - objectId : String
+            - objectNameTextField : JTextField
+            - objectTypeComboBox : JComboBox<String>
+            - removeObjectButton : JButton
+            + ObjectParamWidget()
+            + getObjectId()
+            + setObjectId()
+            - setObjectNameColor()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.ScenarioWidget {
+            - actorLabel : JLabel
+            - featureLabel : JLabel
+            - featureTextArea : JTextArea
+            - mainPanel : JPanel
+            + ScenarioWidget()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.SuggestionGenerated {
+            - addFeatureButton : JButton
+            - currentScenarioId : int
+            - generateBalButton : JButton
+            - gridBagLayout : GridBagLayout
+            - gridConstraint : GridBagConstraints
+            - gridX : int
+            - gridY : int
+            - lFeatureNames : List<String>
+            - lFeaturePaths : List<String>
+            - mainPanel : JPanel
+            - panelButtons : JPanel
+            - panelInScrollPanel : JPanel
+            - panelSuggestions : JPanel
+            - scrollPanel : JScrollPane
+            + SuggestionGenerated()
+            + createAndShowGUI()
+            + update()
+            - getFeatureName()
+            - initScenario()
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.SuggestionWidget {
+            {static} - CREATE_CUSTOM : String
+            - actionNameTextField : JTextField
+            - actionTypeComboBox : JComboBox<String>
+            - addObjectButton : JButton
+            - frequencyLabel : JLabel
+            - lObjectParamWidget : ArrayList<ObjectParamWidget>
+            - mainPanel : JPanel
+            - objectsBox : Box
+            - removeSuggestionButton : JButton
+            - scenarioId : String
+            - suggestionId : String
+            + SuggestionWidget()
+            + addObjectParamWidget()
+            + removeObjectParamWidget()
+            + setActionNameColor()
+            - addObjects()
+        }
+      }
+    }
+  }
+  
+
+  fourcats.view.gui.CustomTypeCreation -up-|> java.awt.Component
+  fourcats.view.gui.GUI_Design .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.GUI_Design -up-|> java.awt.Component
+  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.Controller : controller
+  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.gui.ScenarioWidget -up-|> javax.swing.JComponent
+  fourcats.view.gui.SuggestionGenerated .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.SuggestionGenerated -up-|> java.awt.Component
+  fourcats.view.gui.SuggestionGenerated o-- fourcats.interfaceadapters.Controller : contr
+  fourcats.view.gui.SuggestionGenerated o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
