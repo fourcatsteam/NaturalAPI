@@ -5,19 +5,19 @@ import fourcats.entities.BAL;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.GenerateBALInputPort;
-import fourcats.port.GenerateBALOutputPort;
+import fourcats.port.GenerateBalInputPort;
+import fourcats.port.GenerateBalOutputPort;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateBAL implements GenerateBALInputPort {
+public class GenerateBal implements GenerateBalInputPort {
     RepositoryAccess repo;
-    GenerateBALOutputPort out;
+    GenerateBalOutputPort out;
     BalAnalyzer balAnalyzer;
 
-    public GenerateBAL(RepositoryAccess repositoryAccess, GenerateBALOutputPort outputPort, BalAnalyzer balAnalyzer){
+    public GenerateBal(RepositoryAccess repositoryAccess, GenerateBalOutputPort outputPort, BalAnalyzer balAnalyzer){
         this.repo = repositoryAccess;
         this.out = outputPort;
         this.balAnalyzer = balAnalyzer;

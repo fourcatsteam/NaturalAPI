@@ -9,9 +9,9 @@ import fourcats.port.*;
 
 import java.util.Map;
 
-public class DataPresenter extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        GenerateBALOutputPort, ModifyBALSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort,
-        AddBALSuggestionOutputPort, LoadBDLOutputPort {
+public class DataPresenter extends Subject implements GenerateBalSuggestionsOutputPort, DeclineBalSuggestionOutputPort,
+        GenerateBalOutputPort, ModifyBalSuggestionOutputPort, CreateCustomTypeOutputPort, ShowTypesOutputPort,
+        AddBalSuggestionOutputPort, LoadBdlOutputPort, RemoveBdlOutputPort {
 
     private String toShow;
 
@@ -196,7 +196,12 @@ public class DataPresenter extends Subject implements GenerateBALSuggestionsOutp
     }
 
     @Override
-    public void showBDLOutput(String s, Bdl b) {
+    public void showBDLOutput(Bdl bdl) {
+        //TODO
+    }
 
+    @Override
+    public void showRemoveBdlStatus() {
+        //TODO
     }
 }

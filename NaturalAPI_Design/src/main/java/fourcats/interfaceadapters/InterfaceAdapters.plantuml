@@ -110,33 +110,33 @@ title __INTERFACEADAPTERS's Class Diagram__\n
   }
   
 
-  fourcats.interfaceadapters.Controller o-- fourcats.port.AddBALSuggestionInputPort : addSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.AddBalSuggestionInputPort : addSuggestion
   fourcats.interfaceadapters.Controller o-- fourcats.port.CreateCustomTypeInputPort : createCustomType
-  fourcats.interfaceadapters.Controller o-- fourcats.port.DeclineBALSuggestionInputPort : declineSuggestion
-  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBALInputPort : generateBAL
-  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBALSuggestionsInputPort : generateSuggestion
-  fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBDLInputPort : loadBdl
-  fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBALSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.DeclineBalSuggestionInputPort : declineSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalInputPort : generateBAL
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalSuggestionsInputPort : generateSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBdlInputPort : loadBdl
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBalSuggestionInputPort : modifySuggestion
   fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.DeclineBALSuggestionOutputPort
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBALOutputPort
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBALSuggestionsOutputPort
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBDLOutputPort
-  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.CreateCustomTypeOutputPort
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.DeclineBALSuggestionOutputPort
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBALOutputPort
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBALSuggestionsOutputPort
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBDLOutputPort
-  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBALSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBalSuggestionOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
-  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.SuggestionBDLAlgorithm.StrategyAlgorithm : algorithm
+  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.StrategyAlgorithm : algorithm
   fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.entities.Bdl : bdlLoaded
 
 

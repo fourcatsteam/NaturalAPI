@@ -1,8 +1,7 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.AddBALSuggestionOutputPort;
-import fourcats.port.CreateCustomTypeOutputPort;
+import fourcats.port.AddBalSuggestionOutputPort;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,10 +19,10 @@ public class AddBALSuggestionTest {
     RepositoryAccess repo;
 
     @Mock
-    AddBALSuggestionOutputPort out;
+    AddBalSuggestionOutputPort out;
 
     @InjectMocks
-    AddBALSuggestion addBALSuggestion;
+    AddBalSuggestion addBALSuggestion;
 
     @Before
     public void setup(){

@@ -2,6 +2,6 @@ package fourcats.port;
 
 import java.io.IOException;
 
-public interface LoadBDLInputPort {
+public interface LoadBdlInputPort {
     void loadingBdl(String[] nameBdl) throws IOException;
 }

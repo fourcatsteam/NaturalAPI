@@ -2,6 +2,6 @@ package fourcats.port;
 
 import java.util.List;
 
-public interface GenerateBALSuggestionsInputPort {
+public interface GenerateBalSuggestionsInputPort {
     void generateSuggestions(List<String> lFeatureFilePaths, boolean isForNewBal);
 }

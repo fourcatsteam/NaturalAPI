@@ -12,6 +12,7 @@ public abstract class Subject {
     public void attach(Observer observer){
         lObservers.add(observer);
     }
+    public void detach(Observer observer){lObservers.remove(observer);}
     protected void notifyObservers(){
         for (Observer o: lObservers){
             o.update();

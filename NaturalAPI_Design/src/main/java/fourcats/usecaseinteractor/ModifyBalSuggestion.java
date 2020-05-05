@@ -1,14 +1,14 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.ModifyBALSuggestionInputPort;
-import fourcats.port.ModifyBALSuggestionOutputPort;
+import fourcats.port.ModifyBalSuggestionInputPort;
+import fourcats.port.ModifyBalSuggestionOutputPort;
 
-public class ModifyBALSuggestion implements ModifyBALSuggestionInputPort {
+public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     RepositoryAccess repo;
-    ModifyBALSuggestionOutputPort out;
+    ModifyBalSuggestionOutputPort out;
 
-    public ModifyBALSuggestion(RepositoryAccess repositoryAccess, ModifyBALSuggestionOutputPort outputPort){
+    public ModifyBalSuggestion(RepositoryAccess repositoryAccess, ModifyBalSuggestionOutputPort outputPort){
         this.repo = repositoryAccess;
         this.out = outputPort;
     }

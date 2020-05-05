@@ -4,7 +4,7 @@ import fourcats.entities.Scenario;
 
 import java.util.Map;
 
-public interface GenerateBALSuggestionsOutputPort {
+public interface GenerateBalSuggestionsOutputPort {
 
     void showSuggestionsForScenario(Map<Integer,Scenario> mScenarios);
 

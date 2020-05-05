@@ -1,5 +1,5 @@
 package fourcats.port;
 
-public interface GenerateBALOutputPort {
+public interface GenerateBalOutputPort {
     void showGenerationStatus(boolean isBALGenerated);
 }

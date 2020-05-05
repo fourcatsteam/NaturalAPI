@@ -3,7 +3,6 @@ package fourcats.usecaseinteractor;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.CreateCustomTypeInputPort;
 import fourcats.port.CreateCustomTypeOutputPort;
-import fourcats.port.DeclineBALSuggestionOutputPort;
 
 import java.util.Map;
 

@@ -6,21 +6,21 @@ import fourcats.entities.ObjectParam;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
-import fourcats.port.GenerateBALSuggestionsInputPort;
-import fourcats.port.GenerateBALSuggestionsOutputPort;
+import fourcats.port.GenerateBalSuggestionsInputPort;
+import fourcats.port.GenerateBalSuggestionsOutputPort;
 import org.apache.lucene.util.SetOnce;
 
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.*;
 
-public class GenerateBALSuggestions implements GenerateBALSuggestionsInputPort {
+public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     RepositoryAccess repo;
     TextAnalyzer textAnalyzer;
-    GenerateBALSuggestionsOutputPort out;
+    GenerateBalSuggestionsOutputPort out;
     private static final String AS_A = "As a";
 
-    public GenerateBALSuggestions(RepositoryAccess repositoryAccess, TextAnalyzer textAnalyzer, GenerateBALSuggestionsOutputPort outputPort)
+    public GenerateBalSuggestions(RepositoryAccess repositoryAccess, TextAnalyzer textAnalyzer, GenerateBalSuggestionsOutputPort outputPort)
     {
         this.repo = repositoryAccess;
         this.textAnalyzer = textAnalyzer;

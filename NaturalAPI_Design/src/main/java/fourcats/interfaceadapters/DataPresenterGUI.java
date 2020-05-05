@@ -1,7 +1,7 @@
 package fourcats.interfaceadapters;
 
-import fourcats.SuggestionBDLAlgorithm.StrategyAlgorithm;
-import fourcats.SuggestionBDLAlgorithm.SuggestionBDLAlgorithm;
+import fourcats.suggestionbdlalgorithm.StrategyAlgorithm;
+import fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm;
 import fourcats.datastructure.observer.Subject;
 import fourcats.entities.*;
 import fourcats.port.*;
@@ -10,28 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsOutputPort, DeclineBALSuggestionOutputPort,
-        ModifyBALSuggestionOutputPort, ShowTypesOutputPort, GenerateBALOutputPort, CreateCustomTypeOutputPort, AddBALSuggestionOutputPort, LoadBDLOutputPort {
+public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsOutputPort, DeclineBalSuggestionOutputPort,
+        ModifyBalSuggestionOutputPort, ShowTypesOutputPort, GenerateBalOutputPort, CreateCustomTypeOutputPort,
+        AddBalSuggestionOutputPort, LoadBdlOutputPort, RemoveBdlOutputPort {
 
-    String message; //NOTE remember to always set to empty string ("") after notifyObservers
-    String featurePath;
-    String scenarioId;
-    String suggestionId;
-    String scenarioContent;
-    String actionType;
-    String actionName;
-    String actor;
-    ArrayList<String> lTypes;
-    ArrayList<String> lObjectId;
-    ArrayList<String> lObjectTypes;
-    ArrayList<String> lObjectNames;
-    boolean isSuggestionToAdd;
-    boolean isOkOperation;
-    boolean isSuggestionsRefreshNeeded;
+    private String message; //NOTE remember to always set to empty string ("") after notifyObservers
+    private String featurePath;
+    private String scenarioId;
+    private String suggestionId;
+    private String scenarioContent;
+    private String actionType;
+    private String actionName;
+    private String actor;
+    private ArrayList<String> lTypes;
+    private ArrayList<String> lObjectId;
+    private ArrayList<String> lObjectTypes;
+    private ArrayList<String> lObjectNames;
+    private boolean isSuggestionToAdd;
+    private boolean isOkOperation;
+    private boolean isSuggestionsRefreshNeeded;
+    private boolean isBdlLoaded;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
     private StrategyAlgorithm algorithm;
-    private Bdl bdlLoaded;
     private int frequencyInBdl;
 
 
@@ -40,12 +41,11 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
         scenarioId = "" + (-1);
         isSuggestionToAdd = false;
         isOkOperation = false;
+        isBdlLoaded = false;
         lTypes = new ArrayList<>();
         lObjectId = new ArrayList<>();
         lObjectTypes = new ArrayList<>();
         lObjectNames = new ArrayList<>();
-        algorithm = new SuggestionBDLAlgorithm();
-        bdlLoaded = null;
         frequencyInBdl = 0;
     }
 
@@ -151,7 +151,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
         if (isActionNameModified){
             isOkOperation = true;
-            if(bdlLoaded!=null) this.frequencyInBdl = algorithm.findActionInBdl(actionNameModified,bdlLoaded);
+            if(isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionNameModified);
         }
         else{
             message = ERROR_MESSAGE;
@@ -180,7 +180,7 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified,String objectNameModified) {
         if (isObjectNameModified){
             isOkOperation = true;
-            if(bdlLoaded!=null) this.frequencyInBdl = algorithm.findObjectInBdl(objectNameModified,bdlLoaded);
+            if(isBdlLoaded) this.frequencyInBdl = algorithm.findObjectInBdl(objectNameModified);
         }
         else {
             message = ERROR_MESSAGE;
@@ -318,21 +318,33 @@ public class DataPresenterGUI extends Subject implements GenerateBALSuggestionsO
     }
 
     public int getWordObjectFrequency(String s){
-        return this.algorithm.findObjectInBdl(s,bdlLoaded);
+        return this.algorithm.findObjectInBdl(s);
     }
 
     public boolean isBdlLoaded(){
-        if(bdlLoaded!=null) {
-            return true;
-        }
-        return false;
+        return isBdlLoaded;
     }
 
     @Override
-    public void showBDLOutput(String s,Bdl b) {
-        this.message = s;
-        this.bdlLoaded = b;
+    public void showBDLOutput(Bdl bdl) {
+        if (bdl!=null){
+            algorithm = new SuggestionBdlAlgorithm(bdl);
+            message = "BDL Loaded successfully";
+            isBdlLoaded = true;
+        }
+        else{
+            message = "Error while loading BDL";
+            isBdlLoaded = false;
+        }
         notifyObservers();
-        this.message = "";
+        message = "";
+    }
+
+    @Override
+    public void showRemoveBdlStatus() {
+        message = "Done! No BDL currently loaded.";
+        isBdlLoaded = false;
+        notifyObservers();
+        message = "";
     }
 }

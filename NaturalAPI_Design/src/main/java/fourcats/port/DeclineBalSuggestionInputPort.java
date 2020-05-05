@@ -1,5 +1,5 @@
 package fourcats.port;
 
-public interface DeclineBALSuggestionInputPort {
+public interface DeclineBalSuggestionInputPort {
     void declineSuggestion(int idAction, int idScenario);
 }

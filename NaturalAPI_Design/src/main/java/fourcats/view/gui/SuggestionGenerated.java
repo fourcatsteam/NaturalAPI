@@ -1,6 +1,5 @@
 package fourcats.view.gui;
 
-
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
@@ -8,6 +7,8 @@ import fourcats.interfaceadapters.DataPresenterGUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,6 +107,13 @@ public class SuggestionGenerated extends Component implements Observer{
     public void createAndShowGUI() {
         JFrame frame = new JFrame("NaturalAPI Design - Suggestions");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //detach from the subject so that the instance of the class will be destroy
+                dataPresenter.detach(SuggestionGenerated.this);
+            }
+        });
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(1400,800));
         frame.pack();
@@ -195,4 +203,5 @@ public class SuggestionGenerated extends Component implements Observer{
         }
         return "";
     }
+
 }

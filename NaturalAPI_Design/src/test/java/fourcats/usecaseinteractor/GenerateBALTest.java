@@ -2,22 +2,20 @@ package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.GenerateBALOutputPort;
+import fourcats.port.GenerateBalOutputPort;
 import org.junit.Test;
 import org.mockito.*;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
 public class GenerateBALTest {
 
     RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
-    GenerateBALOutputPort outputMock = Mockito.mock(GenerateBALOutputPort.class);
+    GenerateBalOutputPort outputMock = Mockito.mock(GenerateBalOutputPort.class);
     BalAnalyzer analyzerMock = Mockito.mock(BalAnalyzer.class);
 
     @InjectMocks
-    GenerateBAL correctGenerator = new GenerateBAL(repositoryMock, outputMock, analyzerMock);
+    GenerateBal correctGenerator = new GenerateBal(repositoryMock, outputMock, analyzerMock);
 
     @Test
     public void GenerateBALCorrectCreation() {

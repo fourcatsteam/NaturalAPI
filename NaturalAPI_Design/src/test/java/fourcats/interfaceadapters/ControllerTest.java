@@ -15,24 +15,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ControllerTest {
 
     @Mock
-    GenerateBALSuggestionsInputPort generateSuggestion;
+    GenerateBalSuggestionsInputPort generateSuggestion;
 
     @Mock
-    DeclineBALSuggestionInputPort declineSuggestion;
+    DeclineBalSuggestionInputPort declineSuggestion;
 
     @Mock
-    GenerateBALInputPort generateBAL;
+    GenerateBalInputPort generateBAL;
 
     @Mock
-    ModifyBALSuggestionInputPort modifySuggestion;
+    ModifyBalSuggestionInputPort modifySuggestion;
 
     @Mock
     CreateCustomTypeInputPort createCustomType;
@@ -41,10 +39,10 @@ public class ControllerTest {
     ShowTypesInputPort showTypes;
 
     @Mock
-    AddBALSuggestionInputPort addSuggestion;
+    AddBalSuggestionInputPort addSuggestion;
 
     @Mock
-    LoadBDLInputPort loadBdl;
+    LoadBdlInputPort loadBdl;
 
     @InjectMocks
     Controller controller;

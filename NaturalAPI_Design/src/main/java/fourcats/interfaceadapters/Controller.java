@@ -7,18 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Controller{
-    private GenerateBALSuggestionsInputPort generateSuggestion;
-    private DeclineBALSuggestionInputPort declineSuggestion;
-    private GenerateBALInputPort generateBAL;
-    private ModifyBALSuggestionInputPort modifySuggestion;
+    private GenerateBalSuggestionsInputPort generateSuggestion;
+    private DeclineBalSuggestionInputPort declineSuggestion;
+    private GenerateBalInputPort generateBAL;
+    private ModifyBalSuggestionInputPort modifySuggestion;
     private CreateCustomTypeInputPort createCustomType;
     private ShowTypesInputPort showTypes;
-    private AddBALSuggestionInputPort addSuggestion;
-    private LoadBDLInputPort loadBdl;
+    private AddBalSuggestionInputPort addSuggestion;
+    private LoadBdlInputPort loadBdl;
+    private RemoveBdlInputPort removeBdl;
 
-    public Controller(GenerateBALSuggestionsInputPort generateBALSugg, DeclineBALSuggestionInputPort declineBALSugg,
-                      GenerateBALInputPort generateBal, ModifyBALSuggestionInputPort modifyBALSugg,
-                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes, AddBALSuggestionInputPort addSuggestion,LoadBDLInputPort loadBdl){
+    public Controller(GenerateBalSuggestionsInputPort generateBALSugg, DeclineBalSuggestionInputPort declineBALSugg,
+                      GenerateBalInputPort generateBal, ModifyBalSuggestionInputPort modifyBALSugg,
+                      CreateCustomTypeInputPort createCustomType, ShowTypesInputPort showTypes,
+                      AddBalSuggestionInputPort addSuggestion, LoadBdlInputPort loadBdl, RemoveBdlInputPort removeBdl){
             this.generateSuggestion = generateBALSugg;
             this.declineSuggestion = declineBALSugg;
             this.generateBAL = generateBal;
@@ -27,6 +29,7 @@ public class Controller{
             this.showTypes = showTypes;
             this.addSuggestion = addSuggestion;
             this.loadBdl = loadBdl;
+            this.removeBdl = removeBdl;
     }
 
     public void generateSuggestions(List<String> lFeatureFilePaths, boolean isForNewBal) {
@@ -84,6 +87,10 @@ public class Controller{
 
     public void loadBdl(String[] namebdl) throws IOException {
         loadBdl.loadingBdl(namebdl);
+    }
+
+    public void removeBdl(){
+        removeBdl.removeLoadedBdl();
     }
 
 

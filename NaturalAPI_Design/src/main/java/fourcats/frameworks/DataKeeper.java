@@ -1,9 +1,6 @@
 package fourcats.frameworks;
 
-import fourcats.entities.Action;
-import fourcats.entities.ObjectParam;
-import fourcats.entities.Scenario;
-import fourcats.entities.Type;
+import fourcats.entities.*;
 import org.apache.lucene.util.SetOnce;
 
 import java.util.*;
@@ -12,6 +9,7 @@ public class DataKeeper {
     private final List<String> lDefaultTypes = Arrays.asList("string","int","float","double","bool");
     private Map<Integer, Scenario> mScenarios;
     private Map<Integer, Type> mTypes;
+    private Bdl bdl;
 
     public DataKeeper(){
         initTypesMap();
@@ -35,7 +33,6 @@ public class DataKeeper {
         mScenarios.put(mScenarios.size(),scenario);
     }
 
-
     public Map<Integer,Scenario> getScenarioMap(){
         return mScenarios;
     }
@@ -43,6 +40,17 @@ public class DataKeeper {
         return mTypes;
     }
 
+    public void addBdl(Bdl bdl){
+        this.bdl = bdl;
+    }
+
+    public void removeBdl() {
+        this.bdl = null;
+    }
+
+    public Bdl getBdl(){
+        return bdl;
+    }
 
     public void removeAction(int idScenario, int idAction){
         try {
@@ -55,7 +63,6 @@ public class DataKeeper {
 
     public void clearScenariosMap(){
         mScenarios.clear();
-
         initTypesMap();
     }
 

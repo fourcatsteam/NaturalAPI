@@ -1,20 +1,19 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.DeclineBALSuggestionOutputPort;
+import fourcats.port.DeclineBalSuggestionOutputPort;
 import org.junit.Test;
 import org.mockito.*;
-import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
 public class DeclineBALSuggestionTest {
 
     RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
-    DeclineBALSuggestionOutputPort outputMock = Mockito.mock(DeclineBALSuggestionOutputPort.class);
+    DeclineBalSuggestionOutputPort outputMock = Mockito.mock(DeclineBalSuggestionOutputPort.class);
 
     @InjectMocks
-    DeclineBALSuggestion declineSuggestion = new DeclineBALSuggestion(repositoryMock, outputMock);
+    DeclineBalSuggestion declineSuggestion = new DeclineBalSuggestion(repositoryMock, outputMock);
 
     @Test
     public void DeclineSuggestionFromWrongID() {

@@ -30,7 +30,7 @@ public class GUI_Design extends Component implements Observer  {
     private List<String> featureFilesName;
 
 
-    public GUI_Design(Controller c,DataPresenterGUI dp){
+    public GUI_Design(Controller c, DataPresenterGUI dp){
         this.controller = c;
         this.dataPresenter = dp;
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
@@ -116,12 +116,11 @@ public class GUI_Design extends Component implements Observer  {
         removeBdlBtn.addActionListener(e->{
             if (bdlNameFile!=null){
                 bdlNameFile = null;
-                log.append("\n"+ "Done! BDL removed.");
+                controller.removeBdl();
             }
             else{
                 log.append("\n"+"Nothing to remove: no BDL uploaded!");
             }
-
         });
     }
 

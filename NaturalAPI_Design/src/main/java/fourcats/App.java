@@ -20,17 +20,18 @@ public class App {
         DataPresenterGUI dataPresenter = new DataPresenterGUI();
         BalAnalyzerImplementation balAnalyzer = new BalAnalyzerImplementation();
 
-        GenerateBAL generateBAL = new GenerateBAL(repo,dataPresenter,balAnalyzer);
-        GenerateBALSuggestions generateBALSugg = new GenerateBALSuggestions(repo,nlp,dataPresenter);
-        DeclineBALSuggestion declineBALSuggestion = new DeclineBALSuggestion(repo,dataPresenter);
-        ModifyBALSuggestion modifyBALSuggestion = new ModifyBALSuggestion(repo,dataPresenter);
+        GenerateBal generateBAL = new GenerateBal(repo,dataPresenter,balAnalyzer);
+        GenerateBalSuggestions generateBALSugg = new GenerateBalSuggestions(repo,nlp,dataPresenter);
+        DeclineBalSuggestion declineBALSuggestion = new DeclineBalSuggestion(repo,dataPresenter);
+        ModifyBalSuggestion modifyBALSuggestion = new ModifyBalSuggestion(repo,dataPresenter);
         CreateCustomType createCustomType = new CreateCustomType(repo,dataPresenter);
         ShowTypes showTypes = new ShowTypes(repo,dataPresenter);
-        AddBALSuggestion addBALSuggestion = new AddBALSuggestion(repo,dataPresenter);
+        AddBalSuggestion addBALSuggestion = new AddBalSuggestion(repo,dataPresenter);
         LoadBdl loadBdl = new LoadBdl(repo,dataPresenter);
+        RemoveBdl removeBdl = new RemoveBdl(repo,dataPresenter);
 
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
-                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl);
+                generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl,removeBdl);
 
 
         Locale.setDefault(Locale.ENGLISH); //set language of GUI components to english

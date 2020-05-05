@@ -112,8 +112,22 @@ public class Repository implements RepositoryAccess  {
     }
 
     @Override
-    public Bdl readBdl(String[] name) throws IOException {
-        return memoryAccess.getBdl(name);
+    public void readAndCreateBdl(String[] name) throws IOException {
+        //read bdl from filesystem and add to dataKeeper
+        Bdl bdl = memoryAccess.getBdl(name);
+        if (bdl!=null) {
+            dataKeeper.addBdl(bdl);
+        }
+    }
+
+    @Override
+    public void deleteBdl() {
+        dataKeeper.removeBdl();
+    }
+
+    @Override
+    public Bdl readBdl() {
+        return dataKeeper.getBdl();
     }
 
 

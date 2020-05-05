@@ -1,6 +1,6 @@
 package fourcats.port;
 
-public interface ModifyBALSuggestionInputPort {
+public interface ModifyBalSuggestionInputPort {
     void modifyActionType(int idAction, int idScenario, String newType);
     void modifyActionTypeById(int idAction, int idScenario, int idType);
     void modifyActionName(int idAction, int idScenario, String newName);

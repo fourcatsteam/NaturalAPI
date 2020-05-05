@@ -4,7 +4,7 @@ import fourcats.entities.Scenario;
 
 import java.util.Map;
 
-public interface ModifyBALSuggestionOutputPort {
+public interface ModifyBalSuggestionOutputPort {
     void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified);
     void showModifiedActionType(Map<Integer, Scenario> mScenarios, boolean isActionTypeModified);
     void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified, String objectNameModified);

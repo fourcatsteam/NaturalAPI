@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -149,7 +148,7 @@ public class RepositoryTest {
     @Test
     public void testReadBdl() throws IOException {
         String[] myStr = new String[1];
-        repository.readBdl(myStr);
+        repository.readAndCreateBdl(myStr);
         verify(memoryAccess,times(1)).getBdl(myStr);
     }
 }

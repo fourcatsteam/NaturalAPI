@@ -39,6 +39,7 @@
           </grid>
         </constraints>
         <properties>
+          <autoscrolls value="true"/>
           <editable value="false"/>
         </properties>
       </component>

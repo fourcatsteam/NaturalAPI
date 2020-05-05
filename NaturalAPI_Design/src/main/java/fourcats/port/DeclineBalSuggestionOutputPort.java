@@ -5,6 +5,6 @@ import fourcats.entities.Scenario;
 
 import java.util.Map;
 
-public interface DeclineBALSuggestionOutputPort {
+public interface DeclineBalSuggestionOutputPort {
     void showDeclinedSuggestion(Map<Integer, Scenario> mScenarios, boolean isOk);
 }

@@ -2,10 +2,9 @@ package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
-import fourcats.port.GenerateBALSuggestionsOutputPort;
+import fourcats.port.GenerateBalSuggestionsOutputPort;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -19,14 +18,14 @@ public class GenerateBALSuggestionsTest {
 
     RepositoryAccess repositoryMock = mock(RepositoryAccess.class);
     TextAnalyzer analyzerMock = mock(TextAnalyzer.class);
-    GenerateBALSuggestionsOutputPort outputMock = mock(GenerateBALSuggestionsOutputPort.class);
+    GenerateBalSuggestionsOutputPort outputMock = mock(GenerateBalSuggestionsOutputPort.class);
 
-    GenerateBALSuggestions generateBALSuggestions;
+    GenerateBalSuggestions generateBALSuggestions;
 
     @Before
     public void setup(){
         generateBALSuggestions =
-                new GenerateBALSuggestions(repositoryMock, analyzerMock, outputMock);
+                new GenerateBalSuggestions(repositoryMock, analyzerMock, outputMock);
     }
 
     @Test
