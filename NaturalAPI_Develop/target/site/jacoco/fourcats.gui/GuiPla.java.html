@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GuiPla.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.gui</a> &gt; <span class="el_source">GuiPla.java</span></div><h1>GuiPla.java</h1><pre class="source lang-java linenums">package fourcats.gui;
+
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGui;
+import fourcats.observer.Observer;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.File;
+
+public class GuiPla implements Observer {
+
+    private JFrame frame;
+    private JTextArea textArea1;
+    private JButton createButton;
+    private JButton cancelButton;
+    private JPanel mainPanel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextArea textArea2;
+
+    String message;
+
+    private Controller controller;
+    private DataPresenterGui dataPresenterGui;
+
+<span class="nc" id="L27">    public GuiPla(Controller c,DataPresenterGui d){</span>
+
+<span class="nc" id="L29">        controller = c;</span>
+<span class="nc" id="L30">        dataPresenterGui = d;</span>
+<span class="nc" id="L31">        dataPresenterGui.attach(this);</span>
+<span class="nc" id="L32">        message = &quot;&quot;;</span>
+
+<span class="nc" id="L34">        frame = new JFrame(&quot;NaturalApi Develop&quot;);</span>
+<span class="nc" id="L35">        frame.setContentPane(mainPanel);</span>
+<span class="nc" id="L36">        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L37">        frame.setSize(500,500);</span>
+        try {
+<span class="nc" id="L39">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
+        }
+<span class="nc" id="L41">        catch (Exception e){</span>
+<span class="nc" id="L42">            e.printStackTrace();</span>
+<span class="nc" id="L43">        }</span>
+
+<span class="nc" id="L45">        createButton.addActionListener(e -&gt; {</span>
+
+<span class="nc" id="L47">            controller.createPla(textField1.getText(),textField2.getText(),textArea1.getText() +</span>
+<span class="nc" id="L48">                    &quot;\ncustom class\n&quot; + textArea2.getText());</span>
+<span class="nc" id="L49">            JOptionPane.showMessageDialog(frame,message);</span>
+<span class="nc" id="L50">        });</span>
+
+<span class="nc" id="L52">        cancelButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L53">            frame.dispose(); //close the frame</span>
+<span class="nc" id="L54">        });</span>
+<span class="nc" id="L55">    }</span>
+
+    public void showGuiPla(){
+<span class="nc" id="L58">        frame.setVisible(true);</span>
+<span class="nc" id="L59">    }</span>
+
+    public void showOutput(){
+<span class="nc" id="L62">        message = dataPresenterGui.getMessagePla();</span>
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public void update() {
+<span class="nc" id="L67">        showOutput();</span>
+<span class="nc" id="L68">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

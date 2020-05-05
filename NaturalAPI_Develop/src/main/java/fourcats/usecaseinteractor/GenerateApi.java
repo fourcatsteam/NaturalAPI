@@ -14,9 +14,15 @@ public class GenerateApi implements GenerateInputPort {
         repositoryAccess = ra;
     }
 
-    public void generate(){
-        for(Map.Entry<Integer,API> mApi : repositoryAccess.getApiMap().entrySet()){
-            repositoryAccess.writeApi(mApi.getValue());
+    public void generate() throws Exception {
+
+        if(repositoryAccess.getApiMap().isEmpty()){
+            throw new Exception();
+        }
+        else{
+            for(Map.Entry<Integer,API> mApi : repositoryAccess.getApiMap().entrySet()){
+                repositoryAccess.writeApi(mApi.getValue());
+            }
         }
     }
 }

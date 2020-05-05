@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Repository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.frameworks</a> &gt; <span class="el_source">Repository.java</span></div><h1>Repository.java</h1><pre class="source lang-java linenums">package fourcats.frameworks;
+
+import fourcats.entity.API;
+import fourcats.interfaceaccess.RepositoryAccess;
+
+import java.io.File;
+import java.util.Map;
+
+public class Repository implements RepositoryAccess {
+
+    private DataKeeper dataKeeper;
+    private FileSystem fileSystem;
+
+<span class="fc" id="L14">    public Repository(DataKeeper datakeeper,FileSystem fileSystem){</span>
+<span class="fc" id="L15">        this.dataKeeper = datakeeper;</span>
+<span class="fc" id="L16">        this.fileSystem = fileSystem;</span>
+<span class="fc" id="L17">    }</span>
+
+    public File openFile(String filename) {
+<span class="fc" id="L20">        return fileSystem.openFile(filename);</span>
+    }
+
+    public String loadPLA(String filename) {
+<span class="fc" id="L24">        return fileSystem.loadPLA(filename);</span>
+    }
+
+    public void writeApi(API api){
+<span class="fc" id="L28">        fileSystem.writeApi(api);</span>
+<span class="fc" id="L29">    }</span>
+
+    public void addApi(API api){
+<span class="fc" id="L32">        dataKeeper.addApi(api);</span>
+<span class="fc" id="L33">    }</span>
+
+    public void addApiWithId(int id,API api){
+<span class="fc" id="L36">        dataKeeper.addApiWithId(id,api);</span>
+<span class="fc" id="L37">    }</span>
+
+    public void deleteApi(int id){
+<span class="fc" id="L40">        dataKeeper.deleteApi(id);</span>
+<span class="fc" id="L41">    }</span>
+
+    public API getApi(int id){
+<span class="fc" id="L44">        return dataKeeper.getApi(id);</span>
+    }
+
+    public Map&lt;Integer,API&gt; getApiMap(){
+<span class="fc" id="L48">        return dataKeeper.getApiMap();</span>
+    }
+
+    public int getSize(){
+<span class="fc" id="L52">        return dataKeeper.getSize();</span>
+    }
+
+    public void updateApi(String oldApi,String newApi){
+<span class="fc" id="L56">        dataKeeper.updateApi(oldApi,newApi);</span>
+<span class="fc" id="L57">    }</span>
+
+    public void writePla(String file,String pla){
+<span class="nc" id="L60">        fileSystem.writePla(file,pla);</span>
+<span class="nc" id="L61">    }</span>
+
+    public void addCoupleBalPla(String bal,String pla){
+<span class="nc" id="L64">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="nc" id="L65">    }</span>
+
+    public boolean isCoupleBalPlaPresent(String bal,String pla){
+<span class="nc" id="L68">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

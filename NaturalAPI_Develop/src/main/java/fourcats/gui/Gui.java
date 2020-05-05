@@ -105,7 +105,7 @@ public class Gui implements Observer {
                 mainPanel.setBackground(Color.GREEN);
             }
             catch(Exception ex){
-                messageLabel.setText("Ops! Something went wrong!");
+                messageLabel.setText("What are you doing? There aren't suggestions to generate!");
                 mainPanel.setBackground(Color.RED);
             }
         });
@@ -121,8 +121,14 @@ public class Gui implements Observer {
         });
 
         modifyButton.addActionListener(e -> {
-            controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
-            toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
+            try{
+                controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
+                toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
+            }
+            catch (Exception ex) {
+                messageLabel.setText("What are you doing? There aren't suggestions to modify!");
+                mainPanel.setBackground(Color.RED);
+            }
         });
 
         comboBox1.addActionListener(e -> {

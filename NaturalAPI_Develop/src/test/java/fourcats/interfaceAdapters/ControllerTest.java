@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -48,7 +50,8 @@ public class ControllerTest {
     }
 
     @Test
-    public void testGenerateApi(){
+    public void testGenerateApi() throws Exception {
+
         controller.generateApi();
 
         verify(genMock).generate();

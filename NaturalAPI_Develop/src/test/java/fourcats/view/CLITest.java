@@ -131,7 +131,7 @@ public class CLITest {
     }
 
     @Test
-    public void readingGenerateApi() throws IOException {
+    public void readingGenerateApi() throws Exception {
         when(bufferedReaderMock.readLine()).thenReturn("y");
         cli.readGenerateApi();
         verify(controllerMock,times(1)).generateApi();

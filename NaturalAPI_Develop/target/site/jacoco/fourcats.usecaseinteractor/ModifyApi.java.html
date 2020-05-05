@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModifyApi.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.usecaseinteractor</a> &gt; <span class="el_source">ModifyApi.java</span></div><h1>ModifyApi.java</h1><pre class="source lang-java linenums">package fourcats.usecaseinteractor;
+
+import fourcats.entity.*;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
+import fourcats.port.ModifyGuiInputPort;
+import fourcats.port.ModifyInputPort;
+import fourcats.port.ModifyOutputPort;
+
+
+public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
+
+    BalAnalyzer balAnalyzer;
+    RepositoryAccess repositoryAccess;
+    ModifyOutputPort modifyOutputPort;
+
+<span class="fc" id="L17">    public ModifyApi(BalAnalyzer b,RepositoryAccess r,ModifyOutputPort m){</span>
+<span class="fc" id="L18">        balAnalyzer = b;</span>
+<span class="fc" id="L19">        repositoryAccess = r;</span>
+<span class="fc" id="L20">        modifyOutputPort = m;</span>
+<span class="fc" id="L21">    }</span>
+
+    public void modifyGui(String oldApi,String newApi){
+<span class="fc" id="L24">        repositoryAccess.updateApi(oldApi,newApi);</span>
+<span class="fc" id="L25">    }</span>
+
+    public void modify(int id, String filenameBal, String filenamePla){
+
+<span class="fc" id="L29">        repositoryAccess.deleteApi(id);</span>
+<span class="fc" id="L30">        balAnalyzer.setBalFile(repositoryAccess.openFile(&quot;./BAL/&quot; + filenameBal));</span>
+<span class="fc" id="L31">        BAL bal = balAnalyzer.getBAL();</span>
+<span class="fc" id="L32">        PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));</span>
+
+<span class="fc" id="L34">        API api = new API();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for(Actor actors : bal.getActors()){</span>
+
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            for(Action action : actors.getActions()){</span>
+
+<span class="fc" id="L39">                String newApi = pla.getText();</span>
+<span class="fc" id="L40">                newApi = insertGroup(newApi, action.getName());</span>
+<span class="fc" id="L41">                newApi = insertActionType(newApi, action.getType().getName());</span>
+<span class="fc" id="L42">                newApi = insertActionName(newApi, action.getName());</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">                for(ObjectParam objectParam : action.getObjectParams()) {</span>
+
+<span class="fc" id="L45">                    newApi = insertObjectType(newApi, objectParam.getType().getName());</span>
+<span class="fc" id="L46">                    newApi = insertObjectName(newApi, objectParam.getName());</span>
+<span class="fc" id="L47">                }</span>
+<span class="fc" id="L48">                api.addApi(&quot;./API/&quot; + action.getName().substring(0,1).toUpperCase() +</span>
+<span class="fc" id="L49">                        action.getName().substring(1) + &quot;_&quot; + id + pla.getExtension(), newApi);</span>
+<span class="fc" id="L50">            }</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">        repositoryAccess.addApiWithId(id,api);</span>
+<span class="fc" id="L53">        modifyOutputPort.showOutput(repositoryAccess.getApiMap());</span>
+<span class="fc" id="L54">    }</span>
+
+    private String insertGroup(String text,String toReplace){
+        //CamelCase
+<span class="fc" id="L58">        toReplace = toReplace.substring(0,1).toUpperCase() + toReplace.substring(1);</span>
+<span class="fc" id="L59">        return text.replaceAll(&quot;\&quot;group_action\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionType (String text,String toReplace){
+<span class="fc" id="L63">        return text.replaceAll(&quot;\&quot;action_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionName (String text,String toReplace){
+<span class="fc" id="L67">        return text.replaceAll(&quot;\&quot;action_name\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertObjectType (String text,String toReplace){
+<span class="fc" id="L71">        return text.replaceAll(&quot;\&quot;object_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertObjectName (String text,String toReplace){
+<span class="fc" id="L75">        return text.replaceAll(&quot;\&quot;object_name\&quot;&quot;, toReplace);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

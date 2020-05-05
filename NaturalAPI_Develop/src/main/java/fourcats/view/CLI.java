@@ -112,7 +112,7 @@ public class CLI implements Observer {
                     throw new InputMismatchException("Error: insert y or n");
             }
         }
-        catch (IOException e){
+        catch (Exception e){
             e.printStackTrace();
         }
     }

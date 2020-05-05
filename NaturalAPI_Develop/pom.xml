@@ -101,6 +101,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <build>
+          <defaultGoal>install</defaultGoal>
         <plugins>
           <plugin>
             <groupId>org.jacoco</groupId>
@@ -143,11 +144,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.10.0.pr2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.7.6</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

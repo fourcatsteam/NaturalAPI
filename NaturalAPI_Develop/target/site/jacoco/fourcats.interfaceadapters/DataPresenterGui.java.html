@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataPresenterGui.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.interfaceadapters</a> &gt; <span class="el_source">DataPresenterGui.java</span></div><h1>DataPresenterGui.java</h1><pre class="source lang-java linenums">package fourcats.interfaceadapters;
+
+import fourcats.entity.API;
+import fourcats.observer.Subject;
+import fourcats.port.*;
+
+import java.util.Map;
+
+public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort, CreatePlaOutputPort, ModifyPlaOutputPort {
+
+    private String toShow;
+    private String comboToShow;
+    private String messagePla;
+
+    private String modifyApiPla;
+
+    private String modifyCustomPla;
+<span class="nc" id="L18">    public DataPresenterGui(){</span>
+<span class="nc" id="L19">        toShow = &quot;&quot;;</span>
+<span class="nc" id="L20">        comboToShow = &quot;&quot;;</span>
+<span class="nc" id="L21">        messagePla = &quot;&quot;;</span>
+<span class="nc" id="L22">        modifyApiPla = &quot;&quot;;</span>
+<span class="nc" id="L23">        modifyCustomPla = &quot;&quot;;</span>
+<span class="nc" id="L24">    }</span>
+
+    public String getStringToShow(){
+<span class="nc" id="L27">        return toShow;</span>
+    }
+
+    public String getComboToShow(){
+<span class="nc" id="L31">        return comboToShow;</span>
+    }
+
+    public String getMessagePla() {
+<span class="nc" id="L35">        return messagePla;</span>
+    }
+
+    public String getModifyApiPla() {
+<span class="nc" id="L39">        return modifyApiPla;</span>
+    }
+
+    public String getModifyCustomPla() {
+<span class="nc" id="L43">        return modifyCustomPla;</span>
+    }
+
+    @Override
+    public void showOutput(Map&lt;Integer,API&gt; mApi) {
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (Map.Entry&lt;Integer,API&gt; mapApi : mApi.entrySet()) {</span>
+
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            for(Map.Entry&lt;String,String&gt; api : mapApi.getValue().getListApi().entrySet()){</span>
+<span class="nc" id="L52">                toShow = api.getValue();</span>
+<span class="nc" id="L53">                String[] split = api.getKey().split(&quot;/&quot;);</span>
+<span class="nc" id="L54">                comboToShow = split[split.length-1];</span>
+<span class="nc" id="L55">                notifyObservers();</span>
+<span class="nc" id="L56">            }</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">    }</span>
+
+    public void showOutput(String message){
+<span class="nc" id="L61">        messagePla = message;</span>
+<span class="nc" id="L62">        notifyObservers();</span>
+<span class="nc" id="L63">    }</span>
+
+    public void showLoadPla(String api,String custom){
+<span class="nc" id="L66">        modifyApiPla = api;</span>
+<span class="nc" id="L67">        modifyCustomPla = custom;</span>
+<span class="nc" id="L68">        notifyObservers();</span>
+<span class="nc" id="L69">    }</span>
+
+    public void showModifyPla(String message){
+<span class="nc" id="L72">        messagePla = message;</span>
+<span class="nc" id="L73">        notifyObservers();</span>
+<span class="nc" id="L74">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

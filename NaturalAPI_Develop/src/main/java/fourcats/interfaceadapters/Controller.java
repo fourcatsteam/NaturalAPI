@@ -26,7 +26,7 @@ public class Controller {
         apiInputPort.create(filenameBal,filenamePla);
     }
 
-    public void generateApi() {
+    public void generateApi() throws Exception{
         generateInputPort.generate();
     }
 

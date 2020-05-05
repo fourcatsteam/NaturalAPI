@@ -39,7 +39,7 @@ public class GenerateApiTest {
     }
 
     @Test
-    public void generateAPI(){
+    public void generateAPI() throws Exception {
         Map<Integer, API> map = new HashMap<>();
         map.put(1,new API());
         when(repositoryMock.getApiMap()).thenReturn(map);

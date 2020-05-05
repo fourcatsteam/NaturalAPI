@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuggestApi.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.usecaseinteractor</a> &gt; <span class="el_source">SuggestApi.java</span></div><h1>SuggestApi.java</h1><pre class="source lang-java linenums">package fourcats.usecaseinteractor;
+
+import fourcats.port.ApiInputPort;
+import fourcats.entity.*;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
+import fourcats.port.ApiOutputPort;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SuggestApi implements ApiInputPort {
+
+    BalAnalyzer balAnalyzer;
+    RepositoryAccess repositoryAccess;
+    ApiOutputPort apiOutputPort;
+
+<span class="fc" id="L18">    public SuggestApi(BalAnalyzer b,RepositoryAccess r,ApiOutputPort apiOutputPort) {</span>
+<span class="fc" id="L19">        balAnalyzer = b;</span>
+<span class="fc" id="L20">        repositoryAccess = r;</span>
+<span class="fc" id="L21">        this.apiOutputPort = apiOutputPort;</span>
+<span class="fc" id="L22">    }</span>
+
+    public void create(String filenameBal,String filenamePla){
+
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(repositoryAccess.isCoupleBalPlaPresent(filenameBal,filenamePla) == false){</span>
+<span class="fc" id="L27">            balAnalyzer.setBalFile(repositoryAccess.openFile(&quot;./BAL/&quot; + filenameBal));</span>
+<span class="fc" id="L28">            BAL bal = balAnalyzer.getBAL();</span>
+<span class="fc" id="L29">            PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));</span>
+
+<span class="fc" id="L31">            API api = new API();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            for(Actor actor : bal.getActors()){</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">                for(Action action : actor.getActions()){</span>
+
+<span class="fc" id="L36">                    String newApi = pla.getText();</span>
+<span class="fc" id="L37">                    newApi = insertGroup(newApi, action.getName());</span>
+<span class="fc" id="L38">                    newApi = insertActionType(newApi, action.getType().getName());</span>
+<span class="fc" id="L39">                    newApi = insertActionName(newApi, action.getName());</span>
+
+
+<span class="fc" id="L42">                    int size = action.getObjectParams().size();</span>
+<span class="fc" id="L43">                    Pattern p = Pattern.compile(&quot;\&quot;object_type\&quot;.*\&quot;object_name\&quot;&quot;);</span>
+<span class="fc" id="L44">                    Matcher m = p.matcher(newApi);</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">                    if(m.find()){</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">                        while(size != 1){</span>
+<span class="nc" id="L47">                            newApi = m.replaceFirst(m.group() + &quot;, &quot; + m.group());</span>
+<span class="nc" id="L48">                            size--;</span>
+                        }
+                    }
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                    for(ObjectParam objectParam : action.getObjectParams()) {</span>
+
+<span class="fc" id="L54">                        String customApi = pla.getCustomClass();</span>
+<span class="fc" id="L55">                        newApi = insertObjectType(newApi, objectParam.getType().getName());</span>
+<span class="fc" id="L56">                        newApi = insertObjectName(newApi, objectParam.getName());</span>
+
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">                        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()) {</span>
+
+<span class="fc" id="L60">                            int numAttributes = objectParam.getType().getAttributes().size();</span>
+
+<span class="fc" id="L62">                            customApi = customApi.substring(0,customApi.lastIndexOf(&quot;}&quot;));</span>
+
+<span class="fc" id="L64">                            java.util.Iterator&lt;String&gt; iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();</span>
+<span class="fc" id="L65">                            java.util.Iterator&lt;String&gt; iteratorValues = objectParam.getType().getAttributes().values().iterator();</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                            while(numAttributes &gt; 0) {</span>
+
+<span class="fc" id="L68">                                customApi = customApi.replaceAll(&quot;\&quot;attribute_name\&quot;&quot;, iteratorKeys.next());</span>
+<span class="fc" id="L69">                                customApi = customApi.replaceAll(&quot;\&quot;attribute_type\&quot;&quot;, iteratorValues.next());</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">                                if(numAttributes &gt; 1) {</span>
+<span class="nc" id="L71">                                    customApi = customApi.concat(pla.getCustomBody());</span>
+                                }
+<span class="fc" id="L73">                                numAttributes--;</span>
+                            }
+<span class="fc" id="L75">                            customApi = customApi.concat(&quot;}&quot;);</span>
+
+<span class="fc" id="L77">                            customApi = customApi.replaceAll(&quot;\&quot;custom_class\&quot;&quot;,objectParam.getType().getName());</span>
+<span class="fc" id="L78">                            repositoryAccess.openFile(&quot;./API/&quot; + actor.getName() + &quot;/&quot; +&quot;/CustomClasses/&quot;).mkdir();</span>
+<span class="fc" id="L79">                            api.addApi(&quot;./API/&quot; + actor.getName() + &quot;/&quot; +&quot;/CustomClasses/&quot;</span>
+<span class="fc" id="L80">                                    + objectParam.getType().getName() + &quot;_&quot; + repositoryAccess.getSize()</span>
+<span class="fc" id="L81">                                    + pla.getExtension(),customApi);</span>
+                        }
+<span class="fc" id="L83">                    }</span>
+<span class="fc" id="L84">                    repositoryAccess.openFile(&quot;./API/&quot; + actor.getName() + &quot;/&quot;).mkdir();</span>
+<span class="fc" id="L85">                    repositoryAccess.openFile(&quot;./API/&quot; + actor.getName() + &quot;/&quot; +&quot;/CustomClasses/&quot;).mkdir();</span>
+<span class="fc" id="L86">                    api.addApi(&quot;./API/&quot; + actor.getName() + &quot;/&quot; + action.getName().substring(0,1).toUpperCase() +</span>
+<span class="fc" id="L87">                            action.getName().substring(1) + &quot;_&quot; + repositoryAccess.getSize() + pla.getExtension(), newApi);</span>
+<span class="fc" id="L88">                }</span>
+<span class="fc" id="L89">            }</span>
+<span class="fc" id="L90">            repositoryAccess.addApi(api);</span>
+<span class="fc" id="L91">            repositoryAccess.addCoupleBalPla(filenameBal,filenamePla);</span>
+<span class="fc" id="L92">            apiOutputPort.showOutput(repositoryAccess.getApiMap());</span>
+        }
+<span class="fc" id="L94">    }</span>
+
+    private String insertGroup(String text,String toReplace){
+        //CamelCase
+<span class="fc" id="L98">        toReplace = toReplace.substring(0,1).toUpperCase() + toReplace.substring(1);</span>
+<span class="fc" id="L99">        return text.replaceFirst(&quot;\&quot;group_action\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionType (String text,String toReplace){
+<span class="fc" id="L103">        return text.replaceFirst(&quot;\&quot;action_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionName (String text,String toReplace){
+<span class="fc" id="L107">        return text.replaceFirst(&quot;\&quot;action_name\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertObjectType (String text,String toReplace){
+<span class="fc" id="L111">        return text.replaceFirst(&quot;\&quot;object_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertObjectName (String text,String toReplace){
+<span class="fc" id="L115">        return text.replaceFirst(&quot;\&quot;object_name\&quot;&quot;, toReplace);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
