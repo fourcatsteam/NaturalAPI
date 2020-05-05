@@ -29,12 +29,12 @@ public class ScenarioTest {
 
     @Test
     public void ScenarioGetNameCorrectly() {
-        assertEquals(scenario.getName(), "Name");
+        assertEquals("Name",scenario.getName());
     }
 
     @Test
     public void ScenarioGetActionsMapCorrectly() {
-        assertEquals(scenario.getActionsMap(), map);
+        assertEquals(map,scenario.getActionsMap());
     }
 
 
@@ -48,17 +48,17 @@ public class ScenarioTest {
 
     @Test
     public void ScenarioGetContentCorrectly() {
-        assertEquals(scenario.getContent(), "Content");
+        assertEquals("Content",scenario.getContent());
     }
 
     @Test
     public void ScenarioGetActorNameCorrectly() {
-        assertEquals(scenario.getActorName(), "Actor");
+        assertEquals("Actor",scenario.getActorName());
     }
 
     @Test
     public void ScenarioGetFeatureNameCorrectly() {
-        assertEquals(scenario.getFeatureName(), "FeatureName");
+        assertEquals("FeatureName",scenario.getFeatureName());
     }
 
 }

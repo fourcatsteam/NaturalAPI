@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class SuggestionGenerated extends Component implements Observer{
         panelInScrollPanel.setLayout(gridBagLayout);
         gridConstraint.fill = GridBagConstraints.HORIZONTAL;
 
-        scrollPanel = new JScrollPane(panelInScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPanel = new JScrollPane(panelInScrollPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         panelButtons.setLayout(new GridLayout(2,1));
         panelButtons.add(generateBalButton);
@@ -96,7 +97,7 @@ public class SuggestionGenerated extends Component implements Observer{
                     }
                 }
             }
-            if (newPaths.size()!=0) {
+            if (!newPaths.isEmpty()) {
                 contr.generateSuggestions(newPaths, false); //generate suggestions only for the new files
             }
 
@@ -106,7 +107,7 @@ public class SuggestionGenerated extends Component implements Observer{
 
     public void createAndShowGUI() {
         JFrame frame = new JFrame("NaturalAPI Design - Suggestions");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -183,14 +184,12 @@ public class SuggestionGenerated extends Component implements Observer{
             new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
 
-        if (!dataPresenter.getMessage().equals("")) {
-            if(!dataPresenter.isBdlLoaded()) {
-                //check if the operation was successful then show information message or error message
-                if (dataPresenter.isOkOperation())
-                    JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
-                else
-                    JOptionPane.showMessageDialog(null, dataPresenter.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
-            }
+        if (!dataPresenter.getMessage().equals("") && !dataPresenter.isBdlLoaded() ) {
+            //check if the operation was successful then show information message or error message
+            if (dataPresenter.isOkOperation())
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
+            else
+                JOptionPane.showMessageDialog(null, dataPresenter.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 

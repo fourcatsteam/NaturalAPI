@@ -25,14 +25,14 @@ public class TypeTest {
     @Test
     public void TypeCreateFromMap() {
         type = new Type("Name", map);
-        assertEquals(type.getName(), "Name");
-        assertEquals(type.getAttributes(), map);
+        assertEquals("Name",type.getName() );
+        assertEquals(map, type.getAttributes());
     }
 
     @Test
     public void TypeSetNameCorrectly() {
         type.setName("NewName");
-        assertEquals(type.getName(), "NewName");
+        assertEquals("NewName",type.getName());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TypeTest {
 
     @Test
     public void TypeToString() {
-        assertEquals(type.toString(), "Name");
+        assertEquals("Name",type.toString());
     }
 
 }

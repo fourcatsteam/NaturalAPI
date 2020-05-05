@@ -44,7 +44,7 @@ public class DataKeeperTest {
     @Test
     public void DataKeeperAddScenarioCorrectly() {
         when(scenario.getName()).thenReturn("Scenario");
-        assertEquals(dataKeeper.getScenarioMap().get(0).getName(), "Scenario");
+        assertEquals("Scenario",dataKeeper.getScenarioMap().get(0).getName());
     }
 
     @Test
@@ -64,14 +64,14 @@ public class DataKeeperTest {
     public void DataKeeperUpdateActionName() {
         when(scenario.getActionsMap()).thenReturn(map);
         dataKeeper.updateActionName(0, 0, "NewActionName");
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getName(), "NewActionName");
+        assertEquals("NewActionName",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getName());
     }
 
     @Test
     public void DataKeeperUpdateActionType() {
         when(scenario.getActionsMap()).thenReturn(map);
         dataKeeper.updateActionType(0, 0, "NewActionType");
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName(), "NewActionType");
+        assertEquals("NewActionType",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class DataKeeperTest {
         map.clear();
         map.put(0, action);
         dataKeeper.updateObjectName(0, 0, 0, "NewName");
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName(), "NewName");
+        assertEquals("NewName",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName());
     }
 
     @Test
@@ -91,13 +91,13 @@ public class DataKeeperTest {
         map.clear();
         map.put(0, action);
         dataKeeper.updateObjectType(0, 0, 0, "NewType");
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getType().getName(), "NewType");
+        assertEquals("NewType",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getType().getName());
     }
 
     @Test
     public void DataKeeperAddCustomTypeWthEmptyMap() {
         dataKeeper.addCustomType("NewType", new HashMap<String, String>());
-        assertEquals(dataKeeper.getTypeMap().size(), 6);
+        assertEquals(6,dataKeeper.getTypeMap().size());
     }
 
     @Test
@@ -107,14 +107,14 @@ public class DataKeeperTest {
         map.clear();
         map.put(0, action);
         dataKeeper.updateObjectTypeById(0, 0, 0, 0);
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getType().getName(), "string");
+        assertEquals("string",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getType().getName());
     }
 
     @Test
     public void DataKeeperUpdateActionTypeById() {
         when(scenario.getActionsMap()).thenReturn(map);
         dataKeeper.updateActionTypeById(0, 0, 0);
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName(), "string");
+        assertEquals("string",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class DataKeeperTest {
         map.clear();
         map.put(0, realAction);
         dataKeeper.addObject(0, 0, "SecondName", 3);
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName(), "SecondName");
+        assertEquals("SecondName",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName());
     }
 
     @Test
@@ -136,8 +136,8 @@ public class DataKeeperTest {
         dataKeeper.addObject(0, 0, "FirstName", 3);
         dataKeeper.addObject(0, 0, "SecondName", 1);
         dataKeeper.removeObject(0, 0, 1);
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().size(), 1);
-        assertEquals(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName(), "FirstName");
+        assertEquals(1,dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().size());
+        assertEquals("FirstName",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName());
     }
 
 
