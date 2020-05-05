@@ -16,12 +16,17 @@ public class CreatePla implements CreatePlaInputPort {
 
     public void create(String title, String extension, String text){
 
-        if(repositoryAccess.openFile("./PLA/" + title).exists()){
-            createPlaOutputPort.showOutput("There is already a PLA with this name");
+        if(title.isEmpty() || extension.isEmpty() || text.isEmpty()){
+            createPlaOutputPort.showOutput("There is an empty field!");
         }
         else{
-            repositoryAccess.writePla("./PLA/" + title,extension + "\n" + text);
-            createPlaOutputPort.showOutput("PLA created!");
+            if(repositoryAccess.openFile("./PLA/" + title).exists()){
+                createPlaOutputPort.showOutput("There is already a PLA with this name");
+            }
+            else{
+                repositoryAccess.writePla("./PLA/" + title,extension + "\n" + text);
+                createPlaOutputPort.showOutput("PLA created!");
+            }
         }
     }
 }
