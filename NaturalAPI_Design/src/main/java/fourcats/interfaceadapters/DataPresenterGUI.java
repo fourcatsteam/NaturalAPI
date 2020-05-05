@@ -22,10 +22,10 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     private String actionType;
     private String actionName;
     private String actor;
-    private ArrayList<String> lTypes;
-    private ArrayList<String> lObjectId;
-    private ArrayList<String> lObjectTypes;
-    private ArrayList<String> lObjectNames;
+    private final ArrayList<String> lTypes;
+    private final ArrayList<String> lObjectId;
+    private final ArrayList<String> lObjectTypes;
+    private final ArrayList<String> lObjectNames;
     private boolean isSuggestionToAdd;
     private boolean isOkOperation;
     private boolean isSuggestionsRefreshNeeded;

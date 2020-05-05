@@ -28,6 +28,11 @@ public class GUI_Design extends Component implements Observer  {
     private String[] bdlNameFile;
     private List<String> featureFilesPath;
     private List<String> featureFilesName;
+    private static final String WELCOME = "Welcome to NaturalAPI Design!";
+    private static final String ADD_FEATURE_FILES = "Please start by adding one or more feature files.";
+    private static final String ADD_BDL = "Consider loading a BDL if you want to take full advantage of the potential of NaturalAPI Design.";
+    private static final String LOADED_FEATURE = "Currently loaded feature files: ";
+    private static final String LOADED_BDL = "Currently loaded BDL files: ";
 
 
     public GUI_Design(Controller c, DataPresenterGUI dp){
@@ -35,7 +40,7 @@ public class GUI_Design extends Component implements Observer  {
         this.dataPresenter = dp;
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
         this.fc.setMultiSelectionEnabled(true);
-        this.log.append("Welcome to NaturalAPI Design!\n\n");
+        this.log.append(WELCOME + "\n\n" + ADD_FEATURE_FILES + "\n" + ADD_BDL + "\n");
         this.dataPresenter.attach(this);
         this.featureFilesPath = new ArrayList<>();
         this.featureFilesName = new ArrayList<>();
@@ -48,7 +53,7 @@ public class GUI_Design extends Component implements Observer  {
                 new SuggestionGenerated(featureFilesName, featureFilesPath, controller, dataPresenter).createAndShowGUI();
             }
             else{
-                log.append("\nPlease, load feature file first.");
+                JOptionPane.showMessageDialog(null,"Please, load feature file first!", "No feature loaded", JOptionPane.WARNING_MESSAGE);
             }
         });
 
@@ -57,19 +62,17 @@ public class GUI_Design extends Component implements Observer  {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
-                    //check if the file has already been uploaded
                     if(!featureFilesPath.contains(f.getAbsolutePath())) {
-                        log.append("\nOpening: " + f.getName() + ".");
                         featureFilesPath.add(f.getAbsolutePath());
                         featureFilesName.add(f.getName());
                     }
                     else{
                         JOptionPane.showMessageDialog(GUI_Design.this, "The file '"+f.getName()+"' has already been uploaded!",
                                 "Notice",JOptionPane.INFORMATION_MESSAGE);
+                        return;
                     }
                 }
-            } else {
-                log.append("\nOpen command cancelled by user.");
+                logPrintStatus();
             }
             log.setCaretPosition(log.getDocument().getLength());
         });
@@ -83,7 +86,6 @@ public class GUI_Design extends Component implements Observer  {
                 if (files.length==3){
                     bdlNameFile = new String[3];
                     for(File f: files){
-                        log.append("\nOpening: " + f.getName() + ".");
                         bdlNameFile[i] = f.getName();
                         i++;
                     }
@@ -95,22 +97,21 @@ public class GUI_Design extends Component implements Observer  {
                     return;
                 }
                 JOptionPane.showMessageDialog(GUI_Design.this, "Abort: you have to select 3 files: predicates,verbs and nouns", "Bdl not loaded", JOptionPane.ERROR_MESSAGE);
-
-            } else {
-                log.append("\nOpen command cancelled by user.");
             }
             log.setCaretPosition(log.getDocument().getLength());
         });
 
         removeFeatureBtn.addActionListener(e->{
-            if (featureFilesPath.size()!=0){
+            if (!featureFilesPath.isEmpty()){
                 featureFilesPath.clear();
                 featureFilesName.clear();
-                log.append("\n"+ "Done! Feature files removed.");
+                log.setText("Done! Feature files removed.\n\n");
+
             }
             else{
-                log.append("\n"+"Nothing to remove: no feature files uploaded!");
+                log.setText("Nothing to remove: no feature files uploaded!\n\n");
             }
+            logPrintStatus();
         });
 
         removeBdlBtn.addActionListener(e->{
@@ -119,8 +120,9 @@ public class GUI_Design extends Component implements Observer  {
                 controller.removeBdl();
             }
             else{
-                log.append("\n"+"Nothing to remove: no BDL uploaded!");
+                log.setText("Nothing to remove: no BDL uploaded!\n\n");
             }
+            logPrintStatus();
         });
     }
 
@@ -141,8 +143,38 @@ public class GUI_Design extends Component implements Observer  {
 
     private void showOutput(){
         if (!dataPresenter.getMessage().equals("")) {
-            log.append("\n" + dataPresenter.getMessage() + "\n");
+            log.setText("\n" + dataPresenter.getMessage() + "\n");
+            logPrintStatus();
         }
+    }
+
+    private void logPrintStatus(){
+        if (featureFilesName.isEmpty() && bdlNameFile!=null){
+            log.append(ADD_FEATURE_FILES+"\n");
+            log.append("\n"+LOADED_BDL+"\n\n");
+            for (String bdlFile : bdlNameFile) {
+                log.append("- "+ bdlFile +"\n");
+            }
+        }
+        else if (featureFilesName.isEmpty()){
+            log.append(ADD_FEATURE_FILES+"\n");
+            log.append(ADD_BDL+"\n");
+        }
+        else if (bdlNameFile == null){
+            log.setText(LOADED_FEATURE+"\n\n");
+            featureFilesName.forEach(fileName->log.append("- " + fileName+"\n"));
+            log.append("\n"+ADD_BDL);
+        }
+        else {
+            log.setText(LOADED_FEATURE+"\n\n");
+            featureFilesName.forEach(fileName->log.append("- " + fileName+"\n"));
+            log.append("\n"+LOADED_BDL+"\n\n");
+            for (String bdlFile : bdlNameFile) {
+                log.append("- "+ bdlFile +"\n");
+            }
+            log.append("\nGood to go! Click the 'Generate suggestions for BAL' button.");
+        }
+
     }
 
 }
