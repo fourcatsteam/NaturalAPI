@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import FourCats.InterfaceAdapters.DataPresenter;
 import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.Observer.Observer;
 
@@ -39,11 +40,11 @@ public class GUI_Discover extends JPanel implements Observer{
     private Boolean areFilesLoaded;
 
     private Controller controller;
-    private DataPresenter_GUI datapresenter;
+    private DataPresenter datapresenter;
     private FileSystemAccess fileSystemAccess;
     private LinkedList<String> nameTitleList;
 
-    public GUI_Discover(Controller c, DataPresenter_GUI d, FileSystemAccess fs) {
+    public GUI_Discover(Controller c, DataPresenter d, FileSystemAccess fs) {
         this.areFilesLoaded = false;
         this.controller = c;
         this.datapresenter= d;
