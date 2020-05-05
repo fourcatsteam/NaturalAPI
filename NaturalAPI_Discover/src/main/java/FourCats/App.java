@@ -1,11 +1,9 @@
 package FourCats;
 
-import FourCats.Frameworks.CLI;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.Frameworks.StanfordNlp;
 import FourCats.GUI.GUI_Discover;
 import FourCats.InterfaceAdapters.Controller;
-import FourCats.InterfaceAdapters.DataPresenter;
 import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.InterfaceAdapters.Repository;
 import FourCats.UseCaseInteractor.AddDocuments;
@@ -13,9 +11,6 @@ import FourCats.UseCaseInteractor.CreateBdl;
 import FourCats.UseCaseInteractor.RemoveDocuments;
 import FourCats.UseCaseInteractor.ViewBdl;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * Hello world!
@@ -47,7 +42,7 @@ public class App {
             start = cli.readUseCase();
         }*/
         GUI_Discover g = new GUI_Discover(controller,datapresenter,fs);
-        g.createAndShowGUI();
+        g.showGUI();
 
     }
 }

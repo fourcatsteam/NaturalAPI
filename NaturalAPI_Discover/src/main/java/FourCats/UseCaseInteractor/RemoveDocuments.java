@@ -36,6 +36,12 @@ public class RemoveDocuments implements RemoveDocumentsInputPort {
             if(association==null) {
                 outputPort.showError("BDL-Document association file missing, removing documents is not possible");
             } else {
+                for (String title: docTitles) {
+                    if(!association.contains(title)) {
+                        outputPort.showWarning("Document "+title+" is not associated to the BDL. This document will be discarded");
+                        docTitles.remove(title);
+                    }
+                }
                 //retrieve Documents
                 LinkedList<Document> documents = new LinkedList<>();
                 for (String title: docTitles) {

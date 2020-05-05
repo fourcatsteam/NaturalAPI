@@ -19,14 +19,15 @@ import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.Observer.Observer;
 
 public class GUI_Discover extends JPanel implements Observer{
-    private JButton loadFileBtn;
+    //private JButton loadFileBtn;
     private JPanel panel1;
     private JFileChooser txtChooser;
-    private JFileChooser dirChooser;
+    private JFileChooser destinationFolderChooser;
+    private JFileChooser sourceFolderChooser;
     private JTextArea log;
     private JButton createBDLbtn;
     private JButton addDocumentBtn;
-    private JButton removeDococumentBtn;
+    private JButton removeDocumentBtn;
     private JButton viewBDLBtn;
     private JScrollPane scrollNouns;
     private JScrollPane scrollVerbs;
@@ -51,69 +52,150 @@ public class GUI_Discover extends JPanel implements Observer{
         nameTitleList = new LinkedList<>();
         txtChooser = new JFileChooser("..\\NaturalAPI_Discover\\txt_documents");
         txtChooser.setMultiSelectionEnabled(true);
-        dirChooser = new JFileChooser("\\NaturalAPI_Discover\\BDL");
-        dirChooser.setMultiSelectionEnabled(false);
-        dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        txtChooser.setDialogTitle("Select txt documents");
+        destinationFolderChooser = new JFileChooser(".\\BDL");
+        destinationFolderChooser.setDialogTitle("Select destination folder");
+        destinationFolderChooser.setMultiSelectionEnabled(false);
+        destinationFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        sourceFolderChooser = new JFileChooser(".\\BDL");
+        sourceFolderChooser.setDialogTitle("Select source folder");
+        sourceFolderChooser.setMultiSelectionEnabled(false);
+        sourceFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-        loadFileBtn.addActionListener(actionEvent -> {
-            int returnVal = txtChooser.showOpenDialog(GUI_Discover.this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
+        /*loadFileBtn.addActionListener(actionEvent -> {
+            int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File[] files = txtChooser.getSelectedFiles();
                 for(File f: files){
-                    log.append("Opening: " + f.getName() + "." + "\n");
+                    log.append("Selected: " + f.getName() + "." + "\n");
                     nameTitleList.add(f.getName());
                 }
                 this.areFilesLoaded = true;
+                String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\","/");
+                fileSystemAccess.setTxtSourceFolder(sourceDir);
             } else {
                 log.append("Open command cancelled by user." + "\n");
             }
             log.setCaretPosition(log.getDocument().getLength());
-        });
+        });*/
 
         createBDLbtn.addActionListener(actionEvent -> {
-            String result = this.choosing(1);
-            if(result!=null) {
-                controller.createBdl(result, nameTitleList);
-                nameTitleList.clear();
-                this.areFilesLoaded = false;
-            }else{
-                if(this.areFilesLoaded) {
-                    log.append("Your files are still available.");
+            int returnVal = destinationFolderChooser.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File directory = destinationFolderChooser.getSelectedFile();
+                String path = directory.getPath().replaceAll("\\\\", "/");
+                fileSystemAccess.setSaveFolder(path);
+
+                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File[] files = txtChooser.getSelectedFiles();
+                    for(File f: files){
+                        log.append("Selected: " + f.getName() + "." + "\n");
+                        nameTitleList.add(f.getName());
+                    }
+                    this.areFilesLoaded = true;
+                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\","/");
+                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+
+                    String result = this.choosing(1);
+                    if (result != null) {
+                        controller.createBdl(result, nameTitleList);
+                        nameTitleList.clear();
+                        this.areFilesLoaded = false;
+                    } else {
+                        if (this.areFilesLoaded) {
+                            log.append("Your files are still available.\n");
+                        }
+                    }
+                } else {
+                    log.append("Open command cancelled by user." + "\n");
                 }
+            }else{
+                log.append("Selection canceled\n");
             }
         });
 
         addDocumentBtn.addActionListener(actionEvent -> {
-            String result = this.choosing(2);
-            if(result!=null) {
-                controller.addDocument(result, nameTitleList);
-                nameTitleList.clear();
-                this.areFilesLoaded = false;
-            } else {
-                if(this.areFilesLoaded) {
-                    log.append("Your files are still available.");
+            int returnVal = sourceFolderChooser.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File directory = sourceFolderChooser.getSelectedFile();
+                String path = directory.getPath().replaceAll("\\\\", "/");
+                fileSystemAccess.setBdlSourceFolder(path);
+                fileSystemAccess.setSaveFolder(path);
+
+                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File[] files = txtChooser.getSelectedFiles();
+                    for (File f : files) {
+                        log.append("Selected: " + f.getName() + "." + "\n");
+                        nameTitleList.add(f.getName());
+                    }
+                    this.areFilesLoaded = true;
+                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
+                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+
+                    String result = this.choosing(2);
+                    if (result != null) {
+                        controller.addDocument(result, nameTitleList);
+                        nameTitleList.clear();
+                        this.areFilesLoaded = false;
+                    } else {
+                        if (this.areFilesLoaded) {
+                            log.append("Your files are still available.\n");
+                        }
+                    }
+                } else {
+                    log.append("Open command cancelled by user." + "\n");
                 }
+            }else{
+                log.append("Selection canceled\n");
             }
         });
 
-        removeDococumentBtn.addActionListener(actionEvent -> {
-            String result = this.choosing(2);
-            if(result!=null) {
-                controller.removeDocument(result, nameTitleList);
-                nameTitleList.clear();
-                this.areFilesLoaded = false;
-            } else {
-                if(this.areFilesLoaded) {
-                    log.append("Your files are still available.");
+        removeDocumentBtn.addActionListener(actionEvent -> {
+            int returnVal = sourceFolderChooser.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File directory = sourceFolderChooser.getSelectedFile();
+                String path = directory.getPath().replaceAll("\\\\", "/");
+                fileSystemAccess.setBdlSourceFolder(path);
+                fileSystemAccess.setSaveFolder(path);
+
+                txtChooser.setCurrentDirectory(directory);
+                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File[] files = txtChooser.getSelectedFiles();
+                    for (File f : files) {
+                        log.append("Selected: " + f.getName() + "." + "\n");
+                        nameTitleList.add(f.getName());
+                    }
+                    this.areFilesLoaded = true;
+                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
+                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+
+                    String result = this.choosing(2);
+                    if (result != null) {
+                        controller.removeDocument(result, nameTitleList);
+                        nameTitleList.clear();
+                        this.areFilesLoaded = false;
+                    } else {
+                        if (this.areFilesLoaded) {
+                            log.append("Your files are still available.\n");
+                        }
+                    }
+                } else {
+                    log.append("Open command cancelled by user." + "\n");
                 }
+            }else {
+                log.append("Selection canceled\n");
             }
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
-            int returnVal = dirChooser.showOpenDialog(this);
+            int returnVal = sourceFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
-                File directory = dirChooser.getSelectedFile();
+                File directory = sourceFolderChooser.getSelectedFile();
                 String path = directory.getPath().replaceAll("\\\\","/");
+                fileSystemAccess.setBdlSourceFolder(path);
                 String result = (String)JOptionPane.showInputDialog(this,
                         "Choose the name of the bdl that you want to view",
                         "Choose name",
@@ -135,13 +217,13 @@ public class GUI_Discover extends JPanel implements Observer{
 
                     if (choice != null) {
                         Integer visualizationType = Arrays.asList(choices).indexOf(choice);
-                        controller.viewBdl(path+"/"+result, visualizationType);
+                        controller.viewBdl(result, visualizationType);
                     }
                 } else {
-                    log.append("Operation canceled");
+                    log.append("Operation canceled\n");
                 }
             }else {
-                log.append("Selection canceled");
+                log.append("Selection canceled\n");
             }
         });
 
@@ -217,14 +299,14 @@ public class GUI_Discover extends JPanel implements Observer{
         log.replaceSelection("");
     }
 
-    public void createAndShowGUI() {
+    public void showGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("NaturalAPI Discover");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Add content to the window.
-        frame.add(new GUI_Discover(controller,datapresenter,fileSystemAccess).panel1);
-        frame.setPreferredSize(new Dimension(600,500));
+        frame.add(panel1);
+        frame.setPreferredSize(new Dimension(800,500));
 
         //Display the window.
         frame.pack();
