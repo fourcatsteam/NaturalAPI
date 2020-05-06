@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 
@@ -44,12 +45,23 @@ public class GenerateBALSuggestionsTest {
     }
 
     @Test
-    public void test() throws FileNotFoundException {
-        String feature = "Scenario";
+    public void testExtractScenarioName(){
+        String scenario = "" ;
+        String scenarioName = "";
 
-        List<String> listString = Arrays.asList("String");
-        when(repositoryMock.read("String")).thenReturn(feature);
+        scenario = "This is the name\nGiven some text" ;
+        scenarioName = generateBALSuggestions.extractScenarioName(scenario);
+        assertEquals("This is the name",scenarioName);
+
+        scenario = "This is another name\nAs a Actor" ;
+        scenarioName = generateBALSuggestions.extractScenarioName(scenario);
+        assertEquals("This is another name",scenarioName);
+
     }
+
+
+
+
 
 //    @Test
 //    public void GenerateBALSuggestionsFromNotExistingFeature() {

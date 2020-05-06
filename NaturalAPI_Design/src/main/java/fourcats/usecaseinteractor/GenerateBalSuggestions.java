@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.*;
 
+import static java.util.stream.Collectors.toMap;
+
 public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     RepositoryAccess repo;
     TextAnalyzer textAnalyzer;
@@ -31,14 +33,12 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         if (isForNewBal){
             repo.deleteScenarios(); //make sure that there are no old suggestions by deleting scenarios from repo
         }
-        Map<Integer,Action> mActions;
-        //BlackList blackList = new BlackList();
+
         List<Scenario> lScenarios = new ArrayList<>();
-        List<Action> lGeneratedActions;
-        int id = 0;
-        String feature = "";
+
         //read each feature file from repository
         for (String featurePath: lFeatureFilePaths) {
+            String feature = "";
             try {
                 feature = repo.read(featurePath);
             } catch (FileNotFoundException e) {
@@ -46,17 +46,8 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
                 return;
             }
             if (feature != null) {
-                String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
-                for (String currentScenario : Arrays.asList(arrScenarios).subList(1, arrScenarios.length)) {
-                    currentScenario = currentScenario.trim();
-                    lGeneratedActions = generateAction(currentScenario);
-                    mActions = new HashMap<>();
-                    for (Action action : lGeneratedActions) {
-                        mActions.put(id, action);
-                        id++;
-                    }
-                    lScenarios.add(new Scenario(extractScenarioName(currentScenario), mActions, currentScenario, extractActorName(feature),featurePath)); //add Scenario with relative suggestions
-                }
+
+                lScenarios = generateScenario(feature);
             }
         }
         boolean isScenarioDuplicated = false;
@@ -76,6 +67,30 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
 
+    protected List<Scenario> generateScenario(String feature){
+
+        String actorName =extractActorName(feature);
+
+        List<Scenario> scenarioList = new ArrayList<>();
+
+        String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
+        for(String scenarioString : arrScenarios){
+            scenarioString = scenarioString.trim();
+            List<Action> actionList = generateAction(scenarioString);
+            Map<Integer,Action> actionMap = actionList.stream()
+                                            .collect(toMap(actionList::indexOf,action->action));
+
+            String scenarioName = extractScenarioName(scenarioString);
+
+
+            Scenario scenario = new Scenario(scenarioName,actionMap,scenarioString,actorName,feature);
+
+            scenarioList.add(scenario);
+        }
+
+        return scenarioList;
+    }
+
     protected List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
         String scenarioContent = extractScenarioContent(scenario);
@@ -83,10 +98,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         // extract steps from the scenario and analyze them
         List<String> lSteps = extractScenarioSteps(scenarioContent);
         for (String step : lSteps) {
-            AnalyzedData analyzedData = null;
-            analyzedData = textAnalyzer.parseDocumentContent(step);
-            String formattedSuggestion = "";
-            Action suggestion = null;
+            AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(step);
 
             List<String> predicates = analyzedData.getDependenciesList()
                     .stream()
@@ -97,8 +109,10 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
             //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
             for (String suggestedAction : predicates){
                 //format the suggestion by adding "_" between words (ex. withdraw cash --> withdraw_cash)
-                formattedSuggestion = suggestedAction.replace(" ", "_");
-                suggestion = new Action(formattedSuggestion, "void",extractScenarioName(scenario),step);
+                String formattedSuggestion = suggestedAction.replace(" ", "_");
+
+
+                Action suggestion = new Action(formattedSuggestion, "void",extractScenarioName(scenario),step);
                 suggestion.addObjectParam(generateObject(suggestion.getName()));
                 lGeneratedActions.add(suggestion);
             }
@@ -114,15 +128,14 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         return new ObjectParam(splittedActionName[1],"string"); //object type default at string
     }
 
-    protected String extractScenarioName(String feature){
-        //extract scenario name by picking the text between first row and "Given:" in the feature file
-        int indexFeatureStart = 0;
-        int indexFeatureEnd = -1;
-        if (feature.indexOf(AS_A)!=-1)
-            indexFeatureEnd = feature.indexOf(AS_A);
-        else
-            indexFeatureEnd = feature.indexOf("Given");
-        return feature.substring(indexFeatureStart,indexFeatureEnd).trim();
+    protected String extractScenarioName(String scenario){
+        //Pre-condition: All the scenario text after
+
+        int indexScenarioEnd = scenario.contains(AS_A) ? scenario.indexOf(AS_A) : scenario.indexOf("Given");
+
+        String scenarionName = scenario.substring(0,indexScenarioEnd).trim();
+
+        return scenarionName;
 
     }
 
