@@ -157,7 +157,7 @@ public class ControllerTest {
     public void loadBdl() throws IOException {
         String[] namebdl = new String[1];
         controller.loadBdl(namebdl);
-        verify(loadBdl).loadingBdl(namebdl);
+        verify(loadBdl).loadBdlFiles(namebdl);
     }
 
 }

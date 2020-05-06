@@ -42,11 +42,11 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         String bdlNames[] = new String[3];
         int i = 0;
         for(String s:name){
-           String[] splitting = s.split("\\."); //Il punto è un carattere special
+           String[] splitting = s.split("\\."); //period is a special character
            bdlNames[i] = splitting[0];
            i++;
         }
-        if(!(bdlNames[0].equals(bdlNames[1]) && bdlNames[0].equals(bdlNames[2]))){ //Hai selezionato dei file che si riferiscono a BDL diverse
+        if(!(bdlNames[0].equals(bdlNames[1]) && bdlNames[0].equals(bdlNames[2]))){ //Files are from different BDL
             return null;
         }
         return loadBdl(bdlNames[0]);

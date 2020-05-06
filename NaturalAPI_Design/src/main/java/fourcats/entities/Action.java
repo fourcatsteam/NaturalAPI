@@ -79,16 +79,16 @@ public class Action {
     @Override
     public String toString() {
         String actionParams = "";
-        boolean firstParam = true;
+        boolean isFirstParam = true;
         for (ObjectParam par : param) {
-            if (firstParam) {
+            if (isFirstParam) {
                 actionParams+=par.getType()+ " " + par.getName();
-                firstParam = false;
+                isFirstParam = false;
             }
             else {
                 actionParams+=", " + par.getType()+ " " + par.getName();
             }
         }
-        return this.type + " " + this.name + "(" + actionParams + ")";
+        return this.type + " " + this.name + " (" + actionParams + ")";
     }
 }

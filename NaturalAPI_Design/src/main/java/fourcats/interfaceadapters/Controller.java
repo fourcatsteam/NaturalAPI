@@ -86,7 +86,7 @@ public class Controller{
     }
 
     public void loadBdl(String[] namebdl) throws IOException {
-        loadBdl.loadingBdl(namebdl);
+        loadBdl.loadBdlFiles(namebdl);
     }
 
     public void removeBdl(){

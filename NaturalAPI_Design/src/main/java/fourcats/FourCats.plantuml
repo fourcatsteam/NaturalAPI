@@ -3,7 +3,7 @@
 title __FOURCATS's Class Diagram__\n
 
   namespace fourcats {
-    class fourcats.App {
+    class fourcats.GuiLauncher {
         {static} + main()
     }
   }

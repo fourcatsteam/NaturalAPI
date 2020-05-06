@@ -327,16 +327,15 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     }
 
     @Override
-    public void showBDLOutput(Bdl bdl) {
-        if (bdl!=null){
+    public void showBDLOutput(Bdl bdl, boolean isLoaded) {
+        if (isLoaded){
             algorithm = new SuggestionBdlAlgorithm(bdl);
             message = "BDL Loaded successfully";
-            isBdlLoaded = true;
         }
         else{
-            message = "Error while loading BDL";
-            isBdlLoaded = false;
+            message = "Error while loading BDL. Check that the files belong to the same BDL";
         }
+        isBdlLoaded = isLoaded;
         notifyObservers();
         message = "";
     }

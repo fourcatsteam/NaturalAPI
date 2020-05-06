@@ -119,7 +119,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>fourcats.App</mainClass>
+                <mainClass>fourcats.GuiLauncher</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>

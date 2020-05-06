@@ -1,11 +1,10 @@
 package fourcats.interfaceadapters;
 
 import fourcats.datastructure.observer.Subject;
-import fourcats.entities.Action;
-import fourcats.entities.Bdl;
-import fourcats.entities.Scenario;
-import fourcats.entities.Type;
+import fourcats.entities.*;
 import fourcats.port.*;
+import fourcats.suggestionbdlalgorithm.StrategyAlgorithm;
+import fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm;
 
 import java.util.Map;
 
@@ -14,6 +13,8 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         AddBalSuggestionOutputPort, LoadBdlOutputPort, RemoveBdlOutputPort {
 
     private String toShow;
+    private StrategyAlgorithm algorithm;
+    private boolean isBdlLoaded;
 
     @Override
     public void showSuggestionsForScenario(Map<Integer,Scenario> mScenarios) {
@@ -188,20 +189,64 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
             toShow = "----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getName() + "----";
             notifyObservers();
-            for (Map.Entry<Integer,Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                toShow = mAc.getKey() + ") " + mAc.getValue().toString();
-                notifyObservers();
+            if (isBdlLoaded) showActionObjectsWithFrequency(mSc);
+            else {
+                for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+                    toShow = mAc.getKey() + ") " + mAc.getValue().toString();
+                    notifyObservers();
+                }
             }
         }
     }
 
+    private void showActionObjectsWithFrequency(Map.Entry<Integer,Scenario> mScenario) {
+        //for each action
+        String action = "";
+        StringBuilder objects = new StringBuilder();
+        for (Map.Entry<Integer,Action> mAc : mScenario.getValue().getActionsMap().entrySet()) {
+            //build action string
+            action = mAc.getKey() + ") " + mAc.getValue().getType() + " " + mAc.getValue().getName() +
+                    "[" + algorithm.findActionInBdl(mAc.getValue().getName()) + "] ";
+            //build object string
+            objects.setLength(0); //clear the stringBuilder
+            boolean isFirstObject = true;
+            for(ObjectParam obj : mAc.getValue().getObjectParams()) {
+                if (!isFirstObject) {
+                    objects.append(", "); //add a comma before new object
+                }
+                objects.append(obj.getType() + " " + obj.getName() + "[" +
+                        algorithm.findObjectInBdl(obj.getName()) + "]");
+                isFirstObject = false;
+            }
+            toShow = action + "(" + objects + ")"; //build combined string (action + objects)
+            notifyObservers();
+        }
+
+    }
+
     @Override
-    public void showBDLOutput(Bdl bdl) {
-        //TODO
+    public void showBDLOutput(Bdl bdl, boolean isLoaded) {
+        if (isLoaded){
+            algorithm = new SuggestionBdlAlgorithm(bdl);
+            toShow = "BDL Loaded successfully";
+        }
+        else{
+            toShow = "Error while loading BDL."+
+                    "\nPlease check the path you entered and that the three files that make up the BDL are in the same dir.";
+        }
+        isBdlLoaded = isLoaded;
+        notifyObservers();
     }
 
     @Override
     public void showRemoveBdlStatus() {
-        //TODO
+        toShow = "Done! No BDL currently loaded.";
+        isBdlLoaded = false;
+        notifyObservers();
+        toShow = "";
+    }
+
+    public boolean isBdlLoaded() {
+        return isBdlLoaded;
     }
 }

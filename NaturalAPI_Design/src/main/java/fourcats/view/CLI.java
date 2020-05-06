@@ -12,10 +12,10 @@ import java.util.*;
 
 public class CLI implements Observer {
     private Controller contr;
-   // private Repository repo;
     private String currentUseCase = "";
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private DataPresenter dataPresenter;
+    private boolean isBdlLoaded = false;
 
     public CLI(Controller controller, DataPresenter presenter){
         this.contr = controller;
@@ -26,6 +26,10 @@ public class CLI implements Observer {
     public void askForUseCase(){
         System.out.println("\n-------NATURAL API DESIGN-------");
         System.out.println("\n1. Generate Suggestions");
+        if (!isBdlLoaded)
+            System.out.println("2. Load BDL");
+        else
+            System.out.println("2. Remove loaded BDL");
         System.out.println("EXIT. Quit Application");
     }
 
@@ -37,6 +41,12 @@ public class CLI implements Observer {
                 case "1":
                     generateSuggestion();
                     askForOperationOnSuggestion();
+                    break;
+                case "2":
+                    if (!isBdlLoaded)
+                        loadBdl();
+                    else
+                        contr.removeBdl();
                     break;
                 case "EXIT":
                     shouldContinue = false;
@@ -53,7 +63,28 @@ public class CLI implements Observer {
         return shouldContinue;
     }
 
-    private List<String> chooseFile() throws IOException {
+    private void loadBdl() throws IOException {
+        String[] bdlFiles = chooseBdlFiles();
+        if (bdlFiles!=null) {
+            contr.loadBdl(bdlFiles);
+        }
+    }
+
+    private String[] chooseBdlFiles() throws IOException {
+        String[] bdlFiles = new String[3];
+        String input="";
+        System.out.println("Enter the path of one of the BDL file\n"+
+                "Notice: all the 3 files (.nouns, .verbs, .predicates) must be in the same dir\n"+
+                "Digit EXIT to abort.\n");
+        input = br.readLine();
+        if (input.equals("EXIT") || input.equals("")) {
+            return null;
+        }
+        Arrays.fill(bdlFiles, input); //this is needed as the loadBdl file functions needs 3 paths..
+        return bdlFiles;
+    }
+
+    private List<String> chooseFeatureFile() throws IOException {
         List<String> lFiles = new ArrayList<>();
         String input="";
         while(!input.equals("EXIT")){
@@ -70,7 +101,7 @@ public class CLI implements Observer {
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
             System.out.println("\nWhat do you want to do?\n1. Modify suggestion\n2. Delete suggestion\n3. Add suggestion" +
-                    "\n4. Add new feature\n5. Generate BAL\nDigit EXIT to abort.");
+                    "\n4. Add new feature\n5. Generate BAL\nDigit EXIT to abort and go back to the main menu.");
             input = br.readLine();
             switch(input){
                 case "1":
@@ -83,7 +114,7 @@ public class CLI implements Observer {
                     addSuggestion();
                     break;
                 case "4":
-                    contr.generateSuggestions(chooseFile(),false);
+                    contr.generateSuggestions(chooseFeatureFile(),false);
                     break;
                 case "5":
                     System.out.println("Please, enter the path including the name for the BAL");
@@ -187,7 +218,7 @@ public class CLI implements Observer {
     }
 
     public void generateSuggestion() throws IOException {
-        List<String> lFilesPath = chooseFile();
+        List<String> lFilesPath = chooseFeatureFile();
         contr.generateSuggestions(lFilesPath,true);
     }
 
@@ -265,5 +296,6 @@ public class CLI implements Observer {
     @Override
     public void update() {
         System.out.println(dataPresenter.getDataToShow());
+        isBdlLoaded = dataPresenter.isBdlLoaded();
     }
 }
