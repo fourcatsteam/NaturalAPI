@@ -69,7 +69,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected List<Scenario> generateScenario(String feature){
 
-        String actorName =extractActorName(feature);
+        String actorName = extractActorName(feature);
 
         List<Scenario> scenarioList = new ArrayList<>();
 
@@ -93,10 +93,10 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
-        String scenarioContent = extractScenarioContent(scenario);
+        String scenarioContent = extractScenarioSteps(scenario);
 
         // extract steps from the scenario and analyze them
-        List<String> lSteps = extractScenarioSteps(scenarioContent);
+        List<String> lSteps = splitScenarioSteps(scenarioContent);
         for (String step : lSteps) {
             AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(step);
 
@@ -129,52 +129,38 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
     protected String extractScenarioName(String scenario){
-        //Pre-condition: All the scenario text after
-
+    //Pre-condition: Scenario name followed by keyword As a or Given
         int indexScenarioEnd = scenario.contains(AS_A) ? scenario.indexOf(AS_A) : scenario.indexOf("Given");
 
-        String scenarionName = scenario.substring(0,indexScenarioEnd).trim();
-
-        return scenarionName;
-
+        return scenario.substring(0,indexScenarioEnd).trim();
     }
 
     protected String extractActorName(String feature){
         //extract actor name by picking the text between "As a" and the first '\n' found after it in the feature
         //if there isn't the keyword "As a" return "All"
-        int indexActorStart = -1;
-        int indexActorEnd = 0;
-        if (feature.contains(AS_A)) {
-            indexActorStart = feature.indexOf(AS_A)+5;
-            indexActorEnd = feature.indexOf('\n',indexActorStart);
-            if (indexActorStart <= indexActorEnd)
-                return feature.substring(indexActorStart,indexActorEnd).trim();
-        }
-        return "All";
+        if (!feature.contains(AS_A))
+            return "All";
 
+        int indexActorStart = feature.indexOf(AS_A)+5;
+        int indexActorEnd = feature.indexOf('\n',indexActorStart);
+
+        return feature.substring(indexActorStart,indexActorEnd).trim();
     }
 
-    protected String extractScenarioContent(String scenario){
-        //extract all text from the keyword "Given" in the scenario
+    protected String extractScenarioSteps(String scenario){
+        //rimove the name of the scenario from the string
         int indexGiven = 0;
-        if (scenario.indexOf("Given")!=-1){
+        if (scenario.contains("Given")){
             indexGiven = scenario.indexOf("Given");
         }
         return scenario.substring(indexGiven);
     }
 
-    protected List<String> extractScenarioSteps(String scenarioContent){
-        List<String> lSteps = new ArrayList<>();
-        //split whenever one of the keyword is found
-        String[] steps = scenarioContent.split("Given|When|Then|And");
-        String trimmedStep = "";
-        for (String step : steps){
-            trimmedStep = step.trim();
-            if (!trimmedStep.equals("")) {
-                lSteps.add(trimmedStep);
-            }
-        }
-        return lSteps;
+    protected List<String> splitScenarioSteps(String scenarioContent){
+        return Stream.of(scenarioContent.split("Given|When|Then|And"))
+                .map(elem -> new String(elem.trim()))
+                .skip(1)
+                .collect(Collectors.toList());
     }
 
 

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 
@@ -59,8 +60,59 @@ public class GenerateBALSuggestionsTest {
 
     }
 
+    @Test
+    public void testExtractActorName(){
+        String feature;
+        String actorName;
 
+        feature = "As a Actor\nI do things";
+        actorName = generateBALSuggestions.extractActorName(feature);
+        assertEquals("Actor",actorName);
 
+        feature = "Randome text\nI do things";
+        actorName = generateBALSuggestions.extractActorName(feature);
+        assertEquals("All",actorName);
+    }
+
+    @Test
+    public void testExtractScenarioContent(){
+        String scenario;
+        String scenarioContent;
+
+        scenario = "SomeName\nGiven tuttoilresto";
+        scenarioContent = generateBALSuggestions.extractScenarioSteps(scenario);
+        assertEquals("Given tuttoilresto",scenarioContent);
+
+        scenario = "Given tuttoilresto";
+        scenarioContent = generateBALSuggestions.extractScenarioSteps(scenario);
+        assertEquals("Given tuttoilresto",scenarioContent);
+
+    }
+
+    @Test
+    public void testSplitScenarioSteps(){
+        String inputString;
+        List<String> outputList;
+
+        inputString = "Given A"+"\n"+"When B"+"\n"+"Then C"+"\n"+"And D";
+        outputList = generateBALSuggestions.splitScenarioSteps(inputString);
+        assertEquals(Arrays.asList("A", "B", "C","D"), outputList);
+
+        inputString = "Given A"+"\n"+"When B"+"\n"+"Then C";
+        outputList = generateBALSuggestions.splitScenarioSteps(inputString);
+        assertEquals(Arrays.asList("A", "B", "C"), outputList);
+    }
+
+    @Test
+    public void testGenerateAction(){
+        String inputString;
+        inputString =  "Given no character with name  \"Arya\" exists in the currente project" +"\n"
+                       +"When I try to create a character with name \"Arya\""+"\n"
+                       +"Then character with name \"Arya\" is created"+"\n"
+                       +"And I can loopup the character with name \"Arya\" in the current project";
+        generateBALSuggestions.generateAction(inputString);
+        assertTrue(true);
+    }
 
 
 //    @Test
