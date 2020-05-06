@@ -10,14 +10,36 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
 import java.util.LinkedList;
 import java.util.List;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
+    private String bdlSourceFolder;
+    private String saveFolder;
+    private String txtSourceFolder;
 
-    private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
+    public FileSystemAccess() {
+        bdlSourceFolder = "./BDL";
+        saveFolder = "./BDL";
+        txtSourceFolder = "./txt_documents";
+    }
+
+    public void setBdlSourceFolder(String bdlSourceFolder) {
+        this.bdlSourceFolder = bdlSourceFolder;
+    }
+
+    public void setSaveFolder(String saveFolder) {
+        this.saveFolder = saveFolder;
+    }
+
+    public void setTxtSourceFolder(String txtSourceFolder) {
+        this.txtSourceFolder = txtSourceFolder;
+    }
+
+    private void readBdlNouns(String filename, Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".nouns.bdl.csv";
+        String filepath = bdlSourceFolder + "/" + filename + ".nouns.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -28,7 +50,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlVerbs(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".verbs.bdl.csv";
+        String filepath = bdlSourceFolder + "/" + filename + ".verbs.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -39,7 +61,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     private void readBdlPredicates(String filename,Bdl loadbdl) throws IOException {
         String line = "";
-        String filepath = "BDL/" + filename + ".predicates.bdl.csv";
+        String filepath = bdlSourceFolder + "/" + filename + ".predicates.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
@@ -49,7 +71,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     }
 
     private void saveListToFile(List<WordCounter> list, String namefile) throws IOException {
-            String filepath = "BDL/"+namefile;
+            String filepath = saveFolder + "/" + namefile;
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
                 StringBuilder sb = new StringBuilder();
                 for (WordCounter w : list) {
@@ -68,7 +90,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     public Document loadDocument(String documentTitle) {
         String line = "";
         String fileContent = "";
-        String filepath = "txt_documents/" + documentTitle;
+        String filepath = txtSourceFolder + "/" + documentTitle;
         try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             while((line = reader.readLine()) != null){
                 //add a space to separate sentences
@@ -77,9 +99,23 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         } catch(IOException e) {
             return null;
         }
+        if(txtSourceFolder != saveFolder) {
+            transferFile(filepath,saveFolder+"/"+documentTitle);
+        }
         return new Document(documentTitle, fileContent);
     }
 
+    private void transferFile(String sourcePath, String destPath) {
+        try(FileInputStream inputStream = new FileInputStream(new File(sourcePath));
+            FileOutputStream outputStream = new FileOutputStream(new File(destPath))) {
+            FileChannel in = inputStream.getChannel();
+            FileChannel out = outputStream.getChannel();
+
+            in.transferTo(0,in.size(),out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public Bdl loadBdl(String bdlName) {
         Bdl loadedBdl = new Bdl(bdlName);
@@ -110,7 +146,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
     public LinkedList<String> loadAssociation(String bdlName) {
         LinkedList<String> association = new LinkedList<>();
 
-        String filepath = "system_files/"+bdlName+".json";
+        String filepath = bdlSourceFolder + "/" + bdlName + ".json";
 
         JSONObject value;
         JSONParser parser = new JSONParser();
@@ -131,7 +167,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     @Override
     public boolean saveAssociation(String bdlName, List<String> titleList) {
-        String filepath = "system_files/" + bdlName+".json";
+        String filepath = saveFolder + "/" + bdlName+".json";
         JSONObject obj = new JSONObject();
         JSONArray namefiles = new JSONArray();
         for(String title : titleList) {
@@ -147,62 +183,6 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             return false;
         }
     }
-
-    //------------------------------//
-
-    /*@Override
-    public boolean addAssociation(String bdlName, List<String> titleList) {
-        String filepath = "system_files/"+bdlName+".json";
-
-        JSONObject value;
-        JSONParser parser = new JSONParser();
-        try(BufferedReader reader = new BufferedReader(new FileReader(filepath));) {
-            value = (JSONObject) parser.parse(reader);
-            JSONArray entity = (JSONArray) value.get("FileNameList");
-            for(String s: titleList) {
-                entity.add(s);
-            }
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
-                writer.write(value.toJSONString());
-            } catch (IOException e){
-                return false;
-            }
-        } catch (ParseException e) {
-            return false;
-        } catch (IOException e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean removeAssociation(String bdlName, List<String> docToRemove) {
-        String filepath = "system_files/"+bdlName+".json";
-
-        JSONObject value;
-        JSONParser parser = new JSONParser();
-        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-            value = (JSONObject) parser.parse(reader);
-            JSONArray entity = (JSONArray) value.get("FileNameList");
-
-            for(String s: docToRemove) {
-                entity.remove(s);
-            }
-
-            reader.close();
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
-                writer.write(value.toJSONString());
-            } catch(IOException e){
-                return false;
-            }
-        } catch (ParseException e) {
-            return false;
-        } catch(IOException e){
-            return false;
-        }
-        return true;
-
-    }*/
 }
 
 

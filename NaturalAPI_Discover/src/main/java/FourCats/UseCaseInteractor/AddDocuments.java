@@ -29,14 +29,14 @@ public class AddDocuments implements AddDocumentsInputPort {
         Bdl bdl = this.repository.readBdl(targetBdl);
 
         if(bdl==null) {
-            outputPort.showError("BDL not found");
+            outputPort.showError("BDL \""+targetBdl+"\" not found");
         } else {
             //retrieve BDL-Documents association from the repository
             LinkedList<String> association = this.repository.readAssociation(targetBdl);
 
             //filter already used documents
             if (association == null) {
-                outputPort.showError("BDL-Document association file missing, adding documents is not possible");
+                outputPort.showError("BDL-Document association file missing, adding documents is not possible.");
             } else {
                 docTitles.removeAll(association);
 
@@ -47,7 +47,7 @@ public class AddDocuments implements AddDocumentsInputPort {
                     if(doc!=null) {
                         documents.add(doc);
                     } else {
-                        outputPort.showWarning("Document "+title+" not found");
+                        outputPort.showWarning("Document "+title+" not found. The integration will continue with the other documents.");
                     }
                 }
 

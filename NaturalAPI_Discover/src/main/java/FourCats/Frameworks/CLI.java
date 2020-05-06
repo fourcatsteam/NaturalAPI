@@ -30,6 +30,7 @@ public class CLI implements Observer {
         System.out.println("1. Create a new BDL");
         System.out.println("2. Add documents to a BDL");
         System.out.println("3. Remove document from a BDL");
+        System.out.println("Digit QUIT to close program");
     }
 
     public Boolean readUseCase(){
@@ -67,7 +68,7 @@ public class CLI implements Observer {
                     controller.removeDocument(name,nameTitleList);
                     nameTitleList.clear();
                     break;
-                case "E":
+                case "QUIT":
                     result = false;
                 default:
                     break;

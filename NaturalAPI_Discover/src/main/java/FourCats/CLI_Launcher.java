@@ -3,7 +3,6 @@ package FourCats;
 import FourCats.Frameworks.CLI;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.Frameworks.StanfordNlp;
-import FourCats.GUI.GUI_Discover;
 import FourCats.InterfaceAdapters.Controller;
 import FourCats.InterfaceAdapters.DataPresenter;
 import FourCats.InterfaceAdapters.Repository;
@@ -16,14 +15,11 @@ import FourCats.UseCaseUtilities.AnalyzeDocument;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * Hello world!
- *
- */
-public class App {
+public class CLI_Launcher {
     public static void main( String[] args ) {
 
-        Repository repo = new Repository(new FileSystemAccess());
+        FileSystemAccess fs = new FileSystemAccess();
+        Repository repo = new Repository(fs);
         StanfordNlp nlp = new StanfordNlp();
         DataPresenter datapresenter = new DataPresenter();
 
@@ -34,19 +30,16 @@ public class App {
 
         Controller controller = new Controller(createBdl,addDocuments,removeDocuments,viewBdl);
 
-        System.out.println("Choose CLI(1) or GUI(2)?");
-        /* Codice per scegliere CLI o GUI*/
-        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Launching CLI");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         CLI cli = new CLI(controller,datapresenter,br);
 
         Boolean start = true;
         while(start) {
             cli.askForUseCase();
             start = cli.readUseCase();
-        }*/
-        GUI_Discover g = new GUI_Discover(controller,datapresenter);
-        g.createAndShowGUI();
-
+        }
 
     }
 }

@@ -28,7 +28,7 @@ public class ViewBdl implements ViewBdlInputPort {
     public void view(String nameBdl, Integer viewType) {
         Bdl bdl = repository.readBdl(nameBdl);
         if(bdl==null){
-            output.showError("Bdl not found");
+            output.showError("BDL \""+nameBdl+"\" not found");
         } else{
             output.showViewBdlOutput(this.filter(bdl,viewType));
         }
