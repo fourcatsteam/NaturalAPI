@@ -86,7 +86,7 @@ public class GUI_Design extends Component implements Observer  {
                 if (files.length==3){
                     bdlNameFile = new String[3];
                     for(File f: files){
-                        bdlNameFile[i] = f.getName();
+                        bdlNameFile[i] = f.getAbsolutePath();
                         i++;
                     }
                     try {
@@ -153,7 +153,7 @@ public class GUI_Design extends Component implements Observer  {
             log.append(ADD_FEATURE_FILES+"\n");
             log.append("\n"+LOADED_BDL+"\n\n");
             for (String bdlFile : bdlNameFile) {
-                log.append("- "+ bdlFile +"\n");
+                log.append("- "+ bdlFile.substring(bdlFile.lastIndexOf(File.separatorChar)+1) +"\n");
             }
         }
         else if (featureFilesName.isEmpty()){
@@ -170,7 +170,7 @@ public class GUI_Design extends Component implements Observer  {
             featureFilesName.forEach(fileName->log.append("- " + fileName+"\n"));
             log.append("\n"+LOADED_BDL+"\n\n");
             for (String bdlFile : bdlNameFile) {
-                log.append("- "+ bdlFile +"\n");
+                log.append("- "+ bdlFile.substring(bdlFile.lastIndexOf(File.separatorChar)+1) +"\n");
             }
             log.append("\nGood to go! Click the 'Generate suggestions for BAL' button.");
         }

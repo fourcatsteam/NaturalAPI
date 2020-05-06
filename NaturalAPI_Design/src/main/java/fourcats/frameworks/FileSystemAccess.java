@@ -8,10 +8,6 @@ import java.io.*;
 
 public class FileSystemAccess implements PersistentMemoryAccess {
 
-
-     String bdlPathToFolder = "BDL/"; //this should be done in a different way...
-
-
     @Override
     public String readFile(String filePath) throws FileNotFoundException {
         String s;
@@ -67,35 +63,35 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         return loadedBdl;
     }
 
-    private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
+    private void readBdlNouns(String filePath,Bdl loadedBdl) throws IOException {
         String line = "";
-        String filepath = bdlPathToFolder + filename + ".nouns.bdl.csv";
+        String filepath = filePath + ".nouns.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
-                loadbdl.storeBdlNoun(bdl[0], Integer.parseInt(bdl[1]));
+                loadedBdl.storeBdlNoun(bdl[0], Integer.parseInt(bdl[1]));
             }
         }
     }
 
-    private void readBdlVerbs(String filename,Bdl loadbdl) throws IOException {
+    private void readBdlVerbs(String filePath,Bdl loadedBdl) throws IOException {
         String line = "";
-        String filepath = bdlPathToFolder + filename + ".verbs.bdl.csv";
+        String filepath = filePath + ".verbs.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
-                loadbdl.storeBdlVerb(bdl[0], Integer.parseInt(bdl[1]));
+                loadedBdl.storeBdlVerb(bdl[0], Integer.parseInt(bdl[1]));
             }
         }
     }
 
-    private void readBdlPredicates(String filename,Bdl loadbdl) throws IOException {
+    private void readBdlPredicates(String filePath,Bdl loadedBdl) throws IOException {
         String line = "";
-        String filepath = bdlPathToFolder + filename + ".predicates.bdl.csv";
+        String filepath = filePath + ".predicates.bdl.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             while ((line = br.readLine()) != null) {
                 String[] bdl = line.split(",");
-                loadbdl.storeBdlPredicate(bdl[0], Integer.parseInt(bdl[1]));
+                loadedBdl.storeBdlPredicate(bdl[0], Integer.parseInt(bdl[1]));
             }
         }
     }
