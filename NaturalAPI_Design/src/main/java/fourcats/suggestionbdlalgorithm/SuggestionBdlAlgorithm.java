@@ -17,7 +17,7 @@ public class SuggestionBdlAlgorithm implements StrategyAlgorithm{
 
        if (bdl!=null){
             for(WordCounter wc : bdl.getPredicates()){
-                if(wc.getWord().equalsIgnoreCase(nameAction.replaceAll("_"," "))){
+                if(wc.getWord().equalsIgnoreCase(nameAction.replace("_"," "))){
                     return wc.getCount();
                 }
             }

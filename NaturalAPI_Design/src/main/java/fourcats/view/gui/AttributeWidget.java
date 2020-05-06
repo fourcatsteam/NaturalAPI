@@ -35,9 +35,9 @@ public class AttributeWidget {
             mainPanel.setVisible(false);
         });
 
-        attributeTypeComboBox.addActionListener(e->{
-            attrType = attributeTypeComboBox.getSelectedItem().toString();
-        });
+        attributeTypeComboBox.addActionListener(e->
+                attrType = attributeTypeComboBox.getSelectedItem().toString()
+        );
 
         attributeNameField.getDocument().addDocumentListener(new DocumentListener() {
             @Override

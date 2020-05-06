@@ -127,13 +127,13 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
     protected String extractActorName(String feature){
-        //extract actor name by picking the text between "As a" and the first "\n" found after it in the feature
+        //extract actor name by picking the text between "As a" and the first '\n' found after it in the feature
         //if there isn't the keyword "As a" return "All"
         int indexActorStart = -1;
         int indexActorEnd = 0;
         if (feature.contains(AS_A)) {
             indexActorStart = feature.indexOf(AS_A)+5;
-            indexActorEnd = feature.indexOf("\n",indexActorStart);
+            indexActorEnd = feature.indexOf('\n',indexActorStart);
             if (indexActorStart <= indexActorEnd)
                 return feature.substring(indexActorStart,indexActorEnd).trim();
         }

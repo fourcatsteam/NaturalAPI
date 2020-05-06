@@ -11,17 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class CustomTypeCreation extends Component{
-    private JPanel mainPanel;
 
     public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
-        mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         JFrame frame = new JFrame("Create custom type");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(400,350));
         frame.pack();
@@ -91,9 +89,6 @@ public class CustomTypeCreation extends Component{
 
         });
 
-        cancelButton.addActionListener(e->{
-            frame.dispose();
-        });
-
+        cancelButton.addActionListener(e->frame.dispose());
     }
 }

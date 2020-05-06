@@ -50,10 +50,10 @@ public class ObjectParamWidget {
         });
 
         objectTypeComboBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED && objectTypeComboBox.getSelectedItem() != null) {
-                if (objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
-                    new CustomTypeCreation(contr, dataPresenter.getlTypes());
-                }
+            if (e.getStateChange() == ItemEvent.SELECTED &&
+                    objectTypeComboBox.getSelectedItem() != null &&
+                    objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
+                new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });
 

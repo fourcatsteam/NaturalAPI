@@ -26,11 +26,11 @@ public class GUI_Design extends Component implements Observer  {
     private JPanel removeFilesBtnPanel;
     private JFileChooser fc;
     private String[] bdlNameFile;
-    private List<String> featureFilesPath;
-    private List<String> featureFilesName;
+    private final List<String> featureFilesPath;
+    private final List<String> featureFilesName;
     private static final String WELCOME = "Welcome to NaturalAPI Design!";
     private static final String ADD_FEATURE_FILES = "Please start by adding one or more feature files.";
-    private static final String ADD_BDL = "Consider loading a BDL if you want to take full advantage of the potential of NaturalAPI Design.";
+    private static final String ADD_BDL = "Consider loading a BDL in order to take full advantage of the potential of NaturalAPI Design.";
     private static final String LOADED_FEATURE = "Currently loaded feature files: ";
     private static final String LOADED_BDL = "Currently loaded BDL files: ";
 
