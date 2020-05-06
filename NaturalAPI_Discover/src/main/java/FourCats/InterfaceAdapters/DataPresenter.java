@@ -17,24 +17,28 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     private LinkedList<TableRow> bdlNouns;
     private LinkedList<TableRow> bdlVerbs;
     private LinkedList<TableRow> bdlPredicates;
+    private boolean error;
 
     public DataPresenter() {
         this.message = "";
         this.bdlNouns = new LinkedList<>();
         this.bdlVerbs = new LinkedList<>();
         this.bdlPredicates = new LinkedList<>();
+        this.error = false;
     }
 
     public String getMessage() {return message;}
     public List<TableRow> getBdlNouns() {return bdlNouns;}
     public List<TableRow> getBdlVerbs() {return bdlVerbs;}
     public List<TableRow> getBdlPredicates() {return bdlPredicates;}
+    public boolean getError() {return error;}
 
     private void clearData() {
         this.message = "";
         this.bdlNouns.clear();
         this.bdlVerbs.clear();
         this.bdlPredicates.clear();
+        this.error = false;
     }
 
     @Override
@@ -48,7 +52,8 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     @Override
     public void showError(String msg) {
         this.clearData();
-        message = "Error: "+msg;
+        this.message = "Error: "+msg;
+        this.error = true;
         notifyObservers();
     }
 

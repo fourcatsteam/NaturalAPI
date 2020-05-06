@@ -16,11 +16,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import FourCats.InterfaceAdapters.DataPresenter;
-import FourCats.InterfaceAdapters.DataPresenter_GUI;
 import FourCats.Observer.Observer;
 
 public class GUI_Discover extends JPanel implements Observer{
-    //private JButton loadFileBtn;
     private JPanel panel1;
     private JFileChooser txtChooser;
     private JFileChooser destinationFolderChooser;
@@ -42,7 +40,6 @@ public class GUI_Discover extends JPanel implements Observer{
     private Controller controller;
     private DataPresenter datapresenter;
     private FileSystemAccess fileSystemAccess;
-    private LinkedList<String> nameTitleList;
 
     public GUI_Discover(Controller c, DataPresenter d, FileSystemAccess fs) {
         this.areFilesLoaded = false;
@@ -50,7 +47,6 @@ public class GUI_Discover extends JPanel implements Observer{
         this.datapresenter= d;
         this.fileSystemAccess = fs;
         datapresenter.attach(this);
-        nameTitleList = new LinkedList<>();
         txtChooser = new JFileChooser("..\\NaturalAPI_Discover\\txt_documents");
         txtChooser.setMultiSelectionEnabled(true);
         txtChooser.setDialogTitle("Select txt documents");
@@ -63,23 +59,6 @@ public class GUI_Discover extends JPanel implements Observer{
         sourceFolderChooser.setMultiSelectionEnabled(false);
         sourceFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-        /*loadFileBtn.addActionListener(actionEvent -> {
-            int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                File[] files = txtChooser.getSelectedFiles();
-                for(File f: files){
-                    log.append("Selected: " + f.getName() + "." + "\n");
-                    nameTitleList.add(f.getName());
-                }
-                this.areFilesLoaded = true;
-                String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\","/");
-                fileSystemAccess.setTxtSourceFolder(sourceDir);
-            } else {
-                log.append("Open command cancelled by user." + "\n");
-            }
-            log.setCaretPosition(log.getDocument().getLength());
-        });*/
-
         createBDLbtn.addActionListener(actionEvent -> {
             int returnVal = destinationFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -90,29 +69,26 @@ public class GUI_Discover extends JPanel implements Observer{
                 int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File[] files = txtChooser.getSelectedFiles();
+                    LinkedList<String> nameTitleList = new LinkedList<>();
                     for(File f: files){
                         log.append("Selected: " + f.getName() + "." + "\n");
                         nameTitleList.add(f.getName());
                     }
-                    this.areFilesLoaded = true;
                     String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\","/");
                     fileSystemAccess.setTxtSourceFolder(sourceDir);
 
-                    String result = this.choosing(1);
-                    if (result != null) {
-                        controller.createBdl(result, nameTitleList);
-                        nameTitleList.clear();
-                        this.areFilesLoaded = false;
+                    String name = this.chooseName("Choose the name of the BDL you want to create");
+                    if (name != null) {
+                        log.append("Chosen name: " + name + "\n");
+                        controller.createBdl(name, nameTitleList);
                     } else {
-                        if (this.areFilesLoaded) {
-                            log.append("Your files are still available.\n");
-                        }
+                        log.append("Operation cancelled.\n");
                     }
                 } else {
-                    log.append("Open command cancelled by user." + "\n");
+                    log.append("File selection cancelled.\n");
                 }
             }else{
-                log.append("Selection canceled\n");
+                log.append("Destination folder selection cancelled.\n");
             }
         });
 
@@ -127,29 +103,26 @@ public class GUI_Discover extends JPanel implements Observer{
                 int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File[] files = txtChooser.getSelectedFiles();
+                    LinkedList<String> nameTitleList = new LinkedList<>();
                     for (File f : files) {
                         log.append("Selected: " + f.getName() + "." + "\n");
                         nameTitleList.add(f.getName());
                     }
-                    this.areFilesLoaded = true;
                     String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
                     fileSystemAccess.setTxtSourceFolder(sourceDir);
 
-                    String result = this.choosing(2);
-                    if (result != null) {
-                        controller.addDocument(result, nameTitleList);
-                        nameTitleList.clear();
-                        this.areFilesLoaded = false;
+                    String name = this.chooseName("Choose the name of the BDL you want to update");
+                    if (name != null) {
+                        log.append("Chosen name: " + name + "\n");
+                        controller.addDocument(name, nameTitleList);
                     } else {
-                        if (this.areFilesLoaded) {
-                            log.append("Your files are still available.\n");
-                        }
+                        log.append("Operation canceled\n");
                     }
                 } else {
-                    log.append("Open command cancelled by user." + "\n");
+                    log.append("File selection cancelled.\n");
                 }
             }else{
-                log.append("Selection canceled\n");
+                log.append("Source folder selection cancelled.\n");
             }
         });
 
@@ -165,29 +138,26 @@ public class GUI_Discover extends JPanel implements Observer{
                 int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File[] files = txtChooser.getSelectedFiles();
+                    LinkedList<String> nameTitleList = new LinkedList<>();
                     for (File f : files) {
                         log.append("Selected: " + f.getName() + "." + "\n");
                         nameTitleList.add(f.getName());
                     }
-                    this.areFilesLoaded = true;
                     String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
                     fileSystemAccess.setTxtSourceFolder(sourceDir);
 
-                    String result = this.choosing(2);
-                    if (result != null) {
-                        controller.removeDocument(result, nameTitleList);
-                        nameTitleList.clear();
-                        this.areFilesLoaded = false;
+                    String name = this.chooseName("Choose the name of the BDL you want to update");
+                    if (name != null) {
+                        log.append("Chosen name: " + name + "\n");
+                        controller.removeDocument(name, nameTitleList);
                     } else {
-                        if (this.areFilesLoaded) {
-                            log.append("Your files are still available.\n");
-                        }
+                        log.append("Operation cancelled\n");
                     }
                 } else {
-                    log.append("Open command cancelled by user." + "\n");
+                    log.append("file selection cancelled." + "\n");
                 }
             }else {
-                log.append("Selection canceled\n");
+                log.append("Source folder selection cancelled\n");
             }
         });
 
@@ -197,15 +167,9 @@ public class GUI_Discover extends JPanel implements Observer{
                 File directory = sourceFolderChooser.getSelectedFile();
                 String path = directory.getPath().replaceAll("\\\\","/");
                 fileSystemAccess.setBdlSourceFolder(path);
-                String result = (String)JOptionPane.showInputDialog(this,
-                        "Choose the name of the bdl that you want to view",
-                        "Choose name",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        null );
-                if(result != null) {
-
+                String name = chooseName("Choose the name of the BDL you want to view");
+                if(name != null) {
+                    log.append("Chosen name: " + name + "\n");
                     String[] choices = {"Show all","More probable words","First 15 words"};
                     String choice = (String) JOptionPane.showInputDialog(this,
                             "Select a type of visualization",
@@ -218,13 +182,15 @@ public class GUI_Discover extends JPanel implements Observer{
 
                     if (choice != null) {
                         Integer visualizationType = Arrays.asList(choices).indexOf(choice);
-                        controller.viewBdl(result, visualizationType);
+                        controller.viewBdl(name, visualizationType);
+                    } else {
+                        log.append("Operation cancelled\n");
                     }
                 } else {
-                    log.append("Operation canceled\n");
+                    log.append("Operation cancelled\n");
                 }
             }else {
-                log.append("Selection canceled\n");
+                log.append("Source folder selection cancelled\n");
             }
         });
 
@@ -270,34 +236,26 @@ public class GUI_Discover extends JPanel implements Observer{
         }
     }
 
-    private String choosing(int useCase){
-        String result = null;
-        String text = useCase == 1 ? "Choose a name for the BDL" : "Choose the name of the BDL that you want update";
-        if(!this.areFilesLoaded){
-            JOptionPane.showMessageDialog(this,"Please, load at least one .txt file, by pressing \"Load File\"","Load file error",JOptionPane.ERROR_MESSAGE);
-        }else {
-            result = (String)JOptionPane.showInputDialog(this,
-                    text,
+    private String chooseName(String message) {
+        String name = "";
+        while(name!=null && name.length()<=0) {
+            name = (String)JOptionPane.showInputDialog(this,
+                    message,
                     "Choose name",
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     null,
-                    null            );
-
-            if(result != null && result.length() > 0){
-                log.append("Name choosed: " + result +"\n");
-            }else {
-                log.append("No name choosed. Please choose one.\n");
-                return null;
-            }
+                    null
+            );
         }
-        return result;
+        return name;
     }
 
-    private void clearing(){
+    private void clearTable(){
         //Clear the TextArea
-        log.selectAll();
-        log.replaceSelection("");
+        tableNouns.setModel(new DefaultTableModel());
+        tableVerbs.setModel(new DefaultTableModel());
+        tablePredicates.setModel(new DefaultTableModel());
     }
 
     public void showGUI() {
@@ -316,28 +274,31 @@ public class GUI_Discover extends JPanel implements Observer{
     }
 
     private void showResult(){
-        DefaultTableModel nounModel = new DefaultTableModel(new Object[]{"Noun","Frequency"},0);
-        datapresenter.getBdlNouns().stream()
-                .forEach(tableRow -> {
-                    nounModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
-                });
-        tableNouns.setModel(nounModel);
+        clearTable();
+        if(!datapresenter.getError()) {
+            DefaultTableModel nounModel = new DefaultTableModel(new Object[]{"Noun", "Frequency"}, 0);
+            datapresenter.getBdlNouns().stream()
+                    .forEach(tableRow -> {
+                        nounModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
+                    });
+            tableNouns.setModel(nounModel);
 
-        DefaultTableModel verbsModel = new DefaultTableModel(new Object[]{"Verb","Frequency"},0);
-        datapresenter.getBdlVerbs().stream()
-                .forEach(tableRow -> {
-                    verbsModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
-                });
-        tableVerbs.setModel(verbsModel);
+            DefaultTableModel verbsModel = new DefaultTableModel(new Object[]{"Verb", "Frequency"}, 0);
+            datapresenter.getBdlVerbs().stream()
+                    .forEach(tableRow -> {
+                        verbsModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
+                    });
+            tableVerbs.setModel(verbsModel);
 
-        DefaultTableModel predModel = new DefaultTableModel(new Object[]{"Predicate","Frequency"},0);
-        datapresenter.getBdlPredicates().stream()
-                .forEach(tableRow -> {
-                    predModel.addRow(new Object[]{tableRow.getWord(),tableRow.getFrequency()});
-                });
+            DefaultTableModel predModel = new DefaultTableModel(new Object[]{"Predicate", "Frequency"}, 0);
+            datapresenter.getBdlPredicates().stream()
+                    .forEach(tableRow -> {
+                        predModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
+                    });
 
-        tablePredicates.setModel(predModel);
-        tablePredicates.getColumn("Frequency").setPreferredWidth(10);
+            tablePredicates.setModel(predModel);
+            tablePredicates.getColumn("Frequency").setPreferredWidth(10);
+        }
 
         log.append(datapresenter.getMessage()+"\n");
     }
