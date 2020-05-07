@@ -6,6 +6,7 @@ import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
 import fourcats.port.GenerateBalSuggestionsOutputPort;
+import org.apache.lucene.util.SetOnce;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class GenerateBALSuggestionsTest {
     }
 
     @Test
-    public void testRepoDeleteScenario(){
+    public void testRepoDeleteScenarioWithNewBALOption(){
         List<String> listString = new ArrayList<>();
         generateBALSuggestions.generateSuggestions(listString,true);
         verify(repositoryMock,times(1) ).deleteScenarios();
@@ -158,10 +159,63 @@ public class GenerateBALSuggestionsTest {
         assertEquals(2,scenarioList.size());
     }
 
-//    @Test
-//    public void GenerateBALSuggestionsFromNotExistingFeature() {
-//        correctGenerator.generateSuggestions(new ArrayList<>(),true);
-//        Mockito.verifyZeroInteractions(analyzerMock);
-//    }
+    @Test
+    public void testGenerateSuggestions() throws FileNotFoundException {
+        String inputString;
+        inputString = "Feature " +"\n"
+                +"Scenario: nome_scenario_1" +"\n"
+                +"Given text1" + "\n"
+                +"When  text1" + "\n"
+                +"Then  text1" + "\n";
+
+        List<String> filePath = Arrays.asList("FilePath");
+        when(repositoryMock.read(anyString())).thenReturn(inputString);
+        AnalyzedData analyzedDataMock = mock(AnalyzedData.class);
+
+        when(analyzerMock.parseDocumentContent(anyString())).thenReturn(analyzedDataMock);
+        when(analyzedDataMock.getPredicates())
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"));
+
+
+        generateBALSuggestions.generateSuggestions(filePath,true);
+        verify(repositoryMock,times(1)).createScenario(any(Scenario.class));
+
+    }
+
+    /*@Test(expected = SetOnce.AlreadySetException.class)
+    public void testGenerateSuggestionsExpection() throws FileNotFoundException {
+        String inputString;
+        inputString = "Feature " +"\n"
+                +"Scenario: nome_scenario_1" +"\n"
+                +"Given text1" + "\n"
+                +"When  text1" + "\n"
+                +"Then  text1" + "\n"
+                +"Scenario: nome_scenario_1" +"\n"
+                +"Given text1" + "\n"
+                +"When  text1" + "\n"
+                +"Then  text1" + "\n";;
+
+        List<String> filePath = Arrays.asList("FilePath");
+        when(repositoryMock.read(anyString())).thenReturn(inputString);
+        AnalyzedData analyzedDataMock = mock(AnalyzedData.class);
+
+        when(analyzerMock.parseDocumentContent(anyString())).thenReturn(analyzedDataMock);
+        when(analyzedDataMock.getPredicates())
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"));;
+
+
+        generateBALSuggestions.generateSuggestions(filePath,true);
+        verify(repositoryMock,times(1)).createScenario(any(Scenario.class));
+
+    }*/
+
+
 
 }

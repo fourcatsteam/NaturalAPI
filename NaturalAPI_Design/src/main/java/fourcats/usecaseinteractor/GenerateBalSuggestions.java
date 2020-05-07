@@ -34,7 +34,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
             repo.deleteScenarios(); //make sure that there are no old suggestions by deleting scenarios from repo
         }
 
-        List<Scenario> lScenarios = new ArrayList<>();
+        List<Scenario> scenarioList = new ArrayList<>();
 
         //read each feature file from repository
         for (String featurePath: lFeatureFilePaths) {
@@ -46,23 +46,20 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
                 return;
             }
             if (feature != null) {
-
-                lScenarios = generateScenario(feature);
+                List<Scenario> x = generateScenario(feature);
+                scenarioList.addAll(x);
             }
         }
-        boolean isScenarioDuplicated = false;
-        for (Scenario scenario : lScenarios) {
+
+        for (Scenario scenario : scenarioList) {
             try {
                 repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
             }
             catch (SetOnce.AlreadySetException e){
-                isScenarioDuplicated = true;
+                out.showErrorFileLoad(true);
+                return;
             }
         }
-        if(isScenarioDuplicated){
-            out.showErrorFileLoad(true);
-        }
-
         out.showSuggestionsForScenario(repo.readScenarios());
     }
 
