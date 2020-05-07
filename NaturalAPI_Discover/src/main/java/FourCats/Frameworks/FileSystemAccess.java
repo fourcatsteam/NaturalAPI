@@ -99,21 +99,22 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         } catch(IOException e) {
             return null;
         }
-        if(txtSourceFolder != saveFolder) {
+        if(!txtSourceFolder.equals(saveFolder)) {
             transferFile(filepath,saveFolder+"/"+documentTitle);
         }
         return new Document(documentTitle, fileContent);
     }
 
-    private void transferFile(String sourcePath, String destPath) {
+    private boolean transferFile(String sourcePath, String destPath) {
         try(FileInputStream inputStream = new FileInputStream(new File(sourcePath));
             FileOutputStream outputStream = new FileOutputStream(new File(destPath))) {
             FileChannel in = inputStream.getChannel();
             FileChannel out = outputStream.getChannel();
 
             in.transferTo(0,in.size(),out);
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
     }
     @Override
