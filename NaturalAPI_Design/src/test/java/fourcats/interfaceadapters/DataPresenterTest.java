@@ -56,7 +56,6 @@ public class DataPresenterTest {
         aMap.put(1, aScenario);
 
         when(aScenario.getName()).thenReturn("ScenarioName");
-        when(aScenarioMap.size()).thenReturn(1);
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
@@ -69,7 +68,6 @@ public class DataPresenterTest {
         aMap.put(1, aScenario);
 
         when(aScenario.getName()).thenReturn("ScenarioName");
-        when(aScenarioMap.size()).thenReturn(1);
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showRemoveBdlStatus();
