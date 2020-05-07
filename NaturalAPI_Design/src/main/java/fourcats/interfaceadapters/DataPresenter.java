@@ -3,8 +3,8 @@ package fourcats.interfaceadapters;
 import fourcats.datastructure.observer.Subject;
 import fourcats.entities.*;
 import fourcats.port.*;
-import fourcats.suggestionbdlalgorithm.StrategyAlgorithm;
-import fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm;
+import fourcats.suggestionbdlalgorithm.SuggestionFeedback;
+import fourcats.suggestionbdlalgorithm.SuggestionFrequency;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         AddBalSuggestionOutputPort, LoadBdlOutputPort, RemoveBdlOutputPort {
 
     private String toShow;
-    private StrategyAlgorithm algorithm;
+    private SuggestionFeedback algorithm;
     private boolean isBdlLoaded;
 
     @Override
@@ -227,7 +227,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showBDLOutput(Bdl bdl, boolean isLoaded) {
         if (isLoaded){
-            algorithm = new SuggestionBdlAlgorithm(bdl);
+            algorithm = new SuggestionFrequency(bdl);
             toShow = "BDL Loaded successfully";
         }
         else{

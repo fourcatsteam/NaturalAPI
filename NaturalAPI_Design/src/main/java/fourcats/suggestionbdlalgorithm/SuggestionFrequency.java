@@ -3,11 +3,11 @@ package fourcats.suggestionbdlalgorithm;
 import fourcats.datastructure.WordCounter;
 import fourcats.entities.Bdl;
 
-public class SuggestionBdlAlgorithm implements StrategyAlgorithm{
+public class SuggestionFrequency implements SuggestionFeedback {
 
     private Bdl bdl;
 
-    public SuggestionBdlAlgorithm(Bdl bdl){
+    public SuggestionFrequency(Bdl bdl){
         this.bdl = bdl;
     }
 

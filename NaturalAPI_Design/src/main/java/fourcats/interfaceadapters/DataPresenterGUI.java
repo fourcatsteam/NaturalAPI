@@ -1,7 +1,7 @@
 package fourcats.interfaceadapters;
 
-import fourcats.suggestionbdlalgorithm.StrategyAlgorithm;
-import fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm;
+import fourcats.suggestionbdlalgorithm.SuggestionFeedback;
+import fourcats.suggestionbdlalgorithm.SuggestionFrequency;
 import fourcats.datastructure.observer.Subject;
 import fourcats.entities.*;
 import fourcats.port.*;
@@ -32,7 +32,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     private boolean isBdlLoaded;
     static final String ERROR_MESSAGE = "Oh no! Something went wrong...";
 
-    private StrategyAlgorithm algorithm;
+    private SuggestionFeedback algorithm;
     private int frequencyInBdl;
 
 
@@ -329,7 +329,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     @Override
     public void showBDLOutput(Bdl bdl, boolean isLoaded) {
         if (isLoaded){
-            algorithm = new SuggestionBdlAlgorithm(bdl);
+            algorithm = new SuggestionFrequency(bdl);
             message = "BDL Loaded successfully";
         }
         else{
