@@ -56,7 +56,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showGenerationStatus(boolean isBALGenerated) {
         if (isBALGenerated){
-            toShow = "Hooray! The BAL was successfully created. You will find it in the BAL folder";
+            toShow = "Hooray! The BAL was successfully created. You will find it in the folder you specified";
         }
         else{
             toShow = "Oh no! Something went wrong...";
@@ -66,7 +66,6 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
 
     @Override
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
-        //Da implementare isBdlLoaded
         if (isActionNameModified){
             toShow = "Suggestion name successfully updated! This is the updated list of suggestions";
             notifyObservers();

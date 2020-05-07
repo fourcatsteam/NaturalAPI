@@ -24,15 +24,15 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     @Override
     public void writeFile(String content, String filePath) throws IOException {
-        try{
-            File file = new File(filePath + ".json");
-            file.getParentFile().mkdirs();
-            try(FileWriter writer = new FileWriter(file)) {
-                writer.write(content);
+        File file = new File(filePath + ".json");
+        try(FileWriter writer = new FileWriter(file)){
+            if (file.getParentFile()!=null){
+                file.getParentFile().mkdirs();
             }
+            writer.write(content);
         }
-        catch (IOException e){
-            e.printStackTrace();
+        catch (Exception e){
+            throw e;
         }
 
     }
