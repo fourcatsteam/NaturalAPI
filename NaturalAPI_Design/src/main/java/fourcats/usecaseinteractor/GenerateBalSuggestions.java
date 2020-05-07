@@ -73,15 +73,19 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
         List<Scenario> scenarioList = new ArrayList<>();
 
-        String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
-        for(String scenarioString : arrScenarios){
+        //String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
+
+        List<String> scenarioStringList = new ArrayList<>(Arrays.asList(feature.split("Scenario:")));
+        scenarioStringList.remove(0);
+
+        for(String scenarioString : scenarioStringList){
+
             scenarioString = scenarioString.trim();
+            String scenarioName = extractScenarioName(scenarioString);
+
             List<Action> actionList = generateAction(scenarioString);
             Map<Integer,Action> actionMap = actionList.stream()
                                             .collect(toMap(actionList::indexOf,action->action));
-
-            String scenarioName = extractScenarioName(scenarioString);
-
 
             Scenario scenario = new Scenario(scenarioName,actionMap,scenarioString,actorName,feature);
 
@@ -107,8 +111,8 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
             //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
             for (String predicate : predicates){
                 
-                String actionName = predicate == "" ? "" : predicate.replace(" ", "_");
-                String objParName = predicate == "" ? "" : predicate.split(" ")[1];
+                String actionName = predicate.replace(" ", "_");
+                String objParName = predicate.split(" ")[1];
 
                 Action action = new Action(actionName, "void",scenarioName,step);
                 action.addObjectParam(objParName,"string");
@@ -120,12 +124,6 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         return lGeneratedActions;
 
     }
-
-/*    protected ObjectParam generateObject(String actionName){
-        //generate default objectParameter (the first parameter in the Action)
-        String[] splittedActionName = actionName.split("_");
-        return new ObjectParam(splittedActionName[1],"string"); //object type default at string
-    }*/
 
     protected String extractScenarioName(String scenario){
     //Pre-condition: Scenario name followed by keyword As a or Given

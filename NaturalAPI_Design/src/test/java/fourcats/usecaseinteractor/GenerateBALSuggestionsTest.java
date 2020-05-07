@@ -2,6 +2,7 @@ package fourcats.usecaseinteractor;
 
 import fourcats.datastructure.AnalyzedData;
 import fourcats.entities.Action;
+import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
 import fourcats.port.GenerateBalSuggestionsOutputPort;
@@ -119,15 +120,43 @@ public class GenerateBALSuggestionsTest {
 
         when(analyzerMock.parseDocumentContent(anyString())).thenReturn(analyzedDataMock);
         when(analyzedDataMock.getPredicates())
-                .thenReturn(Arrays.asList(""))
+                .thenReturn(Arrays.asList())
                 .thenReturn(Arrays.asList("create character"))
-                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList())
                 .thenReturn(Arrays.asList("lookup character"));
 
         List<Action> actionList = generateBALSuggestions.generateAction(inputString);
-        assertEquals(4, actionList.size());
+        assertEquals(2, actionList.size());
     }
 
+    @Test
+    public void testGenerateScenario(){
+        String inputString;
+        inputString = "Feature " +"\n"
+                     +"Scenario: nome_scenario_1" +"\n"
+                     +"Given text1" + "\n"
+                     +"When  text1" + "\n"
+                     +"Then  text1" + "\n"
+                     +"Scenario: nome_scenario_2" +"\n"
+                     +"Given text2" + "\n"
+                     +"When  text2" + "\n"
+                     +"Then  text2" + "\n";
+
+
+        AnalyzedData analyzedDataMock = mock(AnalyzedData.class);
+
+        when(analyzerMock.parseDocumentContent(anyString())).thenReturn(analyzedDataMock);
+        when(analyzedDataMock.getPredicates())
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("do things"));
+
+        List<Scenario> scenarioList = generateBALSuggestions.generateScenario(inputString);
+        assertEquals(2,scenarioList.size());
+    }
 
 //    @Test
 //    public void GenerateBALSuggestionsFromNotExistingFeature() {
