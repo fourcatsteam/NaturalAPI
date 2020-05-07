@@ -2,8 +2,8 @@
 **NaturalAPI** is a toolkit able to automatically generate application programming interfaces (APIs) and related unit tests for a given programming language, starting from features and scenarios in Gherkin format and from text documents related to the domain of interest.
 
 
-The project is created by the **FourCats** team** for the _**Software Engineering**_ exam of the *Degree Course in Computer Science of the University of Padua*.
-> *More information can be found by consulting the documentation that will be made public when the project is delivered.
+The project is created by the **FourCats** team for the _**Software Engineering**_ exam of the *Degree Course in Computer Science of the University of Padua*.
+> *More information can be found by consulting the documentation that will be made public when the project is delivered.*
 
 ## To begin with:
 #### To use the product you must have installed on your system the JVM (Java Virtual Machine) included in JRE (Java Runtime Environment) downloadable at the following link: [JRE](https://www.java.com/it/download/).
