@@ -71,6 +71,7 @@ public class Action {
         this.param.add(objectParam);
     }
 
+    public void addObjectParam(String name, String type) {param.add(new ObjectParam(name, type));}
 
     public void removeObjectParam(int idObjectParam){
         param.remove(idObjectParam);
