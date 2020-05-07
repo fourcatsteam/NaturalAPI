@@ -5,6 +5,7 @@ import FourCats.Entities.Document;
 import FourCats.InterfaceAccess.RepositoryAccess;
 import FourCats.Port.RemoveDocumentsOutputPort;
 import FourCats.UseCaseUtilities.AnalyzeDocument;
+import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,6 +38,9 @@ public class RemoveDocumentsTest {
     public void testRemoveWithDocumentFound() {
         when(repositoryMock.readBdl(any(String.class))).thenReturn(new Bdl("example"));
         when(repositoryMock.readDocument(any(String.class))).thenReturn(new Document("","word"));
+        LinkedList<String> association = new LinkedList<>();
+        association.add("doc1");
+        when(repositoryMock.readAssociation(any(String.class))).thenReturn(association);
 
         LinkedList<String> titleList = new LinkedList<>();
         titleList.add("doc1");

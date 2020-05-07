@@ -64,7 +64,7 @@ public class CLITest {
 
     @Test
     public void testReadUseCaseExit() throws IOException {
-        when(bufferedReaderMock.readLine()).thenReturn("E");
+        when(bufferedReaderMock.readLine()).thenReturn("QUIT");
 
         Boolean result = cli.readUseCase();
 

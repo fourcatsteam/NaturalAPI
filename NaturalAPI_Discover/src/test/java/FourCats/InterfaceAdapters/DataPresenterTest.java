@@ -27,25 +27,26 @@ public class DataPresenterTest {
 
     @Test
     public void testGetBdlNouns() {
-        assertEquals("",dataPresenter.getBdlNouns());
+        assertTrue(dataPresenter.getBdlNouns()!=null);
     }
 
     @Test
     public void testGetBdlVerbs() {
-        assertEquals("",dataPresenter.getBdlVerbs());
+        assertTrue(dataPresenter.getBdlVerbs()!=null);
     }
 
     @Test
     public void testGetBdlPredicates() {
-        assertEquals("",dataPresenter.getBdlPredicates());
+        assertTrue(dataPresenter.getBdlPredicates()!=null);
     }
 
     @Test
     public void testShowCreateBdlOutput() {
         Bdl bdlMock = Mockito.mock(Bdl.class);
         dataPresenter.showCreateBdlOutput(bdlMock);
+        when(bdlMock.getName()).thenReturn("bdl_name");
 
-        String expected="BDL generata! Puoi trovare i file csv all'interno della cartella BDL";
+        String expected="BDL \"bdl_name\" generated successfully. You can find the CSV files in the chosen directory";
         assertEquals(expected,dataPresenter.getMessage());
     }
 
