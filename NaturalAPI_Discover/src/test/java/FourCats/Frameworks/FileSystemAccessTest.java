@@ -17,7 +17,8 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadDocumentFound() {
-        String title = "TestFiles/prova.txt";
+        String title = "prova.txt";
+        fs.setTxtSourceFolder("./txt_documents/TestFiles");
         String content = "Hi, i'm Simone. I'm trying to coding following Clean Architecture! See you soon. ";
 
         Document doc = fs.loadDocument(title);
@@ -37,7 +38,8 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadBdlFound() {
-        String name = "TestFiles/Prova";
+        String name = "Prova";
+        fs.setBdlSourceFolder("./BDL/TestFiles");
 
         Bdl bdl = fs.loadBdl(name);
 
@@ -70,7 +72,8 @@ public class FileSystemAccessTest {
 
     @Test
     public void testLoadAssociationFound() {
-        String name = "TestFiles/Prova";
+        String name = "Prova";
+        fs.setBdlSourceFolder("./BDL/TestFiles");
 
         LinkedList<String> association = fs.loadAssociation(name);
 
