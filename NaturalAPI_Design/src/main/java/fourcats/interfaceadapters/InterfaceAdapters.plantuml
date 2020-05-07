@@ -144,7 +144,7 @@ title __INTERFACEADAPTERS's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
-  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.StrategyAlgorithm : algorithm
+  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.SuggestionFeedback : algorithm
 
 
 right footer

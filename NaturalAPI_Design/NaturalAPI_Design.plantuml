@@ -366,7 +366,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace suggestionbdlalgorithm {
-      interface fourcats.suggestionbdlalgorithm.StrategyAlgorithm {
+      interface fourcats.suggestionbdlalgorithm.SuggestionFeedback {
       }
     }
   }
@@ -374,7 +374,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace suggestionbdlalgorithm {
-      class fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm {
+      class fourcats.suggestionbdlalgorithm.SuggestionFrequency {
       }
     }
   }
@@ -579,9 +579,9 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
   fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
   fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
-  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.StrategyAlgorithm : algorithm
-  fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm .up.|> fourcats.suggestionbdlalgorithm.StrategyAlgorithm
-  fourcats.suggestionbdlalgorithm.SuggestionBdlAlgorithm o-- fourcats.entities.Bdl : bdl
+  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.SuggestionFeedback : algorithm
+  fourcats.suggestionbdlalgorithm.SuggestionFrequency .up.|> fourcats.suggestionbdlalgorithm.SuggestionFeedback
+  fourcats.suggestionbdlalgorithm.SuggestionFrequency o-- fourcats.entities.Bdl : bdl
   fourcats.usecaseinteractor.AddBalSuggestion .up.|> fourcats.port.AddBalSuggestionInputPort
   fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.port.AddBalSuggestionOutputPort : out
   fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
