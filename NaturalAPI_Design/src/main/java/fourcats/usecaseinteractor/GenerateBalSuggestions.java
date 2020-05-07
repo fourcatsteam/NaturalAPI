@@ -93,28 +93,27 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected List<Action> generateAction(String scenario)  {
         List<Action> lGeneratedActions = new ArrayList<>();
-        String scenarioContent = extractScenarioSteps(scenario);
+
+        String scenarioName = extractScenarioName(scenario);
+        String scenarioSteps = extractScenarioSteps(scenario);
 
         // extract steps from the scenario and analyze them
-        List<String> lSteps = splitScenarioSteps(scenarioContent);
+        List<String> lSteps = splitScenarioSteps(scenarioSteps);
         for (String step : lSteps) {
             AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(step);
 
-            List<String> predicates = analyzedData.getDependenciesList()
-                    .stream()
-                    .filter(d->(d.getRelation().equals("dobj")))
-                    .map(d-> d.getGov()+" "+d.getDep())
-                    .collect(Collectors.toList());
+            List<String> predicates = analyzedData.getPredicates();
 
             //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
-            for (String suggestedAction : predicates){
-                //format the suggestion by adding "_" between words (ex. withdraw cash --> withdraw_cash)
-                String formattedSuggestion = suggestedAction.replace(" ", "_");
+            for (String predicate : predicates){
+                
+                String actionName = predicate == "" ? "" : predicate.replace(" ", "_");
+                String objParName = predicate == "" ? "" : predicate.split(" ")[1];
 
+                Action action = new Action(actionName, "void",scenarioName,step);
+                action.addObjectParam(objParName,"string");
 
-                Action suggestion = new Action(formattedSuggestion, "void",extractScenarioName(scenario),step);
-                suggestion.addObjectParam(generateObject(suggestion.getName()));
-                lGeneratedActions.add(suggestion);
+                lGeneratedActions.add(action);
             }
         }
 
@@ -122,11 +121,11 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     }
 
-    protected ObjectParam generateObject(String actionName){
+/*    protected ObjectParam generateObject(String actionName){
         //generate default objectParameter (the first parameter in the Action)
         String[] splittedActionName = actionName.split("_");
         return new ObjectParam(splittedActionName[1],"string"); //object type default at string
-    }
+    }*/
 
     protected String extractScenarioName(String scenario){
     //Pre-condition: Scenario name followed by keyword As a or Given
@@ -149,10 +148,8 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected String extractScenarioSteps(String scenario){
         //rimove the name of the scenario from the string
-        int indexGiven = 0;
-        if (scenario.contains("Given")){
-            indexGiven = scenario.indexOf("Given");
-        }
+        int indexGiven = scenario.contains("Given") ? scenario.indexOf("Given") : 0 ;
+
         return scenario.substring(indexGiven);
     }
 

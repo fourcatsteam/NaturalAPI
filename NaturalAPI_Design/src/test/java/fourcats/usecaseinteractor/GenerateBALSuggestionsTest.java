@@ -1,5 +1,7 @@
 package fourcats.usecaseinteractor;
 
+import fourcats.datastructure.AnalyzedData;
+import fourcats.entities.Action;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
 import fourcats.port.GenerateBalSuggestionsOutputPort;
@@ -9,6 +11,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -75,7 +78,7 @@ public class GenerateBALSuggestionsTest {
     }
 
     @Test
-    public void testExtractScenarioContent(){
+    public void testExtractScenarioSteps(){
         String scenario;
         String scenarioContent;
 
@@ -106,12 +109,23 @@ public class GenerateBALSuggestionsTest {
     @Test
     public void testGenerateAction(){
         String inputString;
-        inputString =  "Given no character with name  \"Arya\" exists in the currente project" +"\n"
+        inputString =  "nome dello scenario" +"\n"
+                       +"Given no character with name \"Arya\" exists in the currente project" +"\n"
                        +"When I try to create a character with name \"Arya\""+"\n"
                        +"Then character with name \"Arya\" is created"+"\n"
-                       +"And I can loopup the character with name \"Arya\" in the current project";
-        generateBALSuggestions.generateAction(inputString);
-        assertTrue(true);
+                       +"And I can lookup the character with name \"Arya\" in the current project";
+
+        AnalyzedData analyzedDataMock = mock(AnalyzedData.class);
+
+        when(analyzerMock.parseDocumentContent(anyString())).thenReturn(analyzedDataMock);
+        when(analyzedDataMock.getPredicates())
+                .thenReturn(Arrays.asList(""))
+                .thenReturn(Arrays.asList("create character"))
+                .thenReturn(Arrays.asList("do things"))
+                .thenReturn(Arrays.asList("lookup character"));
+
+        List<Action> actionList = generateBALSuggestions.generateAction(inputString);
+        assertEquals(4, actionList.size());
     }
 
 
