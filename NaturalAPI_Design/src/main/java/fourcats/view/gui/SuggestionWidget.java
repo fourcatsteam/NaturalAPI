@@ -25,7 +25,7 @@ public class SuggestionWidget {
     private final ArrayList <ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
-
+    private CustomTypeCreation customType;
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         lObjectParamWidget = new ArrayList<>();
@@ -85,7 +85,7 @@ public class SuggestionWidget {
         actionTypeComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED &&
                     Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
-                new CustomTypeCreation(contr, dataPresenter.getlTypes());
+                customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });
 
@@ -98,6 +98,10 @@ public class SuggestionWidget {
                 actionTypeComboBox.addItem("void");
                 for (String type : dataPresenter.getlTypes()) {
                     actionTypeComboBox.addItem(type);
+                }
+                //check if the selected item should be the custom type recently created
+                if (customType!=null && customType.isCustomTypeCreated()){
+                    actionTypeComboBox.setSelectedIndex(actionTypeComboBox.getItemCount()-1);
                 }
                 actionTypeComboBox.addItem(CREATE_CUSTOM);
             }

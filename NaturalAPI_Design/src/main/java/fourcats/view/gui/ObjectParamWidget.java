@@ -16,6 +16,7 @@ public class ObjectParamWidget {
     private JButton removeObjectButton;
     private JLabel frequencyLabel;
     private String objectId;
+    private CustomTypeCreation customType;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
 
@@ -53,7 +54,7 @@ public class ObjectParamWidget {
             if (e.getStateChange() == ItemEvent.SELECTED &&
                     objectTypeComboBox.getSelectedItem() != null &&
                     objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
-                new CustomTypeCreation(contr, dataPresenter.getlTypes());
+                customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });
 
@@ -65,6 +66,10 @@ public class ObjectParamWidget {
                 contr.showTypes();
                 for (String type : dataPresenter.getlTypes()) {
                     objectTypeComboBox.addItem(type);
+                }
+                //check if the selected item should be the custom type recently created
+                if (customType!=null && customType.isCustomTypeCreated()){
+                    objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount()-1);
                 }
                 objectTypeComboBox.addItem(CREATE_CUSTOM);
             }

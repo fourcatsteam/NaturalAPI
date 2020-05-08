@@ -12,8 +12,10 @@ import java.util.Map;
 
 
 public class CustomTypeCreation extends Component{
+    private boolean isCustomTypeCreated;
 
     public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
+        isCustomTypeCreated = false;
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
@@ -78,6 +80,7 @@ public class CustomTypeCreation extends Component{
                 }
                 if (mAttributes.size()!=0){
                     controller.createCustomType(customTypeNameField.getText(),mAttributes);
+                    isCustomTypeCreated = true;
                     frame.dispose();
                     return;
                 }
@@ -89,7 +92,10 @@ public class CustomTypeCreation extends Component{
 
         });
 
-        cancelButton.addActionListener(e->frame.dispose())
-        ;
+        cancelButton.addActionListener(e->frame.dispose());
+    }
+
+    public boolean isCustomTypeCreated(){
+        return isCustomTypeCreated;
     }
 }
