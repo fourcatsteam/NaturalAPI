@@ -1,0 +1,38 @@
+{
+  "actors" : [ {
+    "name" : "All",
+    "actions" : [ {
+      "name" : "create_character",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "A scenario",
+      "step" : "I try to create a character with name \"Ayran\"",
+      "objectParams" : [ {
+        "name" : "character",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "lookup_character",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "A scenario",
+      "step" : "I can lookup the character with name \"Ayran\" in the current project",
+      "objectParams" : [ {
+        "name" : "cash",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

@@ -1,0 +1,41 @@
+{
+  "actors" : [ {
+    "name" : "Customer",
+    "actions" : [ {
+      "name" : "check_pin",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Withdraw cash",
+      "step" : "the ATM should check the pin",
+      "objectParams" : [ {
+        "name" : "pin",
+        "type" : {
+          "name" : "int",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "display_message",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Expired card",
+      "step" : "the ATM should display an error message",
+      "objectParams" : [ {
+        "name" : "message",
+        "type" : {
+          "name" : "CustomMessage",
+          "attributes" : {
+            "title" : "string",
+            "content" : "string"
+          }
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

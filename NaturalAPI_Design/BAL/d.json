@@ -1,0 +1,54 @@
+{
+  "actors" : [ {
+    "name" : "All",
+    "actions" : [ {
+      "name" : "start_game",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Breaker joins a game",
+      "step" : "the Maker has started a game with the word \"silky\"",
+      "objectParams" : [ {
+        "name" : "game",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "join_game",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Breaker joins a game",
+      "step" : "the Breaker joins the Maker's game",
+      "objectParams" : [ {
+        "name" : "game",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "guess_word",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Breaker joins a game",
+      "step" : "the Breaker must guess a word with 5 characters",
+      "objectParams" : [ {
+        "name" : "word",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

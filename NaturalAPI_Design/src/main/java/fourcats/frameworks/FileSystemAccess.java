@@ -47,7 +47,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
            i++;
         }
         if(!(bdlNames[0].equals(bdlNames[1]) && bdlNames[0].equals(bdlNames[2]))){ //Files are from different BDL
-            return null;
+            throw new IOException();
         }
         return loadBdl(bdlNames[0]);
     }

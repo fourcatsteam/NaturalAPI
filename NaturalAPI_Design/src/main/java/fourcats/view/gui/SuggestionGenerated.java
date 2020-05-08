@@ -3,6 +3,7 @@ package fourcats.view.gui;
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
+import fourcats.view.utilities.ViewUtility;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +67,7 @@ public class SuggestionGenerated extends Component implements Observer{
                 File file = fileChooser.getSelectedFile();
                 String path = file.getAbsolutePath();
                 if (!path.equals("")) {
-                    try {
-                        contr.generateBAL(path);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+                    contr.generateBAL(path);
                 }
             }
         });
@@ -85,9 +81,15 @@ public class SuggestionGenerated extends Component implements Observer{
                 File[] files = fileChooser.getSelectedFiles();
                 for(File f: files){
                     if(!lFeaturePaths.contains(f.getAbsolutePath())) {
-                        newPaths.add(f.getAbsolutePath());
-                        this.lFeatureNames.add(f.getName());
-                        this.lFeaturePaths.add(f.getAbsolutePath());
+                        if (ViewUtility.isFeaturePathValid(f.getAbsolutePath())) {
+                            newPaths.add(f.getAbsolutePath());
+                            this.lFeatureNames.add(f.getName());
+                            this.lFeaturePaths.add(f.getAbsolutePath());
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(SuggestionGenerated.this, "The file '"+f.getName()+"' is not a feature file.",
+                                    "Error",JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     else{
                         JOptionPane.showMessageDialog(SuggestionGenerated.this,
@@ -183,7 +185,7 @@ public class SuggestionGenerated extends Component implements Observer{
             new SuggestionWidget(panelSuggestions, contr, dataPresenter);
         }
 
-        if (!dataPresenter.getMessage().equals("") && !dataPresenter.isBdlLoaded() ) {
+        if (!dataPresenter.getMessage().equals("")) {
             //check if the operation was successful then show information message or error message
             if (dataPresenter.isOkOperation())
                 JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
