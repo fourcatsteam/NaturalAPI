@@ -151,7 +151,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     public void showModifiedActionName(Map<Integer, Scenario> mScenarios, boolean isActionNameModified,String actionNameModified) {
         if (isActionNameModified){
             isOkOperation = true;
-            if(isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionNameModified);
+            if(isBdlLoaded) frequencyInBdl = algorithm.findActionInBdl(actionNameModified);
         }
         else{
             message = ERROR_MESSAGE;
