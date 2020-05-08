@@ -154,7 +154,7 @@ public class GUI_Discover extends JPanel implements Observer{
                         log.append("Operation cancelled\n");
                     }
                 } else {
-                    log.append("file selection cancelled." + "\n");
+                    log.append("File selection cancelled." + "\n");
                 }
             }else {
                 log.append("Source folder selection cancelled\n");
