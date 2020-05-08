@@ -24,8 +24,7 @@ public class FileSystemTest {
 
     @Test
     public void loadingPLACorrectlyFound(){
-        String name = "C:\\Users\\matte\\OneDrive\\Desktop\\NaturalAPI\\NaturalAPI_Develop\\PLA\\TestFiles\\Prova";
-
+        String name = "PLA/TestFiles/Prova";
         String pla = file.loadPLA(name);
         assertTrue(pla!=null);
         assertEquals("ciao\n",pla);
@@ -40,7 +39,7 @@ public class FileSystemTest {
 
     @Test
     public void loadingFileCorrectly(){
-        String name = "TestFiles/Prova";
+        String name = "PLA/TestFiles/Prova";
         assertNotNull(file.openFile(name));
     }
 
