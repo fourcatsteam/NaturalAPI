@@ -31,15 +31,12 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             }
             writer.write(content);
         }
-        catch (Exception e){
-            throw e;
-        }
 
     }
 
     @Override
     public Bdl getBdl(String[] name) throws IOException {
-        String bdlNames[] = new String[3];
+        String[] bdlNames = new String[3];
         int i = 0;
         for(String s:name){
            String[] splitting = s.split("\\."); //period is a special character
@@ -59,7 +56,6 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         readBdlNouns(bdlName,loadedBdl);
         readBdlVerbs(bdlName,loadedBdl);
         readBdlPredicates(bdlName,loadedBdl);
-
         return loadedBdl;
     }
 

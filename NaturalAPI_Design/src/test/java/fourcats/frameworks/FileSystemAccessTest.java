@@ -45,7 +45,7 @@ public class FileSystemAccessTest {
         {
            result = "Correct";
         }
-        assertEquals(result, "Correct");
+        assertEquals("Correct",result);
     }
 
   /*  @Test

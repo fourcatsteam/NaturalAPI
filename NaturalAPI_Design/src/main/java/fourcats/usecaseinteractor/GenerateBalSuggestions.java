@@ -2,7 +2,6 @@ package fourcats.usecaseinteractor;
 
 import fourcats.datastructure.AnalyzedData;
 import fourcats.entities.Action;
-import fourcats.entities.ObjectParam;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceaccess.TextAnalyzer;
@@ -21,6 +20,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     TextAnalyzer textAnalyzer;
     GenerateBalSuggestionsOutputPort out;
     private static final String AS_A = "As a";
+    private static final String GIVEN = "Given";
 
     public GenerateBalSuggestions(RepositoryAccess repositoryAccess, TextAnalyzer textAnalyzer, GenerateBalSuggestionsOutputPort outputPort)
     {
@@ -122,7 +122,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected String extractScenarioName(String scenario){
     //Pre-condition: Scenario name followed by keyword As a or Given
-        int indexScenarioEnd = scenario.contains(AS_A) ? scenario.indexOf(AS_A) : scenario.indexOf("Given");
+        int indexScenarioEnd = scenario.contains(AS_A) ? scenario.indexOf(AS_A) : scenario.indexOf(GIVEN);
 
         return scenario.substring(0,indexScenarioEnd).trim();
     }
@@ -141,7 +141,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
     protected String extractScenarioSteps(String scenario){
         //rimove the name of the scenario from the string
-        int indexGiven = scenario.contains("Given") ? scenario.indexOf("Given") : 0 ;
+        int indexGiven = scenario.contains(GIVEN) ? scenario.indexOf(GIVEN) : 0 ;
 
         return scenario.substring(indexGiven);
     }
