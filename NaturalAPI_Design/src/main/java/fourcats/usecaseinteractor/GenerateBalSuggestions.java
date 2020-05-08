@@ -52,12 +52,12 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         }
 
         for (Scenario scenario : scenarioList) {
+            //try to add each scenario (which contains the suggestions) to the repository
             try {
-                repo.createScenario(scenario); //add each scenario (which contains the suggestions) to the repository
+                repo.createScenario(scenario);
             }
             catch (SetOnce.AlreadySetException e){
                 out.showErrorFileLoad(true);
-                return;
             }
         }
         out.showSuggestionsForScenario(repo.readScenarios());
@@ -69,8 +69,6 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         String actorName = extractActorName(feature);
 
         List<Scenario> scenarioList = new ArrayList<>();
-
-        //String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
 
         List<String> scenarioStringList = new ArrayList<>(Arrays.asList(feature.split("Scenario:")));
         scenarioStringList.remove(0);
