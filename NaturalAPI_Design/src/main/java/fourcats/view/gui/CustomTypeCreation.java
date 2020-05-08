@@ -89,6 +89,7 @@ public class CustomTypeCreation extends Component{
 
         });
 
-        cancelButton.addActionListener(e->frame.dispose());
+        cancelButton.addActionListener(e->frame.dispose())
+        ;
     }
 }

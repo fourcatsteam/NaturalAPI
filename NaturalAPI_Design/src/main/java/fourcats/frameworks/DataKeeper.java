@@ -72,6 +72,7 @@ public class DataKeeper {
                 return;
             }
         }
+
         mScenarios.get(idScenario).getActionsMap().get(idAction).setType(newActionType);
     }
 
