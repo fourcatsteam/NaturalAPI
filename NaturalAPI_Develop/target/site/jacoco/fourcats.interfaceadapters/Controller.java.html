@@ -26,11 +26,11 @@ public class Controller {
 <span class="fc" id="L26">        apiInputPort.create(filenameBal,filenamePla);</span>
 <span class="fc" id="L27">    }</span>
 
-    public void generateApi() throws Exception{
-<span class="fc" id="L30">        generateInputPort.generate();</span>
+    public void generateApi(String path) throws Exception{
+<span class="fc" id="L30">        generateInputPort.generate(path);</span>
 <span class="fc" id="L31">    }</span>
 
-    public void modifyApi(int id,String filenameBal,String filenamePla){
+    public void modifyApi(int id,String filenameBal,String filenamePla){ //modify for Cli: remove and then recreate the api
 <span class="fc" id="L34">        modifyInputPort.modify(id);</span>
 <span class="fc" id="L35">        apiInputPort.create(filenameBal,filenamePla);</span>
 <span class="fc" id="L36">    }</span>
@@ -39,8 +39,8 @@ public class Controller {
 <span class="fc" id="L39">        modifyGuiInputPort.modifyGui(oldApi,newApi);</span>
 <span class="fc" id="L40">    }</span>
 
-    public void createPla(String title,String extension,String pla){
-<span class="nc" id="L43">        createPlaInputPort.create(title,extension,pla);</span>
+    public void createPla(String path,String extension,String pla){
+<span class="nc" id="L43">        createPlaInputPort.create(path,extension,pla);</span>
 <span class="nc" id="L44">    }</span>
 
     public void loadPlaToModify(String filename) {

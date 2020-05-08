@@ -36,7 +36,7 @@ public class DataPresenterTest {
         map.put(1,api);
 
         dataPresenter.showOutput(map);
-        assertEquals("a",dataPresenter.getStringToShow());
+        assertEquals("",dataPresenter.getStringToShow()); //toshow reset
     }
 
 }

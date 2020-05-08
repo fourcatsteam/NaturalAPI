@@ -38,19 +38,19 @@ public class GuiModifyPla implements Observer {
 <span class="nc" id="L38">        modifyCustomPla = &quot;&quot;;</span>
 
 <span class="nc" id="L40">        frame = new JFrame(&quot;NaturalApi Develop&quot;);</span>
-<span class="nc" id="L41">        frame.setContentPane(mainPanel);</span>
-<span class="nc" id="L42">        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L43">        frame.setSize(500,500);</span>
-        try {
-<span class="nc" id="L45">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
-        }
-<span class="nc" id="L47">        catch (Exception e){</span>
-<span class="nc" id="L48">            e.printStackTrace();</span>
-<span class="nc" id="L49">        }</span>
 
-<span class="nc" id="L51">        loadButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L52">            fileChooser = new JFileChooser(&quot;C:\\Users\\matte\\OneDrive\\Desktop\\&quot; +</span>
-                    &quot;NaturalAPI\\NaturalAPI_Develop\\PLA\\&quot;);
+<span class="nc" id="L42">        frame.setContentPane(mainPanel);</span>
+<span class="nc" id="L43">        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L44">        frame.setSize(500,500);</span>
+        try {
+<span class="nc" id="L46">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
+        }
+<span class="nc" id="L48">        catch (Exception e){</span>
+<span class="nc" id="L49">            e.printStackTrace();</span>
+<span class="nc" id="L50">        }</span>
+
+<span class="nc" id="L52">        loadButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L53">            fileChooser = new JFileChooser();</span>
 <span class="nc" id="L54">            fileChooser.showOpenDialog(mainPanel);</span>
 <span class="nc" id="L55">            controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());</span>
 <span class="nc" id="L56">            textArea1.setText(modifyApiPla);</span>
@@ -58,30 +58,36 @@ public class GuiModifyPla implements Observer {
 <span class="nc" id="L58">        });</span>
 
 <span class="nc" id="L60">        modifyButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L61">            controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +</span>
-<span class="nc" id="L62">                    &quot;\ncustom class\n&quot; + textArea2.getText());</span>
-<span class="nc" id="L63">            JOptionPane.showMessageDialog(frame,message);</span>
-<span class="nc" id="L64">            frame.dispose();</span>
-<span class="nc" id="L65">        });</span>
 
-<span class="nc" id="L67">        cancelButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L68">            frame.dispose(); //close the frame</span>
-<span class="nc" id="L69">        });</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc bnc" id="L62" title="All 4 branches missed.">            if(textArea1.getText().isEmpty() || textArea2.getText().isEmpty()){</span>
+<span class="nc" id="L63">                JOptionPane.showMessageDialog(frame,&quot;There is an empty field!&quot;);</span>
+            }
+            else{
+<span class="nc" id="L66">                controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +</span>
+<span class="nc" id="L67">                        &quot;\ncustom class\n&quot; + textArea2.getText());</span>
+<span class="nc" id="L68">                JOptionPane.showMessageDialog(frame,message);</span>
+<span class="nc" id="L69">                frame.dispose();</span>
+            }
+<span class="nc" id="L71">        });</span>
+
+<span class="nc" id="L73">        cancelButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L74">            frame.dispose(); //close the frame</span>
+<span class="nc" id="L75">        });</span>
+<span class="nc" id="L76">    }</span>
 
     public void showGuiModifyPla(){
-<span class="nc" id="L73">        frame.setVisible(true);</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L79">        frame.setVisible(true);</span>
+<span class="nc" id="L80">    }</span>
 
     public void showOutput(){
-<span class="nc" id="L77">        modifyApiPla = dataPresenterGui.getModifyApiPla();</span>
-<span class="nc" id="L78">        modifyCustomPla = dataPresenterGui.getModifyCustomPla();</span>
-<span class="nc" id="L79">        message = dataPresenterGui.getMessagePla();</span>
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L83">        modifyApiPla = dataPresenterGui.getModifyApiPla();</span>
+<span class="nc" id="L84">        modifyCustomPla = dataPresenterGui.getModifyCustomPla();</span>
+<span class="nc" id="L85">        message = dataPresenterGui.getMessagePla();</span>
+<span class="nc" id="L86">    }</span>
 
     @Override
     public void update() {
-<span class="nc" id="L84">        showOutput();</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L90">        showOutput();</span>
+<span class="nc" id="L91">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

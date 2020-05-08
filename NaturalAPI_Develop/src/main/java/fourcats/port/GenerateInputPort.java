@@ -3,5 +3,5 @@ package fourcats.port;
 
 public interface GenerateInputPort {
 
-    void generate() throws Exception;
+    void generate(String path) throws Exception;
 }

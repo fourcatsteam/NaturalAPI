@@ -31,6 +31,7 @@ public class Gui implements Observer {
     private JComboBox<String> comboBox1;
     private JLabel messageLabel;
     Map<String,String> toView;
+    String message;
 
     public Gui(Controller c,DataPresenterGui d){
 
@@ -59,7 +60,7 @@ public class Gui implements Observer {
         addBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
-            bal[0] = fileChooser.getSelectedFile().getName();
+            bal[0] = fileChooser.getSelectedFile().getAbsolutePath();
             if(bal[0].contains(".json")){
                 messageLabel.setText("Bal loaded!");
                 mainPanel.setBackground(Color.GREEN);
@@ -73,7 +74,7 @@ public class Gui implements Observer {
         addPlaButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
-            pla[0] = fileChooser.getSelectedFile().getName();
+            pla[0] = fileChooser.getSelectedFile().getAbsolutePath();
             if(pla[0].contains(".txt")){
                 messageLabel.setText("Pla loaded!");
                 mainPanel.setBackground(Color.GREEN);
@@ -100,8 +101,11 @@ public class Gui implements Observer {
 
         generateButton.addActionListener(e -> {
             try{
-                c.generateApi();
-                messageLabel.setText("APIs generated!");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fileChooser.showSaveDialog(mainPanel);
+                c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
+                messageLabel.setText(message);
                 mainPanel.setBackground(Color.GREEN);
             }
             catch(Exception ex){
@@ -243,6 +247,7 @@ public class Gui implements Observer {
             toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
             comboBox1.addItem(dataPresenterGui.getComboToShow());
         }
+        message = dataPresenterGui.getMessage();
     }
 
     @Override

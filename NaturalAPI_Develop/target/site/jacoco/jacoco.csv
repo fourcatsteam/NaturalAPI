@@ -1,18 +1,18 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 NaturalAPI_Develop,fourcats,AppConfig,0,3,0,0,0,1,0,1,0,1
-NaturalAPI_Develop,fourcats,App,165,0,6,0,36,0,5,0,2,0
-NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenterGui,103,0,4,0,31,0,12,0,10,0
-NaturalAPI_Develop,fourcats.interfaceadapters,Controller,18,47,0,0,6,17,3,5,3,5
-NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenter,0,62,0,4,0,14,0,5,0,3
+NaturalAPI_Develop,fourcats,App,167,0,6,0,36,0,5,0,2,0
+NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenterGui,115,0,4,0,36,0,14,0,12,0
+NaturalAPI_Develop,fourcats.interfaceadapters,Controller,18,48,0,0,6,17,3,5,3,5
+NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenter,12,68,0,4,5,16,2,5,2,3
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
-NaturalAPI_Develop,fourcats.gui,GuiPla,105,0,0,0,28,0,6,0,6,0
-NaturalAPI_Develop,fourcats.gui,GuiModifyPla,157,0,0,0,40,0,7,0,7,0
+NaturalAPI_Develop,fourcats.gui,GuiPla,144,0,8,0,35,0,10,0,6,0
+NaturalAPI_Develop,fourcats.gui,GuiModifyPla,173,0,4,0,42,0,9,0,7,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
-NaturalAPI_Develop,fourcats.gui,Gui,450,0,6,0,100,0,15,0,12,0
+NaturalAPI_Develop,fourcats.gui,Gui,480,0,6,0,104,0,15,0,12,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
@@ -25,7 +25,7 @@ NaturalAPI_Develop,fourcats.observer,Subject,13,16,1,1,4,5,2,2,1,2
 NaturalAPI_Develop,fourcats.frameworks,FileSystem,23,84,0,4,9,19,1,6,1,4
 NaturalAPI_Develop,fourcats.frameworks,DataKeeper,58,93,9,5,11,21,7,10,2,8
 NaturalAPI_Develop,fourcats.frameworks,BalAnalyzerImplementation,0,244,0,14,0,54,0,10,0,3
-NaturalAPI_Develop,fourcats.frameworks,Repository,18,59,0,0,5,19,3,11,3,11
+NaturalAPI_Develop,fourcats.frameworks,Repository,18,60,0,0,5,19,3,11,3,11
 NaturalAPI_Develop,fourcats.entity,API,0,18,0,0,0,6,0,3,0,3
 NaturalAPI_Develop,fourcats.entity,BAL,0,76,0,8,0,21,0,9,0,5
 NaturalAPI_Develop,fourcats.entity,Type,0,43,1,1,0,16,1,7,0,7
@@ -33,7 +33,7 @@ NaturalAPI_Develop,fourcats.entity,Actor,0,95,1,5,0,27,1,11,0,9
 NaturalAPI_Develop,fourcats.entity,ObjectParam,5,51,0,0,2,20,1,9,1,9
 NaturalAPI_Develop,fourcats.entity,Action,17,138,1,7,5,31,3,12,2,9
 NaturalAPI_Develop,fourcats.entity,PLA,3,78,0,2,1,18,1,6,1,5
-NaturalAPI_Develop,fourcats.view,CLI,32,199,4,8,16,72,4,19,0,16
+NaturalAPI_Develop,fourcats.view,CLI,32,217,4,8,16,77,4,20,0,17
 NaturalAPI_Develop,com.intellij.uiDesigner.core,DimensionInfo,502,0,84,0,105,0,58,0,16,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,HorizontalInfo,37,0,0,0,10,0,9,0,9,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,SupportCode.TextWithMnemonic,59,0,10,0,11,0,7,0,2,0
@@ -46,7 +46,7 @@ NaturalAPI_Develop,com.intellij.uiDesigner.core,Spacer,12,0,0,0,3,0,3,0,3,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,Util,315,0,46,0,59,0,31,0,8,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,LayoutState,99,0,6,0,21,0,9,0,6,0
 NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyApi,0,23,0,0,0,9,0,3,0,3
-NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyPla,120,0,2,0,31,0,4,0,3,0
-NaturalAPI_Develop,fourcats.usecaseinteractor,GenerateApi,4,32,1,3,1,8,1,3,0,2
-NaturalAPI_Develop,fourcats.usecaseinteractor,CreatePla,67,0,8,0,11,0,6,0,2,0
-NaturalAPI_Develop,fourcats.usecaseinteractor,SuggestApi,22,369,5,13,3,58,5,11,0,7
+NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyPla,96,0,2,0,24,0,4,0,3,0
+NaturalAPI_Develop,fourcats.usecaseinteractor,GenerateApi,4,40,1,3,1,10,1,3,0,2
+NaturalAPI_Develop,fourcats.usecaseinteractor,CreatePla,53,0,2,0,9,0,3,0,2,0
+NaturalAPI_Develop,fourcats.usecaseinteractor,SuggestApi,22,300,5,13,3,54,5,11,0,7

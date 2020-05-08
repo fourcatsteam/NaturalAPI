@@ -38,19 +38,11 @@ public class ModifyPla implements ModifyPlaInputPort {
 <span class="nc" id="L38">    }</span>
 
     public void modify(String filename,String text){
-<span class="nc" id="L41">        File file = repositoryAccess.openFile(filename);</span>
-<span class="nc" id="L42">        try (BufferedReader br = new BufferedReader(new FileReader(file))){</span>
-<span class="nc" id="L43">            String title = file.getName();</span>
-<span class="nc" id="L44">            String extension = br.readLine();</span>
+<span class="nc" id="L41">        String pla = repositoryAccess.loadPLA(filename);</span>
+<span class="nc" id="L42">        String extension = pla.split(&quot;\n&quot;,2)[0];</span>
+<span class="nc" id="L43">        repositoryAccess.writePla(filename,extension + &quot;\n&quot; + text);</span>
+<span class="nc" id="L44">        modifyPlaOutputPort.showModifyPla(&quot;Pla modified!&quot;);</span>
 
-<span class="nc" id="L46">            repositoryAccess.writePla(&quot;./PLA/&quot; + title,extension + &quot;\n&quot; + text);</span>
-<span class="nc" id="L47">            modifyPlaOutputPort.showModifyPla(&quot;Pla modified!&quot;);</span>
-
-<span class="nc" id="L49">        } catch (FileNotFoundException e) {</span>
-<span class="nc" id="L50">            e.printStackTrace();</span>
-<span class="nc" id="L51">        } catch (IOException e) {</span>
-<span class="nc" id="L52">            e.printStackTrace();</span>
-<span class="nc" id="L53">        }</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L46">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

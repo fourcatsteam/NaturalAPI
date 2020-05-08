@@ -38,18 +38,10 @@ public class ModifyPla implements ModifyPlaInputPort {
     }
 
     public void modify(String filename,String text){
-        File file = repositoryAccess.openFile(filename);
-        try (BufferedReader br = new BufferedReader(new FileReader(file))){
-            String title = file.getName();
-            String extension = br.readLine();
+        String pla = repositoryAccess.loadPLA(filename);
+        String extension = pla.split("\n",2)[0];
+        repositoryAccess.writePla(filename,extension + "\n" + text);
+        modifyPlaOutputPort.showModifyPla("Pla modified!");
 
-            repositoryAccess.writePla("./PLA/" + title,extension + "\n" + text);
-            modifyPlaOutputPort.showModifyPla("Pla modified!");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

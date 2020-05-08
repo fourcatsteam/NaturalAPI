@@ -52,9 +52,9 @@ public class ControllerTest {
     @Test
     public void testGenerateApi() throws Exception {
 
-        controller.generateApi();
+        controller.generateApi("path");
 
-        verify(genMock).generate();
+        verify(genMock).generate(any(String.class));
     }
 
     @Test

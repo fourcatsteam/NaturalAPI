@@ -6,23 +6,26 @@ import fourcats.port.*;
 
 import java.util.Map;
 
-public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort, CreatePlaOutputPort, ModifyPlaOutputPort {
+public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort,
+        CreatePlaOutputPort, ModifyPlaOutputPort, GenerateOutputPort {
 
     private String toShow;
     private String comboToShow;
     private String messagePla;
 
-    private String modifyApiPla;
+    private String message;
 
+    private String modifyApiPla;
     private String modifyCustomPla;
+
     public DataPresenterGui(){
         toShow = "";
         comboToShow = "";
         messagePla = "";
         modifyApiPla = "";
         modifyCustomPla = "";
+        message = "";
     }
-
     public String getStringToShow(){
         return toShow;
     }
@@ -41,6 +44,10 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     public String getModifyCustomPla() {
         return modifyCustomPla;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -70,6 +77,11 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     public void showModifyPla(String message){
         messagePla = message;
+        notifyObservers();
+    }
+
+    public void showGenerationMessage(String m) {
+        message = m;
         notifyObservers();
     }
 }

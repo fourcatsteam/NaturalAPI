@@ -27,7 +27,7 @@ public class App {
         if(choice == 1){
             DataPresenter dataPresenter = new DataPresenter();
             SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);
-            GenerateApi generateApi = new GenerateApi(repo);
+            GenerateApi generateApi = new GenerateApi(repo,dataPresenter);
             ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenter);
             Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,new CreatePla(repo,new DataPresenterGui()),
                     new ModifyPla(repo,new DataPresenterGui()));
@@ -51,7 +51,7 @@ public class App {
         else if(choice == 2){
             DataPresenterGui dataPresenterGui = new DataPresenterGui();
             SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenterGui);
-            GenerateApi generateApi = new GenerateApi(repo);
+            GenerateApi generateApi = new GenerateApi(repo,dataPresenterGui);
             ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenterGui);
             CreatePla createPla = new CreatePla(repo,dataPresenterGui);
             ModifyPla modifyPla = new ModifyPla(repo,dataPresenterGui);

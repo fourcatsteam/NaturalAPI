@@ -98,12 +98,18 @@ public class CLI implements Observer {
         System.out.println("Do you want to generate your APIs? Type y or n");
     }
 
+    public void askPathApi() {
+        System.out.println("Type the path where APIs will be created.");
+    }
+
     public void readGenerateApi(){
         try{
             currentAnswer = br.readLine();
             switch (currentAnswer) {
                 case "y":
-                    controller.generateApi();
+                    askPathApi();
+                    currentAnswer = br.readLine();
+                    controller.generateApi(currentAnswer);
                     break;
                 case "n":
                     askModifyApi();
@@ -151,6 +157,7 @@ public class CLI implements Observer {
 
     public void showOutput(){
         System.out.println(dataPresenter.getStringToShow());
+        System.out.println(dataPresenter.getMessage());
     }
 
     @Override

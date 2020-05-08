@@ -2,6 +2,7 @@ package fourcats.usecaseinteractor;
 
 import fourcats.entity.API;
 import fourcats.interfaceaccess.RepositoryAccess;
+import fourcats.port.GenerateOutputPort;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,8 @@ import static org.mockito.Mockito.when;
 public class GenerateApiTest {
     @Mock
     RepositoryAccess repositoryMock;
+    @Mock
+    GenerateOutputPort generateOutputPortMock;
 
     /*@Mock
     Repository repo;*/
@@ -44,8 +47,9 @@ public class GenerateApiTest {
         map.put(1,new API());
         when(repositoryMock.getApiMap()).thenReturn(map);
 
-        generator.generate();
-        verify(repositoryMock).writeApi(any(API.class));
+        generator.generate("path");
+        verify(repositoryMock).writeApi(any(String.class),any(API.class));
+        verify(generateOutputPortMock).showGenerationMessage(any(String.class));
     }
 
 }

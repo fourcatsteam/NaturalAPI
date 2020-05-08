@@ -16,7 +16,6 @@ public class GuiPla implements Observer {
     private JButton cancelButton;
     private JPanel mainPanel;
     private JTextField textField1;
-    private JTextField textField2;
     private JTextArea textArea2;
 
     String message;
@@ -32,6 +31,7 @@ public class GuiPla implements Observer {
         message = "";
 
         frame = new JFrame("NaturalApi Develop");
+
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
@@ -44,9 +44,20 @@ public class GuiPla implements Observer {
 
         createButton.addActionListener(e -> {
 
-            controller.createPla(textField1.getText(),textField2.getText(),textArea1.getText() +
-                    "\ncustom class\n" + textArea2.getText());
-            JOptionPane.showMessageDialog(frame,message);
+            if(textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty()){
+                JOptionPane.showMessageDialog(frame,"There is an empty field!");
+            }
+            else{
+                JFileChooser savePla = new JFileChooser();
+                savePla.showSaveDialog(mainPanel);
+                controller.createPla(savePla.getSelectedFile().getAbsolutePath(),
+                        textField1.getText(),
+                        textArea1.getText() + "\ncustom class\n" + textArea2.getText());
+                JOptionPane.showMessageDialog(frame,message);
+                if(message.equals("PLA created!")){
+                    frame.dispose();
+                }
+            }
         });
 
         cancelButton.addActionListener(e -> {

@@ -3,33 +3,49 @@
 import fourcats.entity.API;
 import fourcats.observer.Subject;
 import fourcats.port.ApiOutputPort;
+import fourcats.port.GenerateOutputPort;
 import fourcats.port.ModifyOutputPort;
 import java.util.Map;
 
-public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort {
+public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort, GenerateOutputPort {
 
     private String toShow;
 
-<span class="fc" id="L13">    public DataPresenter(){</span>
-<span class="fc" id="L14">        toShow = &quot;&quot;;</span>
-<span class="fc" id="L15">    }</span>
+    private String message;
+
+<span class="fc" id="L16">    public DataPresenter(){</span>
+<span class="fc" id="L17">        toShow = &quot;&quot;;</span>
+<span class="fc" id="L18">        message = &quot;&quot;;</span>
+<span class="fc" id="L19">    }</span>
 
     public String getStringToShow(){
-<span class="fc" id="L18">        return toShow;</span>
+<span class="fc" id="L22">        return toShow;</span>
+    }
+
+    public String getMessage() {
+<span class="nc" id="L26">        return message;</span>
     }
 
     @Override
     public void showOutput(Map&lt;Integer,API&gt; mApi) {
-<span class="fc" id="L23">        toShow = &quot;&quot;;</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (Map.Entry&lt;Integer,API&gt; mapApi : mApi.entrySet()) {</span>
+<span class="fc" id="L31">        toShow = &quot;&quot;;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (Map.Entry&lt;Integer,API&gt; mapApi : mApi.entrySet()) {</span>
 
-<span class="fc" id="L26">            toShow = &quot;-----------API ID : &quot; + mapApi.getKey() + &quot;-----------\n&quot;;</span>
-<span class="fc" id="L27">            notifyObservers();</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">            for(Map.Entry&lt;String,String&gt; api : mapApi.getValue().getListApi().entrySet()){</span>
-<span class="fc" id="L29">                toShow = api.getValue();</span>
-<span class="fc" id="L30">                notifyObservers();</span>
-<span class="fc" id="L31">            }</span>
-<span class="fc" id="L32">        }</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L34">            toShow = &quot;-----------API ID : &quot; + mapApi.getKey() + &quot;-----------\n&quot;;</span>
+<span class="fc" id="L35">            notifyObservers();</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for(Map.Entry&lt;String,String&gt; api : mapApi.getValue().getListApi().entrySet()){</span>
+<span class="fc" id="L37">                toShow = api.getValue();</span>
+<span class="fc" id="L38">                notifyObservers();</span>
+<span class="fc" id="L39">            }</span>
+<span class="fc" id="L40">        }</span>
+<span class="fc" id="L41">        toShow = &quot;&quot;;</span>
+<span class="fc" id="L42">    }</span>
+
+    @Override
+    public void showGenerationMessage(String m){
+<span class="nc" id="L46">        message = m;</span>
+<span class="nc" id="L47">        notifyObservers();</span>
+<span class="nc" id="L48">        message = &quot;&quot;;</span>
+<span class="nc" id="L49">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

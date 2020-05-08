@@ -84,11 +84,11 @@ public class SuggestApiTest {
                 "\t}\n" +
                 "\n" +
                 "}");
-        when(repositoryMock.openFile(any(String.class))).thenReturn(new File("./API/"));
+        when(repositoryMock.openFile(any(String.class))).thenReturn(new File(""));
 
         suggestAPI.create(filebal,filepla);
 
-        verify(repositoryMock,times(4)).openFile(any(String.class));
+        verify(repositoryMock,times(1)).openFile(any(String.class));
         verify(repositoryMock).addApi(any(API.class));
         verify(outputMock).showOutput(anyMap());
     }

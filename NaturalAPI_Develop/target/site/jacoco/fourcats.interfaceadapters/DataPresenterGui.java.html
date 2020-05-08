@@ -6,71 +6,83 @@ import fourcats.port.*;
 
 import java.util.Map;
 
-public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort, CreatePlaOutputPort, ModifyPlaOutputPort {
+public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOutputPort,
+        CreatePlaOutputPort, ModifyPlaOutputPort, GenerateOutputPort {
 
     private String toShow;
     private String comboToShow;
     private String messagePla;
 
+    private String message;
+
     private String modifyApiPla;
-
     private String modifyCustomPla;
-<span class="nc" id="L18">    public DataPresenterGui(){</span>
-<span class="nc" id="L19">        toShow = &quot;&quot;;</span>
-<span class="nc" id="L20">        comboToShow = &quot;&quot;;</span>
-<span class="nc" id="L21">        messagePla = &quot;&quot;;</span>
-<span class="nc" id="L22">        modifyApiPla = &quot;&quot;;</span>
-<span class="nc" id="L23">        modifyCustomPla = &quot;&quot;;</span>
-<span class="nc" id="L24">    }</span>
 
+<span class="nc" id="L21">    public DataPresenterGui(){</span>
+<span class="nc" id="L22">        toShow = &quot;&quot;;</span>
+<span class="nc" id="L23">        comboToShow = &quot;&quot;;</span>
+<span class="nc" id="L24">        messagePla = &quot;&quot;;</span>
+<span class="nc" id="L25">        modifyApiPla = &quot;&quot;;</span>
+<span class="nc" id="L26">        modifyCustomPla = &quot;&quot;;</span>
+<span class="nc" id="L27">        message = &quot;&quot;;</span>
+<span class="nc" id="L28">    }</span>
     public String getStringToShow(){
-<span class="nc" id="L27">        return toShow;</span>
+<span class="nc" id="L30">        return toShow;</span>
     }
 
     public String getComboToShow(){
-<span class="nc" id="L31">        return comboToShow;</span>
+<span class="nc" id="L34">        return comboToShow;</span>
     }
 
     public String getMessagePla() {
-<span class="nc" id="L35">        return messagePla;</span>
+<span class="nc" id="L38">        return messagePla;</span>
     }
 
     public String getModifyApiPla() {
-<span class="nc" id="L39">        return modifyApiPla;</span>
+<span class="nc" id="L42">        return modifyApiPla;</span>
     }
 
     public String getModifyCustomPla() {
-<span class="nc" id="L43">        return modifyCustomPla;</span>
+<span class="nc" id="L46">        return modifyCustomPla;</span>
+    }
+
+    public String getMessage() {
+<span class="nc" id="L50">        return message;</span>
     }
 
     @Override
     public void showOutput(Map&lt;Integer,API&gt; mApi) {
 
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (Map.Entry&lt;Integer,API&gt; mapApi : mApi.entrySet()) {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        for (Map.Entry&lt;Integer,API&gt; mapApi : mApi.entrySet()) {</span>
 
-<span class="nc bnc" id="L51" title="All 2 branches missed.">            for(Map.Entry&lt;String,String&gt; api : mapApi.getValue().getListApi().entrySet()){</span>
-<span class="nc" id="L52">                toShow = api.getValue();</span>
-<span class="nc" id="L53">                String[] split = api.getKey().split(&quot;/&quot;);</span>
-<span class="nc" id="L54">                comboToShow = split[split.length-1];</span>
-<span class="nc" id="L55">                notifyObservers();</span>
-<span class="nc" id="L56">            }</span>
-<span class="nc" id="L57">        }</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            for(Map.Entry&lt;String,String&gt; api : mapApi.getValue().getListApi().entrySet()){</span>
+<span class="nc" id="L59">                toShow = api.getValue();</span>
+<span class="nc" id="L60">                String[] split = api.getKey().split(&quot;/&quot;);</span>
+<span class="nc" id="L61">                comboToShow = split[split.length-1];</span>
+<span class="nc" id="L62">                notifyObservers();</span>
+<span class="nc" id="L63">            }</span>
+<span class="nc" id="L64">        }</span>
+<span class="nc" id="L65">    }</span>
 
     public void showOutput(String message){
-<span class="nc" id="L61">        messagePla = message;</span>
-<span class="nc" id="L62">        notifyObservers();</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L68">        messagePla = message;</span>
+<span class="nc" id="L69">        notifyObservers();</span>
+<span class="nc" id="L70">    }</span>
 
     public void showLoadPla(String api,String custom){
-<span class="nc" id="L66">        modifyApiPla = api;</span>
-<span class="nc" id="L67">        modifyCustomPla = custom;</span>
-<span class="nc" id="L68">        notifyObservers();</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L73">        modifyApiPla = api;</span>
+<span class="nc" id="L74">        modifyCustomPla = custom;</span>
+<span class="nc" id="L75">        notifyObservers();</span>
+<span class="nc" id="L76">    }</span>
 
     public void showModifyPla(String message){
-<span class="nc" id="L72">        messagePla = message;</span>
-<span class="nc" id="L73">        notifyObservers();</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L79">        messagePla = message;</span>
+<span class="nc" id="L80">        notifyObservers();</span>
+<span class="nc" id="L81">    }</span>
+
+    public void showGenerationMessage(String m) {
+<span class="nc" id="L84">        message = m;</span>
+<span class="nc" id="L85">        notifyObservers();</span>
+<span class="nc" id="L86">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

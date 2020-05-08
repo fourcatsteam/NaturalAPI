@@ -9,7 +9,7 @@ public interface RepositoryAccess {
 
     File openFile(String filename);
     String loadPLA(String filename);
-    void writeApi(API api);
+    void writeApi(String path,API api);
     void addApi(API api);
     void addApiWithId(int id,API api);
     void deleteApi(int id);

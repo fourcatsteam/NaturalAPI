@@ -26,8 +26,8 @@ public class Controller {
         apiInputPort.create(filenameBal,filenamePla);
     }
 
-    public void generateApi() throws Exception{
-        generateInputPort.generate();
+    public void generateApi(String path) throws Exception{
+        generateInputPort.generate(path);
     }
 
     public void modifyApi(int id,String filenameBal,String filenamePla){ //modify for Cli: remove and then recreate the api
@@ -39,8 +39,8 @@ public class Controller {
         modifyGuiInputPort.modifyGui(oldApi,newApi);
     }
 
-    public void createPla(String title,String extension,String pla){
-        createPlaInputPort.create(title,extension,pla);
+    public void createPla(String path,String extension,String pla){
+        createPlaInputPort.create(path,extension,pla);
     }
 
     public void loadPlaToModify(String filename) {

@@ -36,8 +36,8 @@ public class RepositoryTest {
 
     @Test
     public void writingAPICorrectly(){
-        repo.writeApi(new API());
-        verify(fileMock).writeApi(any(API.class));
+        repo.writeApi("path",new API());
+        verify(fileMock).writeApi(any(String.class),any(API.class));
     }
 
     @Test

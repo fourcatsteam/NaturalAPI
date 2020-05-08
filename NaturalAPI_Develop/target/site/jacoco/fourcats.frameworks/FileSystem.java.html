@@ -17,7 +17,7 @@ import java.util.Scanner;
 
     public String loadPLA(String filename) {
 <span class="fc" id="L19">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L20">        File file = openFile(&quot;./PLA/&quot; +filename);</span>
+<span class="fc" id="L20">        File file = openFile(filename);</span>
 <span class="fc" id="L21">        try (Scanner scanner = new Scanner(file)){</span>
 
 <span class="fc bfc" id="L23" title="All 2 branches covered.">            while(scanner.hasNext()){</span>
@@ -30,9 +30,9 @@ import java.util.Scanner;
 <span class="fc" id="L30">        return sb.toString();</span>
     }
 
-    public void writeApi(API api) {
+    public void writeApi(String path,API api) {
 <span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Map.Entry&lt;String,String&gt; map : api.getListApi().entrySet()){</span>
-<span class="fc" id="L35">            File file = new File(map.getKey());</span>
+<span class="fc" id="L35">            File file = new File(path + map.getKey());</span>
 <span class="fc" id="L36">            try (FileWriter fileWriter = new FileWriter(file)){</span>
 <span class="fc" id="L37">                fileWriter.write(map.getValue());</span>
 <span class="nc" id="L38">            } catch (IOException e) {</span>

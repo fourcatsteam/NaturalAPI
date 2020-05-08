@@ -38,6 +38,7 @@ public class GuiModifyPla implements Observer {
         modifyCustomPla = "";
 
         frame = new JFrame("NaturalApi Develop");
+
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
@@ -49,8 +50,7 @@ public class GuiModifyPla implements Observer {
         }
 
         loadButton.addActionListener(e -> {
-            fileChooser = new JFileChooser("C:\\Users\\matte\\OneDrive\\Desktop\\" +
-                    "NaturalAPI\\NaturalAPI_Develop\\PLA\\");
+            fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
             controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());
             textArea1.setText(modifyApiPla);
@@ -58,10 +58,16 @@ public class GuiModifyPla implements Observer {
         });
 
         modifyButton.addActionListener(e -> {
-            controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +
-                    "\ncustom class\n" + textArea2.getText());
-            JOptionPane.showMessageDialog(frame,message);
-            frame.dispose();
+
+            if(textArea1.getText().isEmpty() || textArea2.getText().isEmpty()){
+                JOptionPane.showMessageDialog(frame,"There is an empty field!");
+            }
+            else{
+                controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +
+                        "\ncustom class\n" + textArea2.getText());
+                JOptionPane.showMessageDialog(frame,message);
+                frame.dispose();
+            }
         });
 
         cancelButton.addActionListener(e -> {

@@ -27,7 +27,7 @@ import java.util.Scanner;
 <span class="nc bnc" id="L27" title="All 2 branches missed.">        if(choice == 1){</span>
 <span class="nc" id="L28">            DataPresenter dataPresenter = new DataPresenter();</span>
 <span class="nc" id="L29">            SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenter);</span>
-<span class="nc" id="L30">            GenerateApi generateApi = new GenerateApi(repo);</span>
+<span class="nc" id="L30">            GenerateApi generateApi = new GenerateApi(repo,dataPresenter);</span>
 <span class="nc" id="L31">            ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenter);</span>
 <span class="nc" id="L32">            Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,new CreatePla(repo,new DataPresenterGui()),</span>
                     new ModifyPla(repo,new DataPresenterGui()));
@@ -51,7 +51,7 @@ import java.util.Scanner;
 <span class="nc bnc" id="L51" title="All 2 branches missed.">        else if(choice == 2){</span>
 <span class="nc" id="L52">            DataPresenterGui dataPresenterGui = new DataPresenterGui();</span>
 <span class="nc" id="L53">            SuggestApi suggestApi = new SuggestApi(balAnalyzerImplementation,repo,dataPresenterGui);</span>
-<span class="nc" id="L54">            GenerateApi generateApi = new GenerateApi(repo);</span>
+<span class="nc" id="L54">            GenerateApi generateApi = new GenerateApi(repo,dataPresenterGui);</span>
 <span class="nc" id="L55">            ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenterGui);</span>
 <span class="nc" id="L56">            CreatePla createPla = new CreatePla(repo,dataPresenterGui);</span>
 <span class="nc" id="L57">            ModifyPla modifyPla = new ModifyPla(repo,dataPresenterGui);</span>

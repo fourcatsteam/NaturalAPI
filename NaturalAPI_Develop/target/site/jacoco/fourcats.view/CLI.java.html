@@ -98,68 +98,75 @@ public class CLI implements Observer {
 <span class="fc" id="L98">        System.out.println(&quot;Do you want to generate your APIs? Type y or n&quot;);</span>
 <span class="fc" id="L99">    }</span>
 
+    public void askPathApi() {
+<span class="fc" id="L102">        System.out.println(&quot;Type the path where APIs will be created.&quot;);</span>
+<span class="fc" id="L103">    }</span>
+
     public void readGenerateApi(){
         try{
-<span class="fc" id="L103">            currentAnswer = br.readLine();</span>
-<span class="pc bpc" id="L104" title="1 of 3 branches missed.">            switch (currentAnswer) {</span>
+<span class="fc" id="L107">            currentAnswer = br.readLine();</span>
+<span class="pc bpc" id="L108" title="1 of 3 branches missed.">            switch (currentAnswer) {</span>
                 case &quot;y&quot;:
-<span class="fc" id="L106">                    controller.generateApi();</span>
-<span class="fc" id="L107">                    break;</span>
+<span class="fc" id="L110">                    askPathApi();</span>
+<span class="fc" id="L111">                    currentAnswer = br.readLine();</span>
+<span class="fc" id="L112">                    controller.generateApi(currentAnswer);</span>
+<span class="fc" id="L113">                    break;</span>
                 case &quot;n&quot;:
-<span class="fc" id="L109">                    askModifyApi();</span>
-<span class="fc" id="L110">                    break;</span>
+<span class="fc" id="L115">                    askModifyApi();</span>
+<span class="fc" id="L116">                    break;</span>
                 default:
-<span class="nc" id="L112">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
+<span class="nc" id="L118">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
             }
         }
-<span class="nc" id="L115">        catch (Exception e){</span>
-<span class="nc" id="L116">            e.printStackTrace();</span>
-<span class="fc" id="L117">        }</span>
-<span class="fc" id="L118">    }</span>
+<span class="nc" id="L121">        catch (Exception e){</span>
+<span class="nc" id="L122">            e.printStackTrace();</span>
+<span class="fc" id="L123">        }</span>
+<span class="fc" id="L124">    }</span>
 
     public void askModifyApi(){
-<span class="fc" id="L121">        System.out.println(&quot;Do you want to modify an API? Type y or n.&quot;);</span>
-<span class="fc" id="L122">        readModifyApi();</span>
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L127">        System.out.println(&quot;Do you want to modify an API? Type y or n.&quot;);</span>
+<span class="fc" id="L128">        readModifyApi();</span>
+<span class="fc" id="L129">    }</span>
 
     public void readModifyApi(){
         try{
-<span class="fc" id="L127">            String currentModify = br.readLine();</span>
-<span class="pc bpc" id="L128" title="1 of 3 branches missed.">            switch (currentModify) {</span>
+<span class="fc" id="L133">            String currentModify = br.readLine();</span>
+<span class="pc bpc" id="L134" title="1 of 3 branches missed.">            switch (currentModify) {</span>
                 case &quot;y&quot;:
-<span class="fc" id="L130">                    System.out.println(&quot;Type the ID of the chosen API&quot;);</span>
-<span class="fc" id="L131">                    currentModify = br.readLine();</span>
-<span class="fc" id="L132">                    askBal();</span>
-<span class="fc" id="L133">                    readBal();</span>
-<span class="fc" id="L134">                    askPla();</span>
-<span class="fc" id="L135">                    readPla();</span>
+<span class="fc" id="L136">                    System.out.println(&quot;Type the ID of the chosen API&quot;);</span>
+<span class="fc" id="L137">                    currentModify = br.readLine();</span>
+<span class="fc" id="L138">                    askBal();</span>
+<span class="fc" id="L139">                    readBal();</span>
+<span class="fc" id="L140">                    askPla();</span>
+<span class="fc" id="L141">                    readPla();</span>
                     //Serve un controllo per l'id
-<span class="fc" id="L137">                    controller.modifyApi(Integer.parseInt(currentModify),currentBal,currentPla);</span>
-<span class="fc" id="L138">                    askGenerateApi();</span>
-<span class="fc" id="L139">                    readGenerateApi();</span>
-<span class="fc" id="L140">                    break;</span>
+<span class="fc" id="L143">                    controller.modifyApi(Integer.parseInt(currentModify),currentBal,currentPla);</span>
+<span class="fc" id="L144">                    askGenerateApi();</span>
+<span class="fc" id="L145">                    readGenerateApi();</span>
+<span class="fc" id="L146">                    break;</span>
                 case &quot;n&quot;:
-<span class="fc" id="L142">                    break;</span>
+<span class="fc" id="L148">                    break;</span>
                 default:
-<span class="nc" id="L144">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
+<span class="nc" id="L150">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
             }
         }
-<span class="nc" id="L147">        catch(IOException e){</span>
-<span class="nc" id="L148">            e.printStackTrace();</span>
-<span class="fc" id="L149">        }</span>
-<span class="fc" id="L150">    }</span>
+<span class="nc" id="L153">        catch(IOException e){</span>
+<span class="nc" id="L154">            e.printStackTrace();</span>
+<span class="fc" id="L155">        }</span>
+<span class="fc" id="L156">    }</span>
 
     public void showOutput(){
-<span class="fc" id="L153">        System.out.println(dataPresenter.getStringToShow());</span>
-<span class="fc" id="L154">    }</span>
+<span class="fc" id="L159">        System.out.println(dataPresenter.getStringToShow());</span>
+<span class="fc" id="L160">        System.out.println(dataPresenter.getMessage());</span>
+<span class="fc" id="L161">    }</span>
 
     @Override
     public void update() {
-<span class="fc" id="L158">        showOutput();</span>
-<span class="fc" id="L159">    }</span>
+<span class="fc" id="L165">        showOutput();</span>
+<span class="fc" id="L166">    }</span>
 
     public String getCurrentAnswer() {
-<span class="fc" id="L162">        return currentAnswer;</span>
+<span class="fc" id="L169">        return currentAnswer;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

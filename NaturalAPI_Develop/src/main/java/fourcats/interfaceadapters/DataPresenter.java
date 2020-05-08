@@ -3,19 +3,27 @@ package fourcats.interfaceadapters;
 import fourcats.entity.API;
 import fourcats.observer.Subject;
 import fourcats.port.ApiOutputPort;
+import fourcats.port.GenerateOutputPort;
 import fourcats.port.ModifyOutputPort;
 import java.util.Map;
 
-public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort {
+public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutputPort, GenerateOutputPort {
 
     private String toShow;
 
+    private String message;
+
     public DataPresenter(){
         toShow = "";
+        message = "";
     }
 
     public String getStringToShow(){
         return toShow;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -30,5 +38,13 @@ public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutpu
                 notifyObservers();
             }
         }
+        toShow = "";
+    }
+
+    @Override
+    public void showGenerationMessage(String m){
+        message = m;
+        notifyObservers();
+        message = "";
     }
 }

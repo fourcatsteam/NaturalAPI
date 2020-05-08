@@ -17,7 +17,7 @@ public class FileSystem {
 
     public String loadPLA(String filename) {
         StringBuilder sb = new StringBuilder();
-        File file = openFile("./PLA/" +filename);
+        File file = openFile(filename);
         try (Scanner scanner = new Scanner(file)){
 
             while(scanner.hasNext()){
@@ -30,9 +30,9 @@ public class FileSystem {
         return sb.toString();
     }
 
-    public void writeApi(API api) {
+    public void writeApi(String path,API api) {
         for (Map.Entry<String,String> map : api.getListApi().entrySet()){
-            File file = new File(map.getKey());
+            File file = new File(path + map.getKey());
             try (FileWriter fileWriter = new FileWriter(file)){
                 fileWriter.write(map.getValue());
             } catch (IOException e) {

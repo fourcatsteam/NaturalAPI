@@ -24,8 +24,8 @@ public class Repository implements RepositoryAccess {
         return fileSystem.loadPLA(filename);
     }
 
-    public void writeApi(API api){
-        fileSystem.writeApi(api);
+    public void writeApi(String path,API api){
+        fileSystem.writeApi(path,api);
     }
 
     public void addApi(API api){

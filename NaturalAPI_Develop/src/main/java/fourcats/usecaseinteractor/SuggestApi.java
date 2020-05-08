@@ -24,7 +24,7 @@ public class SuggestApi implements ApiInputPort {
     public void create(String filenameBal,String filenamePla){
 
         if(repositoryAccess.isCoupleBalPlaPresent(filenameBal,filenamePla) == false){
-            balAnalyzer.setBalFile(repositoryAccess.openFile("./BAL/" + filenameBal));
+            balAnalyzer.setBalFile(repositoryAccess.openFile(filenameBal));
             BAL bal = balAnalyzer.getBAL();
             PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));
 
@@ -75,15 +75,13 @@ public class SuggestApi implements ApiInputPort {
                             customApi = customApi.concat("}");
 
                             customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
-                            repositoryAccess.openFile("./API/" + actor.getName() + "/" +"/CustomClasses/").mkdir();
-                            api.addApi("./API/" + actor.getName() + "/" +"/CustomClasses/"
-                                    + objectParam.getType().getName() + "_" + repositoryAccess.getSize()
+
+                            //actor.getName() nome attore
+                            api.addApi(objectParam.getType().getName() + "_" + repositoryAccess.getSize()
                                     + pla.getExtension(),customApi);
                         }
                     }
-                    repositoryAccess.openFile("./API/" + actor.getName() + "/").mkdir();
-                    repositoryAccess.openFile("./API/" + actor.getName() + "/" +"/CustomClasses/").mkdir();
-                    api.addApi("./API/" + actor.getName() + "/" + action.getName().substring(0,1).toUpperCase() +
+                    api.addApi(action.getName().substring(0,1).toUpperCase() +
                             action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension(), newApi);
                 }
             }

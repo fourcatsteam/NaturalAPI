@@ -131,10 +131,18 @@ public class CLITest {
     }
 
     @Test
-    public void readingGenerateApi() throws Exception {
+    public void testAskPathApi() throws Exception {
+        PrintStream out = mock(PrintStream.class);
+        System.setOut(out);
+        cli.askPathApi();
+        verify(out).println("Type the path where APIs will be created.");
+    }
+
+    @Test
+    public void testGenerateApi() throws Exception {
         when(bufferedReaderMock.readLine()).thenReturn("y");
         cli.readGenerateApi();
-        verify(controllerMock,times(1)).generateApi();
+        verify(controllerMock,times(1)).generateApi(any(String.class));
     }
 
     @Test

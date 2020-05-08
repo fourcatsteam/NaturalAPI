@@ -24,7 +24,7 @@ public class FileSystemTest {
 
     @Test
     public void loadingPLACorrectlyFound(){
-        String name = "TestFiles/Prova";
+        String name = "C:\\Users\\matte\\OneDrive\\Desktop\\NaturalAPI\\NaturalAPI_Develop\\PLA\\TestFiles\\Prova";
 
         String pla = file.loadPLA(name);
         assertTrue(pla!=null);
@@ -49,7 +49,7 @@ public class FileSystemTest {
 
         API apis = new API();
         apis.addApi("apifilename","realapi");
-        file.writeApi(apis);
+        file.writeApi("path",apis);
         assertTrue(true);
 
 

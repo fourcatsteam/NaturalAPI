@@ -3,27 +3,31 @@
 import fourcats.entity.API;
 import fourcats.port.GenerateInputPort;
 import fourcats.interfaceaccess.RepositoryAccess;
+import fourcats.port.GenerateOutputPort;
 
 import java.util.Map;
 
 public class GenerateApi implements GenerateInputPort {
 
     private RepositoryAccess repositoryAccess;
+    public GenerateOutputPort generateOutputPort;
 
-<span class="fc" id="L13">    public GenerateApi(RepositoryAccess ra){</span>
-<span class="fc" id="L14">        repositoryAccess = ra;</span>
-<span class="fc" id="L15">    }</span>
+<span class="fc" id="L15">    public GenerateApi(RepositoryAccess ra,GenerateOutputPort generateOutputPort){</span>
+<span class="fc" id="L16">        repositoryAccess = ra;</span>
+<span class="fc" id="L17">        this.generateOutputPort = generateOutputPort;</span>
+<span class="fc" id="L18">    }</span>
 
-    public void generate() throws Exception {
+    public void generate(String path) throws Exception {
 
-<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if(repositoryAccess.getApiMap().isEmpty()){</span>
-<span class="nc" id="L20">            throw new Exception();</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if(repositoryAccess.getApiMap().isEmpty()){</span>
+<span class="nc" id="L23">            throw new Exception();</span>
         }
         else{
-<span class="fc bfc" id="L23" title="All 2 branches covered.">            for(Map.Entry&lt;Integer,API&gt; mApi : repositoryAccess.getApiMap().entrySet()){</span>
-<span class="fc" id="L24">                repositoryAccess.writeApi(mApi.getValue());</span>
-<span class="fc" id="L25">            }</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            for(Map.Entry&lt;Integer,API&gt; mApi : repositoryAccess.getApiMap().entrySet()){</span>
+<span class="fc" id="L27">                repositoryAccess.writeApi(path,mApi.getValue());</span>
+<span class="fc" id="L28">                generateOutputPort.showGenerationMessage(&quot;APIs generated!&quot;);</span>
+<span class="fc" id="L29">            }</span>
         }
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L31">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
