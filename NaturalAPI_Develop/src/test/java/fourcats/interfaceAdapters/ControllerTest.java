@@ -64,7 +64,7 @@ public class ControllerTest {
         String fileNamePla = "namePla";
         controller.modifyApi(1,fileNameBal,fileNamePla);
 
-        verify(modMock).modify(1,fileNameBal,fileNamePla);
+        verify(modMock).modify(1);
     }
 
     @Test

@@ -41,7 +41,7 @@ public class ModifyApiTest {
     public void ModifyAPITestFromWrongInput() {
 
         try{
-            modifyApi.modify(-1, "", "");
+            modifyApi.modify(-1);
             fail();
         }
         catch(Throwable e)
@@ -63,30 +63,9 @@ public class ModifyApiTest {
 
     @Test
     public void testingModifyApi(){
-        String filenamebal="bal";
-        String filenamePla="b";
-        int i = 1;
-        List<Actor> l = new LinkedList<>();
-        Actor act = new Actor("Actor1");
-        Action action = new Action("gioca","tipo");
-        action.addObjectParam(new ObjectParam("palla","tipoObj"));
-        act.addAction(action);
-        l.add(act);
-        BAL bal = new BAL(l);
-        when(analyzerMock.getBAL()).thenReturn(bal);
-        when(repositoryMock.loadPLA(filenamePla)).thenReturn(".java\n" +
-                "ciao\n" +
-                "custom class\n" +
-                "ciao2");
 
-        modifyApi.modify(i,filenamebal,filenamePla);
-
-
+        modifyApi.modify(1);
         verify(repositoryMock).deleteApi(anyInt());
-        verify(repositoryMock).addApiWithId(anyInt(),any(API.class));
-        verify(outputMock).showOutput(anyMap());
-
-
 
     }
 }

@@ -2,7 +2,7 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 NaturalAPI_Develop,fourcats,AppConfig,0,3,0,0,0,1,0,1,0,1
 NaturalAPI_Develop,fourcats,App,165,0,6,0,36,0,5,0,2,0
 NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenterGui,103,0,4,0,31,0,12,0,10,0
-NaturalAPI_Develop,fourcats.interfaceadapters,Controller,18,44,0,0,6,16,3,5,3,5
+NaturalAPI_Develop,fourcats.interfaceadapters,Controller,18,47,0,0,6,17,3,5,3,5
 NaturalAPI_Develop,fourcats.interfaceadapters,DataPresenter,0,62,0,4,0,14,0,5,0,3
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
 NaturalAPI_Develop,fourcats.gui,Gui.new MouseAdapter() {...},22,0,0,0,4,0,2,0,2,0
@@ -45,7 +45,7 @@ NaturalAPI_Develop,com.intellij.uiDesigner.core,GridConstraints,848,0,102,0,154,
 NaturalAPI_Develop,com.intellij.uiDesigner.core,Spacer,12,0,0,0,3,0,3,0,3,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,Util,315,0,46,0,59,0,31,0,8,0
 NaturalAPI_Develop,com.intellij.uiDesigner.core,LayoutState,99,0,6,0,21,0,9,0,6,0
-NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyApi,0,203,0,6,0,35,0,11,0,8
+NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyApi,0,23,0,0,0,9,0,3,0,3
 NaturalAPI_Develop,fourcats.usecaseinteractor,ModifyPla,120,0,2,0,31,0,4,0,3,0
 NaturalAPI_Develop,fourcats.usecaseinteractor,GenerateApi,4,32,1,3,1,8,1,3,0,2
 NaturalAPI_Develop,fourcats.usecaseinteractor,CreatePla,67,0,8,0,11,0,6,0,2,0

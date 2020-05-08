@@ -31,23 +31,24 @@ public class Controller {
 <span class="fc" id="L31">    }</span>
 
     public void modifyApi(int id,String filenameBal,String filenamePla){
-<span class="fc" id="L34">        modifyInputPort.modify(id,filenameBal,filenamePla);</span>
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L34">        modifyInputPort.modify(id);</span>
+<span class="fc" id="L35">        apiInputPort.create(filenameBal,filenamePla);</span>
+<span class="fc" id="L36">    }</span>
 
     public void modifyApiGui(String oldApi,String newApi){
-<span class="fc" id="L38">        modifyGuiInputPort.modifyGui(oldApi,newApi);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L39">        modifyGuiInputPort.modifyGui(oldApi,newApi);</span>
+<span class="fc" id="L40">    }</span>
 
     public void createPla(String title,String extension,String pla){
-<span class="nc" id="L42">        createPlaInputPort.create(title,extension,pla);</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L43">        createPlaInputPort.create(title,extension,pla);</span>
+<span class="nc" id="L44">    }</span>
 
     public void loadPlaToModify(String filename) {
-<span class="nc" id="L46">        modifyPlaInputPort.loadPlaToModify(filename);</span>
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L47">        modifyPlaInputPort.loadPlaToModify(filename);</span>
+<span class="nc" id="L48">    }</span>
 
     public void modifyPla(String filename,String text){
-<span class="nc" id="L50">        modifyPlaInputPort.modify(filename,text);</span>
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L51">        modifyPlaInputPort.modify(filename,text);</span>
+<span class="nc" id="L52">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
