@@ -23,15 +23,23 @@ import static org.mockito.Mockito.*;
 
 public class GenerateBALSuggestionsTest {
 
-    RepositoryAccess repositoryMock = mock(RepositoryAccess.class);
-    TextAnalyzer analyzerMock = mock(TextAnalyzer.class);
-    GenerateBalSuggestionsOutputPort outputMock = mock(GenerateBalSuggestionsOutputPort.class);
+    RepositoryAccess repositoryMock ;
+
+    TextAnalyzer analyzerMock ;
+
+    GenerateBalSuggestionsOutputPort outputMock ;
 
     GenerateBalSuggestions generateBALSuggestions;
 
     @Before
     public void setup(){
-        generateBALSuggestions =
+         repositoryMock = mock(RepositoryAccess.class);
+
+         analyzerMock = mock(TextAnalyzer.class);
+
+         outputMock = mock(GenerateBalSuggestionsOutputPort.class);
+
+         generateBALSuggestions =
                 new GenerateBalSuggestions(repositoryMock, analyzerMock, outputMock);
     }
 
