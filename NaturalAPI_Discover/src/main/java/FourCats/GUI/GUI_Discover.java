@@ -66,26 +66,27 @@ public class GUI_Discover extends JPanel implements Observer{
                 String path = directory.getPath().replaceAll("\\\\", "/");
                 fileSystemAccess.setSaveFolder(path);
 
-                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File[] files = txtChooser.getSelectedFiles();
-                    LinkedList<String> nameTitleList = new LinkedList<>();
-                    for(File f: files){
-                        log.append("Selected: " + f.getName() + "." + "\n");
-                        nameTitleList.add(f.getName());
-                    }
-                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\","/");
-                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+                String name = this.chooseName("Choose the name of the BDL you want to create");
+                if (name != null) {
+                    log.append("Chosen name: " + name + "\n");
 
-                    String name = this.chooseName("Choose the name of the BDL you want to create");
-                    if (name != null) {
-                        log.append("Chosen name: " + name + "\n");
+                    int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                    if (returnValue == JFileChooser.APPROVE_OPTION) {
+                        File[] files = txtChooser.getSelectedFiles();
+                        LinkedList<String> nameTitleList = new LinkedList<>();
+                        for (File f : files) {
+                            log.append("Selected: " + f.getName() + "." + "\n");
+                            nameTitleList.add(f.getName());
+                        }
+                        String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
+                        fileSystemAccess.setTxtSourceFolder(sourceDir);
+
                         controller.createBdl(name, nameTitleList);
                     } else {
-                        log.append("Operation cancelled.\n");
+                        log.append("File selection cancelled.\n");
                     }
                 } else {
-                    log.append("File selection cancelled.\n");
+                    log.append("Operation cancelled.\n");
                 }
             }else{
                 log.append("Destination folder selection cancelled.\n");
@@ -100,26 +101,27 @@ public class GUI_Discover extends JPanel implements Observer{
                 fileSystemAccess.setBdlSourceFolder(path);
                 fileSystemAccess.setSaveFolder(path);
 
-                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File[] files = txtChooser.getSelectedFiles();
-                    LinkedList<String> nameTitleList = new LinkedList<>();
-                    for (File f : files) {
-                        log.append("Selected: " + f.getName() + "." + "\n");
-                        nameTitleList.add(f.getName());
-                    }
-                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
-                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+                String name = this.chooseName("Choose the name of the BDL you want to update");
+                if (name != null) {
+                    log.append("Chosen name: " + name + "\n");
 
-                    String name = this.chooseName("Choose the name of the BDL you want to update");
-                    if (name != null) {
-                        log.append("Chosen name: " + name + "\n");
+                    int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                    if (returnValue == JFileChooser.APPROVE_OPTION) {
+                        File[] files = txtChooser.getSelectedFiles();
+                        LinkedList<String> nameTitleList = new LinkedList<>();
+                        for (File f : files) {
+                            log.append("Selected: " + f.getName() + "." + "\n");
+                            nameTitleList.add(f.getName());
+                        }
+                        String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
+                        fileSystemAccess.setTxtSourceFolder(sourceDir);
+
                         controller.addDocument(name, nameTitleList);
                     } else {
-                        log.append("Operation canceled\n");
+                        log.append("File selection cancelled.\n");
                     }
                 } else {
-                    log.append("File selection cancelled.\n");
+                    log.append("Operation canceled\n");
                 }
             }else{
                 log.append("Source folder selection cancelled.\n");
@@ -134,27 +136,28 @@ public class GUI_Discover extends JPanel implements Observer{
                 fileSystemAccess.setBdlSourceFolder(path);
                 fileSystemAccess.setSaveFolder(path);
 
-                txtChooser.setCurrentDirectory(directory);
-                int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File[] files = txtChooser.getSelectedFiles();
-                    LinkedList<String> nameTitleList = new LinkedList<>();
-                    for (File f : files) {
-                        log.append("Selected: " + f.getName() + "." + "\n");
-                        nameTitleList.add(f.getName());
-                    }
-                    String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
-                    fileSystemAccess.setTxtSourceFolder(sourceDir);
+                String name = this.chooseName("Choose the name of the BDL you want to update");
+                if (name != null) {
+                    log.append("Chosen name: " + name + "\n");
 
-                    String name = this.chooseName("Choose the name of the BDL you want to update");
-                    if (name != null) {
-                        log.append("Chosen name: " + name + "\n");
+                    txtChooser.setCurrentDirectory(directory);
+                    int returnValue = txtChooser.showOpenDialog(GUI_Discover.this);
+                    if (returnValue == JFileChooser.APPROVE_OPTION) {
+                        File[] files = txtChooser.getSelectedFiles();
+                        LinkedList<String> nameTitleList = new LinkedList<>();
+                        for (File f : files) {
+                            log.append("Selected: " + f.getName() + "." + "\n");
+                            nameTitleList.add(f.getName());
+                        }
+                        String sourceDir = txtChooser.getCurrentDirectory().getPath().replaceAll("\\\\", "/");
+                        fileSystemAccess.setTxtSourceFolder(sourceDir);
+
                         controller.removeDocument(name, nameTitleList);
                     } else {
-                        log.append("Operation cancelled\n");
+                        log.append("File selection cancelled\n");
                     }
                 } else {
-                    log.append("File selection cancelled." + "\n");
+                log.append("Operation cancelled\n");
                 }
             }else {
                 log.append("Source folder selection cancelled\n");
