@@ -122,7 +122,8 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
         if (isFileDuplicated){
             isOkOperation = true;
             message = ("Warning!\n" +
-                    "One of the files you selected was already on the system. No action has been taken on it.");
+                    "One of the selected files is already present in the system or contains a duplicate scenario.");
+
         }
         else {
             isOkOperation = false;

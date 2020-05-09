@@ -31,15 +31,12 @@ public class FileSystemAccess implements PersistentMemoryAccess {
             }
             writer.write(content);
         }
-        catch (Exception e){
-            throw e;
-        }
 
     }
 
     @Override
     public Bdl getBdl(String[] name) throws IOException {
-        String bdlNames[] = new String[3];
+        String[] bdlNames = new String[3];
         int i = 0;
         for(String s:name){
            String[] splitting = s.split("\\."); //period is a special character
@@ -47,7 +44,7 @@ public class FileSystemAccess implements PersistentMemoryAccess {
            i++;
         }
         if(!(bdlNames[0].equals(bdlNames[1]) && bdlNames[0].equals(bdlNames[2]))){ //Files are from different BDL
-            return null;
+            throw new IOException();
         }
         return loadBdl(bdlNames[0]);
     }
@@ -59,7 +56,6 @@ public class FileSystemAccess implements PersistentMemoryAccess {
         readBdlNouns(bdlName,loadedBdl);
         readBdlVerbs(bdlName,loadedBdl);
         readBdlPredicates(bdlName,loadedBdl);
-
         return loadedBdl;
     }
 

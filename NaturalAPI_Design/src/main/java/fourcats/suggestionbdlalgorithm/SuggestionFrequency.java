@@ -13,8 +13,7 @@ public class SuggestionFrequency implements SuggestionFeedback {
 
     @Override
     public int findActionInBdl(String nameAction) {
-        //Ricerca sui predicati
-
+        //predicates research
        if (bdl!=null){
             for(WordCounter wc : bdl.getPredicates()){
                 if(wc.getWord().equalsIgnoreCase(nameAction.replace("_"," "))){
@@ -27,11 +26,10 @@ public class SuggestionFrequency implements SuggestionFeedback {
 
     @Override
     public int findObjectInBdl(String nameObject) {
-        //Ricerca sui nomi
+        //nouns research
         if (bdl!=null) {
             for (WordCounter wc : bdl.getNouns()) {
                 if (wc.getWord().equalsIgnoreCase(nameObject)) {
-                    //return true;
                     return wc.getCount();
                 }
             }

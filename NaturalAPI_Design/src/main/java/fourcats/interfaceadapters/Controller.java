@@ -2,7 +2,6 @@ package fourcats.interfaceadapters;
 
 import fourcats.port.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +39,7 @@ public class Controller{
         declineSuggestion.declineSuggestion(Integer.parseInt(idSuggestion), Integer.parseInt(idScenario));
     }
 
-    public void generateBAL(String filePath) throws IOException {
+    public void generateBAL(String filePath) {
         generateBAL.generateBAL(filePath);
     }
     public void modifyActionName(String idSuggestion, String idScenario, String newActionName){
@@ -85,7 +84,7 @@ public class Controller{
         addSuggestion.addSuggestionByIdType(Integer.parseInt(idScenario),suggestionName,Integer.parseInt(idType));
     }
 
-    public void loadBdl(String[] namebdl) throws IOException {
+    public void loadBdl(String[] namebdl) {
         loadBdl.loadBdlFiles(namebdl);
     }
 

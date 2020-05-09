@@ -25,7 +25,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     public void showErrorFileLoad(boolean isFileDuplicated) {
         if (isFileDuplicated){
             toShow = ("Warning!\n" +
-                    "One of the files you selected was already on the system. No action has been taken on it.");
+                    "One of the selected files is already present in the system or contains a duplicate scenario.");
         }
         else {
             toShow = ("Error! \n" +
