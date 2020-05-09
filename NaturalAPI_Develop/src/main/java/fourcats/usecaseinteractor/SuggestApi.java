@@ -35,11 +35,6 @@ public class SuggestApi implements ApiInputPort {
 
                     String newApi = pla.getText();
 
-                    String className = action.getName() + "_" + repositoryAccess.getSize();
-                    newApi = insertGroup(newApi,className);
-                    newApi = insertActionType(newApi, action.getType().getName());
-                    newApi = insertActionName(newApi, action.getName());
-
                     int size = action.getObjectParams().size();
                     Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
                     Matcher m = p.matcher(newApi);
@@ -70,6 +65,10 @@ public class SuggestApi implements ApiInputPort {
                         newApi = insertObjectName(newApi, objectParam.getName());
 
                     }
+                    String className = action.getName() + "_" + repositoryAccess.getSize();
+                    newApi = insertGroup(newApi,className);
+                    newApi = insertActionType(newApi, action.getType().getName());
+                    newApi = insertActionName(newApi, action.getName());
                     API api = new API();
                     api.setFilename(className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
                     api.setText(newApi);
