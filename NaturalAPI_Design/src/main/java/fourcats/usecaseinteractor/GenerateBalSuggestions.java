@@ -70,9 +70,8 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
         List<Scenario> scenarioList = new ArrayList<>();
 
-        //String[] arrScenarios = feature.split("Scenario:"); //split all scenarios to different strings
-
         List<String> scenarioStringList = new ArrayList<>(Arrays.asList(feature.split("Scenario:")));
+
         scenarioStringList.remove(0);
 
         for(String scenarioString : scenarioStringList){

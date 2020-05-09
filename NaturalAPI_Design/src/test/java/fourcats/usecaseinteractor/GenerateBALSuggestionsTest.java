@@ -114,6 +114,33 @@ public class GenerateBALSuggestionsTest {
         inputString = "Given A"+"\n"+"When B"+"\n"+"Then C";
         outputList = generateBALSuggestions.splitScenarioSteps(inputString);
         assertEquals(Arrays.asList("A", "B", "C"), outputList);
+
+        inputString =
+        "Given the account balance is \"$100\"" + "\n"
+        +"And the machine contains enough money" + "\n"
+        +"And we introduce a \"AMEX\" card" + "\n"
+        +"And the card is valid" + "\n"
+        +"When the Account Holder requests \"$50\"" + "\n"
+        +"Then the ATM should dispense \"$50\"" + "\n"
+        +"And the account balance should be \"$50\"" + "\n"
+        +"And the card should be returned";
+
+        outputList = generateBALSuggestions.splitScenarioSteps(inputString);
+
+        List<String> expectedOutput = Arrays.asList(
+            "the account balance is \"$100\"",
+            "the machine contains enough money",
+            "we introduce a \"AMEX\" card",
+            "the card is valid",
+            "the Account Holder requests \"$50\"",
+            "the ATM should dispense \"$50\"" ,
+            "the account balance should be \"$50\"",
+            "the card should be returned"
+        );
+
+        assertEquals(expectedOutput, outputList);
+
+
     }
 
     @Test
