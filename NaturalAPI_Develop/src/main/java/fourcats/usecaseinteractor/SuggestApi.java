@@ -49,37 +49,15 @@ public class SuggestApi implements ApiInputPort {
                         }
                     }
 
+                    createCustomClassForAction(api,pla,action);
+
                     for(ObjectParam objectParam : action.getObjectParams()) {
 
-                        String customApi = pla.getCustomClass();
                         newApi = insertObjectType(newApi, objectParam.getType().getName());
                         newApi = insertObjectName(newApi, objectParam.getName());
 
-                        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+                        createCustomClassForObjectParam(api,pla,objectParam);
 
-                            int numAttributes = objectParam.getType().getAttributes().size();
-
-                            customApi = customApi.substring(0,customApi.lastIndexOf("}"));
-
-                            java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
-                            java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
-                            while(numAttributes > 0) {
-
-                                customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
-                                customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
-                                if(numAttributes > 1) {
-                                    customApi = customApi.concat(pla.getCustomBody());
-                                }
-                                numAttributes--;
-                            }
-                            customApi = customApi.concat("}");
-
-                            customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
-
-                            //actor.getName() nome attore
-                            api.addApi(objectParam.getType().getName() + "_" + repositoryAccess.getSize()
-                                    + pla.getExtension(),customApi);
-                        }
                     }
                     api.addApi(action.getName().substring(0,1).toUpperCase() +
                             action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension(), newApi);
@@ -111,6 +89,63 @@ public class SuggestApi implements ApiInputPort {
 
     private String insertObjectName (String text,String toReplace){
         return text.replaceFirst("\"object_name\"", toReplace);
+    }
+
+    private void createCustomClassForAction(API api,PLA pla,Action action) {
+
+        String customApi = pla.getCustomClass();
+        if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+
+            int numAttributes = action.getType().getAttributes().size();
+
+            customApi = customApi.substring(0,customApi.lastIndexOf("}"));
+
+            java.util.Iterator<String> iteratorKeys = action.getType().getAttributes().keySet().iterator();
+            java.util.Iterator<String> iteratorValues = action.getType().getAttributes().values().iterator();
+            while(numAttributes > 0) {
+
+                customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
+                customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+                if(numAttributes > 1) {
+                    customApi = customApi.concat(pla.getCustomBody());
+                }
+                numAttributes--;
+            }
+            customApi = customApi.concat("}");
+
+            customApi = customApi.replaceAll("\"custom_class\"",action.getType().getName());
+
+            api.addApi(action.getType().getName() + "_" + repositoryAccess.getSize()
+                    + pla.getExtension(),customApi);
+        }
+    }
+
+    private void createCustomClassForObjectParam(API api,PLA pla,ObjectParam objectParam) {
+        String customApi = pla.getCustomClass();
+        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+
+            int numAttributes = objectParam.getType().getAttributes().size();
+
+            customApi = customApi.substring(0,customApi.lastIndexOf("}"));
+
+            java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
+            java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
+            while(numAttributes > 0) {
+
+                customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
+                customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+                if(numAttributes > 1) {
+                    customApi = customApi.concat(pla.getCustomBody());
+                }
+                numAttributes--;
+            }
+            customApi = customApi.concat("}");
+
+            customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
+
+            api.addApi(objectParam.getType().getName() + "_" + repositoryAccess.getSize()
+                    + pla.getExtension(),customApi);
+        }
     }
 
 }
