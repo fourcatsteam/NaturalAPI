@@ -27,16 +27,14 @@ public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutpu
     }
 
     @Override
-    public void showOutput(Map<Integer,API> mApi) {
+    public void showOutput(Map<Integer, API> mApi) {
         toShow = "";
-        for (Map.Entry<Integer,API> mapApi : mApi.entrySet()) {
+        for (Map.Entry<Integer, API> mapApi : mApi.entrySet()) {
 
             toShow = "-----------API ID : " + mapApi.getKey() + "-----------\n";
             notifyObservers();
-            for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
-                toShow = api.getValue();
-                notifyObservers();
-            }
+            toShow = mapApi.getValue().getText();
+            notifyObservers();
         }
         toShow = "";
     }

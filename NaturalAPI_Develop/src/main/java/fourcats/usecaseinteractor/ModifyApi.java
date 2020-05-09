@@ -24,8 +24,11 @@ public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
         repositoryAccess.updateApi(oldApi,newApi);
     }
 
-    public void modify(int id){
-        repositoryAccess.deleteApi(id);
+    public void modify(int id1,int id2){
+
+        for(int i = 0; i < id2 - id1; i++){
+            repositoryAccess.deleteApi(id1+i);
+        }
         //modify for cli: only delete api and create the controller creates an api with different bal or pla
     }
 }

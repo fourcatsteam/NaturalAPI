@@ -133,14 +133,16 @@ public class CLI implements Observer {
             String currentModify = br.readLine();
             switch (currentModify) {
                 case "y":
-                    System.out.println("Type the ID of the chosen API");
-                    currentModify = br.readLine();
+                    System.out.println("Type the ID of the first API to replace");
+                    String first = br.readLine();
+                    System.out.println("Type the ID of the last API to replace");
+                    String second = br.readLine();
                     askBal();
                     readBal();
                     askPla();
                     readPla();
                     //Serve un controllo per l'id
-                    controller.modifyApi(Integer.parseInt(currentModify),currentBal,currentPla);
+                    controller.modifyApi(Integer.parseInt(first),Integer.parseInt(second),currentBal,currentPla);
                     askGenerateApi();
                     readGenerateApi();
                     break;

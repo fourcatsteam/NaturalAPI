@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface ApiOutputPort {
 
-    void showOutput(Map<Integer,API> mApi);
+    void showOutput(Map<Integer, API> mApi);
 }

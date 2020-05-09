@@ -23,10 +23,10 @@ public class GenerateApi implements GenerateInputPort {
             throw new Exception();
         }
         else{
-            for(Map.Entry<Integer,API> mApi : repositoryAccess.getApiMap().entrySet()){
+            for(Map.Entry<Integer, API> mApi : repositoryAccess.getApiMap().entrySet()){
                 repositoryAccess.writeApi(path,mApi.getValue());
-                generateOutputPort.showGenerationMessage("APIs generated!");
             }
+            generateOutputPort.showGenerationMessage("APIs generated!");
         }
     }
 }

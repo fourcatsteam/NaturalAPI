@@ -30,8 +30,8 @@ public class Controller {
         generateInputPort.generate(path);
     }
 
-    public void modifyApi(int id,String filenameBal,String filenamePla){ //modify for Cli: remove and then recreate the api
-        modifyInputPort.modify(id);
+    public void modifyApi(int id1,int id2,String filenameBal,String filenamePla){ //modify for Cli: remove and then recreate the api
+        modifyInputPort.modify(id1,id2);
         apiInputPort.create(filenameBal,filenamePla);
     }
 

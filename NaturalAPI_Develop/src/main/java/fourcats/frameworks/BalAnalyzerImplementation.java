@@ -38,6 +38,8 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 String actionName = ac.get("name").asText();
                 JsonNode acType = ac.get("type");
                 String actionType = acType.get("name").asText();
+                String scenario = ac.get("scenario").asText();
+                String step = ac.get("step").asText();
 
                 //camelCase operations
                 String[] split = actionName.split("_");
@@ -61,7 +63,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 Type entityType = new Type(actionType,mAttributes);
 
                 actionName = sb.toString();
-                Action entityAction = new Action(actionName,entityType);
+                Action entityAction = new Action(actionName,entityType,scenario,step);
 
                 JsonNode parameters = ac.get("objectParams");
                 for (JsonNode par : parameters) {

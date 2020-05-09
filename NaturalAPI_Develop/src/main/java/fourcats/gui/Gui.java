@@ -128,6 +128,8 @@ public class Gui implements Observer {
             try{
                 controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
                 toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
+                messageLabel.setText("Api modified!");
+                mainPanel.setBackground(Color.GREEN);
             }
             catch (Exception ex) {
                 messageLabel.setText("What are you doing? There aren't suggestions to modify!");

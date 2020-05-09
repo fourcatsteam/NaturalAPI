@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
 public class FileSystem {
@@ -30,14 +29,13 @@ public class FileSystem {
         return sb.toString();
     }
 
-    public void writeApi(String path,API api) {
-        for (Map.Entry<String,String> map : api.getListApi().entrySet()){
-            File file = new File(path + map.getKey());
-            try (FileWriter fileWriter = new FileWriter(file)){
-                fileWriter.write(map.getValue());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void writeApi(String path, API api) {
+
+        File file = new File(path + api.getFilename());
+        try (FileWriter fileWriter = new FileWriter(file)){
+            fileWriter.write(api.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

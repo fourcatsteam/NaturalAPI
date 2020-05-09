@@ -1,7 +1,6 @@
 package fourcats.frameworks;
 
 import fourcats.entity.API;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

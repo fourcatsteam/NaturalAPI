@@ -24,7 +24,7 @@ public class Repository implements RepositoryAccess {
         return fileSystem.loadPLA(filename);
     }
 
-    public void writeApi(String path,API api){
+    public void writeApi(String path, API api){
         fileSystem.writeApi(path,api);
     }
 
@@ -32,7 +32,7 @@ public class Repository implements RepositoryAccess {
         dataKeeper.addApi(api);
     }
 
-    public void addApiWithId(int id,API api){
+    public void addApiWithId(int id, API api){
         dataKeeper.addApiWithId(id,api);
     }
 
@@ -44,7 +44,7 @@ public class Repository implements RepositoryAccess {
         return dataKeeper.getApi(id);
     }
 
-    public Map<Integer,API> getApiMap(){
+    public Map<Integer, API> getApiMap(){
         return dataKeeper.getApiMap();
     }
 
@@ -66,5 +66,9 @@ public class Repository implements RepositoryAccess {
 
     public boolean isCoupleBalPlaPresent(String bal,String pla){
         return dataKeeper.isCoupleBalPlaPresent(bal,pla);
+    }
+
+    public boolean isThisApiPresent(API a){
+        return dataKeeper.isThisApiPresent(a);
     }
 }

@@ -22,7 +22,7 @@ public class DataKeeper {
         mApi.put(id,api);
     }
 
-    public void addApiWithId(int id,API api) {
+    public void addApiWithId(int id, API api) {
         mApi.put(id,api);
     }
 
@@ -34,7 +34,7 @@ public class DataKeeper {
         return mApi.get(id);
     }
 
-    public Map<Integer,API> getApiMap(){
+    public Map<Integer, API> getApiMap(){
         return mApi;
     }
 
@@ -43,11 +43,10 @@ public class DataKeeper {
     }
 
     public void updateApi(String oldApi,String newApi) {
-        for(Map.Entry<Integer,API> api : mApi.entrySet()){
-            for(Map.Entry<String,String> listApi : api.getValue().getListApi().entrySet()){
-                if(listApi.getValue().equals(oldApi)){
-                    listApi.setValue(newApi);
-                }
+        for(Map.Entry<Integer, API> api : mApi.entrySet()){
+
+            if(api.getValue().getText().equals(oldApi)){
+                api.getValue().setText(newApi);
             }
         }
     }
@@ -68,6 +67,16 @@ public class DataKeeper {
         for(Map.Entry<String,List<String>> map : mBalPlaUsed.entrySet()){
 
             if(map.getKey().equals(bal) && map.getValue().contains(pla)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isThisApiPresent(API a){
+        for(Map.Entry<Integer, API> api : mApi.entrySet()) {
+
+            if(api.getValue().getText().equals(a.getText())){
                 return true;
             }
         }

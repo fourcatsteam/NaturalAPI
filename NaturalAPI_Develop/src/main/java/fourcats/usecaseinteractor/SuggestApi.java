@@ -28,7 +28,6 @@ public class SuggestApi implements ApiInputPort {
             BAL bal = balAnalyzer.getBAL();
             PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));
 
-            API api = new API();
             for(Actor actor : bal.getActors()){
 
                 for(Action action : actor.getActions()){
@@ -49,21 +48,47 @@ public class SuggestApi implements ApiInputPort {
                         }
                     }
 
-                    createCustomClassForAction(api,pla,action);
+                    if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+                        API api = createCustomClassForAction(pla, action);
+                        if(repositoryAccess.isThisApiPresent(api) == false){
+                            repositoryAccess.addApi(api);
+                        }
+                    }
+
+//                    String step = action.getStep();
+//                    step = step.replaceAll(" ", "_");
+//                    String testApi = pla.getText();
+//                    testApi = insertGroup(testApi,step);
+//                    API test = new API();
+//                    test.setFilename(action.getName().substring(0,1).toUpperCase() +
+//                            action.getName().substring(1) + "Test" + "_" + repositoryAccess.getSize() + pla.getExtension());
+//                    test.setText(testApi);
+//                    if(repositoryAccess.isThisApiPresent(test) == false) {
+//                        repositoryAccess.addApi(test);
+//                    }
 
                     for(ObjectParam objectParam : action.getObjectParams()) {
 
                         newApi = insertObjectType(newApi, objectParam.getType().getName());
                         newApi = insertObjectName(newApi, objectParam.getName());
 
-                        createCustomClassForObjectParam(api,pla,objectParam);
+                        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()){
+                            API api = createCustomClassForObjectParam(pla,objectParam);
+                            if(repositoryAccess.isThisApiPresent(api) == false){
+                                repositoryAccess.addApi(api);
+                            }
+                        }
 
                     }
-                    api.addApi(action.getName().substring(0,1).toUpperCase() +
-                            action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension(), newApi);
+                    API api = new API();
+                    api.setFilename(action.getName().substring(0,1).toUpperCase() +
+                            action.getName().substring(1) + "_" + repositoryAccess.getSize() + pla.getExtension());
+                    api.setText(newApi);
+                    if(repositoryAccess.isThisApiPresent(api) == false){
+                        repositoryAccess.addApi(api);
+                    }
                 }
             }
-            repositoryAccess.addApi(api);
             repositoryAccess.addCoupleBalPla(filenameBal,filenamePla);
             apiOutputPort.showOutput(repositoryAccess.getApiMap());
         }
@@ -91,61 +116,65 @@ public class SuggestApi implements ApiInputPort {
         return text.replaceFirst("\"object_name\"", toReplace);
     }
 
-    private void createCustomClassForAction(API api,PLA pla,Action action) {
+    private API createCustomClassForAction(PLA pla, Action action) {
 
+        API api = new API();
         String customApi = pla.getCustomClass();
-        if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
 
-            int numAttributes = action.getType().getAttributes().size();
+        int numAttributes = action.getType().getAttributes().size();
 
-            customApi = customApi.substring(0,customApi.lastIndexOf("}"));
+        customApi = customApi.substring(0,customApi.lastIndexOf("}"));
 
-            java.util.Iterator<String> iteratorKeys = action.getType().getAttributes().keySet().iterator();
-            java.util.Iterator<String> iteratorValues = action.getType().getAttributes().values().iterator();
-            while(numAttributes > 0) {
+        java.util.Iterator<String> iteratorKeys = action.getType().getAttributes().keySet().iterator();
+        java.util.Iterator<String> iteratorValues = action.getType().getAttributes().values().iterator();
+        while(numAttributes > 0) {
 
-                customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
-                customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
-                if(numAttributes > 1) {
-                    customApi = customApi.concat(pla.getCustomBody());
-                }
-                numAttributes--;
+            customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
+            customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+            if(numAttributes > 1) {
+                customApi = customApi.concat(pla.getCustomBody());
             }
-            customApi = customApi.concat("}");
-
-            customApi = customApi.replaceAll("\"custom_class\"",action.getType().getName());
-
-            api.addApi(action.getType().getName() + "_" + repositoryAccess.getSize()
-                    + pla.getExtension(),customApi);
+            numAttributes--;
         }
+        customApi = customApi.concat("}");
+
+        customApi = customApi.replaceAll("\"custom_class\"",action.getType().getName());
+
+        api.setFilename(action.getType().getName() + "_" + repositoryAccess.getSize()
+                + pla.getExtension());
+        api.setText(customApi);
+
+        return api;
     }
 
-    private void createCustomClassForObjectParam(API api,PLA pla,ObjectParam objectParam) {
+    private API createCustomClassForObjectParam(PLA pla, ObjectParam objectParam) {
+
+        API api = new API();
         String customApi = pla.getCustomClass();
-        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
 
-            int numAttributes = objectParam.getType().getAttributes().size();
+        int numAttributes = objectParam.getType().getAttributes().size();
 
-            customApi = customApi.substring(0,customApi.lastIndexOf("}"));
+        customApi = customApi.substring(0,customApi.lastIndexOf("}"));
 
-            java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
-            java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
-            while(numAttributes > 0) {
+        java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
+        java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
+        while(numAttributes > 0) {
 
-                customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
-                customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
-                if(numAttributes > 1) {
-                    customApi = customApi.concat(pla.getCustomBody());
-                }
-                numAttributes--;
+            customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
+            customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+            if(numAttributes > 1) {
+                customApi = customApi.concat(pla.getCustomBody());
             }
-            customApi = customApi.concat("}");
-
-            customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
-
-            api.addApi(objectParam.getType().getName() + "_" + repositoryAccess.getSize()
-                    + pla.getExtension(),customApi);
+            numAttributes--;
         }
+        customApi = customApi.concat("}");
+
+        customApi = customApi.replaceAll("\"custom_class\"",objectParam.getType().getName());
+
+        api.setFilename(objectParam.getType().getName() + "_" + repositoryAccess.getSize()
+                + pla.getExtension());
+        api.setText(customApi);
+        return api;
     }
 
 }

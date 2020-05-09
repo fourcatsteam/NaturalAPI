@@ -51,16 +51,14 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
     }
 
     @Override
-    public void showOutput(Map<Integer,API> mApi) {
+    public void showOutput(Map<Integer, API> mApi) {
 
-        for (Map.Entry<Integer,API> mapApi : mApi.entrySet()) {
+        for (Map.Entry<Integer, API> mapApi : mApi.entrySet()) {
 
-            for(Map.Entry<String,String> api : mapApi.getValue().getListApi().entrySet()){
-                toShow = api.getValue();
-                String[] split = api.getKey().split("/");
-                comboToShow = split[split.length-1];
-                notifyObservers();
-            }
+            toShow = mapApi.getValue().getText();
+            String[] split = mapApi.getValue().getFilename().split("/");
+            comboToShow = split[split.length-1];
+            notifyObservers();
         }
     }
 
