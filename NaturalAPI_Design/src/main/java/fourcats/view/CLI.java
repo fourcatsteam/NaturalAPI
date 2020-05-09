@@ -3,6 +3,7 @@ package fourcats.view;
 import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
+import fourcats.view.utilities.ViewUtility;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,7 +41,6 @@ public class CLI implements Observer {
             switch (currentUseCase) {
                 case "1":
                     generateSuggestion();
-                    askForOperationOnSuggestion();
                     break;
                 case "2":
                     if (!isBdlLoaded)
@@ -91,7 +91,8 @@ public class CLI implements Observer {
             System.out.println("Enter the path of the gherkin feature file, digit EXIT when you're done.");
             input = br.readLine();
             if (!input.equals("EXIT")){
-                lFiles.add(input);
+                if (ViewUtility.isFeaturePathValid(input)) lFiles.add(input);
+                else System.out.println("\nInvalid file: this is not a .feature file!\n");
             }
         }
         return lFiles;
@@ -219,7 +220,10 @@ public class CLI implements Observer {
 
     public void generateSuggestion() throws IOException {
         List<String> lFilesPath = chooseFeatureFile();
-        contr.generateSuggestions(lFilesPath,true);
+        if (!lFilesPath.isEmpty()) {
+            contr.generateSuggestions(lFilesPath, true);
+            askForOperationOnSuggestion();
+        }
     }
 
     private void modifyActionName(String idScenario, String idSuggestion) throws IOException {

@@ -55,10 +55,7 @@ public class Action {
         return param;
     }
     public void setType(String actionType) {
-        if (this.type == null)
-            this.type = new Type(actionType);
-        else
-            this.type.setName(actionType);
+        this.type = new Type(actionType);
     }
     public String getScenario() {
         return scenario;

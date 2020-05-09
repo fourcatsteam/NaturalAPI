@@ -4,8 +4,6 @@ import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.LoadBdlInputPort;
 import fourcats.port.LoadBdlOutputPort;
 
-import java.io.IOException;
-
 public class LoadBdl implements LoadBdlInputPort {
     RepositoryAccess repo;
     LoadBdlOutputPort out;
