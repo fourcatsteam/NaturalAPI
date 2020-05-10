@@ -1,5 +1,6 @@
 package fourcats.usecaseinteractor;
 
+import fourcats.observer.Subject;
 import fourcats.port.ApiInputPort;
 import fourcats.entity.*;
 import fourcats.interfaceaccess.BalAnalyzer;
@@ -46,19 +47,13 @@ public class SuggestApi implements ApiInputPort {
                     }
 
                     if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
-                        API api = createCustomClassForAction(pla, action);
-                        if(repositoryAccess.isThisApiPresent(api) == false){
-                            repositoryAccess.addApi(api);
-                        }
+                        createCustomClassForAction(pla, action);
                     }
 
                     for(ObjectParam objectParam : action.getObjectParams()) {
 
                         if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()){
-                            API api = createCustomClassForObjectParam(pla,objectParam);
-                            if(repositoryAccess.isThisApiPresent(api) == false){
-                                repositoryAccess.addApi(api);
-                            }
+                            createCustomClassForObjectParam(pla,objectParam);
                         }
 
                         newApi = insertObjectType(newApi, objectParam.getType().getName());
@@ -76,7 +71,7 @@ public class SuggestApi implements ApiInputPort {
                         int num = 0;
                         while(repositoryAccess.isThisClassNamePresent(api)){
                             num++;
-                            String newClassName = className.concat("_" + num);
+                            String newClassName = className.concat("__" + num);
                             newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                             className = className.substring(0,1).toUpperCase() + className.substring(1);
                             api.setText(api.getText().replaceAll(className,newClassName));
@@ -99,6 +94,14 @@ public class SuggestApi implements ApiInputPort {
                     test.setFilename("Test\\" + classTestName + pla.getExtension());
                     test.setText(testApi);
                     if(repositoryAccess.isThisApiPresent(test) == false) {
+                        int num = 0;
+                        while(repositoryAccess.isThisClassNamePresent(test)){
+                            num++;
+                            String newClassTestName = classTestName.concat("__" + num);
+                            test.setText(test.getText().replaceAll(classTestName,newClassTestName));
+                            test.setFilename(test.getFilename().replaceAll(classTestName,newClassTestName));
+                            classTestName = newClassTestName;
+                        }
                         repositoryAccess.addApi(test);
                     }
                 }
@@ -130,7 +133,7 @@ public class SuggestApi implements ApiInputPort {
         return text.replaceFirst("\"object_name\"", toReplace);
     }
 
-    private API createCustomClassForAction(PLA pla, Action action) {
+    private void createCustomClassForAction(PLA pla, Action action) {
 
         API api = new API();
         String customApi = pla.getCustomClass();
@@ -158,10 +161,22 @@ public class SuggestApi implements ApiInputPort {
         api.setFilename("Custom classes\\" + className + pla.getExtension());
         api.setText(customApi);
 
-        return api;
+        if(repositoryAccess.isThisApiPresent(api) == false){
+            int num = 0;
+            while(repositoryAccess.isThisClassNamePresent(api)){
+                num++;
+                String newClassName = className.concat("__" + num);
+                newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
+                className = className.substring(0,1).toUpperCase() + className.substring(1);
+                api.setText(api.getText().replaceAll(className,newClassName));
+                api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                className = newClassName;
+            }
+            repositoryAccess.addApi(api);
+        }
     }
 
-    private API createCustomClassForObjectParam(PLA pla, ObjectParam objectParam) {
+    private void createCustomClassForObjectParam(PLA pla, ObjectParam objectParam) {
 
         API api = new API();
         String customApi = pla.getCustomClass();
@@ -188,7 +203,20 @@ public class SuggestApi implements ApiInputPort {
 
         api.setFilename("Custom classes\\" + className + pla.getExtension());
         api.setText(customApi);
-        return api;
+
+        if(repositoryAccess.isThisApiPresent(api) == false){
+            int num = 0;
+            while(repositoryAccess.isThisClassNamePresent(api)){
+                num++;
+                String newClassName = className.concat("__" + num);
+                newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
+                className = className.substring(0,1).toUpperCase() + className.substring(1);
+                api.setText(api.getText().replaceAll(className,newClassName));
+                api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                className = newClassName;
+            }
+            repositoryAccess.addApi(api);
+        }
     }
 
 }

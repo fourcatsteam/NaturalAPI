@@ -75,7 +75,7 @@ public class DataKeeper {
 
     public boolean isThisApiPresent(API a){
         for(Map.Entry<Integer, API> api : mApi.entrySet()) {
-            if(api.getValue().getText().replaceAll("_[0-9]*","").equals(a.getText())){
+            if(api.getValue().getText().replaceAll("__[0-9]*","").equals(a.getText())){
                 return true;
             }
         }
