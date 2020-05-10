@@ -45,7 +45,7 @@ public class Gui implements Observer {
         frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700,500);
+        frame.setSize(750,700);
         try {
             frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }

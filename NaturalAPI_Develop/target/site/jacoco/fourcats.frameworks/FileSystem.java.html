@@ -6,48 +6,48 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
-<span class="fc" id="L12">public class FileSystem {</span>
+<span class="fc" id="L11">public class FileSystem {</span>
 
     public File openFile(String filename) {
-<span class="fc" id="L15">        return new File(filename);</span>
+<span class="fc" id="L14">        return new File(filename);</span>
     }
 
     public String loadPLA(String filename) {
-<span class="fc" id="L19">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L20">        File file = openFile(filename);</span>
-<span class="fc" id="L21">        try (Scanner scanner = new Scanner(file)){</span>
+<span class="fc" id="L18">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L19">        File file = openFile(filename);</span>
+<span class="fc" id="L20">        try (Scanner scanner = new Scanner(file)){</span>
 
-<span class="fc bfc" id="L23" title="All 2 branches covered.">            while(scanner.hasNext()){</span>
-<span class="fc" id="L24">                sb.append(scanner.nextLine());</span>
-<span class="fc" id="L25">                sb.append(&quot;\n&quot;);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">            while(scanner.hasNext()){</span>
+<span class="fc" id="L23">                sb.append(scanner.nextLine());</span>
+<span class="fc" id="L24">                sb.append(&quot;\n&quot;);</span>
             }
-<span class="fc" id="L27">        } catch (FileNotFoundException e) {</span>
-<span class="fc" id="L28">            return null;</span>
-<span class="fc" id="L29">        }</span>
-<span class="fc" id="L30">        return sb.toString();</span>
+<span class="fc" id="L26">        } catch (FileNotFoundException e) {</span>
+<span class="fc" id="L27">            return null;</span>
+<span class="fc" id="L28">        }</span>
+<span class="fc" id="L29">        return sb.toString();</span>
     }
 
-    public void writeApi(String path,API api) {
-<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Map.Entry&lt;String,String&gt; map : api.getListApi().entrySet()){</span>
-<span class="fc" id="L35">            File file = new File(path + map.getKey());</span>
-<span class="fc" id="L36">            try (FileWriter fileWriter = new FileWriter(file)){</span>
-<span class="fc" id="L37">                fileWriter.write(map.getValue());</span>
-<span class="nc" id="L38">            } catch (IOException e) {</span>
-<span class="nc" id="L39">                e.printStackTrace();</span>
-<span class="fc" id="L40">            }</span>
-<span class="fc" id="L41">        }</span>
-<span class="fc" id="L42">    }</span>
+    public void writeApi(String path, API api) {
+
+<span class="nc" id="L34">        File file = new File(path + api.getFilename());</span>
+<span class="nc" id="L35">        file.getParentFile().getParentFile().mkdir();</span>
+<span class="nc" id="L36">        file.getParentFile().mkdir();</span>
+<span class="nc" id="L37">        try (FileWriter fileWriter = new FileWriter(file)){</span>
+<span class="nc" id="L38">            fileWriter.write(api.getText());</span>
+<span class="nc" id="L39">        } catch (IOException e) {</span>
+<span class="nc" id="L40">            e.printStackTrace();</span>
+<span class="nc" id="L41">        }</span>
+<span class="nc" id="L42">    }</span>
 
     public void writePla(String file,String pla) {
-<span class="nc" id="L45">        File f = new File(file);</span>
-<span class="nc" id="L46">        try(FileWriter fw = new FileWriter(f)){</span>
-<span class="nc" id="L47">            fw.write(pla);</span>
+<span class="fc" id="L45">        File f = new File(file);</span>
+<span class="fc" id="L46">        try(FileWriter fw = new FileWriter(f)){</span>
+<span class="fc" id="L47">            fw.write(pla);</span>
 <span class="nc" id="L48">        } catch (IOException ex) {</span>
 <span class="nc" id="L49">            ex.printStackTrace();</span>
-<span class="nc" id="L50">        }</span>
-<span class="nc" id="L51">    }</span>
+<span class="fc" id="L50">        }</span>
+<span class="fc" id="L51">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

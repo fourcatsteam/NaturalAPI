@@ -24,7 +24,7 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L24">        return fileSystem.loadPLA(filename);</span>
     }
 
-    public void writeApi(String path,API api){
+    public void writeApi(String path, API api){
 <span class="fc" id="L28">        fileSystem.writeApi(path,api);</span>
 <span class="fc" id="L29">    }</span>
 
@@ -32,7 +32,7 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L32">        dataKeeper.addApi(api);</span>
 <span class="fc" id="L33">    }</span>
 
-    public void addApiWithId(int id,API api){
+    public void addApiWithId(int id, API api){
 <span class="fc" id="L36">        dataKeeper.addApiWithId(id,api);</span>
 <span class="fc" id="L37">    }</span>
 
@@ -44,7 +44,7 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L44">        return dataKeeper.getApi(id);</span>
     }
 
-    public Map&lt;Integer,API&gt; getApiMap(){
+    public Map&lt;Integer, API&gt; getApiMap(){
 <span class="fc" id="L48">        return dataKeeper.getApiMap();</span>
     }
 
@@ -57,15 +57,23 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L57">    }</span>
 
     public void writePla(String file,String pla){
-<span class="nc" id="L60">        fileSystem.writePla(file,pla);</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L60">        fileSystem.writePla(file,pla);</span>
+<span class="fc" id="L61">    }</span>
 
     public void addCoupleBalPla(String bal,String pla){
-<span class="nc" id="L64">        dataKeeper.addCoupleBalPla(bal,pla);</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L64">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="fc" id="L65">    }</span>
 
     public boolean isCoupleBalPlaPresent(String bal,String pla){
-<span class="nc" id="L68">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+<span class="fc" id="L68">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+    }
+
+    public boolean isThisApiPresent(API a){
+<span class="fc" id="L72">        return dataKeeper.isThisApiPresent(a);</span>
+    }
+
+    public boolean isThisClassNamePresent(API a){
+<span class="fc" id="L76">        return dataKeeper.isThisClassNamePresent(a);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

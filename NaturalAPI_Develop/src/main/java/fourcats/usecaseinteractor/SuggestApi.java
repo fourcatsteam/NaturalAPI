@@ -62,6 +62,7 @@ public class SuggestApi implements ApiInputPort {
 
                             newApi = insertObjectType(newApi, objectParam.getType().getName());
                             newApi = insertObjectName(newApi, objectParam.getName());
+
                         }
                     }
 
@@ -81,20 +82,32 @@ public class SuggestApi implements ApiInputPort {
                             String newClassName = holdClassName.concat("__" + num);
                             newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                             className = className.substring(0,1).toUpperCase() + className.substring(1);
-                            api.setText(api.getText().replaceAll(className,newClassName));
-                            api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                            api.setText(api.getText().replace(className,newClassName));
+                            api.setFilename(api.getFilename().replace(className,newClassName));
                             className = newClassName;
                         }
                         repositoryAccess.addApi(api);
                     }
 
-                    if(action.getStep() != "null") {
+                    if(!action.getStep().equals("null")) {
                         String step = action.getStep();
-                        step = step.replaceAll(" ", "_");
+
+                        String[] splitKeyword = step.split(" ");
+                        String keyword = splitKeyword[0];
+
+                        step = "";
+                        for(int i = 1; i < splitKeyword.length-1; i++){
+                            step = step.concat(splitKeyword[i]);
+                            step = step.concat(" ");
+                        }
+                        step = step.concat(splitKeyword[splitKeyword.length-1]);
+
+                        step = step.replace(" ", "_");
                         step = step.toLowerCase();
-                        step = step.replaceAll("\"", "");
+                        step = step.replace("\"", "");
                         String testApi = pla.getTestClass();
                         String classTestName = step;
+                        testApi = insertKeyword(testApi,keyword);
                         testApi = insertTestStub(testApi, classTestName);
                         testApi = insertGroup(testApi, className);
                         testApi = insertActionName(testApi, action.getName());
@@ -107,8 +120,8 @@ public class SuggestApi implements ApiInputPort {
                             while (repositoryAccess.isThisClassNamePresent(test)) {
                                 num++;
                                 String newClassTestName = holdClassTestName.concat("__" + num);
-                                test.setText(test.getText().replaceAll(classTestName, newClassTestName));
-                                test.setFilename(test.getFilename().replaceAll(classTestName, newClassTestName));
+                                test.setText(test.getText().replace(classTestName, newClassTestName));
+                                test.setFilename(test.getFilename().replace(classTestName, newClassTestName));
                                 classTestName = newClassTestName;
                             }
                             repositoryAccess.addApi(test);
@@ -124,28 +137,33 @@ public class SuggestApi implements ApiInputPort {
     private String insertGroup(String text,String toReplace){
         //CamelCase
         toReplace = toReplace.substring(0,1).toUpperCase() + toReplace.substring(1);
-        return text.replaceAll("\"group_action\"", toReplace);
+        return text.replace("\"group_action\"", toReplace);
     }
 
     private String insertActionType (String text,String toReplace){
-        return text.replaceAll("\"action_type\"", toReplace);
+        return text.replace("\"action_type\"", toReplace);
     }
 
     private String insertActionName (String text,String toReplace){
-        return text.replaceAll("\"action_name\"", toReplace);
+        return text.replace("\"action_name\"", toReplace);
     }
 
     private String insertObjectType (String text,String toReplace){
-        return text.replaceAll("\"object_type\"", toReplace);
+        return text.replace("\"object_type\"", toReplace);
     }
 
     private String insertObjectName (String text,String toReplace){
-        return text.replaceAll("\"object_name\"", toReplace);
+        return text.replace("\"object_name\"", toReplace);
     }
 
     private String insertTestStub(String text,String toReplace) {
-        return text.replaceAll("\"test_stub\"", toReplace);
+        return text.replace("\"test_stub\"", toReplace);
     }
+
+    private String insertKeyword(String text,String toReplace) {
+        return text.replace("\"keyword\"", toReplace);
+    }
+
 
     private void createCustomClassForAction(PLA pla, Action action, String actor) {
 
@@ -160,8 +178,8 @@ public class SuggestApi implements ApiInputPort {
         java.util.Iterator<String> iteratorValues = action.getType().getAttributes().values().iterator();
         while(numAttributes > 0) {
 
-            customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
-            customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+            customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
+            customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
             if(numAttributes > 1) {
                 customApi = customApi.concat(pla.getCustomBody());
             }
@@ -170,7 +188,7 @@ public class SuggestApi implements ApiInputPort {
         customApi = customApi.concat("}");
 
         String className = action.getType().getName();
-        customApi = customApi.replaceAll("\"custom_class\"",className);
+        customApi = customApi.replace("\"custom_class\"",className);
 
         api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
@@ -183,8 +201,8 @@ public class SuggestApi implements ApiInputPort {
                 String newClassName = holdClassName.concat("__" + num);
                 newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                 className = className.substring(0,1).toUpperCase() + className.substring(1);
-                api.setText(api.getText().replaceAll(className,newClassName));
-                api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                api.setText(api.getText().replace(className,newClassName));
+                api.setFilename(api.getFilename().replace(className,newClassName));
                 className = newClassName;
             }
             repositoryAccess.addApi(api);
@@ -204,8 +222,8 @@ public class SuggestApi implements ApiInputPort {
         java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
         while(numAttributes > 0) {
 
-            customApi = customApi.replaceAll("\"attribute_name\"", iteratorKeys.next());
-            customApi = customApi.replaceAll("\"attribute_type\"", iteratorValues.next());
+            customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
+            customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
             if(numAttributes > 1) {
                 customApi = customApi.concat(pla.getCustomBody());
             }
@@ -214,7 +232,7 @@ public class SuggestApi implements ApiInputPort {
         customApi = customApi.concat("}");
 
         String className = objectParam.getType().getName();
-        customApi = customApi.replaceAll("\"custom_class\"",className);
+        customApi = customApi.replace("\"custom_class\"",className);
 
         api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
@@ -227,8 +245,8 @@ public class SuggestApi implements ApiInputPort {
                 String newClassName = holdClassName.concat("__" + num);
                 newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                 className = className.substring(0,1).toUpperCase() + className.substring(1);
-                api.setText(api.getText().replaceAll(className,newClassName));
-                api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                api.setText(api.getText().replace(className,newClassName));
+                api.setFilename(api.getFilename().replace(className,newClassName));
                 className = newClassName;
             }
             repositoryAccess.addApi(api);

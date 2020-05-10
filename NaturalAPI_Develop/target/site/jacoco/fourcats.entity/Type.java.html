@@ -9,29 +9,30 @@ public class Type {
 
 <span class="fc" id="L10">    public Type(String name){</span>
 <span class="fc" id="L11">        this.name = name;</span>
-<span class="fc" id="L12">    }</span>
-<span class="fc" id="L13">    public Type(String name, Map&lt;String,String&gt; mAttributes){</span>
-<span class="fc" id="L14">        this.name = name;</span>
-<span class="fc" id="L15">        this.mAttributes = mAttributes;</span>
-<span class="fc" id="L16">    }</span>
+<span class="fc" id="L12">        mAttributes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L13">    }</span>
+<span class="fc" id="L14">    public Type(String name, Map&lt;String,String&gt; mAttributes){</span>
+<span class="fc" id="L15">        this.name = name;</span>
+<span class="fc" id="L16">        this.mAttributes = mAttributes;</span>
+<span class="fc" id="L17">    }</span>
     public void setName(String name){
-<span class="fc" id="L18">        this.name = name;</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L19">        this.name = name;</span>
+<span class="fc" id="L20">    }</span>
     public void addAttribute(String attributeName, String attributeType){
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (mAttributes==null) {</span>
-<span class="fc" id="L22">            this.mAttributes = new HashMap&lt;&gt;();</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (mAttributes==null) {</span>
+<span class="nc" id="L23">            this.mAttributes = new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L24">        this.mAttributes.put(attributeName, attributeType);</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L25">        this.mAttributes.put(attributeName, attributeType);</span>
+<span class="fc" id="L26">    }</span>
     public String getName(){
-<span class="fc" id="L27">        return this.name;</span>
+<span class="fc" id="L28">        return this.name;</span>
     }
     public Map&lt;String,String&gt; getAttributes(){
-<span class="fc" id="L30">        return this.mAttributes;</span>
+<span class="fc" id="L31">        return this.mAttributes;</span>
     }
     @Override
     public String toString() {
-<span class="fc" id="L34">        return name;</span>
+<span class="fc" id="L35">        return name;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

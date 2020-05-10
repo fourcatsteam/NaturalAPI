@@ -9,20 +9,20 @@ public class CreatePla implements CreatePlaInputPort {
     private RepositoryAccess repositoryAccess;
     private CreatePlaOutputPort createPlaOutputPort;
 
-<span class="nc" id="L12">    public CreatePla(RepositoryAccess r,CreatePlaOutputPort createPlaOutputPort){</span>
-<span class="nc" id="L13">        repositoryAccess = r;</span>
-<span class="nc" id="L14">        this.createPlaOutputPort = createPlaOutputPort;</span>
-<span class="nc" id="L15">    }</span>
+<span class="fc" id="L12">    public CreatePla(RepositoryAccess r,CreatePlaOutputPort createPlaOutputPort){</span>
+<span class="fc" id="L13">        this.repositoryAccess = r;</span>
+<span class="fc" id="L14">        this.createPlaOutputPort = createPlaOutputPort;</span>
+<span class="fc" id="L15">    }</span>
 
     public void create(String path,String extension,String text){
 
-<span class="nc bnc" id="L19" title="All 2 branches missed.">        if(repositoryAccess.openFile(path + &quot;.txt&quot;).exists()){</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if(repositoryAccess.openFile(path + &quot;.txt&quot;).exists()){</span>
 <span class="nc" id="L20">            createPlaOutputPort.showOutput(&quot;There is already a PLA with this name&quot;);</span>
         }
         else{
-<span class="nc" id="L23">            repositoryAccess.writePla(path + &quot;.txt&quot;,extension + &quot;\n&quot; + text);</span>
-<span class="nc" id="L24">            createPlaOutputPort.showOutput(&quot;PLA created!&quot;);</span>
+<span class="fc" id="L23">            repositoryAccess.writePla(path + &quot;.txt&quot;,extension + &quot;\n&quot; + text);</span>
+<span class="fc" id="L24">            createPlaOutputPort.showOutput(&quot;PLA created!&quot;);</span>
         }
-<span class="nc" id="L26">    }</span>
+<span class="fc" id="L26">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

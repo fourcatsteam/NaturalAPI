@@ -133,40 +133,42 @@ public class CLI implements Observer {
 <span class="fc" id="L133">            String currentModify = br.readLine();</span>
 <span class="pc bpc" id="L134" title="1 of 3 branches missed.">            switch (currentModify) {</span>
                 case &quot;y&quot;:
-<span class="fc" id="L136">                    System.out.println(&quot;Type the ID of the chosen API&quot;);</span>
-<span class="fc" id="L137">                    currentModify = br.readLine();</span>
-<span class="fc" id="L138">                    askBal();</span>
-<span class="fc" id="L139">                    readBal();</span>
-<span class="fc" id="L140">                    askPla();</span>
-<span class="fc" id="L141">                    readPla();</span>
+<span class="fc" id="L136">                    System.out.println(&quot;Type the ID of the first API to replace&quot;);</span>
+<span class="fc" id="L137">                    String first = br.readLine();</span>
+<span class="fc" id="L138">                    System.out.println(&quot;Type the ID of the last API to replace&quot;);</span>
+<span class="fc" id="L139">                    String second = br.readLine();</span>
+<span class="fc" id="L140">                    askBal();</span>
+<span class="fc" id="L141">                    readBal();</span>
+<span class="fc" id="L142">                    askPla();</span>
+<span class="fc" id="L143">                    readPla();</span>
                     //Serve un controllo per l'id
-<span class="fc" id="L143">                    controller.modifyApi(Integer.parseInt(currentModify),currentBal,currentPla);</span>
-<span class="fc" id="L144">                    askGenerateApi();</span>
-<span class="fc" id="L145">                    readGenerateApi();</span>
-<span class="fc" id="L146">                    break;</span>
-                case &quot;n&quot;:
+<span class="fc" id="L145">                    controller.modifyApi(Integer.parseInt(first),Integer.parseInt(second),currentBal,currentPla);</span>
+<span class="fc" id="L146">                    askGenerateApi();</span>
+<span class="fc" id="L147">                    readGenerateApi();</span>
 <span class="fc" id="L148">                    break;</span>
+                case &quot;n&quot;:
+<span class="fc" id="L150">                    break;</span>
                 default:
-<span class="nc" id="L150">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
+<span class="nc" id="L152">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
             }
         }
-<span class="nc" id="L153">        catch(IOException e){</span>
-<span class="nc" id="L154">            e.printStackTrace();</span>
-<span class="fc" id="L155">        }</span>
-<span class="fc" id="L156">    }</span>
+<span class="nc" id="L155">        catch(IOException e){</span>
+<span class="nc" id="L156">            e.printStackTrace();</span>
+<span class="fc" id="L157">        }</span>
+<span class="fc" id="L158">    }</span>
 
     public void showOutput(){
-<span class="fc" id="L159">        System.out.println(dataPresenter.getStringToShow());</span>
-<span class="fc" id="L160">        System.out.println(dataPresenter.getMessage());</span>
-<span class="fc" id="L161">    }</span>
+<span class="fc" id="L161">        System.out.println(dataPresenter.getStringToShow());</span>
+<span class="fc" id="L162">        System.out.println(dataPresenter.getMessage());</span>
+<span class="fc" id="L163">    }</span>
 
     @Override
     public void update() {
-<span class="fc" id="L165">        showOutput();</span>
-<span class="fc" id="L166">    }</span>
+<span class="fc" id="L167">        showOutput();</span>
+<span class="fc" id="L168">    }</span>
 
     public String getCurrentAnswer() {
-<span class="fc" id="L169">        return currentAnswer;</span>
+<span class="fc" id="L171">        return currentAnswer;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

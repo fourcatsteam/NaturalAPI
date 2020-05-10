@@ -45,7 +45,7 @@ public class Gui implements Observer {
 <span class="nc" id="L45">        frame = new JFrame(&quot;NaturalApi Develop&quot;);</span>
 <span class="nc" id="L46">        frame.setContentPane(mainPanel);</span>
 <span class="nc" id="L47">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L48">        frame.setSize(700,500);</span>
+<span class="nc" id="L48">        frame.setSize(750,700);</span>
         try {
 <span class="nc" id="L50">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
         }
@@ -128,125 +128,125 @@ public class Gui implements Observer {
             try{
 <span class="nc" id="L129">                controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());</span>
 <span class="nc" id="L130">                toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());</span>
+<span class="nc" id="L131">                messageLabel.setText(&quot;Api modified!&quot;);</span>
+<span class="nc" id="L132">                mainPanel.setBackground(Color.GREEN);</span>
             }
-<span class="nc" id="L132">            catch (Exception ex) {</span>
-<span class="nc" id="L133">                messageLabel.setText(&quot;What are you doing? There aren't suggestions to modify!&quot;);</span>
-<span class="nc" id="L134">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L135">            }</span>
-<span class="nc" id="L136">        });</span>
+<span class="nc" id="L134">            catch (Exception ex) {</span>
+<span class="nc" id="L135">                messageLabel.setText(&quot;What are you doing? There aren't suggestions to modify!&quot;);</span>
+<span class="nc" id="L136">                mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L137">            }</span>
+<span class="nc" id="L138">        });</span>
 
-<span class="nc" id="L138">        comboBox1.addActionListener(e -&gt; {</span>
-<span class="nc" id="L139">            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()));</span>
-<span class="nc" id="L140">        });</span>
-<span class="nc" id="L141">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L140">        comboBox1.addActionListener(e -&gt; {</span>
+<span class="nc" id="L141">            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()));</span>
+<span class="nc" id="L142">        });</span>
+<span class="nc" id="L143">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L144">                createPLAButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L145">                createPLAButton.setBorderPainted(false);</span>
-<span class="nc" id="L146">            }</span>
+<span class="nc" id="L146">                createPLAButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L147">                createPLAButton.setBorderPainted(false);</span>
+<span class="nc" id="L148">            }</span>
         });
-<span class="nc" id="L148">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L150">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L151">                createPLAButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L152">                createPLAButton.setBorderPainted(true);</span>
-<span class="nc" id="L153">            }</span>
+<span class="nc" id="L153">                createPLAButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L154">                createPLAButton.setBorderPainted(true);</span>
+<span class="nc" id="L155">            }</span>
         });
-<span class="nc" id="L155">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L157">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L158">                modifyPLAButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L159">                modifyPLAButton.setBorderPainted(false);</span>
-<span class="nc" id="L160">            }</span>
+<span class="nc" id="L160">                modifyPLAButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L161">                modifyPLAButton.setBorderPainted(false);</span>
+<span class="nc" id="L162">            }</span>
         });
-<span class="nc" id="L162">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L164">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L165">                modifyPLAButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L166">                modifyPLAButton.setBorderPainted(true);</span>
-<span class="nc" id="L167">            }</span>
+<span class="nc" id="L167">                modifyPLAButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L168">                modifyPLAButton.setBorderPainted(true);</span>
+<span class="nc" id="L169">            }</span>
         });
-<span class="nc" id="L169">        addBalButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L171">        addBalButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L172">                addBalButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L173">                addBalButton.setBorderPainted(false);</span>
-<span class="nc" id="L174">            }</span>
+<span class="nc" id="L174">                addBalButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L175">                addBalButton.setBorderPainted(false);</span>
+<span class="nc" id="L176">            }</span>
         });
-<span class="nc" id="L176">        addBalButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L178">        addBalButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L179">                addBalButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L180">                addBalButton.setBorderPainted(true);</span>
-<span class="nc" id="L181">            }</span>
+<span class="nc" id="L181">                addBalButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L182">                addBalButton.setBorderPainted(true);</span>
+<span class="nc" id="L183">            }</span>
         });
-<span class="nc" id="L183">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L185">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L186">                addPlaButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L187">                addPlaButton.setBorderPainted(false);</span>
-<span class="nc" id="L188">            }</span>
+<span class="nc" id="L188">                addPlaButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L189">                addPlaButton.setBorderPainted(false);</span>
+<span class="nc" id="L190">            }</span>
         });
-<span class="nc" id="L190">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L192">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L193">                addPlaButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L194">                addPlaButton.setBorderPainted(true);</span>
-<span class="nc" id="L195">            }</span>
+<span class="nc" id="L195">                addPlaButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L196">                addPlaButton.setBorderPainted(true);</span>
+<span class="nc" id="L197">            }</span>
         });
-<span class="nc" id="L197">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L199">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L200">                suggestionButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L201">                suggestionButton.setBorderPainted(false);</span>
-<span class="nc" id="L202">            }</span>
+<span class="nc" id="L202">                suggestionButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L203">                suggestionButton.setBorderPainted(false);</span>
+<span class="nc" id="L204">            }</span>
         });
-<span class="nc" id="L204">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L206">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L207">                suggestionButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L208">                suggestionButton.setBorderPainted(true);</span>
-<span class="nc" id="L209">            }</span>
+<span class="nc" id="L209">                suggestionButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L210">                suggestionButton.setBorderPainted(true);</span>
+<span class="nc" id="L211">            }</span>
         });
-<span class="nc" id="L211">        generateButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L213">        generateButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L214">                generateButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L215">                generateButton.setBorderPainted(false);</span>
-<span class="nc" id="L216">            }</span>
+<span class="nc" id="L216">                generateButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L217">                generateButton.setBorderPainted(false);</span>
+<span class="nc" id="L218">            }</span>
         });
-<span class="nc" id="L218">        generateButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L220">        generateButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L221">                generateButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L222">                generateButton.setBorderPainted(true);</span>
-<span class="nc" id="L223">            }</span>
+<span class="nc" id="L223">                generateButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L224">                generateButton.setBorderPainted(true);</span>
+<span class="nc" id="L225">            }</span>
         });
-<span class="nc" id="L225">        modifyButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L227">        modifyButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L228">                modifyButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L229">                modifyButton.setBorderPainted(false);</span>
-<span class="nc" id="L230">            }</span>
+<span class="nc" id="L230">                modifyButton.setBackground(new Color( 224,91,73));</span>
+<span class="nc" id="L231">                modifyButton.setBorderPainted(false);</span>
+<span class="nc" id="L232">            }</span>
         });
-<span class="nc" id="L232">        modifyButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L234">        modifyButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L235">                modifyButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L236">                modifyButton.setBorderPainted(true);</span>
-<span class="nc" id="L237">            }</span>
+<span class="nc" id="L237">                modifyButton.setBackground(new Color(58,84,105));</span>
+<span class="nc" id="L238">                modifyButton.setBorderPainted(true);</span>
+<span class="nc" id="L239">            }</span>
         });
-<span class="nc" id="L239">    }</span>
+<span class="nc" id="L241">    }</span>
 
     public void showGui(){
-<span class="nc" id="L242">        frame.setVisible(true);</span>
-<span class="nc" id="L243">    }</span>
+<span class="nc" id="L244">        frame.setVisible(true);</span>
+<span class="nc" id="L245">    }</span>
 
     public void showOutput(){
-<span class="nc bnc" id="L246" title="All 2 branches missed.">        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1){</span>
-<span class="nc" id="L247">            toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());</span>
-<span class="nc" id="L248">            comboBox1.addItem(dataPresenterGui.getComboToShow());</span>
-        }
+<span class="nc" id="L248">        toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());</span>
+<span class="nc" id="L249">        comboBox1.addItem(dataPresenterGui.getComboToShow());</span>
 <span class="nc" id="L250">        message = dataPresenterGui.getMessage();</span>
 <span class="nc" id="L251">    }</span>
 
