@@ -56,4 +56,9 @@ public class ObjectParamTest {
         assertEquals("Name",objectParam.toString());
     }
 
+    @Test
+    public void setTypeCorrectly(){
+       objectParam.setType("tipo1");
+       assertEquals("tipo1",objectParam.getType().getName());
+    }
 }

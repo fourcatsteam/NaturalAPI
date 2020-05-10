@@ -65,7 +65,6 @@ public class DataKeeper {
 
     public boolean isCoupleBalPlaPresent(String bal,String pla){
         for(Map.Entry<String,List<String>> map : mBalPlaUsed.entrySet()){
-
             if(map.getKey().equals(bal) && map.getValue().contains(pla)){
                 return true;
             }
@@ -84,7 +83,6 @@ public class DataKeeper {
 
     public boolean isThisClassNamePresent(API a){
         for(Map.Entry<Integer, API> api : mApi.entrySet()) {
-
             if(api.getValue().getFilename().equals(a.getFilename())){
                 return true;
             }

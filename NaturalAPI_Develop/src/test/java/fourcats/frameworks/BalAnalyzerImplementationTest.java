@@ -51,7 +51,7 @@ public class BalAnalyzerImplementationTest {
 
     @Test
     public void gettingBalCorrectly(){
-        analyzer.setBalFile(new File("./BAL/all.json"));
+        analyzer.setBalFile(new File("./BAL/TestFiles/balAtm.json"));
         assertNotNull(analyzer.getBAL());
     }
 

@@ -1,0 +1,182 @@
+{
+  "actors" : [ {
+    "name" : "Account Holder",
+    "actions" : [ {
+      "name" : "contain_money",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "the machine contains enough money",
+      "objectParams" : [ {
+        "name" : "money",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "introduce_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "we introduce a \"Visa\" card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "contain_money",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "the machine contains enough money",
+      "objectParams" : [ {
+        "name" : "money",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "introduce_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "we introduce a \"AMEX\" card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "contain_money",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "the machine contains enough money",
+      "objectParams" : [ {
+        "name" : "money",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "introduce_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has sufficient funds",
+      "step" : "we introduce a \"Mastercard\" card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "introduce_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has insufficient funds",
+      "step" : "we introduce a card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "contains_cash",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has insufficient funds",
+      "step" : "the machine contains enough money",
+      "objectParams" : [ {
+        "name" : "money",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "dispense_cash",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Account has insufficient funds",
+      "step" : "the ATM should not dispense any money",
+      "objectParams" : [ {
+        "name" : "money",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "introduce_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Card has been disabled",
+      "step" : "we introduce the card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    }, {
+      "name" : "retain_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Card has been disabled",
+      "step" : "the ATM should retain the card",
+      "objectParams" : [ {
+        "name" : "card",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}
