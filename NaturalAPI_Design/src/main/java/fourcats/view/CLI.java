@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-
 public class CLI implements Observer {
     private Controller contr;
     private String currentUseCase = "";
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private DataPresenter dataPresenter;
     private boolean isBdlLoaded = false;
+
 
     public CLI(Controller controller, DataPresenter presenter){
         this.contr = controller;
