@@ -71,4 +71,8 @@ public class Repository implements RepositoryAccess {
     public boolean isThisApiPresent(API a){
         return dataKeeper.isThisApiPresent(a);
     }
+
+    public boolean isThisClassNamePresent(API a){
+        return dataKeeper.isThisClassNamePresent(a);
+    }
 }

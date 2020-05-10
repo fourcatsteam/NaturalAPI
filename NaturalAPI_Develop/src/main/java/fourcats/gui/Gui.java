@@ -245,10 +245,8 @@ public class Gui implements Observer {
     }
 
     public void showOutput(){
-        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1){
-            toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
-            comboBox1.addItem(dataPresenterGui.getComboToShow());
-        }
+        toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
+        comboBox1.addItem(dataPresenterGui.getComboToShow());
         message = dataPresenterGui.getMessage();
     }
 

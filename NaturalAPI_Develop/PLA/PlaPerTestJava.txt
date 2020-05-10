@@ -1,0 +1,9 @@
+.java
+@Test
+public class "action_type" {
+
+	"group_action" object = new "group_action"();
+	object."action_name"();
+}
+custom class
+ciao

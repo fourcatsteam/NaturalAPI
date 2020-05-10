@@ -21,5 +21,6 @@ public interface RepositoryAccess {
     void addCoupleBalPla(String bal,String pla);
     boolean isCoupleBalPlaPresent(String bal,String pla);
     boolean isThisApiPresent(API a);
+    boolean isThisClassNamePresent(API a);
 
 }

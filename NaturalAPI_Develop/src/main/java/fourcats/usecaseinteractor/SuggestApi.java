@@ -27,7 +27,7 @@ public class SuggestApi implements ApiInputPort {
             balAnalyzer.setBalFile(repositoryAccess.openFile(filenameBal));
             BAL bal = balAnalyzer.getBAL();
             PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));
-            PLA testPla = new PLA(repositoryAccess.loadPLA("C:\\Users\\matte\\OneDrive\\Desktop\\test.txt"));
+            PLA testPla = new PLA(repositoryAccess.loadPLA("C:\\Users\\matte\\OneDrive\\Desktop\\NaturalAPI\\NaturalAPI_Develop\\PLA\\PlaPerTestJava.txt"));
 
             for(Actor actor : bal.getActors()){
 
@@ -65,27 +65,38 @@ public class SuggestApi implements ApiInputPort {
                         newApi = insertObjectName(newApi, objectParam.getName());
 
                     }
-                    String className = action.getName() + "_" + repositoryAccess.getSize();
+                    String className = action.getName();
                     newApi = insertGroup(newApi,className);
                     newApi = insertActionType(newApi, action.getType().getName());
                     newApi = insertActionName(newApi, action.getName());
                     API api = new API();
-                    api.setFilename(className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
+                    api.setFilename("Api\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
                     api.setText(newApi);
                     if(repositoryAccess.isThisApiPresent(api) == false){
+                        int num = 0;
+                        while(repositoryAccess.isThisClassNamePresent(api)){
+                            num++;
+                            String newClassName = className.concat("_" + num);
+                            newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
+                            className = className.substring(0,1).toUpperCase() + className.substring(1);
+                            api.setText(api.getText().replaceAll(className,newClassName));
+                            api.setFilename(api.getFilename().replaceAll(className,newClassName));
+                            className = newClassName;
+                        }
                         repositoryAccess.addApi(api);
                     }
 
                     String step = action.getStep();
                     step = step.replaceAll(" ", "_");
                     step = step.toLowerCase();
+                    step = step.replaceAll("\"","");
                     String testApi = testPla.getText();
-                    String classTestName = step + "_" + repositoryAccess.getSize();
+                    String classTestName = step;
                     testApi = insertActionType(testApi,classTestName);
                     testApi = insertGroup(testApi,className);
                     testApi = insertActionName(testApi,action.getName());
                     API test = new API();
-                    test.setFilename(classTestName + pla.getExtension());
+                    test.setFilename("Test\\" + classTestName + pla.getExtension());
                     test.setText(testApi);
                     if(repositoryAccess.isThisApiPresent(test) == false) {
                         repositoryAccess.addApi(test);
@@ -141,10 +152,10 @@ public class SuggestApi implements ApiInputPort {
         }
         customApi = customApi.concat("}");
 
-        String className = action.getType().getName() + "_" + repositoryAccess.getSize();
+        String className = action.getType().getName();
         customApi = customApi.replaceAll("\"custom_class\"",className);
 
-        api.setFilename(className + pla.getExtension());
+        api.setFilename("Custom classes\\" + className + pla.getExtension());
         api.setText(customApi);
 
         return api;
@@ -172,10 +183,10 @@ public class SuggestApi implements ApiInputPort {
         }
         customApi = customApi.concat("}");
 
-        String className = objectParam.getType().getName() + "_" + repositoryAccess.getSize();
+        String className = objectParam.getType().getName();
         customApi = customApi.replaceAll("\"custom_class\"",className);
 
-        api.setFilename(className + pla.getExtension());
+        api.setFilename("Custom classes\\" + className + pla.getExtension());
         api.setText(customApi);
         return api;
     }

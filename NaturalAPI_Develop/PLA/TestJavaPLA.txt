@@ -1,8 +1,0 @@
-.java
-public class{
-
-}
-custom class
-public class{
-
-}

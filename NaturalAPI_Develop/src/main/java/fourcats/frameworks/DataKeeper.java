@@ -75,8 +75,17 @@ public class DataKeeper {
 
     public boolean isThisApiPresent(API a){
         for(Map.Entry<Integer, API> api : mApi.entrySet()) {
+            if(api.getValue().getText().replaceAll("_[0-9]*","").equals(a.getText())){
+                return true;
+            }
+        }
+        return false;
+    }
 
-            if(api.getValue().getText().equals(a.getText())){
+    public boolean isThisClassNamePresent(API a){
+        for(Map.Entry<Integer, API> api : mApi.entrySet()) {
+
+            if(api.getValue().getFilename().equals(a.getFilename())){
                 return true;
             }
         }
