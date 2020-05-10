@@ -18,22 +18,27 @@ public class FileSystemAccessTest {
 
     private FileSystemAccess fileSystemAccess;
 
-    @Before public void CreateFileSystemAccess() {
+    @Before
+    public void CreateFileSystemAccess() {
         fileSystemAccess = new FileSystemAccess();
     }
 
-   /* @Test
+   @Test
     public void FileSystemAccessReadFileCorrectly() {
         String result = "Not correct now";
         try {
-            result = fileSystemAccess.readFile("prova.feature");
+            result = fileSystemAccess.readFile("src/test/java/fourcats/test_documents/prova.feature");
         }
         catch(IOException e)
         {
             fail();
         }
-        assertEquals("Feature: aFeature   As a actor   Scenario: firstScenario     Given A     Then B  ", result);
-    }*/
+        assertEquals("Feature: aFeature\n" +
+                "  As a actor\n" +
+                "  Scenario: firstScenario\n" +
+                "    Given A\n" +
+                "    Then B\n\n", result);
+    }
 
     @Test
     public void FileSystemAccessReadFileWthError() {
@@ -48,7 +53,7 @@ public class FileSystemAccessTest {
         assertEquals("Correct",result);
     }
 
-  /*  @Test
+    @Test
     public void FileSystemAccessWriteFileCorrectly() {
         try{
             fileSystemAccess.writeFile("My correct content", "correctlyWroteFile");
@@ -59,20 +64,18 @@ public class FileSystemAccessTest {
         }
         File existingFile = new File("src/test/java/fourcats/test_documents/correctlyWroteFile.json");
         assertTrue(existingFile.exists());
-    }*/
+    }
 
-    /*@Test
-    public void FileSystemAccessLoadBdlCorrectly() {
-        Bdl emptyContentBdl = new Bdl();
+    @Test
+    public void FileSystemAccessLoadBdlWthError() {
         try{
-            emptyContentBdl = fileSystemAccess.loadBdl("bdl");
+            fileSystemAccess.loadBdl("bdl");
+            fail();
         }
         catch(IOException e)
         {
-            fail();
+            assertTrue(true);
         }
-        assertEquals(emptyContentBdl.getName(), "bdl");
-    }*/
-
+    }
 
 }
