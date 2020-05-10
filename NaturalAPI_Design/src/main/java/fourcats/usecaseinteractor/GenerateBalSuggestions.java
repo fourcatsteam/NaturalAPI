@@ -141,16 +141,16 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
     protected String extractScenarioSteps(String scenario){
-        //rimove the name of the scenario from the string
+        //remove the name of the scenario from the string
         int indexGiven = scenario.contains(GIVEN) ? scenario.indexOf(GIVEN) : 0 ;
 
         return scenario.substring(indexGiven);
     }
 
     protected List<String> splitScenarioSteps(String scenarioContent){
-        return Stream.of(scenarioContent.split("Given|When|Then|And"))
-                .map(elem -> new String(elem.trim()))
-                .skip(1)
+
+        return Stream.of(scenarioContent.split("\n"))
+                .map(String::trim)
                 .collect(Collectors.toList());
     }
 
