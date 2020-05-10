@@ -31,14 +31,9 @@ public class FileSystem {
 
     public void writeApi(String path, API api) {
 
-        File test = new File(path + "Test\\");
-        test.mkdir();
-        File custom = new File(path + "Custom classes\\");
-        custom.mkdir();
-        File apiFile = new File(path + "Api\\");
-        apiFile.mkdir();
-
         File file = new File(path + api.getFilename());
+        String directoryString = file.getParent();
+        new File(directoryString).mkdir();
         try (FileWriter fileWriter = new FileWriter(file)){
             fileWriter.write(api.getText());
         } catch (IOException e) {

@@ -20,6 +20,7 @@ public class GuiModifyPla implements Observer {
     private JButton cancelButton;
     private JPanel mainPanel;
     private JButton loadButton;
+    private JTextArea textArea3;
     JFileChooser fileChooser;
 
     private Controller controller;
@@ -27,6 +28,8 @@ public class GuiModifyPla implements Observer {
     String message;
     String modifyApiPla;
     String modifyCustomPla;
+
+    String modifyTestPla;
 
     public GuiModifyPla(Controller controller, DataPresenterGui dataPresenterGui){
 
@@ -36,6 +39,7 @@ public class GuiModifyPla implements Observer {
         message = "";
         modifyApiPla = "";
         modifyCustomPla = "";
+        modifyTestPla = "";
 
         frame = new JFrame("NaturalApi Develop");
 
@@ -55,16 +59,17 @@ public class GuiModifyPla implements Observer {
             controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());
             textArea1.setText(modifyApiPla);
             textArea2.setText(modifyCustomPla);
+            textArea3.setText(modifyTestPla);
         });
 
         modifyButton.addActionListener(e -> {
 
-            if(textArea1.getText().isEmpty() || textArea2.getText().isEmpty()){
+            if(textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()){
                 JOptionPane.showMessageDialog(frame,"There is an empty field!");
             }
             else{
                 controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +
-                        "\ncustom class\n" + textArea2.getText());
+                        "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
                 JOptionPane.showMessageDialog(frame,message);
                 frame.dispose();
             }
@@ -82,6 +87,7 @@ public class GuiModifyPla implements Observer {
     public void showOutput(){
         modifyApiPla = dataPresenterGui.getModifyApiPla();
         modifyCustomPla = dataPresenterGui.getModifyCustomPla();
+        modifyTestPla = dataPresenterGui.getModifyTestPla();
         message = dataPresenterGui.getMessagePla();
     }
 

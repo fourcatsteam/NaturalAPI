@@ -19,3 +19,10 @@ public class "custom_class" {
 	}
 
 }
+test class
+@Test
+public class "test_stub" {
+
+	"group_action" object = new "group_action"();
+	object."action_name"();
+}

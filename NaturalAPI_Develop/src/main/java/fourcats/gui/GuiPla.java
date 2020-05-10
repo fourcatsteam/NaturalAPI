@@ -17,6 +17,7 @@ public class GuiPla implements Observer {
     private JPanel mainPanel;
     private JTextField textField1;
     private JTextArea textArea2;
+    private JTextArea textArea3;
 
     String message;
 
@@ -44,7 +45,7 @@ public class GuiPla implements Observer {
 
         createButton.addActionListener(e -> {
 
-            if(textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty()){
+            if(textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()){
                 JOptionPane.showMessageDialog(frame,"There is an empty field!");
             }
             else{
@@ -52,7 +53,7 @@ public class GuiPla implements Observer {
                 savePla.showSaveDialog(mainPanel);
                 controller.createPla(savePla.getSelectedFile().getAbsolutePath(),
                         textField1.getText(),
-                        textArea1.getText() + "\ncustom class\n" + textArea2.getText());
+                        textArea1.getText() + "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
                 JOptionPane.showMessageDialog(frame,message);
                 if(message.equals("PLA created!")){
                     frame.dispose();

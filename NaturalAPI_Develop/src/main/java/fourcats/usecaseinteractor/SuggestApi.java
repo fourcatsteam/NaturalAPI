@@ -28,7 +28,6 @@ public class SuggestApi implements ApiInputPort {
             balAnalyzer.setBalFile(repositoryAccess.openFile(filenameBal));
             BAL bal = balAnalyzer.getBAL();
             PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));
-            PLA testPla = new PLA(repositoryAccess.loadPLA("C:\\Users\\matte\\OneDrive\\Desktop\\NaturalAPI\\NaturalAPI_Develop\\PLA\\PlaPerTestJava.txt"));
 
             for(Actor actor : bal.getActors()){
 
@@ -47,13 +46,13 @@ public class SuggestApi implements ApiInputPort {
                     }
 
                     if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
-                        createCustomClassForAction(pla, action);
+                        createCustomClassForAction(pla,action,actor.getName());
                     }
 
                     for(ObjectParam objectParam : action.getObjectParams()) {
 
                         if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()){
-                            createCustomClassForObjectParam(pla,objectParam);
+                            createCustomClassForObjectParam(pla,objectParam,actor.getName());
                         }
 
                         newApi = insertObjectType(newApi, objectParam.getType().getName());
@@ -65,7 +64,7 @@ public class SuggestApi implements ApiInputPort {
                     newApi = insertActionType(newApi, action.getType().getName());
                     newApi = insertActionName(newApi, action.getName());
                     API api = new API();
-                    api.setFilename("Api\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
+                    api.setFilename("Api\\" + actor.getName() + "\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
                     api.setText(newApi);
                     if(repositoryAccess.isThisApiPresent(api) == false){
                         int num = 0;
@@ -85,13 +84,13 @@ public class SuggestApi implements ApiInputPort {
                     step = step.replaceAll(" ", "_");
                     step = step.toLowerCase();
                     step = step.replaceAll("\"","");
-                    String testApi = testPla.getText();
+                    String testApi = pla.getTestClass();
                     String classTestName = step;
-                    testApi = insertActionType(testApi,classTestName);
+                    testApi = insertTestStub(testApi,classTestName);
                     testApi = insertGroup(testApi,className);
                     testApi = insertActionName(testApi,action.getName());
                     API test = new API();
-                    test.setFilename("Test\\" + classTestName + pla.getExtension());
+                    test.setFilename("Test\\" + actor.getName() + "\\"+ classTestName + pla.getExtension());
                     test.setText(testApi);
                     if(repositoryAccess.isThisApiPresent(test) == false) {
                         int num = 0;
@@ -118,22 +117,26 @@ public class SuggestApi implements ApiInputPort {
     }
 
     private String insertActionType (String text,String toReplace){
-        return text.replaceFirst("\"action_type\"", toReplace);
+        return text.replaceAll("\"action_type\"", toReplace);
     }
 
     private String insertActionName (String text,String toReplace){
-        return text.replaceFirst("\"action_name\"", toReplace);
+        return text.replaceAll("\"action_name\"", toReplace);
     }
 
     private String insertObjectType (String text,String toReplace){
-        return text.replaceFirst("\"object_type\"", toReplace);
+        return text.replaceAll("\"object_type\"", toReplace);
     }
 
     private String insertObjectName (String text,String toReplace){
-        return text.replaceFirst("\"object_name\"", toReplace);
+        return text.replaceAll("\"object_name\"", toReplace);
     }
 
-    private void createCustomClassForAction(PLA pla, Action action) {
+    private String insertTestStub(String text,String toReplace) {
+        return text.replaceAll("\"test_stub\"", toReplace);
+    }
+
+    private void createCustomClassForAction(PLA pla, Action action, String actor) {
 
         API api = new API();
         String customApi = pla.getCustomClass();
@@ -158,7 +161,7 @@ public class SuggestApi implements ApiInputPort {
         String className = action.getType().getName();
         customApi = customApi.replaceAll("\"custom_class\"",className);
 
-        api.setFilename("Custom classes\\" + className + pla.getExtension());
+        api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
 
         if(repositoryAccess.isThisApiPresent(api) == false){
@@ -176,7 +179,7 @@ public class SuggestApi implements ApiInputPort {
         }
     }
 
-    private void createCustomClassForObjectParam(PLA pla, ObjectParam objectParam) {
+    private void createCustomClassForObjectParam(PLA pla, ObjectParam objectParam, String actor) {
 
         API api = new API();
         String customApi = pla.getCustomClass();
@@ -201,7 +204,7 @@ public class SuggestApi implements ApiInputPort {
         String className = objectParam.getType().getName();
         customApi = customApi.replaceAll("\"custom_class\"",className);
 
-        api.setFilename("Custom classes\\" + className + pla.getExtension());
+        api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
 
         if(repositoryAccess.isThisApiPresent(api) == false){

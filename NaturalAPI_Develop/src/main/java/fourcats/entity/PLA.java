@@ -8,6 +8,8 @@ public class PLA {
     private String customClass;
     private String customBody;
 
+    private String testClass;
+
     public PLA(String t){
         String[] split = t.split("\n",2);
         extension = split[0];
@@ -16,6 +18,10 @@ public class PLA {
         String[] splitCustom = text.split("\ncustom class\n");
         text = splitCustom[0];
         customClass = splitCustom[1];
+
+        String[] splitTest = customClass.split("\ntest class\n");
+        customClass = splitTest[0];
+        testClass = splitTest[1];
 
         customBody = "";
         String[] splitCustomBody = customClass.split("\n");
@@ -45,4 +51,7 @@ public class PLA {
         return customBody;
     }
 
+    public String getTestClass() {
+        return testClass;
+    }
 }

@@ -29,7 +29,9 @@ public class ModifyPla implements ModifyPlaInputPort {
 
             String[] split = text.split("\ncustom class\n");
 
-            modifyPlaOutputPort.showLoadPla(split[0],split[1]);
+            String[] splitTest = split[1].split("\ntest class\n");
+
+            modifyPlaOutputPort.showLoadPla(split[0],splitTest[0],splitTest[1]);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
