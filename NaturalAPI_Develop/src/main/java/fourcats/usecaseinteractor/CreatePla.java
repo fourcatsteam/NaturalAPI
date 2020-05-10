@@ -10,7 +10,7 @@ public class CreatePla implements CreatePlaInputPort {
     private CreatePlaOutputPort createPlaOutputPort;
 
     public CreatePla(RepositoryAccess r,CreatePlaOutputPort createPlaOutputPort){
-        repositoryAccess = r;
+        this.repositoryAccess = r;
         this.createPlaOutputPort = createPlaOutputPort;
     }
 

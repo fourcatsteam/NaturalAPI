@@ -44,14 +44,19 @@ public class SuggestApiTest {
         assertNotNull(suggestAPI);
     }
 
- /*   @Test
+   @Test
     public void correctlysuggestionApiCreated(){
-        String filebal = "bal.json";
-        String filepla = "pla";
+        String filenamebal = ".\\BAL\\TestFiles\\balAtm.json";
+        String filenamepla = ".\\PLA\\javaClassPLA.txt";
+        when(repositoryMock.isCoupleBalPlaPresent(filenamebal,filenamebal)).thenReturn(false);
+
 
         List<Actor> l = new LinkedList<>();
         Actor act = new Actor("Actor1");
-        Action action = new Action("gioca","tipo");
+        Type tipo = new Type("tipo");
+        tipo.addAttribute("nomeattributo1","tipoattributo1");
+       tipo.addAttribute("nomeattributo2","tipoattributo2");
+        Action action = new Action("gioca",tipo,"scenario","step");
 
         ObjectParam op = new ObjectParam("object","tipoObj");
         op.getType().addAttribute("attribute","attributetype");
@@ -60,16 +65,17 @@ public class SuggestApiTest {
         act.addAction(action);
         l.add(act);
         BAL bal = new BAL(l);
+       when(analyzerMock.getBAL()).thenReturn(bal);
 
-        when(analyzerMock.getBAL()).thenReturn(bal);
-        when(repositoryMock.loadPLA(filepla)).thenReturn(".java\n" +
+
+
+        when(repositoryMock.loadPLA(filenamepla)).thenReturn(".java\n" +
                 "public class \"group_action\" {\n" +
                 "\n" +
                 "\tpublic \"action_type\" \"action_name\" (\"object_type\" \"object_name\"){\n" +
                 "\n" +
                 "\t}\n" +
                 "}\n" +
-                "\n" +
                 "custom class\n" +
                 "public class \"custom_class\" {\n" +
                 "\t\n" +
@@ -83,14 +89,23 @@ public class SuggestApiTest {
                 "\t\treturn \"attribute_name\";\n" +
                 "\t}\n" +
                 "\n" +
+                "}\n" +
+                "test class\n" +
+                "@Test\n" +
+                "public class \"test_stub\" {\n" +
+                "\n" +
+                "\t\"group_action\" object = new \"group_action\"();\n" +
+                "\tobject.\"action_name\"();\n" +
                 "}");
         when(repositoryMock.openFile(any(String.class))).thenReturn(new File(""));
 
-        suggestAPI.create(filebal,filepla);
+        suggestAPI.create(filenamebal,filenamepla);
 
         verify(repositoryMock,times(1)).openFile(any(String.class));
-        verify(repositoryMock).addApi(any(API.class));
+        verify(repositoryMock,times(4)).addApi(any(API.class));
         verify(outputMock).showOutput(anyMap());
-    }*/
+    }
+
+    
 
 }

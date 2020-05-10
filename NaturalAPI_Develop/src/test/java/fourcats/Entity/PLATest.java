@@ -16,7 +16,34 @@ public class PLATest {
     PLA pla;
 
     @Before
-    public void before(){ pla = new PLA(".java\npublic class Classe{ }\ncustom class\npublic class\n{\nprivate \"attribute_type\" \"attribute_name\";\n}");}
+    public void before(){ pla = new PLA(".java\n" +
+            "public class \"group_action\" {\n" +
+            "\n" +
+            "\tpublic \"action_type\" \"action_name\" (\"object_type\" \"object_name\"){\n" +
+            "\n" +
+            "\t}\n" +
+            "}\n" +
+            "custom class\n" +
+            "public class \"custom_class\" {\n" +
+            "\t\n" +
+            "\tprivate \"attribute_type\" \"attribute_name\";\n" +
+            "\n" +
+            "\tpublic void set\"attribute_name\"(\"attribute_type\" \"attribute_name\") {\n" +
+            "\t\tthis.\"attribute_name\" = \"attribute_name\";\n" +
+            "\t}\n" +
+            "\n" +
+            "\tpublic \"attribute_type\" get\"attribute_name\"() {\n" +
+            "\t\treturn \"attribute_name\";\n" +
+            "\t}\n" +
+            "\n" +
+            "}\n" +
+            "test class\n" +
+            "@Test\n" +
+            "public class \"test_stub\" {\n" +
+            "\n" +
+            "\t\"group_action\" object = new \"group_action\"();\n" +
+            "\tobject.\"action_name\"();\n" +
+            "}");}
 
     @Test
     public void testConstructor(){
@@ -30,7 +57,12 @@ public class PLATest {
 
     @Test
     public void testTextFromPLA(){
-        assertEquals("public class Classe{ }",pla.getText());
+        assertEquals("public class \"group_action\" {\n" +
+                "\n" +
+                "\tpublic \"action_type\" \"action_name\" (\"object_type\" \"object_name\"){\n" +
+                "\n" +
+                "\t}\n" +
+                "}",pla.getText());
     }
 
     @Test
@@ -41,14 +73,44 @@ public class PLATest {
 
     @Test
     public void getCustomClassCorrectly(){
-        assertEquals("public class\n" +
-                "{\nprivate \"attribute_type\" \"attribute_name\";\n" +
+        assertEquals("public class \"custom_class\" {\n" +
+                "\t\n" +
+                "\tprivate \"attribute_type\" \"attribute_name\";\n" +
+                "\n" +
+                "\tpublic void set\"attribute_name\"(\"attribute_type\" \"attribute_name\") {\n" +
+                "\t\tthis.\"attribute_name\" = \"attribute_name\";\n" +
+                "\t}\n" +
+                "\n" +
+                "\tpublic \"attribute_type\" get\"attribute_name\"() {\n" +
+                "\t\treturn \"attribute_name\";\n" +
+                "\t}\n" +
+                "\n" +
                 "}",pla.getCustomClass());
     }
 
     @Test
     public void getCustomBodyCorrectly(){
-        assertEquals("{\nprivate \"attribute_type\" \"attribute_name\";\n",pla.getCustomBody());
+        assertEquals("\t\n" +
+                "\tprivate \"attribute_type\" \"attribute_name\";\n" +
+                "\n" +
+                "\tpublic void set\"attribute_name\"(\"attribute_type\" \"attribute_name\") {\n" +
+                "\t\tthis.\"attribute_name\" = \"attribute_name\";\n" +
+                "\t}\n" +
+                "\n" +
+                "\tpublic \"attribute_type\" get\"attribute_name\"() {\n" +
+                "\t\treturn \"attribute_name\";\n" +
+                "\t}\n" +
+                "\n",pla.getCustomBody());
+    }
+
+    @Test
+    public void getTestClassCorrectly(){
+        assertEquals("@Test\n" +
+                "public class \"test_stub\" {\n" +
+                "\n" +
+                "\t\"group_action\" object = new \"group_action\"();\n" +
+                "\tobject.\"action_name\"();\n" +
+                "}",pla.getTestClass());
     }
 
 
