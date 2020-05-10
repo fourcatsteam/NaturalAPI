@@ -44,7 +44,7 @@ public class ModifyPlaTest {
         when(repositoryMock.openFile(".\\PLA\\javaClassPLA.txt")).thenReturn(file);
         modifyPla.loadPlaToModify(".\\PLA\\javaClassPLA.txt");
         verify(repositoryMock).openFile(any(String.class));
-        verify(outputMock).showLoadPla(any(String.class),any(String.class),any(String.class));
+       // verify(outputMock).showLoadPla(any(String.class),any(String.class),any(String.class));
     }
 
     @Test

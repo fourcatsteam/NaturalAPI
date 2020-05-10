@@ -106,6 +106,6 @@ public class SuggestApiTest {
         verify(outputMock).showOutput(anyMap());
     }
 
-    
+
 
 }
