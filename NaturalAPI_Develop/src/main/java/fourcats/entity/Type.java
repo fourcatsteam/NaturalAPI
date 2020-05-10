@@ -9,6 +9,7 @@ public class Type {
 
     public Type(String name){
         this.name = name;
+        mAttributes = new HashMap<>();
     }
     public Type(String name, Map<String,String> mAttributes){
         this.name = name;
