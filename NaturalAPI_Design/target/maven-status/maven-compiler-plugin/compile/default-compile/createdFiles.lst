@@ -18,6 +18,7 @@ fourcats/datastructure/WordCounter.class
 fourcats/datastructure/WordTag.class
 fourcats/entities/BAL.class
 fourcats/port/ShowTypesInputPort.class
+fourcats/view/utilities/ViewUtility.class
 fourcats/frameworks/BalAnalyzerImplementation.class
 fourcats/interfaceadapters/DataPresenter.class
 fourcats/view/gui/ObjectParamWidget$1.class
