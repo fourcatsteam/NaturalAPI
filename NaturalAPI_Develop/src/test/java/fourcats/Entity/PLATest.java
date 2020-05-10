@@ -16,7 +16,7 @@ public class PLATest {
     PLA pla;
 
     @Before
-    public void before(){ pla = new PLA(".java\npublic class Classe{ }\ncustom class\npublic class\n{\n}");}
+    public void before(){ pla = new PLA(".java\npublic class Classe{ }\ncustom class\npublic class\n{\nprivate \"attribute_type\" \"attribute_name\";\n}");}
 
     @Test
     public void testConstructor(){
@@ -37,6 +37,18 @@ public class PLATest {
     public void testSettingTextPLA(){
         pla.setText("another class");
         assertEquals("another class",pla.getText());
+    }
+
+    @Test
+    public void getCustomClassCorrectly(){
+        assertEquals("public class\n" +
+                "{\nprivate \"attribute_type\" \"attribute_name\";\n" +
+                "}",pla.getCustomClass());
+    }
+
+    @Test
+    public void getCustomBodyCorrectly(){
+        assertEquals("{\nprivate \"attribute_type\" \"attribute_name\";\n",pla.getCustomBody());
     }
 
 

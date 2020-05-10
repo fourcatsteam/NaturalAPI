@@ -2,6 +2,7 @@ package fourcats.Entity;
 
 import fourcats.entity.Action;
 import fourcats.entity.ObjectParam;
+import fourcats.entity.Type;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,9 +18,35 @@ public class ActionTest {
         act = new Action("name","type");
     }
 
+
+
     @Test
     public void createActionWithNameAndType(){
         Action act = new Action("NomeAction","TipoAction");
+        assertNotNull(act);
+    }
+
+    @Test
+    public void createActionWithNameAndTypeNotString(){
+        Action act = new Action("NomeAction",new Type("Tipo particolare"));
+        assertNotNull(act);
+    }
+
+    @Test
+    public void createActionWithNameAndTypeNotStringAndScenarioAndStep(){
+        Action act = new Action("NomeAction",new Type("Tipo particolare"),"scenario","step");
+        assertNotNull(act);
+    }
+
+    @Test
+    public void createActionWithNameAndTypeAndScenarioAndStep(){
+        Action act = new Action("NomeAction","Tipo particolare","scenario","step");
+        assertNotNull(act);
+    }
+
+    @Test
+    public void createActionWithNameAndTypeNullAndScenarioAndStep(){
+        Action act = new Action("NomeAction","","scenario","step");
         assertNotNull(act);
     }
 
@@ -42,7 +69,7 @@ public class ActionTest {
         act.setType("TYPE");
         ObjectParam o = new ObjectParam("nome","type");
         act.addObjectParam(o);
-        assertEquals("TYPE NAME(type nome)",act.toString());
+        assertEquals("TYPE NAME (type nome)",act.toString());
     }
     @Test
 
@@ -53,7 +80,7 @@ public class ActionTest {
         ObjectParam o2 = new ObjectParam("nome2","type2");
         act.addObjectParam(o);
         act.addObjectParam(o2);
-        assertEquals("TYPE NAME(type nome, type2 nome2)",act.toString());
+        assertEquals("TYPE NAME (type nome, type2 nome2)",act.toString());
     }
 
     @Test
@@ -72,7 +99,38 @@ public class ActionTest {
          assertEquals("type",act.getType().getName());
     }
 
+    @Test
+    public void testAddObjectParamWithString(){
+        act.addObjectParam("nome","tipo");
+        assertEquals(1,act.getObjectParams().size());
+    }
 
+    @Test
+    public void testRemoveObjectParamWithId(){
+        ObjectParam obj = new ObjectParam("nome","tipo");
+        act.addObjectParam(obj);
+        act.removeObjectParam(act.getObjectParams().indexOf(obj));
+        assertEquals(0,act.getObjectParams().size());
+    }
+
+    @Test
+    public void setTypeCorrectly(){
+        Type t1 = new Type("tipo1");
+        act.setType(t1);
+        assertEquals(t1,act.getType());
+    }
+
+    @Test
+    public void getScenarioCorrectly(){
+        Action act = new Action("NomeAction","","scenario","step");
+        assertEquals("scenario",act.getScenario());
+    }
+
+    @Test
+    public void getStepCorrectly(){
+        Action act = new Action("NomeAction","","scenario","step");
+        assertEquals("step",act.getStep());
+    }
 
 
 }

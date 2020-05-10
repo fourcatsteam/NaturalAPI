@@ -55,7 +55,7 @@ public class ActorTest {
     @Test
     public void testActorToString(){
         act.addAction(new Action("Action","TypeAction"));
-        assertEquals("TypeAction Action()",act.toString());
+        assertEquals("TypeAction Action ()",act.toString());
     }
 
     public void testGettingNameOfActor(){
