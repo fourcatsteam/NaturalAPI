@@ -7,8 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RepositoryTest {
@@ -80,5 +82,38 @@ public class RepositoryTest {
         repo.updateApi("api1","api2");
         verify(dataMock).updateApi(any(String.class),any(String.class));
     }
+
+    @Test
+    public void writingPLAToFileSystemCorrectly(){
+        repo.writePla("plafile","pla");
+        verify(fileMock).writePla(any(String.class),any(String.class));
+    }
+
+    @Test
+    public void addingCoupleBalPlaToDataKeeperCorrectly(){
+        repo.addCoupleBalPla("BAL","pla");
+        verify(dataMock).addCoupleBalPla(any(String.class),any(String.class));
+    }
+
+    @Test
+    public void isCoupleBalPlaPresentInDataKeepeerCorrectly(){
+        when(dataMock.isCoupleBalPlaPresent("BAL","pla")).thenReturn(true);
+        assertTrue(repo.isCoupleBalPlaPresent("BAL","pla"));
+    }
+
+    @Test
+    public void isThisAPIPresentInDataKeeperCorrectly(){
+        API a = new API();
+        when(dataMock.isThisApiPresent(a)).thenReturn(true);
+        assertTrue(repo.isThisApiPresent(a));
+    }
+
+    @Test
+    public void isThisClassNamePresentInDataKeeperCorrectly(){
+        API a = new API();
+        when(dataMock.isThisClassNamePresent(a)).thenReturn(true);
+        assertTrue(repo.isThisClassNamePresent(a));
+    }
+
 
 }
