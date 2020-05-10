@@ -39,26 +39,32 @@ public class SuggestApi implements ApiInputPort {
                     Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
                     Matcher m = p.matcher(newApi);
                     if(m.find()){
-                        while(size != 1){
+                        while(size > 1){
                             newApi = m.replaceFirst(m.group() + ", " + m.group());
                             size--;
                         }
                     }
 
-                    if(action.getType().getAttributes().keySet().stream().findFirst().isPresent()) {
+                    if(!action.getType().getAttributes().isEmpty()) {
                         createCustomClassForAction(pla,action,actor.getName());
                     }
 
-                    for(ObjectParam objectParam : action.getObjectParams()) {
-
-                        if(objectParam.getType().getAttributes().keySet().stream().findFirst().isPresent()){
-                            createCustomClassForObjectParam(pla,objectParam,actor.getName());
-                        }
-
-                        newApi = insertObjectType(newApi, objectParam.getType().getName());
-                        newApi = insertObjectName(newApi, objectParam.getName());
-
+                    if(action.getObjectParams().isEmpty()){
+                        newApi = insertObjectType(newApi, "");
+                        newApi = insertObjectName(newApi, "");
                     }
+                    else {
+                        for (ObjectParam objectParam : action.getObjectParams()) {
+
+                            if (!objectParam.getType().getAttributes().isEmpty()) {
+                                createCustomClassForObjectParam(pla, objectParam, actor.getName());
+                            }
+
+                            newApi = insertObjectType(newApi, objectParam.getType().getName());
+                            newApi = insertObjectName(newApi, objectParam.getName());
+                        }
+                    }
+
                     String className = action.getName();
                     newApi = insertGroup(newApi,className);
                     newApi = insertActionType(newApi, action.getType().getName());
@@ -66,11 +72,13 @@ public class SuggestApi implements ApiInputPort {
                     API api = new API();
                     api.setFilename("Api\\" + actor.getName() + "\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
                     api.setText(newApi);
+
                     if(repositoryAccess.isThisApiPresent(api) == false){
                         int num = 0;
+                        String holdClassName = className;
                         while(repositoryAccess.isThisClassNamePresent(api)){
                             num++;
-                            String newClassName = className.concat("__" + num);
+                            String newClassName = holdClassName.concat("__" + num);
                             newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                             className = className.substring(0,1).toUpperCase() + className.substring(1);
                             api.setText(api.getText().replaceAll(className,newClassName));
@@ -80,28 +88,31 @@ public class SuggestApi implements ApiInputPort {
                         repositoryAccess.addApi(api);
                     }
 
-                    String step = action.getStep();
-                    step = step.replaceAll(" ", "_");
-                    step = step.toLowerCase();
-                    step = step.replaceAll("\"","");
-                    String testApi = pla.getTestClass();
-                    String classTestName = step;
-                    testApi = insertTestStub(testApi,classTestName);
-                    testApi = insertGroup(testApi,className);
-                    testApi = insertActionName(testApi,action.getName());
-                    API test = new API();
-                    test.setFilename("Test\\" + actor.getName() + "\\"+ classTestName + pla.getExtension());
-                    test.setText(testApi);
-                    if(repositoryAccess.isThisApiPresent(test) == false) {
-                        int num = 0;
-                        while(repositoryAccess.isThisClassNamePresent(test)){
-                            num++;
-                            String newClassTestName = classTestName.concat("__" + num);
-                            test.setText(test.getText().replaceAll(classTestName,newClassTestName));
-                            test.setFilename(test.getFilename().replaceAll(classTestName,newClassTestName));
-                            classTestName = newClassTestName;
+                    if(action.getStep() != "null") {
+                        String step = action.getStep();
+                        step = step.replaceAll(" ", "_");
+                        step = step.toLowerCase();
+                        step = step.replaceAll("\"", "");
+                        String testApi = pla.getTestClass();
+                        String classTestName = step;
+                        testApi = insertTestStub(testApi, classTestName);
+                        testApi = insertGroup(testApi, className);
+                        testApi = insertActionName(testApi, action.getName());
+                        API test = new API();
+                        test.setFilename("Test\\" + actor.getName() + "\\" + classTestName + pla.getExtension());
+                        test.setText(testApi);
+                        if (repositoryAccess.isThisApiPresent(test) == false) {
+                            int num = 0;
+                            String holdClassTestName = classTestName;
+                            while (repositoryAccess.isThisClassNamePresent(test)) {
+                                num++;
+                                String newClassTestName = holdClassTestName.concat("__" + num);
+                                test.setText(test.getText().replaceAll(classTestName, newClassTestName));
+                                test.setFilename(test.getFilename().replaceAll(classTestName, newClassTestName));
+                                classTestName = newClassTestName;
+                            }
+                            repositoryAccess.addApi(test);
                         }
-                        repositoryAccess.addApi(test);
                     }
                 }
             }
@@ -166,9 +177,10 @@ public class SuggestApi implements ApiInputPort {
 
         if(repositoryAccess.isThisApiPresent(api) == false){
             int num = 0;
+            String holdClassName = className;
             while(repositoryAccess.isThisClassNamePresent(api)){
                 num++;
-                String newClassName = className.concat("__" + num);
+                String newClassName = holdClassName.concat("__" + num);
                 newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                 className = className.substring(0,1).toUpperCase() + className.substring(1);
                 api.setText(api.getText().replaceAll(className,newClassName));
@@ -209,9 +221,10 @@ public class SuggestApi implements ApiInputPort {
 
         if(repositoryAccess.isThisApiPresent(api) == false){
             int num = 0;
+            String holdClassName = className;
             while(repositoryAccess.isThisClassNamePresent(api)){
                 num++;
-                String newClassName = className.concat("__" + num);
+                String newClassName = holdClassName.concat("__" + num);
                 newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
                 className = className.substring(0,1).toUpperCase() + className.substring(1);
                 api.setText(api.getText().replaceAll(className,newClassName));

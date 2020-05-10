@@ -66,6 +66,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 Action entityAction = new Action(actionName,entityType,scenario,step);
 
                 JsonNode parameters = ac.get("objectParams");
+
                 for (JsonNode par : parameters) {
                     JsonNode typePar = par.get("type");
                     JsonNode attributes = typePar.get("attributes");
