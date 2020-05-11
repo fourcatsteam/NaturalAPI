@@ -26,6 +26,7 @@ public class SuggestionWidget {
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
     private CustomTypeCreation customType;
+    private String currentActionName="";
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         lObjectParamWidget = new ArrayList<>();
@@ -115,12 +116,12 @@ public class SuggestionWidget {
         });
 
         actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
-           public void changedUpdate(DocumentEvent e) {
+            public void changedUpdate(DocumentEvent e) {
                 setNewName();
                 if(dataPresenter.isBdlLoaded()) setColor();
             }
             public void removeUpdate(DocumentEvent e) {
-                setNewName();
+                if (!currentActionName.equals(actionNameTextField.getText())) setNewName();
                 if(dataPresenter.isBdlLoaded()) setColor();
             }
             public void insertUpdate(DocumentEvent e) {
@@ -134,6 +135,11 @@ public class SuggestionWidget {
 
             public void setNewName() {
                 contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
+                //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
+                if (!dataPresenter.isOkOperation())
+                    currentActionName = actionNameTextField.getText().substring(0, actionNameTextField.getText().length() - 1);
+                else
+                    currentActionName = actionNameTextField.getText();
             }
         });
     }
