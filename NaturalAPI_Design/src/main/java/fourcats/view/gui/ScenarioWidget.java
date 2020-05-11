@@ -18,7 +18,7 @@ public class ScenarioWidget extends JComponent{
         featureLabel.setText("---Feature: " + featureName);
 
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
-        mainPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        mainPanel.add(Box.createHorizontalStrut(20));
         mainPanel.add(panelNorth);
         mainPanel.add(featureTextArea);
         featureTextArea.setText(scenario);

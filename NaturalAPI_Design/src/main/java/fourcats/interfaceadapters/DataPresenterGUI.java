@@ -155,7 +155,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             if(isBdlLoaded) frequencyInBdl = algorithm.findActionInBdl(actionNameModified);
         }
         else{
-            message = ERROR_MESSAGE;
+            message = ERROR_MESSAGE + "\nThis name is probably already used. Change it!";
             isOkOperation = false;
         }
         notifyObservers();
@@ -277,7 +277,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             showSuggestions(mScenarios);
         }
         else{
-            message = ERROR_MESSAGE;
+            message = ERROR_MESSAGE + "\nThis name is probably already used. No action added.";
             isOkOperation = false;
             notifyObservers();
         }
@@ -298,22 +298,29 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             scenarioContent = "Scenario:" + mSc.getValue().getContent();
             scenarioId = "" + mSc.getKey();
             actor = mSc.getValue().getActorName();
-            for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                int idCurrentObject=0;
-                suggestionId = "" + mAc.getKey();
-                actionName = mAc.getValue().getName();
-                if(isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionName);
-                actionType = "" + mAc.getValue().getType();
-                for (ObjectParam op : mAc.getValue().getObjectParams()){
-                    lObjectId.add("" + idCurrentObject);
-                    lObjectTypes.add("" + op.getType());
-                    lObjectNames.add(op.getName());
-                    idCurrentObject++;
-                }
+            if (mSc.getValue().getActionsMap().isEmpty()){ //scenario has no action
+                actionName = null; //MODIFICA FACENDO CHECK SU GUI CHE SE è NULL VIENE VISUALIZZATA LABEL
+                //isSuggestionToAdd = false;
                 notifyObservers();
-                lObjectId.clear();
-                lObjectTypes.clear();
-                lObjectNames.clear();
+            }
+            else {
+                for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+                    int idCurrentObject = 0;
+                    suggestionId = "" + mAc.getKey();
+                    actionName = mAc.getValue().getName();
+                    if (isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionName);
+                    actionType = "" + mAc.getValue().getType();
+                    for (ObjectParam op : mAc.getValue().getObjectParams()) {
+                        lObjectId.add("" + idCurrentObject);
+                        lObjectTypes.add("" + op.getType());
+                        lObjectNames.add(op.getName());
+                        idCurrentObject++;
+                    }
+                    notifyObservers();
+                    lObjectId.clear();
+                    lObjectTypes.clear();
+                    lObjectNames.clear();
+                }
             }
         }
         isSuggestionToAdd = false;

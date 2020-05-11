@@ -25,12 +25,20 @@ public class DataKeeper {
 
     public void addScenarioToMap(Scenario scenario){
         //first check if the scenario is already in the map by checking the scenario content
-        for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()){
-            if (mSc.getValue().getContent().equals(scenario.getContent())){
+        for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()) {
+            if (mSc.getValue().getContent().equals(scenario.getContent())) {
                 throw new SetOnce.AlreadySetException();
             }
         }
-        mScenarios.put(mScenarios.size(),scenario);
+        //check if action already exists. If so, remove it from scenario
+        List<Integer> actionKeysToRemove = new ArrayList<>();
+        for (Map.Entry<Integer,Action> acEntry : scenario.getActionsMap().entrySet()){
+            if (isActionNamePresent(acEntry.getValue().getName()))
+                actionKeysToRemove.add(acEntry.getKey());
+        }
+        actionKeysToRemove.forEach(key->scenario.getActionsMap().remove(key));
+
+        mScenarios.put(mScenarios.size(), scenario);
     }
 
     public Map<Integer,Scenario> getScenarioMap(){
@@ -62,7 +70,10 @@ public class DataKeeper {
     }
 
     public void updateActionName(int idScenario, int idAction, String newActionName){
-        mScenarios.get(idScenario).getActionsMap().get(idAction).setName(newActionName);
+        if (!isActionNamePresent(newActionName))
+            mScenarios.get(idScenario).getActionsMap().get(idAction).setName(newActionName);
+        else
+            throw new SetOnce.AlreadySetException();
     }
 
     public void updateActionType(int idScenario, int idAction, String newActionType){
@@ -132,23 +143,28 @@ public class DataKeeper {
     }
 
     public void addSuggestion(int idScenario, String suggestionName, String suggestionType) {
-        int idSuggestion = getMaxKeyInActionMap(mScenarios.get(idScenario).getActionsMap())+1;
-        for (Type ty : mTypes.values()){
-            if (ty.getName().equals(suggestionType)) {
-                mScenarios.get(idScenario).getActionsMap().put(idSuggestion,new Action(suggestionName,ty));
-                return;
+        if (!isActionNamePresent(suggestionName)) {
+            int idSuggestion = getMaxKeyInActionMap(mScenarios.get(idScenario).getActionsMap()) + 1;
+            for (Type ty : mTypes.values()) {
+                if (ty.getName().equals(suggestionType)) {
+                    mScenarios.get(idScenario).getActionsMap().put(idSuggestion, new Action(suggestionName, ty));
+                    return;
+                }
             }
+            mScenarios.get(idScenario).getActionsMap().put(idSuggestion, new Action(suggestionName, suggestionType));
         }
-        mScenarios.get(idScenario).getActionsMap().put(idSuggestion,new Action(suggestionName,suggestionType));
+        else
+            throw new SetOnce.AlreadySetException();
     }
 
     public void addSuggestionByIdType(int idScenario, String suggestionName, int idType) {
-        if(mTypes.get(idType)!=null) {
-            int idSuggestion = getMaxKeyInActionMap(mScenarios.get(idScenario).getActionsMap())+1;
-            mScenarios.get(idScenario).getActionsMap().put(idSuggestion, new Action(suggestionName,mTypes.get(idType)));
-        }
-        else {
-            throw new NoSuchElementException();
+        if(!isActionNamePresent(suggestionName)) {
+            if (mTypes.get(idType) != null) {
+                int idSuggestion = getMaxKeyInActionMap(mScenarios.get(idScenario).getActionsMap()) + 1;
+                mScenarios.get(idScenario).getActionsMap().put(idSuggestion, new Action(suggestionName, mTypes.get(idType)));
+            } else {
+                throw new NoSuchElementException();
+            }
         }
     }
 
@@ -161,5 +177,15 @@ public class DataKeeper {
             }
         }
         return maxKeyInMap;
+    }
+
+    private boolean isActionNamePresent(String actionName) {
+        for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()) {
+            for (Action ac : mSc.getValue().getActions()) {
+                if (ac.getName().equals(actionName))
+                    return true;
+            }
+        }
+        return false;
     }
 }

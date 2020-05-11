@@ -72,7 +72,8 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update." +
+                    "\nIt's also possible that the name has already been used. No changes have been made";
             notifyObservers();
         }
 
@@ -179,7 +180,8 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
             showSuggestions(mScenarios);
         }
         else {
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario or the id of the type for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario or the id of the type for the suggestion you want to update."+
+                    "\nIt's also possible that the name has already been used. No changes have been made";
             notifyObservers();
         }
     }
@@ -188,11 +190,17 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
             toShow = "----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getName() + "----";
             notifyObservers();
-            if (isBdlLoaded) showActionObjectsWithFrequency(mSc);
+            if (mSc.getValue().getActionsMap().isEmpty()){
+                toShow = "No additional suggestion found";
+                notifyObservers();
+            }
             else {
-                for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                    toShow = mAc.getKey() + ") " + mAc.getValue().toString();
-                    notifyObservers();
+                if (isBdlLoaded) showActionObjectsWithFrequency(mSc);
+                else {
+                    for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+                        toShow = mAc.getKey() + ") " + mAc.getValue().toString();
+                        notifyObservers();
+                    }
                 }
             }
         }

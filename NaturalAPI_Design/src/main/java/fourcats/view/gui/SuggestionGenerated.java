@@ -182,9 +182,18 @@ public class SuggestionGenerated extends Component implements Observer{
         }
         //the update method can be call for different reasons but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
-            new SuggestionWidget(panelSuggestions, contr, dataPresenter);
+            if (dataPresenter.getActionName()!=null)
+                new SuggestionWidget(panelSuggestions, contr, dataPresenter);
+            else{
+                JLabel label = new JLabel ("No additional suggestion found in this scenario. You can add actions manually by clicking on the '+' button.");
+                Box labelBox = Box.createHorizontalBox();
+                labelBox.add(Box.createHorizontalGlue());
+                labelBox.add(label);
+                labelBox.add(Box.createHorizontalGlue());
+                labelBox.add(Box.createVerticalStrut(35));
+                panelSuggestions.add(labelBox);
+            }
         }
-
         if (!dataPresenter.getMessage().equals("")) {
             //check if the operation was successful then show information message or error message
             if (dataPresenter.isOkOperation())

@@ -40,7 +40,7 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
             repo.updateActionName(idAction, idScenario, newName);
             out.showModifiedActionName(repo.readScenarios(), true,newName);
         }
-        catch (NullPointerException e){
+        catch (Exception e){
             //Modifica non effettuata
             out.showModifiedActionName(repo.readScenarios(), false,"");
         }

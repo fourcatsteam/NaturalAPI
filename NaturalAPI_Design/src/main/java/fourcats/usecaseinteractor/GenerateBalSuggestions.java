@@ -45,7 +45,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
                 return;
             }
             if (feature != null) {
-                List<Scenario> x = generateScenario(feature);
+                List<Scenario> x = generateScenario(feature,featurePath);
                 scenarioList.addAll(x);
             }
         }
@@ -62,7 +62,7 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
     }
 
 
-    protected List<Scenario> generateScenario(String feature) {
+    protected List<Scenario> generateScenario(String feature,String featureName) {
 
         String actorName = extractActorName(feature);
 
@@ -76,12 +76,11 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
             scenarioString = scenarioString.trim();
             String scenarioName = extractScenarioName(scenarioString);
-
             List<Action> actionList = generateAction(scenarioString);
             Map<Integer, Action> actionMap = actionList.stream()
                     .collect(toMap(actionList::indexOf, action -> action));
 
-            Scenario scenario = new Scenario(scenarioName, actionMap, scenarioString, actorName, feature);
+            Scenario scenario = new Scenario(scenarioName, actionMap, scenarioString, actorName, featureName);
 
             scenarioList.add(scenario);
         }
@@ -105,7 +104,6 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
 
             //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
             for (String predicate : predicates) {
-
                 String actionName = predicate.replace(" ", "_");
                 String objParName = predicate.split(" ")[1];
 

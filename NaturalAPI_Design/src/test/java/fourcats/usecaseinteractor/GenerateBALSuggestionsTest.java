@@ -190,7 +190,7 @@ public class GenerateBALSuggestionsTest {
                 .thenReturn(Arrays.asList("do things"))
                 .thenReturn(Arrays.asList("do things"));
 
-        List<Scenario> scenarioList = generateBALSuggestions.generateScenario(inputString);
+        List<Scenario> scenarioList = generateBALSuggestions.generateScenario(inputString,"featureName");
         assertEquals(2,scenarioList.size());
     }
 
