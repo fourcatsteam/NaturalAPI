@@ -16,11 +16,14 @@ public interface RepositoryAccess {
     API getApi(int id);
     Map<Integer, API> getApiMap();
     int getSize();
+    void addTest(String s);
+    String getAllTests();
     void updateApi(String oldApi,String newApi);
     void writePla(String file,String pla);
     void addCoupleBalPla(String bal,String pla);
     boolean isCoupleBalPlaPresent(String bal,String pla);
     boolean isThisApiPresent(API a);
     boolean isThisClassNamePresent(API a);
+    boolean isThisTestPresent(String test);
 
 }

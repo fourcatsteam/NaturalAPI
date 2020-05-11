@@ -11,10 +11,12 @@ public class DataKeeper {
 
     private Map<Integer, API> mApi;
     private Map<String,List<String>> mBalPlaUsed;
+    private List<String> lTests;
 
     public DataKeeper() {
         mApi = new HashMap<>();
         mBalPlaUsed = new HashMap<>();
+        lTests = new ArrayList<>();
     }
 
     public void addApi(API api){
@@ -40,6 +42,18 @@ public class DataKeeper {
 
     public int getSize(){
         return  mApi.size();
+    }
+
+    public void addTest(String s) {
+        lTests.add(s);
+    }
+
+    public String getAllTests() {
+        String toReturn = "";
+        for(String s : lTests) {
+            toReturn = toReturn.concat(s + "\n");
+        }
+        return toReturn;
     }
 
     public void updateApi(String oldApi,String newApi) {
@@ -74,7 +88,7 @@ public class DataKeeper {
 
     public boolean isThisApiPresent(API a){
         for(Map.Entry<Integer, API> api : mApi.entrySet()) {
-            if(api.getValue().getText().replaceAll("__[0-9]*","").equals(a.getText())){
+            if(api.getValue().getText().equals(a.getText())){
                 return true;
             }
         }
@@ -84,6 +98,15 @@ public class DataKeeper {
     public boolean isThisClassNamePresent(API a){
         for(Map.Entry<Integer, API> api : mApi.entrySet()) {
             if(api.getValue().getFilename().equals(a.getFilename())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isThisTestPresent(String test) {
+        for(String s : lTests){
+            if(s.equals(test)){
                 return true;
             }
         }

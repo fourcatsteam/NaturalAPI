@@ -17,3 +17,10 @@ public:
 		return "attribute_name"
 	}
 }
+test class
+public:
+	@"keyword" ("^"test_stub"$")
+	void "test_stub"() {
+		//please insert an implementation of the test
+		//"group_action" object;
+	}

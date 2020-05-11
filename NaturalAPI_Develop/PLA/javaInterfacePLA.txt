@@ -3,3 +3,23 @@ public interface "group_action" {
 
 	public "action_type" "action_name" ("object_type" "object_name");
 }
+custom class
+public class "custom_class" {
+	
+	private "attribute_type" "attribute_name";
+
+	public void set"attribute_name"("attribute_type" "attribute_name") {
+		this."attribute_name" = "attribute_name";
+	}
+
+	public "attribute_type" get"attribute_name"() {
+		return "attribute_name";
+	}
+
+}
+test class
+@"keyword" ("^"test_stub"$")
+	public void "test_stub"() {
+		//please insert an implementation of the test
+		//"group_action" object;
+	}

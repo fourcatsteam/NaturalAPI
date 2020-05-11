@@ -52,6 +52,14 @@ public class Repository implements RepositoryAccess {
         return dataKeeper.getSize();
     }
 
+    public void addTest(String s) {
+        dataKeeper.addTest(s);
+    }
+
+    public String getAllTests() {
+        return dataKeeper.getAllTests();
+    }
+
     public void updateApi(String oldApi,String newApi){
         dataKeeper.updateApi(oldApi,newApi);
     }
@@ -74,5 +82,9 @@ public class Repository implements RepositoryAccess {
 
     public boolean isThisClassNamePresent(API a){
         return dataKeeper.isThisClassNamePresent(a);
+    }
+
+    public boolean isThisTestPresent(String test) {
+        return dataKeeper.isThisTestPresent(test);
     }
 }

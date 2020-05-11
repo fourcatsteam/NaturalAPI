@@ -20,9 +20,8 @@ public class "custom_class" {
 
 }
 test class
-@Test
-public class "test_stub" {
-
-	"group_action" object = new "group_action"();
-	object."action_name"();
-}
+	@"keyword" ("^"test_stub"$")
+	public void "test_stub"() {
+		//please insert an implementation of the test
+		//"group_action" object;
+	}

@@ -1,6 +1,5 @@
 package fourcats.usecaseinteractor;
 
-import fourcats.observer.Subject;
 import fourcats.port.ApiInputPort;
 import fourcats.entity.*;
 import fourcats.interfaceaccess.BalAnalyzer;
@@ -74,18 +73,7 @@ public class SuggestApi implements ApiInputPort {
                     api.setFilename("Api\\" + actor.getName() + "\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
                     api.setText(newApi);
 
-                    if(repositoryAccess.isThisApiPresent(api) == false){
-                        int num = 0;
-                        String holdClassName = className;
-                        while(repositoryAccess.isThisClassNamePresent(api)){
-                            num++;
-                            String newClassName = holdClassName.concat("__" + num);
-                            newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
-                            className = className.substring(0,1).toUpperCase() + className.substring(1);
-                            api.setText(api.getText().replace(className,newClassName));
-                            api.setFilename(api.getFilename().replace(className,newClassName));
-                            className = newClassName;
-                        }
+                    if(!repositoryAccess.isThisApiPresent(api)){
                         repositoryAccess.addApi(api);
                     }
 
@@ -110,25 +98,20 @@ public class SuggestApi implements ApiInputPort {
                         testApi = insertKeyword(testApi,keyword);
                         testApi = insertTestStub(testApi, classTestName);
                         testApi = insertGroup(testApi, className);
-                        testApi = insertActionName(testApi, action.getName());
-                        API test = new API();
-                        test.setFilename("Test\\" + actor.getName() + "\\" + classTestName + pla.getExtension());
-                        test.setText(testApi);
-                        if (repositoryAccess.isThisApiPresent(test) == false) {
-                            int num = 0;
-                            String holdClassTestName = classTestName;
-                            while (repositoryAccess.isThisClassNamePresent(test)) {
-                                num++;
-                                String newClassTestName = holdClassTestName.concat("__" + num);
-                                test.setText(test.getText().replace(classTestName, newClassTestName));
-                                test.setFilename(test.getFilename().replace(classTestName, newClassTestName));
-                                classTestName = newClassTestName;
-                            }
-                            repositoryAccess.addApi(test);
+
+                        if(!repositoryAccess.isThisTestPresent(testApi)) {
+                            repositoryAccess.addTest(testApi);
                         }
                     }
                 }
             }
+            API test = new API();
+            String[] splitTest = pla.getText().split("\n");
+            splitTest[0] = insertGroup(splitTest[0],"StepDefinitions");
+            test.setFilename("Test\\StepDefinitions" + pla.getExtension());
+            test.setText(splitTest[0] + "\n\n" + repositoryAccess.getAllTests() + splitTest[splitTest.length-1]);
+            repositoryAccess.addApi(test);
+
             repositoryAccess.addCoupleBalPla(filenameBal,filenamePla);
             apiOutputPort.showOutput(repositoryAccess.getApiMap());
         }
@@ -193,18 +176,7 @@ public class SuggestApi implements ApiInputPort {
         api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
 
-        if(repositoryAccess.isThisApiPresent(api) == false){
-            int num = 0;
-            String holdClassName = className;
-            while(repositoryAccess.isThisClassNamePresent(api)){
-                num++;
-                String newClassName = holdClassName.concat("__" + num);
-                newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
-                className = className.substring(0,1).toUpperCase() + className.substring(1);
-                api.setText(api.getText().replace(className,newClassName));
-                api.setFilename(api.getFilename().replace(className,newClassName));
-                className = newClassName;
-            }
+        if(!repositoryAccess.isThisApiPresent(api)){
             repositoryAccess.addApi(api);
         }
     }
@@ -237,20 +209,8 @@ public class SuggestApi implements ApiInputPort {
         api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
         api.setText(customApi);
 
-        if(repositoryAccess.isThisApiPresent(api) == false){
-            int num = 0;
-            String holdClassName = className;
-            while(repositoryAccess.isThisClassNamePresent(api)){
-                num++;
-                String newClassName = holdClassName.concat("__" + num);
-                newClassName = newClassName.substring(0,1).toUpperCase() + newClassName.substring(1);
-                className = className.substring(0,1).toUpperCase() + className.substring(1);
-                api.setText(api.getText().replace(className,newClassName));
-                api.setFilename(api.getFilename().replace(className,newClassName));
-                className = newClassName;
-            }
+        if(!repositoryAccess.isThisApiPresent(api)){
             repositoryAccess.addApi(api);
         }
     }
-
 }
