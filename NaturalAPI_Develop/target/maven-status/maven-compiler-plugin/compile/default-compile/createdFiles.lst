@@ -11,7 +11,6 @@ fourcats\usecaseinteractor\ModifyApi.class
 fourcats\usecaseinteractor\GenerateApi.class
 fourcats\frameworks\BalAnalyzerImplementation.class
 fourcats\port\GenerateOutputPort.class
-fourcats\App.class
 fourcats\entity\PLA.class
 fourcats\interfaceadapters\DataPresenter.class
 fourcats\port\GenerateInputPort.class

@@ -32,6 +32,10 @@ public class DataKeeper {
         mApi.remove(id);
     }
 
+    public void deleteTests() {
+        lTests.clear();
+    }
+
     public API getApi(int id){
         return mApi.get(id);
     }

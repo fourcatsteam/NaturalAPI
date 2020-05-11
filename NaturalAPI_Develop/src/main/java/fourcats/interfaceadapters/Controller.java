@@ -7,17 +7,15 @@ public class Controller {
     private ApiInputPort apiInputPort;
     private GenerateInputPort generateInputPort;
     private ModifyInputPort modifyInputPort;
-    private ModifyGuiInputPort modifyGuiInputPort;
     private CreatePlaInputPort createPlaInputPort;
     private ModifyPlaInputPort modifyPlaInputPort;
 
     public Controller(ApiInputPort apiInputPort,GenerateInputPort generateInputPort,
-                      ModifyInputPort modifyInputPort, ModifyGuiInputPort modifyGuiInputPort,
+                      ModifyInputPort modifyInputPort,
                       CreatePlaInputPort createPlaInputPort, ModifyPlaInputPort modifyPlaInputPort){
         this.apiInputPort = apiInputPort;
         this.generateInputPort = generateInputPort;
         this.modifyInputPort = modifyInputPort;
-        this.modifyGuiInputPort = modifyGuiInputPort;
         this.createPlaInputPort = createPlaInputPort;
         this.modifyPlaInputPort = modifyPlaInputPort;
     }
@@ -36,7 +34,7 @@ public class Controller {
     }
 
     public void modifyApiGui(String oldApi,String newApi){
-        modifyGuiInputPort.modifyGui(oldApi,newApi);
+        modifyInputPort.modifyGui(oldApi,newApi);
     }
 
     public void createPla(String path,String extension,String pla){

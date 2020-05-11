@@ -47,7 +47,7 @@ public class CreatePlaTest {
         createPla.create(".\\PLA\\TestFiles\\Prova","ext","text");
 
 
-        verify(outputMock).showOutput(any(String.class));
+        verify(outputMock).showMessagePla(any(String.class));
         verify(repositoryMock).writePla(".\\PLA\\TestFiles\\Prova.txt","ext\ntext");
 
     }

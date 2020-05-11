@@ -69,11 +69,6 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
         }
     }
 
-    public void showOutput(String message){
-        messagePla = message;
-        notifyObservers();
-    }
-
     public void showLoadPla(String api,String custom,String test){
         modifyApiPla = api;
         modifyCustomPla = custom;
@@ -81,7 +76,7 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
         notifyObservers();
     }
 
-    public void showModifyPla(String message){
+    public void showMessagePla(String message){
         messagePla = message;
         notifyObservers();
     }

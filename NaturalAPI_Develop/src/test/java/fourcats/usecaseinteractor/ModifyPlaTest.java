@@ -1,8 +1,6 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.CreatePlaOutputPort;
-import fourcats.port.ModifyPlaInputPort;
 import fourcats.port.ModifyPlaOutputPort;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +50,7 @@ public class ModifyPlaTest {
        when(repositoryMock.loadPLA(any(String.class))).thenReturn("pla");
        modifyPla.modify("nomefile","testo");
        verify(repositoryMock).writePla(any(String.class),any(String.class));
-       verify(outputMock).showModifyPla(any(String.class));
+       verify(outputMock).showMessagePla(any(String.class));
     }
 
 

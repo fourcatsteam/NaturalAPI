@@ -52,28 +52,40 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L52">        return dataKeeper.getSize();</span>
     }
 
+    public void addTest(String s) {
+<span class="nc" id="L56">        dataKeeper.addTest(s);</span>
+<span class="nc" id="L57">    }</span>
+
+    public String getAllTests() {
+<span class="nc" id="L60">        return dataKeeper.getAllTests();</span>
+    }
+
     public void updateApi(String oldApi,String newApi){
-<span class="fc" id="L56">        dataKeeper.updateApi(oldApi,newApi);</span>
-<span class="fc" id="L57">    }</span>
-
-    public void writePla(String file,String pla){
-<span class="fc" id="L60">        fileSystem.writePla(file,pla);</span>
-<span class="fc" id="L61">    }</span>
-
-    public void addCoupleBalPla(String bal,String pla){
-<span class="fc" id="L64">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="fc" id="L64">        dataKeeper.updateApi(oldApi,newApi);</span>
 <span class="fc" id="L65">    }</span>
 
+    public void writePla(String file,String pla){
+<span class="fc" id="L68">        fileSystem.writePla(file,pla);</span>
+<span class="fc" id="L69">    }</span>
+
+    public void addCoupleBalPla(String bal,String pla){
+<span class="fc" id="L72">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="fc" id="L73">    }</span>
+
     public boolean isCoupleBalPlaPresent(String bal,String pla){
-<span class="fc" id="L68">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+<span class="fc" id="L76">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
     }
 
     public boolean isThisApiPresent(API a){
-<span class="fc" id="L72">        return dataKeeper.isThisApiPresent(a);</span>
+<span class="fc" id="L80">        return dataKeeper.isThisApiPresent(a);</span>
     }
 
     public boolean isThisClassNamePresent(API a){
-<span class="fc" id="L76">        return dataKeeper.isThisClassNamePresent(a);</span>
+<span class="fc" id="L84">        return dataKeeper.isThisClassNamePresent(a);</span>
+    }
+
+    public boolean isThisTestPresent(String test) {
+<span class="nc" id="L88">        return dataKeeper.isThisTestPresent(test);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

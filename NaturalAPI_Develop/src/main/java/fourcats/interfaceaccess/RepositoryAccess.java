@@ -13,6 +13,7 @@ public interface RepositoryAccess {
     void addApi(API api);
     void addApiWithId(int id, API api);
     void deleteApi(int id);
+    void deleteTests();
     API getApi(int id);
     Map<Integer, API> getApiMap();
     int getSize();

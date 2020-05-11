@@ -40,6 +40,10 @@ public class Repository implements RepositoryAccess {
         dataKeeper.deleteApi(id);
     }
 
+    public void deleteTests() {
+        dataKeeper.deleteTests();
+    }
+
     public API getApi(int id){
         return dataKeeper.getApi(id);
     }

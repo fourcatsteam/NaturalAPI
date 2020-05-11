@@ -3,33 +3,32 @@
 import fourcats.entity.*;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 import fourcats.port.ModifyOutputPort;
 
 
-public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
+public class ModifyApi implements ModifyInputPort {
 
     BalAnalyzer balAnalyzer;
     RepositoryAccess repositoryAccess;
     ModifyOutputPort modifyOutputPort;
 
-<span class="fc" id="L17">    public ModifyApi(BalAnalyzer b,RepositoryAccess r,ModifyOutputPort m){</span>
-<span class="fc" id="L18">        balAnalyzer = b;</span>
-<span class="fc" id="L19">        repositoryAccess = r;</span>
-<span class="fc" id="L20">        modifyOutputPort = m;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L16">    public ModifyApi(BalAnalyzer b,RepositoryAccess r,ModifyOutputPort m){</span>
+<span class="fc" id="L17">        balAnalyzer = b;</span>
+<span class="fc" id="L18">        repositoryAccess = r;</span>
+<span class="fc" id="L19">        modifyOutputPort = m;</span>
+<span class="fc" id="L20">    }</span>
 
     public void modifyGui(String oldApi,String newApi){
-<span class="fc" id="L24">        repositoryAccess.updateApi(oldApi,newApi);</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L23">        repositoryAccess.updateApi(oldApi,newApi);</span>
+<span class="fc" id="L24">    }</span>
 
     public void modify(int id1,int id2){
 
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        for(int i = 0; i &lt; id2 - id1; i++){</span>
-<span class="fc" id="L30">            repositoryAccess.deleteApi(id1+i);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for(int i = 0; i &lt; id2 - id1; i++){</span>
+<span class="fc" id="L29">            repositoryAccess.deleteApi(id1+i);</span>
         }
         //modify for cli: only delete api and create the controller creates an api with different bal or pla
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L32">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

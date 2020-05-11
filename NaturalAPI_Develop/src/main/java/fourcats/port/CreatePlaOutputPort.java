@@ -2,5 +2,5 @@ package fourcats.port;
 
 public interface CreatePlaOutputPort {
 
-    void showOutput(String message);
+    void showMessagePla(String message);
 }

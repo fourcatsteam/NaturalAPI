@@ -1,15 +1,14 @@
+C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\AppGui.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\gui\Gui.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ModifyPlaOutputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\interfaceaccess\BalAnalyzer.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\CreatePlaInputPort.java
-C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ModifyGuiOutputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\usecaseinteractor\SuggestApi.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\entity\PLA.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ModifyOutputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\usecaseinteractor\ModifyPla.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\entity\ObjectParam.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\gui\GuiModifyPla.java
-C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\App.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\interfaceadapters\DataPresenterGui.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\entity\BAL.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\interfaceadapters\DataPresenter.java
@@ -22,6 +21,7 @@ C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\four
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ModifyInputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\frameworks\BalAnalyzerImplementation.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\view\CLI.java
+C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\AppCli.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\entity\API.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\GenerateOutputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\entity\Type.java
@@ -32,7 +32,6 @@ C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\four
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\observer\Subject.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ApiInputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\frameworks\DataKeeper.java
-C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\port\ModifyGuiInputPort.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\frameworks\FileSystem.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\frameworks\Repository.java
 C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\src\main\java\fourcats\AppConfig.java

@@ -22,7 +22,7 @@ public class AppGui {
         ModifyApi modifyApi = new ModifyApi(balAnalyzerImplementation,repo,dataPresenterGui);
         CreatePla createPla = new CreatePla(repo,dataPresenterGui);
         ModifyPla modifyPla = new ModifyPla(repo,dataPresenterGui);
-        Controller controller = new Controller(suggestApi,generateApi,modifyApi,modifyApi,createPla,modifyPla);
+        Controller controller = new Controller(suggestApi,generateApi,modifyApi,createPla,modifyPla);
         Gui gui = new Gui(controller,dataPresenterGui);
         gui.showGui();
 

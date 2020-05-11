@@ -25,9 +25,6 @@ public class ControllerTest {
     ModifyInputPort modMock;
 
     @Mock
-    ModifyGuiInputPort modGuiInputMock;
-
-    @Mock
     CreatePlaInputPort createPlaMock;
 
     @Mock
@@ -72,7 +69,7 @@ public class ControllerTest {
     @Test
     public void testingModifyApiGui(){
         controller.modifyApiGui("","");
-        verify(modGuiInputMock).modifyGui(any(String.class),any(String.class));
+        verify(modMock).modifyGui(any(String.class),any(String.class));
     }
 
     @Test

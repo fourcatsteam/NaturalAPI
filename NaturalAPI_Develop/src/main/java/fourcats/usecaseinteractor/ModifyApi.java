@@ -3,12 +3,11 @@ package fourcats.usecaseinteractor;
 import fourcats.entity.*;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
-import fourcats.port.ModifyGuiInputPort;
 import fourcats.port.ModifyInputPort;
 import fourcats.port.ModifyOutputPort;
 
 
-public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
+public class ModifyApi implements ModifyInputPort {
 
     BalAnalyzer balAnalyzer;
     RepositoryAccess repositoryAccess;
@@ -28,6 +27,7 @@ public class ModifyApi implements ModifyInputPort, ModifyGuiInputPort {
 
         for(int i = 0; i < id2 - id1; i++){
             repositoryAccess.deleteApi(id1+i);
+            repositoryAccess.deleteTests();
         }
         //modify for cli: only delete api and create the controller creates an api with different bal or pla
     }
