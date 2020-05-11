@@ -58,7 +58,6 @@ public class DataKeeper {
 
     public void updateApi(String oldApi,String newApi) {
         for(Map.Entry<Integer, API> api : mApi.entrySet()){
-
             if(api.getValue().getText().equals(oldApi)){
                 api.getValue().setText(newApi);
             }
