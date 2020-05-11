@@ -25,13 +25,13 @@ public class CLI implements Observer {
     }
 
     public void askForUseCase(){
-        System.out.println("\n-------NATURAL API DESIGN-------");
-        System.out.println("\n1. Generate Suggestions");
+        print("\n-------NATURAL API DESIGN-------");
+        print("\n1. Generate Suggestions");
         if (!isBdlLoaded)
-            System.out.println("2. Load BDL");
+            print("2. Load BDL");
         else
-            System.out.println("2. Remove loaded BDL");
-        System.out.println("EXIT. Quit Application");
+            print("2. Remove loaded BDL");
+        print("EXIT. Quit Application");
     }
 
     public boolean readUseCase(){
@@ -52,12 +52,11 @@ public class CLI implements Observer {
                     shouldContinue = false;
                     break;
                 default:
-                    System.out.println("Please insert a valid option. Digit EXIT to exit.");
+                    print("Please insert a valid option. Digit EXIT to exit.");
                     break;
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
             shouldContinue = false;
         }
         return shouldContinue;
@@ -73,7 +72,7 @@ public class CLI implements Observer {
     private String[] chooseBdlFiles() throws IOException {
         String[] bdlFiles = new String[3];
         String input="";
-        System.out.println("Enter the path of one of the BDL file\n"+
+        print("Enter the path of one of the BDL file\n"+
                 "Notice: all the 3 files (.nouns, .verbs, .predicates) must be in the same dir\n"+
                 "Digit EXIT to abort.\n");
         input = br.readLine();
@@ -88,11 +87,11 @@ public class CLI implements Observer {
         List<String> lFiles = new ArrayList<>();
         String input="";
         while(!input.equals("EXIT")){
-            System.out.println("Enter the path of the gherkin feature file, digit EXIT when you're done.");
+            print("Enter the path of the gherkin feature file, digit EXIT when you're done.");
             input = br.readLine();
             if (!input.equals("EXIT")){
                 if (ViewUtility.isFeaturePathValid(input)) lFiles.add(input);
-                else System.out.println("\nInvalid file: this is not a .feature file!\n");
+                else print("\nInvalid file: this is not a .feature file!\n");
             }
         }
         return lFiles;
@@ -101,7 +100,7 @@ public class CLI implements Observer {
     private void askForOperationOnSuggestion() throws IOException {
         String input = "";
         while(!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("\nWhat do you want to do?\n1. Modify suggestion\n2. Delete suggestion\n3. Add suggestion" +
+            print("\nWhat do you want to do?\n1. Modify suggestion\n2. Delete suggestion\n3. Add suggestion" +
                     "\n4. Add new feature\n5. Generate BAL\nDigit EXIT to abort and go back to the main menu.");
             input = br.readLine();
             switch(input){
@@ -118,12 +117,12 @@ public class CLI implements Observer {
                     contr.generateSuggestions(chooseFeatureFile(),false);
                     break;
                 case "5":
-                    System.out.println("Please, enter the path including the name for the BAL");
+                    print("Please, enter the path including the name for the BAL");
                     String balPath = br.readLine();
                     contr.generateBAL(balPath);
                     break;
                 default:
-                    System.out.println("Please choose a valid option. Digit EXIT to exit.");
+                    print("Please choose a valid option. Digit EXIT to exit.");
                     break;
             }
         }
@@ -132,7 +131,7 @@ public class CLI implements Observer {
     private void modifySuggestion() throws IOException {
         String idScenario = askForIdScenarioToModify();
         String idSuggestion = askForIdSuggestionToModify();
-        System.out.println("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
+        print("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
         String input = br.readLine();
         switch(input){
             case "1":
@@ -154,14 +153,14 @@ public class CLI implements Observer {
                 removeObject(idScenario,idSuggestion);
                 break;
             default:
-                System.out.println("Error! Please insert a valid option");
+                print("Error! Please insert a valid option");
                 break;
         }
     }
 
     private void addSuggestion() throws IOException {
         String idScenario = askForIdScenarioToModify();
-        System.out.println("Insert the name for the new Action");
+        print("Insert the name for the new Action");
         String actionName = br.readLine();
         String idType = askForIdType();
         contr.addSuggestionByIdType(idScenario,actionName,idType);
@@ -169,17 +168,17 @@ public class CLI implements Observer {
 
     private String createCustomType() throws IOException {
         Map<String, String> mAttributes = new HashMap<>();
-        System.out.println("Insert the name for the custom type");
+        print("Insert the name for the custom type");
         String customTypeName = br.readLine();
         boolean isDone = false;
         while(!isDone) {
-            System.out.println("Insert the name of the attribute for the type '" + customTypeName + "'");
+            print("Insert the name of the attribute for the type '" + customTypeName + "'");
             String attributeName = br.readLine();
-            System.out.println("Insert the type for the attribute '" + attributeName + "'");
+            print("Insert the type for the attribute '" + attributeName + "'");
             String attributeType = askForSimpleTypeOption();
             mAttributes.put(attributeName,attributeType);
-            System.out.println("Here the attribute you defined: " + attributeType + " " + attributeName);
-            System.out.println("\nDo you want to add another attribute? 1. Yes 2. No");
+            print("Here the attribute you defined: " + attributeType + " " + attributeName);
+            print("\nDo you want to add another attribute? 1. Yes 2. No");
             if (br.readLine().equals("2")) {
                 isDone = true;
             }
@@ -190,7 +189,7 @@ public class CLI implements Observer {
 
 
     private String askForSimpleTypeOption() throws IOException {
-        System.out.println("1. string, 2. int, 3. float, 4. double, 5. bool");
+        print("1. string, 2. int, 3. float, 4. double, 5. bool");
         String input = br.readLine();
         switch (input) {
             case "1":
@@ -204,16 +203,16 @@ public class CLI implements Observer {
             case "5":
                 return "bool";
             default:
-                System.out.println("Error. Please insert a valid option");
+                print("Error. Please insert a valid option");
                 return null;
         }
     }
 
 
     private void deleteSuggestion() throws IOException {
-        System.out.println("Please insert the id of the scenario for the suggestion you want to delete");
+        print("Please insert the id of the scenario for the suggestion you want to delete");
         String idScenario = br.readLine();
-        System.out.println("Please insert the id of the suggestion you want to delete");
+        print("Please insert the id of the suggestion you want to delete");
         String idSuggestion = br.readLine();
         contr.declineSuggestion(idSuggestion, idScenario);
     }
@@ -227,13 +226,13 @@ public class CLI implements Observer {
     }
 
     private void modifyActionName(String idScenario, String idSuggestion) throws IOException {
-        System.out.println("Please insert the new name of the action");
+        print("Please insert the new name of the action");
         String actionName = br.readLine();
         contr.modifyActionName(idSuggestion,idScenario,actionName);
     }
 
     private void modifyActionType(String idScenario, String idSuggestion) throws IOException {
-        System.out.println("1. Restore action to default type (void) 2. Show other types");
+        print("1. Restore action to default type (void) 2. Show other types");
         String input = br.readLine();
         if (input.equals("1")){
             contr.modifyActionType(idSuggestion, idScenario, "void");
@@ -243,12 +242,12 @@ public class CLI implements Observer {
             contr.modifyActionTypeById(idSuggestion,idScenario,idType);
         }
         else{
-            System.out.println("Error: invalid option");
+            print("Error: invalid option");
         }
     }
     private void modifyObjectName(String idScenario, String idSuggestion) throws IOException {
         String idObject = askForIdObjectToModify();
-        System.out.println("Please insert the new name for the object");
+        print("Please insert the new name for the object");
         String objectName = br.readLine();
         contr.modifyObjectName(idSuggestion,idScenario,idObject,objectName);
     }
@@ -260,38 +259,38 @@ public class CLI implements Observer {
     }
 
     private void addObject(String idScenario, String idSuggestion) throws IOException {
-        System.out.println("Insert new object name");
+        print("Insert new object name");
         String objectName = br.readLine();
         String idType = askForIdType();
         contr.addObject(idSuggestion,idScenario,objectName,idType);
     }
 
     private void removeObject(String idScenario, String idSuggestion) throws IOException {
-        System.out.println("Please insert the id of the object you want to remove: 0 first, 1 second, 2 third...");
+        print("Please insert the id of the object you want to remove: 0 first, 1 second, 2 third...");
         String idObject = br.readLine();
         contr.removeObject(idSuggestion,idScenario,idObject);
     }
 
     private String askForIdScenarioToModify() throws IOException {
-        System.out.println("Please insert the id of the scenario you want to modify");
+        print("Please insert the id of the scenario you want to modify");
         return br.readLine();
     }
     private String askForIdSuggestionToModify() throws IOException {
-        System.out.println("Please insert the id of the suggestion you want to modify");
+        print("Please insert the id of the suggestion you want to modify");
         return br.readLine();
     }
     private String askForIdObjectToModify() throws IOException {
-        System.out.println("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
+        print("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
         return br.readLine();
     }
     private String askForIdType() throws IOException {
         contr.showTypes();
-        System.out.println("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
+        print("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
         String input = br.readLine();
         while (input.equals("CREATE")){
             createCustomType();
             contr.showTypes();
-            System.out.println("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
+            print("Insert the id for the desired type.\nDigit CREATE to create a custom one.");
             input = br.readLine();
         }
         return input;
@@ -299,7 +298,11 @@ public class CLI implements Observer {
 
     @Override
     public void update() {
-        System.out.println(dataPresenter.getDataToShow());
+        print(dataPresenter.getDataToShow());
         isBdlLoaded = dataPresenter.isBdlLoaded();
+    }
+    
+    private void print(String message){
+        System.out.println(message);
     }
 }
