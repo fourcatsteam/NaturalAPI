@@ -59,7 +59,8 @@ public class DataPresenterTest {
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
-        assertTrue(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
+        //Cambiato
+        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
     }
 
     @Test
@@ -72,7 +73,8 @@ public class DataPresenterTest {
 
         dataPresenter.showRemoveBdlStatus();
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
-        assertTrue(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
+        //Cambiato
+        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
     }
 
     @Test

@@ -78,7 +78,7 @@ public class DataPresenterGUITest {
 
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
 
-        verify(scenario, times(1)).getActionsMap();
+        verify(scenario, times(2)).getActionsMap();
         verify(action, times(1)).getObjectParams();
         verify(objectParam, times(1)).getName();
     }
