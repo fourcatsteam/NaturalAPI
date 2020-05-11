@@ -114,6 +114,10 @@ public class SuggestApi implements ApiInputPort {
 
             repositoryAccess.addCoupleBalPla(filenameBal,filenamePla);
             apiOutputPort.showOutput(repositoryAccess.getApiMap());
+            apiOutputPort.showMessage("Suggestions created!");
+        }
+        else {
+            apiOutputPort.showMessage("This couple of BAL and PLA is already generated!");
         }
     }
 

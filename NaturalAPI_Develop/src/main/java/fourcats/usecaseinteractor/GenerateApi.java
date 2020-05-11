@@ -26,7 +26,7 @@ public class GenerateApi implements GenerateInputPort {
             for(Map.Entry<Integer, API> mApi : repositoryAccess.getApiMap().entrySet()){
                 repositoryAccess.writeApi(path,mApi.getValue());
             }
-            generateOutputPort.showGenerationMessage("APIs generated!");
+            generateOutputPort.showMessage("APIs generated!");
         }
     }
 }

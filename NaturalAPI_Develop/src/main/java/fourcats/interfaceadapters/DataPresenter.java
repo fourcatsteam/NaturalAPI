@@ -40,7 +40,7 @@ public class DataPresenter extends Subject implements ApiOutputPort, ModifyOutpu
     }
 
     @Override
-    public void showGenerationMessage(String m){
+    public void showMessage(String m){
         message = m;
         notifyObservers();
         message = "";

@@ -71,7 +71,7 @@ public class GuiPla implements Observer {
     }
 
     public void showOutput(){
-        message = dataPresenterGui.getMessagePla();
+        message = dataPresenterGui.getMessage();
     }
 
     @Override

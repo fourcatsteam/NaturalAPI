@@ -17,11 +17,11 @@ public class CreatePla implements CreatePlaInputPort {
     public void create(String path,String extension,String text){
 
         if(repositoryAccess.openFile(path + ".txt").exists()){
-            createPlaOutputPort.showMessagePla("There is already a PLA with this name");
+            createPlaOutputPort.showMessage("There is already a PLA with this name");
         }
         else{
             repositoryAccess.writePla(path + ".txt",extension + "\n" + text);
-            createPlaOutputPort.showMessagePla("PLA created!");
+            createPlaOutputPort.showMessage("PLA created!");
         }
     }
 }

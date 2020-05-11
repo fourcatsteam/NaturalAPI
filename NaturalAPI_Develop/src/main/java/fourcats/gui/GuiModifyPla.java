@@ -88,7 +88,7 @@ public class GuiModifyPla implements Observer {
         modifyApiPla = dataPresenterGui.getModifyApiPla();
         modifyCustomPla = dataPresenterGui.getModifyCustomPla();
         modifyTestPla = dataPresenterGui.getModifyTestPla();
-        message = dataPresenterGui.getMessagePla();
+        message = dataPresenterGui.getMessage();
     }
 
     @Override

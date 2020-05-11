@@ -50,7 +50,7 @@ public class ModifyPlaTest {
        when(repositoryMock.loadPLA(any(String.class))).thenReturn("pla");
        modifyPla.modify("nomefile","testo");
        verify(repositoryMock).writePla(any(String.class),any(String.class));
-       verify(outputMock).showMessagePla(any(String.class));
+       verify(outputMock).showMessage(any(String.class));
     }
 
 

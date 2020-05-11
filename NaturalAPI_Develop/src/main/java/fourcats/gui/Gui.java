@@ -89,8 +89,13 @@ public class Gui implements Observer {
             try{
                 c.createApiSuggestion(bal[0],pla[0]);
                 comboBox1.setVisible(true);
-                mainPanel.setBackground(Color.GREEN);
-                messageLabel.setText("Suggestions created!");
+                messageLabel.setText(message);
+                if(message.equals("Suggestions created!")){
+                    mainPanel.setBackground(Color.GREEN);
+                }
+                else if(message.equals("This couple of BAL and PLA is already generated!")){
+                    mainPanel.setBackground(Color.RED);
+                }
             }
             catch (Exception ex){
                 messageLabel.setText("Ops! Something went wrong! " +
@@ -245,8 +250,16 @@ public class Gui implements Observer {
     }
 
     public void showOutput(){
-        toView.put(dataPresenterGui.getComboToShow(),dataPresenterGui.getStringToShow());
-        comboBox1.addItem(dataPresenterGui.getComboToShow());
+        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1) {
+            toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());
+            comboBox1.addItem(dataPresenterGui.getComboToShow());
+        }
+        else {
+            if(dataPresenterGui.getComboToShow().equals("Test\\StepDefinitions.java")){
+                toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());
+                comboBox1.setSelectedIndex(0);
+            }
+        }
         message = dataPresenterGui.getMessage();
     }
 

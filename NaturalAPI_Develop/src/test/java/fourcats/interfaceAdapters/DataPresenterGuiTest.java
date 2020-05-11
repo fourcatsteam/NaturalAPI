@@ -37,7 +37,7 @@ public class DataPresenterGuiTest {
 
     @Test
     public void testGettingMessagePla(){
-        assertEquals("",dataPresGui.getMessagePla());
+        assertEquals("",dataPresGui.getMessage());
     }
 
     @Test
@@ -57,8 +57,8 @@ public class DataPresenterGuiTest {
 
     @Test
     public void testShowOutput(){
-        dataPresGui.showMessagePla("output");
-        assertEquals("output",dataPresGui.getMessagePla());
+        dataPresGui.showMessage("output");
+        assertEquals("output",dataPresGui.getMessage());
     }
 
     @Test
@@ -71,13 +71,13 @@ public class DataPresenterGuiTest {
 
     @Test
     public void testShowModifyPla(){
-        dataPresGui.showMessagePla("modifypla");
-        assertEquals("modifypla",dataPresGui.getMessagePla());
+        dataPresGui.showMessage("modifypla");
+        assertEquals("modifypla",dataPresGui.getMessage());
     }
 
     @Test
     public void testShowGenMessage(){
-        dataPresGui.showGenerationMessage("output");
+        dataPresGui.showMessage("output");
         assertEquals("output",dataPresGui.getMessage());
     }
 

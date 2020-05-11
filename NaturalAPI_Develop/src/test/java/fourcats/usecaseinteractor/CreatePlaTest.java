@@ -1,15 +1,12 @@
 package fourcats.usecaseinteractor;
 
-import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.CreatePlaOutputPort;
-import fourcats.port.ModifyOutputPort;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
@@ -47,7 +44,7 @@ public class CreatePlaTest {
         createPla.create(".\\PLA\\TestFiles\\Prova","ext","text");
 
 
-        verify(outputMock).showMessagePla(any(String.class));
+        verify(outputMock).showMessage(any(String.class));
         verify(repositoryMock).writePla(".\\PLA\\TestFiles\\Prova.txt","ext\ntext");
 
     }

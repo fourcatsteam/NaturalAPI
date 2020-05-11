@@ -11,19 +11,14 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     private String toShow;
     private String comboToShow;
-    private String messagePla;
-
     private String message;
-
     private String modifyApiPla;
     private String modifyCustomPla;
-
     private String modifyTestPla;
 
     public DataPresenterGui(){
         toShow = "";
         comboToShow = "";
-        messagePla = "";
         modifyApiPla = "";
         modifyCustomPla = "";
         modifyTestPla = "";
@@ -33,12 +28,9 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
     public String getStringToShow(){
         return toShow;
     }
+
     public String getComboToShow(){
         return comboToShow;
-    }
-
-    public String getMessagePla() {
-        return messagePla;
     }
 
     public String getModifyApiPla() {
@@ -76,12 +68,7 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
         notifyObservers();
     }
 
-    public void showMessagePla(String message){
-        messagePla = message;
-        notifyObservers();
-    }
-
-    public void showGenerationMessage(String m) {
+    public void showMessage(String m) {
         message = m;
         notifyObservers();
     }

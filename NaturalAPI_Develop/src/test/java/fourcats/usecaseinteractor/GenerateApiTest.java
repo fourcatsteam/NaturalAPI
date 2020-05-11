@@ -49,7 +49,7 @@ public class GenerateApiTest {
 
         generator.generate("path");
         verify(repositoryMock).writeApi(any(String.class),any(API.class));
-        verify(generateOutputPortMock).showGenerationMessage(any(String.class));
+        verify(generateOutputPortMock).showMessage(any(String.class));
     }
 
 }

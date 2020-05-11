@@ -43,7 +43,7 @@ public class ModifyPla implements ModifyPlaInputPort {
         String pla = repositoryAccess.loadPLA(filename);
         String extension = pla.split("\n",2)[0];
         repositoryAccess.writePla(filename,extension + "\n" + text);
-        modifyPlaOutputPort.showMessagePla("Pla modified!");
+        modifyPlaOutputPort.showMessage("Pla modified!");
 
     }
 }

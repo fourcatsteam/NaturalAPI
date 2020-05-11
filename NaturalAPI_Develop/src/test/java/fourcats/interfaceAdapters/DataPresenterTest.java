@@ -37,7 +37,7 @@ public class DataPresenterTest {
 
     @Test
     public void testingShowGenerationMessage(){
-        dataPresenter.showGenerationMessage("messaggio");
+        dataPresenter.showMessage("messaggio");
         assertEquals("",dataPresenter.getMessage());
     }
 
