@@ -1,6 +1,6 @@
 package integration.GenerateBALSuggestion;
 
-import fourcats.entities.BAL;
+
 import fourcats.entities.Scenario;
 import fourcats.frameworks.DataKeeper;
 import fourcats.frameworks.FileSystemAccess;

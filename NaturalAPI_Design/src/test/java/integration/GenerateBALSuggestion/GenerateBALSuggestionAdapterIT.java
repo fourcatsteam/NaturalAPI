@@ -1,7 +1,6 @@
 package integration.GenerateBALSuggestion;
 
 import fourcats.entities.Action;
-import fourcats.entities.BAL;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;

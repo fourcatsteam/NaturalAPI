@@ -1,5 +1,7 @@
 package fourcats.entities;
 
+import fourcats.entities.Actor;
+
 import java.util.List;
 
 public class Bal {

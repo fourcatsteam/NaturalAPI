@@ -1,6 +1,7 @@
 package integration.GenerateBAL;
 
 import fourcats.entities.Action;
+
 import fourcats.entities.Bal;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.BalAnalyzer;
