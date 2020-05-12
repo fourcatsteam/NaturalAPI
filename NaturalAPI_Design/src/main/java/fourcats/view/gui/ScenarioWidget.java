@@ -20,9 +20,12 @@ public class ScenarioWidget extends JComponent{
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
         mainPanel.add(Box.createHorizontalStrut(20));
         mainPanel.add(panelNorth);
-        mainPanel.add(featureTextArea);
+        //add text area in a scrollPane
+        JScrollPane scrollPane = new JScrollPane (featureTextArea,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        mainPanel.add(scrollPane);
         featureTextArea.setText(scenario);
-        featureTextArea.setPreferredSize(new Dimension(380,230));
+        featureTextArea.setPreferredSize(new Dimension(350,200));
         panelToUpdate.add(mainPanel);
 
     }
