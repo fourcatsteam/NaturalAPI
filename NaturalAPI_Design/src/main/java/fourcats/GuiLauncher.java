@@ -4,7 +4,7 @@ import fourcats.frameworks.*;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.usecaseinteractor.*;
-import fourcats.view.gui.GUI_Design;
+import fourcats.view.gui.GuiDesign;
 
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class GuiLauncher {
 
 
         Locale.setDefault(Locale.ENGLISH); //set language of GUI components to english
-        GUI_Design gui = new GUI_Design(controller,dataPresenter);
+        GuiDesign gui = new GuiDesign(controller,dataPresenter);
         gui.createAndShowGUI();
 
     }

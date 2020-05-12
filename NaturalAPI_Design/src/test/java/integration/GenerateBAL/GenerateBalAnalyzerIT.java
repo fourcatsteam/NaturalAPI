@@ -1,12 +1,7 @@
 package integration.GenerateBAL;
 
-import fourcats.entities.Action;
-import fourcats.entities.BAL;
-import fourcats.entities.Scenario;
+import fourcats.entities.Bal;
 import fourcats.frameworks.BalAnalyzerImplementation;
-import fourcats.frameworks.DataKeeper;
-import fourcats.frameworks.FileSystemAccess;
-import fourcats.frameworks.Repository;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.interfaceadapters.DataPresenterGUI;
@@ -19,15 +14,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GenerateBALAnalyzerIT {
+public class GenerateBalAnalyzerIT {
 
 
     BalAnalyzer analyzer = new BalAnalyzerImplementation();
@@ -51,7 +43,7 @@ public class GenerateBALAnalyzerIT {
     @Test
     public void verifyLinkSuggestAPIAndBalAnalyzer() throws Exception {
         generatorBAL.generateBAL("");
-        verify(spyAnalyzer).createJsonFromBAL(any(BAL.class));
-        assertNotNull(spyAnalyzer.createJsonFromBAL(any(BAL.class)));
+        verify(spyAnalyzer).createJsonFromBAL(any(Bal.class));
+        assertNotNull(spyAnalyzer.createJsonFromBAL(any(Bal.class)));
     }
 }

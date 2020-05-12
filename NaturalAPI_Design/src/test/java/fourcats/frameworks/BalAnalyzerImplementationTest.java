@@ -1,30 +1,28 @@
 package fourcats.frameworks;
 
 import fourcats.entities.Actor;
-import fourcats.entities.BAL;
+import fourcats.entities.Bal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BalAnalyzerImplementationTest {
 
-    private BAL bal;
+    private Bal bal;
     private BalAnalyzerImplementation balAnalyzer;
 
     @Before public void CeateBalAnalyzer() {
         Actor actor = new Actor("Actor");
         ArrayList<Actor> list = new ArrayList<>();
         list.add(actor);
-        bal = new BAL(list);
+        bal = new Bal(list);
         balAnalyzer = new BalAnalyzerImplementation();
     }
 

@@ -4,7 +4,7 @@ import fourcats.frameworks.*;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenter;
 import fourcats.usecaseinteractor.*;
-import fourcats.view.CLI;
+import fourcats.view.Cli;
 
 public class CliLauncher {
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class CliLauncher {
         Controller controller = new Controller(generateBALSugg, declineBALSuggestion,
                 generateBAL ,modifyBALSuggestion, createCustomType, showTypes, addBALSuggestion,loadBdl,removeBdl);
 
-        CLI cli = new CLI(controller,dataPresenter);
+        Cli cli = new Cli(controller,dataPresenter);
 
         boolean shouldContinue = true;
         while(shouldContinue) {

@@ -26,28 +26,25 @@ public class AnalyzedData {
     }
 
     public List<String> getPredicates(){
-        List<String> predicates =  dependencies
-                                   .stream()
-                                   .filter(d->(d.getRelation().equals("dobj")))
-                                   .map(d-> d.getGov()+" "+d.getDep())
-                                   .collect(Collectors.toList());
-        return predicates;
-
+        return dependencies.stream()
+                           .filter(d->(d.getRelation().equals("dobj")))
+                           .map(d-> d.getGov()+" "+d.getDep())
+                           .collect(Collectors.toList());
     }
 
 
     public List<WordTag> getTaggedData() { return tokens; }
 
     public String toString(){
-        String s ="-- Token and lemma Data -- \n";
+        StringBuilder s = new StringBuilder("-- Token and lemma Data -- \n");
         for(WordTag wtag : tokens){
-            s = s + wtag.toString()+ "\n";
+            s.append(wtag.toString()).append("\n");
         }
-        s = s + "-- Dependencies Data -- \n";
+        s.append("-- Dependencies Data -- \n");
         for(Dependency dat: dependencies){
-            s = s + dat.getGov() + " " + dat.getDep() + " " + dat.getRelation() + "\n";
+            s.append(dat.getGov()).append(" ").append(dat.getDep()).append(" ").append(dat.getRelation()).append("\n");
         }
-        return s;
+        return s.toString();
 
     }
 

@@ -49,10 +49,10 @@ public class Actor {
 
     @Override
     public String toString() {
-        String actionStr = "";
+        StringBuilder actionStr = new StringBuilder();
         for (Action s : lAction) {
-            actionStr += s.toString();
+            actionStr.append(s.toString());
         }
-        return actionStr;
+        return actionStr.toString();
     }
 }

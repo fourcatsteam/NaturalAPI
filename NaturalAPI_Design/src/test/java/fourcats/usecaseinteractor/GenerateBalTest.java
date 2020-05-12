@@ -8,7 +8,7 @@ import org.mockito.*;
 
 import static org.junit.Assert.*;
 
-public class GenerateBALTest {
+public class GenerateBalTest {
 
     RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
     GenerateBalOutputPort outputMock = Mockito.mock(GenerateBalOutputPort.class);

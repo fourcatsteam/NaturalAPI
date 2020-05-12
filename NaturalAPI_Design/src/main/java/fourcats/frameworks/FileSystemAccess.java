@@ -10,25 +10,22 @@ public class FileSystemAccess implements PersistentMemoryAccess {
 
     @Override
     public String readFile(String filePath) throws FileNotFoundException {
-        String s;
-        String fileContent = "";
+        String line;
+        StringBuilder fileContent = new StringBuilder();
         try(BufferedReader input = new BufferedReader(new FileReader(filePath))){
-            while((s=input.readLine()) != null){
-                fileContent += s + "\n";
+            while((line=input.readLine()) != null){
+                fileContent.append(line).append("\n");
             }
         }catch(IOException e){
             throw new FileNotFoundException();
         }
-        return fileContent;
+        return fileContent.toString();
     }
 
     @Override
     public void writeFile(String content, String filePath) throws IOException {
         File file = new File(filePath + ".json");
         try(FileWriter writer = new FileWriter(file)){
-            if (file.getParentFile()!=null){
-                file.getParentFile().mkdirs();
-            }
             writer.write(content);
         }
 

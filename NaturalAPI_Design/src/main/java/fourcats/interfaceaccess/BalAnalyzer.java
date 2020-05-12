@@ -1,8 +1,8 @@
 package fourcats.interfaceaccess;
 
-import fourcats.entities.BAL;
+import fourcats.entities.Bal;
 import java.io.IOException;
 
 public interface BalAnalyzer {
-    String createJsonFromBAL(BAL bal) throws IOException;
+    String createJsonFromBAL(Bal bal) throws IOException;
 }

@@ -10,15 +10,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class CLI implements Observer {
+public class Cli implements Observer {
     private Controller contr;
-    private String currentUseCase = "";
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private DataPresenter dataPresenter;
     private boolean isBdlLoaded = false;
 
 
-    public CLI(Controller controller, DataPresenter presenter){
+    public Cli(Controller controller, DataPresenter presenter){
         this.contr = controller;
         this.dataPresenter = presenter;
         this.dataPresenter.attach(this);
@@ -35,10 +34,11 @@ public class CLI implements Observer {
     }
 
     public boolean readUseCase(){
+        String input = "";
         boolean shouldContinue = true;
         try {
-            currentUseCase = br.readLine();
-            switch (currentUseCase) {
+            input = br.readLine();
+            switch (input) {
                 case "1":
                     generateSuggestion();
                     break;

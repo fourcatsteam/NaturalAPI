@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddBALSuggestionTest {
+public class AddBalSuggestionTest {
 
     @Mock
     RepositoryAccess repo;

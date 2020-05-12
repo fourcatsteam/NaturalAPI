@@ -90,7 +90,7 @@ public class DataPresenterGUITest {
 
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
 
-        assertEquals(dataPresenterGUI.getActionName(), "Action");
+        assertEquals("Action", dataPresenterGUI.getActionName());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class DataPresenterGUITest {
 
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
 
-        assertEquals(dataPresenterGUI.getActionType(), "Type");
+        assertEquals("Type", dataPresenterGUI.getActionType());
     }
 
     @Test

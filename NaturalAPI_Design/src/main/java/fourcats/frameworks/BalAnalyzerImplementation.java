@@ -1,6 +1,6 @@
 package fourcats.frameworks;
 
-import fourcats.entities.BAL;
+import fourcats.entities.Bal;
 import fourcats.interfaceaccess.BalAnalyzer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +11,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
 
 
     @Override
-    public String createJsonFromBAL(BAL bal) throws IOException {
+    public String createJsonFromBAL(Bal bal) throws IOException {
         //Creating the ObjectMapper object
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);

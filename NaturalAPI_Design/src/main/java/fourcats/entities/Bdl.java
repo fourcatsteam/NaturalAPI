@@ -71,13 +71,6 @@ public class Bdl {
         if(!present) predicates.add(new WordCounter(predicate));
     }
 
-    //ORDER BDL
-    private void order() {
-        Collections.sort(nouns,Collections.reverseOrder());
-        Collections.sort(verbs,Collections.reverseOrder());
-        Collections.sort(predicates, Collections.reverseOrder());
-    }
-
     public void storeBdlNoun(String s,Integer i){
         nouns.add(new WordCounter(s,i));
     }
@@ -101,7 +94,6 @@ public class Bdl {
     }
 
     public void removeVerb(String verb) {
-        //Da rivedere perchè uso iteratori
         for (Iterator<WordCounter> iterator = verbs.iterator(); iterator.hasNext();) {
             WordCounter wc = iterator.next();
             if (wc.getWord().equalsIgnoreCase(verb)) {
@@ -128,20 +120,20 @@ public class Bdl {
     @Override
     public String toString() {
 
-        String ret="-- NOUNS -- \n";
+        StringBuilder ret= new StringBuilder("-- NOUNS -- \n");
 
         for(WordCounter w: nouns){
-            ret = ret + w.toString() +"\n";
+            ret.append(w.toString()).append("\n");
         }
-        ret = ret + "-- VERBS -- \n";
+        ret.append("-- VERBS -- \n");
         for(WordCounter w: verbs){
-            ret = ret + w.toString() +"\n";
+            ret.append(w.toString()).append("\n");
         }
-        ret = ret + "-- PREDICATES -- \n";
+        ret.append("-- PREDICATES -- \n");
         for(WordCounter w: predicates){
-            ret = ret + w.toString() +"\n";
+            ret.append(w.toString()).append("\n");
         }
 
-        return ret;
+        return ret.toString();
     }
 }

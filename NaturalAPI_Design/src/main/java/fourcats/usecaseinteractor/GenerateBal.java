@@ -1,7 +1,7 @@
 package fourcats.usecaseinteractor;
 
 import fourcats.entities.Actor;
-import fourcats.entities.BAL;
+import fourcats.entities.Bal;
 import fourcats.entities.Scenario;
 import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
@@ -41,7 +41,7 @@ public class GenerateBal implements GenerateBalInputPort {
             }
 
         }
-        BAL bal = new BAL(lActors);
+        Bal bal = new Bal(lActors);
         String jsonBal;
         try{
             jsonBal = balAnalyzer.createJsonFromBAL(bal);

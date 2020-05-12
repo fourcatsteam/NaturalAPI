@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class GUI_Design extends Component implements Observer  {
+public class GuiDesign extends Component implements Observer  {
     private Controller controller;
     private DataPresenterGUI dataPresenter;
     private JLabel titleText;
@@ -38,7 +38,7 @@ public class GUI_Design extends Component implements Observer  {
     private static final String LOADED_BDL = "Currently loaded BDL files: ";
 
 
-    public GUI_Design(Controller c, DataPresenterGUI dp){
+    public GuiDesign(Controller c, DataPresenterGUI dp){
         this.controller = c;
         this.dataPresenter = dp;
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
@@ -54,7 +54,7 @@ public class GUI_Design extends Component implements Observer  {
 
 
         genSuggestBtn.addActionListener(actionEvent -> {
-            if(featureFilesPath.size()!=0) {
+            if(!featureFilesPath.isEmpty()) {
                 new SuggestionGenerated(featureFilesName, featureFilesPath, controller, dataPresenter).createAndShowGUI();
             }
             else{
@@ -63,7 +63,7 @@ public class GUI_Design extends Component implements Observer  {
         });
 
         loadFeatureBtn.addActionListener(actionEvent -> {
-            int returnVal = fc.showOpenDialog(GUI_Design.this);
+            int returnVal = fc.showOpenDialog(GuiDesign.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
@@ -73,12 +73,12 @@ public class GUI_Design extends Component implements Observer  {
                             featureFilesName.add(f.getName());
                         }
                         else{
-                            JOptionPane.showMessageDialog(GUI_Design.this, "The file '"+f.getName()+"' is not a feature file.",
+                            JOptionPane.showMessageDialog(GuiDesign.this, "The file '"+f.getName()+"' is not a feature file.",
                                     "Error",JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else{
-                        JOptionPane.showMessageDialog(GUI_Design.this, "The file '"+f.getName()+"' has already been uploaded!",
+                        JOptionPane.showMessageDialog(GuiDesign.this, "The file '"+f.getName()+"' has already been uploaded!",
                                 "Notice",JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
@@ -89,7 +89,7 @@ public class GUI_Design extends Component implements Observer  {
 
 
         loadBDLButton.addActionListener(actionEvent -> {
-            int returnVal = fc.showOpenDialog(GUI_Design.this);
+            int returnVal = fc.showOpenDialog(GuiDesign.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 if (files.length==3){
@@ -99,7 +99,7 @@ public class GUI_Design extends Component implements Observer  {
                     controller.loadBdl(bdlNameFile);
                 }
                 else {
-                    JOptionPane.showMessageDialog(GUI_Design.this, "Abort: you have to select 3 files: predicates,verbs and nouns", "Bdl not loaded", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(GuiDesign.this, "Abort: you have to select 3 files: predicates,verbs and nouns", "Bdl not loaded", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

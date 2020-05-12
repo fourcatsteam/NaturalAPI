@@ -7,7 +7,7 @@ import org.mockito.*;
 
 import static org.junit.Assert.*;
 
-public class DeclineBALSuggestionTest {
+public class DeclineBalSuggestionTest {
 
     RepositoryAccess repositoryMock = Mockito.mock(RepositoryAccess.class);
     DeclineBalSuggestionOutputPort outputMock = Mockito.mock(DeclineBalSuggestionOutputPort.class);

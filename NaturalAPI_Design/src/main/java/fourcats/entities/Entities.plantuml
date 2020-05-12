@@ -42,7 +42,7 @@ title __ENTITIES's Class Diagram__\n
 
   
 
-      class fourcats.entities.BAL {
+      class fourcats.entities.Bal {
           - lActors : List<Actor>
           + BAL()
           + addUserToBAL()

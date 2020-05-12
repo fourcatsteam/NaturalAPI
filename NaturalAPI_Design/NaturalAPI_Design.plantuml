@@ -86,7 +86,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace entities {
-      class fourcats.entities.BAL {
+      class fourcats.entities.Bal {
       }
     }
   }
@@ -454,7 +454,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
 
   namespace fourcats {
     namespace view {
-      class fourcats.view.CLI {
+      class fourcats.view.Cli {
       }
     }
   }
@@ -493,7 +493,7 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   namespace fourcats {
     namespace view {
       namespace gui {
-        class fourcats.view.gui.GUI_Design {
+        class fourcats.view.gui.GuiDesign {
         }
       }
     }
@@ -611,14 +611,14 @@ title __NATURALAPI_DESIGN's Class Diagram__\n
   fourcats.usecaseinteractor.ShowTypes .up.|> fourcats.port.ShowTypesInputPort
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.port.ShowTypesOutputPort : out
   fourcats.usecaseinteractor.ShowTypes o-- fourcats.interfaceaccess.RepositoryAccess : repo
-  fourcats.view.CLI .up.|> fourcats.datastructure.observer.Observer
-  fourcats.view.CLI o-- fourcats.interfaceadapters.Controller : contr
-  fourcats.view.CLI o-- fourcats.interfaceadapters.DataPresenter : dataPresenter
+  fourcats.view.Cli .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.Cli o-- fourcats.interfaceadapters.Controller : contr
+  fourcats.view.Cli o-- fourcats.interfaceadapters.DataPresenter : dataPresenter
   fourcats.view.gui.CustomTypeCreation -up-|> java.awt.Component
-  fourcats.view.gui.GUI_Design .up.|> fourcats.datastructure.observer.Observer
-  fourcats.view.gui.GUI_Design -up-|> java.awt.Component
-  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.Controller : controller
-  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.gui.GuiDesign .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.GuiDesign -up-|> java.awt.Component
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.Controller : controller
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
   fourcats.view.gui.ScenarioWidget -up-|> javax.swing.JComponent
   fourcats.view.gui.SuggestionGenerated .up.|> fourcats.datastructure.observer.Observer
   fourcats.view.gui.SuggestionGenerated -up-|> java.awt.Component

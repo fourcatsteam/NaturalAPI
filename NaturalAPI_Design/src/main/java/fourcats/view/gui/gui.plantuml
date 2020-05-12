@@ -50,7 +50,7 @@ title __GUI's Class Diagram__\n
   namespace fourcats {
     namespace view {
       namespace gui {
-        class fourcats.view.gui.GUI_Design {
+        class fourcats.view.gui.GuiDesign {
             - bdlNameFile : String[]
             - fc : JFileChooser
             - featureFilesName : List<String>
@@ -166,10 +166,10 @@ title __GUI's Class Diagram__\n
   
 
   fourcats.view.gui.CustomTypeCreation -up-|> java.awt.Component
-  fourcats.view.gui.GUI_Design .up.|> fourcats.datastructure.observer.Observer
-  fourcats.view.gui.GUI_Design -up-|> java.awt.Component
-  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.Controller : controller
-  fourcats.view.gui.GUI_Design o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.gui.GuiDesign .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.GuiDesign -up-|> java.awt.Component
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.Controller : controller
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
   fourcats.view.gui.ScenarioWidget -up-|> javax.swing.JComponent
   fourcats.view.gui.SuggestionGenerated .up.|> fourcats.datastructure.observer.Observer
   fourcats.view.gui.SuggestionGenerated -up-|> java.awt.Component

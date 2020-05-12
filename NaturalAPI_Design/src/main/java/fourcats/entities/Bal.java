@@ -2,11 +2,11 @@ package fourcats.entities;
 
 import java.util.List;
 
-public class BAL{
+public class Bal {
     private List<Actor> lActors;
 
-    public BAL(List<Actor> ActorsList) {
-        this.lActors = ActorsList;
+    public Bal(List<Actor> actorsList) {
+        this.lActors = actorsList;
     }
 
     public List<Actor> getActors() {
@@ -15,11 +15,11 @@ public class BAL{
 
     @Override
     public String toString() {
-        String BALStr = "";
+        StringBuilder balStr = new StringBuilder();
         for (Actor f : lActors) {
-            BALStr +=f.toString();
+            balStr.append(f.toString());
         }
-        return BALStr;
+        return balStr.toString();
     }
 }
 

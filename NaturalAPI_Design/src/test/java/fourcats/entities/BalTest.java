@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class BALTest {
+public class BalTest {
 
     @Mock
     Actor actorMock;
@@ -23,7 +23,7 @@ public class BALTest {
     public LinkedList<Actor> listMock = new LinkedList<>();
 
     @InjectMocks
-    BAL bal;
+    Bal bal;
 
     @Before
     public void setUp() {
