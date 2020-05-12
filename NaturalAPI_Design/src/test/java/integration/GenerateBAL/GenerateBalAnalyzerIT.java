@@ -41,7 +41,7 @@ public class GenerateBalAnalyzerIT {
     }
 
     @Test
-    public void verifyLinkSuggestAPIAndBalAnalyzer() throws Exception {
+    public void verifyLinkGenerateBALAndBalAnalyzer() throws Exception {
         generatorBAL.generateBAL("");
         verify(spyAnalyzer).createJsonFromBAL(any(Bal.class));
         assertNotNull(spyAnalyzer.createJsonFromBAL(any(Bal.class)));
