@@ -22,7 +22,7 @@ public class ScenarioWidget extends JComponent{
         mainPanel.add(panelNorth);
         mainPanel.add(featureTextArea);
         featureTextArea.setText(scenario);
-
+        featureTextArea.setPreferredSize(new Dimension(380,230));
         panelToUpdate.add(mainPanel);
 
     }

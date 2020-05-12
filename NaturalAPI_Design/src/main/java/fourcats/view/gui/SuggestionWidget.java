@@ -26,7 +26,7 @@ public class SuggestionWidget {
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
     private CustomTypeCreation customType;
-    private String currentActionName="";
+    private String currentActionName=""; //updated with the one in dataKeeper
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         lObjectParamWidget = new ArrayList<>();
