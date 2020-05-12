@@ -198,8 +198,14 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
                 if (isBdlLoaded) showActionObjectsWithFrequency(mSc);
                 else {
                     for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                        toShow = mAc.getKey() + ") " + mAc.getValue().toString();
-                        notifyObservers();
+                        //do not print actions that have been removed or that do not have a name
+                        if (!mAc.getValue().getName().equals("")) {
+                            if(mAc.getValue().getName().startsWith("@"))
+                                toShow = mAc.getKey() + ") " + mAc.getValue().getName();
+                            else
+                                toShow = mAc.getKey() + ") " + mAc.getValue().toString();
+                            notifyObservers();
+                        }
                     }
                 }
             }
@@ -211,22 +217,30 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         String action = "";
         StringBuilder objects = new StringBuilder();
         for (Map.Entry<Integer,Action> mAc : mScenario.getValue().getActionsMap().entrySet()) {
-            //build action string
-            action = mAc.getKey() + ") " + mAc.getValue().getType() + " " + mAc.getValue().getName() +
-                    "[" + algorithm.findActionInBdl(mAc.getValue().getName()) + "] ";
-            //build object string
-            objects.setLength(0); //clear the stringBuilder
-            boolean isFirstObject = true;
-            for(ObjectParam obj : mAc.getValue().getObjectParams()) {
-                if (!isFirstObject) {
-                    objects.append(", "); //add a comma before new object
+            //do not print actions that have been removed or that do not have a name
+            if (!mAc.getValue().getName().equals("")) {
+                //build action string
+                if(mAc.getValue().getName().startsWith("@")) { //-->no suggestion found for the step
+                    toShow = mAc.getKey() + ") " + mAc.getValue().getName();
                 }
-                objects.append(obj.getType() + " " + obj.getName() + "[" +
-                        algorithm.findObjectInBdl(obj.getName()) + "]");
-                isFirstObject = false;
+                else {
+                    action = mAc.getKey() + ") " + mAc.getValue().getType() + " " + mAc.getValue().getName() +
+                            "[" + algorithm.findActionInBdl(mAc.getValue().getName()) + "] ";
+                    //build object string
+                    objects.setLength(0); //clear the stringBuilder
+                    boolean isFirstObject = true;
+                    for (ObjectParam obj : mAc.getValue().getObjectParams()) {
+                        if (!isFirstObject) {
+                            objects.append(", "); //add a comma before new object
+                        }
+                        objects.append(obj.getType() + " " + obj.getName() + "[" +
+                                algorithm.findObjectInBdl(obj.getName()) + "]");
+                        isFirstObject = false;
+                    }
+                    toShow = action + "(" + objects + ")"; //build combined string (action + objects)
+                }
+                notifyObservers();
             }
-            toShow = action + "(" + objects + ")"; //build combined string (action + objects)
-            notifyObservers();
         }
 
     }

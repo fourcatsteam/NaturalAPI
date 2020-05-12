@@ -162,7 +162,7 @@ public class GenerateBalSuggestionsTest {
                 .thenReturn(Arrays.asList("lookup character"));
 
         List<Action> actionList = generateBALSuggestions.generateAction(inputString);
-        assertEquals(2, actionList.size());
+        assertEquals(4, actionList.size());
     }
 
     @Test

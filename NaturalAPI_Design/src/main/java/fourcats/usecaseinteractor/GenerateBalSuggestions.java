@@ -98,20 +98,28 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
         List<String> lSteps = splitScenarioSteps(scenarioSteps);
         List<String> lStandardizedAndSteps = convertAndKeywords(lSteps);
         for (String step : lSteps) {
+            String actionName = "";
+            String objParName = "";
             AnalyzedData analyzedData = textAnalyzer.parseDocumentContent(step);
 
             List<String> predicates = analyzedData.getPredicates();
 
             //add each suggestion to the actions list (lGeneratedActions) with a default parameter (the name in the action)
             for (String predicate : predicates) {
-                String actionName = predicate.replace(" ", "_");
-                String objParName = predicate.split(" ")[1];
+                actionName = predicate.replace(" ", "_");
+                objParName = predicate.split(" ")[1];
 
                 Action action = new Action(actionName, "void", scenarioName, lStandardizedAndSteps.get(lSteps.indexOf(step)));
                 action.addObjectParam(objParName, "string");
 
                 lGeneratedActions.add(action);
             }
+            //if no predicate was found
+            if (actionName.equals("")){
+                Action action = new Action("@"+step, "void", scenarioName, lStandardizedAndSteps.get(lSteps.indexOf(step)));
+                lGeneratedActions.add(action);
+            }
+
         }
 
         return lGeneratedActions;

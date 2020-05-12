@@ -30,10 +30,10 @@ public class DataKeeper {
                 throw new SetOnce.AlreadySetException();
             }
         }
-        //check if action already exists. If so, remove it from scenario
+        //check if action name or step already exists. If so, remove it from scenario
         List<Integer> actionKeysToRemove = new ArrayList<>();
         for (Map.Entry<Integer,Action> acEntry : scenario.getActionsMap().entrySet()){
-            if (isActionNamePresent(acEntry.getValue().getName()))
+            if (isActionNamePresent(acEntry.getValue().getName()) || isStepPresent(acEntry.getValue().getStep()))
                 actionKeysToRemove.add(acEntry.getKey());
         }
         actionKeysToRemove.forEach(key->scenario.getActionsMap().remove(key));
@@ -61,7 +61,10 @@ public class DataKeeper {
     }
 
     public void removeAction(int idScenario, int idAction){
-        mScenarios.get(idScenario).getActionsMap().remove(idAction);
+        //only deletes the name and objectParams of the action so that the step will remain present in the BAL
+        mScenarios.get(idScenario).getActionsMap().get(idAction).setName("");
+        mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().clear();
+
     }
 
     public void clearScenariosMap(){
@@ -180,9 +183,20 @@ public class DataKeeper {
     }
 
     private boolean isActionNamePresent(String actionName) {
+        if (!actionName.equals("")) {
+            for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()) {
+                for (Action ac : mSc.getValue().getActions()) {
+                    if (ac.getName().equals(actionName))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean isStepPresent(String step){
         for (Map.Entry<Integer, Scenario> mSc : mScenarios.entrySet()) {
             for (Action ac : mSc.getValue().getActions()) {
-                if (ac.getName().equals(actionName))
+                if (ac.getStep().equals(step))
                     return true;
             }
         }

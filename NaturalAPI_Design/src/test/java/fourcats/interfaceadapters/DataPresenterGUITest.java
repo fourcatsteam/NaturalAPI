@@ -75,6 +75,7 @@ public class DataPresenterGUITest {
     public void DataPresenterGUIShowSuggestionsWthFocusOnlObjects() {
         when(scenario.getActionsMap()).thenReturn(actionMap);
         when(action.getObjectParams()).thenReturn(objectList);
+        when(action.getName()).thenReturn("Action");
 
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
 
@@ -97,6 +98,7 @@ public class DataPresenterGUITest {
     public void DataPresenterGUIGetActionType() {
         when(scenario.getActionsMap()).thenReturn(actionMap);
         when(action.getType()).thenReturn(type);
+        when(action.getName()).thenReturn("Action");
         when(type.toString()).thenReturn("Type");
 
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
@@ -138,7 +140,7 @@ public class DataPresenterGUITest {
     @Test
     public void DataPresenterGUIGetSuggestionId() {
         when(scenario.getActionsMap()).thenReturn(actionMap);
-
+        when(action.getName()).thenReturn("Action");
         dataPresenterGUI.showSuggestionsForScenario(scenarioMap);
 
         assertEquals("1", dataPresenterGUI.getSuggestionId());

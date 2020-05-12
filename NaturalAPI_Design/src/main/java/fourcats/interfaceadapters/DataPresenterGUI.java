@@ -303,26 +303,33 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
                 notifyObservers();
             }
             else {
-                for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
-                    int idCurrentObject = 0;
-                    suggestionId = "" + mAc.getKey();
-                    actionName = mAc.getValue().getName();
-                    if (isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionName);
-                    actionType = "" + mAc.getValue().getType();
-                    for (ObjectParam op : mAc.getValue().getObjectParams()) {
-                        lObjectId.add("" + idCurrentObject);
-                        lObjectTypes.add("" + op.getType());
-                        lObjectNames.add(op.getName());
-                        idCurrentObject++;
-                    }
-                    notifyObservers();
-                    lObjectId.clear();
-                    lObjectTypes.clear();
-                    lObjectNames.clear();
-                }
+                getActionProperties(mSc);
             }
         }
         isSuggestionToAdd = false;
+    }
+
+    private void getActionProperties(Map.Entry<Integer, Scenario> mSc) {
+        for (Map.Entry<Integer, Action> mAc : mSc.getValue().getActionsMap().entrySet()) {
+            //do not print actions that have been removed or that do not have a name
+            if (!mAc.getValue().getName().equals("")) {
+                int idCurrentObject = 0;
+                suggestionId = "" + mAc.getKey();
+                actionName = mAc.getValue().getName();
+                if (isBdlLoaded) this.frequencyInBdl = algorithm.findActionInBdl(actionName);
+                actionType = "" + mAc.getValue().getType();
+                for (ObjectParam op : mAc.getValue().getObjectParams()) {
+                    lObjectId.add("" + idCurrentObject);
+                    lObjectTypes.add("" + op.getType());
+                    lObjectNames.add(op.getName());
+                    idCurrentObject++;
+                }
+                notifyObservers();
+                lObjectId.clear();
+                lObjectTypes.clear();
+                lObjectNames.clear();
+            }
+        }
     }
 
     public int getWordObjectFrequency(String s){

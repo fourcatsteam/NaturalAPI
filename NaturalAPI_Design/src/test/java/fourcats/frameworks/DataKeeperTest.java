@@ -51,7 +51,8 @@ public class DataKeeperTest {
     public void DataKeeperRemoveActionCorrectly() {
         when(scenario.getActionsMap()).thenReturn(map);
         dataKeeper.removeAction(0, 0);
-        assertTrue(dataKeeper.getScenarioMap().get(0).getActionsMap().isEmpty());
+        assertTrue(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getName().equals(""));
+        assertTrue(dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().isEmpty());
     }
 
     @Test
