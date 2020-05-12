@@ -31,15 +31,18 @@ public class Gui implements Observer {
     private JComboBox<String> comboBox1;
     private JLabel messageLabel;
     Map<String,String> toView;
-    String message;
+    private String bal;
+    private String pla;
+    private String message;
 
     public Gui(Controller c,DataPresenterGui d){
 
         controller = c;
         dataPresenterGui = d;
         dataPresenterGui.attach(this);
-        final String[] bal = new String[1];
-        final String[] pla = new String[1];
+        bal = "";
+        pla = "";
+        message = "";
         toView = new HashMap<>();
 
         frame = new JFrame("NaturalApi Develop");
@@ -60,8 +63,8 @@ public class Gui implements Observer {
         addBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
-            bal[0] = fileChooser.getSelectedFile().getAbsolutePath();
-            if(bal[0].contains(".json")){
+            setBal(fileChooser.getSelectedFile().getAbsolutePath());
+            if(bal.contains(".json")){
                 messageLabel.setText("Bal loaded!");
                 mainPanel.setBackground(Color.GREEN);
             }
@@ -74,8 +77,8 @@ public class Gui implements Observer {
         addPlaButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(mainPanel);
-            pla[0] = fileChooser.getSelectedFile().getAbsolutePath();
-            if(pla[0].contains(".txt")){
+            setPla(fileChooser.getSelectedFile().getAbsolutePath());
+            if(pla.contains(".txt")){
                 messageLabel.setText("Pla loaded!");
                 mainPanel.setBackground(Color.GREEN);
             }
@@ -87,7 +90,7 @@ public class Gui implements Observer {
 
         suggestionButton.addActionListener(e -> {
             try{
-                c.createApiSuggestion(bal[0],pla[0]);
+                c.createApiSuggestion(bal,pla);
                 comboBox1.setVisible(true);
                 messageLabel.setText(message);
                 if(message.equals("Suggestions created!")){
@@ -243,6 +246,14 @@ public class Gui implements Observer {
                 modifyButton.setBorderPainted(true);
             }
         });
+    }
+
+    private void setBal(String s) {
+        bal = s;
+    }
+
+    private void setPla(String s) {
+        pla = s;
     }
 
     public void showGui(){

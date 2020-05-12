@@ -48,11 +48,13 @@ public class SuggestApi implements ApiInputPort {
                         createCustomClassForAction(pla,action,actor.getName());
                     }
 
+                    String parameters = "";
                     if(action.getObjectParams().isEmpty()){
                         newApi = insertObjectType(newApi, "");
                         newApi = insertObjectName(newApi, "");
                     }
                     else {
+                        size = action.getObjectParams().size();
                         for (ObjectParam objectParam : action.getObjectParams()) {
 
                             if (!objectParam.getType().getAttributes().isEmpty()) {
@@ -61,16 +63,19 @@ public class SuggestApi implements ApiInputPort {
 
                             newApi = insertObjectType(newApi, objectParam.getType().getName());
                             newApi = insertObjectName(newApi, objectParam.getName());
-
+                            parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
+                            if(size > 1) {
+                                parameters = parameters.concat(", ");
+                            }
+                            size--;
                         }
                     }
 
-                    String className = action.getName();
-                    newApi = insertGroup(newApi,className);
+                    newApi = insertGroup(newApi,action.getName());
                     newApi = insertActionType(newApi, action.getType().getName());
                     newApi = insertActionName(newApi, action.getName());
                     API api = new API();
-                    api.setFilename("Api\\" + actor.getName() + "\\" + className.substring(0,1).toUpperCase() + className.substring(1) + pla.getExtension());
+                    api.setFilename("Api\\" + actor.getName() + "\\" + action.getName().substring(0,1).toUpperCase() + action.getName().substring(1) + pla.getExtension());
                     api.setText(newApi);
 
                     if(!repositoryAccess.isThisApiPresent(api)){
@@ -97,7 +102,9 @@ public class SuggestApi implements ApiInputPort {
                         String classTestName = step;
                         testApi = insertKeyword(testApi,keyword);
                         testApi = insertTestStub(testApi, classTestName);
-                        testApi = insertGroup(testApi, className);
+                        testApi = insertGroup(testApi, action.getName());
+                        testApi = insertActionName(testApi,action.getName());
+                        testApi = insertObjectName(testApi,parameters);
 
                         if(!repositoryAccess.isThisTestPresent(testApi)) {
                             repositoryAccess.addTest(testApi);
@@ -136,11 +143,11 @@ public class SuggestApi implements ApiInputPort {
     }
 
     private String insertObjectType (String text,String toReplace){
-        return text.replace("\"object_type\"", toReplace);
+        return text.replaceFirst("\"object_type\"", toReplace);
     }
 
     private String insertObjectName (String text,String toReplace){
-        return text.replace("\"object_name\"", toReplace);
+        return text.replaceFirst("\"object_name\"", toReplace);
     }
 
     private String insertTestStub(String text,String toReplace) {
@@ -174,10 +181,9 @@ public class SuggestApi implements ApiInputPort {
         }
         customApi = customApi.concat("}");
 
-        String className = action.getType().getName();
-        customApi = customApi.replace("\"custom_class\"",className);
+        customApi = customApi.replace("\"custom_class\"",action.getType().getName());
 
-        api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
+        api.setFilename("Custom classes\\" + actor + "\\" + action.getType().getName() + pla.getExtension());
         api.setText(customApi);
 
         if(!repositoryAccess.isThisApiPresent(api)){
@@ -207,10 +213,9 @@ public class SuggestApi implements ApiInputPort {
         }
         customApi = customApi.concat("}");
 
-        String className = objectParam.getType().getName();
-        customApi = customApi.replace("\"custom_class\"",className);
+        customApi = customApi.replace("\"custom_class\"",objectParam.getType().getName());
 
-        api.setFilename("Custom classes\\" + actor + "\\" + className + pla.getExtension());
+        api.setFilename("Custom classes\\" + actor + "\\" + objectParam.getType().getName() + pla.getExtension());
         api.setText(customApi);
 
         if(!repositoryAccess.isThisApiPresent(api)){
