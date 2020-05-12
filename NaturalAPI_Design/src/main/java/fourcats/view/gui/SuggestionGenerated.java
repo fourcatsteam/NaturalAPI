@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SuggestionGenerated extends Component implements Observer{
+public class SuggestionGenerated implements Observer{
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
@@ -62,7 +62,7 @@ public class SuggestionGenerated extends Component implements Observer{
 
         generateBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\BAL");
-            int returnVal = fileChooser.showSaveDialog(SuggestionGenerated.this);
+            int returnVal = fileChooser.showSaveDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 String path = file.getAbsolutePath();
@@ -76,7 +76,7 @@ public class SuggestionGenerated extends Component implements Observer{
             List<String> newPaths = new ArrayList<>(); //contains paths of new files
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
             fileChooser.setMultiSelectionEnabled(true);
-            int returnVal = fileChooser.showOpenDialog(SuggestionGenerated.this);
+            int returnVal = fileChooser.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fileChooser.getSelectedFiles();
                 for(File f: files){
@@ -87,12 +87,12 @@ public class SuggestionGenerated extends Component implements Observer{
                             this.lFeaturePaths.add(f.getAbsolutePath());
                         }
                         else{
-                            JOptionPane.showMessageDialog(SuggestionGenerated.this, "The file '"+f.getName()+"' is not a feature file.",
+                            JOptionPane.showMessageDialog(null, "The file '"+f.getName()+"' is not a feature file.",
                                     "Error",JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else{
-                        JOptionPane.showMessageDialog(SuggestionGenerated.this,
+                        JOptionPane.showMessageDialog(null,
                                 "The file '"+f.getName()+"' has already been uploaded!",
                                 "Notice",JOptionPane.INFORMATION_MESSAGE);
                     }

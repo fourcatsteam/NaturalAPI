@@ -14,9 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class GuiDesign extends Component implements Observer  {
-    private Controller controller;
-    private DataPresenterGUI dataPresenter;
+public class GuiDesign implements Observer  {
+    private final Controller controller;
+    private final DataPresenterGUI dataPresenter;
     private JLabel titleText;
     private JButton loadFeatureBtn;
     private JButton genSuggestBtn;
@@ -26,7 +26,7 @@ public class GuiDesign extends Component implements Observer  {
     private JButton removeFeatureBtn;
     private JButton removeBdlBtn;
     private JPanel removeFilesBtnPanel;
-    private JFileChooser fc;
+    private final JFileChooser fc;
     private String[] bdlNameFile;
     private boolean isBdlUploaded;
     private final List<String> featureFilesPath;
@@ -63,7 +63,7 @@ public class GuiDesign extends Component implements Observer  {
         });
 
         loadFeatureBtn.addActionListener(actionEvent -> {
-            int returnVal = fc.showOpenDialog(GuiDesign.this);
+            int returnVal = fc.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 for(File f: files){
@@ -73,12 +73,12 @@ public class GuiDesign extends Component implements Observer  {
                             featureFilesName.add(f.getName());
                         }
                         else{
-                            JOptionPane.showMessageDialog(GuiDesign.this, "The file '"+f.getName()+"' is not a feature file.",
+                            JOptionPane.showMessageDialog(null, "The file '"+f.getName()+"' is not a feature file.",
                                     "Error",JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else{
-                        JOptionPane.showMessageDialog(GuiDesign.this, "The file '"+f.getName()+"' has already been uploaded!",
+                        JOptionPane.showMessageDialog(null, "The file '"+f.getName()+"' has already been uploaded!",
                                 "Notice",JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
@@ -89,7 +89,7 @@ public class GuiDesign extends Component implements Observer  {
 
 
         loadBDLButton.addActionListener(actionEvent -> {
-            int returnVal = fc.showOpenDialog(GuiDesign.this);
+            int returnVal = fc.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fc.getSelectedFiles();
                 if (files.length==3){
@@ -99,7 +99,7 @@ public class GuiDesign extends Component implements Observer  {
                     controller.loadBdl(bdlNameFile);
                 }
                 else {
-                    JOptionPane.showMessageDialog(GuiDesign.this, "Abort: you have to select 3 files: predicates,verbs and nouns", "Bdl not loaded", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Abort: you have to select 3 files: predicates,verbs and nouns", "Bdl not loaded", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -110,7 +110,7 @@ public class GuiDesign extends Component implements Observer  {
                 featureFilesName.clear();
             }
             else{
-                JOptionPane.showMessageDialog(null,"Nothing to remove: no feature files uploaded!\n\n");
+                JOptionPane.showMessageDialog(null,"Nothing to remove: no feature files uploaded!\n","Info",JOptionPane.INFORMATION_MESSAGE);
             }
             logPrintStatus();
         });
@@ -120,7 +120,7 @@ public class GuiDesign extends Component implements Observer  {
                 controller.removeBdl();
             }
             else{
-                JOptionPane.showMessageDialog(null,"Nothing to remove: no BDL uploaded!\n\n");
+                JOptionPane.showMessageDialog(null,"Nothing to remove: no BDL uploaded!\n","Info",JOptionPane.INFORMATION_MESSAGE);
             }
             logPrintStatus();
         });

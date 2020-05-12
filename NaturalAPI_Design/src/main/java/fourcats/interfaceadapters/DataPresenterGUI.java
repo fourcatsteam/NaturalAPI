@@ -299,8 +299,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             scenarioId = "" + mSc.getKey();
             actor = mSc.getValue().getActorName();
             if (mSc.getValue().getActionsMap().isEmpty()){ //scenario has no action
-                actionName = null; //MODIFICA FACENDO CHECK SU GUI CHE SE è NULL VIENE VISUALIZZATA LABEL
-                //isSuggestionToAdd = false;
+                actionName = null;
                 notifyObservers();
             }
             else {
