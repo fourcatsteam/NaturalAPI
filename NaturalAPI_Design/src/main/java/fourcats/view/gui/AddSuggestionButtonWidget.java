@@ -10,8 +10,9 @@ public class AddSuggestionButtonWidget {
     public AddSuggestionButtonWidget(Controller controller, String scenarioId){
         addSuggestionButton = new JButton("+");
         addSuggestionButton.addActionListener(e->{
-            String actionName = JOptionPane.showInputDialog(null,"Insert the name for the action","Add suggestion",JOptionPane.INFORMATION_MESSAGE);
-            if (!actionName.equals("") && actionName!=null) {
+            String actionName = JOptionPane.showInputDialog(null,"Insert the name for the action","Add suggestion",JOptionPane.INFORMATION_MESSAGE).trim();
+            if (!actionName.equals("")) {
+                if (Character.isDigit(actionName.charAt(0))) actionName = "_" + actionName;
                 controller.addSuggestion(scenarioId, actionName, "void");
             }
             else{

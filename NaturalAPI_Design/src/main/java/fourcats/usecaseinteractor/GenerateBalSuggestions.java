@@ -108,6 +108,8 @@ public class GenerateBalSuggestions implements GenerateBalSuggestionsInputPort {
             for (String predicate : predicates) {
                 actionName = predicate.replace(" ", "_");
                 objParName = predicate.split(" ")[1];
+                if (Character.isDigit(objParName.charAt(0)))
+                    objParName = "_" + objParName;
 
                 Action action = new Action(actionName, "void", scenarioName, lStandardizedAndSteps.get(lSteps.indexOf(step)));
                 action.addObjectParam(objParName, "string");

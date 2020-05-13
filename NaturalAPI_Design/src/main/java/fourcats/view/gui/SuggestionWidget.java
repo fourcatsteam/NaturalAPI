@@ -2,7 +2,6 @@ package fourcats.view.gui;
 
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
-import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -60,8 +59,9 @@ public class SuggestionWidget {
 
         addObjectButton.addActionListener(e->{
             String objectName = JOptionPane.showInputDialog(null,"Insert the name for the object",
-                    "Object creation",JOptionPane.QUESTION_MESSAGE);
-            if (objectName!=null && !objectName.equals("")){
+                    "Object creation",JOptionPane.QUESTION_MESSAGE).trim();
+            if (!objectName.equals("")){
+                if (Character.isDigit(objectName.charAt(0))) objectName = "_" + objectName;
                 contr.addObject(suggestionId,scenarioId,objectName,"0");
                 if (dataPresenter.isOkOperation()){
                     lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),
@@ -153,8 +153,11 @@ public class SuggestionWidget {
                 if (!actionNameTextField.getText().trim().equals(currentActionName)) {
                     contr.modifyActionName(suggestionId, scenarioId, actionNameTextField.getText());
                     //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
-                    if (dataPresenter.isOkOperation())
+                    if (dataPresenter.isOkOperation()) {
                         currentActionName = actionNameTextField.getText().trim();
+                        if (!currentActionName.equals("") && Character.isDigit(currentActionName.charAt(0)))
+                            currentActionName = "_" + currentActionName;
+                    }
                 }
             }
         });

@@ -174,10 +174,11 @@ public class Cli implements Observer {
         Map<String, String> mAttributes = new HashMap<>();
         print("Insert the name for the custom type");
         String customTypeName = br.readLine().trim().replace(' ','_');
-        if (!isNumeric(customTypeName)) {
+        if (!customTypeName.equals("") && !isNumeric(customTypeName)) {
             boolean isDone = false;
             while (!isDone) {
                 print("Insert the name of the attribute for the type '" + customTypeName + "'");
+                print("NOTICE: All attribute names must be unique (otherwise only the last one entered will be retained).");
                 String attributeName = br.readLine().trim().replace(' ','_');
                 if (!attributeName.equals("") && !isNumeric(attributeName)) {
                     print("Insert the type for the attribute '" + attributeName + "'");

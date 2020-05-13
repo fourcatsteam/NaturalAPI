@@ -55,6 +55,17 @@ public class CustomTypeCreation extends Component{
         mainPanel.add(labelBox);
         mainPanel.add(customTypeNameField);
         mainPanel.add(Box.createVerticalStrut(10));
+
+        Box noticeVertBox = Box.createVerticalBox();
+        noticeVertBox.add(new JLabel("------NOTICE: All attribute names must be unique------"));
+        noticeVertBox.add(new JLabel("Otherwise, only the last one entered will be retained."));
+        Box noticeHorBox = Box.createHorizontalBox();
+        noticeHorBox.add(Box.createHorizontalGlue()); //* push from left
+        noticeHorBox.add(noticeVertBox); //center aligned
+        noticeHorBox.add(Box.createHorizontalGlue()); //* push from right
+        mainPanel.add(noticeHorBox);
+        mainPanel.add(Box.createVerticalStrut(10));
+
         mainPanel.add(attributeBox);
         mainPanel.add(Box.createVerticalStrut(10)); //space addAttributeButton from the fields
         mainPanel.add(addAttributeButton);
@@ -75,7 +86,9 @@ public class CustomTypeCreation extends Component{
             if (!customTypeNameField.getText().equals("")){
                 for (AttributeWidget attrW : lAttributeWidgets){
                     if (!attrW.getAttributeName().equals("")){
-                        mAttributes.put(attrW.getAttributeName().trim().replace(' ','_'),attrW.getAttributeType());
+                        String attrName = attrW.getAttributeName().trim().replace(' ','_');
+                        if (Character.isDigit(attrName.charAt(0))) attrName = "_" + attrName;
+                        mAttributes.put(attrName,attrW.getAttributeType());
                     }
                 }
                 if (mAttributes.size()!=0){

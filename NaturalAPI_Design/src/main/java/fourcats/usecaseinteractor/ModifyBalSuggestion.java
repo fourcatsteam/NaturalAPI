@@ -4,6 +4,8 @@ import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ModifyBalSuggestionInputPort;
 import fourcats.port.ModifyBalSuggestionOutputPort;
 
+import java.text.NumberFormat;
+
 public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     RepositoryAccess repo;
     ModifyBalSuggestionOutputPort out;
@@ -37,7 +39,7 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     @Override
     public void modifyActionName(int idAction, int idScenario, String newName) {
         try {
-            newName = newName.trim().replace(' ','_');
+            newName = standardizeInput(newName);
             repo.updateActionName(idAction, idScenario, newName);
             out.showModifiedActionName(repo.readScenarios(), true,newName);
         }
@@ -72,7 +74,7 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     @Override
     public void modifyObjectName(int idAction, int idScenario, int idObject, String newName) {
         try {
-            newName = newName.trim().replace(' ','_');
+            newName = standardizeInput(newName);
             repo.updateObjectName(idAction, idScenario, idObject, newName);
             out.showModifiedObjectName(repo.readScenarios(),true,newName);
         }
@@ -84,6 +86,7 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     @Override
     public void addObject(int idAction, int idScenario, String objectName, int idType) {
         try {
+            objectName = standardizeInput(objectName);
             repo.createObject(idAction,idScenario,objectName,idType);
             out.showAddedObject(repo.readScenarios(),true);
         }
@@ -101,5 +104,11 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
         catch (Exception e){
             out.showRemovedObject(repo.readScenarios(),false);
         }
+    }
+
+    private String standardizeInput(String input){
+        if (!input.equals("") && Character.isDigit(input.charAt(0)))
+            input = "_" + input;
+        return input.trim().replace(' ','_');
     }
 }

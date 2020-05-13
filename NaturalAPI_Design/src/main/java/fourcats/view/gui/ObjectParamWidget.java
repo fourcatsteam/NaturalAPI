@@ -127,6 +127,8 @@ public class ObjectParamWidget {
                     //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
                     if (dataPresenter.isOkOperation())
                         currentObjectName = objectNameTextField.getText().trim();
+                    if (!currentObjectName.equals("") && Character.isDigit(currentObjectName.charAt(0)))
+                        currentObjectName = "_" + currentObjectName;
                 }
             }
         });

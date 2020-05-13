@@ -240,7 +240,8 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             isOkOperation = true;
         }
         else{
-            message = ERROR_MESSAGE;
+            message = ERROR_MESSAGE +
+                    "\nCheck if the type is already defined: that could be the problem!";
             isOkOperation = false;
         }
         notifyObservers();
