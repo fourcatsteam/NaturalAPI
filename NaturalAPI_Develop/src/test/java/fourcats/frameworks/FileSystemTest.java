@@ -8,6 +8,8 @@ import org.mockito.Mockito;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,13 +30,6 @@ public class FileSystemTest {
         String pla = file.loadPLA(name);
         assertTrue(pla!=null);
         assertEquals("ciao\n",pla);
-    }
-
-    @Test
-    public void loadingPLACorrectlyNotFound(){
-        String name = "anAssociationThatIsNotPresent";
-        String pla = file.loadPLA(name);
-        assertTrue(pla==null);
     }
 
     @Test

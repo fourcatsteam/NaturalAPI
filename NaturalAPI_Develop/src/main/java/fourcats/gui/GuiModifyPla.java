@@ -6,6 +6,8 @@ import fourcats.observer.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GuiModifyPla implements Observer {
 
@@ -46,7 +48,8 @@ public class GuiModifyPla implements Observer {
             frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }
         catch (Exception e){
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
 
         loadButton.addActionListener(e -> {

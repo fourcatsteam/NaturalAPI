@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Gui implements Observer {
 
@@ -53,7 +55,8 @@ public class Gui implements Observer {
             frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }
         catch (Exception e){
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
         comboBox1.setVisible(false);
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();

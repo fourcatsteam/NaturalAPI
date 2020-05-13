@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BalAnalyzerImplementation implements BalAnalyzer {
 
@@ -19,7 +21,8 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
         try {
             jsonNode = objectMapper.readValue(file,JsonNode.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 

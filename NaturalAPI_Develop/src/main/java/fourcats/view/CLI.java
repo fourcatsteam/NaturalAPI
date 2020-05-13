@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CLI implements Observer {
 
@@ -39,7 +41,8 @@ public class CLI implements Observer {
                 System.exit(0);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -54,7 +57,8 @@ public class CLI implements Observer {
                    System.exit(0);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -77,7 +81,8 @@ public class CLI implements Observer {
                 readSuggestApi();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -90,7 +95,8 @@ public class CLI implements Observer {
             currentAnswer = br.readLine();
         }
         catch(IOException e){
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -119,7 +125,8 @@ public class CLI implements Observer {
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -151,7 +158,8 @@ public class CLI implements Observer {
             }
         }
         catch(IOException e){
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 

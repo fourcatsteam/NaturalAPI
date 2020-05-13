@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class FileSystem {
 
@@ -24,7 +26,8 @@ public class FileSystem {
                 sb.append("\n");
             }
         } catch (FileNotFoundException e) {
-            return null;
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
         return sb.toString();
     }
@@ -37,7 +40,8 @@ public class FileSystem {
         try (FileWriter fileWriter = new FileWriter(file)){
             fileWriter.write(api.getText());
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
@@ -46,7 +50,8 @@ public class FileSystem {
         try(FileWriter fw = new FileWriter(f)){
             fw.write(pla);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", ex);
         }
     }
 }

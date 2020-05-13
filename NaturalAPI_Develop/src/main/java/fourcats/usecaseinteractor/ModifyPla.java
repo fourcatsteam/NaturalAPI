@@ -5,6 +5,8 @@ import fourcats.port.ModifyPlaInputPort;
 import fourcats.port.ModifyPlaOutputPort;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ModifyPla implements ModifyPlaInputPort {
 
@@ -33,7 +35,8 @@ public class ModifyPla implements ModifyPlaInputPort {
 
             modifyPlaOutputPort.showLoadPla(split[0],splitTest[0],splitTest[1]);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, "File not found", e);
         }
     }
 
