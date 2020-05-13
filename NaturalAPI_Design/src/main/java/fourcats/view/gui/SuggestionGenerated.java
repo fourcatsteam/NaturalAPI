@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.View;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -71,6 +73,32 @@ public class SuggestionGenerated implements Observer{
                 if (!path.equals("")) {
                     contr.generateBAL(path);
                 }
+            }
+        });
+
+        generateBalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                generateBalButton.setBackground(new Color( 224,91,73));
+            }
+        });
+        generateBalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                generateBalButton.setBackground(new Color(58,84,105));
+            }
+        });
+
+        addFeatureButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addFeatureButton.setBackground(new Color( 224,91,73));
+            }
+        });
+        addFeatureButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addFeatureButton.setBackground(new Color(58,84,105));
             }
         });
 

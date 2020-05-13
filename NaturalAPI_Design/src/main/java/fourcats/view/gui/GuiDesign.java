@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,7 +54,6 @@ public class GuiDesign implements Observer  {
         this.featureFilesName = new ArrayList<>();
         this.bdlNameFile = new String[3];
         this.isBdlUploaded = false;
-        //this.mainPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(!featureFilesPath.isEmpty()) {
@@ -60,6 +61,19 @@ public class GuiDesign implements Observer  {
             }
             else{
                 JOptionPane.showMessageDialog(null,"Please, load feature file first!", "No feature loaded", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
+        genSuggestBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                genSuggestBtn.setBackground(new Color( 224,91,73));
+            }
+        });
+        genSuggestBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                genSuggestBtn.setBackground(new Color(58,84,105));
             }
         });
 
@@ -88,6 +102,19 @@ public class GuiDesign implements Observer  {
             }
         });
 
+        loadFeatureBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loadFeatureBtn.setBackground(new Color( 224,91,73));
+            }
+        });
+        loadFeatureBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                loadFeatureBtn.setBackground(new Color(58,84,105));
+            }
+        });
+
 
         loadBDLButton.addActionListener(actionEvent -> {
             int returnVal = fc.showOpenDialog(null);
@@ -105,6 +132,19 @@ public class GuiDesign implements Observer  {
             }
         });
 
+        loadBDLButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loadBDLButton.setBackground(new Color( 224,91,73));
+            }
+        });
+        loadBDLButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                loadBDLButton.setBackground(new Color(58,84,105));
+            }
+        });
+
         removeFeatureBtn.addActionListener(e->{
             if (!featureFilesPath.isEmpty()){
                 featureFilesPath.clear();
@@ -116,6 +156,19 @@ public class GuiDesign implements Observer  {
             logPrintStatus();
         });
 
+        removeFeatureBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                removeFeatureBtn.setBackground(new Color( 224,91,73));
+            }
+        });
+        removeFeatureBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                removeFeatureBtn.setBackground(new Color(58,84,105));
+            }
+        });
+
         removeBdlBtn.addActionListener(e->{
             if (isBdlUploaded){
                 controller.removeBdl();
@@ -124,6 +177,19 @@ public class GuiDesign implements Observer  {
                 JOptionPane.showMessageDialog(null,"Nothing to remove: no BDL uploaded!\n","Info",JOptionPane.INFORMATION_MESSAGE);
             }
             logPrintStatus();
+        });
+
+        removeBdlBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                removeBdlBtn.setBackground(new Color( 224,91,73));
+            }
+        });
+        removeBdlBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                removeBdlBtn.setBackground(new Color(58,84,105));
+            }
         });
     }
 

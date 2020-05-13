@@ -8,7 +8,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Objects;
 
