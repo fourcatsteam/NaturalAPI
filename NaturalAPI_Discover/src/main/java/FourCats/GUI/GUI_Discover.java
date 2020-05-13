@@ -3,6 +3,7 @@ package FourCats.GUI;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.InterfaceAdapters.Controller;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -10,8 +11,10 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -59,6 +62,20 @@ public class GUI_Discover extends JPanel implements Observer{
         sourceFolderChooser.setMultiSelectionEnabled(false);
         sourceFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
+        createBDLbtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                createBDLbtn.setBackground(new Color( 224,91,73));
+               // createBDLbtn.setBorderPainted(false);
+            }
+        });
+        createBDLbtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                createBDLbtn.setBackground(new Color(58,84,105));
+               // createBDLbtn.setBorderPainted(true);
+            }
+        });
         createBDLbtn.addActionListener(actionEvent -> {
             int returnVal = destinationFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -93,6 +110,20 @@ public class GUI_Discover extends JPanel implements Observer{
             }
         });
 
+        addDocumentBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addDocumentBtn.setBackground(new Color( 224,91,73));
+                //addDocumentBtn.setBorderPainted(false);
+            }
+        });
+        addDocumentBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addDocumentBtn.setBackground(new Color(58,84,105));
+               // addDocumentBtn.setBorderPainted(true);
+            }
+        });
         addDocumentBtn.addActionListener(actionEvent -> {
             int returnVal = sourceFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -125,6 +156,21 @@ public class GUI_Discover extends JPanel implements Observer{
                 }
             }else{
                 log.append("Source folder selection cancelled.\n");
+            }
+        });
+
+        removeDocumentBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                removeDocumentBtn.setBackground(new Color( 224,91,73));
+                //removeDocumentBtn.setBorderPainted(false);
+            }
+        });
+        removeDocumentBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                removeDocumentBtn.setBackground(new Color(58,84,105));
+                //removeDocumentBtn.setBorderPainted(true);
             }
         });
 
@@ -161,6 +207,21 @@ public class GUI_Discover extends JPanel implements Observer{
                 }
             }else {
                 log.append("Source folder selection cancelled\n");
+            }
+        });
+
+        viewBDLBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                viewBDLBtn.setBackground(new Color( 224,91,73));
+                //viewBDLBtn.setBorderPainted(false);
+            }
+        });
+        viewBDLBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                viewBDLBtn.setBackground(new Color(58,84,105));
+                //viewBDLBtn.setBorderPainted(true);
             }
         });
 
@@ -269,7 +330,11 @@ public class GUI_Discover extends JPanel implements Observer{
         //Add content to the window.
         frame.add(panel1);
         frame.setPreferredSize(new Dimension(800,500));
-
+        try {
+            frame.setIconImage(ImageIO.read(new File("src/main/java/FourCats/logo.png")));
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"Error while loading logo");
+        }
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);
