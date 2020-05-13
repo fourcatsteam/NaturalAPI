@@ -49,7 +49,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 Map<String,String> mAttributes = new HashMap<>();
                 java.util.Iterator<String> it = attributesAction.fieldNames();
                 while(it.hasNext()){
-                    String attributeName = it.next().toString();
+                    String attributeName = it.next();
                     String attributeType = attributesAction.get(attributeName).asText();
                     mAttributes.put(attributeName,attributeType);
                 }
@@ -66,7 +66,7 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                     mAttributes = new HashMap<>();
                     it = attributes.fieldNames();
                     while(it.hasNext()){
-                        String attributeName = it.next().toString();
+                        String attributeName = it.next();
                         String attributeType = attributes.get(attributeName).asText();
                         mAttributes.put(attributeName,attributeType);
                     }

@@ -30,92 +30,9 @@ public class SuggestApi implements ApiInputPort {
 
             for(Actor actor : bal.getActors()){
 
-                for(Action action : actor.getActions()) {
-
-                    String parameters = "";
-                    if (!action.getName().startsWith("@") && !action.getName().isEmpty()) {
-
-                        String newApi = pla.getText();
-
-                        int size = action.getObjectParams().size();
-                        Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
-                        Matcher m = p.matcher(newApi);
-                        if (m.find()) {
-                            while (size > 1) {
-                                newApi = m.replaceFirst(m.group() + ", " + m.group());
-                                size--;
-                            }
-                        }
-
-                        if (!action.getType().getAttributes().isEmpty()) {
-                            createCustomClassForAction(pla, action, actor.getName());
-                        }
-
-                        if (action.getObjectParams().isEmpty()) {
-                            newApi = insertObjectType(newApi, "");
-                            newApi = insertObjectName(newApi, "");
-                        } else {
-                            size = action.getObjectParams().size();
-                            for (ObjectParam objectParam : action.getObjectParams()) {
-
-                                if (!objectParam.getType().getAttributes().isEmpty()) {
-                                    createCustomClassForObjectParam(pla, objectParam, actor.getName());
-                                }
-
-                                newApi = insertObjectType(newApi, objectParam.getType().getName());
-                                newApi = insertObjectName(newApi, objectParam.getName());
-                                parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
-                                if (size > 1) {
-                                    parameters = parameters.concat(", ");
-                                }
-                                size--;
-                            }
-                        }
-
-                        newApi = insertGroup(newApi, action.getName());
-                        newApi = insertActionType(newApi, action.getType().getName());
-                        newApi = insertActionName(newApi, action.getName());
-
-                        API api = new API();
-                        api.setFilename("Api\\" + actor.getName() + "\\" + action.getName().substring(0, 1).toUpperCase() + action.getName().substring(1) + pla.getExtension());
-                        api.setText(newApi);
-
-                        if (!repositoryAccess.isThisApiPresent(api)) {
-                            repositoryAccess.addApi(api);
-                        }
-                    }
-
-                    String step = action.getStep();
-
-                    String[] splitKeyword = step.split(" ");
-                    String keyword = splitKeyword[0];
-
-                    step = "";
-                    for(int i = 1; i < splitKeyword.length-1; i++){
-                        step = step.concat(splitKeyword[i]);
-                        step = step.concat(" ");
-                    }
-                    step = step.concat(splitKeyword[splitKeyword.length-1]);
-                    step = step.replace("\"", "");
-                    String testApi = pla.getTestClass();
-                    testApi = insertKeyword(testApi,keyword);
-                    testApi = insertTestStub(testApi, step);
-                    testApi = insertTestName(testApi, step.replace(" ","_"));
-                    if(!action.getName().isEmpty() && !action.getName().startsWith("@")){
-                        testApi = insertGroup(testApi,action.getName());
-                        testApi = insertActionName(testApi,action.getName());
-                        testApi = insertObjectName(testApi,parameters);
-                    }
-                    else {
-                        String[] splitTest = testApi.split("\n");
-                        testApi = "" . concat(splitTest[0] + "\n" + splitTest[1] + "\n\n" + splitTest[splitTest.length-1] + "\n");
-                    }
-
-                    if(!repositoryAccess.isThisTestPresent(testApi)) {
-                        repositoryAccess.addTest(testApi);
-                    }
-                }
+                iterateActions(pla,actor);
             }
+
             API test = new API();
             String[] splitTest = pla.getText().split("\n");
             splitTest[0] = insertGroup(splitTest[0],"StepDefinitions");
@@ -131,6 +48,98 @@ public class SuggestApi implements ApiInputPort {
             apiOutputPort.showMessage("This couple of BAL and PLA is already generated!");
         }
     }
+
+    private void iterateActions(PLA pla,Actor actor) {
+        for(Action action : actor.getActions()) {
+
+            String parameters = "";
+            if (!action.getName().startsWith("@") && !action.getName().isEmpty()) {
+
+                String newApi = pla.getText();
+
+                int size = action.getObjectParams().size();
+                Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
+                Matcher m = p.matcher(newApi);
+                if (m.find()) {
+                    while (size > 1) {
+                        newApi = m.replaceFirst(m.group() + ", " + m.group());
+                        size--;
+                    }
+                }
+
+                if (!action.getType().getAttributes().isEmpty()) {
+                    createCustomClassForAction(pla, action, actor.getName());
+                }
+
+                if (action.getObjectParams().isEmpty()) {
+                    newApi = insertObjectType(newApi, "");
+                    newApi = insertObjectName(newApi, "");
+                } else {
+                    size = action.getObjectParams().size();
+                    for (ObjectParam objectParam : action.getObjectParams()) {
+
+                        if (!objectParam.getType().getAttributes().isEmpty()) {
+                            createCustomClassForObjectParam(pla, objectParam, actor.getName());
+                        }
+
+                        newApi = insertObjectType(newApi, objectParam.getType().getName());
+                        newApi = insertObjectName(newApi, objectParam.getName());
+                        parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
+                        if (size > 1) {
+                            parameters = parameters.concat(", ");
+                        }
+                        size--;
+                    }
+                }
+
+                newApi = insertGroup(newApi, action.getName());
+                newApi = insertActionType(newApi, action.getType().getName());
+                newApi = insertActionName(newApi, action.getName());
+
+                API api = new API();
+                api.setFilename("Api\\" + actor.getName() + "\\" + action.getName().substring(0, 1).toUpperCase() + action.getName().substring(1) + pla.getExtension());
+                api.setText(newApi);
+
+                if (!repositoryAccess.isThisApiPresent(api)) {
+                    repositoryAccess.addApi(api);
+                }
+            }
+
+            createTest(pla,action,parameters);
+        }
+    }
+
+    private void createTest(PLA pla,Action action,String parameters){
+        String step = action.getStep();
+
+        String[] splitKeyword = step.split(" ");
+        String keyword = splitKeyword[0];
+
+        step = "";
+        for (int i = 1; i < splitKeyword.length - 1; i++) {
+            step = step.concat(splitKeyword[i]);
+            step = step.concat(" ");
+        }
+        step = step.concat(splitKeyword[splitKeyword.length - 1]);
+        step = step.replace("\"", "");
+        String testApi = pla.getTestClass();
+        testApi = insertKeyword(testApi, keyword);
+        testApi = insertTestStub(testApi, step);
+        testApi = insertTestName(testApi, step.replace(" ", "_"));
+        if (!action.getName().isEmpty() && !action.getName().startsWith("@")) {
+            testApi = insertGroup(testApi, action.getName());
+            testApi = insertActionName(testApi, action.getName());
+            testApi = insertObjectName(testApi, parameters);
+        } else {
+            String[] splitTest = testApi.split("\n");
+            testApi = "".concat(splitTest[0] + "\n" + splitTest[1] + "\n\n" + splitTest[splitTest.length - 1] + "\n");
+        }
+
+        if (!repositoryAccess.isThisTestPresent(testApi)) {
+            repositoryAccess.addTest(testApi);
+        }
+    }
+
 
     private String insertGroup(String text,String toReplace){
         //CamelCase
