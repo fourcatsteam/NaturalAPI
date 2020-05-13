@@ -178,7 +178,7 @@ public class Cli implements Observer {
             boolean isDone = false;
             while (!isDone) {
                 print("Insert the name of the attribute for the type '" + customTypeName + "'");
-                String attributeName = br.readLine().trim().replace(' ','_');;
+                String attributeName = br.readLine().trim().replace(' ','_');
                 if (!attributeName.equals("") && !isNumeric(attributeName)) {
                     print("Insert the type for the attribute '" + attributeName + "'");
                     String attributeType = askForSimpleTypeOption();
