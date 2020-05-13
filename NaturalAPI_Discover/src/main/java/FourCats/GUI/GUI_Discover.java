@@ -39,16 +39,13 @@ public class GUI_Discover extends JPanel implements Observer{
     private JTable tableVerbs;
     private JTable tablePredicates;
     private Boolean areFilesLoaded;
-
     private Controller controller;
     private DataPresenter datapresenter;
     private FileSystemAccess fileSystemAccess;
-    private LinkedList<Integer> isKey;
     private LinkedList<String> isKeyString;
 
 
     public GUI_Discover(Controller c, DataPresenter d, FileSystemAccess fs) {
-        this.isKey = new LinkedList<>();
         this.isKeyString = new LinkedList<>();
         this.areFilesLoaded = false;
         this.controller = c;
@@ -137,7 +134,7 @@ public class GUI_Discover extends JPanel implements Observer{
         });
 
         removeDocumentBtn.addActionListener(actionEvent -> {
-           /* int returnVal = sourceFolderChooser.showOpenDialog(this);
+            int returnVal = sourceFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File directory = sourceFolderChooser.getSelectedFile();
                 String path = directory.getPath().replaceAll("\\\\", "/");
@@ -169,16 +166,7 @@ public class GUI_Discover extends JPanel implements Observer{
                 }
             }else {
                 log.append("Source folder selection cancelled\n");
-            }*/
-            for(TableRow w : datapresenter.getBdlPredicates()){
-                System.out.println(w.isKeyValue());
             }
-            System.out.println("caio");
-            for(Integer i: isKey){
-                System.out.println(i);
-            }
-
-
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
@@ -313,19 +301,13 @@ public class GUI_Discover extends JPanel implements Observer{
             DefaultTableModel predModel = new DefaultTableModel(new Object[]{"Predicate", "Frequency"}, 0);
             datapresenter.getBdlPredicates().stream()
                     .forEach(tableRow -> {
-
-
                         predModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
                         if(tableRow.isKeyValue()){
-                            isKey.add(predModel.getRowCount());
                             isKeyString.add(tableRow.getWord());
                         }
                     });
-
-
+            
             tablePredicates.setModel(predModel);
-
-
             tablePredicates.getColumn("Predicate").setCellRenderer(
                     new DefaultTableCellRenderer() {
                         @Override
@@ -344,8 +326,6 @@ public class GUI_Discover extends JPanel implements Observer{
 
                     }
             );
-
-
 
             tablePredicates.getColumn("Frequency").setPreferredWidth(10);
         }
