@@ -8,7 +8,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ObjectParamWidget {
     private JComboBox<String> objectTypeComboBox;
@@ -52,10 +54,8 @@ public class ObjectParamWidget {
 
         });
 
-        objectTypeComboBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED &&
-                    objectTypeComboBox.getSelectedItem() != null &&
-                    objectTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
+        objectTypeComboBox.addActionListener(e -> {
+            if (Objects.equals(objectTypeComboBox.getSelectedItem(),CREATE_CUSTOM)) {
                 customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });

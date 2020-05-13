@@ -28,6 +28,7 @@ public class GuiDesign implements Observer  {
     private JButton removeFeatureBtn;
     private JButton removeBdlBtn;
     private JPanel removeFilesBtnPanel;
+    private JPanel buttonsPanel;
     private final JFileChooser fc;
     private String[] bdlNameFile;
     private boolean isBdlUploaded;
@@ -51,7 +52,7 @@ public class GuiDesign implements Observer  {
         this.featureFilesName = new ArrayList<>();
         this.bdlNameFile = new String[3];
         this.isBdlUploaded = false;
-        this.mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+        //this.mainPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(!featureFilesPath.isEmpty()) {

@@ -3,6 +3,7 @@ package fourcats.view.gui;
 import fourcats.interfaceadapters.Controller;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddSuggestionButtonWidget {
     private JButton addSuggestionButton;

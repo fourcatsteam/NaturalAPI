@@ -84,9 +84,8 @@ public class SuggestionWidget {
             }
         });
 
-        actionTypeComboBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED &&
-                    Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
+        actionTypeComboBox.addActionListener(e -> {
+            if (Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
                 customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });
