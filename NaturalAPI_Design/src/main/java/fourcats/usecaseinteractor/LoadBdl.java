@@ -16,7 +16,8 @@ public class LoadBdl implements LoadBdlInputPort {
     @Override
     public void loadBdlFiles(String[] pathBdl) {
         try {
-            repo.readAndCreateBdl(pathBdl); //read bdl from external source and store in dataKeeper
+            //read bdl from external source and store in dataKeeper
+            repo.readAndCreateBdl(pathBdl);
             out.showBDLOutput(repo.readBdl(),true);
         }
         catch (Exception e){

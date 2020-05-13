@@ -7,16 +7,16 @@ public class SuggestionFrequency implements SuggestionFeedback {
 
     private Bdl bdl;
 
-    public SuggestionFrequency(Bdl bdl){
+    public SuggestionFrequency(Bdl bdl) {
         this.bdl = bdl;
     }
 
     @Override
     public int findActionInBdl(String nameAction) {
         //predicates research
-       if (bdl!=null){
-            for(WordCounter wc : bdl.getPredicates()){
-                if(wc.getWord().equalsIgnoreCase(nameAction.replace("_"," "))){
+       if (bdl!=null) {
+            for(WordCounter wc : bdl.getPredicates()) {
+                if(wc.getWord().equalsIgnoreCase(nameAction.replace("_"," "))) {
                     return wc.getCount();
                 }
             }

@@ -9,13 +9,12 @@ import java.io.IOException;
 
 public class BalAnalyzerImplementation implements BalAnalyzer {
 
-
     @Override
     public String createJsonFromBAL(Bal bal) throws IOException {
         //Creating the ObjectMapper object
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        //Converting the Object to JSONString and saving it on file
+        //Converting the Object to JSONString
         String balJson = "";
         try {
             balJson = mapper.writeValueAsString(bal);

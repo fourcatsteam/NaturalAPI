@@ -30,7 +30,7 @@ public class StanfordNlp implements TextAnalyzer {
     }
 
     public AnalyzedData parseDocumentContent(String documentContent) {
-        //Parsing della frase
+        //sentence parsing
         AnalyzedData data = new AnalyzedData();
 
         Annotation document = new Annotation(documentContent);
@@ -44,7 +44,7 @@ public class StanfordNlp implements TextAnalyzer {
             for(TypedDependency dep : dependencies) {
                 data.addDependency(dep.gov().lemma(), dep.dep().lemma(), dep.reln().getShortName());
             }
-            //Lemmatizzazione della frase
+            //sentence lemmatization
             for (CoreLabel token: sentence.get(CoreAnnotations.TokensAnnotation.class)) {
                 data.addLemmaData(token.value(),token.tag(),token.getString(CoreAnnotations.LemmaAnnotation.class));
             }

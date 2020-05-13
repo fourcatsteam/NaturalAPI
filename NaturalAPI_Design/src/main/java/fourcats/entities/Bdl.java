@@ -22,15 +22,15 @@ public class Bdl {
         this.predicates=new LinkedList<>();
     }
 
-    public List<WordCounter> getNouns(){
+    public List<WordCounter> getNouns() {
         return nouns;
     }
 
-    public List<WordCounter> getVerbs(){
+    public List<WordCounter> getVerbs() {
         return verbs;
     }
 
-    public List<WordCounter> getPredicates(){
+    public List<WordCounter> getPredicates() {
         return predicates;
     }
 

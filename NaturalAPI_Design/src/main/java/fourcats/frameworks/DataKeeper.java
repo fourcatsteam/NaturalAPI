@@ -64,7 +64,6 @@ public class DataKeeper {
         //only deletes the name and objectParams of the action so that the step will remain present in the BAL
         mScenarios.get(idScenario).getActionsMap().get(idAction).setName("");
         mScenarios.get(idScenario).getActionsMap().get(idAction).getObjectParams().clear();
-
     }
 
     public void clearScenariosMap(){
