@@ -1,7 +1,7 @@
 package fourcats.view.gui;
 
 import fourcats.interfaceadapters.Controller;
-
+import fourcats.view.utilities.ViewUtility;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class CustomTypeCreation extends Component{
     private boolean isCustomTypeCreated;
 
-    public CustomTypeCreation(Controller controller, List<String> lAvailableTypes){
+    public CustomTypeCreation(Controller controller, List<String> lAvailableTypes) {
         isCustomTypeCreated = false;
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS));
@@ -24,6 +24,7 @@ public class CustomTypeCreation extends Component{
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(400,350));
+        frame.setIconImage(ViewUtility.getLogo());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

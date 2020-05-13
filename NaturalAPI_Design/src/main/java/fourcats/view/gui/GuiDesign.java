@@ -5,10 +5,12 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.view.utilities.ViewUtility;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +40,7 @@ public class GuiDesign implements Observer  {
     private static final String LOADED_BDL = "Currently loaded BDL files: ";
 
 
-    public GuiDesign(Controller c, DataPresenterGUI dp){
+    public GuiDesign(Controller c, DataPresenterGUI dp) throws IOException {
         this.controller = c;
         this.dataPresenter = dp;
         this.fc = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
@@ -50,8 +52,6 @@ public class GuiDesign implements Observer  {
         this.bdlNameFile = new String[3];
         this.isBdlUploaded = false;
         this.mainPanel.setBorder(new EmptyBorder(5,5,5,5));
-
-
 
         genSuggestBtn.addActionListener(actionEvent -> {
             if(!featureFilesPath.isEmpty()) {
@@ -126,11 +126,12 @@ public class GuiDesign implements Observer  {
         });
     }
 
-    public void createAndShowGUI() {
+    public void createAndShowGUI() throws IOException {
         JFrame frame = new JFrame("NaturalAPI Design");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(650,550));
+        frame.setIconImage(ViewUtility.getLogo());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

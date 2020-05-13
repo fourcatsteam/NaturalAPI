@@ -5,8 +5,10 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.view.utilities.ViewUtility;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -118,6 +120,7 @@ public class SuggestionGenerated implements Observer{
         });
         frame.add(mainPanel);
         frame.setPreferredSize(new Dimension(1400,1000));
+        frame.setIconImage(ViewUtility.getLogo());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
