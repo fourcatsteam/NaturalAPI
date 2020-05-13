@@ -1,9 +1,12 @@
 package FourCats.GUI;
 
+import FourCats.DataStructure.TableRow;
+import FourCats.DataStructure.WordCounter;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.InterfaceAdapters.Controller;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -40,8 +43,13 @@ public class GUI_Discover extends JPanel implements Observer{
     private Controller controller;
     private DataPresenter datapresenter;
     private FileSystemAccess fileSystemAccess;
+    private LinkedList<Integer> isKey;
+    private LinkedList<String> isKeyString;
+
 
     public GUI_Discover(Controller c, DataPresenter d, FileSystemAccess fs) {
+        this.isKey = new LinkedList<>();
+        this.isKeyString = new LinkedList<>();
         this.areFilesLoaded = false;
         this.controller = c;
         this.datapresenter= d;
@@ -129,7 +137,7 @@ public class GUI_Discover extends JPanel implements Observer{
         });
 
         removeDocumentBtn.addActionListener(actionEvent -> {
-            int returnVal = sourceFolderChooser.showOpenDialog(this);
+           /* int returnVal = sourceFolderChooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File directory = sourceFolderChooser.getSelectedFile();
                 String path = directory.getPath().replaceAll("\\\\", "/");
@@ -161,7 +169,16 @@ public class GUI_Discover extends JPanel implements Observer{
                 }
             }else {
                 log.append("Source folder selection cancelled\n");
+            }*/
+            for(TableRow w : datapresenter.getBdlPredicates()){
+                System.out.println(w.isKeyValue());
             }
+            System.out.println("caio");
+            for(Integer i: isKey){
+                System.out.println(i);
+            }
+
+
         });
 
         viewBDLBtn.addActionListener(actionEvent -> {
@@ -296,10 +313,40 @@ public class GUI_Discover extends JPanel implements Observer{
             DefaultTableModel predModel = new DefaultTableModel(new Object[]{"Predicate", "Frequency"}, 0);
             datapresenter.getBdlPredicates().stream()
                     .forEach(tableRow -> {
+
+
                         predModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
+                        if(tableRow.isKeyValue()){
+                            isKey.add(predModel.getRowCount());
+                            isKeyString.add(tableRow.getWord());
+                        }
                     });
 
+
             tablePredicates.setModel(predModel);
+
+
+            tablePredicates.getColumn("Predicate").setCellRenderer(
+                    new DefaultTableCellRenderer() {
+                        @Override
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                            DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                            for (String s : isKeyString) {
+                                if (s.equalsIgnoreCase(value.toString())) {
+                                    renderer.setForeground(Color.GREEN);
+                                    return renderer;
+                                }else{
+                                    renderer.setForeground(Color.BLACK);
+                                }
+                            }
+                            return renderer;
+                        }
+
+                    }
+            );
+
+
+
             tablePredicates.getColumn("Frequency").setPreferredWidth(10);
         }
 
