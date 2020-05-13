@@ -50,6 +50,11 @@ public class Bdl {
         return predicates;
     }
 
+    public void setPredicates(List<WordCounter> predicates) {
+
+        this.predicates = new LinkedList<>(predicates);
+    }
+
     public String getName() { return nameBdl; }
 
     public void addNoun(String noun) {

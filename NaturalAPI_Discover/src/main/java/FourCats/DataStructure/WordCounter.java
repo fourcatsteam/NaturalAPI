@@ -3,10 +3,12 @@ package FourCats.DataStructure;
 public class WordCounter implements Comparable<WordCounter>{
     private String word;
     private Integer count;
+    private boolean isKeyValue;
 
     public WordCounter(String w, Integer c) {
         word=w;
         count=c;
+        isKeyValue = false;
     }
 
     public WordCounter(String w) {
@@ -32,6 +34,13 @@ public class WordCounter implements Comparable<WordCounter>{
         return 1;
     }
 
+    public boolean isKeyValue() {
+        return isKeyValue;
+    }
+
+    public void setKeyValue(boolean keyValue) {
+        isKeyValue = keyValue;
+    }
 
 
     @Override
