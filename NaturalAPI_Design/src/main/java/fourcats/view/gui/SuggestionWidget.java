@@ -2,6 +2,7 @@ package fourcats.view.gui;
 
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -26,7 +27,7 @@ public class SuggestionWidget {
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
     private CustomTypeCreation customType;
-    private String currentActionName=""; //updated with the one in dataKeeper
+    private String currentActionName; //updated with the one in dataKeeper
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
         lObjectParamWidget = new ArrayList<>();
@@ -115,13 +116,27 @@ public class SuggestionWidget {
             }
         });
 
+        actionNameTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentActionName = actionNameTextField.getText();
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                actionNameTextField.setText(currentActionName.replace(' ','_'));
+                if (actionNameTextField.getText().equals("")){
+                    JOptionPane.showMessageDialog(null,"You have to enter the name of the action","Empty field", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
         actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
                 setNewName();
                 if(dataPresenter.isBdlLoaded()) setColor();
             }
             public void removeUpdate(DocumentEvent e) {
-                if (!currentActionName.equals(actionNameTextField.getText())) setNewName();
+                setNewName();
                 if(dataPresenter.isBdlLoaded()) setColor();
             }
             public void insertUpdate(DocumentEvent e) {
@@ -134,12 +149,13 @@ public class SuggestionWidget {
             }
 
             public void setNewName() {
-                contr.modifyActionName(suggestionId,scenarioId,actionNameTextField.getText());
-                //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
-                if (!dataPresenter.isOkOperation())
-                    currentActionName = actionNameTextField.getText().substring(0, actionNameTextField.getText().length() - 1);
-                else
-                    currentActionName = actionNameTextField.getText();
+                //check that the current action really differs from the one inserted
+                if (!actionNameTextField.getText().trim().equals(currentActionName)) {
+                    contr.modifyActionName(suggestionId, scenarioId, actionNameTextField.getText());
+                    //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
+                    if (dataPresenter.isOkOperation())
+                        currentActionName = actionNameTextField.getText().trim();
+                }
             }
         });
     }

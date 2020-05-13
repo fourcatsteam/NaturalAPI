@@ -277,7 +277,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
             showSuggestions(mScenarios);
         }
         else{
-            message = ERROR_MESSAGE + "\nThis name is probably already used. No action added.";
+            message = ERROR_MESSAGE + "\nThe name is probably already used. No action added.";
             isOkOperation = false;
             notifyObservers();
         }

@@ -17,6 +17,7 @@ public class ObjectParamWidget {
     private JLabel frequencyLabel;
     private String objectId;
     private CustomTypeCreation customType;
+    private String currentObjectName; //updated with the one in dataKeeper
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
 
@@ -84,6 +85,20 @@ public class ObjectParamWidget {
             }
         });
 
+        objectNameTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentObjectName = objectNameTextField.getText();
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                objectNameTextField.setText(currentObjectName.replace(' ','_'));
+                if (objectNameTextField.getText().equals("")){
+                    JOptionPane.showMessageDialog(null,"You have to enter the name of the object","Empty field", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
         objectNameTextField.getDocument().addDocumentListener(new DocumentListener() {
 
             public void changedUpdate(DocumentEvent e) {
@@ -106,7 +121,13 @@ public class ObjectParamWidget {
             }
 
             public void setNewName() {
-                contr.modifyObjectName(suggestionId, scenarioId, objectId, objectNameTextField.getText());
+                //check that the current objectParam really differs from the one inserted
+                if (!objectNameTextField.getText().trim().equals(currentObjectName)) {
+                    contr.modifyObjectName(suggestionId, scenarioId, objectId, objectNameTextField.getText());
+                    //this is needed because the text in the field could be different from the one in dataPresenter if an error occurs
+                    if (dataPresenter.isOkOperation())
+                        currentObjectName = objectNameTextField.getText().trim();
+                }
             }
         });
     }

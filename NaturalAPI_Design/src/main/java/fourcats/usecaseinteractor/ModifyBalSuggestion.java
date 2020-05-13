@@ -37,11 +37,11 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     @Override
     public void modifyActionName(int idAction, int idScenario, String newName) {
         try {
+            newName = newName.trim().replace(' ','_');
             repo.updateActionName(idAction, idScenario, newName);
             out.showModifiedActionName(repo.readScenarios(), true,newName);
         }
         catch (Exception e){
-            //Modifica non effettuata
             out.showModifiedActionName(repo.readScenarios(), false,"");
         }
     }
@@ -72,6 +72,7 @@ public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     @Override
     public void modifyObjectName(int idAction, int idScenario, int idObject, String newName) {
         try {
+            newName = newName.trim().replace(' ','_');
             repo.updateObjectName(idAction, idScenario, idObject, newName);
             out.showModifiedObjectName(repo.readScenarios(),true,newName);
         }

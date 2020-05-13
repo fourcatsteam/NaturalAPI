@@ -87,7 +87,8 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.\n"+
+                    "Please check also the id of the type.";
             notifyObservers();
         }
     }
@@ -115,7 +116,8 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.\n"+
+                    "Please check also the id of the type.";
             notifyObservers();
         }
     }

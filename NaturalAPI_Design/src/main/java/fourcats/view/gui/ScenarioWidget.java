@@ -23,9 +23,9 @@ public class ScenarioWidget extends JComponent{
         //add text area in a scrollPane
         JScrollPane scrollPane = new JScrollPane (featureTextArea,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(370,200));
         mainPanel.add(scrollPane);
         featureTextArea.setText(scenario);
-        featureTextArea.setPreferredSize(new Dimension(350,200));
         panelToUpdate.add(mainPanel);
 
     }

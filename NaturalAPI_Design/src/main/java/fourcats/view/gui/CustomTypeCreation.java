@@ -75,11 +75,11 @@ public class CustomTypeCreation extends Component{
             if (!customTypeNameField.getText().equals("")){
                 for (AttributeWidget attrW : lAttributeWidgets){
                     if (!attrW.getAttributeName().equals("")){
-                        mAttributes.put(attrW.getAttributeName(),attrW.getAttributeType());
+                        mAttributes.put(attrW.getAttributeName().trim().replace(' ','_'),attrW.getAttributeType());
                     }
                 }
                 if (mAttributes.size()!=0){
-                    controller.createCustomType(customTypeNameField.getText(),mAttributes);
+                    controller.createCustomType(customTypeNameField.getText().trim().replace(' ','_'),mAttributes);
                     isCustomTypeCreated = true;
                     frame.dispose();
                     return;

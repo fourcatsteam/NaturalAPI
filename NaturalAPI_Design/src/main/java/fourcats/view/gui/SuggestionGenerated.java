@@ -4,6 +4,7 @@ import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.view.utilities.ViewUtility;
+import javafx.embed.swing.SwingFXUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -195,11 +196,16 @@ public class SuggestionGenerated implements Observer{
             }
         }
         if (!dataPresenter.getMessage().equals("")) {
-            //check if the operation was successful then show information message or error message
-            if (dataPresenter.isOkOperation())
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage());
-            else
-                JOptionPane.showMessageDialog(null, dataPresenter.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+            String message = dataPresenter.getMessage();
+            boolean isError = dataPresenter.isOkOperation();
+            //in this way we can execute operations while the notification is shown
+            SwingUtilities.invokeLater(()->{
+                //check if the operation was successful then show information message or error message
+                if (isError)
+                    JOptionPane.showMessageDialog(null, message);
+                else
+                    JOptionPane.showMessageDialog(null, message, "Error!", JOptionPane.ERROR_MESSAGE);
+            });
         }
     }
 
