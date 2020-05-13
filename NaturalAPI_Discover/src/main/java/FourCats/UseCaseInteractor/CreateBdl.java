@@ -48,7 +48,7 @@ public class CreateBdl implements CreateBdlInputPort {
 
         // SMILE for keywords
 
-        // Get String with all documents
+         //Get String with all documents
         StringBuilder documentsString = new StringBuilder();
         for(Document document: documents) {
             documentsString.append(document.getContent());
@@ -66,31 +66,30 @@ public class CreateBdl implements CreateBdlInputPort {
         }
 
         List<WordCounter> predicateList = bdl.getPredicates();
-
-
-        // Ciclo for su tutti i predicati
+//
+//
+//        // Ciclo for su tutti i predicati
         for (WordCounter predicate: predicateList) {
-
-            // Non so ancora nulla sul predicato, do per scontato che non sia una keyword
+//
+//            // Non so ancora nulla sul predicato, do per scontato che non sia una keyword
             predicate.setKeyValue(false);
+//
+//            // Estrai il noun dal predicato
+            String noun = predicate.getWord();
+            noun = noun.split(" ")[1];
 
-            // Estrai il noun dal predicato
-            String noun = predicate.getWord().split("_")[1];
+            noun = noun.toLowerCase();
 
-            // Metti tutto il lowercase
-            noun.toLowerCase();
-
-            boolean isKeyValue;
             for(String keyword: keyWordList){
                 if(keyword.contains(noun)) {
                     predicate.setKeyValue(true);
                     break;
                 }
             }
-
+//
         }
-
-        // Update predicates
+//
+//        // Update predicates
         bdl.setPredicates(predicateList);
 
         //update BDL and document association in the repository
