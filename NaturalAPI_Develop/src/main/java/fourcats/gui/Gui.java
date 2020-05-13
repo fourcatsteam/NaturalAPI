@@ -145,9 +145,10 @@ public class Gui implements Observer {
             }
         });
 
-        comboBox1.addActionListener(e -> {
-            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()));
-        });
+        comboBox1.addActionListener(e ->
+            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))
+        );
+
         createPLAButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

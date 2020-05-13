@@ -10,7 +10,7 @@ import java.util.Map;
 public class GenerateApi implements GenerateInputPort {
 
     private RepositoryAccess repositoryAccess;
-    public GenerateOutputPort generateOutputPort;
+    private GenerateOutputPort generateOutputPort;
 
     public GenerateApi(RepositoryAccess ra,GenerateOutputPort generateOutputPort){
         repositoryAccess = ra;

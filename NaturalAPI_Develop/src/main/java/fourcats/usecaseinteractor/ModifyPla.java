@@ -32,8 +32,6 @@ public class ModifyPla implements ModifyPlaInputPort {
             String[] splitTest = split[1].split("\ntest class\n");
 
             modifyPlaOutputPort.showLoadPla(split[0],splitTest[0],splitTest[1]);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

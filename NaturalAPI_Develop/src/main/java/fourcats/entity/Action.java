@@ -83,17 +83,17 @@ public class Action {
 
     @Override
     public String toString() {
-        String actionParams = "";
+        StringBuilder sb = new StringBuilder();
         boolean isFirstParam = true;
         for (ObjectParam par : param) {
             if (isFirstParam) {
-                actionParams+=par.getType()+ " " + par.getName();
+                sb.append(par.getType() + " " + par.getName());
                 isFirstParam = false;
             }
             else {
-                actionParams+=", " + par.getType()+ " " + par.getName();
+                sb.append(", " + par.getType() + " " + par.getName());
             }
         }
-        return this.type + " " + this.name + " (" + actionParams + ")";
+        return this.type + " " + this.name + " (" + sb.toString() + ")";
     }
 }

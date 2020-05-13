@@ -61,9 +61,9 @@ public class GuiPla implements Observer {
             }
         });
 
-        cancelButton.addActionListener(e -> {
-            frame.dispose(); //close the frame
-        });
+        cancelButton.addActionListener(e ->
+            frame.dispose() //close the frame
+        );
     }
 
     public void showGuiPla(){

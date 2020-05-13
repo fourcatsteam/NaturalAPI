@@ -42,19 +42,12 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 String step = ac.get("step").asText();
 
                 //camelCase operations
-                String[] split = actionName.split("_");
-                StringBuilder sb = new StringBuilder();
-                for(int i=0; i<split.length; i++) {
-                    if(i>0) {
-                        split[i] = split[i].substring(0,1).toUpperCase() + split[i].substring(1);
-                    }
-                    sb.append(split[i]);
-                }
+                actionName = camelCase(actionName);
 
                 JsonNode attributesAction = acType.get("attributes");
 
                 Map<String,String> mAttributes = new HashMap<>();
-                java.util.Iterator it = attributesAction.fieldNames();
+                java.util.Iterator<String> it = attributesAction.fieldNames();
                 while(it.hasNext()){
                     String attributeName = it.next().toString();
                     String attributeType = attributesAction.get(attributeName).asText();
@@ -62,7 +55,6 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
                 }
                 Type entityType = new Type(actionType,mAttributes);
 
-                actionName = sb.toString();
                 Action entityAction = new Action(actionName,entityType,scenario,step);
 
                 JsonNode parameters = ac.get("objectParams");
@@ -89,5 +81,17 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
             bal.addUserToBAL(entityActor);
         }
         return bal;
+    }
+
+    private String camelCase(String s){
+        String[] split = s.split("_");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<split.length; i++) {
+            if(i>0) {
+                split[i] = split[i].substring(0,1).toUpperCase() + split[i].substring(1);
+            }
+            sb.append(split[i]);
+        }
+        return sb.toString();
     }
 }

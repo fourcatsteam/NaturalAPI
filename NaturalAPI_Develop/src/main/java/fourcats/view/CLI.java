@@ -137,8 +137,6 @@ public class CLI implements Observer {
                     String first = br.readLine();
                     System.out.println("Type the ID of the last API to replace");
                     String second = br.readLine();
-                    askBal();
-                    readBal();
                     askPla();
                     readPla();
                     //Serve un controllo per l'id

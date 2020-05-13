@@ -1,14 +1,10 @@
 package fourcats.gui;
 
 import fourcats.interfaceadapters.Controller;
-import fourcats.interfaceadapters.DataPresenter;
 import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.observer.Observer;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class GuiModifyPla implements Observer {
@@ -75,9 +71,9 @@ public class GuiModifyPla implements Observer {
             }
         });
 
-        cancelButton.addActionListener(e -> {
-            frame.dispose(); //close the frame
-        });
+        cancelButton.addActionListener(e ->
+            frame.dispose() //close the frame
+        );
     }
 
     public void showGuiModifyPla(){

@@ -1,8 +1,5 @@
 package fourcats.entity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class API {
 
     String filename;
