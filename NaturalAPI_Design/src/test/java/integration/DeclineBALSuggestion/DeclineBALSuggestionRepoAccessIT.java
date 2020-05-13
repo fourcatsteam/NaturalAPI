@@ -64,7 +64,7 @@ public class DeclineBALSuggestionRepoAccessIT {
     @Test
     public void verifyLinkFromRepoAndGenerateBAL() throws IOException {
         declineBalSuggestion.declineSuggestion(1,0);
-        assertEquals(1,repo.readScenarios().get(0).getActionsMap().size());
+        assertEquals(2,repo.readScenarios().get(0).getActionsMap().size());
 
     }
 }
