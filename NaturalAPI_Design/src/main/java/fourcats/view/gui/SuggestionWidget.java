@@ -61,7 +61,7 @@ public class SuggestionWidget {
         addObjectButton.addActionListener(e->{
             String objectName = JOptionPane.showInputDialog(null,"Insert the name for the object",
                     "Object creation",JOptionPane.QUESTION_MESSAGE);
-            if (!objectName.equals("")){
+            if (objectName!=null && !objectName.equals("")){
                 contr.addObject(suggestionId,scenarioId,objectName,"0");
                 if (dataPresenter.isOkOperation()){
                     lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),

@@ -4,7 +4,6 @@ import fourcats.datastructure.observer.Observer;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 import fourcats.view.utilities.ViewUtility;
-import javafx.embed.swing.SwingFXUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
