@@ -4,8 +4,6 @@ import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ModifyBalSuggestionInputPort;
 import fourcats.port.ModifyBalSuggestionOutputPort;
 
-import java.text.NumberFormat;
-
 public class ModifyBalSuggestion implements ModifyBalSuggestionInputPort {
     RepositoryAccess repo;
     ModifyBalSuggestionOutputPort out;

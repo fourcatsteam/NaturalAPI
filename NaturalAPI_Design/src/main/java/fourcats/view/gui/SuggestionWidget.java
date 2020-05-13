@@ -95,17 +95,26 @@ public class SuggestionWidget {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                actionTypeComboBox.removeAllItems();
+                ArrayList<String> currentItems = new ArrayList();
+                // i = 1 because 0 is void (not present in dataKeeper),
+                // itemCount-1 because last item is the CREATE CUSTOM option (not present in dataKeeper)
+                for (int i = 1; i < actionTypeComboBox.getItemCount()-1; i++){
+                    currentItems.add(actionTypeComboBox.getItemAt(i));
+                }
                 contr.showTypes();
-                actionTypeComboBox.addItem("void");
-                for (String type : dataPresenter.getlTypes()) {
-                    actionTypeComboBox.addItem(type);
+                //update items if currentItems are different from the ones given by the dataPresenter
+                if (!dataPresenter.getlTypes().equals(currentItems)) {
+                    actionTypeComboBox.removeAllItems();
+                    actionTypeComboBox.addItem("void");
+                    for (String type : dataPresenter.getlTypes()) {
+                        actionTypeComboBox.addItem(type);
+                    }
+                    //check if the selected item should be the custom type recently created
+                    if (customType != null && customType.isCustomTypeCreated()) {
+                        actionTypeComboBox.setSelectedIndex(actionTypeComboBox.getItemCount() - 1);
+                    }
+                    actionTypeComboBox.addItem(CREATE_CUSTOM);
                 }
-                //check if the selected item should be the custom type recently created
-                if (customType!=null && customType.isCustomTypeCreated()){
-                    actionTypeComboBox.setSelectedIndex(actionTypeComboBox.getItemCount()-1);
-                }
-                actionTypeComboBox.addItem(CREATE_CUSTOM);
             }
             @Override
             public void focusLost(FocusEvent e) {

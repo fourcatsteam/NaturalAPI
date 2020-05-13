@@ -8,6 +8,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class ObjectParamWidget {
     private JComboBox<String> objectTypeComboBox;
@@ -63,16 +64,24 @@ public class ObjectParamWidget {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                objectTypeComboBox.removeAllItems();
+                ArrayList<String> currentItems = new ArrayList();
+                // itemCount-1 because last item is the CREATE CUSTOM option (not present in dataKeeper)
+                for (int i = 0; i < objectTypeComboBox.getItemCount() - 1; i++) {
+                    currentItems.add(objectTypeComboBox.getItemAt(i));
+                }
                 contr.showTypes();
-                for (String type : dataPresenter.getlTypes()) {
-                    objectTypeComboBox.addItem(type);
+                //update items if currentItems are different from the ones given by the dataPresenter
+                if (!dataPresenter.getlTypes().equals(currentItems)) {
+                    objectTypeComboBox.removeAllItems();
+                    for (String type : dataPresenter.getlTypes()) {
+                        objectTypeComboBox.addItem(type);
+                    }
+                    //check if the selected item should be the custom type recently created
+                    if (customType != null && customType.isCustomTypeCreated()) {
+                        objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount() - 1);
+                    }
+                    objectTypeComboBox.addItem(CREATE_CUSTOM);
                 }
-                //check if the selected item should be the custom type recently created
-                if (customType!=null && customType.isCustomTypeCreated()){
-                    objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount()-1);
-                }
-                objectTypeComboBox.addItem(CREATE_CUSTOM);
             }
 
             @Override
