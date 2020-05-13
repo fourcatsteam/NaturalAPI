@@ -58,14 +58,8 @@ public class SuggestApi implements ApiInputPort {
                 String newApi = pla.getText();
 
                 int size = action.getObjectParams().size();
-                Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
-                Matcher m = p.matcher(newApi);
-                if (m.find()) {
-                    while (size > 1) {
-                        newApi = m.replaceFirst(m.group() + ", " + m.group());
-                        size--;
-                    }
-                }
+
+                newApi = numberOfParameters(newApi,size);
 
                 if (!action.getType().getAttributes().isEmpty()) {
                     createCustomClassForAction(pla, action, actor.getName());
@@ -75,21 +69,10 @@ public class SuggestApi implements ApiInputPort {
                     newApi = insertObjectType(newApi, "");
                     newApi = insertObjectName(newApi, "");
                 } else {
-                    size = action.getObjectParams().size();
-                    for (ObjectParam objectParam : action.getObjectParams()) {
 
-                        if (!objectParam.getType().getAttributes().isEmpty()) {
-                            createCustomClassForObjectParam(pla, objectParam, actor.getName());
-                        }
-
-                        newApi = insertObjectType(newApi, objectParam.getType().getName());
-                        newApi = insertObjectName(newApi, objectParam.getName());
-                        parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
-                        if (size > 1) {
-                            parameters = parameters.concat(", ");
-                        }
-                        size--;
-                    }
+                    String[] split = iterateObjectParams(pla,actor,action,newApi,parameters).split("PARAMETERS");
+                    newApi = split[0];
+                    parameters = split[1];
                 }
 
                 newApi = insertGroup(newApi, action.getName());
@@ -107,6 +90,25 @@ public class SuggestApi implements ApiInputPort {
 
             createTest(pla,action,parameters);
         }
+    }
+
+    private String iterateObjectParams(PLA pla,Actor actor,Action action,String newApi,String parameters) {
+        int size = action.getObjectParams().size();
+        for (ObjectParam objectParam : action.getObjectParams()) {
+
+            if (!objectParam.getType().getAttributes().isEmpty()) {
+                createCustomClassForObjectParam(pla, objectParam, actor.getName());
+            }
+
+            newApi = insertObjectType(newApi, objectParam.getType().getName());
+            newApi = insertObjectName(newApi, objectParam.getName());
+            parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
+            if (size > 1) {
+                parameters = parameters.concat(", ");
+            }
+            size--;
+        }
+        return newApi.concat("PARAMETERS" + parameters);
     }
 
     private void createTest(PLA pla,Action action,String parameters){
@@ -140,6 +142,17 @@ public class SuggestApi implements ApiInputPort {
         }
     }
 
+    private String numberOfParameters(String newApi,int size) {
+        Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
+        Matcher m = p.matcher(newApi);
+        if (m.find()) {
+            while (size > 1) {
+                newApi = m.replaceFirst(m.group() + ", " + m.group());
+                size--;
+            }
+        }
+        return newApi;
+    }
 
     private String insertGroup(String text,String toReplace){
         //CamelCase
