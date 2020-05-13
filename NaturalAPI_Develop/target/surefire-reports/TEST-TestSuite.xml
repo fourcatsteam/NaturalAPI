@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="3.113" tests="152" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="2.384" tests="152" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="IT"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\matte\AppData\Local\Temp\surefire4509142076096545905\surefirebooter3311573679972040844.jar C:\Users\matte\AppData\Local\Temp\surefire4509142076096545905 2020-05-11T18-18-57_652-jvmRun1 surefire9194879210371760088tmp surefire_05291716450873116194tmp"/>
+    <property name="sun.java.command" value="C:\Users\matte\AppData\Local\Temp\surefire1542905976939542116\surefirebooter3072637396576383734.jar C:\Users\matte\AppData\Local\Temp\surefire1542905976939542116 2020-05-13T20-26-22_448-jvmRun1 surefire97563196639860573tmp surefire_0932773650503726917tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\target\test-classes;C:\Users\matte\OneDrive\Desktop\NaturalAPI\NaturalAPI_Develop\target\classes;C:\Users\matte\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\matte\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\matte\.m2\repository\org\mockito\mockito-core\2.23.4\mockito-core-2.23.4.jar;C:\Users\matte\.m2\repository\net\bytebuddy\byte-buddy\1.9.3\byte-buddy-1.9.3.jar;C:\Users\matte\.m2\repository\net\bytebuddy\byte-buddy-agent\1.9.3\byte-buddy-agent-1.9.3.jar;C:\Users\matte\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\matte\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.10.0.pr2\jackson-databind-2.10.0.pr2.jar;C:\Users\matte\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.0.pr2\jackson-annotations-2.10.0.pr2.jar;C:\Users\matte\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.10.0.pr2\jackson-core-2.10.0.pr2.jar;C:\Users\matte\.m2\repository\org\testng\testng\7.1.0\testng-7.1.0.jar;C:\Users\matte\.m2\repository\com\beust\jcommander\1.72\jcommander-1.72.jar;C:\Users\matte\.m2\repository\com\google\inject\guice\4.1.0\guice-4.1.0-no_aop.jar;C:\Users\matte\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\matte\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;C:\Users\matte\.m2\repository\com\google\guava\guava\19.0\guava-19.0.jar;C:\Users\matte\.m2\repository\org\yaml\snakeyaml\1.21\snakeyaml-1.21.jar;C:\Users\matte\.m2\repository\org\springframework\spring-test\5.2.5.RELEASE\spring-test-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-core\5.2.5.RELEASE\spring-core-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-jcl\5.2.5.RELEASE\spring-jcl-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-beans\5.2.5.RELEASE\spring-beans-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-context\5.2.5.RELEASE\spring-context-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-aop\5.2.5.RELEASE\spring-aop-5.2.5.RELEASE.jar;C:\Users\matte\.m2\repository\org\springframework\spring-expression\5.2.5.RELEASE\spring-expression-5.2.5.RELEASE.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\matte"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\matte\AppData\Local\Temp\surefire4509142076096545905\surefirebooter3311573679972040844.jar;C:\\Users\\matte\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\matte\AppData\Local\Temp\surefire1542905976939542116\surefirebooter3072637396576383734.jar;C:\\Users\\matte\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_191\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -61,14 +61,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="createActionWithNameAndTypeNullAndScenarioAndStep on createActionWithNameAndTypeNullAndScenarioAndStep(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0.003"/>
-  <testcase name="createActionWithNameAndTypeAndScenarioAndStep on createActionWithNameAndTypeAndScenarioAndStep(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0.001"/>
+  <testcase name="createActionWithNameAndTypeNullAndScenarioAndStep on createActionWithNameAndTypeNullAndScenarioAndStep(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0.002"/>
+  <testcase name="createActionWithNameAndTypeAndScenarioAndStep on createActionWithNameAndTypeAndScenarioAndStep(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="testAddObjectName on testAddObjectName(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="toStringActionCorrectly on toStringActionCorrectly(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="setTypeCorrectly on setTypeCorrectly(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="createActionWithNameAndTypeNotStringAndScenarioAndStep on createActionWithNameAndTypeNotStringAndScenarioAndStep(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="testGettingTypeNameCorrectly on testGettingTypeNameCorrectly(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
-  <testcase name="testAddObjectParamWithString on testAddObjectParamWithString(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
+  <testcase name="testAddObjectParamWithString on testAddObjectParamWithString(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0.001"/>
   <testcase name="createActionWithNameAndNullType on createActionWithNameAndNullType(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="addObjectParamCorrectly on addObjectParamCorrectly(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
   <testcase name="testRemoveObjectParamWithId on testRemoveObjectParamWithId(fourcats.Entity.ActionTest)" classname="fourcats.Entity.ActionTest" time="0"/>
@@ -84,46 +84,46 @@
   <testcase name="testActorEmptyCorrectlyCreate on testActorEmptyCorrectlyCreate(fourcats.Entity.ActorTest)" classname="fourcats.Entity.ActorTest" time="0"/>
   <testcase name="testSettingNameOfActor on testSettingNameOfActor(fourcats.Entity.ActorTest)" classname="fourcats.Entity.ActorTest" time="0"/>
   <testcase name="testActorWithNameCorrectlyCreate on testActorWithNameCorrectlyCreate(fourcats.Entity.ActorTest)" classname="fourcats.Entity.ActorTest" time="0"/>
-  <testcase name="testAddingMoreActionCorrectly on testAddingMoreActionCorrectly(fourcats.Entity.ActorTest)" classname="fourcats.Entity.ActorTest" time="0"/>
-  <testcase name="getTextCorrectly on getTextCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0.007"/>
-  <testcase name="getFileNameCorrectly on getFileNameCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0"/>
+  <testcase name="testAddingMoreActionCorrectly on testAddingMoreActionCorrectly(fourcats.Entity.ActorTest)" classname="fourcats.Entity.ActorTest" time="0.001"/>
+  <testcase name="getTextCorrectly on getTextCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0.005"/>
+  <testcase name="getFileNameCorrectly on getFileNameCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0.001"/>
   <testcase name="setTextCorrectly on setTextCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0"/>
   <testcase name="setFileNameCorrectly on setFileNameCorrectly(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0"/>
   <testcase name="testConstructor on testConstructor(fourcats.Entity.APITest)" classname="fourcats.Entity.APITest" time="0"/>
-  <testcase name="testToString on testToString(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.786"/>
-  <testcase name="tesAddDuplicateUserToBAL on tesAddDuplicateUserToBAL(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.011"/>
-  <testcase name="getActors on getActors(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.002"/>
-  <testcase name="testConstructor on testConstructor(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0"/>
+  <testcase name="testToString on testToString(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.601"/>
+  <testcase name="tesAddDuplicateUserToBAL on tesAddDuplicateUserToBAL(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.009"/>
+  <testcase name="getActors on getActors(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0"/>
+  <testcase name="testConstructor on testConstructor(fourcats.Entity.BALTest)" classname="fourcats.Entity.BALTest" time="0.001"/>
   <testcase name="ObjectParamSetRequiredCorrectly on ObjectParamSetRequiredCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
-  <testcase name="setTypeCorrectly on setTypeCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0.001"/>
+  <testcase name="setTypeCorrectly on setTypeCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
   <testcase name="ObjectParamSetNameCorrectly on ObjectParamSetNameCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
   <testcase name="ObjectParamSetTypeCorrectly on ObjectParamSetTypeCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
-  <testcase name="ObjectParamConvertedToStringCorrectly on ObjectParamConvertedToStringCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
+  <testcase name="ObjectParamConvertedToStringCorrectly on ObjectParamConvertedToStringCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0.001"/>
   <testcase name="EmptyObjectParamCorrectCreation on EmptyObjectParamCorrectCreation(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
-  <testcase name="ObjectParamGetTypeCorrectly on ObjectParamGetTypeCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0.001"/>
+  <testcase name="ObjectParamGetTypeCorrectly on ObjectParamGetTypeCorrectly(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
   <testcase name="ObjectParamCorrectCreationWthName on ObjectParamCorrectCreationWthName(fourcats.Entity.ObjectParamTest)" classname="fourcats.Entity.ObjectParamTest" time="0"/>
   <testcase name="testTextFromPLA on testTextFromPLA(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
-  <testcase name="getCustomClassCorrectly on getCustomClassCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
+  <testcase name="getCustomClassCorrectly on getCustomClassCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0"/>
   <testcase name="testExtensionFromPLA on testExtensionFromPLA(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
-  <testcase name="getCustomBodyCorrectly on getCustomBodyCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
+  <testcase name="getCustomBodyCorrectly on getCustomBodyCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0"/>
   <testcase name="testSettingTextPLA on testSettingTextPLA(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0"/>
-  <testcase name="testConstructor on testConstructor(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0"/>
-  <testcase name="getTestClassCorrectly on getTestClassCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
-  <testcase name="gettingNameCorrectly on gettingNameCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0.001"/>
+  <testcase name="testConstructor on testConstructor(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0.001"/>
+  <testcase name="getTestClassCorrectly on getTestClassCorrectly(fourcats.Entity.PLATest)" classname="fourcats.Entity.PLATest" time="0"/>
+  <testcase name="gettingNameCorrectly on gettingNameCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
   <testcase name="testingToStringCorrectly on testingToStringCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
-  <testcase name="addingAttributeCorrectly on addingAttributeCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0.001"/>
+  <testcase name="addingAttributeCorrectly on addingAttributeCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
   <testcase name="testConstructorStringAndMapCorrectly on testConstructorStringAndMapCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
-  <testcase name="testGettingAttributesCorrectly on testGettingAttributesCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
+  <testcase name="testGettingAttributesCorrectly on testGettingAttributesCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0.001"/>
   <testcase name="testConstructorStringCorrectly on testConstructorStringCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
   <testcase name="settingNameCorrectly on settingNameCorrectly(fourcats.Entity.TypeTest)" classname="fourcats.Entity.TypeTest" time="0"/>
-  <testcase name="gettingBalCorrectly on gettingBalCorrectly(fourcats.frameworks.BalAnalyzerImplementationTest)" classname="fourcats.frameworks.BalAnalyzerImplementationTest" time="0.277"/>
+  <testcase name="gettingBalCorrectly on gettingBalCorrectly(fourcats.frameworks.BalAnalyzerImplementationTest)" classname="fourcats.frameworks.BalAnalyzerImplementationTest" time="0.231"/>
   <testcase name="correctlySettingBalFile on correctlySettingBalFile(fourcats.frameworks.BalAnalyzerImplementationTest)" classname="fourcats.frameworks.BalAnalyzerImplementationTest" time="0.025"/>
   <testcase name="createBalAnalyzerCorrectly on createBalAnalyzerCorrectly(fourcats.frameworks.BalAnalyzerImplementationTest)" classname="fourcats.frameworks.BalAnalyzerImplementationTest" time="0"/>
   <testcase name="removingAPINotPresent on removingAPINotPresent(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="isClassNameNotPresentTest on isClassNameNotPresentTest(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="updatingAPICorrectly on updatingAPICorrectly(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="createDatakeeperCorrectly on createDatakeeperCorrectly(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
-  <testcase name="isCoupleBalPlaNOTPresentTest on isCoupleBalPlaNOTPresentTest(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0.001"/>
+  <testcase name="isCoupleBalPlaNOTPresentTest on isCoupleBalPlaNOTPresentTest(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="addingAPIWithoutIdCorrectly on addingAPIWithoutIdCorrectly(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="addingAPIWithIdCorrectlyWithoutDuplicate on addingAPIWithIdCorrectlyWithoutDuplicate(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
   <testcase name="removingAPIPresent on removingAPIPresent(fourcats.frameworks.DataKeeperTest)" classname="fourcats.frameworks.DataKeeperTest" time="0"/>
@@ -142,75 +142,75 @@
   <testcase name="loadingPLACorrectlyNotFound on loadingPLACorrectlyNotFound(fourcats.frameworks.FileSystemTest)" classname="fourcats.frameworks.FileSystemTest" time="0"/>
   <testcase name="loadingPLACorrectlyFound on loadingPLACorrectlyFound(fourcats.frameworks.FileSystemTest)" classname="fourcats.frameworks.FileSystemTest" time="0"/>
   <testcase name="writingPLATestCorrectly on writingPLATestCorrectly(fourcats.frameworks.FileSystemTest)" classname="fourcats.frameworks.FileSystemTest" time="0"/>
-  <testcase name="writingAPICorrectly on writingAPICorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
+  <testcase name="writingAPICorrectly on writingAPICorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
   <testcase name="addingAPIWithoutIdToDataKeeperCorrectly on addingAPIWithoutIdToDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
   <testcase name="deletingAPIWithIdFromDataKeeperCorrectly on deletingAPIWithIdFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
-  <testcase name="addingAPIWithIdToDataKeeperCorrectly on addingAPIWithIdToDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
-  <testcase name="gettingAPIWithIdFromDataKeeperCorrectly on gettingAPIWithIdFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
+  <testcase name="addingAPIWithIdToDataKeeperCorrectly on addingAPIWithIdToDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
+  <testcase name="gettingAPIWithIdFromDataKeeperCorrectly on gettingAPIWithIdFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
   <testcase name="isThisAPIPresentInDataKeeperCorrectly on isThisAPIPresentInDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
-  <testcase name="gettingSizeFromDataKeeperCorrectly on gettingSizeFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
+  <testcase name="gettingSizeFromDataKeeperCorrectly on gettingSizeFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
   <testcase name="addingCoupleBalPlaToDataKeeperCorrectly on addingCoupleBalPlaToDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
   <testcase name="isCoupleBalPlaPresentInDataKeepeerCorrectly on isCoupleBalPlaPresentInDataKeepeerCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
-  <testcase name="isThisClassNamePresentInDataKeeperCorrectly on isThisClassNamePresentInDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
-  <testcase name="gettingADIMapWithIdFromDataKeeperCorrectly on gettingADIMapWithIdFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
+  <testcase name="isThisClassNamePresentInDataKeeperCorrectly on isThisClassNamePresentInDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
+  <testcase name="gettingADIMapWithIdFromDataKeeperCorrectly on gettingADIMapWithIdFromDataKeeperCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
   <testcase name="updatingAPIToDataKeepeerCorrectly on updatingAPIToDataKeepeerCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
   <testcase name="loadingPLACorrectly on loadingPLACorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
-  <testcase name="openingFileCorrectly on openingFileCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
+  <testcase name="openingFileCorrectly on openingFileCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0.001"/>
   <testcase name="writingPLAToFileSystemCorrectly on writingPLAToFileSystemCorrectly(fourcats.frameworks.RepositoryTest)" classname="fourcats.frameworks.RepositoryTest" time="0"/>
   <testcase name="testCreateApiSuggestion on testCreateApiSuggestion(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0.001"/>
   <testcase name="testModifyApi on testModifyApi(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
   <testcase name="testModifyPla on testModifyPla(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
   <testcase name="testLoadingPla on testLoadingPla(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
   <testcase name="testingModifyApiGui on testingModifyApiGui(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
-  <testcase name="testGenerateApi on testGenerateApi(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
+  <testcase name="testGenerateApi on testGenerateApi(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0.001"/>
   <testcase name="createControllerCorrectly on createControllerCorrectly(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
-  <testcase name="testingCreatePla on testingCreatePla(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0"/>
+  <testcase name="testingCreatePla on testingCreatePla(fourcats.interfaceAdapters.ControllerTest)" classname="fourcats.interfaceAdapters.ControllerTest" time="0.001"/>
   <testcase name="testShowOutputMap on testShowOutputMap(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testShowModifyPla on testShowModifyPla(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testingCostructCorrectly on testingCostructCorrectly(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testGettingString on testGettingString(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
-  <testcase name="testGettingMessage on testGettingMessage(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
+  <testcase name="testGettingMessage on testGettingMessage(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0.001"/>
   <testcase name="testShowOutput on testShowOutput(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testGettingCombo on testGettingCombo(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testShowLoadPla on testShowLoadPla(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testGettingMessagePla on testGettingMessagePla(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
-  <testcase name="testShowGenMessage on testShowGenMessage(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0.001"/>
+  <testcase name="testShowGenMessage on testShowGenMessage(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testGettingModifyCustomPla on testGettingModifyCustomPla(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testGettingModifyApiPla on testGettingModifyApiPla(fourcats.interfaceAdapters.DataPresenterGuiTest)" classname="fourcats.interfaceAdapters.DataPresenterGuiTest" time="0"/>
   <testcase name="testShowOuput on testShowOuput(fourcats.interfaceAdapters.DataPresenterTest)" classname="fourcats.interfaceAdapters.DataPresenterTest" time="0.001"/>
   <testcase name="testingGettingMessage on testingGettingMessage(fourcats.interfaceAdapters.DataPresenterTest)" classname="fourcats.interfaceAdapters.DataPresenterTest" time="0"/>
   <testcase name="testingShowGenerationMessage on testingShowGenerationMessage(fourcats.interfaceAdapters.DataPresenterTest)" classname="fourcats.interfaceAdapters.DataPresenterTest" time="0"/>
-  <testcase name="testGetMessageToShow on testGetMessageToShow(fourcats.interfaceAdapters.DataPresenterTest)" classname="fourcats.interfaceAdapters.DataPresenterTest" time="0"/>
-  <testcase name="testingCorrectlyMethodCallModifyGui on testingCorrectlyMethodCallModifyGui(fourcats.usecaseinteractor.CreatePlaTest)" classname="fourcats.usecaseinteractor.CreatePlaTest" time="0.001"/>
+  <testcase name="testGetMessageToShow on testGetMessageToShow(fourcats.interfaceAdapters.DataPresenterTest)" classname="fourcats.interfaceAdapters.DataPresenterTest" time="0.001"/>
+  <testcase name="testingCorrectlyMethodCallModifyGui on testingCorrectlyMethodCallModifyGui(fourcats.usecaseinteractor.CreatePlaTest)" classname="fourcats.usecaseinteractor.CreatePlaTest" time="0"/>
   <testcase name="correctlyCreatingModifyApi on correctlyCreatingModifyApi(fourcats.usecaseinteractor.CreatePlaTest)" classname="fourcats.usecaseinteractor.CreatePlaTest" time="0"/>
   <testcase name="GenerateAPITestCorrectCreation on GenerateAPITestCorrectCreation(fourcats.usecaseinteractor.GenerateApiTest)" classname="fourcats.usecaseinteractor.GenerateApiTest" time="0"/>
   <testcase name="generateAPI on generateAPI(fourcats.usecaseinteractor.GenerateApiTest)" classname="fourcats.usecaseinteractor.GenerateApiTest" time="0.001"/>
   <testcase name="testingModifyApi on testingModifyApi(fourcats.usecaseinteractor.ModifyApiTest)" classname="fourcats.usecaseinteractor.ModifyApiTest" time="0.002"/>
-  <testcase name="testingCorrectlyMethodCallModifyGui on testingCorrectlyMethodCallModifyGui(fourcats.usecaseinteractor.ModifyApiTest)" classname="fourcats.usecaseinteractor.ModifyApiTest" time="0"/>
+  <testcase name="testingCorrectlyMethodCallModifyGui on testingCorrectlyMethodCallModifyGui(fourcats.usecaseinteractor.ModifyApiTest)" classname="fourcats.usecaseinteractor.ModifyApiTest" time="0.001"/>
   <testcase name="correctlyCreatingModifyApi on correctlyCreatingModifyApi(fourcats.usecaseinteractor.ModifyApiTest)" classname="fourcats.usecaseinteractor.ModifyApiTest" time="0"/>
   <testcase name="testingModify on testingModify(fourcats.usecaseinteractor.ModifyPlaTest)" classname="fourcats.usecaseinteractor.ModifyPlaTest" time="0.001"/>
-  <testcase name="correctlyCreatingModifyApi on correctlyCreatingModifyApi(fourcats.usecaseinteractor.ModifyPlaTest)" classname="fourcats.usecaseinteractor.ModifyPlaTest" time="0.001"/>
+  <testcase name="correctlyCreatingModifyApi on correctlyCreatingModifyApi(fourcats.usecaseinteractor.ModifyPlaTest)" classname="fourcats.usecaseinteractor.ModifyPlaTest" time="0"/>
   <testcase name="testingLoadingPlaCorrectly on testingLoadingPlaCorrectly(fourcats.usecaseinteractor.ModifyPlaTest)" classname="fourcats.usecaseinteractor.ModifyPlaTest" time="0.001"/>
   <testcase name="correctlyCreatingSuggestApi on correctlyCreatingSuggestApi(fourcats.usecaseinteractor.SuggestApiTest)" classname="fourcats.usecaseinteractor.SuggestApiTest" time="0"/>
   <testcase name="SuggestAPITestCreationFromWrongInput on SuggestAPITestCreationFromWrongInput(fourcats.usecaseinteractor.SuggestApiTest)" classname="fourcats.usecaseinteractor.SuggestApiTest" time="0"/>
-  <testcase name="correctlysuggestionApiCreated on correctlysuggestionApiCreated(fourcats.usecaseinteractor.SuggestApiTest)" classname="fourcats.usecaseinteractor.SuggestApiTest" time="0.003"/>
-  <testcase name="gettingCurrentAnswer on gettingCurrentAnswer(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
-  <testcase name="testAskingModifyApi on testAskingModifyApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.065"/>
+  <testcase name="correctlysuggestionApiCreated on correctlysuggestionApiCreated(fourcats.usecaseinteractor.SuggestApiTest)" classname="fourcats.usecaseinteractor.SuggestApiTest" time="0.002"/>
+  <testcase name="gettingCurrentAnswer on gettingCurrentAnswer(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
+  <testcase name="testAskingModifyApi on testAskingModifyApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.075"/>
   <testcase name="testAskPathApi on testAskPathApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
   <testcase name="readingAnotherBal on readingAnotherBal(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
   <testcase name="testAskingGenerateApi on testAskingGenerateApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
-  <testcase name="readingSuggestionAPIInput on readingSuggestionAPIInput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
-  <testcase name="readingBalInput on readingBalInput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
+  <testcase name="readingSuggestionAPIInput on readingSuggestionAPIInput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
+  <testcase name="readingBalInput on readingBalInput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
   <testcase name="readingPLAInput on readingPLAInput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
   <testcase name="testAskingForSuggestionApi on testAskingForSuggestionApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
-  <testcase name="readingSuggestionAPIInputWithNoAnswer on readingSuggestionAPIInputWithNoAnswer(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.003"/>
+  <testcase name="readingSuggestionAPIInputWithNoAnswer on readingSuggestionAPIInputWithNoAnswer(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.004"/>
   <testcase name="testingShowOutput on testingShowOutput(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
   <testcase name="testingUpdate on testingUpdate(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
   <testcase name="testGenerateApi on testGenerateApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
-  <testcase name="readingModifyApi on readingModifyApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.002"/>
-  <testcase name="testingConstructor on testingConstructor(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
-  <testcase name="readingNotGenerateApi on readingNotGenerateApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
+  <testcase name="readingModifyApi on readingModifyApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.019"/>
+  <testcase name="testingConstructor on testingConstructor(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
+  <testcase name="readingNotGenerateApi on readingNotGenerateApi(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
   <testcase name="testAskingForBal on testAskingForBal(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
-  <testcase name="testAskingForPLA on testAskingForPLA(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
-  <testcase name="testAskingAnother on testAskingAnother(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0.001"/>
+  <testcase name="testAskingForPLA on testAskingForPLA(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
+  <testcase name="testAskingAnother on testAskingAnother(fourcats.view.CLITest)" classname="fourcats.view.CLITest" time="0"/>
 </testsuite>

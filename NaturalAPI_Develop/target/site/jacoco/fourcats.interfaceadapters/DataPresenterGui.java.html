@@ -11,84 +11,66 @@ public class DataPresenterGui extends Subject implements ApiOutputPort, ModifyOu
 
     private String toShow;
     private String comboToShow;
-    private String messagePla;
-
     private String message;
-
     private String modifyApiPla;
     private String modifyCustomPla;
-
     private String modifyTestPla;
 
-<span class="fc" id="L23">    public DataPresenterGui(){</span>
-<span class="fc" id="L24">        toShow = &quot;&quot;;</span>
-<span class="fc" id="L25">        comboToShow = &quot;&quot;;</span>
-<span class="fc" id="L26">        messagePla = &quot;&quot;;</span>
-<span class="fc" id="L27">        modifyApiPla = &quot;&quot;;</span>
-<span class="fc" id="L28">        modifyCustomPla = &quot;&quot;;</span>
-<span class="fc" id="L29">        modifyTestPla = &quot;&quot;;</span>
-<span class="fc" id="L30">        message = &quot;&quot;;</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L19">    public DataPresenterGui(){</span>
+<span class="fc" id="L20">        toShow = &quot;&quot;;</span>
+<span class="fc" id="L21">        comboToShow = &quot;&quot;;</span>
+<span class="fc" id="L22">        modifyApiPla = &quot;&quot;;</span>
+<span class="fc" id="L23">        modifyCustomPla = &quot;&quot;;</span>
+<span class="fc" id="L24">        modifyTestPla = &quot;&quot;;</span>
+<span class="fc" id="L25">        message = &quot;&quot;;</span>
+<span class="fc" id="L26">    }</span>
 
     public String getStringToShow(){
-<span class="fc" id="L34">        return toShow;</span>
-    }
-    public String getComboToShow(){
-<span class="fc" id="L37">        return comboToShow;</span>
+<span class="fc" id="L29">        return toShow;</span>
     }
 
-    public String getMessagePla() {
-<span class="fc" id="L41">        return messagePla;</span>
+    public String getComboToShow(){
+<span class="fc" id="L33">        return comboToShow;</span>
     }
 
     public String getModifyApiPla() {
-<span class="fc" id="L45">        return modifyApiPla;</span>
+<span class="fc" id="L37">        return modifyApiPla;</span>
     }
 
     public String getModifyCustomPla() {
-<span class="fc" id="L49">        return modifyCustomPla;</span>
+<span class="fc" id="L41">        return modifyCustomPla;</span>
     }
 
     public String getModifyTestPla() {
-<span class="fc" id="L53">        return modifyTestPla;</span>
+<span class="fc" id="L45">        return modifyTestPla;</span>
     }
 
     public String getMessage() {
-<span class="fc" id="L57">        return message;</span>
+<span class="fc" id="L49">        return message;</span>
     }
 
     @Override
     public void showOutput(Map&lt;Integer, API&gt; mApi) {
 
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (Map.Entry&lt;Integer, API&gt; mapApi : mApi.entrySet()) {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Map.Entry&lt;Integer, API&gt; mapApi : mApi.entrySet()) {</span>
 
-<span class="fc" id="L65">            toShow = mapApi.getValue().getText();</span>
-<span class="fc" id="L66">            String[] split = mapApi.getValue().getFilename().split(&quot;/&quot;);</span>
-<span class="fc" id="L67">            comboToShow = split[split.length-1];</span>
-<span class="fc" id="L68">            notifyObservers();</span>
-<span class="fc" id="L69">        }</span>
-<span class="fc" id="L70">    }</span>
-
-    public void showOutput(String message){
-<span class="fc" id="L73">        messagePla = message;</span>
-<span class="fc" id="L74">        notifyObservers();</span>
-<span class="fc" id="L75">    }</span>
+<span class="fc" id="L57">            toShow = mapApi.getValue().getText();</span>
+<span class="fc" id="L58">            String[] split = mapApi.getValue().getFilename().split(&quot;/&quot;);</span>
+<span class="fc" id="L59">            comboToShow = split[split.length-1];</span>
+<span class="fc" id="L60">            notifyObservers();</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">    }</span>
 
     public void showLoadPla(String api,String custom,String test){
-<span class="fc" id="L78">        modifyApiPla = api;</span>
-<span class="fc" id="L79">        modifyCustomPla = custom;</span>
-<span class="fc" id="L80">        modifyTestPla = test;</span>
-<span class="fc" id="L81">        notifyObservers();</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L65">        modifyApiPla = api;</span>
+<span class="fc" id="L66">        modifyCustomPla = custom;</span>
+<span class="fc" id="L67">        modifyTestPla = test;</span>
+<span class="fc" id="L68">        notifyObservers();</span>
+<span class="fc" id="L69">    }</span>
 
-    public void showModifyPla(String message){
-<span class="fc" id="L85">        messagePla = message;</span>
-<span class="fc" id="L86">        notifyObservers();</span>
-<span class="fc" id="L87">    }</span>
-
-    public void showGenerationMessage(String m) {
-<span class="fc" id="L90">        message = m;</span>
-<span class="fc" id="L91">        notifyObservers();</span>
-<span class="fc" id="L92">    }</span>
+    public void showMessage(String m) {
+<span class="fc" id="L72">        message = m;</span>
+<span class="fc" id="L73">        notifyObservers();</span>
+<span class="fc" id="L74">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

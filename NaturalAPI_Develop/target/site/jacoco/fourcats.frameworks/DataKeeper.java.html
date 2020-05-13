@@ -32,85 +32,88 @@ public class DataKeeper {
 <span class="fc" id="L32">        mApi.remove(id);</span>
 <span class="fc" id="L33">    }</span>
 
+    public void deleteTests() {
+<span class="nc" id="L36">        lTests.clear();</span>
+<span class="nc" id="L37">    }</span>
+
     public API getApi(int id){
-<span class="fc" id="L36">        return mApi.get(id);</span>
+<span class="fc" id="L40">        return mApi.get(id);</span>
     }
 
     public Map&lt;Integer, API&gt; getApiMap(){
-<span class="fc" id="L40">        return mApi;</span>
+<span class="fc" id="L44">        return mApi;</span>
     }
 
     public int getSize(){
-<span class="fc" id="L44">        return  mApi.size();</span>
+<span class="fc" id="L48">        return  mApi.size();</span>
     }
 
     public void addTest(String s) {
-<span class="nc" id="L48">        lTests.add(s);</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L52">        lTests.add(s);</span>
+<span class="nc" id="L53">    }</span>
 
     public String getAllTests() {
-<span class="nc" id="L52">        String toReturn = &quot;&quot;;</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        for(String s : lTests) {</span>
-<span class="nc" id="L54">            toReturn = toReturn.concat(s + &quot;\n&quot;);</span>
-<span class="nc" id="L55">        }</span>
-<span class="nc" id="L56">        return toReturn;</span>
+<span class="nc" id="L56">        String toReturn = &quot;&quot;;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for(String s : lTests) {</span>
+<span class="nc" id="L58">            toReturn = toReturn.concat(s + &quot;\n&quot;);</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        return toReturn;</span>
     }
 
     public void updateApi(String oldApi,String newApi) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()){</span>
-
-<span class="fc bfc" id="L62" title="All 2 branches covered.">            if(api.getValue().getText().equals(oldApi)){</span>
-<span class="fc" id="L63">                api.getValue().setText(newApi);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()){</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            if(api.getValue().getText().equals(oldApi)){</span>
+<span class="fc" id="L66">                api.getValue().setText(newApi);</span>
             }
-<span class="fc" id="L65">        }</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">    }</span>
 
     public void addCoupleBalPla(String bal,String pla){
 
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        if(mBalPlaUsed.containsKey(bal)){</span>
-<span class="fc" id="L71">            mBalPlaUsed.get(bal).add(pla);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if(mBalPlaUsed.containsKey(bal)){</span>
+<span class="fc" id="L74">            mBalPlaUsed.get(bal).add(pla);</span>
         }
         else{
-<span class="fc" id="L74">            List&lt;String&gt; l = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L75">            l.add(pla);</span>
-<span class="fc" id="L76">            mBalPlaUsed.put(bal,l);</span>
+<span class="fc" id="L77">            List&lt;String&gt; l = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L78">            l.add(pla);</span>
+<span class="fc" id="L79">            mBalPlaUsed.put(bal,l);</span>
         }
-<span class="fc" id="L78">    }</span>
+<span class="fc" id="L81">    }</span>
 
     public boolean isCoupleBalPlaPresent(String bal,String pla){
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        for(Map.Entry&lt;String,List&lt;String&gt;&gt; map : mBalPlaUsed.entrySet()){</span>
-<span class="pc bpc" id="L82" title="1 of 4 branches missed.">            if(map.getKey().equals(bal) &amp;&amp; map.getValue().contains(pla)){</span>
-<span class="fc" id="L83">                return true;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        for(Map.Entry&lt;String,List&lt;String&gt;&gt; map : mBalPlaUsed.entrySet()){</span>
+<span class="pc bpc" id="L85" title="1 of 4 branches missed.">            if(map.getKey().equals(bal) &amp;&amp; map.getValue().contains(pla)){</span>
+<span class="fc" id="L86">                return true;</span>
             }
-<span class="fc" id="L85">        }</span>
-<span class="fc" id="L86">        return false;</span>
+<span class="fc" id="L88">        }</span>
+<span class="fc" id="L89">        return false;</span>
     }
 
     public boolean isThisApiPresent(API a){
-<span class="fc bfc" id="L90" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()) {</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">            if(api.getValue().getText().equals(a.getText())){</span>
-<span class="fc" id="L92">                return true;</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()) {</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if(api.getValue().getText().equals(a.getText())){</span>
+<span class="fc" id="L95">                return true;</span>
             }
-<span class="nc" id="L94">        }</span>
-<span class="fc" id="L95">        return false;</span>
+<span class="nc" id="L97">        }</span>
+<span class="fc" id="L98">        return false;</span>
     }
 
     public boolean isThisClassNamePresent(API a){
-<span class="fc bfc" id="L99" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()) {</span>
-<span class="pc bpc" id="L100" title="1 of 2 branches missed.">            if(api.getValue().getFilename().equals(a.getFilename())){</span>
-<span class="fc" id="L101">                return true;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for(Map.Entry&lt;Integer, API&gt; api : mApi.entrySet()) {</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">            if(api.getValue().getFilename().equals(a.getFilename())){</span>
+<span class="fc" id="L104">                return true;</span>
             }
-<span class="nc" id="L103">        }</span>
-<span class="fc" id="L104">        return false;</span>
+<span class="nc" id="L106">        }</span>
+<span class="fc" id="L107">        return false;</span>
     }
 
     public boolean isThisTestPresent(String test) {
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        for(String s : lTests){</span>
-<span class="nc bnc" id="L109" title="All 2 branches missed.">            if(s.equals(test)){</span>
-<span class="nc" id="L110">                return true;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for(String s : lTests){</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            if(s.equals(test)){</span>
+<span class="nc" id="L113">                return true;</span>
             }
-<span class="nc" id="L112">        }</span>
-<span class="nc" id="L113">        return false;</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

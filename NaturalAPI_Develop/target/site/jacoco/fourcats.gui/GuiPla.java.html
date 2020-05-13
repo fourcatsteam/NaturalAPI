@@ -61,9 +61,9 @@ public class GuiPla implements Observer {
             }
 <span class="nc" id="L62">        });</span>
 
-<span class="nc" id="L64">        cancelButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L65">            frame.dispose(); //close the frame</span>
-<span class="nc" id="L66">        });</span>
+<span class="nc" id="L64">        cancelButton.addActionListener(e -&gt;</span>
+<span class="nc" id="L65">            frame.dispose() //close the frame</span>
+        );
 <span class="nc" id="L67">    }</span>
 
     public void showGuiPla(){
@@ -71,7 +71,7 @@ public class GuiPla implements Observer {
 <span class="nc" id="L71">    }</span>
 
     public void showOutput(){
-<span class="nc" id="L74">        message = dataPresenterGui.getMessagePla();</span>
+<span class="nc" id="L74">        message = dataPresenterGui.getMessage();</span>
 <span class="nc" id="L75">    }</span>
 
     @Override

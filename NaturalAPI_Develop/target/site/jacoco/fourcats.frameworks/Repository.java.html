@@ -40,52 +40,56 @@ public class Repository implements RepositoryAccess {
 <span class="fc" id="L40">        dataKeeper.deleteApi(id);</span>
 <span class="fc" id="L41">    }</span>
 
+    public void deleteTests() {
+<span class="nc" id="L44">        dataKeeper.deleteTests();</span>
+<span class="nc" id="L45">    }</span>
+
     public API getApi(int id){
-<span class="fc" id="L44">        return dataKeeper.getApi(id);</span>
+<span class="fc" id="L48">        return dataKeeper.getApi(id);</span>
     }
 
     public Map&lt;Integer, API&gt; getApiMap(){
-<span class="fc" id="L48">        return dataKeeper.getApiMap();</span>
+<span class="fc" id="L52">        return dataKeeper.getApiMap();</span>
     }
 
     public int getSize(){
-<span class="fc" id="L52">        return dataKeeper.getSize();</span>
+<span class="fc" id="L56">        return dataKeeper.getSize();</span>
     }
 
     public void addTest(String s) {
-<span class="nc" id="L56">        dataKeeper.addTest(s);</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L60">        dataKeeper.addTest(s);</span>
+<span class="nc" id="L61">    }</span>
 
     public String getAllTests() {
-<span class="nc" id="L60">        return dataKeeper.getAllTests();</span>
+<span class="nc" id="L64">        return dataKeeper.getAllTests();</span>
     }
 
     public void updateApi(String oldApi,String newApi){
-<span class="fc" id="L64">        dataKeeper.updateApi(oldApi,newApi);</span>
-<span class="fc" id="L65">    }</span>
-
-    public void writePla(String file,String pla){
-<span class="fc" id="L68">        fileSystem.writePla(file,pla);</span>
+<span class="fc" id="L68">        dataKeeper.updateApi(oldApi,newApi);</span>
 <span class="fc" id="L69">    }</span>
 
-    public void addCoupleBalPla(String bal,String pla){
-<span class="fc" id="L72">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+    public void writePla(String file,String pla){
+<span class="fc" id="L72">        fileSystem.writePla(file,pla);</span>
 <span class="fc" id="L73">    }</span>
 
+    public void addCoupleBalPla(String bal,String pla){
+<span class="fc" id="L76">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="fc" id="L77">    }</span>
+
     public boolean isCoupleBalPlaPresent(String bal,String pla){
-<span class="fc" id="L76">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+<span class="fc" id="L80">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
     }
 
     public boolean isThisApiPresent(API a){
-<span class="fc" id="L80">        return dataKeeper.isThisApiPresent(a);</span>
+<span class="fc" id="L84">        return dataKeeper.isThisApiPresent(a);</span>
     }
 
     public boolean isThisClassNamePresent(API a){
-<span class="fc" id="L84">        return dataKeeper.isThisClassNamePresent(a);</span>
+<span class="fc" id="L88">        return dataKeeper.isThisClassNamePresent(a);</span>
     }
 
     public boolean isThisTestPresent(String test) {
-<span class="nc" id="L88">        return dataKeeper.isThisTestPresent(test);</span>
+<span class="nc" id="L92">        return dataKeeper.isThisTestPresent(test);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

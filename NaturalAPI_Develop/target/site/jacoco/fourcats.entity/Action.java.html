@@ -83,18 +83,18 @@ public class Action {
 
     @Override
     public String toString() {
-<span class="fc" id="L86">        String actionParams = &quot;&quot;;</span>
+<span class="fc" id="L86">        StringBuilder sb = new StringBuilder();</span>
 <span class="fc" id="L87">        boolean isFirstParam = true;</span>
 <span class="fc bfc" id="L88" title="All 2 branches covered.">        for (ObjectParam par : param) {</span>
 <span class="fc bfc" id="L89" title="All 2 branches covered.">            if (isFirstParam) {</span>
-<span class="fc" id="L90">                actionParams+=par.getType()+ &quot; &quot; + par.getName();</span>
+<span class="fc" id="L90">                sb.append(par.getType() + &quot; &quot; + par.getName());</span>
 <span class="fc" id="L91">                isFirstParam = false;</span>
             }
             else {
-<span class="fc" id="L94">                actionParams+=&quot;, &quot; + par.getType()+ &quot; &quot; + par.getName();</span>
+<span class="fc" id="L94">                sb.append(&quot;, &quot; + par.getType() + &quot; &quot; + par.getName());</span>
             }
 <span class="fc" id="L96">        }</span>
-<span class="fc" id="L97">        return this.type + &quot; &quot; + this.name + &quot; (&quot; + actionParams + &quot;)&quot;;</span>
+<span class="fc" id="L97">        return this.type + &quot; &quot; + this.name + &quot; (&quot; + sb.toString() + &quot;)&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

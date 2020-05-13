@@ -10,7 +10,7 @@ import java.util.Map;
 public class GenerateApi implements GenerateInputPort {
 
     private RepositoryAccess repositoryAccess;
-    public GenerateOutputPort generateOutputPort;
+    private GenerateOutputPort generateOutputPort;
 
 <span class="fc" id="L15">    public GenerateApi(RepositoryAccess ra,GenerateOutputPort generateOutputPort){</span>
 <span class="fc" id="L16">        repositoryAccess = ra;</span>
@@ -26,7 +26,7 @@ public class GenerateApi implements GenerateInputPort {
 <span class="fc bfc" id="L26" title="All 2 branches covered.">            for(Map.Entry&lt;Integer, API&gt; mApi : repositoryAccess.getApiMap().entrySet()){</span>
 <span class="fc" id="L27">                repositoryAccess.writeApi(path,mApi.getValue());</span>
 <span class="fc" id="L28">            }</span>
-<span class="fc" id="L29">            generateOutputPort.showGenerationMessage(&quot;APIs generated!&quot;);</span>
+<span class="fc" id="L29">            generateOutputPort.showMessage(&quot;APIs generated!&quot;);</span>
         }
 <span class="fc" id="L31">    }</span>
 }
