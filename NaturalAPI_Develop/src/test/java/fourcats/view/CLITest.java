@@ -174,8 +174,6 @@ public class CLITest {
         spycli.readModifyApi();
         verify(out).println("Type the ID of the first API to replace");
         verify(out).println("Type the ID of the last API to replace");
-        verify(spycli).askBal();
-        verify(spycli).readBal();
         verify(spycli).askPla();
         verify(spycli).readPla();
         verify(controllerMock,times(1)).modifyApi(any(Integer.class),any(Integer.class),any(String.class),any(String.class));
