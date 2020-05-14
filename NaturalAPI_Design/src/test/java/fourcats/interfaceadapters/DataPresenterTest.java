@@ -59,8 +59,8 @@ public class DataPresenterTest {
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
-        //Cambiato
-        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
+
+        assertTrue(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName"));
     }
 
     @Test
@@ -73,8 +73,8 @@ public class DataPresenterTest {
 
         dataPresenter.showRemoveBdlStatus();
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
-        //Cambiato
-        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName----"));
+
+        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName"));
     }
 
     @Test
@@ -144,7 +144,7 @@ public class DataPresenterTest {
     @Test
     public void DataPresenterShowModifiedObjectNameCorrectly() {
         dataPresenter.showModifiedObjectName(aScenarioMap, true, "");
-        assertTrue(dataPresenter.getDataToShow().startsWith("Object name of the suggestion successfully updated"));
+        assertTrue(dataPresenter.getDataToShow().startsWith("Parameter name of the suggestion successfully updated"));
     }
 
     @Test
@@ -156,7 +156,7 @@ public class DataPresenterTest {
     @Test
     public void DataPresenterShowModifiedObjectTypeCorrectly() {
         dataPresenter.showModifiedObjectType(aScenarioMap, true);
-        assertTrue(dataPresenter.getDataToShow().startsWith("Object type of the suggestion successfully updated"));
+        assertTrue(dataPresenter.getDataToShow().startsWith("Parameter type of the suggestion successfully updated"));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class DataPresenterTest {
     @Test
     public void DataPresenterShowAddedObjectCorrectly() {
         dataPresenter.showAddedObject(aScenarioMap, true);
-        assertTrue(dataPresenter.getDataToShow().startsWith("Object successfully added"));
+        assertTrue(dataPresenter.getDataToShow().startsWith("Parameter successfully added"));
     }
 
     @Test
@@ -180,7 +180,7 @@ public class DataPresenterTest {
     @Test
     public void DataPresenterShowRemovedObjectCorrectly() {
         dataPresenter.showRemovedObject(aScenarioMap, true);
-        assertTrue(dataPresenter.getDataToShow().startsWith("Object successfully removed!"));
+        assertTrue(dataPresenter.getDataToShow().startsWith("Parameter successfully removed!"));
     }
 
     @Test
