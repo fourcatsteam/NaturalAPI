@@ -32,7 +32,7 @@ public class Gui implements Observer {
     private JButton createPLAButton;
     private JComboBox<String> comboBox1;
     private JLabel messageLabel;
-    Map<String,String> toView;
+    private Map<String,String> toView;
     private String bal;
     private String pla;
     private String message;

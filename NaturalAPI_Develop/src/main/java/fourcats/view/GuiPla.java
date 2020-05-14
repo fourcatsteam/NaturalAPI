@@ -29,7 +29,7 @@ public class GuiPla implements Observer {
     private JLabel label3;
     private JLabel label4;
 
-    String message;
+    private String message;
 
     private Controller controller;
     private DataPresenterGui dataPresenterGui;

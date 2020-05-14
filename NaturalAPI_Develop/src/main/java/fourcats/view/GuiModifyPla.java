@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class GuiModifyPla implements Observer {
 
-    JFrame frame;
+    private JFrame frame;
     private JTextArea textArea1;
     private JTextArea textArea2;
     private JButton modifyButton;

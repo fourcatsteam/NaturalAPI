@@ -2,7 +2,7 @@
 class "group_action" {
 
 public:
-	"action_type" "action_name" ("object_type" "object_name") const;	
+	"action_type" "action_name" ("parameter_type" "parameter_name") const;	
 }
 custom class
 class "custom_class" {
@@ -22,5 +22,5 @@ public:
 	"test_stub"() {
 		//please insert an implementation of the test
 		//"group_action" "action_name";
-		//"action_name"."action_name"("object_name");
+		//"action_name"."action_name"("parameter_name");
 	}

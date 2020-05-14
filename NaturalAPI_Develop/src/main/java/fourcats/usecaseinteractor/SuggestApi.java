@@ -72,8 +72,8 @@ public class SuggestApi implements ApiInputPort {
                 }
 
                 if (action.getObjectParams().isEmpty()) {
-                    newApi = insertObjectType(newApi, "");
-                    newApi = insertObjectName(newApi, "");
+                    newApi = insertParameterType(newApi, "");
+                    newApi = insertParameterName(newApi, "");
                 } else {
 
                     String[] split = iterateObjectParams(pla,actor,action,newApi,parameters).split("PARAMETERS");
@@ -112,8 +112,8 @@ public class SuggestApi implements ApiInputPort {
                 createCustomClassForObjectParam(pla, objectParam, actor.getName());
             }
 
-            newApi = insertObjectType(newApi, objectParam.getType().getName());
-            newApi = insertObjectName(newApi, objectParam.getName());
+            newApi = insertParameterType(newApi, objectParam.getType().getName());
+            newApi = insertParameterName(newApi, objectParam.getName());
             parameters = parameters.concat(objectParam.getType().getName() + " " + objectParam.getName());
             if (size > 1) {
                 parameters = parameters.concat(", ");
@@ -143,7 +143,7 @@ public class SuggestApi implements ApiInputPort {
         if (!action.getName().isEmpty() && !action.getName().startsWith("@")) {
             testApi = insertGroup(testApi, action.getName());
             testApi = insertActionName(testApi, action.getName());
-            testApi = insertObjectName(testApi, parameters);
+            testApi = insertParameterName(testApi, parameters);
         } else {
             String[] splitTest = testApi.split("\n");
             testApi = "".concat(splitTest[0] + "\n" + splitTest[1] + "\n\n" + splitTest[splitTest.length - 1] + "\n");
@@ -155,7 +155,7 @@ public class SuggestApi implements ApiInputPort {
     }
 
     private String numberOfParameters(String newApi,int size) {
-        Pattern p = Pattern.compile("\"object_type\".*\"object_name\"");
+        Pattern p = Pattern.compile("\"parameter_type\".*\"parameter_name\"");
         Matcher m = p.matcher(newApi);
         if (m.find()) {
             while (size > 1) {
@@ -180,12 +180,12 @@ public class SuggestApi implements ApiInputPort {
         return text.replace("\"action_name\"", toReplace);
     }
 
-    private String insertObjectType (String text,String toReplace){
-        return text.replaceFirst("\"object_type\"", toReplace);
+    private String insertParameterType (String text,String toReplace){
+        return text.replaceFirst("\"parameter_type\"", toReplace);
     }
 
-    private String insertObjectName (String text,String toReplace){
-        return text.replaceFirst("\"object_name\"", toReplace);
+    private String insertParameterName(String text, String toReplace){
+        return text.replaceFirst("\"parameter_name\"", toReplace);
     }
 
     private String insertTestStub(String text,String toReplace) {
