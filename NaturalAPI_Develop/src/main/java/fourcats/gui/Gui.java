@@ -66,29 +66,32 @@ public class Gui implements Observer {
         
         addBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.showOpenDialog(mainPanel);
-            setBal(fileChooser.getSelectedFile().getAbsolutePath());
-            if(bal.contains(".json")){
-                messageLabel.setText("Bal loaded!");
-                mainPanel.setBackground(Color.GREEN);
-            }
-            else{
-                mainPanel.setBackground(Color.RED);
-                messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+            int valid = fileChooser.showOpenDialog(mainPanel);
+            if (valid == JFileChooser.APPROVE_OPTION) {
+                setBal(fileChooser.getSelectedFile().getAbsolutePath());
+                if(bal.contains(".json")){
+                    messageLabel.setText("Bal loaded!");
+                    mainPanel.setBackground(Color.GREEN);
+                }
+                else{
+                    mainPanel.setBackground(Color.RED);
+                    messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+                }
             }
         });
 
         addPlaButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.showOpenDialog(mainPanel);
-            setPla(fileChooser.getSelectedFile().getAbsolutePath());
-            if(pla.contains(".txt")){
-                messageLabel.setText("Pla loaded!");
-                mainPanel.setBackground(Color.GREEN);
-            }
-            else{
-                mainPanel.setBackground(Color.RED);
-                messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+            int valid = fileChooser.showOpenDialog(mainPanel);
+            if (valid == JFileChooser.APPROVE_OPTION) {
+                setPla(fileChooser.getSelectedFile().getAbsolutePath());
+                if (pla.contains(".txt")) {
+                    messageLabel.setText("Pla loaded!");
+                    mainPanel.setBackground(Color.GREEN);
+                } else {
+                    mainPanel.setBackground(Color.RED);
+                    messageLabel.setText("Ops! Something went wrong! Reload your Bal");
+                }
             }
         });
 
