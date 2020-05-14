@@ -14,7 +14,7 @@ import java.util.Locale;
  *
  */
 public class GuiLauncher {
-    public static void main( String[] args ) throws IOException {
+    public static void main( String[] args ) {
         Repository repo = new Repository(new DataKeeper(), new FileSystemAccess());
         StanfordNlp nlp = new StanfordNlp();
         DataPresenterGUI dataPresenter = new DataPresenterGUI();

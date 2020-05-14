@@ -4,6 +4,7 @@ import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGUI;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -22,17 +23,17 @@ public class SuggestionWidget {
     private final String suggestionId;
     private final String scenarioId;
     private final Box objectsBox;
-    private final ArrayList <ObjectParamWidget> lObjectParamWidget;
+    private final ArrayList<ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
     private CustomTypeCreation customType;
     private String currentActionName; //updated with the one in dataKeeper
 
-    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter){
+    public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter) {
         lObjectParamWidget = new ArrayList<>();
-        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.LINE_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
         objectsBox = Box.createVerticalBox();
-        
+
         this.scenarioId = dataPresenter.getScenarioId();
         this.suggestionId = dataPresenter.getSuggestionId();
 
@@ -42,7 +43,7 @@ public class SuggestionWidget {
 
         mainPanel.add(actionTypeComboBox);
         mainPanel.add(actionNameTextField);
-        if(dataPresenter.isBdlLoaded()){
+        if (dataPresenter.isBdlLoaded()) {
             mainPanel.add(frequencyLabel);
             frequencyLabel.setText(WORD_FREQUENCY + dataPresenter.getFrequencyInBdl());
             setActionNameColor(dataPresenter.getFrequencyInBdl());
@@ -50,34 +51,33 @@ public class SuggestionWidget {
 
         mainPanel.add(objectsBox);
 
-        addObjects(contr,dataPresenter);
+        addObjects(contr, dataPresenter);
 
         mainPanel.add(addObjectButton);
         mainPanel.add(Box.createRigidArea(new Dimension(5, 0)));
         mainPanel.add(removeSuggestionButton);
         panelToUpdate.add(mainPanel);
 
-        addObjectButton.addActionListener(e->{
-            String objectName = JOptionPane.showInputDialog(null,"Insert the name for the object",
-                    "Object creation",JOptionPane.QUESTION_MESSAGE).trim();
-            if (!objectName.equals("")){
+        addObjectButton.addActionListener(e -> {
+            String objectName = JOptionPane.showInputDialog(null, "Insert the name for the object",
+                    "Object creation", JOptionPane.QUESTION_MESSAGE).trim();
+            if (!objectName.equals("")) {
                 if (Character.isDigit(objectName.charAt(0))) objectName = "_" + objectName;
-                contr.addObject(suggestionId,scenarioId,objectName,"0");
-                if (dataPresenter.isOkOperation()){
-                    lObjectParamWidget.add(new ObjectParamWidget(this,contr,dataPresenter,Integer.toString(lObjectParamWidget.size()),
-                            "string",objectName,suggestionId,scenarioId));
+                contr.addObject(suggestionId, scenarioId, objectName, "0");
+                if (dataPresenter.isOkOperation()) {
+                    lObjectParamWidget.add(new ObjectParamWidget(this, contr, dataPresenter, Integer.toString(lObjectParamWidget.size()),
+                            "string", objectName, suggestionId, scenarioId));
                 }
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Abort: no name entered", "Invalid name",JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Abort: no name entered", "Invalid name", JOptionPane.WARNING_MESSAGE);
             }
         });
 
         removeSuggestionButton.addActionListener(e -> {
-            if (JOptionPane.showConfirmDialog(null,"Are you sure you want to remove this suggestion?",
-                    "Suggestion remove confirmation",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this suggestion?",
+                    "Suggestion remove confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
                 //0=yes
-                contr.declineSuggestion(suggestionId,scenarioId);
+                contr.declineSuggestion(suggestionId, scenarioId);
                 panelToUpdate.remove(mainPanel);
                 panelToUpdate.revalidate();
                 panelToUpdate.repaint();
@@ -85,7 +85,7 @@ public class SuggestionWidget {
         });
 
         actionTypeComboBox.addActionListener(e -> {
-            if (Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)){
+            if (Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)) {
                 customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
             }
         });
@@ -97,7 +97,7 @@ public class SuggestionWidget {
                 ArrayList<String> currentItems = new ArrayList();
                 // i = 1 because 0 is void (not present in dataKeeper),
                 // itemCount-1 because last item is the CREATE CUSTOM option (not present in dataKeeper)
-                for (int i = 1; i < actionTypeComboBox.getItemCount()-1; i++){
+                for (int i = 1; i < actionTypeComboBox.getItemCount() - 1; i++) {
                     currentItems.add(actionTypeComboBox.getItemAt(i));
                 }
                 contr.showTypes();
@@ -115,11 +115,12 @@ public class SuggestionWidget {
                     actionTypeComboBox.addItem(CREATE_CUSTOM);
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (actionTypeComboBox.getSelectedItem()!=null && !actionTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
-                    contr.modifyActionType(suggestionId,scenarioId,actionTypeComboBox.getSelectedItem().toString());
+                if (actionTypeComboBox.getSelectedItem() != null && !actionTypeComboBox.getSelectedItem().toString().equals(CREATE_CUSTOM)) {
+                    contr.modifyActionType(suggestionId, scenarioId, actionTypeComboBox.getSelectedItem().toString());
                 }
             }
         });
@@ -129,11 +130,12 @@ public class SuggestionWidget {
             public void focusGained(FocusEvent e) {
                 currentActionName = actionNameTextField.getText();
             }
+
             @Override
             public void focusLost(FocusEvent e) {
-                actionNameTextField.setText(currentActionName.replace(' ','_'));
-                if (actionNameTextField.getText().equals("")){
-                    JOptionPane.showMessageDialog(null,"You have to enter the name of the action","Empty field", JOptionPane.WARNING_MESSAGE);
+                actionNameTextField.setText(currentActionName.replace(' ', '_'));
+                if (actionNameTextField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "You have to enter the name of the action", "Empty field", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -141,15 +143,17 @@ public class SuggestionWidget {
         actionNameTextField.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
                 setNewName();
-                if(dataPresenter.isBdlLoaded()) setColor();
+                if (dataPresenter.isBdlLoaded()) setColor();
             }
+
             public void removeUpdate(DocumentEvent e) {
                 setNewName();
-                if(dataPresenter.isBdlLoaded()) setColor();
+                if (dataPresenter.isBdlLoaded()) setColor();
             }
+
             public void insertUpdate(DocumentEvent e) {
                 setNewName();
-                if(dataPresenter.isBdlLoaded()) setColor();
+                if (dataPresenter.isBdlLoaded()) setColor();
             }
 
             public void setColor() {
@@ -171,20 +175,20 @@ public class SuggestionWidget {
         });
     }
 
-    private void addObjects(Controller controller, DataPresenterGUI dataPresenter){
+    private void addObjects(Controller controller, DataPresenterGUI dataPresenter) {
         //init suggested objects
-        for (String objId : dataPresenter.getlObjectId()){
+        for (String objId : dataPresenter.getlObjectId()) {
             int id = lObjectParamWidget.size();
-            lObjectParamWidget.add(new ObjectParamWidget(this,controller,dataPresenter,objId,dataPresenter.getlObjectTypes().get(id),
-                    dataPresenter.getlObjectNames().get(id),dataPresenter.getSuggestionId(),dataPresenter.getScenarioId()));
+            lObjectParamWidget.add(new ObjectParamWidget(this, controller, dataPresenter, objId, dataPresenter.getlObjectTypes().get(id),
+                    dataPresenter.getlObjectNames().get(id), dataPresenter.getSuggestionId(), dataPresenter.getScenarioId()));
         }
     }
 
-    public void removeObjectParamWidget(ObjectParamWidget objectParamWidget, JPanel panelToRemove){
+    public void removeObjectParamWidget(ObjectParamWidget objectParamWidget, JPanel panelToRemove) {
         //update all the outdated objectId by searching in the list all the objectParamWidget after the one given
         //this function needs to be call from all ObjectParamWidget after remove object button has been pressed
-        for (int i=objectParamWidget.getObjectId()+1; i<lObjectParamWidget.size(); i++){
-            lObjectParamWidget.get(i).setObjectId(i-1);
+        for (int i = objectParamWidget.getObjectId() + 1; i < lObjectParamWidget.size(); i++) {
+            lObjectParamWidget.get(i).setObjectId(i - 1);
         }
         objectsBox.remove(panelToRemove);
         objectsBox.revalidate();
@@ -200,16 +204,70 @@ public class SuggestionWidget {
         objectsBox.repaint();
     }
 
-    public void setActionNameColor(int isPresentInBdl){
-        actionNameTextField.setFont(new Font("",Font.BOLD,12));
-        if(isPresentInBdl!=0) { //if present in BDL then set text color to green
-            actionNameTextField.setForeground(new Color(9,148,65));
-        }else{
+    public void setActionNameColor(int isPresentInBdl) {
+        actionNameTextField.setFont(new Font("", Font.BOLD, 12));
+        if (isPresentInBdl != 0) { //if present in BDL then set text color to green
+            actionNameTextField.setForeground(new Color(9, 148, 65));
+        } else {
             actionNameTextField.setForeground(Color.RED);
         }
         frequencyLabel.setText(WORD_FREQUENCY + isPresentInBdl);
     }
 
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+        $$$setupUI$$$();
+    }
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 5, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), "Suggestion", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        actionTypeComboBox = new JComboBox();
+        actionTypeComboBox.setBackground(new Color(-1));
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("void");
+        defaultComboBoxModel1.addElement("string");
+        defaultComboBoxModel1.addElement("int");
+        defaultComboBoxModel1.addElement("float");
+        defaultComboBoxModel1.addElement("double");
+        defaultComboBoxModel1.addElement("bool");
+        defaultComboBoxModel1.addElement("CREATE CUSTOM");
+        actionTypeComboBox.setModel(defaultComboBoxModel1);
+        actionTypeComboBox.setOpaque(true);
+        mainPanel.add(actionTypeComboBox, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        actionNameTextField = new JTextField();
+        actionNameTextField.setText("withdraw_cash");
+        mainPanel.add(actionNameTextField, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        addObjectButton = new JButton();
+        addObjectButton.setBorderPainted(true);
+        addObjectButton.setText("+");
+        mainPanel.add(addObjectButton, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        removeSuggestionButton = new JButton();
+        removeSuggestionButton.setBorderPainted(true);
+        removeSuggestionButton.setOpaque(true);
+        removeSuggestionButton.setText("Remove Suggestion");
+        mainPanel.add(removeSuggestionButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        frequencyLabel = new JLabel();
+        frequencyLabel.setText("");
+        mainPanel.add(frequencyLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return mainPanel;
+    }
 }
 
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SuggestionGenerated implements Observer{
+public class SuggestionGenerated implements Observer {
     private JPanel mainPanel;
     private JPanel panelButtons;
     private JPanel panelSuggestions;
@@ -37,7 +37,7 @@ public class SuggestionGenerated implements Observer{
     private final List<String> lFeatureNames;
     private final List<String> lFeaturePaths;
 
-    public SuggestionGenerated(List<String> featureNames, List<String> featurePaths, Controller controller, DataPresenterGUI dataPresenter){
+    public SuggestionGenerated(List<String> featureNames, List<String> featurePaths, Controller controller, DataPresenterGUI dataPresenter) {
         this.contr = controller;
         this.dataPresenter = dataPresenter;
         this.dataPresenter.attach(this);
@@ -51,17 +51,17 @@ public class SuggestionGenerated implements Observer{
         panelInScrollPanel.setLayout(gridBagLayout);
         gridConstraint.fill = GridBagConstraints.HORIZONTAL;
 
-        scrollPanel = new JScrollPane(panelInScrollPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+        scrollPanel = new JScrollPane(panelInScrollPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        panelButtons.setLayout(new GridLayout(2,1));
+        panelButtons.setLayout(new GridLayout(2, 1));
         panelButtons.add(generateBalButton);
         panelButtons.add(addFeatureButton);
 
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(5,5,5,5));
-        mainPanel.add(scrollPanel,BorderLayout.CENTER);
-        mainPanel.add(panelButtons,BorderLayout.SOUTH);
+        mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        mainPanel.add(scrollPanel, BorderLayout.CENTER);
+        mainPanel.add(panelButtons, BorderLayout.SOUTH);
 
 
         generateBalButton.addActionListener(e -> {
@@ -79,52 +79,50 @@ public class SuggestionGenerated implements Observer{
         generateBalButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                generateBalButton.setBackground(new Color( 224,91,73));
+                generateBalButton.setBackground(new Color(224, 91, 73));
             }
         });
         generateBalButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                generateBalButton.setBackground(new Color(58,84,105));
+                generateBalButton.setBackground(new Color(58, 84, 105));
             }
         });
 
         addFeatureButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                addFeatureButton.setBackground(new Color( 224,91,73));
+                addFeatureButton.setBackground(new Color(224, 91, 73));
             }
         });
         addFeatureButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                addFeatureButton.setBackground(new Color(58,84,105));
+                addFeatureButton.setBackground(new Color(58, 84, 105));
             }
         });
 
-        addFeatureButton.addActionListener(e->{
+        addFeatureButton.addActionListener(e -> {
             List<String> newPaths = new ArrayList<>(); //contains paths of new files
             JFileChooser fileChooser = new JFileChooser("..\\NaturalAPI_Design\\gherkin_documents");
             fileChooser.setMultiSelectionEnabled(true);
             int returnVal = fileChooser.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File[] files = fileChooser.getSelectedFiles();
-                for(File f: files){
-                    if(!lFeaturePaths.contains(f.getAbsolutePath())) {
+                for (File f : files) {
+                    if (!lFeaturePaths.contains(f.getAbsolutePath())) {
                         if (ViewUtility.isFeaturePathValid(f.getAbsolutePath())) {
                             newPaths.add(f.getAbsolutePath());
                             this.lFeatureNames.add(f.getName());
                             this.lFeaturePaths.add(f.getAbsolutePath());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "The file '" + f.getName() + "' is not a feature file.",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(null, "The file '"+f.getName()+"' is not a feature file.",
-                                    "Error",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
+                    } else {
                         JOptionPane.showMessageDialog(null,
-                                "The file '"+f.getName()+"' has already been uploaded!",
-                                "Notice",JOptionPane.INFORMATION_MESSAGE);
+                                "The file '" + f.getName() + "' has already been uploaded!",
+                                "Notice", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -133,7 +131,7 @@ public class SuggestionGenerated implements Observer{
             }
 
         });
-        contr.generateSuggestions(featurePaths,true);
+        contr.generateSuggestions(featurePaths, true);
     }
 
     public void createAndShowGUI() {
@@ -147,19 +145,19 @@ public class SuggestionGenerated implements Observer{
             }
         });
         frame.add(mainPanel);
-        frame.setPreferredSize(new Dimension(1400,1000));
+        frame.setPreferredSize(new Dimension(1400, 1000));
         frame.setIconImage(ViewUtility.getLogo());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void initScenario(){
+    private void initScenario() {
         JPanel panelScenario = new JPanel();
         panelSuggestions = new JPanel();
 
         //add a vertical spacer in panelInScrollPanel if it's not the first scenario
-        if (currentScenarioId!=-1) {
+        if (currentScenarioId != -1) {
             gridConstraint.gridx = gridX;
             gridConstraint.gridy = gridY;
             Component box = Box.createRigidArea(new Dimension(0, 50));
@@ -170,7 +168,7 @@ public class SuggestionGenerated implements Observer{
 
         //include panel suggestion in a box with a button which let to manually add a suggestion
         Box suggestionsAndAddButtonBox = Box.createVerticalBox();
-        JButton addSuggestionButton = new AddSuggestionButtonWidget(contr,Integer.toString(currentScenarioId)).getButtonWidget();
+        JButton addSuggestionButton = new AddSuggestionButtonWidget(contr, Integer.toString(currentScenarioId)).getButtonWidget();
         suggestionsAndAddButtonBox.add(panelSuggestions);
         suggestionsAndAddButtonBox.add(addSuggestionButton);
 
@@ -179,7 +177,7 @@ public class SuggestionGenerated implements Observer{
         this.gridY++;
         gridConstraint.gridx = this.gridX;
         gridConstraint.gridy = this.gridY;
-        panelSuggestions.setLayout(new BoxLayout(panelSuggestions,BoxLayout.PAGE_AXIS));
+        panelSuggestions.setLayout(new BoxLayout(panelSuggestions, BoxLayout.PAGE_AXIS));
         gridBagLayout.setConstraints(suggestionsAndAddButtonBox, gridConstraint);
         panelInScrollPanel.add(suggestionsAndAddButtonBox);
 
@@ -201,22 +199,22 @@ public class SuggestionGenerated implements Observer{
     public void update() {
         //if the suggestions widget needs a complete refresh to be updated with the model, then this needs to be execute
         //to fully recreate all suggestion widgets and scenario widgets in panelInScrollPanel
-        if (dataPresenter.isSuggestionsRefreshNeeded()){
+        if (dataPresenter.isSuggestionsRefreshNeeded()) {
             panelInScrollPanel.removeAll();
             panelInScrollPanel.revalidate();
             panelInScrollPanel.repaint();
             currentScenarioId = -1;
         }
         //init a new scenario if the id of the current scenario is different from the one being read from the dataPresenter
-        if (Integer.parseInt(dataPresenter.getScenarioId())!=currentScenarioId) {
+        if (Integer.parseInt(dataPresenter.getScenarioId()) != currentScenarioId) {
             initScenario();
         }
         //the update method can be call for different reasons but that doesn't mean we always need to create a new Suggestion widget
         if (dataPresenter.isSuggestionToAdd()) {
-            if (dataPresenter.getActionName()!=null)
+            if (dataPresenter.getActionName() != null)
                 new SuggestionWidget(panelSuggestions, contr, dataPresenter);
-            else{
-                JLabel label = new JLabel ("No additional suggestion found in this scenario. You can add actions manually by clicking on the '+' button.");
+            else {
+                JLabel label = new JLabel("No additional suggestion found in this scenario. You can add actions manually by clicking on the '+' button.");
                 Box labelBox = Box.createHorizontalBox();
                 labelBox.add(Box.createHorizontalGlue());
                 labelBox.add(label);
@@ -229,7 +227,7 @@ public class SuggestionGenerated implements Observer{
             String message = dataPresenter.getMessage();
             boolean isError = dataPresenter.isOkOperation();
             //in this way we can execute operations while the notification is shown
-            SwingUtilities.invokeLater(()->{
+            SwingUtilities.invokeLater(() -> {
                 //check if the operation was successful then show information message or error message
                 if (isError)
                     JOptionPane.showMessageDialog(null, message);
@@ -239,14 +237,83 @@ public class SuggestionGenerated implements Observer{
         }
     }
 
-    private String getFeatureName(){
+    private String getFeatureName() {
         //the "name" of the feature from the dataPresenter is coming as a path so this method it's useful to get the name of the feature file
-        for (String fPath : lFeaturePaths){
-            if (fPath.equals(dataPresenter.getFeaturePath())){
+        for (String fPath : lFeaturePaths) {
+            if (fPath.equals(dataPresenter.getFeaturePath())) {
                 return lFeatureNames.get(lFeaturePaths.indexOf(dataPresenter.getFeaturePath()));
             }
         }
         return "";
     }
 
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+        $$$setupUI$$$();
+    }
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        scrollPanel = new JScrollPane();
+        mainPanel.add(scrollPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panelInScrollPanel = new JPanel();
+        panelInScrollPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelInScrollPanel.setFocusCycleRoot(true);
+        scrollPanel.setViewportView(panelInScrollPanel);
+        panelButtons = new JPanel();
+        panelButtons.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelButtons.setAutoscrolls(false);
+        panelButtons.setBackground(new Color(-4473925));
+        mainPanel.add(panelButtons, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        generateBalButton = new JButton();
+        generateBalButton.setBackground(new Color(-12954519));
+        Font generateBalButtonFont = this.$$$getFont$$$(null, -1, 14, generateBalButton.getFont());
+        if (generateBalButtonFont != null) generateBalButton.setFont(generateBalButtonFont);
+        generateBalButton.setForeground(new Color(-1));
+        generateBalButton.setText("Generate BAL");
+        panelButtons.add(generateBalButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        addFeatureButton = new JButton();
+        addFeatureButton.setBackground(new Color(-12954519));
+        Font addFeatureButtonFont = this.$$$getFont$$$(null, -1, 14, addFeatureButton.getFont());
+        if (addFeatureButtonFont != null) addFeatureButton.setFont(addFeatureButtonFont);
+        addFeatureButton.setForeground(new Color(-1));
+        addFeatureButton.setText("Add another feature");
+        panelButtons.add(addFeatureButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return mainPanel;
+    }
 }

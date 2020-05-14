@@ -1,10 +1,8 @@
 package fourcats.view.utilities;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
+import java.net.URL;
 
 public class ViewUtility {
 
@@ -19,12 +17,7 @@ public class ViewUtility {
     }
 
     public static Image getLogo() {
-        try {
-            return ImageIO.read(new File("src/main/java/fourcats/logo.png"));
-        }
-        catch (IOException e){
-            JOptionPane.showMessageDialog(null,"Error while loading logo");
-        }
-        return null;
+        final URL url = Thread.currentThread().getContextClassLoader().getResource("images/logo.png");
+        return Toolkit.getDefaultToolkit().getImage(url);
     }
 }

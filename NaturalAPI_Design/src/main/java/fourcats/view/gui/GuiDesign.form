@@ -120,6 +120,7 @@
         <properties>
           <font size="16" style="1"/>
           <foreground color="-2073783"/>
+          <labelFor value="2499d"/>
           <text value="NaturalAPI Design"/>
         </properties>
       </component>
