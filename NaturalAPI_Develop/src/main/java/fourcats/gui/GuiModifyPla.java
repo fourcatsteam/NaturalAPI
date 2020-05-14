@@ -27,15 +27,14 @@ public class GuiModifyPla implements Observer {
     private JLabel label1;
     private JLabel label2;
     private JLabel label3;
-    JFileChooser fileChooser;
-
+    private JFileChooser fileChooser;
     private Controller controller;
     private DataPresenterGui dataPresenterGui;
-    String message;
-    String modifyApiPla;
-    String modifyCustomPla;
-
-    String modifyTestPla;
+    private String message;
+    private String modifyApiPla;
+    private String modifyCustomPla;
+    private String modifyTestPla;
+    private int valid;
 
     public GuiModifyPla(Controller controller, DataPresenterGui dataPresenterGui){
 
@@ -46,6 +45,7 @@ public class GuiModifyPla implements Observer {
         modifyApiPla = "";
         modifyCustomPla = "";
         modifyTestPla = "";
+        valid = JFileChooser.CANCEL_OPTION;
 
         frame = new JFrame("NaturalApi Develop");
 
@@ -63,35 +63,39 @@ public class GuiModifyPla implements Observer {
 
         loadButton.addActionListener(e -> {
             fileChooser = new JFileChooser();
-            fileChooser.showOpenDialog(mainPanel);
-            controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());
-            textArea1.setText(modifyApiPla);
-            textArea2.setText(modifyCustomPla);
-            textArea3.setText(modifyTestPla);
+            valid = fileChooser.showOpenDialog(mainPanel);
+            if(valid == JFileChooser.APPROVE_OPTION) {
+                controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());
+                textArea1.setText(modifyApiPla);
+                textArea2.setText(modifyCustomPla);
+                textArea3.setText(modifyTestPla);
+            }
         });
 
         modifyButton.addActionListener(e -> {
 
-            if(textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()){
-                JOptionPane.showMessageDialog(frame,"There is an empty field!");
+            if(valid == JFileChooser.APPROVE_OPTION) {
+                if (textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "There is an empty field!");
+                } else {
+                    if (textArea1.getText().concat(textArea2.getText() + textArea3.getText())
+                            .equals(modifyApiPla + modifyCustomPla + modifyTestPla)) {
+                        JOptionPane.showMessageDialog(frame, "There aren't changes!");
+                    } else {
+                        try {
+                            controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(), textArea1.getText() +
+                                    "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
+                            JOptionPane.showMessageDialog(frame, message);
+                            frame.dispose();
+                        } catch (IOException ex) {
+                            Logger logger = Logger.getAnonymousLogger();
+                            logger.log(Level.SEVERE, "IOException", e);
+                        }
+                    }
+                }
             }
-            else{
-                if(textArea1.getText().concat(textArea2.getText() + textArea3.getText())
-                        .equals(modifyApiPla + modifyCustomPla + modifyTestPla)) {
-                    JOptionPane.showMessageDialog(frame,"There aren't changes!");
-                }
-                else {
-                    try{
-                        controller.modifyPla(fileChooser.getSelectedFile().getAbsolutePath(),textArea1.getText() +
-                                "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
-                        JOptionPane.showMessageDialog(frame,message);
-                        frame.dispose();
-                    }
-                    catch (IOException ex) {
-                        Logger logger = Logger.getAnonymousLogger();
-                        logger.log(Level.SEVERE, "IOException", e);
-                    }
-                }
+            else {
+                JOptionPane.showMessageDialog(frame, "Select a PLA to modify first!");
             }
         });
 

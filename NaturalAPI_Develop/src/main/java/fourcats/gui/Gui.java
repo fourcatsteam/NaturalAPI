@@ -129,14 +129,16 @@ public class Gui implements Observer {
                 else {
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                    fileChooser.showSaveDialog(mainPanel);
-                    c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
-                    messageLabel.setText(message);
-                    mainPanel.setBackground(Color.GREEN);
+                    int valid = fileChooser.showSaveDialog(mainPanel);
+                    if(valid == JFileChooser.APPROVE_OPTION) {
+                        c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
+                        messageLabel.setText(message);
+                        mainPanel.setBackground(Color.GREEN);
+                    }
                 }
             }
             catch(Exception ex){
-                messageLabel.setText("Files not found!");
+                messageLabel.setText("File not found!");
                 mainPanel.setBackground(Color.RED);
             }
         });

@@ -62,13 +62,15 @@ public class GuiPla implements Observer {
             }
             else{
                 JFileChooser savePla = new JFileChooser();
-                savePla.showSaveDialog(mainPanel);
-                controller.createPla(savePla.getSelectedFile().getAbsolutePath(),
-                        textField1.getText(),
-                        textArea1.getText() + "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
-                JOptionPane.showMessageDialog(frame,message);
-                if(message.equals("PLA created!")){
-                    frame.dispose();
+                int valid = savePla.showSaveDialog(mainPanel);
+                if(valid == JFileChooser.APPROVE_OPTION) {
+                    controller.createPla(savePla.getSelectedFile().getAbsolutePath(),
+                            textField1.getText(),
+                            textArea1.getText() + "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
+                    JOptionPane.showMessageDialog(frame, message);
+                    if (message.equals("PLA created!")) {
+                        frame.dispose();
+                    }
                 }
             }
         });
