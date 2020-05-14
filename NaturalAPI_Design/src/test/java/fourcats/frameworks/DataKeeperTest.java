@@ -1,9 +1,6 @@
 package fourcats.frameworks;
 
-import fourcats.entities.Action;
-import fourcats.entities.ObjectParam;
-import fourcats.entities.Scenario;
-import fourcats.entities.Type;
+import fourcats.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +24,7 @@ public class DataKeeperTest {
     @Mock
     Action action;
 
+
     HashMap<Integer, Action> map;
 
     ArrayList<ObjectParam> objectsList;
@@ -35,11 +33,33 @@ public class DataKeeperTest {
     public void CreateDataKeeperWthOneScenario() {
         dataKeeper = new DataKeeper();
         dataKeeper.addScenarioToMap(scenario);
+        dataKeeper.addBdl(new Bdl("MiaBdl"));
         map  = new HashMap<Integer, Action>();
-        map.put(0, new Action("Action", new Type("Type")));
+        map.put(0, new Action("Action", new Type("int")));
         objectsList = new ArrayList<ObjectParam>();
         objectsList.add(new ObjectParam("Name", "Type"));
     }
+
+    @Test
+    public void gettingBdlCorrectly(){
+        assertNotNull(dataKeeper.getBdl());
+    }
+
+    @Test
+    public void addingBdlCorrectly(){
+        Bdl bd = new Bdl("nuova");
+        dataKeeper.addBdl(bd);
+        assertNotNull(dataKeeper.getBdl());
+        assertEquals("nuova",dataKeeper.getBdl().getName());
+    }
+
+    @Test
+    public void removingBdlCorrectly(){
+        assertNotNull(dataKeeper.getBdl());
+        dataKeeper.removeBdl();
+        assertNull(dataKeeper.getBdl());
+    }
+
 
     @Test
     public void DataKeeperAddScenarioCorrectly() {
@@ -71,8 +91,8 @@ public class DataKeeperTest {
     @Test
     public void DataKeeperUpdateActionType() {
         when(scenario.getActionsMap()).thenReturn(map);
-        dataKeeper.updateActionType(0, 0, "NewActionType");
-        assertEquals("NewActionType",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName());
+        dataKeeper.updateActionType(0, 0, "int");
+        assertEquals("int",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getType().getName());
     }
 
     @Test
@@ -140,6 +160,21 @@ public class DataKeeperTest {
         assertEquals(1,dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().size());
         assertEquals("FirstName",dataKeeper.getScenarioMap().get(0).getActionsMap().get(0).getObjectParams().get(0).getName());
     }
+
+    @Test
+    public void addingSuggestionCorrectly(){
+        when(scenario.getActionsMap()).thenReturn(map);
+        dataKeeper.addSuggestion(0,"nomeNuova","tipoNuova");
+       assertEquals(1,dataKeeper.getScenarioMap().size());
+    }
+
+    @Test
+    public void addingSuggestionCorrectlyByIdType(){
+        when(scenario.getActionsMap()).thenReturn(map);
+        dataKeeper.addSuggestionByIdType(0,"nomeNuova",0);
+        assertEquals(1,dataKeeper.getScenarioMap().size());
+    }
+
 
 
 
