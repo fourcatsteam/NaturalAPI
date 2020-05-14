@@ -102,12 +102,12 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified, String objectNameModified) {
         //Da implementare isBdlLoaded
         if (isObjectNameModified){
-            toShow = "Object name of the suggestion successfully updated! This is the updated list of suggestions";
+            toShow = "Parameter name of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.";
             notifyObservers();
         }
     }
@@ -115,12 +115,12 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
         if (isObjectTypeModified){
-            toShow = "Object type of the suggestion successfully updated! This is the updated list of suggestions";
+            toShow = "Parameter type of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the suggestion you want to update.\n"+
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the suggestion you want to update.\n"+
                     "Please check also the id of the type.";
             notifyObservers();
         }
@@ -129,13 +129,13 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showAddedObject(Map<Integer, Scenario> mScenarios, boolean isObjectAdded) {
         if (isObjectAdded){
-            toShow = "Object successfully added! This is the updated list of suggestions";
+            toShow = "Parameter successfully added! This is the updated list of suggestions";
             notifyObservers();
             showSuggestions(mScenarios);
         }
         else{
             toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario and the id of the suggestion for the suggestion you want to update." +
-                    "\nCheck also if the object is already defined: that could be the problem!";
+                    "\nCheck also if the parameter is already defined: that could be the problem!";
             notifyObservers();
         }
     }
@@ -143,12 +143,12 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showRemovedObject(Map<Integer, Scenario> mScenarios, boolean isObjectRemoved) {
         if (isObjectRemoved){
-            toShow = "Object successfully removed! This is the updated list of suggestions";
+            toShow = "Parameter successfully removed! This is the updated list of suggestions";
             notifyObservers();
             showSuggestions(mScenarios);
         }
         else{
-            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the object for the object you want to remove.";
+            toShow = "Oh no! Something went wrong, please retry by checking the id of the scenario, the id of the suggestion and the id of the parameter for the parameter you want to remove.";
             notifyObservers();
         }
     }

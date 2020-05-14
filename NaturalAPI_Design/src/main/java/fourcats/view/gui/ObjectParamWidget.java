@@ -103,7 +103,7 @@ public class ObjectParamWidget {
             public void focusLost(FocusEvent e) {
                 objectNameTextField.setText(currentObjectName.replace(' ', '_'));
                 if (objectNameTextField.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "You have to enter the name of the object", "Empty field", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "You have to enter the name of the parameter", "Empty field", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

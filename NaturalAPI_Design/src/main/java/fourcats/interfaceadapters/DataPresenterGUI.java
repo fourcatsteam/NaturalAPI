@@ -194,7 +194,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     @Override
     public void showModifiedObjectType(Map<Integer, Scenario> mScenarios, boolean isObjectTypeModified) {
         if (isObjectTypeModified){
-            message = "Object type of the suggestion successfully updated!";
+            message = "Parameter type of the suggestion successfully updated!";
             isOkOperation = true;
         }
         else{
@@ -208,12 +208,12 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     @Override
     public void showAddedObject(Map<Integer, Scenario> mScenarios, boolean isObjectAdded) {
         if (isObjectAdded){
-            message = "Object successfully added!";
+            message = "Parameter successfully added!";
             isOkOperation = true;
         }
         else{
             message = ERROR_MESSAGE+
-                    "\nCheck if the object is already defined: that could be the problem!";
+                    "\nCheck if the parameter is already defined: that could be the problem!";
             isOkOperation = false;
             notifyObservers();
         }
@@ -223,10 +223,10 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     @Override
     public void showRemovedObject(Map<Integer, Scenario> mScenarios, boolean isObjectRemoved) {
         if (isObjectRemoved) {
-            message = "Object successfully removed!";
+            message = "Parameter successfully removed!";
             isOkOperation = true;
         } else {
-            message = ERROR_MESSAGE+"while removing the object";
+            message = ERROR_MESSAGE+"while removing the parameter";
             isOkOperation = false;
             notifyObservers();
         }

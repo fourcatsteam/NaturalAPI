@@ -1,6 +1,6 @@
 package fourcats.entities;
 
-
+//NOTE: objectParam wants to represent the parameter of an action/function.
 public class ObjectParam {
     private String name;
     private Type type;

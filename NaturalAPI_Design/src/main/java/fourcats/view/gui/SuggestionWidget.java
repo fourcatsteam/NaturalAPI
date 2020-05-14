@@ -65,8 +65,8 @@ public class SuggestionWidget {
         panelToUpdate.add(mainPanel);
 
         addObjectButton.addActionListener(e -> {
-            String objectName = JOptionPane.showInputDialog(null, "Insert the name for the object",
-                    "Object creation", JOptionPane.QUESTION_MESSAGE).trim();
+            String objectName = JOptionPane.showInputDialog(null, "Insert the name for the parameter",
+                    "Parameter creation", JOptionPane.QUESTION_MESSAGE).trim();
             if (!objectName.equals("")) {
                 if (Character.isDigit(objectName.charAt(0))) objectName = "_" + objectName;
                 contr.addObject(suggestionId, scenarioId, objectName, "0");

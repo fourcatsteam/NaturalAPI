@@ -131,7 +131,7 @@ public class Cli implements Observer {
     private void modifySuggestion() throws IOException {
         String idScenario = askForIdScenarioToModify();
         String idSuggestion = askForIdSuggestionToModify();
-        print("1. Modify action name\n2. Modify action type\n3. Modify object name\n4. Modify object type\n5. Add object\n6. Remove object");
+        print("1. Modify action name\n2. Modify action type\n3. Modify parameter name\n4. Modify parameter type\n5. Add parameter\n6. Remove parameter");
         String input = br.readLine();
         switch (input) {
             case "1":
@@ -272,7 +272,7 @@ public class Cli implements Observer {
         String idObject = askForIdObjectToModify();
         String objectName = "";
         while (objectName.equals("") || isNumeric(objectName)) {
-            print("Please insert the new name for the object");
+            print("Please insert the new name for the parameter");
             objectName = br.readLine();
         }
         contr.modifyObjectName(idSuggestion, idScenario, idObject, objectName);
@@ -285,7 +285,7 @@ public class Cli implements Observer {
     }
 
     private void addObject(String idScenario, String idSuggestion) throws IOException {
-        print("Insert new object name");
+        print("Insert new parameter name");
         String objectName = br.readLine();
         if(!objectName.equals("") && !isNumeric(objectName)) {
             String idType = askForIdType();
@@ -298,7 +298,7 @@ public class Cli implements Observer {
     private void removeObject(String idScenario, String idSuggestion) throws IOException {
         String idObject = "";
         while (!isNumeric(idObject)) {
-            print("Please insert the id of the object you want to remove: 0 first, 1 second, 2 third...");
+            print("Please insert the id of the parameter you want to remove: 0 first, 1 second, 2 third...");
             idObject = br.readLine();
         }
         contr.removeObject(idSuggestion, idScenario, idObject);
@@ -325,7 +325,7 @@ public class Cli implements Observer {
     private String askForIdObjectToModify() throws IOException {
         String idObject = "";
         while (!isNumeric(idObject)) {
-            print("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
+            print("Please insert the id of the parameter you want to modify: 0 first, 1 second, 2 third...");
             idObject = br.readLine();
         }
         return idObject;
