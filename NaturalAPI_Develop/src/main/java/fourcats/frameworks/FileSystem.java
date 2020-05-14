@@ -16,12 +16,14 @@ public class FileSystem {
     public String loadPLA(String filename) throws IOException {
         StringBuilder sb = new StringBuilder();
         File file = openFile(filename);
+
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
         String line;
         while((line = bufferedReader.readLine()) != null){
             sb.append(line + "\n");
         }
+        bufferedReader.close();
         return sb.toString();
     }
 
