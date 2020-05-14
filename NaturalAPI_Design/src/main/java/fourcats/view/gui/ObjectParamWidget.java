@@ -39,6 +39,9 @@ public class ObjectParamWidget {
             setObjectNameColor(dataPresenter.getWordObjectFrequency(objectName));
         }
         mainPanel.add(removeObjectButton);
+        if (!objectType.equals("string")) {
+            initTypeComboBox(dataPresenter);
+        }
         objectTypeComboBox.setSelectedItem(objectType);
         objectNameTextField.setText(objectName);
         objectNameTextField.setPreferredSize(new Dimension(100, 20));
@@ -72,15 +75,11 @@ public class ObjectParamWidget {
                 contr.showTypes();
                 //update items if currentItems are different from the ones given by the dataPresenter
                 if (!dataPresenter.getlTypes().equals(currentItems)) {
-                    objectTypeComboBox.removeAllItems();
-                    for (String type : dataPresenter.getlTypes()) {
-                        objectTypeComboBox.addItem(type);
-                    }
+                    initTypeComboBox(dataPresenter);
                     //check if the selected item should be the custom type recently created
                     if (customType != null && customType.isCustomTypeCreated()) {
-                        objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount() - 1);
+                        objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount() - 2);
                     }
-                    objectTypeComboBox.addItem(CREATE_CUSTOM);
                 }
             }
 
@@ -161,6 +160,14 @@ public class ObjectParamWidget {
             objectNameTextField.setForeground(Color.RED);
         }
         frequencyLabel.setText(WORD_FREQUENCY + isPresentInBdl);
+    }
+
+    private void initTypeComboBox(DataPresenterGUI dataPresenter) {
+        objectTypeComboBox.removeAllItems();
+        for (String type : dataPresenter.getlTypes()) {
+            objectTypeComboBox.addItem(type);
+        }
+        objectTypeComboBox.addItem(CREATE_CUSTOM);
     }
 
     {

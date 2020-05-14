@@ -265,6 +265,7 @@ public class DataPresenterGUI extends Subject implements GenerateBalSuggestionsO
     @Override
     public void showTypes(Map<Integer, Type> mTypes) {
         if (mTypes.size()!=0 && mTypes.size()!=lTypes.size()) {
+            lTypes.clear();
             for (Map.Entry<Integer, Type> mTy : mTypes.entrySet()) {
                  if (!lTypes.contains(mTy.getValue().getName()))
                     lTypes.add(mTy.getValue().getName());

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class CustomTypeCreation extends Component {
+public class CustomTypeCreation {
     private boolean isCustomTypeCreated;
 
     public CustomTypeCreation(Controller controller, List<String> lAvailableTypes) {

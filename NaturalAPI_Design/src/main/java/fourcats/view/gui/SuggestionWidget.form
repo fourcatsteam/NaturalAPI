@@ -14,6 +14,7 @@
         </constraints>
         <properties>
           <background color="-1"/>
+          <lightWeightPopupEnabled value="true"/>
           <model>
             <item value="void"/>
             <item value="string"/>
@@ -24,6 +25,8 @@
             <item value="CREATE CUSTOM"/>
           </model>
           <opaque value="true"/>
+          <requestFocusEnabled value="true"/>
+          <selectedIndex value="0"/>
         </properties>
       </component>
       <component id="5caca" class="javax.swing.JTextField" binding="actionNameTextField">
