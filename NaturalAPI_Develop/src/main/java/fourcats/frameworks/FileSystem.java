@@ -2,10 +2,7 @@ package fourcats.frameworks;
 
 import fourcats.entity.API;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -16,18 +13,14 @@ public class FileSystem {
         return new File(filename);
     }
 
-    public String loadPLA(String filename) {
+    public String loadPLA(String filename) throws IOException {
         StringBuilder sb = new StringBuilder();
         File file = openFile(filename);
-        try (Scanner scanner = new Scanner(file)){
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
-            while(scanner.hasNext()){
-                sb.append(scanner.nextLine());
-                sb.append("\n");
-            }
-        } catch (FileNotFoundException e) {
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
+        String line;
+        while((line = bufferedReader.readLine()) != null){
+            sb.append(line + "\n");
         }
         return sb.toString();
     }
@@ -41,7 +34,7 @@ public class FileSystem {
             fileWriter.write(api.getText());
         } catch (IOException e) {
             Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
+            logger.log(Level.SEVERE, "IOException", e);
         }
     }
 
@@ -51,7 +44,7 @@ public class FileSystem {
             fw.write(pla);
         } catch (IOException ex) {
             Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", ex);
+            logger.log(Level.SEVERE, "IOException", ex);
         }
     }
 }

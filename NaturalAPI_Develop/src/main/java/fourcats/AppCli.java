@@ -24,19 +24,6 @@ public class AppCli {
                 new CreatePla(repo,new DataPresenterGui()), new ModifyPla(repo,new DataPresenterGui()));
 
         CLI c = new CLI(controller,dataPresenter);
-
-        do{
-            c.askBal();
-            c.readBal();
-            c.askPla();
-            c.readPla();
-            c.askSuggestApi();
-            c.readSuggestApi();
-            c.askAnother();
-            c.readAnother();
-        }
-        while(!c.getCurrentAnswer().equals("n"));
-        c.askGenerateApi();
-        c.readGenerateApi();
+        c.startCli();
     }
 }

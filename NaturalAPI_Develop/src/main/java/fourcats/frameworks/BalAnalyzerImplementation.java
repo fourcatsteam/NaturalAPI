@@ -9,21 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BalAnalyzerImplementation implements BalAnalyzer {
 
     private JsonNode jsonNode;
 
-    public void setBalFile(File file){
+    public void setBalFile(File file) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            jsonNode = objectMapper.readValue(file,JsonNode.class);
-        } catch (IOException e) {
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
-        }
+        jsonNode = objectMapper.readValue(file,JsonNode.class);
     }
 
     public BAL getBAL(){

@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -46,7 +47,7 @@ public class ModifyPlaTest {
     }
 
     @Test
-    public void testingModify(){
+    public void testingModify() throws IOException {
        when(repositoryMock.loadPLA(any(String.class))).thenReturn("pla");
        modifyPla.modify("nomefile","testo");
        verify(repositoryMock).writePla(any(String.class),any(String.class));

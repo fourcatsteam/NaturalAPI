@@ -2,6 +2,8 @@ package fourcats.interfaceadapters;
 
 import fourcats.port.*;
 
+import java.io.IOException;
+
 public class Controller {
 
     private ApiInputPort apiInputPort;
@@ -20,7 +22,7 @@ public class Controller {
         this.modifyPlaInputPort = modifyPlaInputPort;
     }
 
-    public void createApiSuggestion(String filenameBal,String filenamePla) {
+    public void createApiSuggestion(String filenameBal,String filenamePla) throws IOException {
         apiInputPort.create(filenameBal,filenamePla);
     }
 
@@ -28,7 +30,7 @@ public class Controller {
         generateInputPort.generate(path);
     }
 
-    public void modifyApi(int id1,int id2,String filenameBal,String filenamePla){ //modify for Cli: remove and then recreate the api
+    public void modifyApi(int id1,int id2,String filenameBal,String filenamePla) throws IOException{ //modify for Cli: remove and then recreate the api
         modifyInputPort.modify(id1,id2);
         apiInputPort.create(filenameBal,filenamePla);
     }
@@ -45,7 +47,7 @@ public class Controller {
         modifyPlaInputPort.loadPlaToModify(filename);
     }
 
-    public void modifyPla(String filename,String text){
+    public void modifyPla(String filename,String text) throws IOException{
         modifyPlaInputPort.modify(filename,text);
     }
 }

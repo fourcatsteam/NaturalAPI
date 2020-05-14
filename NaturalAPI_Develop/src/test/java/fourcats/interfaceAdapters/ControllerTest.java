@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -39,7 +41,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testCreateApiSuggestion(){
+    public void testCreateApiSuggestion() throws IOException {
         String fileNameBal = "nameBal";
         String fileNamePla = "namePla";
         controller.createApiSuggestion(fileNameBal,fileNamePla);
@@ -56,7 +58,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testModifyApi(){
+    public void testModifyApi() throws IOException{
         int i = 1;
         String fileNameBal = "nameBal";
         String fileNamePla = "namePla";
@@ -85,7 +87,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testModifyPla() {
+    public void testModifyPla() throws IOException{
         controller.modifyPla("filename","text");
         verify(modifyPlaMock).modify("filename","text");
     }

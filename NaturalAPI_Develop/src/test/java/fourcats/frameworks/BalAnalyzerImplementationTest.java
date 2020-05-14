@@ -37,7 +37,7 @@ public class BalAnalyzerImplementationTest {
     }
 
     @Test
-    public void correctlySettingBalFile(){
+    public void correctlySettingBalFile() throws IOException{
         String fileNameBal = "nameBal";
         File file = new File(fileNameBal);
         analyzer.setBalFile(file);
@@ -50,7 +50,7 @@ public class BalAnalyzerImplementationTest {
     }
 
     @Test
-    public void gettingBalCorrectly(){
+    public void gettingBalCorrectly() throws IOException{
         analyzer.setBalFile(new File("./BAL/TestFiles/balAtm.json"));
         assertNotNull(analyzer.getBAL());
     }

@@ -25,10 +25,10 @@ public class ModifyApi implements ModifyInputPort {
 
     public void modify(int id1,int id2){
 
-        for(int i = 0; i < id2 - id1; i++){
+        for(int i = id1; i < id2 - id1; i++){
             repositoryAccess.deleteApi(id1+i);
-            repositoryAccess.deleteTests();
         }
+        repositoryAccess.deleteTests();
         //modify for cli: only delete api and create the controller creates an api with different bal or pla
     }
 }

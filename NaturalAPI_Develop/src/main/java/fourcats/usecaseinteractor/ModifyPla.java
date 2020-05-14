@@ -36,11 +36,11 @@ public class ModifyPla implements ModifyPlaInputPort {
             modifyPlaOutputPort.showLoadPla(split[0],splitTest[0],splitTest[1]);
         } catch (IOException e) {
             Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
+            logger.log(Level.SEVERE, "IOException", e);
         }
     }
 
-    public void modify(String filename,String text){
+    public void modify(String filename,String text) throws IOException{
         String pla = repositoryAccess.loadPLA(filename);
         String extension = pla.split("\n",2)[0];
         repositoryAccess.writePla(filename,extension + "\n" + text);

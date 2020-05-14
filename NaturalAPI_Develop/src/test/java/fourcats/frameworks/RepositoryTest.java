@@ -7,6 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -30,7 +32,7 @@ public class RepositoryTest {
     }
 
     @Test
-    public void loadingPLACorrectly(){
+    public void loadingPLACorrectly() throws IOException {
         repo.loadPLA("filename");
         verify(fileMock).loadPLA(any(String.class));
     }

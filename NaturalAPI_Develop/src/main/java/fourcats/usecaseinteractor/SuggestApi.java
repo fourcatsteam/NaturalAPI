@@ -6,6 +6,8 @@ import fourcats.interfaceaccess.BalAnalyzer;
 import fourcats.interfaceaccess.RepositoryAccess;
 import fourcats.port.ApiOutputPort;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +23,7 @@ public class SuggestApi implements ApiInputPort {
         this.apiOutputPort = apiOutputPort;
     }
 
-    public void create(String filenameBal,String filenamePla){
+    public void create(String filenameBal,String filenamePla) throws IOException {
 
         if(!repositoryAccess.isCoupleBalPlaPresent(filenameBal,filenamePla)){
             balAnalyzer.setBalFile(repositoryAccess.openFile(filenameBal));
@@ -61,7 +63,13 @@ public class SuggestApi implements ApiInputPort {
 
                 newApi = numberOfParameters(newApi,size);
 
-                if (!action.getType().getAttributes().isEmpty()) {
+                if (!(action.getType().getName().equals("void") ||
+                        action.getType().getName().equals("string") ||
+                        action.getType().getName().equals("int") ||
+                        action.getType().getName().equals("float") ||
+                        action.getType().getName().equals("double") ||
+                        action.getType().getName().equals("bool"))
+                ) {
                     createCustomClassForAction(pla, action, actor.getName());
                 }
 
@@ -96,7 +104,13 @@ public class SuggestApi implements ApiInputPort {
         int size = action.getObjectParams().size();
         for (ObjectParam objectParam : action.getObjectParams()) {
 
-            if (!objectParam.getType().getAttributes().isEmpty()) {
+            if (!(objectParam.getType().getName().equals("void") ||
+                    objectParam.getType().getName().equals("string") ||
+                    objectParam.getType().getName().equals("int") ||
+                    objectParam.getType().getName().equals("float") ||
+                    objectParam.getType().getName().equals("double") ||
+                    objectParam.getType().getName().equals("bool"))
+            ) {
                 createCustomClassForObjectParam(pla, objectParam, actor.getName());
             }
 
@@ -200,16 +214,21 @@ public class SuggestApi implements ApiInputPort {
 
         java.util.Iterator<String> iteratorKeys = action.getType().getAttributes().keySet().iterator();
         java.util.Iterator<String> iteratorValues = action.getType().getAttributes().values().iterator();
-        while(numAttributes > 0) {
+        if(numAttributes > 0) {
+            while(numAttributes > 0) {
 
-            customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
-            customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
-            if(numAttributes > 1) {
-                customApi = customApi.concat(pla.getCustomBody());
+                customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
+                customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
+                if(numAttributes > 1) {
+                    customApi = customApi.concat(pla.getCustomBody());
+                }
+                numAttributes--;
             }
-            numAttributes--;
+            customApi = customApi.concat("}");
         }
-        customApi = customApi.concat("}");
+        else {
+            customApi = customApi.split("\n")[0].concat("\n\n}");
+        }
 
         customApi = customApi.replace("\"custom_class\"",action.getType().getName());
 
@@ -232,16 +251,21 @@ public class SuggestApi implements ApiInputPort {
 
         java.util.Iterator<String> iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();
         java.util.Iterator<String> iteratorValues = objectParam.getType().getAttributes().values().iterator();
-        while(numAttributes > 0) {
+        if(numAttributes > 0) {
+            while (numAttributes > 0) {
 
-            customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
-            customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
-            if(numAttributes > 1) {
-                customApi = customApi.concat(pla.getCustomBody());
+                customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
+                customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
+                if (numAttributes > 1) {
+                    customApi = customApi.concat(pla.getCustomBody());
+                }
+                numAttributes--;
             }
-            numAttributes--;
+            customApi = customApi.concat("}");
         }
-        customApi = customApi.concat("}");
+        else {
+            customApi = customApi.split("\n")[0].concat("\n\n}");
+        }
 
         customApi = customApi.replace("\"custom_class\"",objectParam.getType().getName());
 

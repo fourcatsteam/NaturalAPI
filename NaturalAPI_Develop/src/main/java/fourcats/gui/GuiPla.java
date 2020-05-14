@@ -6,6 +6,10 @@ import fourcats.observer.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,10 @@ public class GuiPla implements Observer {
     private JTextField textField1;
     private JTextArea textArea2;
     private JTextArea textArea3;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel label4;
 
     String message;
 
@@ -43,7 +51,7 @@ public class GuiPla implements Observer {
         }
         catch (Exception e){
             Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
+            logger.log(Level.SEVERE, "IOException", e);
         }
 
         createButton.addActionListener(e -> {
@@ -67,6 +75,45 @@ public class GuiPla implements Observer {
         cancelButton.addActionListener(e ->
             frame.dispose() //close the frame
         );
+
+        Color myRed = new Color( 224,91,73);
+        Color myBlue = new Color(58,84,105);
+
+        createButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                createButton.setBackground(myRed);
+                createButton.setBorderPainted(false);
+            }
+        });
+        createButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                createButton.setBackground(myBlue);
+                createButton.setBorderPainted(true);
+            }
+        });
+
+        cancelButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                cancelButton.setBackground(myRed);
+                cancelButton.setBorderPainted(false);
+            }
+        });
+        cancelButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                cancelButton.setBackground(myBlue);
+                cancelButton.setBorderPainted(true);
+            }
+        });
+
+        label1.setBorder(new EmptyBorder(5,0,5,0));
+        label2.setBorder(new EmptyBorder(5,0,5,0));
+        label3.setBorder(new EmptyBorder(5,0,5,0));
+        label4.setBorder(new EmptyBorder(5,0,5,0));
+
     }
 
     public void showGuiPla(){

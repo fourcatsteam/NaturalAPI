@@ -25,7 +25,7 @@ public class FileSystemTest {
     }
 
     @Test
-    public void loadingPLACorrectlyFound(){
+    public void loadingPLACorrectlyFound() throws IOException{
         String name = "PLA/TestFiles/Prova";
         String pla = file.loadPLA(name);
         assertTrue(pla!=null);

@@ -54,9 +54,9 @@ public class Gui implements Observer {
         try {
             frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }
-        catch (Exception e){
+        catch (IOException e){
             Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "File not found", e);
+            logger.log(Level.SEVERE, "IOException", e);
         }
         comboBox1.setVisible(false);
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
@@ -93,14 +93,20 @@ public class Gui implements Observer {
 
         suggestionButton.addActionListener(e -> {
             try{
-                c.createApiSuggestion(bal,pla);
-                comboBox1.setVisible(true);
-                messageLabel.setText(message);
-                if(message.equals("Suggestions created!")){
-                    mainPanel.setBackground(Color.GREEN);
-                }
-                else if(message.equals("This couple of BAL and PLA is already generated!")){
+                if(bal.isEmpty() || pla.isEmpty()){
+                    messageLabel.setText("Load bal and pla first!");
                     mainPanel.setBackground(Color.RED);
+                }
+                else {
+                    c.createApiSuggestion(bal,pla);
+                    comboBox1.setVisible(true);
+                    messageLabel.setText(message);
+                    if(message.equals("Suggestions created!")){
+                        mainPanel.setBackground(Color.GREEN);
+                    }
+                    else if(message.equals("This couple of BAL and PLA is already generated!")){
+                        mainPanel.setBackground(Color.RED);
+                    }
                 }
             }
             catch (Exception ex){
@@ -112,15 +118,21 @@ public class Gui implements Observer {
 
         generateButton.addActionListener(e -> {
             try{
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fileChooser.showSaveDialog(mainPanel);
-                c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
-                messageLabel.setText(message);
-                mainPanel.setBackground(Color.GREEN);
+                if(comboBox1.getItemCount() == 0){
+                    messageLabel.setText("There aren't suggestions to generate!");
+                    mainPanel.setBackground(Color.RED);
+                }
+                else {
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    fileChooser.showSaveDialog(mainPanel);
+                    c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
+                    messageLabel.setText(message);
+                    mainPanel.setBackground(Color.GREEN);
+                }
             }
             catch(Exception ex){
-                messageLabel.setText("What are you doing? There aren't suggestions to generate!");
+                messageLabel.setText("Files not found!");
                 mainPanel.setBackground(Color.RED);
             }
         });
@@ -137,13 +149,19 @@ public class Gui implements Observer {
 
         modifyButton.addActionListener(e -> {
             try{
-                controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
-                toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
-                messageLabel.setText("Api modified!");
-                mainPanel.setBackground(Color.GREEN);
+                if(toView.get(comboBox1.getSelectedItem().toString()).equals(textArea.getText())){
+                    messageLabel.setText("There aren't changes!");
+                    mainPanel.setBackground(Color.RED);
+                }
+                else {
+                    controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
+                    toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
+                    messageLabel.setText("Api modified!");
+                    mainPanel.setBackground(Color.GREEN);
+                }
             }
             catch (Exception ex) {
-                messageLabel.setText("What are you doing? There aren't suggestions to modify!");
+                messageLabel.setText("There aren't suggestions to modify!");
                 mainPanel.setBackground(Color.RED);
             }
         });
@@ -152,101 +170,104 @@ public class Gui implements Observer {
             textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))
         );
 
+        Color myRed = new Color( 224,91,73);
+        Color myBlue = new Color(58,84,105);
+
         createPLAButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                createPLAButton.setBackground(new Color( 224,91,73));
+                createPLAButton.setBackground(myRed);
                 createPLAButton.setBorderPainted(false);
             }
         });
         createPLAButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                createPLAButton.setBackground(new Color(58,84,105));
+                createPLAButton.setBackground(myBlue);
                 createPLAButton.setBorderPainted(true);
             }
         });
         modifyPLAButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                modifyPLAButton.setBackground(new Color( 224,91,73));
+                modifyPLAButton.setBackground(myRed);
                 modifyPLAButton.setBorderPainted(false);
             }
         });
         modifyPLAButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                modifyPLAButton.setBackground(new Color(58,84,105));
+                modifyPLAButton.setBackground(myBlue);
                 modifyPLAButton.setBorderPainted(true);
             }
         });
         addBalButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                addBalButton.setBackground(new Color( 224,91,73));
+                addBalButton.setBackground(myRed);
                 addBalButton.setBorderPainted(false);
             }
         });
         addBalButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                addBalButton.setBackground(new Color(58,84,105));
+                addBalButton.setBackground(myBlue);
                 addBalButton.setBorderPainted(true);
             }
         });
         addPlaButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                addPlaButton.setBackground(new Color( 224,91,73));
+                addPlaButton.setBackground(myRed);
                 addPlaButton.setBorderPainted(false);
             }
         });
         addPlaButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                addPlaButton.setBackground(new Color(58,84,105));
+                addPlaButton.setBackground(myBlue);
                 addPlaButton.setBorderPainted(true);
             }
         });
         suggestionButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                suggestionButton.setBackground(new Color( 224,91,73));
+                suggestionButton.setBackground(myRed);
                 suggestionButton.setBorderPainted(false);
             }
         });
         suggestionButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                suggestionButton.setBackground(new Color(58,84,105));
+                suggestionButton.setBackground(myBlue);
                 suggestionButton.setBorderPainted(true);
             }
         });
         generateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                generateButton.setBackground(new Color( 224,91,73));
+                generateButton.setBackground(myRed);
                 generateButton.setBorderPainted(false);
             }
         });
         generateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                generateButton.setBackground(new Color(58,84,105));
+                generateButton.setBackground(myBlue);
                 generateButton.setBorderPainted(true);
             }
         });
         modifyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                modifyButton.setBackground(new Color( 224,91,73));
+                modifyButton.setBackground(myRed);
                 modifyButton.setBorderPainted(false);
             }
         });
         modifyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                modifyButton.setBackground(new Color(58,84,105));
+                modifyButton.setBackground(myBlue);
                 modifyButton.setBorderPainted(true);
             }
         });

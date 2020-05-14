@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class SuggestApiTest {
     }
 
    @Test
-    public void correctlysuggestionApiCreated(){
+    public void correctlysuggestionApiCreated() throws IOException {
         String filenamebal = ".\\BAL\\TestFiles\\balAtm.json";
         String filenamepla = ".\\PLA\\javaClassPLA.txt";
         when(repositoryMock.isCoupleBalPlaPresent(filenamebal,filenamebal)).thenReturn(false);

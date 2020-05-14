@@ -4,6 +4,7 @@ import fourcats.entity.API;
 import fourcats.interfaceaccess.RepositoryAccess;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public class Repository implements RepositoryAccess {
@@ -20,7 +21,7 @@ public class Repository implements RepositoryAccess {
         return fileSystem.openFile(filename);
     }
 
-    public String loadPLA(String filename) {
+    public String loadPLA(String filename) throws IOException {
         return fileSystem.loadPLA(filename);
     }
 

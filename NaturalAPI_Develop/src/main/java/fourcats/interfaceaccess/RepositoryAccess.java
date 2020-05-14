@@ -3,12 +3,13 @@ package fourcats.interfaceaccess;
 import fourcats.entity.API;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public interface RepositoryAccess {
 
     File openFile(String filename);
-    String loadPLA(String filename);
+    String loadPLA(String filename) throws IOException;
     void writeApi(String path, API api);
     void addApi(API api);
     void addApiWithId(int id, API api);
