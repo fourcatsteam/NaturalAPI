@@ -19,6 +19,10 @@ public class BalAnalyzerImplementation implements BalAnalyzer {
         jsonNode = objectMapper.readValue(file,JsonNode.class);
     }
 
+    public JsonNode getNode(){
+        return jsonNode;
+    }
+
     public BAL getBAL(){
 
         BAL bal = new BAL();

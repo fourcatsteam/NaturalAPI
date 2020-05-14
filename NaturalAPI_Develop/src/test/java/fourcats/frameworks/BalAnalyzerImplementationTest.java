@@ -37,16 +37,12 @@ public class BalAnalyzerImplementationTest {
     }
 
     @Test
-    public void correctlySettingBalFile() throws IOException{
-        String fileNameBal = ".\\BAL\\TestFiles\\balAtm.json";
+    public void correctlySettingBalFile() throws IOException {
+        String fileNameBal = "./BAL/TestFiles/balAtm.json";
         File file = new File(fileNameBal);
         analyzer.setBalFile(file);
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            assertEquals(balAnalyzer,objectMapper.readValue(file, BalAnalyzer.class));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assertNotNull(analyzer.getNode());
+
     }
 
     @Test
