@@ -24,7 +24,7 @@ public class CustomTypeCreation {
         JFrame frame = new JFrame("Create custom type");
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(mainPanel);
-        frame.setPreferredSize(new Dimension(400, 350));
+        frame.setPreferredSize(new Dimension(400, 380));
         frame.setIconImage(ViewUtility.getLogo());
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -70,7 +70,11 @@ public class CustomTypeCreation {
 
         mainPanel.add(attributeBox);
         mainPanel.add(Box.createVerticalStrut(10)); //space addAttributeButton from the fields
-        mainPanel.add(addAttributeButton);
+        Box addAttrBtnBox = Box.createHorizontalBox();
+        addAttrBtnBox.add(Box.createHorizontalGlue()); //* push from left
+        addAttrBtnBox.add(addAttributeButton); //center aligned
+        addAttrBtnBox.add(Box.createHorizontalGlue()); //* push from right
+        mainPanel.add(addAttrBtnBox);
         mainPanel.add(Box.createVerticalGlue()); //this allow push the ok_cancel buttons at the bottom of the panel
         mainPanel.add(okCancelBtnBox);
         mainPanel.add(Box.createVerticalStrut(10)); //space ok_cancel buttons from bottom

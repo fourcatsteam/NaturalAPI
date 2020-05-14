@@ -27,7 +27,7 @@ public class SuggestionWidget {
     private final Box objectsBox;
     private final ArrayList<ObjectParamWidget> lObjectParamWidget;
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
-    private static final String WORD_FREQUENCY = "Word Frequency: ";
+    private static final String PREDICATE_FREQUENCY = "Predicate Frequency: ";
     private CustomTypeCreation customType;
     private String currentActionName; //updated with the one in dataKeeper
 
@@ -51,7 +51,7 @@ public class SuggestionWidget {
         mainPanel.add(actionNameTextField);
         if (dataPresenter.isBdlLoaded()) {
             mainPanel.add(frequencyLabel);
-            frequencyLabel.setText(WORD_FREQUENCY + dataPresenter.getFrequencyInBdl());
+            frequencyLabel.setText(PREDICATE_FREQUENCY + dataPresenter.getFrequencyInBdl());
             setActionNameColor(dataPresenter.getFrequencyInBdl());
         }
 
@@ -212,7 +212,7 @@ public class SuggestionWidget {
         } else {
             actionNameTextField.setForeground(Color.RED);
         }
-        frequencyLabel.setText(WORD_FREQUENCY + isPresentInBdl);
+        frequencyLabel.setText(PREDICATE_FREQUENCY + isPresentInBdl);
     }
 
     private void initTypeComboBox(DataPresenterGUI dataPresenter) {
