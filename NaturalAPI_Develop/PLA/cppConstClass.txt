@@ -19,7 +19,8 @@ public:
 }
 test class
 public:
-	"test_stub"() {
+	@"keyword" (""test_stub"")
+	void "test_stub"() {
 		//please insert an implementation of the test
 		//"group_action" "action_name";
 		//"action_name"."action_name"("parameter_name");
