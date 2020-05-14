@@ -4,6 +4,7 @@ import fourcats.entity.API;
 import fourcats.interfaceaccess.RepositoryAccess;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public class Repository implements RepositoryAccess {
@@ -11,85 +12,85 @@ public class Repository implements RepositoryAccess {
     private DataKeeper dataKeeper;
     private FileSystem fileSystem;
 
-<span class="fc" id="L14">    public Repository(DataKeeper datakeeper,FileSystem fileSystem){</span>
-<span class="fc" id="L15">        this.dataKeeper = datakeeper;</span>
-<span class="fc" id="L16">        this.fileSystem = fileSystem;</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L15">    public Repository(DataKeeper datakeeper,FileSystem fileSystem){</span>
+<span class="fc" id="L16">        this.dataKeeper = datakeeper;</span>
+<span class="fc" id="L17">        this.fileSystem = fileSystem;</span>
+<span class="fc" id="L18">    }</span>
 
     public File openFile(String filename) {
-<span class="fc" id="L20">        return fileSystem.openFile(filename);</span>
+<span class="fc" id="L21">        return fileSystem.openFile(filename);</span>
     }
 
-    public String loadPLA(String filename) {
-<span class="fc" id="L24">        return fileSystem.loadPLA(filename);</span>
+    public String loadPLA(String filename) throws IOException {
+<span class="fc" id="L25">        return fileSystem.loadPLA(filename);</span>
     }
 
     public void writeApi(String path, API api){
-<span class="fc" id="L28">        fileSystem.writeApi(path,api);</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L29">        fileSystem.writeApi(path,api);</span>
+<span class="fc" id="L30">    }</span>
 
     public void addApi(API api){
-<span class="fc" id="L32">        dataKeeper.addApi(api);</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L33">        dataKeeper.addApi(api);</span>
+<span class="fc" id="L34">    }</span>
 
     public void addApiWithId(int id, API api){
-<span class="fc" id="L36">        dataKeeper.addApiWithId(id,api);</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L37">        dataKeeper.addApiWithId(id,api);</span>
+<span class="fc" id="L38">    }</span>
 
     public void deleteApi(int id){
-<span class="fc" id="L40">        dataKeeper.deleteApi(id);</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L41">        dataKeeper.deleteApi(id);</span>
+<span class="fc" id="L42">    }</span>
 
     public void deleteTests() {
-<span class="nc" id="L44">        dataKeeper.deleteTests();</span>
-<span class="nc" id="L45">    }</span>
+<span class="nc" id="L45">        dataKeeper.deleteTests();</span>
+<span class="nc" id="L46">    }</span>
 
     public API getApi(int id){
-<span class="fc" id="L48">        return dataKeeper.getApi(id);</span>
+<span class="fc" id="L49">        return dataKeeper.getApi(id);</span>
     }
 
     public Map&lt;Integer, API&gt; getApiMap(){
-<span class="fc" id="L52">        return dataKeeper.getApiMap();</span>
+<span class="fc" id="L53">        return dataKeeper.getApiMap();</span>
     }
 
     public int getSize(){
-<span class="fc" id="L56">        return dataKeeper.getSize();</span>
+<span class="fc" id="L57">        return dataKeeper.getSize();</span>
     }
 
     public void addTest(String s) {
-<span class="nc" id="L60">        dataKeeper.addTest(s);</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L61">        dataKeeper.addTest(s);</span>
+<span class="nc" id="L62">    }</span>
 
     public String getAllTests() {
-<span class="nc" id="L64">        return dataKeeper.getAllTests();</span>
+<span class="nc" id="L65">        return dataKeeper.getAllTests();</span>
     }
 
     public void updateApi(String oldApi,String newApi){
-<span class="fc" id="L68">        dataKeeper.updateApi(oldApi,newApi);</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L69">        dataKeeper.updateApi(oldApi,newApi);</span>
+<span class="fc" id="L70">    }</span>
 
     public void writePla(String file,String pla){
-<span class="fc" id="L72">        fileSystem.writePla(file,pla);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L73">        fileSystem.writePla(file,pla);</span>
+<span class="fc" id="L74">    }</span>
 
     public void addCoupleBalPla(String bal,String pla){
-<span class="fc" id="L76">        dataKeeper.addCoupleBalPla(bal,pla);</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L77">        dataKeeper.addCoupleBalPla(bal,pla);</span>
+<span class="fc" id="L78">    }</span>
 
     public boolean isCoupleBalPlaPresent(String bal,String pla){
-<span class="fc" id="L80">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
+<span class="fc" id="L81">        return dataKeeper.isCoupleBalPlaPresent(bal,pla);</span>
     }
 
     public boolean isThisApiPresent(API a){
-<span class="fc" id="L84">        return dataKeeper.isThisApiPresent(a);</span>
+<span class="fc" id="L85">        return dataKeeper.isThisApiPresent(a);</span>
     }
 
     public boolean isThisClassNamePresent(API a){
-<span class="fc" id="L88">        return dataKeeper.isThisClassNamePresent(a);</span>
+<span class="fc" id="L89">        return dataKeeper.isThisClassNamePresent(a);</span>
     }
 
     public boolean isThisTestPresent(String test) {
-<span class="nc" id="L92">        return dataKeeper.isThisTestPresent(test);</span>
+<span class="nc" id="L93">        return dataKeeper.isThisTestPresent(test);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

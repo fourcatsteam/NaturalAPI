@@ -7,7 +7,6 @@ import fourcats.observer.Observer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,161 +19,227 @@ public class CLI implements Observer {
     private String currentAnswer;
     private BufferedReader br;
 
-<span class="fc" id="L23">    public CLI(Controller c,DataPresenter dp){</span>
-<span class="fc" id="L24">        dataPresenter = dp;</span>
-<span class="fc" id="L25">        dataPresenter.attach(this);</span>
-<span class="fc" id="L26">        controller = c;</span>
-<span class="fc" id="L27">        br = new BufferedReader(new InputStreamReader(System.in));</span>
-<span class="fc" id="L28">        currentBal=&quot;&quot;;</span>
-<span class="fc" id="L29">        currentPla=&quot;&quot;;</span>
-<span class="fc" id="L30">        currentAnswer=&quot;&quot;;</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L22">    public CLI(Controller c,DataPresenter dp){</span>
+<span class="fc" id="L23">        dataPresenter = dp;</span>
+<span class="fc" id="L24">        dataPresenter.attach(this);</span>
+<span class="fc" id="L25">        controller = c;</span>
+<span class="fc" id="L26">        br = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="fc" id="L27">        currentBal=&quot;&quot;;</span>
+<span class="fc" id="L28">        currentPla=&quot;&quot;;</span>
+<span class="fc" id="L29">        currentAnswer=&quot;&quot;;</span>
+<span class="fc" id="L30">    }</span>
 
     public void askBal(){
-<span class="fc" id="L34">        System.out.println(&quot;Write file BAL title. Type E to exit&quot;);</span>
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L33">        System.out.println(&quot;Write file BAL title. Type E to exit&quot;);</span>
+<span class="fc" id="L34">    }</span>
 
     public void readBal(){
         try {
-<span class="fc" id="L39">            currentBal = br.readLine();</span>
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">            if (currentBal.equals(&quot;E&quot;)){</span>
-<span class="nc" id="L41">                System.exit(0);</span>
+<span class="fc" id="L38">            currentBal = br.readLine();</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">            if (currentBal.equals(&quot;E&quot;)){</span>
+<span class="nc" id="L40">                System.exit(0);</span>
             }
-<span class="nc" id="L43">        } catch (IOException e) {</span>
-<span class="nc" id="L44">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L45">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L46">        }</span>
-<span class="fc" id="L47">    }</span>
+<span class="nc" id="L42">        } catch (IOException e) {</span>
+<span class="nc" id="L43">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L44">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="fc" id="L45">        }</span>
+<span class="fc" id="L46">    }</span>
 
     public void askPla(){
-<span class="fc" id="L50">        System.out.println(&quot;Write file PLA title. Type E to exit&quot;);</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L49">        System.out.println(&quot;Write file PLA title. Type E to exit&quot;);</span>
+<span class="fc" id="L50">    }</span>
 
     public void readPla(){
         try {
-<span class="fc" id="L55">            currentPla = br.readLine();</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (currentPla.equals(&quot;E&quot;)){</span>
-<span class="nc" id="L57">                   System.exit(0);</span>
+<span class="fc" id="L54">            currentPla = br.readLine();</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if (currentPla.equals(&quot;E&quot;)){</span>
+<span class="nc" id="L56">                   System.exit(0);</span>
             }
-<span class="nc" id="L59">        } catch (IOException e) {</span>
-<span class="nc" id="L60">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L61">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L62">        }</span>
-<span class="fc" id="L63">    }</span>
+<span class="nc" id="L58">        } catch (IOException e) {</span>
+<span class="nc" id="L59">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L60">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">    }</span>
 
     public void askSuggestApi(){
-<span class="fc" id="L66">        System.out.println(&quot;Do you want to create your APIs suggestion? Type y or n&quot;);</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L65">        System.out.println(&quot;Do you want to create your APIs suggestion? 1: YES or 2: NO&quot;);</span>
+<span class="fc" id="L66">    }</span>
 
     public void readSuggestApi(){
         try {
-<span class="fc" id="L71">            currentAnswer = br.readLine();</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">            if (currentAnswer.equals(&quot;y&quot;)) {</span>
-<span class="fc" id="L73">                controller.createApiSuggestion(currentBal, currentPla);</span>
+<span class="fc" id="L70">            currentAnswer = br.readLine();</span>
+<span class="pc bpc" id="L71" title="1 of 3 branches missed.">            switch (currentAnswer) {</span>
+                case &quot;1&quot;:
+<span class="fc" id="L73">                    controller.createApiSuggestion(currentBal, currentPla);</span>
+<span class="fc" id="L74">                    break;</span>
+                case &quot;2&quot;:
+<span class="fc" id="L76">                    askBal();</span>
+<span class="fc" id="L77">                    readBal();</span>
+<span class="fc" id="L78">                    askPla();</span>
+<span class="fc" id="L79">                    readPla();</span>
+<span class="fc" id="L80">                    askSuggestApi();</span>
+<span class="fc" id="L81">                    readSuggestApi();</span>
+<span class="fc" id="L82">                    break;</span>
+                default:
+<span class="nc" id="L84">                    System.out.println(&quot;Error: insert 1 or 2&quot;);</span>
+<span class="nc" id="L85">                    askSuggestApi();</span>
+<span class="nc" id="L86">                    readSuggestApi();</span>
+                    break;
             }
-            else {
-<span class="fc" id="L76">                askBal();</span>
-<span class="fc" id="L77">                readBal();</span>
-<span class="fc" id="L78">                askPla();</span>
-<span class="fc" id="L79">                readPla();</span>
-<span class="fc" id="L80">                askSuggestApi();</span>
-<span class="fc" id="L81">                readSuggestApi();</span>
-            }
-<span class="nc" id="L83">        } catch (IOException e) {</span>
-<span class="nc" id="L84">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L85">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L86">        }</span>
-<span class="fc" id="L87">    }</span>
+<span class="nc" id="L89">        } catch (IOException e) {</span>
+<span class="nc" id="L90">            System.out.println(&quot;Error: bal or pla selected doesn't exist&quot;);</span>
+<span class="nc" id="L91">            askBal();</span>
+<span class="nc" id="L92">            readBal();</span>
+<span class="nc" id="L93">            askPla();</span>
+<span class="nc" id="L94">            readPla();</span>
+<span class="nc" id="L95">            askSuggestApi();</span>
+<span class="nc" id="L96">            readSuggestApi();</span>
+        }
+<span class="nc" id="L98">        catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L99">            System.out.println(&quot;Pla isn't correctly formatted&quot;);</span>
+<span class="nc" id="L100">            askBal();</span>
+<span class="nc" id="L101">            readBal();</span>
+<span class="nc" id="L102">            askPla();</span>
+<span class="nc" id="L103">            readPla();</span>
+<span class="nc" id="L104">            askSuggestApi();</span>
+<span class="nc" id="L105">            readSuggestApi();</span>
+<span class="pc" id="L106">        }</span>
+<span class="fc" id="L107">    }</span>
 
     public void askAnother(){
-<span class="fc" id="L90">        System.out.println(&quot;Do you want to add another BAL? Type y or n&quot;);</span>
-<span class="fc" id="L91">    }</span>
+<span class="fc" id="L110">        System.out.println(&quot;Do you want to add another BAL? 1: YES or 2: NO&quot;);</span>
+<span class="fc" id="L111">    }</span>
 
     public void readAnother(){
         try{
-<span class="fc" id="L95">            currentAnswer = br.readLine();</span>
+<span class="nc" id="L115">            currentAnswer = br.readLine();</span>
+<span class="nc bnc" id="L116" title="All 3 branches missed.">            switch (currentAnswer) {</span>
+                case &quot;1&quot;:
+<span class="nc" id="L118">                    startCli();</span>
+<span class="nc" id="L119">                    break;</span>
+                case &quot;2&quot;:
+<span class="nc" id="L121">                    askGenerateApi();</span>
+<span class="nc" id="L122">                    readGenerateApi();</span>
+<span class="nc" id="L123">                    break;</span>
+                default:
+<span class="nc" id="L125">                    System.out.println(&quot;Error: insert 1 or 2&quot;);</span>
+<span class="nc" id="L126">                    askAnother();</span>
+<span class="nc" id="L127">                    readAnother();</span>
+                    break;
+            }
         }
-<span class="nc" id="L97">        catch(IOException e){</span>
-<span class="nc" id="L98">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L99">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L100">        }</span>
-<span class="fc" id="L101">    }</span>
+<span class="nc" id="L131">        catch(IOException e){</span>
+<span class="nc" id="L132">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L133">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="nc" id="L134">        }</span>
+<span class="nc" id="L135">    }</span>
 
     public void askGenerateApi(){
-<span class="fc" id="L104">        System.out.println(&quot;Do you want to generate your APIs? Type y or n&quot;);</span>
-<span class="fc" id="L105">    }</span>
+<span class="fc" id="L138">        System.out.println(&quot;Do you want to generate your APIs? 1: YES or 2: NO&quot;);</span>
+<span class="fc" id="L139">    }</span>
 
     public void askPathApi() {
-<span class="fc" id="L108">        System.out.println(&quot;Type the path where APIs will be created.&quot;);</span>
-<span class="fc" id="L109">    }</span>
+<span class="fc" id="L142">        System.out.println(&quot;Type the path where APIs will be created.&quot;);</span>
+<span class="fc" id="L143">    }</span>
 
     public void readGenerateApi(){
         try{
-<span class="fc" id="L113">            currentAnswer = br.readLine();</span>
-<span class="fc bfc" id="L114" title="All 3 branches covered.">            switch (currentAnswer) {</span>
-                case &quot;y&quot;:
-<span class="fc" id="L116">                    askPathApi();</span>
-<span class="fc" id="L117">                    currentAnswer = br.readLine();</span>
-<span class="fc" id="L118">                    controller.generateApi(currentAnswer);</span>
-<span class="fc" id="L119">                    break;</span>
-                case &quot;n&quot;:
-<span class="fc" id="L121">                    askModifyApi();</span>
-<span class="fc" id="L122">                    break;</span>
+<span class="fc" id="L147">            currentAnswer = br.readLine();</span>
+<span class="fc bfc" id="L148" title="All 3 branches covered.">            switch (currentAnswer) {</span>
+                case &quot;1&quot;:
+<span class="fc" id="L150">                    askPathApi();</span>
+<span class="fc" id="L151">                    currentAnswer = br.readLine();</span>
+<span class="fc" id="L152">                    controller.generateApi(currentAnswer);</span>
+<span class="fc" id="L153">                    System.out.println(&quot;Termine applicazione&quot;);</span>
+<span class="fc" id="L154">                    break;</span>
+                case &quot;2&quot;:
+<span class="fc" id="L156">                    askModifyApi();</span>
+<span class="fc" id="L157">                    break;</span>
                 default:
-<span class="fc" id="L124">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
+<span class="fc" id="L159">                    System.out.println(&quot;Error: insert 1 or 2&quot;);</span>
+<span class="fc" id="L160">                    askGenerateApi();</span>
+<span class="fc" id="L161">                    readGenerateApi();</span>
+                    break;
             }
         }
-<span class="fc" id="L127">        catch (Exception e){</span>
-<span class="fc" id="L128">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="fc" id="L129">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L130">        }</span>
-<span class="fc" id="L131">    }</span>
+<span class="nc" id="L165">        catch (Exception e){</span>
+<span class="nc" id="L166">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L167">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="fc" id="L168">        }</span>
+<span class="fc" id="L169">    }</span>
 
     public void askModifyApi(){
-<span class="fc" id="L134">        System.out.println(&quot;Do you want to modify an API? Type y or n.&quot;);</span>
-<span class="fc" id="L135">        readModifyApi();</span>
-<span class="fc" id="L136">    }</span>
+<span class="fc" id="L172">        System.out.println(&quot;Do you want to modify an API? 1: YES or 2: NO&quot;);</span>
+<span class="fc" id="L173">        readModifyApi();</span>
+<span class="fc" id="L174">    }</span>
 
     public void readModifyApi(){
         try{
-<span class="fc" id="L140">            String currentModify = br.readLine();</span>
-<span class="pc bpc" id="L141" title="1 of 3 branches missed.">            switch (currentModify) {</span>
-                case &quot;y&quot;:
-<span class="fc" id="L143">                    System.out.println(&quot;Type the ID of the first API to replace&quot;);</span>
-<span class="fc" id="L144">                    String first = br.readLine();</span>
-<span class="fc" id="L145">                    System.out.println(&quot;Type the ID of the last API to replace&quot;);</span>
-<span class="fc" id="L146">                    String second = br.readLine();</span>
-<span class="fc" id="L147">                    askPla();</span>
-<span class="fc" id="L148">                    readPla();</span>
-                    //Serve un controllo per l'id
-<span class="fc" id="L150">                    controller.modifyApi(Integer.parseInt(first),Integer.parseInt(second),currentBal,currentPla);</span>
-<span class="fc" id="L151">                    askGenerateApi();</span>
-<span class="fc" id="L152">                    readGenerateApi();</span>
-<span class="fc" id="L153">                    break;</span>
-                case &quot;n&quot;:
-<span class="fc" id="L155">                    break;</span>
+<span class="fc" id="L178">            String currentModify = br.readLine();</span>
+<span class="pc bpc" id="L179" title="1 of 3 branches missed.">            switch (currentModify) {</span>
+                case &quot;1&quot;:
+<span class="fc" id="L181">                    System.out.println(&quot;Type the ID of the first API to replace&quot;);</span>
+<span class="fc" id="L182">                    String first = br.readLine();</span>
+<span class="fc" id="L183">                    System.out.println(&quot;Type the ID of the last API to replace&quot;);</span>
+<span class="fc" id="L184">                    String second = br.readLine();</span>
+<span class="fc" id="L185">                    askPla();</span>
+<span class="fc" id="L186">                    readPla();</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">                    if(Integer.parseInt(first) &lt; 0) {</span>
+<span class="nc" id="L188">                        System.out.println(&quot;Invalid ids&quot;);</span>
+<span class="nc" id="L189">                        askModifyApi();</span>
+<span class="nc" id="L190">                        readModifyApi();</span>
+                    }
+                    else {
+<span class="fc" id="L193">                        controller.modifyApi(Integer.parseInt(first),Integer.parseInt(second),currentBal,currentPla);</span>
+<span class="fc" id="L194">                        askGenerateApi();</span>
+<span class="fc" id="L195">                        readGenerateApi();</span>
+                    }
+<span class="fc" id="L197">                    break;</span>
+                case &quot;2&quot;:
+<span class="fc" id="L199">                    System.out.println(&quot;Termine applicazione&quot;);</span>
+<span class="fc" id="L200">                    break;</span>
                 default:
-<span class="nc" id="L157">                    throw new InputMismatchException(&quot;Error: insert y or n&quot;);</span>
+<span class="nc" id="L202">                    System.out.println(&quot;Error: insert 1 or 2&quot;);</span>
+<span class="nc" id="L203">                    askModifyApi();</span>
+<span class="nc" id="L204">                    readModifyApi();</span>
+                    break;
             }
         }
-<span class="nc" id="L160">        catch(IOException e){</span>
-<span class="nc" id="L161">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L162">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="fc" id="L163">        }</span>
-<span class="fc" id="L164">    }</span>
+<span class="nc" id="L208">        catch (IOException e) {</span>
+<span class="nc" id="L209">            System.out.println(&quot;Pla selected doesn't exist&quot;);</span>
+<span class="nc" id="L210">            askModifyApi();</span>
+<span class="nc" id="L211">            readModifyApi();</span>
+        }
+<span class="nc" id="L213">        catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L214">            System.out.println(&quot;Pla isn't correctly formatted&quot;);</span>
+<span class="nc" id="L215">            askModifyApi();</span>
+<span class="nc" id="L216">            readModifyApi();</span>
+<span class="pc" id="L217">        }</span>
+<span class="fc" id="L218">    }</span>
+
+    public void startCli(){
+<span class="nc" id="L221">        askBal();</span>
+<span class="nc" id="L222">        readBal();</span>
+<span class="nc" id="L223">        askPla();</span>
+<span class="nc" id="L224">        readPla();</span>
+<span class="nc" id="L225">        askSuggestApi();</span>
+<span class="nc" id="L226">        readSuggestApi();</span>
+<span class="nc" id="L227">        askAnother();</span>
+<span class="nc" id="L228">        readAnother();</span>
+<span class="nc" id="L229">    }</span>
 
     public void showOutput(){
-<span class="fc" id="L167">        System.out.println(dataPresenter.getStringToShow());</span>
-<span class="fc" id="L168">        System.out.println(dataPresenter.getMessage());</span>
-<span class="fc" id="L169">    }</span>
+<span class="fc" id="L232">        System.out.println(dataPresenter.getStringToShow());</span>
+<span class="fc" id="L233">        System.out.println(dataPresenter.getMessage());</span>
+<span class="fc" id="L234">    }</span>
 
     @Override
     public void update() {
-<span class="fc" id="L173">        showOutput();</span>
-<span class="fc" id="L174">    }</span>
+<span class="fc" id="L238">        showOutput();</span>
+<span class="fc" id="L239">    }</span>
 
     public String getCurrentAnswer() {
-<span class="fc" id="L177">        return currentAnswer;</span>
+<span class="fc" id="L242">        return currentAnswer;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

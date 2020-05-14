@@ -51,237 +51,264 @@ public class Gui implements Observer {
 <span class="nc" id="L51">        frame.setContentPane(mainPanel);</span>
 <span class="nc" id="L52">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
 <span class="nc" id="L53">        frame.setSize(750,700);</span>
+<span class="nc" id="L54">        frame.setLocationRelativeTo(null);</span>
         try {
-<span class="nc" id="L55">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
+<span class="nc" id="L56">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
         }
-<span class="nc" id="L57">        catch (Exception e){</span>
-<span class="nc" id="L58">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L59">            logger.log(Level.SEVERE, &quot;File not found&quot;, e);</span>
-<span class="nc" id="L60">        }</span>
-<span class="nc" id="L61">        comboBox1.setVisible(false);</span>
-<span class="nc" id="L62">        DefaultListCellRenderer dlcr = new DefaultListCellRenderer();</span>
-<span class="nc" id="L63">        dlcr.setHorizontalAlignment(SwingConstants.CENTER);</span>
-<span class="nc" id="L64">        comboBox1.setRenderer(dlcr);</span>
+<span class="nc" id="L58">        catch (IOException e){</span>
+<span class="nc" id="L59">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L60">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc" id="L62">        comboBox1.setVisible(false);</span>
+<span class="nc" id="L63">        DefaultListCellRenderer dlcr = new DefaultListCellRenderer();</span>
+<span class="nc" id="L64">        dlcr.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L65">        comboBox1.setRenderer(dlcr);</span>
         
-<span class="nc" id="L66">        addBalButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L67">            JFileChooser fileChooser = new JFileChooser();</span>
-<span class="nc" id="L68">            fileChooser.showOpenDialog(mainPanel);</span>
-<span class="nc" id="L69">            setBal(fileChooser.getSelectedFile().getAbsolutePath());</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">            if(bal.contains(&quot;.json&quot;)){</span>
-<span class="nc" id="L71">                messageLabel.setText(&quot;Bal loaded!&quot;);</span>
-<span class="nc" id="L72">                mainPanel.setBackground(Color.GREEN);</span>
+<span class="nc" id="L67">        addBalButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L68">            JFileChooser fileChooser = new JFileChooser();</span>
+<span class="nc" id="L69">            int valid = fileChooser.showOpenDialog(mainPanel);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (valid == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L71">                setBal(fileChooser.getSelectedFile().getAbsolutePath());</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                if(bal.contains(&quot;.json&quot;)){</span>
+<span class="nc" id="L73">                    messageLabel.setText(&quot;Bal loaded!&quot;);</span>
+<span class="nc" id="L74">                    mainPanel.setBackground(Color.GREEN);</span>
+                }
+                else{
+<span class="nc" id="L77">                    mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L78">                    messageLabel.setText(&quot;Ops! Something went wrong! Reload your Bal&quot;);</span>
+                }
             }
-            else{
-<span class="nc" id="L75">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L76">                messageLabel.setText(&quot;Ops! Something went wrong! Reload your Bal&quot;);</span>
-            }
-<span class="nc" id="L78">        });</span>
+<span class="nc" id="L81">        });</span>
 
-<span class="nc" id="L80">        addPlaButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L81">            JFileChooser fileChooser = new JFileChooser();</span>
-<span class="nc" id="L82">            fileChooser.showOpenDialog(mainPanel);</span>
-<span class="nc" id="L83">            setPla(fileChooser.getSelectedFile().getAbsolutePath());</span>
-<span class="nc bnc" id="L84" title="All 2 branches missed.">            if(pla.contains(&quot;.txt&quot;)){</span>
-<span class="nc" id="L85">                messageLabel.setText(&quot;Pla loaded!&quot;);</span>
-<span class="nc" id="L86">                mainPanel.setBackground(Color.GREEN);</span>
+<span class="nc" id="L83">        addPlaButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L84">            JFileChooser fileChooser = new JFileChooser();</span>
+<span class="nc" id="L85">            int valid = fileChooser.showOpenDialog(mainPanel);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (valid == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L87">                setPla(fileChooser.getSelectedFile().getAbsolutePath());</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                if (pla.contains(&quot;.txt&quot;)) {</span>
+<span class="nc" id="L89">                    messageLabel.setText(&quot;Pla loaded!&quot;);</span>
+<span class="nc" id="L90">                    mainPanel.setBackground(Color.GREEN);</span>
+                } else {
+<span class="nc" id="L92">                    mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L93">                    messageLabel.setText(&quot;Ops! Something went wrong! Reload your Bal&quot;);</span>
+                }
             }
-            else{
-<span class="nc" id="L89">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L90">                messageLabel.setText(&quot;Ops! Something went wrong! Reload your Bal&quot;);</span>
-            }
-<span class="nc" id="L92">        });</span>
+<span class="nc" id="L96">        });</span>
 
-<span class="nc" id="L94">        suggestionButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L98">        suggestionButton.addActionListener(e -&gt; {</span>
             try{
-<span class="nc" id="L96">                c.createApiSuggestion(bal,pla);</span>
-<span class="nc" id="L97">                comboBox1.setVisible(true);</span>
-<span class="nc" id="L98">                messageLabel.setText(message);</span>
-<span class="nc bnc" id="L99" title="All 2 branches missed.">                if(message.equals(&quot;Suggestions created!&quot;)){</span>
-<span class="nc" id="L100">                    mainPanel.setBackground(Color.GREEN);</span>
+<span class="nc bnc" id="L100" title="All 4 branches missed.">                if(bal.isEmpty() || pla.isEmpty()){</span>
+<span class="nc" id="L101">                    messageLabel.setText(&quot;Load bal and pla first!&quot;);</span>
+<span class="nc" id="L102">                    mainPanel.setBackground(Color.RED);</span>
                 }
-<span class="nc bnc" id="L102" title="All 2 branches missed.">                else if(message.equals(&quot;This couple of BAL and PLA is already generated!&quot;)){</span>
-<span class="nc" id="L103">                    mainPanel.setBackground(Color.RED);</span>
+                else {
+<span class="nc" id="L105">                    c.createApiSuggestion(bal,pla);</span>
+<span class="nc" id="L106">                    comboBox1.setVisible(true);</span>
+<span class="nc" id="L107">                    messageLabel.setText(message);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                    if(message.equals(&quot;Suggestions created!&quot;)){</span>
+<span class="nc" id="L109">                        mainPanel.setBackground(Color.GREEN);</span>
+                    }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                    else if(message.equals(&quot;This couple of BAL and PLA is already generated!&quot;)){</span>
+<span class="nc" id="L112">                        mainPanel.setBackground(Color.RED);</span>
+                    }
                 }
             }
-<span class="nc" id="L106">            catch (Exception ex){</span>
-<span class="nc" id="L107">                messageLabel.setText(&quot;Ops! Something went wrong! &quot; +</span>
+<span class="nc" id="L116">            catch (Exception ex){</span>
+<span class="nc" id="L117">                messageLabel.setText(&quot;Ops! Something went wrong! &quot; +</span>
                         &quot;Check that your BAL and PLA files are correctly formatted&quot;);
-<span class="nc" id="L109">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L110">            }</span>
-<span class="nc" id="L111">        });</span>
+<span class="nc" id="L119">                mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L120">            }</span>
+<span class="nc" id="L121">        });</span>
 
-<span class="nc" id="L113">        generateButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L123">        generateButton.addActionListener(e -&gt; {</span>
             try{
-<span class="nc" id="L115">                JFileChooser fileChooser = new JFileChooser();</span>
-<span class="nc" id="L116">                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span>
-<span class="nc" id="L117">                fileChooser.showSaveDialog(mainPanel);</span>
-<span class="nc" id="L118">                c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + &quot;\\&quot;);</span>
-<span class="nc" id="L119">                messageLabel.setText(message);</span>
-<span class="nc" id="L120">                mainPanel.setBackground(Color.GREEN);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                if(comboBox1.getItemCount() == 0){</span>
+<span class="nc" id="L126">                    messageLabel.setText(&quot;There aren't suggestions to generate!&quot;);</span>
+<span class="nc" id="L127">                    mainPanel.setBackground(Color.RED);</span>
+                }
+                else {
+<span class="nc" id="L130">                    JFileChooser fileChooser = new JFileChooser();</span>
+<span class="nc" id="L131">                    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span>
+<span class="nc" id="L132">                    int valid = fileChooser.showSaveDialog(mainPanel);</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                    if(valid == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L134">                        c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + &quot;\\&quot;);</span>
+<span class="nc" id="L135">                        messageLabel.setText(message);</span>
+<span class="nc" id="L136">                        mainPanel.setBackground(Color.GREEN);</span>
+                    }
+                }
             }
-<span class="nc" id="L122">            catch(Exception ex){</span>
-<span class="nc" id="L123">                messageLabel.setText(&quot;What are you doing? There aren't suggestions to generate!&quot;);</span>
-<span class="nc" id="L124">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L125">            }</span>
-<span class="nc" id="L126">        });</span>
+<span class="nc" id="L140">            catch(Exception ex){</span>
+<span class="nc" id="L141">                messageLabel.setText(&quot;File not found!&quot;);</span>
+<span class="nc" id="L142">                mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L143">            }</span>
+<span class="nc" id="L144">        });</span>
 
-<span class="nc" id="L128">        createPLAButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L129">            GuiPla guiPla = new GuiPla(controller,dataPresenterGui);</span>
-<span class="nc" id="L130">            guiPla.showGuiPla();</span>
-<span class="nc" id="L131">        });</span>
-
-<span class="nc" id="L133">        modifyPLAButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L134">            GuiModifyPla guiModifyPla = new GuiModifyPla(controller,dataPresenterGui);</span>
-<span class="nc" id="L135">            guiModifyPla.showGuiModifyPla();</span>
-<span class="nc" id="L136">        });</span>
-
-<span class="nc" id="L138">        modifyButton.addActionListener(e -&gt; {</span>
-            try{
-<span class="nc" id="L140">                controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());</span>
-<span class="nc" id="L141">                toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());</span>
-<span class="nc" id="L142">                messageLabel.setText(&quot;Api modified!&quot;);</span>
-<span class="nc" id="L143">                mainPanel.setBackground(Color.GREEN);</span>
-            }
-<span class="nc" id="L145">            catch (Exception ex) {</span>
-<span class="nc" id="L146">                messageLabel.setText(&quot;What are you doing? There aren't suggestions to modify!&quot;);</span>
-<span class="nc" id="L147">                mainPanel.setBackground(Color.RED);</span>
-<span class="nc" id="L148">            }</span>
+<span class="nc" id="L146">        createPLAButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L147">            GuiPla guiPla = new GuiPla(controller,dataPresenterGui);</span>
+<span class="nc" id="L148">            guiPla.showGuiPla();</span>
 <span class="nc" id="L149">        });</span>
 
-<span class="nc" id="L151">        comboBox1.addActionListener(e -&gt;</span>
-<span class="nc" id="L152">            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))</span>
+<span class="nc" id="L151">        modifyPLAButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L152">            GuiModifyPla guiModifyPla = new GuiModifyPla(controller,dataPresenterGui);</span>
+<span class="nc" id="L153">            guiModifyPla.showGuiModifyPla();</span>
+<span class="nc" id="L154">        });</span>
+
+<span class="nc" id="L156">        modifyButton.addActionListener(e -&gt; {</span>
+            try{
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                if(toView.get(comboBox1.getSelectedItem().toString()).equals(textArea.getText())){</span>
+<span class="nc" id="L159">                    messageLabel.setText(&quot;There aren't changes!&quot;);</span>
+<span class="nc" id="L160">                    mainPanel.setBackground(Color.RED);</span>
+                }
+                else {
+<span class="nc" id="L163">                    controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());</span>
+<span class="nc" id="L164">                    toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());</span>
+<span class="nc" id="L165">                    messageLabel.setText(&quot;Api modified!&quot;);</span>
+<span class="nc" id="L166">                    mainPanel.setBackground(Color.GREEN);</span>
+                }
+            }
+<span class="nc" id="L169">            catch (Exception ex) {</span>
+<span class="nc" id="L170">                messageLabel.setText(&quot;There aren't suggestions to modify!&quot;);</span>
+<span class="nc" id="L171">                mainPanel.setBackground(Color.RED);</span>
+<span class="nc" id="L172">            }</span>
+<span class="nc" id="L173">        });</span>
+
+<span class="nc" id="L175">        comboBox1.addActionListener(e -&gt;</span>
+<span class="nc" id="L176">            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))</span>
         );
 
-<span class="nc" id="L155">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L179">        Color myRed = new Color( 224,91,73);</span>
+<span class="nc" id="L180">        Color myBlue = new Color(58,84,105);</span>
+
+<span class="nc" id="L182">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L158">                createPLAButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L159">                createPLAButton.setBorderPainted(false);</span>
-<span class="nc" id="L160">            }</span>
+<span class="nc" id="L185">                createPLAButton.setBackground(myRed);</span>
+<span class="nc" id="L186">                createPLAButton.setBorderPainted(false);</span>
+<span class="nc" id="L187">            }</span>
         });
-<span class="nc" id="L162">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L189">        createPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L165">                createPLAButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L166">                createPLAButton.setBorderPainted(true);</span>
-<span class="nc" id="L167">            }</span>
+<span class="nc" id="L192">                createPLAButton.setBackground(myBlue);</span>
+<span class="nc" id="L193">                createPLAButton.setBorderPainted(true);</span>
+<span class="nc" id="L194">            }</span>
         });
-<span class="nc" id="L169">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L196">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L172">                modifyPLAButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L173">                modifyPLAButton.setBorderPainted(false);</span>
-<span class="nc" id="L174">            }</span>
+<span class="nc" id="L199">                modifyPLAButton.setBackground(myRed);</span>
+<span class="nc" id="L200">                modifyPLAButton.setBorderPainted(false);</span>
+<span class="nc" id="L201">            }</span>
         });
-<span class="nc" id="L176">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L203">        modifyPLAButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L179">                modifyPLAButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L180">                modifyPLAButton.setBorderPainted(true);</span>
-<span class="nc" id="L181">            }</span>
+<span class="nc" id="L206">                modifyPLAButton.setBackground(myBlue);</span>
+<span class="nc" id="L207">                modifyPLAButton.setBorderPainted(true);</span>
+<span class="nc" id="L208">            }</span>
         });
-<span class="nc" id="L183">        addBalButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L210">        addBalButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L186">                addBalButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L187">                addBalButton.setBorderPainted(false);</span>
-<span class="nc" id="L188">            }</span>
+<span class="nc" id="L213">                addBalButton.setBackground(myRed);</span>
+<span class="nc" id="L214">                addBalButton.setBorderPainted(false);</span>
+<span class="nc" id="L215">            }</span>
         });
-<span class="nc" id="L190">        addBalButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L217">        addBalButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L193">                addBalButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L194">                addBalButton.setBorderPainted(true);</span>
-<span class="nc" id="L195">            }</span>
+<span class="nc" id="L220">                addBalButton.setBackground(myBlue);</span>
+<span class="nc" id="L221">                addBalButton.setBorderPainted(true);</span>
+<span class="nc" id="L222">            }</span>
         });
-<span class="nc" id="L197">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L224">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L200">                addPlaButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L201">                addPlaButton.setBorderPainted(false);</span>
-<span class="nc" id="L202">            }</span>
+<span class="nc" id="L227">                addPlaButton.setBackground(myRed);</span>
+<span class="nc" id="L228">                addPlaButton.setBorderPainted(false);</span>
+<span class="nc" id="L229">            }</span>
         });
-<span class="nc" id="L204">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L231">        addPlaButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L207">                addPlaButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L208">                addPlaButton.setBorderPainted(true);</span>
-<span class="nc" id="L209">            }</span>
+<span class="nc" id="L234">                addPlaButton.setBackground(myBlue);</span>
+<span class="nc" id="L235">                addPlaButton.setBorderPainted(true);</span>
+<span class="nc" id="L236">            }</span>
         });
-<span class="nc" id="L211">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L238">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L214">                suggestionButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L215">                suggestionButton.setBorderPainted(false);</span>
-<span class="nc" id="L216">            }</span>
+<span class="nc" id="L241">                suggestionButton.setBackground(myRed);</span>
+<span class="nc" id="L242">                suggestionButton.setBorderPainted(false);</span>
+<span class="nc" id="L243">            }</span>
         });
-<span class="nc" id="L218">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L245">        suggestionButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L221">                suggestionButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L222">                suggestionButton.setBorderPainted(true);</span>
-<span class="nc" id="L223">            }</span>
+<span class="nc" id="L248">                suggestionButton.setBackground(myBlue);</span>
+<span class="nc" id="L249">                suggestionButton.setBorderPainted(true);</span>
+<span class="nc" id="L250">            }</span>
         });
-<span class="nc" id="L225">        generateButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L252">        generateButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L228">                generateButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L229">                generateButton.setBorderPainted(false);</span>
-<span class="nc" id="L230">            }</span>
+<span class="nc" id="L255">                generateButton.setBackground(myRed);</span>
+<span class="nc" id="L256">                generateButton.setBorderPainted(false);</span>
+<span class="nc" id="L257">            }</span>
         });
-<span class="nc" id="L232">        generateButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L259">        generateButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L235">                generateButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L236">                generateButton.setBorderPainted(true);</span>
-<span class="nc" id="L237">            }</span>
+<span class="nc" id="L262">                generateButton.setBackground(myBlue);</span>
+<span class="nc" id="L263">                generateButton.setBorderPainted(true);</span>
+<span class="nc" id="L264">            }</span>
         });
-<span class="nc" id="L239">        modifyButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L266">        modifyButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseEntered(MouseEvent e) {
-<span class="nc" id="L242">                modifyButton.setBackground(new Color( 224,91,73));</span>
-<span class="nc" id="L243">                modifyButton.setBorderPainted(false);</span>
-<span class="nc" id="L244">            }</span>
+<span class="nc" id="L269">                modifyButton.setBackground(myRed);</span>
+<span class="nc" id="L270">                modifyButton.setBorderPainted(false);</span>
+<span class="nc" id="L271">            }</span>
         });
-<span class="nc" id="L246">        modifyButton.addMouseListener(new MouseAdapter() {</span>
+<span class="nc" id="L273">        modifyButton.addMouseListener(new MouseAdapter() {</span>
             @Override
             public void mouseExited(MouseEvent e) {
-<span class="nc" id="L249">                modifyButton.setBackground(new Color(58,84,105));</span>
-<span class="nc" id="L250">                modifyButton.setBorderPainted(true);</span>
-<span class="nc" id="L251">            }</span>
+<span class="nc" id="L276">                modifyButton.setBackground(myBlue);</span>
+<span class="nc" id="L277">                modifyButton.setBorderPainted(true);</span>
+<span class="nc" id="L278">            }</span>
         });
-<span class="nc" id="L253">    }</span>
+<span class="nc" id="L280">    }</span>
 
     private void setBal(String s) {
-<span class="nc" id="L256">        bal = s;</span>
-<span class="nc" id="L257">    }</span>
+<span class="nc" id="L283">        bal = s;</span>
+<span class="nc" id="L284">    }</span>
 
     private void setPla(String s) {
-<span class="nc" id="L260">        pla = s;</span>
-<span class="nc" id="L261">    }</span>
+<span class="nc" id="L287">        pla = s;</span>
+<span class="nc" id="L288">    }</span>
 
     public void showGui(){
-<span class="nc" id="L264">        frame.setVisible(true);</span>
-<span class="nc" id="L265">    }</span>
+<span class="nc" id="L291">        frame.setVisible(true);</span>
+<span class="nc" id="L292">    }</span>
 
     public void showOutput(){
-<span class="nc bnc" id="L268" title="All 2 branches missed.">        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1) {</span>
-<span class="nc" id="L269">            toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());</span>
-<span class="nc" id="L270">            comboBox1.addItem(dataPresenterGui.getComboToShow());</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1) {</span>
+<span class="nc" id="L296">            toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());</span>
+<span class="nc" id="L297">            comboBox1.addItem(dataPresenterGui.getComboToShow());</span>
         }
         else {
-<span class="nc bnc" id="L273" title="All 2 branches missed.">            if(dataPresenterGui.getComboToShow().equals(&quot;Test\\StepDefinitions.java&quot;)){</span>
-<span class="nc" id="L274">                toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());</span>
-<span class="nc" id="L275">                comboBox1.setSelectedIndex(0);</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            if(dataPresenterGui.getComboToShow().equals(&quot;Test\\StepDefinitions.java&quot;)){</span>
+<span class="nc" id="L301">                toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());</span>
+<span class="nc" id="L302">                comboBox1.setSelectedIndex(0);</span>
             }
         }
-<span class="nc" id="L278">        message = dataPresenterGui.getMessage();</span>
-<span class="nc" id="L279">    }</span>
+<span class="nc" id="L305">        message = dataPresenterGui.getMessage();</span>
+<span class="nc" id="L306">    }</span>
 
     @Override
     public void update() {
-<span class="nc" id="L283">        showOutput();</span>
-<span class="nc" id="L284">    }</span>
+<span class="nc" id="L310">        showOutput();</span>
+<span class="nc" id="L311">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

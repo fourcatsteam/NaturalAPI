@@ -24,20 +24,7 @@ import fourcats.view.CLI;
                 new CreatePla(repo,new DataPresenterGui()), new ModifyPla(repo,new DataPresenterGui()));
 
 <span class="nc" id="L26">        CLI c = new CLI(controller,dataPresenter);</span>
-
-        do{
-<span class="nc" id="L29">            c.askBal();</span>
-<span class="nc" id="L30">            c.readBal();</span>
-<span class="nc" id="L31">            c.askPla();</span>
-<span class="nc" id="L32">            c.readPla();</span>
-<span class="nc" id="L33">            c.askSuggestApi();</span>
-<span class="nc" id="L34">            c.readSuggestApi();</span>
-<span class="nc" id="L35">            c.askAnother();</span>
-<span class="nc" id="L36">            c.readAnother();</span>
-        }
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        while(!c.getCurrentAnswer().equals(&quot;n&quot;));</span>
-<span class="nc" id="L39">        c.askGenerateApi();</span>
-<span class="nc" id="L40">        c.readGenerateApi();</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L27">        c.startCli();</span>
+<span class="nc" id="L28">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

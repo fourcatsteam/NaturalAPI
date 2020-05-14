@@ -4,7 +4,7 @@ import fourcats.frameworks.BalAnalyzerImplementation;
 import fourcats.frameworks.DataKeeper;
 import fourcats.frameworks.FileSystem;
 import fourcats.frameworks.Repository;
-import fourcats.gui.Gui;
+import fourcats.view.Gui;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.usecaseinteractor.*;

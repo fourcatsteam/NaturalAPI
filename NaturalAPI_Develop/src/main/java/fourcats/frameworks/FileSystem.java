@@ -3,7 +3,6 @@ package fourcats.frameworks;
 import fourcats.entity.API;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
