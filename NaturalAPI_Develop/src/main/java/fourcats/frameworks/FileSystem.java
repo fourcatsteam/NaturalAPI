@@ -17,13 +17,12 @@ public class FileSystem {
         StringBuilder sb = new StringBuilder();
         File file = openFile(filename);
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-
-        String line;
-        while((line = bufferedReader.readLine()) != null){
-            sb.append(line + "\n");
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                sb.append(line + "\n");
+            }
         }
-        bufferedReader.close();
         return sb.toString();
     }
 
