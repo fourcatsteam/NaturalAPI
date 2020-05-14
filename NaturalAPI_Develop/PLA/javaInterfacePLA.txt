@@ -18,7 +18,7 @@ public class "custom_class" {
 
 }
 test class
-	@"keyword" ("^"test_stub"$")
+	@"keyword" (""test_stub"")
 	public void "test_stub"() {
 		//please insert an implementation of the test
 		//"group_action" "action_name";
