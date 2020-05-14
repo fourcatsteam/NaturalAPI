@@ -1,10 +1,13 @@
 package FourCats.GUI;
 
+import FourCats.DataStructure.TableRow;
+import FourCats.DataStructure.WordCounter;
 import FourCats.Frameworks.FileSystemAccess;
 import FourCats.InterfaceAdapters.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -39,12 +42,14 @@ public class GUI_Discover extends JPanel implements Observer{
     private JTable tableVerbs;
     private JTable tablePredicates;
     private Boolean areFilesLoaded;
-
     private Controller controller;
     private DataPresenter datapresenter;
     private FileSystemAccess fileSystemAccess;
+    private LinkedList<String> isKeyString;
+
 
     public GUI_Discover(Controller c, DataPresenter d, FileSystemAccess fs) {
+        this.isKeyString = new LinkedList<>();
         this.areFilesLoaded = false;
         this.controller = c;
         this.datapresenter= d;
@@ -362,9 +367,31 @@ public class GUI_Discover extends JPanel implements Observer{
             datapresenter.getBdlPredicates().stream()
                     .forEach(tableRow -> {
                         predModel.addRow(new Object[]{tableRow.getWord(), tableRow.getFrequency()});
+                        if(tableRow.isKeyValue()){
+                            isKeyString.add(tableRow.getWord());
+                        }
                     });
-
+            
             tablePredicates.setModel(predModel);
+            tablePredicates.getColumn("Predicate").setCellRenderer(
+                    new DefaultTableCellRenderer() {
+                        @Override
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                            DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                            for (String s : isKeyString) {
+                                if (s.equalsIgnoreCase(value.toString())) {
+                                    renderer.setForeground(Color.GREEN);
+                                    return renderer;
+                                }else{
+                                    renderer.setForeground(Color.BLACK);
+                                }
+                            }
+                            return renderer;
+                        }
+
+                    }
+            );
+
             tablePredicates.getColumn("Frequency").setPreferredWidth(10);
         }
 

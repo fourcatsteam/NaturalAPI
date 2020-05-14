@@ -89,6 +89,7 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
     }
 
     private void convertBdl(Bdl bdl) {
+
         this.bdlNouns.addAll(bdl.getNouns().stream()
                 .map(w->new TableRow(w.getWord(),w.getCount().toString()))
                 .collect(Collectors.toList()));
@@ -96,7 +97,7 @@ public class DataPresenter extends Subject implements CreateBdlOutputPort, AddDo
                 .map(w->new TableRow(w.getWord(),w.getCount().toString()))
                 .collect(Collectors.toList()));
         this.bdlPredicates.addAll(bdl.getPredicates().stream()
-                .map(w->new TableRow(w.getWord(),w.getCount().toString()))
+                .map(w->new TableRow(w.getWord(),w.getCount().toString(),w.isKeyValue()))
                 .collect(Collectors.toList()));
     }
 
