@@ -6,6 +6,8 @@ import fourcats.port.*;
 import fourcats.suggestionbdlalgorithm.SuggestionFeedback;
 import fourcats.suggestionbdlalgorithm.SuggestionFrequency;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class DataPresenter extends Subject implements GenerateBalSuggestionsOutputPort, DeclineBalSuggestionOutputPort,
@@ -13,6 +15,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
         AddBalSuggestionOutputPort, LoadBdlOutputPort, RemoveBdlOutputPort {
 
     private String toShow;
+    private List<String> lTypes = new ArrayList<>();
     private SuggestionFeedback algorithm;
     private boolean isBdlLoaded;
 
@@ -52,6 +55,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     public String getDataToShow(){
         return toShow;
     }
+    public List<String> getTypes(){return lTypes;}
 
     @Override
     public void showGenerationStatus(boolean isBALGenerated) {
@@ -152,7 +156,9 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
     @Override
     public void showTypes(Map<Integer, Type> mTypes) {
         if (mTypes.size()!=0) {
+            lTypes.clear();
             for (Map.Entry<Integer, Type> mTy : mTypes.entrySet()) {
+                lTypes.add(mTy.getValue().getName());
                 toShow = "----TYPE: " + mTy.getKey() + ") " + mTy.getValue().getName() + "----";
                 notifyObservers();
             }

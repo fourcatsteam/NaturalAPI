@@ -176,37 +176,55 @@ public class Cli implements Observer {
         String customTypeName = br.readLine().trim().replace(' ','_');
         if (!customTypeName.equals("") && !isNumeric(customTypeName)) {
             boolean isDone = false;
+            print("Do you want to add an attribute for the type '" + customTypeName + "'? 1. Yes 2. No");
+            String input = br.readLine();
+            if (input.equals("2")) isDone = true;
+            else if (!input.equals("1")) {
+                print("Invalid option. Abort.");
+                return;
+            }
             while (!isDone) {
-                print("Insert the name of the attribute for the type '" + customTypeName + "'");
-                print("NOTICE: All attribute names must be unique (otherwise only the last one entered will be retained).");
-                String attributeName = br.readLine().trim().replace(' ','_');
-                if (!attributeName.equals("") && !isNumeric(attributeName)) {
-                    print("Insert the type for the attribute '" + attributeName + "'");
-                    String attributeType = askForSimpleTypeOption();
-                    if (isNumeric(attributeType)) {
-                        mAttributes.put(attributeName, attributeType);
-                        print("Here the attribute you defined: " + attributeType + " " + attributeName);
-                        print("\nDo you want to add another attribute? 1. Yes 2. No");
-                        if (br.readLine().equals("2")) {
-                            isDone = true;
-                        }
-                    }
+                askForAttribute(mAttributes,customTypeName);
+                print("\nDo you want to add another attribute? 1. Yes 2. No");
+                if (br.readLine().equals("2")) {
+                    isDone = true;
                 }
             }
-            if (!mAttributes.isEmpty())
-                contr.createCustomType(customTypeName, mAttributes);
+            contr.createCustomType(customTypeName, mAttributes);
+        }
+    }
+
+    private void askForAttribute(Map<String,String> mAttributes, String customTypeName) throws IOException {
+        print("Insert the name of the attribute for the type '" + customTypeName + "'");
+        print("NOTICE: All attribute names must be unique (otherwise only the last one entered will be retained).");
+        String attributeName = br.readLine().trim().replace(' ','_');
+        if (!attributeName.equals("") && !isNumeric(attributeName)) {
+            print("Insert the type for the attribute '" + attributeName + "'");
+            String attributeType = askForDefinedTypeId();
+            if (attributeType!=null) {
+                mAttributes.put(attributeName, attributeType);
+                print("Here the attribute you defined: " + attributeType + " " + attributeName);
+            }
+            else {
+                print("Invalid input. Abort.");
+            }
         }
     }
 
 
-    private String askForSimpleTypeOption() throws IOException {
+    private String askForDefinedTypeId() throws IOException {
         String idType = "";
-        while(!isNumeric(idType)) {
+        while(true) {
             contr.showTypes();
             print("Insert the id for the desired type.");
             idType = br.readLine();
+            if (!isNumeric(idType) || Integer.parseInt(idType)>=dataPresenter.getTypes().size()){
+                print("Invalid input.");
+            }
+            else{
+                return dataPresenter.getTypes().get(Integer.parseInt(idType));
+            }
         }
-        return idType;
     }
 
 
