@@ -55,12 +55,11 @@ public class DataPresenterTest {
         HashMap<Integer, Scenario> aMap = new HashMap<>();
         aMap.put(1, aScenario);
 
-        when(aScenario.getName()).thenReturn("ScenarioName");
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
 
-        assertTrue(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName"));
+        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1)"));
     }
 
     @Test
@@ -68,13 +67,12 @@ public class DataPresenterTest {
         HashMap<Integer, Scenario> aMap = new HashMap<>();
         aMap.put(1, aScenario);
 
-        when(aScenario.getName()).thenReturn("ScenarioName");
         when(aScenarioMap.entrySet()).thenReturn(aMap.entrySet());
 
         dataPresenter.showRemoveBdlStatus();
         dataPresenter.showSuggestionsForScenario(aScenarioMap);
 
-        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1) ScenarioName"));
+        assertFalse(dataPresenter.getDataToShow().startsWith("----SCENARIO: 1)"));
     }
 
     @Test
