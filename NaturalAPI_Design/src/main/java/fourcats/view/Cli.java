@@ -324,7 +324,7 @@ public class Cli implements Observer {
 
     private String askForIdObjectToModify() throws IOException {
         String idObject = "";
-        while (isNumeric(idObject)) {
+        while (!isNumeric(idObject)) {
             print("Please insert the id of the object you want to modify: 0 first, 1 second, 2 third...");
             idObject = br.readLine();
         }
