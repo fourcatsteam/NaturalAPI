@@ -31,7 +31,7 @@
               <contentAreaFilled value="true"/>
               <foreground color="-1"/>
               <opaque value="true"/>
-              <text value="Add Bal"/>
+              <text value="Add BAL"/>
             </properties>
           </component>
           <component id="807b6" class="javax.swing.JButton" binding="addPlaButton" default-binding="true">
@@ -43,7 +43,7 @@
               <borderPainted value="true"/>
               <contentAreaFilled value="true"/>
               <foreground color="-1"/>
-              <text value="Add Pla"/>
+              <text value="Add PLA"/>
             </properties>
           </component>
         </children>
@@ -57,7 +57,7 @@
           <borderPainted value="true"/>
           <contentAreaFilled value="true"/>
           <foreground color="-1"/>
-          <text value="Generate Api's suggestions"/>
+          <text value="Generate API's suggestions"/>
         </properties>
       </component>
       <grid id="f96c6" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="0" vgap="0">
@@ -79,7 +79,7 @@
               <borderPainted value="true"/>
               <contentAreaFilled value="true"/>
               <foreground color="-1"/>
-              <text value="Generate your Api's"/>
+              <text value="Generate your API's"/>
             </properties>
           </component>
           <component id="43e4b" class="javax.swing.JButton" binding="modifyButton">
@@ -91,7 +91,7 @@
               <borderPainted value="true"/>
               <contentAreaFilled value="true"/>
               <foreground color="-1"/>
-              <text value="Modify your Api's"/>
+              <text value="Modify your API's"/>
             </properties>
           </component>
         </children>

@@ -16,7 +16,7 @@
         </constraints>
         <properties>
           <foreground color="-1"/>
-          <text value="Modify your PLA (Api)"/>
+          <text value="Modify your PLA (API)"/>
         </properties>
       </component>
       <scrollpane id="f0e1b">

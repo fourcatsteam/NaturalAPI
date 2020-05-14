@@ -46,6 +46,7 @@ public class GuiPla implements Observer {
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
+        frame.setLocationRelativeTo(null);
         try {
             frame.setIconImage(ImageIO.read(new File("./bee.png")));
         }

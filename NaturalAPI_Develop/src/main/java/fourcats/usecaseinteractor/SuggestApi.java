@@ -38,7 +38,7 @@ public class SuggestApi implements ApiInputPort {
             API test = new API();
             String[] splitTest = pla.getText().split("\n");
             splitTest[0] = insertGroup(splitTest[0],"StepDefinitions");
-            test.setFilename("Test\\StepDefinitions" + pla.getExtension());
+            test.setFilename("test\\StepDefinitions" + pla.getExtension());
             test.setText(splitTest[0] + "\n\n" + repositoryAccess.getAllTests() + splitTest[splitTest.length-1]);
             repositoryAccess.addApi(test);
 
@@ -88,7 +88,7 @@ public class SuggestApi implements ApiInputPort {
                 newApi = insertActionName(newApi, action.getName());
 
                 API api = new API();
-                api.setFilename("Api\\" + actor.getName() + "\\" + action.getName().substring(0, 1).toUpperCase() + action.getName().substring(1) + pla.getExtension());
+                api.setFilename("api\\" + actor.getName().toLowerCase().replace(" ","_") + "\\" + action.getName().substring(0, 1).toUpperCase() + action.getName().substring(1) + pla.getExtension());
                 api.setText(newApi);
 
                 if (!repositoryAccess.isThisApiPresent(api)) {
@@ -232,7 +232,7 @@ public class SuggestApi implements ApiInputPort {
 
         customApi = customApi.replace("\"custom_class\"",action.getType().getName());
 
-        api.setFilename("Custom classes\\" + actor + "\\" + action.getType().getName() + pla.getExtension());
+        api.setFilename("custom_classes\\" + actor.toLowerCase().replace(" ","_") + "\\" + action.getType().getName() + pla.getExtension());
         api.setText(customApi);
 
         if(!repositoryAccess.isThisApiPresent(api)){
@@ -269,7 +269,7 @@ public class SuggestApi implements ApiInputPort {
 
         customApi = customApi.replace("\"custom_class\"",objectParam.getType().getName());
 
-        api.setFilename("Custom classes\\" + actor + "\\" + objectParam.getType().getName() + pla.getExtension());
+        api.setFilename("custom_classes\\" + actor.toLowerCase().replace(" ","_") + "\\" + objectParam.getType().getName() + pla.getExtension());
         api.setText(customApi);
 
         if(!repositoryAccess.isThisApiPresent(api)){
