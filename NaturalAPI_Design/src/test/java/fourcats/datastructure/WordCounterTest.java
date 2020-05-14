@@ -1,5 +1,6 @@
 package fourcats.datastructure;
 
+import edu.stanford.nlp.ling.Word;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class WordCounterTest {
 
     @Before
     public void before() {
-        w = new WordCounter("parola");
+        w = new WordCounter("parola",1);
     }
 
     @Test
@@ -25,6 +26,11 @@ public class WordCounterTest {
         w.decrementCounter();
         w.decrementCounter();
         assertEquals(0,w.getCount().longValue());
+    }
+
+    @Test
+    public void compareToTest(){
+        assertEquals(-1,w.compareTo(new WordCounter("parola",2)));
     }
 
     @Test

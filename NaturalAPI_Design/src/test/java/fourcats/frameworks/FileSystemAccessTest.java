@@ -67,6 +67,22 @@ public class FileSystemAccessTest {
     }
 
     @Test
+    public void FileSystemAccessLoadBdl() throws IOException {
+        assertNotNull(fileSystemAccess.loadBdl(".\\BDL\\ATM"));
+    }
+
+    @Test
+    public void FileSystemAccessgetBdl() throws IOException {
+        String[] v = new String[3];
+        v[0] = "BDL\\ATM.nouns.bdl.csv";
+        v[1] = "BDL\\ATM.verbs.bdl.csv";
+        v[2] = "BDL\\ATM.predicates.bdl.csv";
+
+        assertNotNull(fileSystemAccess.getBdl(v));
+    }
+
+
+    @Test
     public void FileSystemAccessLoadBdlWthError() {
         try{
             fileSystemAccess.loadBdl("bdl");
