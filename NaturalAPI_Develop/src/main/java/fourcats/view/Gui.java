@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -52,13 +53,11 @@ public class Gui implements Observer {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(750,700);
         frame.setLocationRelativeTo(null);
-        try {
-            frame.setIconImage(ImageIO.read(new File("./bee.png")));
-        }
-        catch (IOException e){
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "IOException", e);
-        }
+
+        //set logo
+        final URL url = Thread.currentThread().getContextClassLoader().getResource("images/logo.png");
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+
         comboBox1.setVisible(false);
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
         dlcr.setHorizontalAlignment(SwingConstants.CENTER);

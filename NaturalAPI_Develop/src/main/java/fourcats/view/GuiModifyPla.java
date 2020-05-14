@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,13 +54,10 @@ public class GuiModifyPla implements Observer {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500,500);
         frame.setLocationRelativeTo(null);
-        try {
-            frame.setIconImage(ImageIO.read(new File("./bee.png")));
-        }
-        catch (Exception e){
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE, "IOException", e);
-        }
+
+        //set logo
+        final URL url = Thread.currentThread().getContextClassLoader().getResource("images/logo.png");
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
 
         loadButton.addActionListener(e -> {
             fileChooser = new JFileChooser();
