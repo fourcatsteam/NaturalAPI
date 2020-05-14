@@ -100,7 +100,6 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
 
     @Override
     public void showModifiedObjectName(Map<Integer, Scenario> mScenarios, boolean isObjectNameModified, String objectNameModified) {
-        //Da implementare isBdlLoaded
         if (isObjectNameModified){
             toShow = "Parameter name of the suggestion successfully updated! This is the updated list of suggestions";
             notifyObservers();
@@ -196,7 +195,7 @@ public class DataPresenter extends Subject implements GenerateBalSuggestionsOutp
 
     private void showSuggestions(Map<Integer,Scenario> mScenarios) {
         for (Map.Entry<Integer,Scenario> mSc : mScenarios.entrySet()) {
-            toShow = "----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getName() + "----";
+            toShow = "\n----SCENARIO: " + mSc.getKey() + ") " + mSc.getValue().getContent()+"\n";
             notifyObservers();
             if (mSc.getValue().getActionsMap().isEmpty()){
                 toShow = "No additional suggestion found";
