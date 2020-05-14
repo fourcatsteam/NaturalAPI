@@ -38,7 +38,7 @@ public class BalAnalyzerImplementationTest {
 
     @Test
     public void correctlySettingBalFile() throws IOException{
-        String fileNameBal = "nameBal";
+        String fileNameBal = ".\\BAL\\TestFiles\\balAtm.json";
         File file = new File(fileNameBal);
         analyzer.setBalFile(file);
         ObjectMapper objectMapper = new ObjectMapper();

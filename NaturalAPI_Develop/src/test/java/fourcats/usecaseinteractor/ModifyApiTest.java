@@ -52,7 +52,7 @@ public class ModifyApiTest {
     public void testingModifyApi(){
 
         modifyApi.modify(1,3);
-        verify(repositoryMock,times(2)).deleteApi(anyInt());
+        verify(repositoryMock,times(1)).deleteApi(anyInt());
 
     }
 }

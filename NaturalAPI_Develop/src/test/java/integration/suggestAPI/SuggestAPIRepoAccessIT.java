@@ -85,7 +85,7 @@ public class SuggestAPIRepoAccessIT {
 
         verify(spyrepo,times(1)).openFile(any(String.class));
         verify(spyrepo,times(4)).addApi(any(API.class));
-        verify(spyrepo,times(4)).isThisApiPresent(any(API.class));
+        verify(spyrepo,times(3)).isThisApiPresent(any(API.class));
         assertEquals(4,spyrepo.getApiMap().size());
 
     }
