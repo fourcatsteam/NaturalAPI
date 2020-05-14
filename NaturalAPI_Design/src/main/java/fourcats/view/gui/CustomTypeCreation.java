@@ -1,5 +1,6 @@
 package fourcats.view.gui;
 
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import fourcats.interfaceadapters.Controller;
 import fourcats.view.utilities.ViewUtility;
 import javax.swing.*;
@@ -92,19 +93,13 @@ public class CustomTypeCreation extends Component {
                         mAttributes.put(attrName, attrW.getAttributeType());
                     }
                 }
-                if (mAttributes.size() != 0) {
-                    controller.createCustomType(customTypeNameField.getText().trim().replace(' ', '_'), mAttributes);
-                    isCustomTypeCreated = true;
-                    frame.dispose();
-                    return;
-                }
-                JOptionPane.showMessageDialog(null, "Custom types should have at least one attribute", "No attributes", JOptionPane.WARNING_MESSAGE);
+                controller.createCustomType(customTypeNameField.getText().trim().replace(' ', '_'), mAttributes);
+                isCustomTypeCreated = true;
+                frame.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Please enter the name for the custom type", "No name given", JOptionPane.WARNING_MESSAGE);
             }
-
         });
-
         cancelButton.addActionListener(e -> frame.dispose());
     }
 
@@ -128,6 +123,6 @@ public class CustomTypeCreation extends Component {
      */
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
     }
 }
