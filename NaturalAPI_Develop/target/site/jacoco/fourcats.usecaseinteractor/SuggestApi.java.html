@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuggestApi.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.usecaseinteractor</a> &gt; <span class="el_source">SuggestApi.java</span></div><h1>SuggestApi.java</h1><pre class="source lang-java linenums">package fourcats.usecaseinteractor;
+
+import fourcats.port.ApiInputPort;
+import fourcats.entity.*;
+import fourcats.interfaceaccess.BalAnalyzer;
+import fourcats.interfaceaccess.RepositoryAccess;
+import fourcats.port.ApiOutputPort;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SuggestApi implements ApiInputPort {
+
+    BalAnalyzer balAnalyzer;
+    RepositoryAccess repositoryAccess;
+    ApiOutputPort apiOutputPort;
+
+<span class="fc" id="L18">    public SuggestApi(BalAnalyzer b,RepositoryAccess r,ApiOutputPort apiOutputPort) {</span>
+<span class="fc" id="L19">        balAnalyzer = b;</span>
+<span class="fc" id="L20">        repositoryAccess = r;</span>
+<span class="fc" id="L21">        this.apiOutputPort = apiOutputPort;</span>
+<span class="fc" id="L22">    }</span>
+
+    public void create(String filenameBal,String filenamePla) throws IOException {
+
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(!repositoryAccess.isCoupleBalPlaPresent(filenameBal,filenamePla)){</span>
+<span class="fc" id="L27">            balAnalyzer.setBalFile(repositoryAccess.openFile(filenameBal));</span>
+<span class="fc" id="L28">            BAL bal = balAnalyzer.getBAL();</span>
+<span class="fc" id="L29">            PLA pla = new PLA(repositoryAccess.loadPLA(filenamePla));</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            for(Actor actor : bal.getActors()){</span>
+
+<span class="fc" id="L33">                iterateActions(pla,actor);</span>
+<span class="fc" id="L34">            }</span>
+
+<span class="fc" id="L36">            API test = new API();</span>
+<span class="fc" id="L37">            String[] splitTest = pla.getText().split(&quot;\n&quot;);</span>
+<span class="fc" id="L38">            splitTest[0] = insertGroup(splitTest[0],&quot;StepDefinitions&quot;);</span>
+<span class="fc" id="L39">            test.setFilename(&quot;test\\StepDefinitions&quot; + pla.getExtension());</span>
+<span class="fc" id="L40">            test.setText(splitTest[0] + &quot;\n\n&quot; + repositoryAccess.getAllTests() + splitTest[splitTest.length-1]);</span>
+<span class="fc" id="L41">            repositoryAccess.addApi(test);</span>
+
+<span class="fc" id="L43">            repositoryAccess.addCoupleBalPla(filenameBal,filenamePla);</span>
+<span class="fc" id="L44">            apiOutputPort.showOutput(repositoryAccess.getApiMap());</span>
+<span class="fc" id="L45">            apiOutputPort.showMessage(&quot;Suggestions created!&quot;);</span>
+<span class="fc" id="L46">        }</span>
+        else {
+<span class="nc" id="L48">            apiOutputPort.showMessage(&quot;This couple of BAL and PLA is already generated!&quot;);</span>
+        }
+<span class="fc" id="L50">    }</span>
+
+    private void iterateActions(PLA pla,Actor actor) {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for(Action action : actor.getActions()) {</span>
+
+<span class="fc" id="L55">            String parameters = &quot;&quot;;</span>
+<span class="pc bpc" id="L56" title="2 of 4 branches missed.">            if (!action.getName().startsWith(&quot;@&quot;) &amp;&amp; !action.getName().isEmpty()) {</span>
+
+<span class="fc" id="L58">                String newApi = pla.getText();</span>
+
+<span class="fc" id="L60">                int size = action.getObjectParams().size();</span>
+
+<span class="fc" id="L62">                newApi = numberOfParameters(newApi,size);</span>
+
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">                if (!(action.getType().getName().equals(&quot;void&quot;) ||</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">                        action.getType().getName().equals(&quot;string&quot;) ||</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                        action.getType().getName().equals(&quot;int&quot;) ||</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">                        action.getType().getName().equals(&quot;float&quot;) ||</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">                        action.getType().getName().equals(&quot;double&quot;) ||</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">                        action.getType().getName().equals(&quot;bool&quot;))</span>
+                ) {
+<span class="fc" id="L71">                    createCustomClassForAction(pla, action, actor.getName());</span>
+                }
+
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">                if (action.getObjectParams().isEmpty()) {</span>
+<span class="nc" id="L75">                    newApi = insertParameterType(newApi, &quot;&quot;);</span>
+<span class="nc" id="L76">                    newApi = insertParameterName(newApi, &quot;&quot;);</span>
+                } else {
+
+<span class="fc" id="L79">                    String[] split = iterateObjectParams(pla,actor,action,newApi,parameters).split(&quot;PARAMETERS&quot;);</span>
+<span class="fc" id="L80">                    newApi = split[0];</span>
+<span class="fc" id="L81">                    parameters = split[1];</span>
+                }
+
+<span class="fc" id="L84">                newApi = insertGroup(newApi, action.getName());</span>
+<span class="fc" id="L85">                newApi = insertActionType(newApi, action.getType().getName());</span>
+<span class="fc" id="L86">                newApi = insertActionName(newApi, action.getName());</span>
+
+<span class="fc" id="L88">                API api = new API();</span>
+<span class="fc" id="L89">                api.setFilename(&quot;api\\&quot; + actor.getName().toLowerCase().replace(&quot; &quot;,&quot;_&quot;) + &quot;\\&quot; + action.getName().substring(0, 1).toUpperCase() + action.getName().substring(1) + pla.getExtension());</span>
+<span class="fc" id="L90">                api.setText(newApi);</span>
+
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">                if (!repositoryAccess.isThisApiPresent(api)) {</span>
+<span class="fc" id="L93">                    repositoryAccess.addApi(api);</span>
+                }
+            }
+
+<span class="fc" id="L97">            createTest(pla,action,parameters);</span>
+<span class="fc" id="L98">        }</span>
+<span class="fc" id="L99">    }</span>
+
+    private String iterateObjectParams(PLA pla,Actor actor,Action action,String newApi,String parameters) {
+<span class="fc" id="L102">        int size = action.getObjectParams().size();</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (ObjectParam objectParam : action.getObjectParams()) {</span>
+
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">            if (!(objectParam.getType().getName().equals(&quot;void&quot;) ||</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                    objectParam.getType().getName().equals(&quot;string&quot;) ||</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">                    objectParam.getType().getName().equals(&quot;int&quot;) ||</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">                    objectParam.getType().getName().equals(&quot;float&quot;) ||</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">                    objectParam.getType().getName().equals(&quot;double&quot;) ||</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                    objectParam.getType().getName().equals(&quot;bool&quot;))</span>
+            ) {
+<span class="fc" id="L112">                createCustomClassForObjectParam(pla, objectParam, actor.getName());</span>
+            }
+
+<span class="fc" id="L115">            newApi = insertParameterType(newApi, objectParam.getType().getName());</span>
+<span class="fc" id="L116">            newApi = insertParameterName(newApi, objectParam.getName());</span>
+<span class="fc" id="L117">            parameters = parameters.concat(objectParam.getType().getName() + &quot; &quot; + objectParam.getName());</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">            if (size &gt; 1) {</span>
+<span class="nc" id="L119">                parameters = parameters.concat(&quot;, &quot;);</span>
+            }
+<span class="fc" id="L121">            size--;</span>
+<span class="fc" id="L122">        }</span>
+<span class="fc" id="L123">        return newApi.concat(&quot;PARAMETERS&quot; + parameters);</span>
+    }
+
+    private void createTest(PLA pla,Action action,String parameters){
+<span class="fc" id="L127">        String step = action.getStep();</span>
+
+<span class="fc" id="L129">        String[] splitKeyword = step.split(&quot; &quot;);</span>
+<span class="fc" id="L130">        String keyword = splitKeyword[0];</span>
+
+<span class="fc" id="L132">        step = &quot;&quot;;</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        for (int i = 1; i &lt; splitKeyword.length - 1; i++) {</span>
+<span class="nc" id="L134">            step = step.concat(splitKeyword[i]);</span>
+<span class="nc" id="L135">            step = step.concat(&quot; &quot;);</span>
+        }
+<span class="fc" id="L137">        step = step.concat(splitKeyword[splitKeyword.length - 1]);</span>
+<span class="fc" id="L138">        step = step.replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L139">        String testApi = pla.getTestClass();</span>
+<span class="fc" id="L140">        testApi = insertKeyword(testApi, keyword);</span>
+<span class="fc" id="L141">        testApi = insertTestStub(testApi, step);</span>
+<span class="fc" id="L142">        testApi = insertTestName(testApi, step.replace(&quot; &quot;, &quot;_&quot;));</span>
+<span class="pc bpc" id="L143" title="2 of 4 branches missed.">        if (!action.getName().isEmpty() &amp;&amp; !action.getName().startsWith(&quot;@&quot;)) {</span>
+<span class="fc" id="L144">            testApi = insertGroup(testApi, action.getName());</span>
+<span class="fc" id="L145">            testApi = insertActionName(testApi, action.getName());</span>
+<span class="fc" id="L146">            testApi = insertParameterName(testApi, parameters);</span>
+        } else {
+<span class="nc" id="L148">            String[] splitTest = testApi.split(&quot;\n&quot;);</span>
+<span class="nc" id="L149">            testApi = &quot;&quot;.concat(splitTest[0] + &quot;\n&quot; + splitTest[1] + &quot;\n\n&quot; + splitTest[splitTest.length - 1] + &quot;\n&quot;);</span>
+        }
+
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        if (!repositoryAccess.isThisTestPresent(testApi)) {</span>
+<span class="fc" id="L153">            repositoryAccess.addTest(testApi);</span>
+        }
+<span class="fc" id="L155">    }</span>
+
+    private String numberOfParameters(String newApi,int size) {
+<span class="fc" id="L158">        Pattern p = Pattern.compile(&quot;\&quot;parameter_type\&quot;.*\&quot;parameter_name\&quot;&quot;);</span>
+<span class="fc" id="L159">        Matcher m = p.matcher(newApi);</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (m.find()) {</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            while (size &gt; 1) {</span>
+<span class="nc" id="L162">                newApi = m.replaceFirst(m.group() + &quot;, &quot; + m.group());</span>
+<span class="nc" id="L163">                size--;</span>
+            }
+        }
+<span class="fc" id="L166">        return newApi;</span>
+    }
+
+    private String insertGroup(String text,String toReplace){
+        //CamelCase
+<span class="fc" id="L171">        toReplace = toReplace.substring(0,1).toUpperCase() + toReplace.substring(1);</span>
+<span class="fc" id="L172">        return text.replace(&quot;\&quot;group_action\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionType (String text,String toReplace){
+<span class="fc" id="L176">        return text.replace(&quot;\&quot;action_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertActionName (String text,String toReplace){
+<span class="fc" id="L180">        return text.replace(&quot;\&quot;action_name\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertParameterType (String text,String toReplace){
+<span class="fc" id="L184">        return text.replaceFirst(&quot;\&quot;parameter_type\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertParameterName(String text, String toReplace){
+<span class="fc" id="L188">        return text.replaceFirst(&quot;\&quot;parameter_name\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertTestStub(String text,String toReplace) {
+<span class="fc" id="L192">        return text.replace(&quot;\&quot;test_stub\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertTestName(String text,String toReplace) {
+<span class="fc" id="L196">        return text.replace(&quot;\&quot;test_name\&quot;&quot;, toReplace);</span>
+    }
+
+    private String insertKeyword(String text,String toReplace) {
+<span class="fc" id="L200">        return text.replace(&quot;\&quot;keyword\&quot;&quot;, toReplace);</span>
+    }
+
+
+    private void createCustomClassForAction(PLA pla, Action action, String actor) {
+
+<span class="fc" id="L206">        API api = new API();</span>
+<span class="fc" id="L207">        String customApi = pla.getCustomClass();</span>
+
+<span class="fc" id="L209">        int numAttributes = action.getType().getAttributes().size();</span>
+
+<span class="fc" id="L211">        customApi = customApi.substring(0,customApi.lastIndexOf('}'));</span>
+
+<span class="fc" id="L213">        java.util.Iterator&lt;String&gt; iteratorKeys = action.getType().getAttributes().keySet().iterator();</span>
+<span class="fc" id="L214">        java.util.Iterator&lt;String&gt; iteratorValues = action.getType().getAttributes().values().iterator();</span>
+<span class="pc bpc" id="L215" title="1 of 2 branches missed.">        if(numAttributes &gt; 0) {</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">            while(numAttributes &gt; 0) {</span>
+
+<span class="fc" id="L218">                customApi = customApi.replace(&quot;\&quot;attribute_name\&quot;&quot;, iteratorKeys.next());</span>
+<span class="fc" id="L219">                customApi = customApi.replace(&quot;\&quot;attribute_type\&quot;&quot;, iteratorValues.next());</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">                if(numAttributes &gt; 1) {</span>
+<span class="fc" id="L221">                    customApi = customApi.concat(pla.getCustomBody());</span>
+                }
+<span class="fc" id="L223">                numAttributes--;</span>
+            }
+<span class="fc" id="L225">            customApi = customApi.concat(&quot;}&quot;);</span>
+        }
+        else {
+<span class="nc" id="L228">            customApi = customApi.split(&quot;\n&quot;)[0].concat(&quot;\n\n}&quot;);</span>
+        }
+
+<span class="fc" id="L231">        customApi = customApi.replace(&quot;\&quot;custom_class\&quot;&quot;,action.getType().getName());</span>
+
+<span class="fc" id="L233">        api.setFilename(&quot;custom_classes\\&quot; + actor.toLowerCase().replace(&quot; &quot;,&quot;_&quot;) + &quot;\\&quot; + action.getType().getName() + pla.getExtension());</span>
+<span class="fc" id="L234">        api.setText(customApi);</span>
+
+<span class="pc bpc" id="L236" title="1 of 2 branches missed.">        if(!repositoryAccess.isThisApiPresent(api)){</span>
+<span class="fc" id="L237">            repositoryAccess.addApi(api);</span>
+        }
+<span class="fc" id="L239">    }</span>
+
+    private void createCustomClassForObjectParam(PLA pla, ObjectParam objectParam, String actor) {
+
+<span class="fc" id="L243">        API api = new API();</span>
+<span class="fc" id="L244">        String customApi = pla.getCustomClass();</span>
+
+<span class="fc" id="L246">        int numAttributes = objectParam.getType().getAttributes().size();</span>
+
+<span class="fc" id="L248">        customApi = customApi.substring(0,customApi.lastIndexOf('}'));</span>
+
+<span class="fc" id="L250">        java.util.Iterator&lt;String&gt; iteratorKeys = objectParam.getType().getAttributes().keySet().iterator();</span>
+<span class="fc" id="L251">        java.util.Iterator&lt;String&gt; iteratorValues = objectParam.getType().getAttributes().values().iterator();</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">        if(numAttributes &gt; 0) {</span>
+<span class="fc bfc" id="L253" title="All 2 branches covered.">            while (numAttributes &gt; 0) {</span>
+
+<span class="fc" id="L255">                customApi = customApi.replace(&quot;\&quot;attribute_name\&quot;&quot;, iteratorKeys.next());</span>
+<span class="fc" id="L256">                customApi = customApi.replace(&quot;\&quot;attribute_type\&quot;&quot;, iteratorValues.next());</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">                if (numAttributes &gt; 1) {</span>
+<span class="nc" id="L258">                    customApi = customApi.concat(pla.getCustomBody());</span>
+                }
+<span class="fc" id="L260">                numAttributes--;</span>
+            }
+<span class="fc" id="L262">            customApi = customApi.concat(&quot;}&quot;);</span>
+        }
+        else {
+<span class="nc" id="L265">            customApi = customApi.split(&quot;\n&quot;)[0].concat(&quot;\n\n}&quot;);</span>
+        }
+
+<span class="fc" id="L268">        customApi = customApi.replace(&quot;\&quot;custom_class\&quot;&quot;,objectParam.getType().getName());</span>
+
+<span class="fc" id="L270">        api.setFilename(&quot;custom_classes\\&quot; + actor.toLowerCase().replace(&quot; &quot;,&quot;_&quot;) + &quot;\\&quot; + objectParam.getType().getName() + pla.getExtension());</span>
+<span class="fc" id="L271">        api.setText(customApi);</span>
+
+<span class="pc bpc" id="L273" title="1 of 2 branches missed.">        if(!repositoryAccess.isThisApiPresent(api)){</span>
+<span class="fc" id="L274">            repositoryAccess.addApi(api);</span>
+        }
+<span class="fc" id="L276">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

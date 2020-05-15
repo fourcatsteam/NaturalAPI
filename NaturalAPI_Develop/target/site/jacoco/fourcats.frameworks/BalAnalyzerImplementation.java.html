@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BalAnalyzerImplementation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.frameworks</a> &gt; <span class="el_source">BalAnalyzerImplementation.java</span></div><h1>BalAnalyzerImplementation.java</h1><pre class="source lang-java linenums">package fourcats.frameworks;
+
+import fourcats.entity.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fourcats.interfaceaccess.BalAnalyzer;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+<span class="fc" id="L13">public class BalAnalyzerImplementation implements BalAnalyzer {</span>
+
+    private JsonNode jsonNode;
+
+    public void setBalFile(File file) throws IOException{
+<span class="fc" id="L18">        ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="fc" id="L19">        jsonNode = objectMapper.readValue(file,JsonNode.class);</span>
+<span class="fc" id="L20">    }</span>
+
+    public JsonNode getNode(){
+<span class="fc" id="L23">        return jsonNode;</span>
+    }
+
+    public BAL getBAL(){
+
+<span class="fc" id="L28">        BAL bal = new BAL();</span>
+
+<span class="fc" id="L30">        JsonNode actors = jsonNode.get(&quot;actors&quot;);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for(JsonNode actor : actors) {</span>
+<span class="fc" id="L32">            String actorName = actor.get(&quot;name&quot;).asText();</span>
+<span class="fc" id="L33">            Actor entityActor = new Actor(actorName);</span>
+<span class="fc" id="L34">            JsonNode actions = actor.get(&quot;actions&quot;);</span>
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (JsonNode ac : actions) {</span>
+
+<span class="fc" id="L38">                String actionName = ac.get(&quot;name&quot;).asText();</span>
+<span class="fc" id="L39">                JsonNode acType = ac.get(&quot;type&quot;);</span>
+<span class="fc" id="L40">                String actionType = acType.get(&quot;name&quot;).asText();</span>
+<span class="fc" id="L41">                String scenario = ac.get(&quot;scenario&quot;).asText();</span>
+<span class="fc" id="L42">                String step = ac.get(&quot;step&quot;).asText();</span>
+
+                //camelCase operations
+<span class="fc" id="L45">                actionName = camelCase(actionName);</span>
+
+<span class="fc" id="L47">                JsonNode attributesAction = acType.get(&quot;attributes&quot;);</span>
+
+<span class="fc" id="L49">                Map&lt;String,String&gt; mAttributes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L50">                java.util.Iterator&lt;String&gt; it = attributesAction.fieldNames();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">                while(it.hasNext()){</span>
+<span class="nc" id="L52">                    String attributeName = it.next();</span>
+<span class="nc" id="L53">                    String attributeType = attributesAction.get(attributeName).asText();</span>
+<span class="nc" id="L54">                    mAttributes.put(attributeName,attributeType);</span>
+<span class="nc" id="L55">                }</span>
+<span class="fc" id="L56">                Type entityType = new Type(actionType,mAttributes);</span>
+
+<span class="fc" id="L58">                Action entityAction = new Action(actionName,entityType,scenario,step);</span>
+
+<span class="fc" id="L60">                JsonNode parameters = ac.get(&quot;objectParams&quot;);</span>
+
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                for (JsonNode par : parameters) {</span>
+<span class="fc" id="L63">                    JsonNode typePar = par.get(&quot;type&quot;);</span>
+<span class="fc" id="L64">                    JsonNode attributes = typePar.get(&quot;attributes&quot;);</span>
+
+<span class="fc" id="L66">                    mAttributes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L67">                    it = attributes.fieldNames();</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">                    while(it.hasNext()){</span>
+<span class="nc" id="L69">                        String attributeName = it.next();</span>
+<span class="nc" id="L70">                        String attributeType = attributes.get(attributeName).asText();</span>
+<span class="nc" id="L71">                        mAttributes.put(attributeName,attributeType);</span>
+<span class="nc" id="L72">                    }</span>
+
+<span class="fc" id="L74">                    Type entityTypeOb = new Type(typePar.get(&quot;name&quot;).asText(),mAttributes);</span>
+<span class="fc" id="L75">                    ObjectParam entityObjectParam = new ObjectParam(par.get(&quot;name&quot;).asText(),entityTypeOb);</span>
+<span class="fc" id="L76">                    entityAction.addObjectParam(entityObjectParam);</span>
+<span class="fc" id="L77">                }</span>
+
+<span class="fc" id="L79">                entityActor.addAction(entityAction);</span>
+<span class="fc" id="L80">            }</span>
+<span class="fc" id="L81">            bal.addUserToBAL(entityActor);</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">        return bal;</span>
+    }
+
+    private String camelCase(String s){
+<span class="fc" id="L87">        String[] split = s.split(&quot;_&quot;);</span>
+<span class="fc" id="L88">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        for(int i=0; i&lt;split.length; i++) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if(i&gt;0) {</span>
+<span class="fc" id="L91">                split[i] = split[i].substring(0,1).toUpperCase() + split[i].substring(1);</span>
+            }
+<span class="fc" id="L93">            sb.append(split[i]);</span>
+        }
+<span class="fc" id="L95">        return sb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

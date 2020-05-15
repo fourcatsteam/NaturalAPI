@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GuiPla.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Develop</a> &gt; <a href="index.source.html" class="el_package">fourcats.gui</a> &gt; <span class="el_source">GuiPla.java</span></div><h1>GuiPla.java</h1><pre class="source lang-java linenums">package fourcats.gui;
+
+import fourcats.interfaceadapters.Controller;
+import fourcats.interfaceadapters.DataPresenterGui;
+import fourcats.observer.Observer;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class GuiPla implements Observer {
+
+    private JFrame frame;
+    private JTextArea textArea1;
+    private JButton createButton;
+    private JButton cancelButton;
+    private JPanel mainPanel;
+    private JTextField textField1;
+    private JTextArea textArea2;
+    private JTextArea textArea3;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel label4;
+
+    String message;
+
+    private Controller controller;
+    private DataPresenterGui dataPresenterGui;
+
+<span class="nc" id="L37">    public GuiPla(Controller c,DataPresenterGui d){</span>
+
+<span class="nc" id="L39">        controller = c;</span>
+<span class="nc" id="L40">        dataPresenterGui = d;</span>
+<span class="nc" id="L41">        dataPresenterGui.attach(this);</span>
+<span class="nc" id="L42">        message = &quot;&quot;;</span>
+
+<span class="nc" id="L44">        frame = new JFrame(&quot;NaturalApi Develop&quot;);</span>
+
+<span class="nc" id="L46">        frame.setContentPane(mainPanel);</span>
+<span class="nc" id="L47">        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L48">        frame.setSize(500,500);</span>
+<span class="nc" id="L49">        frame.setLocationRelativeTo(null);</span>
+        try {
+<span class="nc" id="L51">            frame.setIconImage(ImageIO.read(new File(&quot;./bee.png&quot;)));</span>
+        }
+<span class="nc" id="L53">        catch (Exception e){</span>
+<span class="nc" id="L54">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L55">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="nc" id="L56">        }</span>
+
+<span class="nc" id="L58">        createButton.addActionListener(e -&gt; {</span>
+
+<span class="nc bnc" id="L60" title="All 8 branches missed.">            if(textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()){</span>
+<span class="nc" id="L61">                JOptionPane.showMessageDialog(frame,&quot;There is an empty field!&quot;);</span>
+            }
+            else{
+<span class="nc" id="L64">                JFileChooser savePla = new JFileChooser();</span>
+<span class="nc" id="L65">                int valid = savePla.showSaveDialog(mainPanel);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                if(valid == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L67">                    controller.createPla(savePla.getSelectedFile().getAbsolutePath(),</span>
+<span class="nc" id="L68">                            textField1.getText(),</span>
+<span class="nc" id="L69">                            textArea1.getText() + &quot;\ncustom class\n&quot; + textArea2.getText() + &quot;\ntest class\n&quot; + textArea3.getText());</span>
+<span class="nc" id="L70">                    JOptionPane.showMessageDialog(frame, message);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    if (message.equals(&quot;PLA created!&quot;)) {</span>
+<span class="nc" id="L72">                        frame.dispose();</span>
+                    }
+                }
+            }
+<span class="nc" id="L76">        });</span>
+
+<span class="nc" id="L78">        cancelButton.addActionListener(e -&gt;</span>
+<span class="nc" id="L79">            frame.dispose() //close the frame</span>
+        );
+
+<span class="nc" id="L82">        Color myRed = new Color( 224,91,73);</span>
+<span class="nc" id="L83">        Color myBlue = new Color(58,84,105);</span>
+
+<span class="nc" id="L85">        createButton.addMouseListener(new MouseAdapter() {</span>
+            @Override
+            public void mouseEntered(MouseEvent e) {
+<span class="nc" id="L88">                createButton.setBackground(myRed);</span>
+<span class="nc" id="L89">                createButton.setBorderPainted(false);</span>
+<span class="nc" id="L90">            }</span>
+        });
+<span class="nc" id="L92">        createButton.addMouseListener(new MouseAdapter() {</span>
+            @Override
+            public void mouseExited(MouseEvent e) {
+<span class="nc" id="L95">                createButton.setBackground(myBlue);</span>
+<span class="nc" id="L96">                createButton.setBorderPainted(true);</span>
+<span class="nc" id="L97">            }</span>
+        });
+
+<span class="nc" id="L100">        cancelButton.addMouseListener(new MouseAdapter() {</span>
+            @Override
+            public void mouseEntered(MouseEvent e) {
+<span class="nc" id="L103">                cancelButton.setBackground(myRed);</span>
+<span class="nc" id="L104">                cancelButton.setBorderPainted(false);</span>
+<span class="nc" id="L105">            }</span>
+        });
+<span class="nc" id="L107">        cancelButton.addMouseListener(new MouseAdapter() {</span>
+            @Override
+            public void mouseExited(MouseEvent e) {
+<span class="nc" id="L110">                cancelButton.setBackground(myBlue);</span>
+<span class="nc" id="L111">                cancelButton.setBorderPainted(true);</span>
+<span class="nc" id="L112">            }</span>
+        });
+
+<span class="nc" id="L115">        label1.setBorder(new EmptyBorder(5,0,5,0));</span>
+<span class="nc" id="L116">        label2.setBorder(new EmptyBorder(5,0,5,0));</span>
+<span class="nc" id="L117">        label3.setBorder(new EmptyBorder(5,0,5,0));</span>
+<span class="nc" id="L118">        label4.setBorder(new EmptyBorder(5,0,5,0));</span>
+
+<span class="nc" id="L120">    }</span>
+
+    public void showGuiPla(){
+<span class="nc" id="L123">        frame.setVisible(true);</span>
+<span class="nc" id="L124">    }</span>
+
+    public void showOutput(){
+<span class="nc" id="L127">        message = dataPresenterGui.getMessage();</span>
+<span class="nc" id="L128">    }</span>
+
+    @Override
+    public void update() {
+<span class="nc" id="L132">        showOutput();</span>
+<span class="nc" id="L133">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

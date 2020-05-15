@@ -1,0 +1,124 @@
+{
+  "actors": [
+    {
+      "name": "All",
+      "actions": [
+        {
+          "name": "start_game",
+          "type": {
+            "name": "void",
+            "attributes": null
+          },
+          "objectParams": [
+            {
+              "name": "game",
+              "type": {
+                "name": "string",
+                "attributes": null
+              },
+              "required": true
+            },
+            {
+              "name": "players",
+              "type": {
+                "name": "int",
+                "attributes": null
+              },
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "join_game",
+          "type": {
+            "name": "void",
+            "attributes": null
+          },
+          "objectParams": [
+            {
+              "name": "game",
+              "type": {
+                "name": "Game",
+                "attributes": {
+                  "maxPlayers": "int",
+                  "price": "float",
+                  "name": "string"
+                }
+              },
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "actions": [
+        {
+          "name": "enter_pin",
+          "type": {
+            "name": "void",
+            "attributes": null
+          },
+          "objectParams": [
+            {
+              "name": "pin",
+              "type": {
+                "name": "int",
+                "attributes": null
+              },
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "check_pin",
+          "type": {
+            "name": "bool",
+            "attributes": null
+          },
+          "objectParams": [
+            {
+              "name": "pin",
+              "type": {
+                "name": "int",
+                "attributes": null
+              },
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "give_cash",
+          "type": {
+            "name": "Cash",
+            "attributes": {
+              "currency": "string"
+            }
+          },
+          "objectParams": [
+            {
+              "name": "amount",
+              "type": {
+                "name": "double",
+                "attributes": null
+              },
+              "required": true
+            },
+            {
+              "name": "creditCard",
+              "type": {
+                "name": "Card",
+                "attributes": {
+                  "number": "int",
+                  "available": "Cash"
+                }
+              },
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

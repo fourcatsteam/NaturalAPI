@@ -1,0 +1,27 @@
+.h
+class "group_action" {
+
+public:
+	"action_type" "action_name" ("parameter_type" "parameter_name") const;	
+}
+custom class
+class "custom_class" {
+private:
+	"attribute_type" "attribute_name";
+public:
+	void set"attribute_name" ("attribute_type "attribute_name"") {
+		this."attribute_name" = "attribute_name";
+	}
+
+	"attribute_type" get"attribute_name" () const {
+		return "attribute_name"
+	}
+}
+test class
+public:
+	@"keyword" (""test_stub"")
+	void "test_stub"() {
+		//please insert an implementation of the test
+		//"group_action" "action_name";
+		//"action_name"."action_name"("parameter_name");
+	}

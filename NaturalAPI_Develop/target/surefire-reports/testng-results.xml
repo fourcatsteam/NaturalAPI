@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="150" passed="150">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="2186" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:29 CEST">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="2186" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:29 CEST">
+      <class name="fourcats.usecaseinteractor.ModifyApiTest">
+        <test-method status="PASS" signature="testingModifyApi()" name="testingModifyApi" duration-ms="7" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingModifyApi -->
+        <test-method status="PASS" signature="correctlyCreatingModifyApi()" name="correctlyCreatingModifyApi" duration-ms="8" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlyCreatingModifyApi -->
+        <test-method status="PASS" signature="testingCorrectlyMethodCallModifyGui()" name="testingCorrectlyMethodCallModifyGui" duration-ms="7" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingCorrectlyMethodCallModifyGui -->
+      </class> <!-- fourcats.usecaseinteractor.ModifyApiTest -->
+      <class name="fourcats.frameworks.DataKeeperTest">
+        <test-method status="PASS" signature="removingAPINotPresent()" name="removingAPINotPresent" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- removingAPINotPresent -->
+        <test-method status="PASS" signature="removingAPIPresent()" name="removingAPIPresent" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- removingAPIPresent -->
+        <test-method status="PASS" signature="isClassNamePresentTest()" name="isClassNamePresentTest" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isClassNamePresentTest -->
+        <test-method status="PASS" signature="createDatakeeperCorrectly()" name="createDatakeeperCorrectly" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createDatakeeperCorrectly -->
+        <test-method status="PASS" signature="updatingAPICorrectly()" name="updatingAPICorrectly" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatingAPICorrectly -->
+        <test-method status="PASS" signature="gettingAPIWithId()" name="gettingAPIWithId" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingAPIWithId -->
+        <test-method status="PASS" signature="addCoupleBlaPlaTest()" name="addCoupleBlaPlaTest" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addCoupleBlaPlaTest -->
+        <test-method status="PASS" signature="addingAPIWithoutIdCorrectly()" name="addingAPIWithoutIdCorrectly" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingAPIWithoutIdCorrectly -->
+        <test-method status="PASS" signature="isCoupleBalPlaNOTPresentTest()" name="isCoupleBalPlaNOTPresentTest" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isCoupleBalPlaNOTPresentTest -->
+        <test-method status="PASS" signature="addingAPIWithIdCorrectlyWithoutDuplicate()" name="addingAPIWithIdCorrectlyWithoutDuplicate" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingAPIWithIdCorrectlyWithoutDuplicate -->
+        <test-method status="PASS" signature="isClassNameNotPresentTest()" name="isClassNameNotPresentTest" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isClassNameNotPresentTest -->
+        <test-method status="PASS" signature="gettingAPIMapCorrectly()" name="gettingAPIMapCorrectly" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingAPIMapCorrectly -->
+        <test-method status="PASS" signature="gettingSizeOfAPIMap()" name="gettingSizeOfAPIMap" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingSizeOfAPIMap -->
+        <test-method status="PASS" signature="addCoupleBlaPlaTestWithSameBal()" name="addCoupleBlaPlaTestWithSameBal" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addCoupleBlaPlaTestWithSameBal -->
+        <test-method status="PASS" signature="isCoupleBalPlaPresentTest()" name="isCoupleBalPlaPresentTest" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isCoupleBalPlaPresentTest -->
+        <test-method status="PASS" signature="updatingAPIWithSame()" name="updatingAPIWithSame" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatingAPIWithSame -->
+        <test-method status="PASS" signature="isAPIPresentTest()" name="isAPIPresentTest" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isAPIPresentTest -->
+        <test-method status="PASS" signature="isAPINotPresentTest()" name="isAPINotPresentTest" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isAPINotPresentTest -->
+      </class> <!-- fourcats.frameworks.DataKeeperTest -->
+      <class name="fourcats.usecaseinteractor.GenerateApiTest">
+        <test-method status="PASS" signature="generateAPI() throws java.lang.Exception" name="generateAPI" duration-ms="6" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- generateAPI -->
+        <test-method status="PASS" signature="GenerateAPITestCorrectCreation()" name="GenerateAPITestCorrectCreation" duration-ms="5" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GenerateAPITestCorrectCreation -->
+      </class> <!-- fourcats.usecaseinteractor.GenerateApiTest -->
+      <class name="fourcats.Entity.APITest">
+        <test-method status="PASS" signature="setTextCorrectly()" name="setTextCorrectly" duration-ms="447" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setTextCorrectly -->
+        <test-method status="PASS" signature="getTextCorrectly()" name="getTextCorrectly" duration-ms="445" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTextCorrectly -->
+        <test-method status="PASS" signature="testConstructor()" name="testConstructor" duration-ms="448" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConstructor -->
+        <test-method status="PASS" signature="getFileNameCorrectly()" name="getFileNameCorrectly" duration-ms="446" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getFileNameCorrectly -->
+        <test-method status="PASS" signature="setFileNameCorrectly()" name="setFileNameCorrectly" duration-ms="447" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setFileNameCorrectly -->
+      </class> <!-- fourcats.Entity.APITest -->
+      <class name="fourcats.usecaseinteractor.CreatePlaTest">
+        <test-method status="PASS" signature="correctlyCreatingModifyApi()" name="correctlyCreatingModifyApi" duration-ms="23" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlyCreatingModifyApi -->
+        <test-method status="PASS" signature="testingCorrectlyMethodCallModifyGui()" name="testingCorrectlyMethodCallModifyGui" duration-ms="22" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingCorrectlyMethodCallModifyGui -->
+      </class> <!-- fourcats.usecaseinteractor.CreatePlaTest -->
+      <class name="fourcats.usecaseinteractor.SuggestApiTest">
+        <test-method status="PASS" signature="SuggestAPITestCreationFromWrongInput()" name="SuggestAPITestCreationFromWrongInput" duration-ms="8" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SuggestAPITestCreationFromWrongInput -->
+        <test-method status="PASS" signature="correctlysuggestionApiCreated() throws java.io.IOException" name="correctlysuggestionApiCreated" duration-ms="10" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlysuggestionApiCreated -->
+        <test-method status="PASS" signature="correctlyCreatingSuggestApi()" name="correctlyCreatingSuggestApi" duration-ms="7" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlyCreatingSuggestApi -->
+      </class> <!-- fourcats.usecaseinteractor.SuggestApiTest -->
+      <class name="fourcats.interfaceAdapters.DataPresenterTest">
+        <test-method status="PASS" signature="testShowOuput()" name="testShowOuput" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowOuput -->
+        <test-method status="PASS" signature="testingGettingMessage()" name="testingGettingMessage" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingGettingMessage -->
+        <test-method status="PASS" signature="testingShowGenerationMessage()" name="testingShowGenerationMessage" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingShowGenerationMessage -->
+        <test-method status="PASS" signature="testGetMessageToShow()" name="testGetMessageToShow" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMessageToShow -->
+      </class> <!-- fourcats.interfaceAdapters.DataPresenterTest -->
+      <class name="fourcats.frameworks.FileSystemTest">
+        <test-method status="PASS" signature="loadingFileCorrectly()" name="loadingFileCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadingFileCorrectly -->
+        <test-method status="PASS" signature="loadingPLACorrectlyFound() throws java.io.IOException" name="loadingPLACorrectlyFound" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadingPLACorrectlyFound -->
+        <test-method status="PASS" signature="writingAPITestCorrectly()" name="writingAPITestCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- writingAPITestCorrectly -->
+        <test-method status="PASS" signature="writingPLATestCorrectly()" name="writingPLATestCorrectly" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- writingPLATestCorrectly -->
+      </class> <!-- fourcats.frameworks.FileSystemTest -->
+      <class name="fourcats.interfaceAdapters.ControllerTest">
+        <test-method status="PASS" signature="testCreateApiSuggestion() throws java.io.IOException" name="testCreateApiSuggestion" duration-ms="33" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateApiSuggestion -->
+        <test-method status="PASS" signature="testModifyApi() throws java.io.IOException" name="testModifyApi" duration-ms="34" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testModifyApi -->
+        <test-method status="PASS" signature="testModifyPla() throws java.io.IOException" name="testModifyPla" duration-ms="34" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testModifyPla -->
+        <test-method status="PASS" signature="createControllerCorrectly()" name="createControllerCorrectly" duration-ms="36" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createControllerCorrectly -->
+        <test-method status="PASS" signature="testLoadingPla()" name="testLoadingPla" duration-ms="34" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoadingPla -->
+        <test-method status="PASS" signature="testingModifyApiGui()" name="testingModifyApiGui" duration-ms="35" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingModifyApiGui -->
+        <test-method status="PASS" signature="testingCreatePla()" name="testingCreatePla" duration-ms="36" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingCreatePla -->
+        <test-method status="PASS" signature="testGenerateApi() throws java.lang.Exception" name="testGenerateApi" duration-ms="35" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGenerateApi -->
+      </class> <!-- fourcats.interfaceAdapters.ControllerTest -->
+      <class name="fourcats.usecaseinteractor.ModifyPlaTest">
+        <test-method status="PASS" signature="testingLoadingPlaCorrectly()" name="testingLoadingPlaCorrectly" duration-ms="10" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingLoadingPlaCorrectly -->
+        <test-method status="PASS" signature="correctlyCreatingModifyApi()" name="correctlyCreatingModifyApi" duration-ms="8" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlyCreatingModifyApi -->
+        <test-method status="PASS" signature="testingModify() throws java.io.IOException" name="testingModify" duration-ms="7" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingModify -->
+      </class> <!-- fourcats.usecaseinteractor.ModifyPlaTest -->
+      <class name="fourcats.Entity.ObjectParamTest">
+        <test-method status="PASS" signature="ObjectParamSetTypeCorrectly()" name="ObjectParamSetTypeCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamSetTypeCorrectly -->
+        <test-method status="PASS" signature="setTypeCorrectly()" name="setTypeCorrectly" duration-ms="0" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setTypeCorrectly -->
+        <test-method status="PASS" signature="ObjectParamConvertedToStringCorrectly()" name="ObjectParamConvertedToStringCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamConvertedToStringCorrectly -->
+        <test-method status="PASS" signature="ObjectParamCorrectCreationWthName()" name="ObjectParamCorrectCreationWthName" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamCorrectCreationWthName -->
+        <test-method status="PASS" signature="ObjectParamSetNameCorrectly()" name="ObjectParamSetNameCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamSetNameCorrectly -->
+        <test-method status="PASS" signature="ObjectParamGetTypeCorrectly()" name="ObjectParamGetTypeCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamGetTypeCorrectly -->
+        <test-method status="PASS" signature="EmptyObjectParamCorrectCreation()" name="EmptyObjectParamCorrectCreation" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EmptyObjectParamCorrectCreation -->
+        <test-method status="PASS" signature="ObjectParamSetRequiredCorrectly()" name="ObjectParamSetRequiredCorrectly" duration-ms="0" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ObjectParamSetRequiredCorrectly -->
+      </class> <!-- fourcats.Entity.ObjectParamTest -->
+      <class name="fourcats.Entity.PLATest">
+        <test-method status="PASS" signature="testSettingTextPLA()" name="testSettingTextPLA" duration-ms="5" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSettingTextPLA -->
+        <test-method status="PASS" signature="getCustomBodyCorrectly()" name="getCustomBodyCorrectly" duration-ms="4" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCustomBodyCorrectly -->
+        <test-method status="PASS" signature="getTestClassCorrectly()" name="getTestClassCorrectly" duration-ms="6" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTestClassCorrectly -->
+        <test-method status="PASS" signature="testTextFromPLA()" name="testTextFromPLA" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTextFromPLA -->
+        <test-method status="PASS" signature="testConstructor()" name="testConstructor" duration-ms="6" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConstructor -->
+        <test-method status="PASS" signature="getCustomClassCorrectly()" name="getCustomClassCorrectly" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCustomClassCorrectly -->
+        <test-method status="PASS" signature="testExtensionFromPLA()" name="testExtensionFromPLA" duration-ms="3" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExtensionFromPLA -->
+      </class> <!-- fourcats.Entity.PLATest -->
+      <class name="fourcats.Entity.TypeTest">
+        <test-method status="PASS" signature="testingToStringCorrectly()" name="testingToStringCorrectly" duration-ms="7" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingToStringCorrectly -->
+        <test-method status="PASS" signature="addingAttributeCorrectly()" name="addingAttributeCorrectly" duration-ms="7" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingAttributeCorrectly -->
+        <test-method status="PASS" signature="gettingNameCorrectly()" name="gettingNameCorrectly" duration-ms="6" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingNameCorrectly -->
+        <test-method status="PASS" signature="testConstructorStringAndMapCorrectly()" name="testConstructorStringAndMapCorrectly" duration-ms="5" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConstructorStringAndMapCorrectly -->
+        <test-method status="PASS" signature="testConstructorStringCorrectly()" name="testConstructorStringCorrectly" duration-ms="6" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConstructorStringCorrectly -->
+        <test-method status="PASS" signature="settingNameCorrectly()" name="settingNameCorrectly" duration-ms="7" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- settingNameCorrectly -->
+        <test-method status="PASS" signature="testGettingAttributesCorrectly()" name="testGettingAttributesCorrectly" duration-ms="5" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingAttributesCorrectly -->
+      </class> <!-- fourcats.Entity.TypeTest -->
+      <class name="fourcats.Entity.ActorTest">
+        <test-method status="PASS" signature="testSettingNameOfActor()" name="testSettingNameOfActor" duration-ms="2" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSettingNameOfActor -->
+        <test-method status="PASS" signature="testAddingMoreActionCorrectly()" name="testAddingMoreActionCorrectly" duration-ms="2" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddingMoreActionCorrectly -->
+        <test-method status="PASS" signature="testActorEmptyCorrectlyCreate()" name="testActorEmptyCorrectlyCreate" duration-ms="2" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testActorEmptyCorrectlyCreate -->
+        <test-method status="PASS" signature="testActorWithNameCorrectlyCreate()" name="testActorWithNameCorrectlyCreate" duration-ms="2" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testActorWithNameCorrectlyCreate -->
+        <test-method status="PASS" signature="testRequestActionByName()" name="testRequestActionByName" duration-ms="1" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRequestActionByName -->
+        <test-method status="PASS" signature="testAddingOneActionCorrectly()" name="testAddingOneActionCorrectly" duration-ms="2" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddingOneActionCorrectly -->
+        <test-method status="PASS" signature="testActorToString()" name="testActorToString" duration-ms="1" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testActorToString -->
+      </class> <!-- fourcats.Entity.ActorTest -->
+      <class name="fourcats.frameworks.RepositoryTest">
+        <test-method status="PASS" signature="addingCoupleBalPlaToDataKeeperCorrectly()" name="addingCoupleBalPlaToDataKeeperCorrectly" duration-ms="50" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingCoupleBalPlaToDataKeeperCorrectly -->
+        <test-method status="PASS" signature="addingAPIWithoutIdToDataKeeperCorrectly()" name="addingAPIWithoutIdToDataKeeperCorrectly" duration-ms="46" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingAPIWithoutIdToDataKeeperCorrectly -->
+        <test-method status="PASS" signature="addingAPIWithIdToDataKeeperCorrectly()" name="addingAPIWithIdToDataKeeperCorrectly" duration-ms="47" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addingAPIWithIdToDataKeeperCorrectly -->
+        <test-method status="PASS" signature="gettingSizeFromDataKeeperCorrectly()" name="gettingSizeFromDataKeeperCorrectly" duration-ms="49" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingSizeFromDataKeeperCorrectly -->
+        <test-method status="PASS" signature="isThisAPIPresentInDataKeeperCorrectly()" name="isThisAPIPresentInDataKeeperCorrectly" duration-ms="49" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isThisAPIPresentInDataKeeperCorrectly -->
+        <test-method status="PASS" signature="gettingAPIWithIdFromDataKeeperCorrectly()" name="gettingAPIWithIdFromDataKeeperCorrectly" duration-ms="48" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingAPIWithIdFromDataKeeperCorrectly -->
+        <test-method status="PASS" signature="writingAPICorrectly()" name="writingAPICorrectly" duration-ms="45" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- writingAPICorrectly -->
+        <test-method status="PASS" signature="deletingAPIWithIdFromDataKeeperCorrectly()" name="deletingAPIWithIdFromDataKeeperCorrectly" duration-ms="46" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deletingAPIWithIdFromDataKeeperCorrectly -->
+        <test-method status="PASS" signature="isCoupleBalPlaPresentInDataKeepeerCorrectly()" name="isCoupleBalPlaPresentInDataKeepeerCorrectly" duration-ms="49" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isCoupleBalPlaPresentInDataKeepeerCorrectly -->
+        <test-method status="PASS" signature="loadingPLACorrectly() throws java.io.IOException" name="loadingPLACorrectly" duration-ms="52" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadingPLACorrectly -->
+        <test-method status="PASS" signature="writingPLAToFileSystemCorrectly()" name="writingPLAToFileSystemCorrectly" duration-ms="53" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- writingPLAToFileSystemCorrectly -->
+        <test-method status="PASS" signature="openingFileCorrectly()" name="openingFileCorrectly" duration-ms="52" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openingFileCorrectly -->
+        <test-method status="PASS" signature="isThisClassNamePresentInDataKeeperCorrectly()" name="isThisClassNamePresentInDataKeeperCorrectly" duration-ms="50" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isThisClassNamePresentInDataKeeperCorrectly -->
+        <test-method status="PASS" signature="updatingAPIToDataKeepeerCorrectly()" name="updatingAPIToDataKeepeerCorrectly" duration-ms="51" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatingAPIToDataKeepeerCorrectly -->
+        <test-method status="PASS" signature="gettingADIMapWithIdFromDataKeeperCorrectly()" name="gettingADIMapWithIdFromDataKeeperCorrectly" duration-ms="50" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingADIMapWithIdFromDataKeeperCorrectly -->
+      </class> <!-- fourcats.frameworks.RepositoryTest -->
+      <class name="fourcats.Entity.ActionTest">
+        <test-method status="PASS" signature="createActionWithNameAndTypeNullAndScenarioAndStep()" name="createActionWithNameAndTypeNullAndScenarioAndStep" duration-ms="15" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndTypeNullAndScenarioAndStep -->
+        <test-method status="PASS" signature="setTypeCorrectly()" name="setTypeCorrectly" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setTypeCorrectly -->
+        <test-method status="PASS" signature="createActionWithNameAndTypeNotStringAndScenarioAndStep()" name="createActionWithNameAndTypeNotStringAndScenarioAndStep" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndTypeNotStringAndScenarioAndStep -->
+        <test-method status="PASS" signature="testAddObjectName()" name="testAddObjectName" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddObjectName -->
+        <test-method status="PASS" signature="toStringActionCorrectly()" name="toStringActionCorrectly" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- toStringActionCorrectly -->
+        <test-method status="PASS" signature="testGettingTypeNameCorrectly()" name="testGettingTypeNameCorrectly" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingTypeNameCorrectly -->
+        <test-method status="PASS" signature="createActionWithNameAndTypeAndScenarioAndStep()" name="createActionWithNameAndTypeAndScenarioAndStep" duration-ms="14" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndTypeAndScenarioAndStep -->
+        <test-method status="PASS" signature="addObjectParamCorrectly()" name="addObjectParamCorrectly" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addObjectParamCorrectly -->
+        <test-method status="PASS" signature="toStringActionWithTwoParametersCorrectly()" name="toStringActionWithTwoParametersCorrectly" duration-ms="17" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- toStringActionWithTwoParametersCorrectly -->
+        <test-method status="PASS" signature="testAddObjectParamWithString()" name="testAddObjectParamWithString" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddObjectParamWithString -->
+        <test-method status="PASS" signature="getStepCorrectly()" name="getStepCorrectly" duration-ms="17" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getStepCorrectly -->
+        <test-method status="PASS" signature="createActionWithNameAndTypeNotString()" name="createActionWithNameAndTypeNotString" duration-ms="18" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndTypeNotString -->
+        <test-method status="PASS" signature="createActionWithNameAndType()" name="createActionWithNameAndType" duration-ms="19" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndType -->
+        <test-method status="PASS" signature="testGettingNameCorrectly()" name="testGettingNameCorrectly" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingNameCorrectly -->
+        <test-method status="PASS" signature="getScenarioCorrectly()" name="getScenarioCorrectly" duration-ms="17" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getScenarioCorrectly -->
+        <test-method status="PASS" signature="createActionWithNameAndNullType()" name="createActionWithNameAndNullType" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createActionWithNameAndNullType -->
+        <test-method status="PASS" signature="testRemoveObjectParamWithId()" name="testRemoveObjectParamWithId" duration-ms="16" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:27 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRemoveObjectParamWithId -->
+      </class> <!-- fourcats.Entity.ActionTest -->
+      <class name="fourcats.view.CLITest">
+        <test-method status="PASS" signature="gettingCurrentAnswer()" name="gettingCurrentAnswer" duration-ms="54" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingCurrentAnswer -->
+        <test-method status="PASS" signature="readingSuggestionAPIInput() throws java.io.IOException" name="readingSuggestionAPIInput" duration-ms="140" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingSuggestionAPIInput -->
+        <test-method status="PASS" signature="testAskPathApi() throws java.lang.Exception" name="testAskPathApi" duration-ms="138" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskPathApi -->
+        <test-method status="PASS" signature="testAskingModifyApi() throws java.io.IOException" name="testAskingModifyApi" duration-ms="137" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingModifyApi -->
+        <test-method status="PASS" signature="testAskingGenerateApi()" name="testAskingGenerateApi" duration-ms="139" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingGenerateApi -->
+        <test-method status="PASS" signature="testGenerateApi() throws java.lang.Exception" name="testGenerateApi" duration-ms="151" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGenerateApi -->
+        <test-method status="PASS" signature="testAskingAnother()" name="testAskingAnother" duration-ms="162" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingAnother -->
+        <test-method status="PASS" signature="readingBalInput() throws java.io.IOException" name="readingBalInput" duration-ms="140" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingBalInput -->
+        <test-method status="PASS" signature="testAskingForBal()" name="testAskingForBal" duration-ms="160" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingForBal -->
+        <test-method status="PASS" signature="testAskingForSuggestionApi()" name="testAskingForSuggestionApi" duration-ms="142" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingForSuggestionApi -->
+        <test-method status="PASS" signature="readingSuggestionAPIInputWithNoAnswer() throws java.io.IOException" name="readingSuggestionAPIInputWithNoAnswer" duration-ms="146" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingSuggestionAPIInputWithNoAnswer -->
+        <test-method status="PASS" signature="testingUpdate()" name="testingUpdate" duration-ms="149" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingUpdate -->
+        <test-method status="PASS" signature="testAskingForPLA()" name="testAskingForPLA" duration-ms="161" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAskingForPLA -->
+        <test-method status="PASS" signature="readingPLAInput() throws java.io.IOException" name="readingPLAInput" duration-ms="141" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingPLAInput -->
+        <test-method status="PASS" signature="testingConstructor()" name="testingConstructor" duration-ms="157" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingConstructor -->
+        <test-method status="PASS" signature="readingNotGenerateApi() throws java.io.IOException" name="readingNotGenerateApi" duration-ms="159" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingNotGenerateApi -->
+        <test-method status="PASS" signature="testingShowOutput()" name="testingShowOutput" duration-ms="148" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingShowOutput -->
+        <test-method status="PASS" signature="readingModifyApi() throws java.io.IOException" name="readingModifyApi" duration-ms="155" started-at="2020-05-15T15:15:29 CEST" finished-at="2020-05-15T15:15:29 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readingModifyApi -->
+      </class> <!-- fourcats.view.CLITest -->
+      <class name="fourcats.interfaceAdapters.DataPresenterGuiTest">
+        <test-method status="PASS" signature="testShowModifyPla()" name="testShowModifyPla" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowModifyPla -->
+        <test-method status="PASS" signature="testShowOutput()" name="testShowOutput" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowOutput -->
+        <test-method status="PASS" signature="testGettingCombo()" name="testGettingCombo" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingCombo -->
+        <test-method status="PASS" signature="testGettingString()" name="testGettingString" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingString -->
+        <test-method status="PASS" signature="testShowLoadPla()" name="testShowLoadPla" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowLoadPla -->
+        <test-method status="PASS" signature="testGettingMessage()" name="testGettingMessage" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingMessage -->
+        <test-method status="PASS" signature="testShowOutputMap()" name="testShowOutputMap" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowOutputMap -->
+        <test-method status="PASS" signature="testGettingMessagePla()" name="testGettingMessagePla" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingMessagePla -->
+        <test-method status="PASS" signature="testingCostructCorrectly()" name="testingCostructCorrectly" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingCostructCorrectly -->
+        <test-method status="PASS" signature="testGettingModifyCustomPla()" name="testGettingModifyCustomPla" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingModifyCustomPla -->
+        <test-method status="PASS" signature="testGettingModifyApiPla()" name="testGettingModifyApiPla" duration-ms="2" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGettingModifyApiPla -->
+        <test-method status="PASS" signature="testShowGenMessage()" name="testShowGenMessage" duration-ms="1" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowGenMessage -->
+      </class> <!-- fourcats.interfaceAdapters.DataPresenterGuiTest -->
+      <class name="fourcats.Entity.BALTest">
+        <test-method status="PASS" signature="testConstructor()" name="testConstructor" duration-ms="730" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConstructor -->
+        <test-method status="PASS" signature="getActors()" name="getActors" duration-ms="729" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getActors -->
+        <test-method status="PASS" signature="tesAddDuplicateUserToBAL()" name="tesAddDuplicateUserToBAL" duration-ms="729" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tesAddDuplicateUserToBAL -->
+        <test-method status="PASS" signature="testToString()" name="testToString" duration-ms="719" started-at="2020-05-15T15:15:27 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testToString -->
+      </class> <!-- fourcats.Entity.BALTest -->
+      <class name="fourcats.frameworks.BalAnalyzerImplementationTest">
+        <test-method status="PASS" signature="correctlySettingBalFile() throws java.io.IOException" name="correctlySettingBalFile" duration-ms="304" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- correctlySettingBalFile -->
+        <test-method status="PASS" signature="gettingBalCorrectly() throws java.io.IOException" name="gettingBalCorrectly" duration-ms="301" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- gettingBalCorrectly -->
+        <test-method status="PASS" signature="createBalAnalyzerCorrectly()" name="createBalAnalyzerCorrectly" duration-ms="304" started-at="2020-05-15T15:15:28 CEST" finished-at="2020-05-15T15:15:28 CEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createBalAnalyzerCorrectly -->
+      </class> <!-- fourcats.frameworks.BalAnalyzerImplementationTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
