@@ -1,5 +1,7 @@
 package fourcats.view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.observer.Observer;
@@ -35,7 +37,7 @@ public class GuiPla implements Observer {
     private Controller controller;
     private DataPresenterGui dataPresenterGui;
 
-    public GuiPla(Controller c,DataPresenterGui d){
+    public GuiPla(Controller c, DataPresenterGui d) {
 
         controller = c;
         dataPresenterGui = d;
@@ -46,7 +48,7 @@ public class GuiPla implements Observer {
 
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(500,500);
+        frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
 
         //set logo
@@ -55,13 +57,12 @@ public class GuiPla implements Observer {
 
         createButton.addActionListener(e -> {
 
-            if(textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()){
-                JOptionPane.showMessageDialog(frame,"There is an empty field!");
-            }
-            else{
+            if (textField1.getText().isEmpty() || textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "There is an empty field!");
+            } else {
                 JFileChooser savePla = new JFileChooser();
                 int valid = savePla.showSaveDialog(mainPanel);
-                if(valid == JFileChooser.APPROVE_OPTION) {
+                if (valid == JFileChooser.APPROVE_OPTION) {
                     controller.createPla(savePla.getSelectedFile().getAbsolutePath(),
                             textField1.getText(),
                             textArea1.getText() + "\ncustom class\n" + textArea2.getText() + "\ntest class\n" + textArea3.getText());
@@ -74,11 +75,11 @@ public class GuiPla implements Observer {
         });
 
         cancelButton.addActionListener(e ->
-            frame.dispose() //close the frame
+                frame.dispose() //close the frame
         );
 
-        Color myRed = new Color( 224,91,73);
-        Color myBlue = new Color(58,84,105);
+        Color myRed = new Color(224, 91, 73);
+        Color myBlue = new Color(58, 84, 105);
 
         createButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -110,18 +111,18 @@ public class GuiPla implements Observer {
             }
         });
 
-        label1.setBorder(new EmptyBorder(5,0,5,0));
-        label2.setBorder(new EmptyBorder(5,0,5,0));
-        label3.setBorder(new EmptyBorder(5,0,5,0));
-        label4.setBorder(new EmptyBorder(5,0,5,0));
+        label1.setBorder(new EmptyBorder(5, 0, 5, 0));
+        label2.setBorder(new EmptyBorder(5, 0, 5, 0));
+        label3.setBorder(new EmptyBorder(5, 0, 5, 0));
+        label4.setBorder(new EmptyBorder(5, 0, 5, 0));
 
     }
 
-    public void showGuiPla(){
+    public void showGuiPla() {
         frame.setVisible(true);
     }
 
-    public void showOutput(){
+    public void showOutput() {
         message = dataPresenterGui.getMessage();
     }
 
@@ -129,4 +130,5 @@ public class GuiPla implements Observer {
     public void update() {
         showOutput();
     }
+
 }

@@ -3,50 +3,49 @@
 import fourcats.entity.API;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-<span class="fc" id="L10">public class FileSystem {</span>
+<span class="fc" id="L9">public class FileSystem {</span>
 
     public File openFile(String filename) {
-<span class="fc" id="L13">        return new File(filename);</span>
+<span class="fc" id="L12">        return new File(filename);</span>
     }
 
     public String loadPLA(String filename) throws IOException {
-<span class="fc" id="L17">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L18">        File file = openFile(filename);</span>
+<span class="fc" id="L16">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L17">        File file = openFile(filename);</span>
 
-<span class="fc" id="L20">        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){</span>
+<span class="fc" id="L19">        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){</span>
             String line;
-<span class="fc bfc" id="L22" title="All 2 branches covered.">            while((line = bufferedReader.readLine()) != null){</span>
-<span class="fc" id="L23">                sb.append(line + &quot;\n&quot;);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">            while((line = bufferedReader.readLine()) != null){</span>
+<span class="fc" id="L22">                sb.append(line + &quot;\n&quot;);</span>
             }
         }
-<span class="fc" id="L26">        return sb.toString();</span>
+<span class="fc" id="L25">        return sb.toString();</span>
     }
 
     public void writeApi(String path, API api) {
 
-<span class="nc" id="L31">        File file = new File(path + api.getFilename());</span>
-<span class="nc" id="L32">        file.getParentFile().getParentFile().mkdir();</span>
-<span class="nc" id="L33">        file.getParentFile().mkdir();</span>
-<span class="nc" id="L34">        try (FileWriter fileWriter = new FileWriter(file)){</span>
-<span class="nc" id="L35">            fileWriter.write(api.getText());</span>
-<span class="nc" id="L36">        } catch (IOException e) {</span>
-<span class="nc" id="L37">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L38">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
-<span class="nc" id="L39">        }</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L30">        File file = new File(path + api.getFilename());</span>
+<span class="nc" id="L31">        file.getParentFile().getParentFile().mkdir();</span>
+<span class="nc" id="L32">        file.getParentFile().mkdir();</span>
+<span class="nc" id="L33">        try (FileWriter fileWriter = new FileWriter(file)){</span>
+<span class="nc" id="L34">            fileWriter.write(api.getText());</span>
+<span class="nc" id="L35">        } catch (IOException e) {</span>
+<span class="nc" id="L36">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L37">            logger.log(Level.SEVERE, &quot;IOException&quot;, e);</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">    }</span>
 
     public void writePla(String file,String pla) {
-<span class="fc" id="L43">        File f = new File(file);</span>
-<span class="fc" id="L44">        try(FileWriter fw = new FileWriter(f)){</span>
-<span class="fc" id="L45">            fw.write(pla);</span>
-<span class="nc" id="L46">        } catch (IOException ex) {</span>
-<span class="nc" id="L47">            Logger logger = Logger.getAnonymousLogger();</span>
-<span class="nc" id="L48">            logger.log(Level.SEVERE, &quot;IOException&quot;, ex);</span>
-<span class="fc" id="L49">        }</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L42">        File f = new File(file);</span>
+<span class="fc" id="L43">        try(FileWriter fw = new FileWriter(f)){</span>
+<span class="fc" id="L44">            fw.write(pla);</span>
+<span class="nc" id="L45">        } catch (IOException ex) {</span>
+<span class="nc" id="L46">            Logger logger = Logger.getAnonymousLogger();</span>
+<span class="nc" id="L47">            logger.log(Level.SEVERE, &quot;IOException&quot;, ex);</span>
+<span class="fc" id="L48">        }</span>
+<span class="fc" id="L49">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

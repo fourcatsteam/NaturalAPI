@@ -1,5 +1,7 @@
 package fourcats.view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.observer.Observer;
@@ -33,12 +35,12 @@ public class Gui implements Observer {
     private JButton createPLAButton;
     private JComboBox<String> comboBox1;
     private JLabel messageLabel;
-    private Map<String,String> toView;
+    private Map<String, String> toView;
     private String bal;
     private String pla;
     private String message;
 
-    public Gui(Controller c,DataPresenterGui d){
+    public Gui(Controller c, DataPresenterGui d) {
 
         controller = c;
         dataPresenterGui = d;
@@ -51,7 +53,7 @@ public class Gui implements Observer {
         frame = new JFrame("NaturalApi Develop");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(750,700);
+        frame.setSize(750, 700);
         frame.setLocationRelativeTo(null);
 
         //set logo
@@ -62,17 +64,16 @@ public class Gui implements Observer {
         DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
         dlcr.setHorizontalAlignment(SwingConstants.CENTER);
         comboBox1.setRenderer(dlcr);
-        
+
         addBalButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             int valid = fileChooser.showOpenDialog(mainPanel);
             if (valid == JFileChooser.APPROVE_OPTION) {
                 setBal(fileChooser.getSelectedFile().getAbsolutePath());
-                if(bal.contains(".json")){
+                if (bal.contains(".json")) {
                     messageLabel.setText("Bal loaded!");
                     mainPanel.setBackground(Color.GREEN);
-                }
-                else{
+                } else {
                     mainPanel.setBackground(Color.RED);
                     messageLabel.setText("Ops! Something went wrong! Reload your Bal");
                 }
@@ -95,24 +96,21 @@ public class Gui implements Observer {
         });
 
         suggestionButton.addActionListener(e -> {
-            try{
-                if(bal.isEmpty() || pla.isEmpty()){
+            try {
+                if (bal.isEmpty() || pla.isEmpty()) {
                     messageLabel.setText("Load bal and pla first!");
                     mainPanel.setBackground(Color.RED);
-                }
-                else {
-                    c.createApiSuggestion(bal,pla);
+                } else {
+                    c.createApiSuggestion(bal, pla);
                     comboBox1.setVisible(true);
                     messageLabel.setText(message);
-                    if(message.equals("Suggestions created!")){
+                    if (message.equals("Suggestions created!")) {
                         mainPanel.setBackground(Color.GREEN);
-                    }
-                    else if(message.equals("This couple of BAL and PLA is already generated!")){
+                    } else if (message.equals("This couple of BAL and PLA is already generated!")) {
                         mainPanel.setBackground(Color.RED);
                     }
                 }
-            }
-            catch (Exception ex){
+            } catch (Exception ex) {
                 messageLabel.setText("Ops! Something went wrong! " +
                         "Check that your BAL and PLA files are correctly formatted");
                 mainPanel.setBackground(Color.RED);
@@ -120,63 +118,59 @@ public class Gui implements Observer {
         });
 
         generateButton.addActionListener(e -> {
-            try{
-                if(comboBox1.getItemCount() == 0){
+            try {
+                if (comboBox1.getItemCount() == 0) {
                     messageLabel.setText("There aren't suggestions to generate!");
                     mainPanel.setBackground(Color.RED);
-                }
-                else {
+                } else {
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                     int valid = fileChooser.showSaveDialog(mainPanel);
-                    if(valid == JFileChooser.APPROVE_OPTION) {
+                    if (valid == JFileChooser.APPROVE_OPTION) {
                         c.generateApi(fileChooser.getSelectedFile().getAbsolutePath() + "\\");
                         messageLabel.setText(message);
                         mainPanel.setBackground(Color.GREEN);
                     }
                 }
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
                 messageLabel.setText("File not found!");
                 mainPanel.setBackground(Color.RED);
             }
         });
 
         createPLAButton.addActionListener(e -> {
-            GuiPla guiPla = new GuiPla(controller,dataPresenterGui);
+            GuiPla guiPla = new GuiPla(controller, dataPresenterGui);
             guiPla.showGuiPla();
         });
 
         modifyPLAButton.addActionListener(e -> {
-            GuiModifyPla guiModifyPla = new GuiModifyPla(controller,dataPresenterGui);
+            GuiModifyPla guiModifyPla = new GuiModifyPla(controller, dataPresenterGui);
             guiModifyPla.showGuiModifyPla();
         });
 
         modifyButton.addActionListener(e -> {
-            try{
-                if(toView.get(comboBox1.getSelectedItem().toString()).equals(textArea.getText())){
+            try {
+                if (toView.get(comboBox1.getSelectedItem().toString()).equals(textArea.getText())) {
                     messageLabel.setText("There aren't changes!");
                     mainPanel.setBackground(Color.RED);
-                }
-                else {
-                    controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()),textArea.getText());
-                    toView.replace(comboBox1.getSelectedItem().toString(),textArea.getText());
+                } else {
+                    controller.modifyApiGui(toView.get(comboBox1.getSelectedItem().toString()), textArea.getText());
+                    toView.replace(comboBox1.getSelectedItem().toString(), textArea.getText());
                     messageLabel.setText("Api modified!");
                     mainPanel.setBackground(Color.GREEN);
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 messageLabel.setText("There aren't suggestions to modify!");
                 mainPanel.setBackground(Color.RED);
             }
         });
 
         comboBox1.addActionListener(e ->
-            textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))
+                textArea.setText(toView.get(comboBox1.getSelectedItem().toString()))
         );
 
-        Color myRed = new Color( 224,91,73);
-        Color myBlue = new Color(58,84,105);
+        Color myRed = new Color(224, 91, 73);
+        Color myBlue = new Color(58, 84, 105);
 
         createPLAButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -286,17 +280,16 @@ public class Gui implements Observer {
         pla = s;
     }
 
-    public void showGui(){
+    public void showGui() {
         frame.setVisible(true);
     }
 
-    public void showOutput(){
-        if(((DefaultComboBoxModel)comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1) {
+    public void showOutput() {
+        if (((DefaultComboBoxModel) comboBox1.getModel()).getIndexOf(dataPresenterGui.getComboToShow()) == -1) {
             toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());
             comboBox1.addItem(dataPresenterGui.getComboToShow());
-        }
-        else {
-            if(dataPresenterGui.getComboToShow().equals("Test\\StepDefinitions.java")){
+        } else {
+            if (dataPresenterGui.getComboToShow().equals("Test\\StepDefinitions.java")) {
                 toView.put(dataPresenterGui.getComboToShow(), dataPresenterGui.getStringToShow());
                 comboBox1.setSelectedIndex(0);
             }

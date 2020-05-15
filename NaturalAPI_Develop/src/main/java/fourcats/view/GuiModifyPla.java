@@ -1,5 +1,7 @@
 package fourcats.view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import fourcats.interfaceadapters.Controller;
 import fourcats.interfaceadapters.DataPresenterGui;
 import fourcats.observer.Observer;
@@ -37,7 +39,7 @@ public class GuiModifyPla implements Observer {
     private String modifyTestPla;
     private int valid;
 
-    public GuiModifyPla(Controller controller, DataPresenterGui dataPresenterGui){
+    public GuiModifyPla(Controller controller, DataPresenterGui dataPresenterGui) {
 
         this.controller = controller;
         this.dataPresenterGui = dataPresenterGui;
@@ -52,7 +54,7 @@ public class GuiModifyPla implements Observer {
 
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(500,500);
+        frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
 
         //set logo
@@ -62,7 +64,7 @@ public class GuiModifyPla implements Observer {
         loadButton.addActionListener(e -> {
             fileChooser = new JFileChooser();
             valid = fileChooser.showOpenDialog(mainPanel);
-            if(valid == JFileChooser.APPROVE_OPTION) {
+            if (valid == JFileChooser.APPROVE_OPTION) {
                 controller.loadPlaToModify(fileChooser.getSelectedFile().getAbsolutePath());
                 textArea1.setText(modifyApiPla);
                 textArea2.setText(modifyCustomPla);
@@ -72,7 +74,7 @@ public class GuiModifyPla implements Observer {
 
         modifyButton.addActionListener(e -> {
 
-            if(valid == JFileChooser.APPROVE_OPTION) {
+            if (valid == JFileChooser.APPROVE_OPTION) {
                 if (textArea1.getText().isEmpty() || textArea2.getText().isEmpty() || textArea3.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(frame, "There is an empty field!");
                 } else {
@@ -91,18 +93,17 @@ public class GuiModifyPla implements Observer {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(frame, "Select a PLA to modify first!");
             }
         });
 
         cancelButton.addActionListener(e ->
-            frame.dispose() //close the frame
+                frame.dispose() //close the frame
         );
 
-        Color myRed = new Color( 224,91,73);
-        Color myBlue = new Color(58,84,105);
+        Color myRed = new Color(224, 91, 73);
+        Color myBlue = new Color(58, 84, 105);
 
         loadButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -149,17 +150,17 @@ public class GuiModifyPla implements Observer {
             }
         });
 
-        label1.setBorder(new EmptyBorder(5,0,5,0));
-        label2.setBorder(new EmptyBorder(5,0,5,0));
-        label3.setBorder(new EmptyBorder(5,0,5,0));
+        label1.setBorder(new EmptyBorder(5, 0, 5, 0));
+        label2.setBorder(new EmptyBorder(5, 0, 5, 0));
+        label3.setBorder(new EmptyBorder(5, 0, 5, 0));
 
     }
 
-    public void showGuiModifyPla(){
+    public void showGuiModifyPla() {
         frame.setVisible(true);
     }
 
-    public void showOutput(){
+    public void showOutput() {
         modifyApiPla = dataPresenterGui.getModifyApiPla();
         modifyCustomPla = dataPresenterGui.getModifyCustomPla();
         modifyTestPla = dataPresenterGui.getModifyTestPla();
@@ -170,4 +171,5 @@ public class GuiModifyPla implements Observer {
     public void update() {
         showOutput();
     }
+
 }
