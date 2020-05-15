@@ -215,9 +215,7 @@ public class SuggestApi implements ApiInputPort {
         if(numAttributes > 0) {
             while(numAttributes > 0) {
 
-                String attributeName = iteratorKeys.next();
-                attributeName = attributeName.substring(0,1).toUpperCase() + attributeName.substring(1);
-                customApi = customApi.replace("\"attribute_name\"", attributeName);
+                customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
                 customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
                 if(numAttributes > 1) {
                     customApi = customApi.concat(pla.getCustomBody());
@@ -254,9 +252,7 @@ public class SuggestApi implements ApiInputPort {
         if(numAttributes > 0) {
             while (numAttributes > 0) {
 
-                String attributeName = iteratorKeys.next();
-                attributeName = attributeName.substring(0,1).toUpperCase() + attributeName.substring(1);
-                customApi = customApi.replace("\"attribute_name\"", attributeName);
+                customApi = customApi.replace("\"attribute_name\"", iteratorKeys.next());
                 customApi = customApi.replace("\"attribute_type\"", iteratorValues.next());
                 if (numAttributes > 1) {
                     customApi = customApi.concat(pla.getCustomBody());
