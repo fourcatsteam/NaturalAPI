@@ -1,0 +1,51 @@
+{
+  "actors" : [ {
+    "name" : "All",
+    "actions" : [ {
+      "name" : "@Given no character with name \"Ayran\" exists in the current project",
+      "type" : {
+        "name" : "hjjhjhh",
+        "attributes" : {
+          "j" : "string"
+        }
+      },
+      "scenario" : "A scenario",
+      "step" : "Given no character with name \"Ayran\" exists in the current project",
+      "objectParams" : [ ]
+    }, {
+      "name" : "",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "A scenario",
+      "step" : "When I try to create a character with name \"Ayran\"",
+      "objectParams" : [ ]
+    }, {
+      "name" : "action_nuova",
+      "type" : {
+        "name" : "float",
+        "attributes" : null
+      },
+      "scenario" : "A scenario",
+      "step" : "Then the character with name \"Ayran\" is created",
+      "objectParams" : [ ]
+    }, {
+      "name" : "hhh",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "A scenario",
+      "step" : "Then I can lookup the character with name \"Ayran\" in the current project",
+      "objectParams" : [ {
+        "name" : "characterfdsf",
+        "type" : {
+          "name" : "string",
+          "attributes" : null
+        },
+        "required" : true
+      } ]
+    } ]
+  } ]
+}

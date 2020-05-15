@@ -1,0 +1,157 @@
+@startuml
+
+title __INTERFACEADAPTERS's Class Diagram__\n
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.Controller {
+          + Controller()
+          + addObject()
+          + addSuggestion()
+          + addSuggestionByIdType()
+          + createCustomType()
+          + declineSuggestion()
+          + generateBAL()
+          + generateSuggestions()
+          + loadBdl()
+          + modifyActionName()
+          + modifyActionType()
+          + modifyActionTypeById()
+          + modifyObjectName()
+          + modifyObjectType()
+          + modifyObjectTypeById()
+          + removeBdl()
+          + removeObject()
+          + showTypes()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.DataPresenter {
+          - toShow : String
+          + getDataToShow()
+          + showAddedObject()
+          + showAddedSuggestion()
+          + showBDLOutput()
+          + showCustomTypeCreationStatus()
+          + showDeclinedSuggestion()
+          + showErrorFileLoad()
+          + showGenerationStatus()
+          + showModifiedActionName()
+          + showModifiedActionType()
+          + showModifiedObjectName()
+          + showModifiedObjectType()
+          + showRemoveBdlStatus()
+          + showRemovedObject()
+          + showSuggestionsForScenario()
+          + showTypes()
+          - showSuggestions()
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.DataPresenterGUI {
+          {static} ~ ERROR_MESSAGE : String
+          - actionName : String
+          - actionType : String
+          - actor : String
+          - featurePath : String
+          - frequencyInBdl : int
+          - isBdlLoaded : boolean
+          - isOkOperation : boolean
+          - isSuggestionToAdd : boolean
+          - isSuggestionsRefreshNeeded : boolean
+          - lObjectId : ArrayList<String>
+          - lObjectNames : ArrayList<String>
+          - lObjectTypes : ArrayList<String>
+          - lTypes : ArrayList<String>
+          - message : String
+          - scenarioContent : String
+          - scenarioId : String
+          - suggestionId : String
+          + DataPresenterGUI()
+          + getActionName()
+          + getActionType()
+          + getActor()
+          + getFeaturePath()
+          + getFrequencyInBdl()
+          + getMessage()
+          + getScenarioContent()
+          + getScenarioId()
+          + getSuggestionId()
+          + getWordObjectFrequency()
+          + getlObjectId()
+          + getlObjectNames()
+          + getlObjectTypes()
+          + getlTypes()
+          + isBdlLoaded()
+          + isOkOperation()
+          + isSuggestionToAdd()
+          + isSuggestionsRefreshNeeded()
+          + showAddedObject()
+          + showAddedSuggestion()
+          + showBDLOutput()
+          + showCustomTypeCreationStatus()
+          + showDeclinedSuggestion()
+          + showErrorFileLoad()
+          + showGenerationStatus()
+          + showModifiedActionName()
+          + showModifiedActionType()
+          + showModifiedObjectName()
+          + showModifiedObjectType()
+          + showRemoveBdlStatus()
+          + showRemovedObject()
+          + showSuggestionsForScenario()
+          + showTypes()
+          - showSuggestions()
+      }
+    }
+  }
+  
+
+  fourcats.interfaceadapters.Controller o-- fourcats.port.AddBalSuggestionInputPort : addSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.CreateCustomTypeInputPort : createCustomType
+  fourcats.interfaceadapters.Controller o-- fourcats.port.DeclineBalSuggestionInputPort : declineSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalInputPort : generateBAL
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalSuggestionsInputPort : generateSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBdlInputPort : loadBdl
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBalSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.RemoveBdlInputPort : removeBdl
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.RemoveBdlOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
+  fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.CreateCustomTypeOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
+  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.SuggestionFeedback : algorithm
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="fourcats.view.gui.GuiDesign">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="2">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1154" height="400"/>
+    </constraints>
+    <properties>
+      <alignmentX value="0.5"/>
+      <alignmentY value="0.5"/>
+      <autoscrolls value="false"/>
+      <background color="-1"/>
+      <enabled value="true"/>
+      <foreground color="-1"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="2499d" class="javax.swing.JTextArea" binding="log">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <autoscrolls value="true"/>
+          <background color="-1"/>
+          <editable value="false"/>
+          <font style="1"/>
+          <margin top="5" left="5" bottom="5" right="5"/>
+        </properties>
+      </component>
+      <grid id="66bf5" binding="buttonsPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12954519"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="c49a9" class="javax.swing.JButton" binding="loadFeatureBtn">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12954519"/>
+              <font size="14"/>
+              <foreground color="-1"/>
+              <text value="Load Feature File"/>
+            </properties>
+          </component>
+          <component id="2aed4" class="javax.swing.JButton" binding="genSuggestBtn">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12954519"/>
+              <font size="14"/>
+              <foreground color="-1"/>
+              <text value="Generate suggestion for BAL"/>
+            </properties>
+          </component>
+          <component id="1728c" class="javax.swing.JButton" binding="loadBDLButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12954519"/>
+              <font size="14"/>
+              <foreground color="-1"/>
+              <selected value="false"/>
+              <text value="Load BDL"/>
+            </properties>
+          </component>
+          <grid id="535c5" binding="removeFilesBtnPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="2" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="c848f" class="javax.swing.JButton" binding="removeFeatureBtn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12954519"/>
+                  <font size="14"/>
+                  <foreground color="-1"/>
+                  <maximumSize width="250" height="30"/>
+                  <preferredSize width="250" height="30"/>
+                  <text value="Remove loaded feature"/>
+                </properties>
+              </component>
+              <component id="18539" class="javax.swing.JButton" binding="removeBdlBtn">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-12954519"/>
+                  <enabled value="true"/>
+                  <font size="14"/>
+                  <foreground color="-1"/>
+                  <maximumSize width="250" height="30"/>
+                  <minimumSize width="143" height="30"/>
+                  <preferredSize width="250" height="30"/>
+                  <text value="Remove loaded BDL"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <component id="570ce" class="javax.swing.JLabel" binding="titleText">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="16" style="1"/>
+          <foreground color="-2073783"/>
+          <labelFor value="2499d"/>
+          <text value="NaturalAPI Design"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

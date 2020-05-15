@@ -28,3 +28,6 @@ _**N.B. The format of the files needed by the modules can be found in the User m
 
 
 You can consult the NaturalAPI website at this link: [NaturalAPI](https://fourcatsteam.github.io/NaturalAPI_Project/).
+
+# NaturalAPI Design
+[![Build Status](https://travis-ci.com/fourcatsteam/NaturalAPI.svg?branch=NaturalAPI_Design)](https://travis-ci.com/fourcatsteam/NaturalAPI)

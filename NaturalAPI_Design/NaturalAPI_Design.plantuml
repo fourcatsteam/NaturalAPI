@@ -1,0 +1,636 @@
+@startuml
+
+title __NATURALAPI_DESIGN's Class Diagram__\n
+
+  namespace fourcats {
+    class fourcats.GuiLauncher {
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      class fourcats.datastructure.AnalyzedData {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      class fourcats.datastructure.BlackList {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      class fourcats.datastructure.Dependency {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      class fourcats.datastructure.WordCounter {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      class fourcats.datastructure.WordTag {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      namespace observer {
+        interface fourcats.datastructure.observer.Observer {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace datastructure {
+      namespace observer {
+        abstract class fourcats.datastructure.observer.Subject {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Action {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Actor {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Bal {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Bdl {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.ObjectParam {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Scenario {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace entities {
+      class fourcats.entities.Type {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace frameworks {
+      class fourcats.frameworks.BalAnalyzerImplementation {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace frameworks {
+      class fourcats.frameworks.DataKeeper {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace frameworks {
+      class fourcats.frameworks.FileSystemAccess {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace frameworks {
+      class fourcats.frameworks.Repository {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace frameworks {
+      class fourcats.frameworks.StanfordNlp {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceaccess {
+      interface fourcats.interfaceaccess.BalAnalyzer {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceaccess {
+      interface fourcats.interfaceaccess.PersistentMemoryAccess {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceaccess {
+      interface fourcats.interfaceaccess.RepositoryAccess {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceaccess {
+      interface fourcats.interfaceaccess.TextAnalyzer {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.Controller {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.DataPresenter {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace interfaceadapters {
+      class fourcats.interfaceadapters.DataPresenterGUI {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.AddBalSuggestionInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.AddBalSuggestionOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.CreateCustomTypeInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.CreateCustomTypeOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.DeclineBalSuggestionInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.DeclineBalSuggestionOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.GenerateBalInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.GenerateBalOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.GenerateBalSuggestionsInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.GenerateBalSuggestionsOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.LoadBdlInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.LoadBdlOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.ModifyBalSuggestionInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.ModifyBalSuggestionOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.RemoveBdlInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.RemoveBdlOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.ShowTypesInputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace port {
+      interface fourcats.port.ShowTypesOutputPort {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace suggestionbdlalgorithm {
+      interface fourcats.suggestionbdlalgorithm.SuggestionFeedback {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace suggestionbdlalgorithm {
+      class fourcats.suggestionbdlalgorithm.SuggestionFrequency {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.AddBalSuggestion {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.CreateCustomType {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.DeclineBalSuggestion {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.GenerateBal {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.GenerateBalSuggestions {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.LoadBdl {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.ModifyBalSuggestion {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.RemoveBdl {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace usecaseinteractor {
+      class fourcats.usecaseinteractor.ShowTypes {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      class fourcats.view.Cli {
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.AddSuggestionButtonWidget {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.AttributeWidget {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.CustomTypeCreation {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.GuiDesign {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.ObjectParamWidget {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.ScenarioWidget {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.SuggestionGenerated {
+        }
+      }
+    }
+  }
+  
+
+  namespace fourcats {
+    namespace view {
+      namespace gui {
+        class fourcats.view.gui.SuggestionWidget {
+        }
+      }
+    }
+  }
+  
+
+  fourcats.datastructure.WordCounter .up.|> java.lang.Comparable
+  fourcats.entities.Action o-- fourcats.entities.Type : type
+  fourcats.entities.ObjectParam o-- fourcats.entities.Type : type
+  fourcats.frameworks.BalAnalyzerImplementation .up.|> fourcats.interfaceaccess.BalAnalyzer
+  fourcats.frameworks.DataKeeper o-- fourcats.entities.Bdl : bdl
+  fourcats.frameworks.FileSystemAccess .up.|> fourcats.interfaceaccess.PersistentMemoryAccess
+  fourcats.frameworks.Repository .up.|> fourcats.interfaceaccess.RepositoryAccess
+  fourcats.frameworks.Repository o-- fourcats.frameworks.DataKeeper : dataKeeper
+  fourcats.frameworks.Repository o-- fourcats.interfaceaccess.PersistentMemoryAccess : memoryAccess
+  fourcats.frameworks.StanfordNlp .up.|> fourcats.interfaceaccess.TextAnalyzer
+  fourcats.interfaceadapters.Controller o-- fourcats.port.AddBalSuggestionInputPort : addSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.CreateCustomTypeInputPort : createCustomType
+  fourcats.interfaceadapters.Controller o-- fourcats.port.DeclineBalSuggestionInputPort : declineSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalInputPort : generateBAL
+  fourcats.interfaceadapters.Controller o-- fourcats.port.GenerateBalSuggestionsInputPort : generateSuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.LoadBdlInputPort : loadBdl
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ModifyBalSuggestionInputPort : modifySuggestion
+  fourcats.interfaceadapters.Controller o-- fourcats.port.RemoveBdlInputPort : removeBdl
+  fourcats.interfaceadapters.Controller o-- fourcats.port.ShowTypesInputPort : showTypes
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.AddBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.CreateCustomTypeOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.RemoveBdlOutputPort
+  fourcats.interfaceadapters.DataPresenter .up.|> fourcats.port.ShowTypesOutputPort
+  fourcats.interfaceadapters.DataPresenter -up-|> fourcats.datastructure.observer.Subject
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.AddBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.CreateCustomTypeOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.DeclineBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.GenerateBalSuggestionsOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.LoadBdlOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ModifyBalSuggestionOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.RemoveBdlOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI .up.|> fourcats.port.ShowTypesOutputPort
+  fourcats.interfaceadapters.DataPresenterGUI -up-|> fourcats.datastructure.observer.Subject
+  fourcats.interfaceadapters.DataPresenterGUI o-- fourcats.suggestionbdlalgorithm.SuggestionFeedback : algorithm
+  fourcats.suggestionbdlalgorithm.SuggestionFrequency .up.|> fourcats.suggestionbdlalgorithm.SuggestionFeedback
+  fourcats.suggestionbdlalgorithm.SuggestionFrequency o-- fourcats.entities.Bdl : bdl
+  fourcats.usecaseinteractor.AddBalSuggestion .up.|> fourcats.port.AddBalSuggestionInputPort
+  fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.port.AddBalSuggestionOutputPort : out
+  fourcats.usecaseinteractor.AddBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.CreateCustomType .up.|> fourcats.port.CreateCustomTypeInputPort
+  fourcats.usecaseinteractor.CreateCustomType o-- fourcats.port.CreateCustomTypeOutputPort : out
+  fourcats.usecaseinteractor.CreateCustomType o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.DeclineBalSuggestion .up.|> fourcats.port.DeclineBalSuggestionInputPort
+  fourcats.usecaseinteractor.DeclineBalSuggestion o-- fourcats.port.DeclineBalSuggestionOutputPort : out
+  fourcats.usecaseinteractor.DeclineBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.GenerateBal .up.|> fourcats.port.GenerateBalInputPort
+  fourcats.usecaseinteractor.GenerateBal o-- fourcats.interfaceaccess.BalAnalyzer : balAnalyzer
+  fourcats.usecaseinteractor.GenerateBal o-- fourcats.port.GenerateBalOutputPort : out
+  fourcats.usecaseinteractor.GenerateBal o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.GenerateBalSuggestions .up.|> fourcats.port.GenerateBalSuggestionsInputPort
+  fourcats.usecaseinteractor.GenerateBalSuggestions o-- fourcats.port.GenerateBalSuggestionsOutputPort : out
+  fourcats.usecaseinteractor.GenerateBalSuggestions o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.GenerateBalSuggestions o-- fourcats.interfaceaccess.TextAnalyzer : textAnalyzer
+  fourcats.usecaseinteractor.LoadBdl .up.|> fourcats.port.LoadBdlInputPort
+  fourcats.usecaseinteractor.LoadBdl o-- fourcats.port.LoadBdlOutputPort : out
+  fourcats.usecaseinteractor.LoadBdl o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.ModifyBalSuggestion .up.|> fourcats.port.ModifyBalSuggestionInputPort
+  fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.port.ModifyBalSuggestionOutputPort : out
+  fourcats.usecaseinteractor.ModifyBalSuggestion o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.RemoveBdl .up.|> fourcats.port.RemoveBdlInputPort
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.port.RemoveBdlOutputPort : out
+  fourcats.usecaseinteractor.RemoveBdl o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.usecaseinteractor.ShowTypes .up.|> fourcats.port.ShowTypesInputPort
+  fourcats.usecaseinteractor.ShowTypes o-- fourcats.port.ShowTypesOutputPort : out
+  fourcats.usecaseinteractor.ShowTypes o-- fourcats.interfaceaccess.RepositoryAccess : repo
+  fourcats.view.Cli .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.Cli o-- fourcats.interfaceadapters.Controller : contr
+  fourcats.view.Cli o-- fourcats.interfaceadapters.DataPresenter : dataPresenter
+  fourcats.view.gui.CustomTypeCreation -up-|> java.awt.Component
+  fourcats.view.gui.GuiDesign .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.GuiDesign -up-|> java.awt.Component
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.Controller : controller
+  fourcats.view.gui.GuiDesign o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+  fourcats.view.gui.ScenarioWidget -up-|> javax.swing.JComponent
+  fourcats.view.gui.SuggestionGenerated .up.|> fourcats.datastructure.observer.Observer
+  fourcats.view.gui.SuggestionGenerated -up-|> java.awt.Component
+  fourcats.view.gui.SuggestionGenerated o-- fourcats.interfaceadapters.Controller : contr
+  fourcats.view.gui.SuggestionGenerated o-- fourcats.interfaceadapters.DataPresenterGUI : dataPresenter
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
