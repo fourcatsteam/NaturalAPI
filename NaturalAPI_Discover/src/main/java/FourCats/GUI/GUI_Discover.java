@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -335,11 +336,11 @@ public class GUI_Discover extends JPanel implements Observer{
         //Add content to the window.
         frame.add(panel1);
         frame.setPreferredSize(new Dimension(800,500));
-        try {
-            frame.setIconImage(ImageIO.read(new File("src/main/java/FourCats/logo.png")));
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,"Error while loading logo");
-        }
+
+        //set logo
+        final URL url = Thread.currentThread().getContextClassLoader().getResource("images/logo.png");
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);
