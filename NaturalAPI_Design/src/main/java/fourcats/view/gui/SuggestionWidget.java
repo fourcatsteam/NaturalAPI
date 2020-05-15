@@ -30,6 +30,7 @@ public class SuggestionWidget {
     private static final String PREDICATE_FREQUENCY = "Predicate Frequency: ";
     private CustomTypeCreation customType;
     private String currentActionName; //updated with the one in dataKeeper
+    private String selectedBeforeCustom;
 
     public SuggestionWidget(JPanel panelToUpdate, Controller contr, DataPresenterGUI dataPresenter) {
         lObjectParamWidget = new ArrayList<>();
@@ -38,6 +39,7 @@ public class SuggestionWidget {
 
         this.scenarioId = dataPresenter.getScenarioId();
         this.suggestionId = dataPresenter.getSuggestionId();
+        this.selectedBeforeCustom = "void";
 
         //this is needed because setSelectedItem won't work if the item is not present
         if (!dataPresenter.getActionType().equals("void")) {
@@ -93,6 +95,12 @@ public class SuggestionWidget {
         actionTypeComboBox.addActionListener(e -> {
             if (Objects.equals(actionTypeComboBox.getSelectedItem(), CREATE_CUSTOM)) {
                 customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
+            } else {
+                if (actionTypeComboBox.getSelectedItem() != null) {
+                    selectedBeforeCustom = actionTypeComboBox.getSelectedItem().toString();
+                } else {
+                    selectedBeforeCustom = "void";
+                }
             }
         });
 
@@ -100,20 +108,25 @@ public class SuggestionWidget {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                ArrayList<String> currentItems = new ArrayList();
+                ArrayList<String> lCurrentItems = new ArrayList();
                 // i = 1 because 0 is void (not present in dataKeeper),
                 // itemCount-1 because last item is the CREATE CUSTOM option (not present in dataKeeper)
                 for (int i = 1; i < actionTypeComboBox.getItemCount() - 1; i++) {
-                    currentItems.add(actionTypeComboBox.getItemAt(i));
+                    lCurrentItems.add(actionTypeComboBox.getItemAt(i));
                 }
                 contr.showTypes();
-                //update items if currentItems are different from the ones given by the dataPresenter
-                if (!dataPresenter.getlTypes().equals(currentItems)) {
+                //update items if lCurrentItems are different from the ones given by the dataPresenter
+                if (!dataPresenter.getlTypes().equals(lCurrentItems)) {
                     initTypeComboBox(dataPresenter);
                     //check if the selected item should be the custom type recently created
                     if (customType != null && customType.isCustomTypeCreated()) {
                         actionTypeComboBox.setSelectedIndex(actionTypeComboBox.getItemCount() - 2);
+                        return;
                     }
+                }
+                if (Objects.requireNonNull(actionTypeComboBox.getSelectedItem()).toString().equals(CREATE_CUSTOM) &&
+                        customType != null && !customType.isCustomTypeCreated()) {
+                    actionTypeComboBox.setSelectedItem(selectedBeforeCustom);
                 }
             }
 

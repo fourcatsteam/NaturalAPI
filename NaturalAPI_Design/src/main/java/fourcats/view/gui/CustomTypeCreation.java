@@ -101,6 +101,7 @@ public class CustomTypeCreation {
                 isCustomTypeCreated = true;
                 frame.dispose();
             } else {
+                isCustomTypeCreated = false;
                 JOptionPane.showMessageDialog(null, "Please enter the name for the custom type", "No name given", JOptionPane.WARNING_MESSAGE);
             }
         });

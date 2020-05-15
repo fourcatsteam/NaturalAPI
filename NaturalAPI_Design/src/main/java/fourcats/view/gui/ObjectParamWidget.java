@@ -21,6 +21,7 @@ public class ObjectParamWidget {
     private JLabel frequencyLabel;
     private String objectId;
     private CustomTypeCreation customType;
+    private String selectedBeforeCustom;
     private String currentObjectName; //updated with the one in dataKeeper
     private static final String CREATE_CUSTOM = "CREATE CUSTOM";
     private static final String WORD_FREQUENCY = "Word Frequency: ";
@@ -29,6 +30,7 @@ public class ObjectParamWidget {
     public ObjectParamWidget(SuggestionWidget suggWidget, Controller contr, DataPresenterGUI dataPresenter, String initialObjectId,
                              String objectType, String objectName, String suggestionId, String scenarioId) {
         this.objectId = initialObjectId;
+        this.selectedBeforeCustom = "string";
         mainPanel = new JPanel();
         mainPanel.add(objectTypeComboBox);
         mainPanel.add(objectNameTextField);
@@ -38,6 +40,7 @@ public class ObjectParamWidget {
             frequencyLabel.setText(WORD_FREQUENCY + dataPresenter.getWordObjectFrequency(objectName));
             setObjectNameColor(dataPresenter.getWordObjectFrequency(objectName));
         }
+
         mainPanel.add(removeObjectButton);
         if (!objectType.equals("string")) {
             initTypeComboBox(dataPresenter);
@@ -60,6 +63,12 @@ public class ObjectParamWidget {
         objectTypeComboBox.addActionListener(e -> {
             if (Objects.equals(objectTypeComboBox.getSelectedItem(), CREATE_CUSTOM)) {
                 customType = new CustomTypeCreation(contr, dataPresenter.getlTypes());
+            } else {
+                if (objectTypeComboBox.getSelectedItem() != null) {
+                    selectedBeforeCustom = objectTypeComboBox.getSelectedItem().toString();
+                } else {
+                    selectedBeforeCustom = "string";
+                }
             }
         });
 
@@ -80,6 +89,10 @@ public class ObjectParamWidget {
                     if (customType != null && customType.isCustomTypeCreated()) {
                         objectTypeComboBox.setSelectedIndex(objectTypeComboBox.getItemCount() - 2);
                     }
+                }
+                if (Objects.requireNonNull(objectTypeComboBox.getSelectedItem()).toString().equals(CREATE_CUSTOM) &&
+                        customType != null && !customType.isCustomTypeCreated()) {
+                    objectTypeComboBox.setSelectedItem(selectedBeforeCustom);
                 }
             }
 
