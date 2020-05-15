@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Repository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Discover</a> &gt; <a href="index.source.html" class="el_package">FourCats.InterfaceAdapters</a> &gt; <span class="el_source">Repository.java</span></div><h1>Repository.java</h1><pre class="source lang-java linenums">package FourCats.InterfaceAdapters;
+
+import FourCats.Entities.Bdl;
+import FourCats.Entities.Document;
+import FourCats.InterfaceAccess.PersistentMemoryAccess;
+import FourCats.InterfaceAccess.RepositoryAccess;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Repository implements RepositoryAccess {
+
+    private PersistentMemoryAccess memoryAccess;
+
+<span class="nc" id="L16">    public Repository(PersistentMemoryAccess persistentMemory) {</span>
+<span class="nc" id="L17">        this.memoryAccess = persistentMemory;</span>
+<span class="nc" id="L18">    }</span>
+
+    @Override
+    public Bdl createBdl(String name) {
+        //create a new Bdl and store it in the DataKeeper
+<span class="nc" id="L23">        return new Bdl(name);</span>
+
+    }
+
+    @Override
+    public Bdl readBdl(String targetBdl) {
+        //load the Bdl and the association list from memory and store it in the DataKeeper
+        try{
+<span class="nc" id="L31">            return this.memoryAccess.loadBdl(targetBdl);</span>
+<span class="nc" id="L32">        }catch(IOException e){</span>
+<span class="nc" id="L33">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L35">        return null;</span>
+    }
+
+    @Override
+    public void updateBdl(Bdl bdl) {
+        try{
+<span class="nc" id="L41">            this.memoryAccess.saveBdl(bdl);</span>
+<span class="nc" id="L42">        }catch(IOException e){</span>
+<span class="nc" id="L43">            e.printStackTrace();</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">    }</span>
+
+    @Override
+    public Document readDocument(String title) {
+        //if the Document has already been loaded it's held by the DataKeeper
+<span class="nc" id="L50">        return this.memoryAccess.loadDocument(title);</span>
+    }
+
+    @Override
+    public LinkedList&lt;String&gt; readAssociation(String referringBdl){
+        try {
+<span class="nc" id="L56">            return this.memoryAccess.loadAssociation(referringBdl);</span>
+<span class="nc" id="L57">        }catch (IOException e){</span>
+<span class="nc" id="L58">            e.printStackTrace();</span>
+<span class="nc" id="L59">            return null;</span>
+        }
+    }
+
+    @Override
+    public void addAssociation(String referringBdl, List&lt;String&gt; associateDocuments) {
+        try{
+<span class="nc" id="L66">            this.memoryAccess.addAssociation(referringBdl, associateDocuments);</span>
+<span class="nc" id="L67">        }catch(IOException e){</span>
+<span class="nc" id="L68">            e.printStackTrace();</span>
+<span class="nc" id="L69">        }</span>
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public void removeAssociation(String referringBdl, List&lt;String&gt; docToRemove) {
+        try{
+<span class="nc" id="L75">            this.memoryAccess.removeAssociation(referringBdl, docToRemove);</span>
+<span class="nc" id="L76">        }catch(IOException e){</span>
+<span class="nc" id="L77">            e.printStackTrace();</span>
+<span class="nc" id="L78">        }</span>
+<span class="nc" id="L79">    }</span>
+
+    @Override
+    public void updateAssociation(String referringBdl, List&lt;String&gt; associateDocuments) {
+        try{
+<span class="nc" id="L84">            this.memoryAccess.saveAssociation(referringBdl, associateDocuments);</span>
+<span class="nc" id="L85">        }catch(IOException e){</span>
+<span class="nc" id="L86">            e.printStackTrace();</span>
+<span class="nc" id="L87">        }</span>
+<span class="nc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

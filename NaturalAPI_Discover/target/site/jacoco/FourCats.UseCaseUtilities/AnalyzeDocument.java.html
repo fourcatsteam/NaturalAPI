@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AnalyzeDocument.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Discover</a> &gt; <a href="index.source.html" class="el_package">FourCats.UseCaseUtilities</a> &gt; <span class="el_source">AnalyzeDocument.java</span></div><h1>AnalyzeDocument.java</h1><pre class="source lang-java linenums">package FourCats.UseCaseUtilities;
+
+import FourCats.DataStructure.AnalyzedData;
+import FourCats.DataStructure.WordTag;
+import FourCats.Entities.Bdl;
+import FourCats.Entities.Document;
+import FourCats.InterfaceAccess.TextAnalyzer;
+
+import java.util.LinkedList;
+
+public class AnalyzeDocument {
+    private TextAnalyzer analyzer;
+
+<span class="nc" id="L14">    public AnalyzeDocument(TextAnalyzer nlp){</span>
+<span class="nc" id="L15">        analyzer = nlp;</span>
+<span class="nc" id="L16">    }</span>
+
+    public AnalyzedData parseDocuments(LinkedList&lt;Document&gt; docs) {
+<span class="nc" id="L19">        AnalyzedData dataToPass = null;</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        for(Document doc : docs){</span>
+<span class="nc" id="L21">            dataToPass = analyzer.parseDocumentContent(doc.getContent());</span>
+<span class="nc" id="L22">        }</span>
+<span class="nc" id="L23">        return dataToPass;</span>
+    }
+
+    public void removeDocumentFromBdl(Bdl bdl, Document document) {
+<span class="nc" id="L27">        AnalyzedData data = analyzer.parseDocumentContent(document.getContent());</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for(WordTag wordTag: data.getTaggedData()){</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (wordTag.getTag().contains(&quot;NN&quot;)) {</span>
+<span class="nc" id="L31">                bdl.removeNoun(wordTag.getLemma());</span>
+            }
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (wordTag.getTag().contains(&quot;VB&quot;)) {</span>
+<span class="nc" id="L34">                bdl.removeVerb(wordTag.getLemma());</span>
+            }
+<span class="nc" id="L36">        }</span>
+
+        //find predicates from the analysis
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for(String s: data.getParseList()){</span>
+<span class="nc" id="L40">            bdl.removePredicate(s);</span>
+<span class="nc" id="L41">        }</span>
+
+<span class="nc" id="L43">    }</span>
+
+    public void addDocumentToBdl(Bdl bdl, Document document) {
+<span class="nc" id="L46">        AnalyzedData data = analyzer.parseDocumentContent(document.getContent());</span>
+
+        //find names and verbs from the analysis composed by single word
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for(WordTag wordTag: data.getTaggedData()){</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (wordTag.getTag().contains(&quot;NN&quot;)) {</span>
+<span class="nc" id="L51">                bdl.addNoun(wordTag.getLemma());</span>
+            }
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if (wordTag.getTag().contains(&quot;VB&quot;)) {</span>
+<span class="nc" id="L54">                bdl.addVerb(wordTag.getLemma());</span>
+            }
+<span class="nc" id="L56">        }</span>
+
+        //find predicates from the analysis
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for(String s: data.getParseList()){</span>
+<span class="nc" id="L60">            bdl.addPredicate(s);</span>
+<span class="nc" id="L61">        }</span>
+
+<span class="nc" id="L63">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

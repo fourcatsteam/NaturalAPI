@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddDocuments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Discover</a> &gt; <a href="index.source.html" class="el_package">FourCats.UseCaseInteractor</a> &gt; <span class="el_source">AddDocuments.java</span></div><h1>AddDocuments.java</h1><pre class="source lang-java linenums">package FourCats.UseCaseInteractor;
+
+import FourCats.Entities.Bdl;
+import FourCats.Entities.Document;
+import FourCats.InterfaceAccess.TextAnalyzer;
+import FourCats.InterfaceAccess.RepositoryAccess;
+import FourCats.Port.AddDocumentsInputPort;
+import FourCats.Port.AddDocumentsOutputPort;
+import FourCats.UseCaseUtilities.AnalyzeDocument;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+public class AddDocuments implements AddDocumentsInputPort {
+
+    private RepositoryAccess repository;
+    private AnalyzeDocument documentAnalyzer;
+    private AddDocumentsOutputPort outputPort;
+
+<span class="nc" id="L20">    public AddDocuments(RepositoryAccess repo, TextAnalyzer analyzer, AddDocumentsOutputPort port) {</span>
+<span class="nc" id="L21">        this.repository = repo;</span>
+<span class="nc" id="L22">        this.documentAnalyzer = new AnalyzeDocument(analyzer);</span>
+<span class="nc" id="L23">        this.outputPort = port;</span>
+<span class="nc" id="L24">    }</span>
+
+
+    @Override
+    public void add(String targetBdl, List&lt;String&gt; docTitles) throws IOException {
+        //retrieve BDL from the repository
+<span class="nc" id="L30">        Bdl bdl = this.repository.readBdl(targetBdl);</span>
+
+        //retrieve BDL-Documents association from the repository
+
+<span class="nc" id="L34">        LinkedList&lt;String&gt; association = this.repository.readAssociation(targetBdl);</span>
+        try {
+            //filter already used documents
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (association != null) {</span>
+<span class="nc" id="L38">                docTitles.removeAll(association);</span>
+            }
+            //retrieve Documents from the repository
+<span class="nc" id="L41">            LinkedList&lt;Document&gt; documents = new LinkedList&lt;&gt;();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            for (String title : docTitles) {</span>
+<span class="nc" id="L43">                documents.add(this.repository.readDocument(title));</span>
+<span class="nc" id="L44">            }</span>
+
+            //add document analysis to BDL
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            for (Document document : documents) {</span>
+<span class="nc" id="L48">                documentAnalyzer.addDocumentToBdl(bdl, document);</span>
+<span class="nc" id="L49">            }</span>
+
+<span class="nc" id="L51">            association.addAll(docTitles);</span>
+<span class="nc" id="L52">        }catch (NullPointerException e){</span>
+<span class="nc" id="L53">            e.printStackTrace();</span>
+<span class="nc" id="L54">        }</span>
+        //update Bdl and association in the repository
+<span class="nc" id="L56">        repository.updateBdl(bdl);</span>
+<span class="nc" id="L57">        repository.updateAssociation(targetBdl, association);</span>
+
+        //send results to output device
+<span class="nc" id="L60">        outputPort.showAddDocumentsOutput(&quot;Documenti aggiunti al BDL con successo!&quot;);</span>
+<span class="nc" id="L61">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,3 @@
+Hi, i'm Simone.
+I'm trying to coding following Clean Architecture!
+See you soon.

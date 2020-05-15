@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileSystemAccess.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NaturalAPI_Discover</a> &gt; <a href="index.source.html" class="el_package">FourCats.Frameworks</a> &gt; <span class="el_source">FileSystemAccess.java</span></div><h1>FileSystemAccess.java</h1><pre class="source lang-java linenums">package FourCats.Frameworks;
+
+import FourCats.DataStructure.WordCounter;
+import FourCats.Entities.Bdl;
+import FourCats.Entities.Document;
+import FourCats.InterfaceAccess.PersistentMemoryAccess;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
+
+<span class="nc" id="L16">public class FileSystemAccess implements PersistentMemoryAccess {</span>
+
+    /*public LinkedList&lt;String&gt; read(LinkedList&lt;String&gt; titleDoc) throws FileNotFoundException {
+        LinkedList&lt;String&gt; ls = new LinkedList&lt;String&gt;();
+        for(int i=0;i&lt;titleDoc.size();i++){
+            ls.add(read(titleDoc.get(i)));
+        }
+        return ls;
+    }*/
+
+    /*private String read(String filename){
+        String filepath = &quot;txt_documents/&quot; + filename;
+        String s, fileContent = new String();
+        try{
+            BufferedReader input = new BufferedReader(new FileReader(filepath));
+            while((s=input.readLine()) != null){
+                fileContent += s + &quot; &quot;;
+            }
+            input.close();
+
+        }catch(IOException e){
+            //modificare gestione eccezioni
+            fileContent=&quot;file non trovato&quot;;
+        }
+        return fileContent;
+    }*/
+
+    /*public void writeBdl(String nameBdl,Bdl bdl) throws IOException {
+        saveListToFile(bdl.getNouns(),nameBdl+&quot;.nouns.bdl.csv&quot;);
+        saveListToFile(bdl.getVerbs(),nameBdl+&quot;.verbs.bdl.csv&quot;);
+        saveListToFile(bdl.getPredicates(),nameBdl+&quot;.predicates.bdl.csv&quot;);
+    }*/
+
+    /*public void writeBdlReference(String nameBdl, LinkedList&lt;String&gt; titleList) throws IOException{
+        String filepath = &quot;system_files/&quot;+nameBdl;
+        JSONObject obj = new JSONObject();
+        JSONArray namefiles = new JSONArray();
+        for(String title : titleList) {
+            namefiles.add(&quot;FileName: &quot;+title);
+        }
+        obj.put(&quot;FileNameList&quot;,namefiles);
+        obj.put(&quot;BdlName&quot;, nameBdl);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+        writer.write(obj.toJSONString());
+        writer.flush();
+        writer.close();
+    }*/
+
+    /*public Bdl readBdl(String targetBdl) throws IOException {
+        Bdl loadedBdl = new Bdl();
+        readBdlNouns(targetBdl,loadedBdl);
+        readBdlVerbs(targetBdl,loadedBdl);
+        readBdlPredicates(targetBdl,loadedBdl);
+
+        return loadedBdl;
+    }*/
+
+
+    private void readBdlNouns(String filename,Bdl loadbdl) throws IOException {
+<span class="nc" id="L75">        String line = &quot;&quot;;</span>
+<span class="nc" id="L76">        String filepath = &quot;BDL/&quot; + filename + &quot;.nouns.bdl.csv&quot;;</span>
+<span class="nc" id="L77">        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L79">                String[] bdl = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L80">                loadbdl.storeBdlNoun(bdl[0], Integer.parseInt(bdl[1]));</span>
+<span class="nc" id="L81">            }</span>
+        }
+<span class="nc" id="L83">    }</span>
+
+    private void readBdlVerbs(String filename,Bdl loadbdl) throws IOException {
+<span class="nc" id="L86">        String line = &quot;&quot;;</span>
+<span class="nc" id="L87">        String filepath = &quot;BDL/&quot; + filename + &quot;.verbs.bdl.csv&quot;;</span>
+<span class="nc" id="L88">        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L90">                String[] bdl = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L91">                loadbdl.storeBdlVerb(bdl[0], Integer.parseInt(bdl[1]));</span>
+<span class="nc" id="L92">            }</span>
+        }
+<span class="nc" id="L94">    }</span>
+
+    private void readBdlPredicates(String filename,Bdl loadbdl) throws IOException {
+<span class="nc" id="L97">        String line = &quot;&quot;;</span>
+<span class="nc" id="L98">        String filepath = &quot;BDL/&quot; + filename + &quot;.predicates.bdl.csv&quot;;</span>
+<span class="nc" id="L99">        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            while ((line = br.readLine()) != null) {</span>
+<span class="nc" id="L101">                String[] bdl = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L102">                loadbdl.storeBdlPredicate(bdl[0], Integer.parseInt(bdl[1]));</span>
+<span class="nc" id="L103">            }</span>
+        }
+<span class="nc" id="L105">    }</span>
+
+    //Sostanzialmente uguale a read, ma ritorna un documento
+
+    /*public Document readDocument(String title) {
+        String line, fileContent = &quot;&quot;, filepath = &quot;txt_documents/&quot; + title;
+        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            while((line = reader.readLine()) != null){
+                //add a space to separate sentences
+                fileContent += line + &quot; &quot;;
+            }
+        } catch(IOException e) {
+            return null;
+        }
+        return new Document(title, fileContent);
+    }*/
+
+    private void saveListToFile(List&lt;WordCounter&gt; list, String namefile) throws IOException {
+<span class="nc" id="L123">            String filepath = &quot;BDL/&quot;+namefile;</span>
+<span class="nc" id="L124">            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {</span>
+<span class="nc" id="L125">                StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                for (WordCounter w : list) {</span>
+<span class="nc" id="L127">                    sb.append(w.getWord());</span>
+<span class="nc" id="L128">                    sb.append(&quot;,&quot;);</span>
+<span class="nc" id="L129">                    sb.append(w.getCount());</span>
+<span class="nc" id="L130">                    sb.append('\n');</span>
+<span class="nc" id="L131">                }</span>
+<span class="nc" id="L132">                writer.write(sb.toString());</span>
+            }
+<span class="nc" id="L134">    }</span>
+
+    //------------------------------------------------------------------------------------
+
+    @Override
+    public Document loadDocument(String documentTitle) {
+<span class="nc" id="L140">        String line = &quot;&quot;;</span>
+<span class="nc" id="L141">        String fileContent = &quot;&quot;;</span>
+<span class="nc" id="L142">        String filepath = &quot;txt_documents/&quot; + documentTitle;</span>
+<span class="nc" id="L143">        try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            while((line = reader.readLine()) != null){</span>
+                //add a space to separate sentences
+<span class="nc" id="L146">                fileContent += line + &quot; &quot;;</span>
+            }
+<span class="nc" id="L148">        } catch(IOException e) {</span>
+<span class="nc" id="L149">            return null;</span>
+<span class="nc" id="L150">        }</span>
+<span class="nc" id="L151">        return new Document(documentTitle, fileContent);</span>
+    }
+
+    @Override
+    public Bdl loadBdl(String bdlName) throws IOException {
+<span class="nc" id="L156">        Bdl loadedBdl = new Bdl(bdlName);</span>
+<span class="nc" id="L157">        readBdlNouns(bdlName,loadedBdl);</span>
+<span class="nc" id="L158">        readBdlVerbs(bdlName,loadedBdl);</span>
+<span class="nc" id="L159">        readBdlPredicates(bdlName,loadedBdl);</span>
+
+<span class="nc" id="L161">        return loadedBdl;</span>
+    }
+
+    @Override
+    public void saveBdl(Bdl bdl) throws IOException {
+<span class="nc" id="L166">        saveListToFile(bdl.getNouns(),bdl.getName()+&quot;.nouns.bdl.csv&quot;);</span>
+<span class="nc" id="L167">        saveListToFile(bdl.getVerbs(),bdl.getName()+&quot;.verbs.bdl.csv&quot;);</span>
+<span class="nc" id="L168">        saveListToFile(bdl.getPredicates(),bdl.getName()+&quot;.predicates.bdl.csv&quot;);</span>
+<span class="nc" id="L169">    }</span>
+
+    @Override
+    public LinkedList&lt;String&gt; loadAssociation(String bdlName) throws IOException {
+<span class="nc" id="L173">        LinkedList&lt;String&gt; association = new LinkedList&lt;&gt;();</span>
+
+<span class="nc" id="L175">        String filepath = &quot;system_files/&quot;+bdlName+&quot;.json&quot;;</span>
+<span class="nc" id="L176">        BufferedReader reader = new BufferedReader(new FileReader(filepath));</span>
+        JSONObject value;
+<span class="nc" id="L178">        JSONParser parser = new JSONParser();</span>
+        try {
+<span class="nc" id="L180">            value = (JSONObject) parser.parse(reader);</span>
+<span class="nc" id="L181">            JSONArray entity = (JSONArray) value.get(&quot;FileNameList&quot;);</span>
+
+<span class="nc bnc" id="L183" title="All 2 branches missed.">            for(int i=0;i&lt;entity.size();i++){</span>
+<span class="nc" id="L184">                association.add( (String) entity.get(i) );</span>
+            }
+
+<span class="nc" id="L187">            reader.close();</span>
+<span class="nc" id="L188">        } catch (ParseException e) {</span>
+<span class="nc" id="L189">            e.printStackTrace();</span>
+<span class="nc" id="L190">        }</span>
+<span class="nc" id="L191">        return association;</span>
+    }
+
+    @Override
+    public void saveAssociation(String bdlName, List&lt;String&gt; titleList) throws IOException {
+<span class="nc" id="L196">        String filepath = &quot;system_files/&quot; + bdlName+&quot;.json&quot;;</span>
+<span class="nc" id="L197">        JSONObject obj = new JSONObject();</span>
+<span class="nc" id="L198">        JSONArray namefiles = new JSONArray();</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        for(String title : titleList) {</span>
+<span class="nc" id="L200">            namefiles.add(title);</span>
+<span class="nc" id="L201">        }</span>
+<span class="nc" id="L202">        obj.put(&quot;FileNameList&quot;,namefiles);</span>
+<span class="nc" id="L203">        obj.put(&quot;BdlName&quot;, bdlName);</span>
+<span class="nc" id="L204">        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {</span>
+<span class="nc" id="L205">            writer.write(obj.toJSONString());</span>
+<span class="nc" id="L206">            writer.flush();</span>
+        }
+<span class="nc" id="L208">    }</span>
+
+    //------------------------------//
+
+    @Override
+    public void addAssociation(String bdlName, List&lt;String&gt; titleList) throws IOException {
+<span class="nc" id="L214">        String filepath = &quot;system_files/&quot;+bdlName+&quot;.json&quot;;</span>
+<span class="nc" id="L215">        BufferedReader reader = new BufferedReader(new FileReader(filepath));</span>
+        JSONObject value;
+<span class="nc" id="L217">        JSONParser parser = new JSONParser();</span>
+        try {
+<span class="nc" id="L219">            value = (JSONObject) parser.parse(reader);</span>
+<span class="nc" id="L220">            JSONArray entity = (JSONArray) value.get(&quot;FileNameList&quot;);</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            for(String s: titleList) {</span>
+<span class="nc" id="L222">                entity.add(s);</span>
+<span class="nc" id="L223">            }</span>
+<span class="nc" id="L224">            reader.close();</span>
+<span class="nc" id="L225">            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {</span>
+<span class="nc" id="L226">                writer.write(value.toJSONString());</span>
+            }
+<span class="nc" id="L228">        } catch (ParseException e) {</span>
+<span class="nc" id="L229">            e.printStackTrace();</span>
+<span class="nc" id="L230">        }</span>
+<span class="nc" id="L231">    }</span>
+
+    @Override
+    public void removeAssociation(String bdlName, List&lt;String&gt; docToRemove) throws IOException {
+<span class="nc" id="L235">        String filepath = &quot;system_files/&quot;+bdlName+&quot;.json&quot;;</span>
+<span class="nc" id="L236">        BufferedReader reader = new BufferedReader(new FileReader(filepath));</span>
+        JSONObject value;
+<span class="nc" id="L238">        JSONParser parser = new JSONParser();</span>
+        try {
+<span class="nc" id="L240">            value = (JSONObject) parser.parse(reader);</span>
+<span class="nc" id="L241">            JSONArray entity = (JSONArray) value.get(&quot;FileNameList&quot;);</span>
+
+<span class="nc bnc" id="L243" title="All 2 branches missed.">            for(String s: docToRemove) {</span>
+<span class="nc" id="L244">                entity.remove(s);</span>
+<span class="nc" id="L245">            }</span>
+
+<span class="nc" id="L247">            reader.close();</span>
+<span class="nc" id="L248">            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {</span>
+<span class="nc" id="L249">                writer.write(value.toJSONString());</span>
+            }
+<span class="nc" id="L251">        } catch (ParseException e) {</span>
+<span class="nc" id="L252">            e.printStackTrace();</span>
+<span class="nc" id="L253">        }</span>
+
+<span class="nc" id="L255">    }</span>
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
