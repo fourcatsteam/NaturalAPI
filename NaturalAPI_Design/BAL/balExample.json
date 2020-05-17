@@ -2,15 +2,26 @@
   "actors" : [ {
     "name" : "Customer",
     "actions" : [ {
-      "name" : "withdraw_cash",
+      "name" : "@Given the user is in front of an ATM",
       "type" : {
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Withdraw cash",
+      "step" : "Given the user is in front of an ATM",
+      "objectParams" : [ ]
+    }, {
+      "name" : "insert_card",
+      "type" : {
+        "name" : "void",
+        "attributes" : null
+      },
+      "scenario" : "Withdraw cash",
+      "step" : "When the user inserts the card in the ATM",
       "objectParams" : [ {
-        "name" : "cash",
+        "name" : "card",
         "type" : {
-          "name" : "string",
+          "name" : "int",
           "attributes" : null
         },
         "required" : true
@@ -21,6 +32,8 @@
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Withdraw cash",
+      "step" : "When the user enters the pin of the card",
       "objectParams" : [ {
         "name" : "pin",
         "type" : {
@@ -35,10 +48,12 @@
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Withdraw cash",
+      "step" : "When the user enters the amount of cash he wants to withdraw",
       "objectParams" : [ {
         "name" : "amount",
         "type" : {
-          "name" : "string",
+          "name" : "float",
           "attributes" : null
         },
         "required" : true
@@ -49,6 +64,8 @@
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Withdraw cash",
+      "step" : "Then the ATM should check the pin",
       "objectParams" : [ {
         "name" : "pin",
         "type" : {
@@ -60,44 +77,19 @@
     }, {
       "name" : "give_cash",
       "type" : {
-        "name" : "void",
-        "attributes" : null
+        "name" : "Cash",
+        "attributes" : {
+          "amount" : "float",
+          "currency" : "string"
+        }
       },
+      "scenario" : "Withdraw cash",
+      "step" : "Then the ATM should give the user the cash",
       "objectParams" : [ {
         "name" : "cash",
         "type" : {
-          "name" : "string",
+          "name" : "float",
           "attributes" : null
-        },
-        "required" : true
-      } ]
-    }, {
-      "name" : "enter_pin",
-      "type" : {
-        "name" : "void",
-        "attributes" : null
-      },
-      "objectParams" : [ {
-        "name" : "pin",
-        "type" : {
-          "name" : "string",
-          "attributes" : null
-        },
-        "required" : true
-      } ]
-    }, {
-      "name" : "enter_amount",
-      "type" : {
-        "name" : "void",
-        "attributes" : null
-      },
-      "objectParams" : [ {
-        "name" : "amount",
-        "type" : {
-          "name" : "cash",
-          "attributes" : {
-            "currency" : "string"
-          }
         },
         "required" : true
       } ]
@@ -107,6 +99,8 @@
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Expired card",
+      "step" : "Then the ATM should check the validity of the card",
       "objectParams" : [ {
         "name" : "validity",
         "type" : {
@@ -121,11 +115,16 @@
         "name" : "void",
         "attributes" : null
       },
+      "scenario" : "Expired card",
+      "step" : "Then the ATM should display an error message",
       "objectParams" : [ {
         "name" : "message",
         "type" : {
-          "name" : "string",
-          "attributes" : null
+          "name" : "Message",
+          "attributes" : {
+            "title" : "string",
+            "content" : "string"
+          }
         },
         "required" : true
       } ]
