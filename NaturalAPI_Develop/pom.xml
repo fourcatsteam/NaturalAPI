@@ -11,7 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.2.5.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <sonar.coverage.exclusions>src/test/*,src/main/java/fourcats/observer/*,src/main/java/fourcats/view/Gui.java,src/main/java/fourcats/view/GuiPla.java,src/main/java/fourcats/view/GuiModifyPla.java,src/main/java/fourcats/AppGui.java,src/main/java/fourcats/AppCli.java,src/main/java/fourcats/frameworks/FileSystem.java,src/main/java/fourcats/frameworks/BalAnalyzerImplementation.java</sonar.coverage.exclusions>
     </properties>
     <build>
